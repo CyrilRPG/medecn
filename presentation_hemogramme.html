@@ -1,0 +1,1835 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hémogramme — Chapitre 2 — Item 212</title>
+<style>*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;background:#1a1a2e;color:#fff;overflow:hidden;height:100vh}
+.slide{display:none;width:100vw;height:100vh;padding:30px 50px;flex-direction:column;position:relative;overflow-y:auto}
+.slide.active{display:flex}
+.slide-number{position:absolute;bottom:15px;right:30px;font-size:14px;color:rgba(255,255,255,0.5)}
+.progress{position:fixed;top:0;left:0;height:4px;background:linear-gradient(90deg,#e74c3c,#f39c12);z-index:999;transition:width 0.3s}
+nav{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);display:flex;gap:15px;z-index:99}
+nav button{padding:10px 25px;border:none;border-radius:25px;cursor:pointer;font-size:15px;font-weight:600;transition:0.3s}
+#prevBtn{background:rgba(255,255,255,0.15);color:#fff}
+#nextBtn{background:linear-gradient(135deg,#e74c3c,#c0392b);color:#fff}
+nav button:hover{transform:scale(1.05);filter:brightness(1.2)}
+.home-btn{background:rgba(255,255,255,0.08);color:#fff;padding:8px 18px;border:none;border-radius:20px;cursor:pointer;font-size:13px;position:fixed;top:12px;right:20px;z-index:999;transition:0.2s;text-decoration:none;display:inline-flex;align-items:center;gap:6px}
+.home-btn:hover{background:rgba(255,255,255,0.15)}
+h1{font-size:2.5em;margin-bottom:15px;line-height:1.2}
+h2{font-size:1.8em;margin-bottom:15px;color:#f39c12;line-height:1.3}
+h3{font-size:1.3em;margin-bottom:10px;color:#3498db}
+p,.desc{font-size:1.05em;line-height:1.6;margin-bottom:10px}
+ul{list-style:none;padding-left:0}
+ul li{padding:5px 0 5px 20px;position:relative;font-size:1em;line-height:1.5}
+ul li::before{content:'';position:absolute;left:0;top:12px;width:8px;height:8px;border-radius:50%;background:#e74c3c}
+.title-slide{background:linear-gradient(135deg,#1a1a2e 0%,#16213e 50%,#0f3460 100%);text-align:center;justify-content:center;align-items:center}
+.title-slide h1{font-size:3em;background:linear-gradient(135deg,#e74c3c,#f39c12);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.title-slide .subtitle{font-size:1.3em;color:#bbb;margin-top:10px}
+.section-slide{background:linear-gradient(135deg,#0f3460,#533483);text-align:center;align-items:center;justify-content:center}
+.section-slide h1{font-size:2.5em;color:#f39c12}
+.section-slide p{font-size:1.2em;color:#ddd;max-width:700px}
+.content-slide{background:linear-gradient(180deg,#1a1a2e,#16213e)}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:30px;margin-top:10px}
+.col{padding:10px}
+.highlight-box{background:rgba(231,76,60,0.15);border-left:4px solid #e74c3c;padding:14px 18px;border-radius:0 10px 10px 0;margin:10px 0;font-size:1em;line-height:1.5}
+.info-box{background:rgba(52,152,219,0.15);border-left:4px solid #3498db;padding:14px 18px;border-radius:0 10px 10px 0;margin:10px 0;font-size:1em;line-height:1.5}
+.def-box{background:rgba(243,156,18,0.12);border-left:4px solid #f39c12;padding:14px 18px;border-radius:0 10px 10px 0;margin:10px 0}
+.def-box strong{color:#f39c12}
+.quiz-slide{background:linear-gradient(135deg,#1a1a2e,#2d132c)}
+.quiz-slide h2{color:#e74c3c}
+.exam-slide{background:linear-gradient(135deg,#1a1a2e,#1a2a1a)}
+.exam-slide h2{color:#2ecc71}
+.qcm-container{display:grid;gap:12px;margin-top:10px}
+.qcm-block{background:rgba(255,255,255,0.05);border-radius:12px;padding:14px 18px;border:2px solid rgba(255,255,255,0.1)}
+.qcm-block .q-text{font-weight:600;margin-bottom:10px;font-size:1em}
+.qcm-options{display:grid;gap:6px}
+.qcm-option{display:flex;align-items:center;gap:10px;padding:8px 14px;border-radius:8px;cursor:pointer;transition:0.2s;border:1px solid rgba(255,255,255,0.1);font-size:0.95em}
+.qcm-option:hover{background:rgba(255,255,255,0.08);border-color:rgba(255,255,255,0.2)}
+.qcm-option.selected{border-color:#f39c12;background:rgba(243,156,18,0.15)}
+.qcm-option.correct{border-color:#2ecc71;background:rgba(46,204,113,0.15)}
+.qcm-option.wrong{border-color:#e74c3c;background:rgba(231,76,60,0.15)}
+.qcm-option .letter{width:28px;height:28px;border-radius:50%;background:rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:0.85em;flex-shrink:0}
+.qcm-explanation{display:none;margin-top:8px;padding:10px 14px;background:rgba(46,204,113,0.1);border-radius:8px;border-left:3px solid #2ecc71;font-size:0.9em;color:#2ecc71}
+.qcm-block.answered .qcm-explanation{display:block}
+.qcm-validate{padding:6px 18px;border:none;border-radius:8px;background:#f39c12;color:#1a1a2e;font-weight:700;cursor:pointer;margin-top:8px;font-size:0.9em}
+.qcm-validate:disabled{opacity:0.4;cursor:not-allowed}
+table{width:100%;border-collapse:collapse;margin:10px 0;font-size:0.9em}
+th{background:rgba(231,76,60,0.3);padding:8px 12px;text-align:left;font-weight:600}
+td{padding:7px 12px;border-bottom:1px solid rgba(255,255,255,0.08)}
+tr:hover td{background:rgba(255,255,255,0.03)}
+.card-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px;margin-top:10px}
+.card{background:rgba(255,255,255,0.06);border-radius:12px;padding:16px;text-align:center;border:1px solid rgba(255,255,255,0.08);transition:0.3s}
+.card:hover{transform:translateY(-2px);border-color:#f39c12}
+.card h3{color:#f39c12;margin-bottom:6px;font-size:1.05em}
+.card p{font-size:0.9em;color:#ccc;line-height:1.4}
+.big-number{font-size:2.5em;font-weight:800;color:#e74c3c;line-height:1}
+.keyword{color:#f39c12;font-weight:600}
+.flow-horizontal{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:5px;margin:8px 0}
+.flow-item{background:rgba(52,152,219,0.2);padding:6px 14px;border-radius:8px;font-weight:600;font-size:0.9em}
+.flow-item.red{background:rgba(231,76,60,0.2);color:#e74c3c}
+.flow-item.green{background:rgba(46,204,113,0.2);color:#2ecc71}
+.flow-item.orange{background:rgba(243,156,18,0.2);color:#f39c12}
+.recap-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:10px}
+.recap-card{background:rgba(255,255,255,0.05);border-radius:10px;padding:12px;border-left:4px solid #3498db}
+.recap-card h3{font-size:1em;margin-bottom:4px}
+.recap-card p{font-size:0.9em;color:#ccc}
+.slide-with-img{flex-direction:row !important;gap:20px;padding:25px 35px}
+.slide-text{flex:1;overflow-y:auto;padding-right:10px;max-height:90vh}
+.slide-img{width:310px;flex-shrink:0;display:flex;align-items:flex-start;justify-content:center;padding-top:5px}
+.slide-img img{width:100%;border-radius:8px;border:2px solid rgba(255,255,255,0.12);cursor:pointer;transition:0.3s;object-fit:contain}
+.slide-img img:hover{border-color:#f39c12;transform:scale(1.01)}
+.img-modal{display:none;position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(0,0,0,0.92);z-index:9999;align-items:center;justify-content:center;cursor:zoom-out}
+.img-modal.active{display:flex}
+.img-modal img{max-width:90vw;max-height:92vh;border-radius:8px}
+.score-bar{height:30px;background:rgba(255,255,255,0.1);border-radius:15px;overflow:hidden;margin:10px 0}
+.score-fill{height:100%;background:linear-gradient(90deg,#e74c3c,#2ecc71);border-radius:15px;transition:width 0.5s;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:0.85em}
+.exam-scroll{max-height:78vh;overflow-y:auto;padding-right:10px}
+.urgence-box{background:rgba(231,76,60,0.2);border:2px solid #e74c3c;border-radius:12px;padding:14px 18px;margin:10px 0}
+.urgence-box h3{color:#e74c3c;margin-bottom:8px}
+.timeline{position:relative;padding-left:25px;border-left:3px solid #e74c3c;margin:10px 0}
+.timeline-item{padding:8px 0 8px 15px;position:relative}
+.timeline-item::before{content:'';position:absolute;left:-32px;top:14px;width:12px;height:12px;background:#e74c3c;border-radius:50%;border:3px solid #1a1a2e}
+.timeline-item strong{color:#f39c12}
+/* ===== TOPBAR ===== */
+.topbar{position:fixed;top:0;left:0;right:0;height:50px;background:rgba(10,10,22,0.97);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid rgba(255,255,255,0.08);display:flex;align-items:center;justify-content:space-between;padding:0 14px;z-index:1000;gap:10px}
+.tb-left{display:flex;align-items:center;gap:8px;flex-shrink:0}
+.tb-home{width:36px;height:36px;border-radius:10px;background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.1);cursor:pointer;display:flex;align-items:center;justify-content:center;text-decoration:none;color:#fff;font-size:1.15em;transition:0.2s;flex-shrink:0}
+.tb-home:hover{background:rgba(231,76,60,0.2);border-color:#e74c3c}
+.tb-title{font-size:0.82em;font-weight:600;color:#aaa;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:200px}
+.tb-center{display:flex;align-items:center;justify-content:center;flex:1}
+.tb-counter{font-size:0.8em;color:#666;white-space:nowrap}.tb-counter b{color:#f39c12;font-weight:700}
+.tb-right{display:flex;align-items:center;gap:6px;flex-shrink:0}
+.tb-btn{width:36px;height:36px;border-radius:10px;background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.1);cursor:pointer;display:flex;align-items:center;justify-content:center;color:#fff;font-size:1em;transition:0.2s;-webkit-tap-highlight-color:transparent}
+.tb-btn:hover,.tb-btn:active{background:rgba(231,76,60,0.2);border-color:#e74c3c}
+.tb-btn.tb-next{background:linear-gradient(135deg,#e74c3c,#c0392b);border-color:transparent}
+.tb-btn.tb-next:hover{filter:brightness(1.15)}
+/* Slide content starts below topbar */
+.slide{padding-top:62px !important}.progress{top:50px !important}
+/* Hide old home-btn */
+.home-btn{display:none !important}
+
+/* ===== MOBILE BREAKPOINTS ===== */
+@media(max-width:900px){
+  .slide{padding-left:28px !important;padding-right:28px !important}
+}
+@media(max-width:768px){
+  .tb-title{max-width:110px}
+  body{overflow:auto !important;height:auto !important;min-height:100vh}
+  .slide{width:100% !important;min-height:100vh;height:auto !important;padding:62px 18px 80px !important;overflow-y:visible !important}
+  .slide.active{display:flex}
+  h1{font-size:1.6em !important;line-height:1.2 !important}
+  h2{font-size:1.3em !important}
+  h3{font-size:1.1em !important}
+  p,.desc{font-size:0.93em !important}
+  ul li{font-size:0.9em !important}
+  .two-col{grid-template-columns:1fr !important;gap:14px !important}
+  .card-grid{grid-template-columns:1fr 1fr !important;gap:10px !important}
+  .title-slide h1{font-size:1.8em !important}
+  .title-slide .subtitle{font-size:1em !important}
+  .section-slide h1{font-size:1.6em !important}
+  .recap-grid{grid-template-columns:1fr !important}
+  .slide-with-img{flex-direction:column !important;padding:62px 16px 80px !important;gap:16px !important}
+  .slide-img{width:100% !important;max-width:100%}
+  .slide-img img{max-width:100% !important;height:auto !important;border-radius:8px}
+  .slide-text{max-height:none !important;overflow-y:visible !important}
+  table{font-size:0.78em !important;display:block;overflow-x:auto}
+  td,th{padding:5px 7px !important}
+  nav{display:none !important}
+  .qcm-container{gap:10px !important}
+  .qcm-block{padding:12px !important}
+  .big-number{font-size:1.8em !important}
+}
+@media(max-width:480px){
+  .tb-title{display:none}
+  h1{font-size:1.2em !important}
+  h2{font-size:1.05em !important}
+  h3{font-size:1em !important}
+  .card-grid{grid-template-columns:1fr !important}
+  .qcm-option{font-size:0.85em !important;padding:7px 10px !important}
+  .flow-horizontal{gap:4px !important}
+  .flow-item{font-size:0.8em !important;padding:5px 10px !important}
+}
+
+</style>
+</head>
+<body>
+<div class="topbar">
+  <div class="tb-left">
+    <a href="index.html" class="tb-home" title="Accueil">&#127968;</a>
+    <span class="tb-title">Ch.2 — Hémogramme</span>
+  </div>
+  <div class="tb-center">
+    <span class="tb-counter">Diapo <b id="tb-cur">1</b>&thinsp;/&thinsp;<b id="tb-tot">?</b></span>
+  </div>
+  <div class="tb-right">
+    <button class="tb-btn" onclick="changeSlide(-1)" title="Pr&#233;c&#233;dent">&#8592;</button>
+    <button class="tb-btn tb-next" onclick="changeSlide(1)" title="Suivant">&#8594;</button>
+  </div>
+</div>
+<div class="progress" id="progress"></div>
+<a href="index.html" class="home-btn">🏠 Menu</a>
+<div class="img-modal" onclick="closeModal()"><img src="" alt="Agrandie"></div>
+<div class="slide title-slide active">
+<h1>HÉMOGRAMME</h1>
+<div class="subtitle">Chapitre 2 · Item 212 — Hématologie<div class="slide-number">1 / 57</div></div>
+<p style="margin-top:20px;color:#888;font-size:1em">Indications, valeurs normales, anomalies — Adulte et enfant</p>
+<p style="color:#666;font-size:0.9em;margin-top:8px">Flèches du clavier ou boutons pour naviguer</p>
+</div><div class="slide content-slide">
+<h2>Objectifs pédagogiques</h2>
+<p>À la fin de cette présentation, vous saurez :</p>
+<ul>
+<li>Argumenter les principales <strong>indications</strong> de l'hémogramme</li>
+<li>Connaître les <strong>valeurs normales</strong> chez l'adulte et l'enfant</li>
+<li>Définir une <strong>anémie</strong> et la classer (micro/normo/macrocytaire, régénérative/arégénérative)</li>
+<li>Interpréter les <strong>anomalies des leucocytes</strong> : polynucléoses, neutropénies, lymphocytoses...</li>
+<li>Savoir quand demander l'hémogramme en <strong>urgence</strong></li>
+<li>Connaître les particularités de l'hémogramme chez l'<strong>enfant</strong></li>
+<li>Identifier les <strong>pièges</strong> : fausse anémie, fausse thrombopénie à l'EDTA</li>
+</ul>
+<div class="slide-number">2 / 57</div></div><div class="slide content-slide">
+<h2>📖 Glossaire des unités — Indispensable avant de commencer</h2>
+<div class="def-box"><strong>💡 G/L (Giga par litre) :</strong> Unité de numération sanguine. 1 G/L = 1 milliard de cellules par litre de sang (10⁹/L). Utilisée pour les globules blancs et les plaquettes. <em>Exemple : 5 G/L de leucocytes = 5 milliards de globules blancs par litre de sang.</em><div class="slide-number">3 / 57</div></div>
+<div class="def-box"><strong>💡 T/L (Tera par litre) :</strong> Plus grande unité, pour les globules rouges (très nombreux). 1 T/L = 1 000 milliards de cellules par litre (10¹²/L). <em>Exemple : 5 T/L de GR = 5 000 milliards de globules rouges par litre.</em></div>
+<div class="def-box"><strong>💡 fL (femtolitre) :</strong> Unité de volume microscopique pour mesurer la taille d'une cellule. 1 fL = 0,000 000 000 000 001 litre (10⁻¹⁵ L). Utilisée pour le VGM (volume d'un globule rouge).</div>
+<div class="def-box"><strong>💡 pg (picogramme) :</strong> Unité de masse pour la quantité d'hémoglobine dans une cellule. 1 pg = 0,000 000 000 001 gramme (10⁻¹² g). Utilisée pour la TCMH.</div>
+<div class="def-box"><strong>💡 g/dL vs g/L :</strong> L'hémoglobine peut s'exprimer en g/dL ou g/L. 1 g/dL = 10 g/L. <em>Exemple : 12 g/dL = 120 g/L.</em> En France, on préfère g/L dans les recommandations modernes.</div>
+</div><div class="slide content-slide">
+<h2>Plan du cours</h2>
+<div class="two-col"><div class="col"><h3>Partie 1</h3><ul>
+<li><strong>I.</strong> Définition et réalisation de l'hémogramme</li>
+<li><strong>II.</strong> Indications de l'hémogramme</li>
+<li><strong>III.</strong> Valeurs normales adulte (hématies, leucocytes, plaquettes)</li>
+<li><strong>IV.</strong> Particularités chez l'enfant</li>
+</ul><div class="slide-number">4 / 57</div></div>
+<div class="col"><h3>Partie 2</h3><ul>
+<li><strong>V.</strong> Anomalies de la lignée rouge</li>
+<li><strong>VI.</strong> Anomalies des leucocytes</li>
+<li><strong>VII.</strong> Anomalies des plaquettes</li>
+<li><strong>VIII.</strong> Récapitulatif</li>
+</ul></div></div>
+</div><div class="slide section-slide">
+<h1>I. L'hémogramme — Définition</h1>
+<p>L'examen biologique le plus prescrit en France</p>
+<div class="slide-number">5 / 57</div></div><div class="slide content-slide slide-with-img">
+<div class="slide-text">
+<h2>L'hémogramme (NFS) — Définition et réalisation</h2>
+<div class="def-box"><strong>💡 Hémogramme / NFS (Numération-Formule Sanguine) :</strong> Analyse quantitative et qualitative des <strong>trois lignées sanguines</strong> dans un échantillon de sang. C'est l'examen biologique le plus prescrit en France.<div class="slide-number">6 / 57</div></div>
+<div class="def-box"><strong>💡 Les 3 lignées sanguines :</strong>
+<ul style="margin-top:6px">
+<li><span class="keyword">Globules rouges (GR) = hématies = érythrocytes</span> : transportent l'oxygène grâce à l'hémoglobine. Vivent 120 jours.</li>
+<li><span class="keyword">Globules blancs (GB) = leucocytes</span> : cellules du système immunitaire. Combattent les infections.</li>
+<li><span class="keyword">Plaquettes = thrombocytes</span> : petits fragments cellulaires qui participent à la coagulation (arrêt des saignements).</li>
+</ul></div>
+<h3>Réalisation pratique</h3>
+<ul>
+<li>Tube <span class="keyword">EDTA</span> (bouchon violet) — pas besoin d'être à jeun</li>
+<li>Ponction veineuse au pli du coude (ou talon nouveau-né, bout du doigt)</li>
+<li>Examen en grande partie <strong>automatisé</strong> (compteur de cellules)</li>
+</ul>
+<div class="def-box"><strong>💡 EDTA :</strong> Acide éthylènediamine-tétraacétique. Anticoagulant qui capture le calcium du sang, empêchant ainsi la coagulation dans le tube. C'est l'anticoagulant de référence pour la NFS.</div>
+</div>
+<div class="slide-img"><img src="images_hemogramme/p1_page1.png" alt="Page du cours" onclick="openModal(this.src)"></div>
+</div><div class="slide quiz-slide">
+<h2>Quiz — Définition NFS</h2>
+<div class="qcm-container">
+<div class="qcm-block" data-answer="1">
+<div class="q-text">Q1 : Dans quel tube est réalisé l'hémogramme ?<div class="slide-number">7 / 57</div></div>
+<div class="qcm-options"><div class="qcm-option" data-idx="0" onclick="selectOption(this)"><span class="letter">A</span><span>Tube sec (bouchon rouge)</span></div>
+<div class="qcm-option" data-idx="1" onclick="selectOption(this)"><span class="letter">B</span><span>Tube EDTA (bouchon violet)</span></div>
+<div class="qcm-option" data-idx="2" onclick="selectOption(this)"><span class="letter">C</span><span>Tube citrate (bouchon bleu)</span></div>
+<div class="qcm-option" data-idx="3" onclick="selectOption(this)"><span class="letter">D</span><span>Tube hépariné (bouchon vert)</span></div>
+</div>
+<button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button>
+<div class="qcm-explanation">L'EDTA chélate le calcium et empêche la coagulation. C'est l'anticoagulant de référence pour l'hémogramme.</div>
+</div>
+<div class="qcm-block" data-answer="2">
+<div class="q-text">Q2 : La formule leucocytaire doit être exprimée :</div>
+<div class="qcm-options"><div class="qcm-option" data-idx="0" onclick="selectOption(this)"><span class="letter">A</span><span>En pourcentage uniquement</span></div>
+<div class="qcm-option" data-idx="1" onclick="selectOption(this)"><span class="letter">B</span><span>En valeur absolue (G/L) uniquement</span></div>
+<div class="qcm-option" data-idx="2" onclick="selectOption(this)"><span class="letter">C</span><span>En valeur absolue — le % seul n'a aucun intérêt</span></div>
+<div class="qcm-option" data-idx="3" onclick="selectOption(this)"><span class="letter">D</span><span>En nombre de cellules par mm³</span></div>
+</div>
+<button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button>
+<div class="qcm-explanation">La formule en % n'a aucun intérêt pris isolément. On interprète TOUJOURS en valeur absolue (G/L).</div>
+</div>
+</div>
+</div><div class="slide section-slide">
+<h1>II. Indications de l'hémogramme</h1>
+<p>Quand et pourquoi prescrire une NFS ?</p>
+<div class="slide-number">8 / 57</div></div><div class="slide content-slide slide-with-img">
+<div class="slide-text">
+<h2>Indications cliniques de l'hémogramme</h2>
+<div class="two-col"><div class="col">
+<h3>Signes de déficit d'une lignée</h3>
+<ul>
+<li><span class="keyword">Syndrome anémique</span> : pâleur + asthénie + dyspnée<br><small style="color:#999">(déficit en GR → moins d'oxygène transporté)</small></li>
+<li><span class="keyword">Syndrome hémorragique</span> : pétéchies, ecchymoses<br><small style="color:#999">(déficit en plaquettes → coagulation insuffisante)</small></li>
+<li><span class="keyword">Syndrome infectieux</span> : persistant ou grave<br><small style="color:#999">(déficit en GB → immunodépression)</small></li>
+</ul>
+<h3>Signes d'excès d'une lignée</h3>
+<ul>
+<li>Érythrose cutanée, prurit à l'eau (trop de GR = polyglobulie)</li>
+<li>Thromboses artérielles/veineuses (trop de plaquettes)</li>
+<li>Syndrome tumoral : adénopathies, splénomégalie</li>
+</ul>
+<div class="slide-number">9 / 57</div></div><div class="col">
+<h3>Contrôle systématique</h3>
+<ul>
+<li>Grossesse (dépistage anémie)</li>
+<li>Ictère (jaunisse — peut signer une hémolyse)</li>
+<li>Médecine préopératoire</li>
+<li>Suivi chimiothérapie, anticoagulants</li>
+<li>Altération état général : asthénie, amaigrissement, fièvre</li>
+<li>Douleurs osseuses</li>
+</ul>
+<div class="info-box"><strong>Règle fondamentale :</strong> Toujours réaliser l'hémogramme <em>avant</em> toute thérapeutique modificatrice (transfusion, fer, chimiothérapie...).</div>
+</div></div>
+</div>
+<div class="slide-img"><img src="images_hemogramme/p1_page2.png" alt="Page du cours" onclick="openModal(this.src)"></div>
+</div><div class="slide quiz-slide">
+<h2>Quiz — Indications cliniques</h2>
+<div class="qcm-container">
+<div class="qcm-block" data-answer="1">
+<div class="q-text">Q1 : La triade classique du syndrome anémique est :<div class="slide-number">10 / 57</div></div>
+<div class="qcm-options"><div class="qcm-option" data-idx="0" onclick="selectOption(this)"><span class="letter">A</span><span>Fièvre + frissons + sueurs</span></div>
+<div class="qcm-option" data-idx="1" onclick="selectOption(this)"><span class="letter">B</span><span>Pâleur + asthénie + dyspnée</span></div>
+<div class="qcm-option" data-idx="2" onclick="selectOption(this)"><span class="letter">C</span><span>Purpura + ecchymoses + hématomes</span></div>
+<div class="qcm-option" data-idx="3" onclick="selectOption(this)"><span class="letter">D</span><span>Adénopathies + splénomégalie + fièvre</span></div>
+</div>
+<button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button>
+<div class="qcm-explanation">Triade anémie = pâleur + asthénie + dyspnée. Peut s'accompagner de tachycardie et souffle systolique.</div>
+</div>
+<div class="qcm-block" data-answer="1">
+<div class="q-text">Q2 : Quand doit-on réaliser l'hémogramme diagnostique ?</div>
+<div class="qcm-options"><div class="qcm-option" data-idx="0" onclick="selectOption(this)"><span class="letter">A</span><span>Après la transfusion pour avoir une valeur de base</span></div>
+<div class="qcm-option" data-idx="1" onclick="selectOption(this)"><span class="letter">B</span><span>Avant toute thérapeutique pouvant modifier les résultats</span></div>
+<div class="qcm-option" data-idx="2" onclick="selectOption(this)"><span class="letter">C</span><span>À distance de la prise de fer</span></div>
+<div class="qcm-option" data-idx="3" onclick="selectOption(this)"><span class="letter">D</span><span>Le matin à jeun uniquement</span></div>
+</div>
+<button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button>
+<div class="qcm-explanation">L'hémogramme doit être fait AVANT toute thérapeutique (transfusion, fer, chimio...) qui modifierait les résultats.</div>
+</div>
+</div>
+</div><div class="slide content-slide slide-with-img">
+<div class="slide-text">
+<h2>Indications en urgence</h2>
+<div class="urgence-box">
+<h3>⚠️ Hémogramme en URGENCE devant :</h3>
+<div class="two-col"><div class="col"><ul>
+<li>État de <span class="keyword">choc</span> <small style="color:#999">(collapsus cardiovasculaire)</small></li>
+<li>Pâleur <strong>intense</strong></li>
+<li>Angine <span class="keyword">ulcéronécrotique</span> <small style="color:#999">(angine avec nécrose des amygdales → signe d'agranulocytose)</small></li>
+<li>Fièvre élevée après chimiothérapie</li>
+</ul><div class="slide-number">11 / 57</div></div>
+<div class="col"><ul>
+<li>Fièvre résistante aux antibiotiques</li>
+<li><span class="keyword">Purpura pétéchial</span> extensif ou fébrile <small style="color:#999">(petites taches hémorragiques sous la peau)</small></li>
+<li>Bulles hémorragiques des muqueuses</li>
+<li>Hémorragies rétiniennes</li>
+</ul></div></div>
+</div>
+<div class="highlight-box"><strong>Anomalies nécessitant une prise en charge urgente spécialisée :</strong>
+<ul style="margin-top:8px">
+<li>Hb &lt; <span class="keyword">60 g/L</span> (adulte/enfant) ou &lt; 110 g/L (nouveau-né)</li>
+<li>Hématocrite &gt; <span class="keyword">60%</span> — <small>Hct = % de sang occupé par les GR. Normal: H~45%, F~40%</small></li>
+<li>PNN &lt; <span class="keyword">0,5 G/L</span> = agranulocytose <small style="color:#999">(absence quasi-totale de neutrophiles → risque infectieux mortel)</small></li>
+<li>Plaquettes &lt; <span class="keyword">20 G/L</span> (hémorragie spontanée possible)</li>
+<li>Blastes &gt; <span class="keyword">20 G/L</span> <small style="color:#999">(cellules immatures anormales = leucémie probable)</small></li>
+</ul></div>
+</div>
+<div class="slide-img"><img src="images_hemogramme/p1_page3.png" alt="Page du cours" onclick="openModal(this.src)"></div>
+</div><div class="slide quiz-slide">
+<h2>Quiz — Urgences hémogramme</h2>
+<div class="qcm-container">
+<div class="qcm-block" data-answer="2">
+<div class="q-text">Q1 : En dessous de quelle valeur d'hémoglobine faut-il adresser en urgence ?<div class="slide-number">12 / 57</div></div>
+<div class="qcm-options"><div class="qcm-option" data-idx="0" onclick="selectOption(this)"><span class="letter">A</span><span>Hb < 100 g/L</span></div>
+<div class="qcm-option" data-idx="1" onclick="selectOption(this)"><span class="letter">B</span><span>Hb < 80 g/L</span></div>
+<div class="qcm-option" data-idx="2" onclick="selectOption(this)"><span class="letter">C</span><span>Hb < 60 g/L</span></div>
+<div class="qcm-option" data-idx="3" onclick="selectOption(this)"><span class="letter">D</span><span>Hb < 40 g/L</span></div>
+</div>
+<button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button>
+<div class="qcm-explanation">Hb < 60 g/L = prise en charge urgente (adulte et enfant). Pour le nouveau-né : < 110 g/L.</div>
+</div>
+<div class="qcm-block" data-answer="2">
+<div class="q-text">Q2 : Quelle valeur de PNN définit une agranulocytose ?</div>
+<div class="qcm-options"><div class="qcm-option" data-idx="0" onclick="selectOption(this)"><span class="letter">A</span><span>PNN < 1,5 G/L</span></div>
+<div class="qcm-option" data-idx="1" onclick="selectOption(this)"><span class="letter">B</span><span>PNN < 1,0 G/L</span></div>
+<div class="qcm-option" data-idx="2" onclick="selectOption(this)"><span class="letter">C</span><span>PNN < 0,5 G/L</span></div>
+<div class="qcm-option" data-idx="3" onclick="selectOption(this)"><span class="letter">D</span><span>PNN < 0,1 G/L</span></div>
+</div>
+<button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button>
+<div class="qcm-explanation">PNN < 0,5 G/L = agranulocytose. Risque infectieux majeur (bactérien et mycosique).</div>
+</div>
+</div>
+</div><div class="slide exam-slide">
+<h2>Examen — Définition, indications et urgences</h2>
+<p style="color:#2ecc71;margin-bottom:10px">10 questions pour valider vos connaissances</p>
+<div id="score-exam1" class="score-bar"><div class="score-fill" style="width:0%">0/10<div class="slide-number">13 / 57</div></div></div>
+<div class="exam-scroll"><div class="qcm-container">
+<div class="qcm-block" data-answer="1">
+<div class="q-text">Q1 : L'EDTA est utilisé car :</div>
+<div class="qcm-options"><div class="qcm-option" data-idx="0" onclick="selectOption(this)"><span class="letter">A</span><span>Il colore les cellules</span></div>
+<div class="qcm-option" data-idx="1" onclick="selectOption(this)"><span class="letter">B</span><span>Il chélate le calcium et empêche la coagulation</span></div>
+<div class="qcm-option" data-idx="2" onclick="selectOption(this)"><span class="letter">C</span><span>Il lyse les globules blancs</span></div>
+<div class="qcm-option" data-idx="3" onclick="selectOption(this)"><span class="letter">D</span><span>Il fixe l'hémoglobine</span></div>
+</div>
+<button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button>
+<div class="qcm-explanation">EDTA = chélateur du calcium → anticoagulation. Tube de référence pour la NFS.</div>
+</div>
+<div class="qcm-block" data-answer="2">
+<div class="q-text">Q2 : La formule leucocytaire en pourcentage seul :</div>
+<div class="qcm-options"><div class="qcm-option" data-idx="0" onclick="selectOption(this)"><span class="letter">A</span><span>Est suffisante</span></div>
+<div class="qcm-option" data-idx="1" onclick="selectOption(this)"><span class="letter">B</span><span>Doit être complétée par les valeurs absolues</span></div>
+<div class="qcm-option" data-idx="2" onclick="selectOption(this)"><span class="letter">C</span><span>N'a AUCUN intérêt pris isolément</span></div>
+<div class="qcm-option" data-idx="3" onclick="selectOption(this)"><span class="letter">D</span><span>Est préférable aux valeurs absolues</span></div>
+</div>
+<button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button>
+<div class="qcm-explanation">% seul = inutile. On interprète TOUJOURS en G/L.</div>
+</div>
+<div class="qcm-block" data-answer="1">
+<div class="q-text">Q3 : Le syndrome anémique se manifeste par :</div>
+<div class="qcm-options"><div class="qcm-option" data-idx="0" onclick="selectOption(this)"><span class="letter">A</span><span>Fièvre + purpura + adénopathies</span></div>
+<div class="qcm-option" data-idx="1" onclick="selectOption(this)"><span class="letter">B</span><span>Pâleur + asthénie + dyspnée</span></div>
+<div class="qcm-option" data-idx="2" onclick="selectOption(this)"><span class="letter">C</span><span>Tachycardie + hypertension + céphalées</span></div>
+<div class="qcm-option" data-idx="3" onclick="selectOption(this)"><span class="letter">D</span><span>Ictère + hépatomégalie + fièvre</span></div>
+</div>
+<button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button>
+<div class="qcm-explanation">Pâleur + asthénie + dyspnée = triade classique.</div>
+</div>
+<div class="qcm-block" data-answer="2">
+<div class="q-text">Q4 : L'hémogramme doit être réalisé :</div>
+<div class="qcm-options"><div class="qcm-option" data-idx="0" onclick="selectOption(this)"><span class="letter">A</span><span>Après la transfusion</span></div>
+<div class="qcm-option" data-idx="1" onclick="selectOption(this)"><span class="letter">B</span><span>Après la supplémentation en fer</span></div>
+<div class="qcm-option" data-idx="2" onclick="selectOption(this)"><span class="letter">C</span><span>Avant toute thérapeutique modificatrice</span></div>
+<div class="qcm-option" data-idx="3" onclick="selectOption(this)"><span class="letter">D</span><span>À jeun obligatoirement</span></div>
+</div>
+<button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button>
+<div class="qcm-explanation">Avant transfusion, fer, chimio pour ne pas modifier les résultats.</div>
+</div>
+<div class="qcm-block" data-answer="1">
+<div class="q-text">Q5 : Une angine ulcéronécrotique résistante aux antibiotiques nécessite :</div>
+<div class="qcm-options"><div class="qcm-option" data-idx="0" onclick="selectOption(this)"><span class="letter">A</span><span>Un scanner cervical</span></div>
+<div class="qcm-option" data-idx="1" onclick="selectOption(this)"><span class="letter">B</span><span>Un hémogramme urgent</span></div>
+<div class="qcm-option" data-idx="2" onclick="selectOption(this)"><span class="letter">C</span><span>Une sérologie virale</span></div>
+<div class="qcm-option" data-idx="3" onclick="selectOption(this)"><span class="letter">D</span><span>Un bilan d'hémostase</span></div>
+</div>
+<button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button>
+<div class="qcm-explanation">Angine ulcéronécrotique = signe possible d'agranulocytose → hémogramme urgent.</div>
+</div>
+<div class="qcm-block" data-answer="1">
+<div class="q-text">Q6 : Le purpura pétéchial fébrile extensif justifie :</div>
+<div class="qcm-options"><div class="qcm-option" data-idx="0" onclick="selectOption(this)"><span class="letter">A</span><span>Une consultation ORL en routine</span></div>
+<div class="qcm-option" data-idx="1" onclick="selectOption(this)"><span class="letter">B</span><span>Un hémogramme en urgence</span></div>
+<div class="qcm-option" data-idx="2" onclick="selectOption(this)"><span class="letter">C</span><span>Un bilan allergologique</span></div>
+<div class="qcm-option" data-idx="3" onclick="selectOption(this)"><span class="letter">D</span><span>Une corticothérapie d'emblée</span></div>
+</div>
+<button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button>
+<div class="qcm-explanation">Purpura pétéchial fébrile = urgence hématologique.</div>
+</div>
+<div class="qcm-block" data-answer="3">
+<div class="q-text">Q7 : Quelle valeur de plaquettes impose une prise en charge urgente ?</div>
+<div class="qcm-options"><div class="qcm-option" data-idx="0" onclick="selectOption(this)"><span class="letter">A</span><span>< 150 G/L</span></div>
+<div class="qcm-option" data-idx="1" onclick="selectOption(this)"><span class="letter">B</span><span>< 80 G/L</span></div>
+<div class="qcm-option" data-idx="2" onclick="selectOption(this)"><span class="letter">C</span><span>< 50 G/L</span></div>
+<div class="qcm-option" data-idx="3" onclick="selectOption(this)"><span class="letter">D</span><span>< 20 G/L</span></div>
+</div>
+<button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button>
+<div class="qcm-explanation">Plaquettes < 20 G/L = urgence, même sans syndrome hémorragique.</div>
+</div>
+<div class="qcm-block" data-answer="2">
+<div class="q-text">Q8 : L'hémogramme peut se faire :</div>
+<div class="qcm-options"><div class="qcm-option" data-idx="0" onclick="selectOption(this)"><span class="letter">A</span><span>Uniquement à jeun</span></div>
+<div class="qcm-option" data-idx="1" onclick="selectOption(this)"><span class="letter">B</span><span>Uniquement le matin</span></div>
+<div class="qcm-option" data-idx="2" onclick="selectOption(this)"><span class="letter">C</span><span>Sans être à jeun</span></div>
+<div class="qcm-option" data-idx="3" onclick="selectOption(this)"><span class="letter">D</span><span>Uniquement en milieu hospitalier</span></div>
+</div>
+<button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button>
+<div class="qcm-explanation">L'hémogramme NE nécessite PAS d'être à jeun.</div>
+</div>
+<div class="qcm-block" data-answer="1">
+<div class="q-text">Q9 : Les bulles hémorragiques des muqueuses indiquent :</div>
+<div class="qcm-options"><div class="qcm-option" data-idx="0" onclick="selectOption(this)"><span class="letter">A</span><span>Une infection fongique buccale</span></div>
+<div class="qcm-option" data-idx="1" onclick="selectOption(this)"><span class="letter">B</span><span>Une thrombopénie sévère → hémogramme urgent</span></div>
+<div class="qcm-option" data-idx="2" onclick="selectOption(this)"><span class="letter">C</span><span>Un mélanome des muqueuses</span></div>
+<div class="qcm-option" data-idx="3" onclick="selectOption(this)"><span class="letter">D</span><span>Une carence en vitamine C</span></div>
+</div>
+<button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button>
+<div class="qcm-explanation">Bulles hémorragiques muqueuses = thrombopénie profonde → hémogramme urgent.</div>
+</div>
+<div class="qcm-block" data-answer="1">
+<div class="q-text">Q10 : L'hémogramme explore :</div>
+<div class="qcm-options"><div class="qcm-option" data-idx="0" onclick="selectOption(this)"><span class="letter">A</span><span>Uniquement les globules rouges</span></div>
+<div class="qcm-option" data-idx="1" onclick="selectOption(this)"><span class="letter">B</span><span>Les 3 lignées : leucocytes, GR et plaquettes</span></div>
+<div class="qcm-option" data-idx="2" onclick="selectOption(this)"><span class="letter">C</span><span>La coagulation sanguine</span></div>
+<div class="qcm-option" data-idx="3" onclick="selectOption(this)"><span class="letter">D</span><span>Les protéines sériques</span></div>
+</div>
+<button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button>
+<div class="qcm-explanation">NFS = 3 lignées : leucocytes + érythrocytes + plaquettes.</div>
+</div>
+</div></div>
+</div><div class="slide section-slide">
+<h1>III. Valeurs normales</h1>
+<p>Les seuils à connaître chez l'adulte</p>
+<div class="slide-number">14 / 57</div></div><div class="slide content-slide slide-with-img">
+<div class="slide-text">
+<h2>A. Hémoglobine — Définition et valeurs normales</h2>
+<div class="def-box"><strong>💡 Hémoglobine (Hb) :</strong> Protéine contenue dans les globules rouges qui fixe l'oxygène dans les poumons et le libère dans les tissus. C'est elle qui donne la couleur rouge au sang. Mesurée en g/L (ou g/dL).<div class="slide-number">15 / 57</div></div>
+<h3>Valeurs normales</h3>
+<table>
+<tr><th>Population</th><th>Valeur normale</th></tr>
+<tr><td>Homme adulte</td><td><span class="keyword">130–180 g/L</span> (13–18 g/dL)</td></tr>
+<tr><td>Femme adulte</td><td><span class="keyword">120–160 g/L</span> (12–16 g/dL)</td></tr>
+<tr><td>Nouveau-né</td><td>140–230 g/L (élevé physiologiquement — HbF fœtale)</td></tr>
+<tr><td>Femme enceinte ≥ 2e trimestre</td><td>≥ 105 g/L (hémodilution physiologique)</td></tr>
+</table>
+<div class="highlight-box"><strong>Anémie :</strong> définie <em>uniquement</em> par la valeur de l'Hb en dessous du seuil normal. Ni le nombre de GR, ni l'hématocrite ne définissent l'anémie.</div>
+<div class="info-box"><strong>Pièges :</strong><ul style="margin-top:6px">
+<li><span class="keyword">Fausse anémie</span> par hémodilution : grossesse, insuffisance cardiaque — le plasma augmente mais les GR aussi</li>
+<li><span class="keyword">Pseudo-polyglobulie</span> par hémoconcentration : déshydratation, diurétiques</li>
+</ul></div>
+</div>
+<div class="slide-img"><img src="images_hemogramme/p1_page4.png" alt="Page du cours" onclick="openModal(this.src)"></div>
+</div><div class="slide quiz-slide">
+<h2>Quiz — Valeurs Hb</h2>
+<div class="qcm-container">
+<div class="qcm-block" data-answer="2">
+<div class="q-text">Q1 : Comment définit-on l'anémie ?<div class="slide-number">16 / 57</div></div>
+<div class="qcm-options"><div class="qcm-option" data-idx="0" onclick="selectOption(this)"><span class="letter">A</span><span>GR < 4 T/L chez l'homme</span></div>
+<div class="qcm-option" data-idx="1" onclick="selectOption(this)"><span class="letter">B</span><span>Hématocrite < 40%</span></div>
+<div class="qcm-option" data-idx="2" onclick="selectOption(this)"><span class="letter">C</span><span>Hémoglobine en dessous du seuil normal</span></div>
+<div class="qcm-option" data-idx="3" onclick="selectOption(this)"><span class="letter">D</span><span>Réticulocytes < 25 G/L</span></div>
+</div>
+<button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button>
+<div class="qcm-explanation">L'anémie est définie UNIQUEMENT par la valeur de l'Hb. Ni le nombre de GR ni l'hématocrite.</div>
+</div>
+<div class="qcm-block" data-answer="1">
+<div class="q-text">Q2 : La principale cause de 'fausse anémie' par hémodilution chez la femme est :</div>
+<div class="qcm-options"><div class="qcm-option" data-idx="0" onclick="selectOption(this)"><span class="letter">A</span><span>La ménopause</span></div>
+<div class="qcm-option" data-idx="1" onclick="selectOption(this)"><span class="letter">B</span><span>La grossesse (à partir du 2e trimestre)</span></div>
+<div class="qcm-option" data-idx="2" onclick="selectOption(this)"><span class="letter">C</span><span>La prise de contraceptifs oraux</span></div>
+<div class="qcm-option" data-idx="3" onclick="selectOption(this)"><span class="letter">D</span><span>La carence en fer</span></div>
+</div>
+<button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button>
+<div class="qcm-explanation">La grossesse augmente le volume plasmatique → dilution → Hb diminuée. Seuil : ≥ 105 g/L à partir du 2e trimestre.</div>
+</div>
+</div>
+</div><div class="slide content-slide slide-with-img">
+<div class="slide-text">
+<h2>B. Indices érythrocytaires : VGM, CCMH, TCMH</h2>
+<div class="def-box"><strong>💡 VGM (Volume Globulaire Moyen) :</strong> Volume moyen d'un globule rouge, mesuré en femtolitres (fL). Permet de classer les anémies selon la taille des GR.<div class="slide-number">17 / 57</div></div>
+<div class="def-box"><strong>💡 CCMH (Concentration Corpusculaire Moyenne en Hémoglobine) :</strong> Concentration en hémoglobine à l'intérieur de chaque GR (g/L). Si basse → les GR sont pâles = hypochromie (manque de fer ou de synthèse).</div>
+<div class="def-box"><strong>💡 TCMH (Teneur Corpusculaire Moyenne en Hémoglobine) :</strong> Quantité absolue d'hémoglobine dans chaque GR, en picogrammes (pg). Diminuée dans la carence martiale.</div>
+<table>
+<tr><th>Indice</th><th>Valeur normale adulte</th><th>Anomalie</th></tr>
+<tr><td><span class="keyword">VGM</span></td><td>80–100 fL</td><td>&lt;80 = microcytose | &gt;100 = macrocytose</td></tr>
+<tr><td><span class="keyword">CCMH</span></td><td>320–360 g/L</td><td>&lt;320 = hypochromie</td></tr>
+<tr><td><span class="keyword">TCMH</span></td><td>27–32 pg</td><td>&lt;24 pg = carence martiale probable</td></tr>
+</table>
+<div class="card-grid">
+<div class="card" style="border-left:4px solid #e74c3c"><h3>Microcytaire</h3><p>VGM &lt; 80 fL → trouble synthèse Hb<br>Carence fer, thalassémie, inflammation</p></div>
+<div class="card" style="border-left:4px solid #3498db"><h3>Normocytaire</h3><p>VGM 80–100 fL<br>Hémorragie aiguë, insuffisance rénale</p></div>
+<div class="card" style="border-left:4px solid #f39c12"><h3>Macrocytaire</h3><p>VGM &gt; 100 fL<br>Déficit B9/B12, éthylisme, MDS</p></div>
+</div>
+</div>
+<div class="slide-img"><img src="images_hemogramme/p1_page5.png" alt="Page du cours" onclick="openModal(this.src)"></div>
+</div><div class="slide quiz-slide">
+<h2>Quiz — VGM CCMH</h2>
+<div class="qcm-container">
+<div class="qcm-block" data-answer="1">
+<div class="q-text">Q1 : Le VGM normal chez l'adulte est :<div class="slide-number">18 / 57</div></div>
+<div class="qcm-options"><div class="qcm-option" data-idx="0" onclick="selectOption(this)"><span class="letter">A</span><span>60–80 fL</span></div>
+<div class="qcm-option" data-idx="1" onclick="selectOption(this)"><span class="letter">B</span><span>80–100 fL</span></div>
+<div class="qcm-option" data-idx="2" onclick="selectOption(this)"><span class="letter">C</span><span>100–120 fL</span></div>
+<div class="qcm-option" data-idx="3" onclick="selectOption(this)"><span class="letter">D</span><span>120–140 fL</span></div>
+</div>
+<button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button>
+<div class="qcm-explanation">80–100 fL = normocytose. < 80 = microcytose (GR petits). > 100 = macrocytose (GR grands).</div>
+</div>
+<div class="qcm-block" data-answer="1">
+<div class="q-text">Q2 : Une TCMH < 24 pg évoque en premier :</div>
+<div class="qcm-options"><div class="qcm-option" data-idx="0" onclick="selectOption(this)"><span class="letter">A</span><span>Une anémie hémolytique</span></div>
+<div class="qcm-option" data-idx="1" onclick="selectOption(this)"><span class="letter">B</span><span>Une carence martiale (en fer)</span></div>
+<div class="qcm-option" data-idx="2" onclick="selectOption(this)"><span class="letter">C</span><span>Une carence en vitamine B12</span></div>
+<div class="qcm-option" data-idx="3" onclick="selectOption(this)"><span class="letter">D</span><span>Une thalassémie alpha</span></div>
+</div>
+<button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button>
+<div class="qcm-explanation">TCMH < 24 pg = signe précoce de carence en fer, associé à CCMH < 320 g/L.</div>
+</div>
+</div>
+</div><div class="slide content-slide slide-with-img">
+<div class="slide-text">
+<h2>C. Hématocrite et nombre de globules rouges</h2>
+<div class="def-box"><strong>💡 Hématocrite (Hct) :</strong> Pourcentage du volume sanguin occupé par les globules rouges. Exemple : Hct = 45% signifie que 45% du sang est constitué de GR. Valeurs normales : H ~40–54%, F ~35–47%.<div class="slide-number">19 / 57</div></div>
+<div class="def-box"><strong>💡 Nombre de GR :</strong> Exprimé en T/L (Tera par litre). Normal : Homme 4,5–6 T/L, Femme 4–5,5 T/L. Mais ce nombre NE définit PAS l'anémie ou la polyglobulie (seule l'Hb compte).</div>
+<h3>Relation entre les indices</h3>
+<div class="info-box">
+<strong>Formules de calcul :</strong><br>
+• VGM = Hct / GR (en fL)<br>
+• CCMH = Hb / Hct (en g/L)<br>
+• TCMH = Hb / GR (en pg)<br>
+<em>Ces calculs sont faits automatiquement par l'automate — vous n'avez pas à les calculer !</em>
+</div>
+<div class="highlight-box"><strong>Rappel :</strong> L'anémie = Hb basse. Pas l'hématocrite, pas le nombre de GR. L'hématocrite peut être faussé par la déshydratation.</div>
+</div>
+<div class="slide-img"><img src="images_hemogramme/p1_page4.png" alt="Page du cours" onclick="openModal(this.src)"></div>
+</div><div class="slide quiz-slide">
+<h2>Quiz — Hématocrite</h2>
+<div class="qcm-container">
+<div class="qcm-block" data-answer="1">
+<div class="q-text">Q1 : L'hématocrite représente :<div class="slide-number">20 / 57</div></div>
+<div class="qcm-options"><div class="qcm-option" data-idx="0" onclick="selectOption(this)"><span class="letter">A</span><span>La quantité d'hémoglobine par litre de sang</span></div>
+<div class="qcm-option" data-idx="1" onclick="selectOption(this)"><span class="letter">B</span><span>Le % du sang occupé par les globules rouges</span></div>
+<div class="qcm-option" data-idx="2" onclick="selectOption(this)"><span class="letter">C</span><span>Le volume d'un globule rouge</span></div>
+<div class="qcm-option" data-idx="3" onclick="selectOption(this)"><span class="letter">D</span><span>Le nombre de GR par litre</span></div>
+</div>
+<button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button>
+<div class="qcm-explanation">Hct = fraction volumique occupée par les GR dans le sang total. Normal : H~45%, F~40%.</div>
+</div>
+<div class="qcm-block" data-answer="1">
+<div class="q-text">Q2 : Une hématocrite > 60% chez l'adulte est :</div>
+<div class="qcm-options"><div class="qcm-option" data-idx="0" onclick="selectOption(this)"><span class="letter">A</span><span>Normale chez les sportifs</span></div>
+<div class="qcm-option" data-idx="1" onclick="selectOption(this)"><span class="letter">B</span><span>Une urgence hématologique</span></div>
+<div class="qcm-option" data-idx="2" onclick="selectOption(this)"><span class="letter">C</span><span>Un artefact de mesure fréquent</span></div>
+<div class="qcm-option" data-idx="3" onclick="selectOption(this)"><span class="letter">D</span><span>Normale en altitude</span></div>
+</div>
+<button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button>
+<div class="qcm-explanation">Hct > 60% = urgence hématologique (polyglobulie sévère) — risque de thrombose cérébrale/coronarienne.</div>
+</div>
+</div>
+</div><div class="slide content-slide slide-with-img">
+<div class="slide-text">
+<h2>D. Réticulocytes — Anémie régénérative vs arégénérative</h2>
+<div class="def-box"><strong>💡 Réticulocytes :</strong> Globules rouges <em>jeunes</em> (immatures) qui viennent d'être libérés par la moelle osseuse. Ils contiennent encore des résidus d'ARN. Maturent en 24–48h dans le sang. Leur nombre reflète l'activité de production de la moelle.<div class="slide-number">21 / 57</div></div>
+<div class="def-box"><strong>💡 Moelle osseuse :</strong> Tissu mou situé à l'intérieur de certains os (sternum, bassin, fémur). C'est là que se fabriquent toutes les cellules sanguines (= hématopoïèse). En cas d'anémie, si la moelle fonctionne bien, elle produit plus de réticulocytes.</div>
+<div class="two-col"><div class="col">
+<h3>Valeurs normales</h3>
+<ul><li>Adulte/enfant : <span class="keyword">20–100 G/L</span></li>
+<li>Nouveau-né : jusqu'à 350 G/L</li>
+<li>Seuil de régénération : <span class="keyword">&gt; 120 G/L</span></li></ul>
+</div><div class="col">
+<div class="card" style="border-left:4px solid #2ecc71;text-align:left"><h3 style="color:#2ecc71">Anémie régénérative</h3>
+<p>Réticulocytes &gt; 120 G/L → Moelle réactive<br><em>Cause périphérique : hémolyse, hémorragie aiguë</em></p></div>
+<div class="card" style="border-left:4px solid #e74c3c;text-align:left;margin-top:10px"><h3 style="color:#e74c3c">Anémie arégénérative</h3>
+<p>Réticulocytes &lt; 120 G/L → Moelle en cause<br><em>Carence, aplasie, envahissement médullaire</em></p></div>
+</div></div>
+<div class="highlight-box"><strong>Important :</strong> Les réticulocytes NE font PAS partie de l'hémogramme standard. Ils doivent être prescrits séparément.</div>
+</div>
+<div class="slide-img"><img src="images_hemogramme/p1_page4.png" alt="Page du cours" onclick="openModal(this.src)"></div>
+</div><div class="slide quiz-slide">
+<h2>Quiz — Réticulocytes</h2>
+<div class="qcm-container">
+<div class="qcm-block" data-answer="1">
+<div class="q-text">Q1 : Quel seuil de réticulocytes définit le caractère régénératif d'une anémie ?<div class="slide-number">22 / 57</div></div>
+<div class="qcm-options"><div class="qcm-option" data-idx="0" onclick="selectOption(this)"><span class="letter">A</span><span>> 50 G/L</span></div>
+<div class="qcm-option" data-idx="1" onclick="selectOption(this)"><span class="letter">B</span><span>> 120 G/L</span></div>
+<div class="qcm-option" data-idx="2" onclick="selectOption(this)"><span class="letter">C</span><span>> 200 G/L</span></div>
+<div class="qcm-option" data-idx="3" onclick="selectOption(this)"><span class="letter">D</span><span>> 500 G/L</span></div>
+</div>
+<button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button>
+<div class="qcm-explanation">> 120 G/L = anémie régénérative (moelle réactive). < 120 G/L chez un patient anémique = arégénérative.</div>
+</div>
+<div class="qcm-block" data-answer="2">
+<div class="q-text">Q2 : Une anémie normocytaire avec réticulocytes < 120 G/L signifie :</div>
+<div class="qcm-options"><div class="qcm-option" data-idx="0" onclick="selectOption(this)"><span class="letter">A</span><span>Hémorragie aiguë récente</span></div>
+<div class="qcm-option" data-idx="1" onclick="selectOption(this)"><span class="letter">B</span><span>Hémolyse en cours</span></div>
+<div class="qcm-option" data-idx="2" onclick="selectOption(this)"><span class="letter">C</span><span>Atteinte centrale de la moelle (carence, aplasie, MDS)</span></div>
+<div class="qcm-option" data-idx="3" onclick="selectOption(this)"><span class="letter">D</span><span>Prise d'érythropoïétine</span></div>
+</div>
+<button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button>
+<div class="qcm-explanation">Anémie normocytaire/macrocytaire arégénérative → atteinte de la moelle → explorer par myélogramme.</div>
+</div>
+</div>
+</div><div class="slide content-slide slide-with-img">
+<div class="slide-text">
+<h2>E. Leucocytes et formule — Valeurs normales adulte</h2>
+<div class="def-box"><strong>💡 Les différents leucocytes (globules blancs) :</strong>
+<ul style="margin-top:6px">
+<li><span class="keyword">PNN (Polynucléaires Neutrophiles)</span> : les plus nombreux. Première défense contre les bactéries. Noyau segmenté en lobes.</li>
+<li><span class="keyword">PNE (Polynucléaires Éosinophiles)</span> : impliqués dans les allergies et parasitoses. Granulations roses/oranges.</li>
+<li><span class="keyword">PNB (Polynucléaires Basophiles)</span> : très rares. Libèrent l'histamine lors des réactions allergiques.</li>
+<li><span class="keyword">Lymphocytes</span> : cellules de l'immunité adaptative (LT, LB). Combattent les virus et produisent des anticorps.</li>
+<li><span class="keyword">Monocytes</span> : phagocytes qui se différencient en macrophages dans les tissus.</li>
+</ul><div class="slide-number">23 / 57</div></div>
+<table>
+<tr><th>Leucocyte</th><th>Normale adulte</th><th>Excès</th><th>Déficit</th></tr>
+<tr><td><strong>Total leucocytes</strong></td><td>4–10 G/L</td><td>Hyperleucocytose &gt;10</td><td>Leucopénie &lt;4</td></tr>
+<tr><td><span class="keyword">PNN</span></td><td>1,5–7 G/L</td><td>Polynucléose &gt;7</td><td>Neutropénie &lt;1,5</td></tr>
+<tr><td><span class="keyword">PNE</span></td><td>0,05–0,5 G/L</td><td>Hyperéosinophilie &gt;0,5</td><td>—</td></tr>
+<tr><td><span class="keyword">PNB</span></td><td>0,01–0,05 G/L</td><td>Hyperbasophilie &gt;0,1</td><td>—</td></tr>
+<tr><td><span class="keyword">Lymphocytes</span></td><td>1,5–4 G/L</td><td>Hyperlymphocytose &gt;4</td><td>Lymphopénie &lt;1,5</td></tr>
+<tr><td><span class="keyword">Monocytes</span></td><td>0,1–1 G/L</td><td>Monocytose &gt;1</td><td>—</td></tr>
+</table>
+<div class="info-box"><strong>À retenir :</strong> On interprète en valeur absolue (G/L). Le terme "inversion de formule" n'a aucune signification et doit être banni.</div>
+</div>
+<div class="slide-img"><img src="images_hemogramme/p1_page6.png" alt="Page du cours" onclick="openModal(this.src)"></div>
+</div><div class="slide quiz-slide">
+<h2>Quiz — Valeurs leucocytes</h2>
+<div class="qcm-container">
+<div class="qcm-block" data-answer="1">
+<div class="q-text">Q1 : La valeur normale des leucocytes chez l'adulte est :<div class="slide-number">24 / 57</div></div>
+<div class="qcm-options"><div class="qcm-option" data-idx="0" onclick="selectOption(this)"><span class="letter">A</span><span>1–4 G/L</span></div>
+<div class="qcm-option" data-idx="1" onclick="selectOption(this)"><span class="letter">B</span><span>4–10 G/L</span></div>
+<div class="qcm-option" data-idx="2" onclick="selectOption(this)"><span class="letter">C</span><span>10–20 G/L</span></div>
+<div class="qcm-option" data-idx="3" onclick="selectOption(this)"><span class="letter">D</span><span>20–40 G/L</span></div>
+</div>
+<button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button>
+<div class="qcm-explanation">4–10 G/L chez l'adulte. > 10 G/L = hyperleucocytose. < 4 G/L = leucopénie.</div>
+</div>
+<div class="qcm-block" data-answer="2">
+<div class="q-text">Q2 : Le terme 'inversion de formule leucocytaire' :</div>
+<div class="qcm-options"><div class="qcm-option" data-idx="0" onclick="selectOption(this)"><span class="letter">A</span><span>Désigne une neutropénie isolée</span></div>
+<div class="qcm-option" data-idx="1" onclick="selectOption(this)"><span class="letter">B</span><span>Est un synonyme de lymphocytose</span></div>
+<div class="qcm-option" data-idx="2" onclick="selectOption(this)"><span class="letter">C</span><span>N'a aucune signification précise et doit être banni</span></div>
+<div class="qcm-option" data-idx="3" onclick="selectOption(this)"><span class="letter">D</span><span>Indique une leucémie lymphoïde</span></div>
+</div>
+<button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button>
+<div class="qcm-explanation">Ce terme est obsolète et sans signification. Seule l'interprétation en valeur absolue a un sens.</div>
+</div>
+</div>
+</div><div class="slide content-slide slide-with-img">
+<div class="slide-text">
+<h2>F. Plaquettes — Valeurs normales et fausse thrombopénie EDTA</h2>
+<div class="def-box"><strong>💡 Plaquettes (thrombocytes) :</strong> Petits fragments cellulaires (sans noyau) produits par les mégacaryocytes dans la moelle. Jouent un rôle fondamental dans l'hémostase primaire (premier bouchon lors d'une plaie). Durée de vie : 8–10 jours.<div class="slide-number">25 / 57</div></div>
+<div class="two-col"><div class="col">
+<h3>Valeurs normales</h3>
+<div class="card-grid" style="grid-template-columns:1fr">
+<div class="card" style="border-left:4px solid #2ecc71"><h3 style="color:#2ecc71">Normal</h3><p>150–450 G/L</p></div>
+<div class="card" style="border-left:4px solid #e74c3c"><h3 style="color:#e74c3c">Thrombopénie</h3><p>&lt; 150 G/L (risque hémorragique)</p></div>
+<div class="card" style="border-left:4px solid #f39c12"><h3 style="color:#f39c12">Thrombocytose</h3><p>&gt; 450 G/L (risque thrombotique)</p></div>
+</div>
+</div><div class="col">
+<div class="urgence-box">
+<h3>⚠️ Fausse thrombopénie à l'EDTA</h3>
+<ul>
+<li>1/5 000 patients : l'EDTA agrège les plaquettes <em>in vitro</em> (dans le tube)</li>
+<li>L'automate ne compte que les plaquettes libres → faux déficit</li>
+<li><strong>Absence</strong> de syndrome hémorragique clinique !</li>
+<li>Confirmer sur frottis sanguin (amas plaquettaires visibles au microscope)</li>
+<li>Solution : nouveau prélèvement sur <span class="keyword">citrate</span></li>
+</ul>
+</div>
+</div></div>
+</div>
+<div class="slide-img"><img src="images_hemogramme/p1_page7.png" alt="Page du cours" onclick="openModal(this.src)"></div>
+</div><div class="slide quiz-slide">
+<h2>Quiz — Plaquettes EDTA</h2>
+<div class="qcm-container">
+<div class="qcm-block" data-answer="1">
+<div class="q-text">Q1 : La fausse thrombopénie à l'EDTA est causée par :<div class="slide-number">26 / 57</div></div>
+<div class="qcm-options"><div class="qcm-option" data-idx="0" onclick="selectOption(this)"><span class="letter">A</span><span>Une destruction immune des plaquettes par l'EDTA</span></div>
+<div class="qcm-option" data-idx="1" onclick="selectOption(this)"><span class="letter">B</span><span>Une agrégation in vitro des plaquettes par l'EDTA chez certains patients</span></div>
+<div class="qcm-option" data-idx="2" onclick="selectOption(this)"><span class="letter">C</span><span>Une destruction mécanique par le compteur cellulaire</span></div>
+<div class="qcm-option" data-idx="3" onclick="selectOption(this)"><span class="letter">D</span><span>Une erreur de prélèvement</span></div>
+</div>
+<button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button>
+<div class="qcm-explanation">Chez 1/5000 patients, l'EDTA provoque une agrégation plaquettaire in vitro → l'automate sous-compte les plaquettes.</div>
+</div>
+<div class="qcm-block" data-answer="2">
+<div class="q-text">Q2 : Comment confirme-t-on une fausse thrombopénie à l'EDTA ?</div>
+<div class="qcm-options"><div class="qcm-option" data-idx="0" onclick="selectOption(this)"><span class="letter">A</span><span>Par un dosage de la TPO</span></div>
+<div class="qcm-option" data-idx="1" onclick="selectOption(this)"><span class="letter">B</span><span>Par un myélogramme montrant des mégacaryocytes normaux</span></div>
+<div class="qcm-option" data-idx="2" onclick="selectOption(this)"><span class="letter">C</span><span>Par le frottis (amas plaquettaires) et un nouveau prélèvement sur citrate</span></div>
+<div class="qcm-option" data-idx="3" onclick="selectOption(this)"><span class="letter">D</span><span>Par une BOM</span></div>
+</div>
+<button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button>
+<div class="qcm-explanation">Frottis = amas plaquettaires. Nouveau prélèvement sur citrate = numération correcte.</div>
+</div>
+</div>
+</div><div class="slide exam-slide">
+<h2>Examen — Valeurs normales de l'hémogramme</h2>
+<p style="color:#2ecc71;margin-bottom:10px">10 questions pour valider vos connaissances</p>
+<div id="score-exam2" class="score-bar"><div class="score-fill" style="width:0%">0/10<div class="slide-number">27 / 57</div></div></div>
+<div class="exam-scroll"><div class="qcm-container">
+<div class="qcm-block" data-answer="2">
+<div class="q-text">Q1 : L'anémie est définie par :</div>
+<div class="qcm-options"><div class="qcm-option" data-idx="0" onclick="selectOption(this)"><span class="letter">A</span><span>GR < 4 T/L</span></div>
+<div class="qcm-option" data-idx="1" onclick="selectOption(this)"><span class="letter">B</span><span>Hématocrite < 35%</span></div>
+<div class="qcm-option" data-idx="2" onclick="selectOption(this)"><span class="letter">C</span><span>Hémoglobine sous le seuil normal</span></div>
+<div class="qcm-option" data-idx="3" onclick="selectOption(this)"><span class="letter">D</span><span>VGM > 100 fL</span></div>
+</div>
+<button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button>
+<div class="qcm-explanation">Seule l'Hb définit l'anémie.</div>
+</div>
+<div class="qcm-block" data-answer="1">
+<div class="q-text">Q2 : L'hémoglobine normale chez la femme adulte est :</div>
+<div class="qcm-options"><div class="qcm-option" data-idx="0" onclick="selectOption(this)"><span class="letter">A</span><span>> 150 g/L</span></div>
+<div class="qcm-option" data-idx="1" onclick="selectOption(this)"><span class="letter">B</span><span>120–160 g/L</span></div>
+<div class="qcm-option" data-idx="2" onclick="selectOption(this)"><span class="letter">C</span><span>100–120 g/L</span></div>
+<div class="qcm-option" data-idx="3" onclick="selectOption(this)"><span class="letter">D</span><span>> 180 g/L</span></div>
+</div>
+<button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button>
+<div class="qcm-explanation">Femme : 120–160 g/L. Homme : 130–180 g/L.</div>
+</div>
+<div class="qcm-block" data-answer="2">
+<div class="q-text">Q3 : La macrocytose chez l'adulte est définie par un VGM :</div>
+<div class="qcm-options"><div class="qcm-option" data-idx="0" onclick="selectOption(this)"><span class="letter">A</span><span>> 80 fL</span></div>
+<div class="qcm-option" data-idx="1" onclick="selectOption(this)"><span class="letter">B</span><span>> 90 fL</span></div>
+<div class="qcm-option" data-idx="2" onclick="selectOption(this)"><span class="letter">C</span><span>> 100 fL</span></div>
+<div class="qcm-option" data-idx="3" onclick="selectOption(this)"><span class="letter">D</span><span>> 120 fL</span></div>
+</div>
+<button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button>
+<div class="qcm-explanation">VGM > 100 fL = macrocytose chez l'adulte.</div>
+</div>
+<div class="qcm-block" data-answer="2">
+<div class="q-text">Q4 : La CCMH normale est :</div>
+<div class="qcm-options"><div class="qcm-option" data-idx="0" onclick="selectOption(this)"><span class="letter">A</span><span>200–280 g/L</span></div>
+<div class="qcm-option" data-idx="1" onclick="selectOption(this)"><span class="letter">B</span><span>280–320 g/L</span></div>
+<div class="qcm-option" data-idx="2" onclick="selectOption(this)"><span class="letter">C</span><span>320–360 g/L</span></div>
+<div class="qcm-option" data-idx="3" onclick="selectOption(this)"><span class="letter">D</span><span>> 360 g/L</span></div>
+</div>
+<button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button>
+<div class="qcm-explanation">CCMH 320–360 g/L. < 320 = hypochromie.</div>
+</div>
+<div class="qcm-block" data-answer="1">
+<div class="q-text">Q5 : Le seuil de réticulocytes pour définir une anémie régénérative est :</div>
+<div class="qcm-options"><div class="qcm-option" data-idx="0" onclick="selectOption(this)"><span class="letter">A</span><span>> 50 G/L</span></div>
+<div class="qcm-option" data-idx="1" onclick="selectOption(this)"><span class="letter">B</span><span>> 120 G/L</span></div>
+<div class="qcm-option" data-idx="2" onclick="selectOption(this)"><span class="letter">C</span><span>> 200 G/L</span></div>
+<div class="qcm-option" data-idx="3" onclick="selectOption(this)"><span class="letter">D</span><span>> 350 G/L</span></div>
+</div>
+<button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button>
+<div class="qcm-explanation">> 120 G/L = régénératif.</div>
+</div>
+<div class="qcm-block" data-answer="1">
+<div class="q-text">Q6 : Les réticulocytes font-ils partie de l'hémogramme standard ?</div>
+<div class="qcm-options"><div class="qcm-option" data-idx="0" onclick="selectOption(this)"><span class="letter">A</span><span>Oui, toujours</span></div>
+<div class="qcm-option" data-idx="1" onclick="selectOption(this)"><span class="letter">B</span><span>Non, prescription séparée nécessaire</span></div>
+<div class="qcm-option" data-idx="2" onclick="selectOption(this)"><span class="letter">C</span><span>Oui, si anémie détectée</span></div>
+<div class="qcm-option" data-idx="3" onclick="selectOption(this)"><span class="letter">D</span><span>Non, uniquement au myélogramme</span></div>
+</div>
+<button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button>
+<div class="qcm-explanation">Les réticulocytes NE font PAS partie de l'hémogramme standard → prescription séparée.</div>
+</div>
+<div class="qcm-block" data-answer="1">
+<div class="q-text">Q7 : La valeur normale des PNN chez l'adulte est :</div>
+<div class="qcm-options"><div class="qcm-option" data-idx="0" onclick="selectOption(this)"><span class="letter">A</span><span>0,5–2 G/L</span></div>
+<div class="qcm-option" data-idx="1" onclick="selectOption(this)"><span class="letter">B</span><span>1,5–7 G/L</span></div>
+<div class="qcm-option" data-idx="2" onclick="selectOption(this)"><span class="letter">C</span><span>7–15 G/L</span></div>
+<div class="qcm-option" data-idx="3" onclick="selectOption(this)"><span class="letter">D</span><span>0,1–0,5 G/L</span></div>
+</div>
+<button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button>
+<div class="qcm-explanation">PNN normaux : 1,5–7 G/L.</div>
+</div>
+<div class="qcm-block" data-answer="1">
+<div class="q-text">Q8 : La thrombopénie est définie par des plaquettes :</div>
+<div class="qcm-options"><div class="qcm-option" data-idx="0" onclick="selectOption(this)"><span class="letter">A</span><span>< 400 G/L</span></div>
+<div class="qcm-option" data-idx="1" onclick="selectOption(this)"><span class="letter">B</span><span>< 150 G/L</span></div>
+<div class="qcm-option" data-idx="2" onclick="selectOption(this)"><span class="letter">C</span><span>< 100 G/L</span></div>
+<div class="qcm-option" data-idx="3" onclick="selectOption(this)"><span class="letter">D</span><span>< 50 G/L</span></div>
+</div>
+<button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button>
+<div class="qcm-explanation">< 150 G/L = thrombopénie.</div>
+</div>
+<div class="qcm-block" data-answer="2">
+<div class="q-text">Q9 : La fausse thrombopénie à l'EDTA s'accompagne de :</div>
+<div class="qcm-options"><div class="qcm-option" data-idx="0" onclick="selectOption(this)"><span class="letter">A</span><span>Purpura pétéchial étendu</span></div>
+<div class="qcm-option" data-idx="1" onclick="selectOption(this)"><span class="letter">B</span><span>Épistaxis</span></div>
+<div class="qcm-option" data-idx="2" onclick="selectOption(this)"><span class="letter">C</span><span>Aucun signe hémorragique clinique</span></div>
+<div class="qcm-option" data-idx="3" onclick="selectOption(this)"><span class="letter">D</span><span>Hématomes profonds</span></div>
+</div>
+<button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button>
+<div class="qcm-explanation">C'est une fausse thrombopénie in vitro → pas de saignement clinique.</div>
+</div>
+<div class="qcm-block" data-answer="2">
+<div class="q-text">Q10 : Les PNE (éosinophiles) sont impliqués dans :</div>
+<div class="qcm-options"><div class="qcm-option" data-idx="0" onclick="selectOption(this)"><span class="letter">A</span><span>Les infections bactériennes</span></div>
+<div class="qcm-option" data-idx="1" onclick="selectOption(this)"><span class="letter">B</span><span>Les infections fongiques</span></div>
+<div class="qcm-option" data-idx="2" onclick="selectOption(this)"><span class="letter">C</span><span>Les allergies et parasitoses</span></div>
+<div class="qcm-option" data-idx="3" onclick="selectOption(this)"><span class="letter">D</span><span>La production d'anticorps</span></div>
+</div>
+<button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button>
+<div class="qcm-explanation">PNE = éosinophiles → allergies et parasitoses. Seuil d'hyperéosinophilie : > 0,5 G/L.</div>
+</div>
+</div></div>
+</div><div class="slide section-slide">
+<h1>IV. Particularités pédiatriques</h1>
+<p>L'hémogramme normal évolue avec l'âge — ne pas confondre avec une pathologie !</p>
+<div class="slide-number">28 / 57</div></div><div class="slide content-slide slide-with-img">
+<div class="slide-text">
+<h2>Valeurs normales chez l'enfant — Leucocytes</h2>
+<div class="info-box"><strong>Principe :</strong> Chez l'enfant, les valeurs normales sont DIFFÉRENTES de l'adulte. Appliquer les normes adulte entraîne des faux diagnostics.<div class="slide-number">29 / 57</div></div>
+<h3>Leucocytes totaux et formule selon l'âge</h3>
+<table>
+<tr><th>Âge</th><th>Leucocytes</th><th>PNN</th><th>Lymphocytes</th></tr>
+<tr><td>Naissance</td><td>9–30 G/L</td><td>9–30 G/L (très élevés !)</td><td>2–7 G/L</td></tr>
+<tr><td>3 mois</td><td>6–12 G/L</td><td>Diminuent</td><td>Augmentent</td></tr>
+<tr><td>1 an</td><td>6–15 G/L</td><td>Bas</td><td>4–10 G/L (élevés !)</td></tr>
+<tr><td>1–4 ans</td><td>6–15 G/L</td><td>—</td><td>2,5–8 G/L</td></tr>
+<tr><td>10–12 ans</td><td>4,5–13,5 G/L</td><td>Progressif ↑</td><td>Se normalise</td></tr>
+<tr><td>Adulte</td><td>4–10 G/L</td><td>1,5–7 G/L</td><td>1,5–4 G/L</td></tr>
+</table>
+<div class="highlight-box"><strong>Points clés :</strong>
+<ul style="margin-top:8px">
+<li>Le nouveau-né a une leucocytose élevée physiologique (9–30 G/L) — normal !</li>
+<li>Les lymphocytes sont élevés chez l'enfant &lt; 10 ans — ne pas confondre avec une leucémie !</li>
+<li>L'hyperlymphocytose pédiatrique est le plus souvent réactionnelle (coqueluche, viroses)</li>
+</ul></div>
+</div>
+<div class="slide-img"><img src="images_hemogramme/p1_page7.png" alt="Page du cours" onclick="openModal(this.src)"></div>
+</div><div class="slide quiz-slide">
+<h2>Quiz — Pédiatrie leucocytes</h2>
+<div class="qcm-container">
+<div class="qcm-block" data-answer="1">
+<div class="q-text">Q1 : Chez l'enfant de 2 ans, une lymphocytose à 5 G/L est :<div class="slide-number">30 / 57</div></div>
+<div class="qcm-options"><div class="qcm-option" data-idx="0" onclick="selectOption(this)"><span class="letter">A</span><span>Toujours pathologique (lymphome)</span></div>
+<div class="qcm-option" data-idx="1" onclick="selectOption(this)"><span class="letter">B</span><span>Possiblement normale — valeurs élevées jusqu'à 10–12 ans</span></div>
+<div class="qcm-option" data-idx="2" onclick="selectOption(this)"><span class="letter">C</span><span>Signe d'une LLC débutante</span></div>
+<div class="qcm-option" data-idx="3" onclick="selectOption(this)"><span class="letter">D</span><span>Signe d'une immunodéficience</span></div>
+</div>
+<button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button>
+<div class="qcm-explanation">Lymphocytes 2,5–8 G/L sont normaux entre 1 et 4 ans. La lymphocytose pédiatrique est souvent réactionnelle.</div>
+</div>
+<div class="qcm-block" data-answer="1">
+<div class="q-text">Q2 : Quelle est l'évolution des PNN chez le nouveau-né ?</div>
+<div class="qcm-options"><div class="qcm-option" data-idx="0" onclick="selectOption(this)"><span class="letter">A</span><span>Bas à la naissance, augmentent progressivement</span></div>
+<div class="qcm-option" data-idx="1" onclick="selectOption(this)"><span class="letter">B</span><span>Très élevés à la naissance, diminuent progressivement</span></div>
+<div class="qcm-option" data-idx="2" onclick="selectOption(this)"><span class="letter">C</span><span>Stables de la naissance à l'adulte</span></div>
+<div class="qcm-option" data-idx="3" onclick="selectOption(this)"><span class="letter">D</span><span>Absents à la naissance</span></div>
+</div>
+<button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button>
+<div class="qcm-explanation">PNN très élevés à la naissance (9–30 G/L), puis diminuent. Les lymphocytes deviennent prédominants entre 1 et 10 ans.</div>
+</div>
+</div>
+</div><div class="slide content-slide slide-with-img">
+<div class="slide-text">
+<h2>Valeurs VGM et hémoglobine chez l'enfant</h2>
+<h3>Seuils de microcytose et macrocytose selon l'âge</h3>
+<table>
+<tr><th>Âge</th><th>Microcytose si VGM &lt;</th><th>Macrocytose si VGM &gt;</th></tr>
+<tr><td>Adulte</td><td>80 fL</td><td>100 fL</td></tr>
+<tr><td>6 mois–2 ans</td><td>70 fL</td><td>84 fL</td></tr>
+<tr><td>2–6 ans</td><td>75 fL</td><td>84 fL</td></tr>
+<tr><td>6–12 ans</td><td>77 fL</td><td>92 fL</td></tr>
+<tr><td>12–16 ans</td><td>78 fL</td><td>96 fL</td></tr>
+</table>
+<div class="two-col"><div class="col">
+<div class="info-box"><strong>Hb chez l'enfant :</strong><ul style="margin-top:6px">
+<li>Nouveau-né : 140–230 g/L (élevé — HbF)</li>
+<li>Nadir à 3 mois : ~100 g/L (anémie physiologique du nourrisson)</li>
+<li>Remonte progressivement : 110–140 g/L jusqu'à 6 ans</li>
+<li>Atteint les valeurs adulte vers 12 ans</li>
+</ul><div class="slide-number">31 / 57</div></div>
+</div><div class="col">
+<div class="highlight-box"><strong>Plaquettes chez le nourrisson :</strong><br>Entre 15 j et 6 mois : <span class="keyword">150–600 G/L</span> (physiologiquement élevées — normal !)</div>
+</div></div>
+</div>
+<div class="slide-img"><img src="images_hemogramme/p1_page5.png" alt="Page du cours" onclick="openModal(this.src)"></div>
+</div><div class="slide quiz-slide">
+<h2>Quiz — VGM pédiatrique</h2>
+<div class="qcm-container">
+<div class="qcm-block" data-answer="2">
+<div class="q-text">Q1 : Chez un enfant de 18 mois, quelle valeur de VGM définit la microcytose ?<div class="slide-number">32 / 57</div></div>
+<div class="qcm-options"><div class="qcm-option" data-idx="0" onclick="selectOption(this)"><span class="letter">A</span><span>< 80 fL (comme l'adulte)</span></div>
+<div class="qcm-option" data-idx="1" onclick="selectOption(this)"><span class="letter">B</span><span>< 75 fL</span></div>
+<div class="qcm-option" data-idx="2" onclick="selectOption(this)"><span class="letter">C</span><span>< 70 fL</span></div>
+<div class="qcm-option" data-idx="3" onclick="selectOption(this)"><span class="letter">D</span><span>< 65 fL</span></div>
+</div>
+<button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button>
+<div class="qcm-explanation">Entre 6 mois et 2 ans : microcytose si VGM < 70 fL (pas 80 fL comme chez l'adulte).</div>
+</div>
+<div class="qcm-block" data-answer="2">
+<div class="q-text">Q2 : À quel âge l'hémoglobine atteint son point le plus bas chez le nourrisson ?</div>
+<div class="qcm-options"><div class="qcm-option" data-idx="0" onclick="selectOption(this)"><span class="letter">A</span><span>À la naissance</span></div>
+<div class="qcm-option" data-idx="1" onclick="selectOption(this)"><span class="letter">B</span><span>À 1 mois</span></div>
+<div class="qcm-option" data-idx="2" onclick="selectOption(this)"><span class="letter">C</span><span>À 3 mois</span></div>
+<div class="qcm-option" data-idx="3" onclick="selectOption(this)"><span class="letter">D</span><span>À 6 mois</span></div>
+</div>
+<button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button>
+<div class="qcm-explanation">Nadir de l'Hb vers 3 mois (~100 g/L). Anémie physiologique du nourrisson, normale !</div>
+</div>
+</div>
+</div><div class="slide exam-slide">
+<h2>Examen — Particularités pédiatriques</h2>
+<p style="color:#2ecc71;margin-bottom:10px">10 questions pour valider vos connaissances</p>
+<div id="score-exam3" class="score-bar"><div class="score-fill" style="width:0%">0/10<div class="slide-number">33 / 57</div></div></div>
+<div class="exam-scroll"><div class="qcm-container">
+<div class="qcm-block" data-answer="1">
+<div class="q-text">Q1 : La leucocytose du nouveau-né est :</div>
+<div class="qcm-options"><div class="qcm-option" data-idx="0" onclick="selectOption(this)"><span class="letter">A</span><span>4–10 G/L</span></div>
+<div class="qcm-option" data-idx="1" onclick="selectOption(this)"><span class="letter">B</span><span>9–30 G/L</span></div>
+<div class="qcm-option" data-idx="2" onclick="selectOption(this)"><span class="letter">C</span><span>2–6 G/L</span></div>
+<div class="qcm-option" data-idx="3" onclick="selectOption(this)"><span class="letter">D</span><span>15–40 G/L</span></div>
+</div>
+<button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button>
+<div class="qcm-explanation">Nouveau-né : 9–30 G/L de leucocytes (physiologiquement élevés).</div>
+</div>
+<div class="qcm-block" data-answer="1">
+<div class="q-text">Q2 : Chez l'enfant de 3 ans, les lymphocytes normaux sont :</div>
+<div class="qcm-options"><div class="qcm-option" data-idx="0" onclick="selectOption(this)"><span class="letter">A</span><span>1,5–4 G/L</span></div>
+<div class="qcm-option" data-idx="1" onclick="selectOption(this)"><span class="letter">B</span><span>2,5–8 G/L</span></div>
+<div class="qcm-option" data-idx="2" onclick="selectOption(this)"><span class="letter">C</span><span>> 10 G/L</span></div>
+<div class="qcm-option" data-idx="3" onclick="selectOption(this)"><span class="letter">D</span><span>0,5–1,5 G/L</span></div>
+</div>
+<button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button>
+<div class="qcm-explanation">1–4 ans : lymphocytes 2,5–8 G/L. Prédominance lymphocytaire normale.</div>
+</div>
+<div class="qcm-block" data-answer="2">
+<div class="q-text">Q3 : La microcytose chez l'enfant de 1 an est définie par VGM :</div>
+<div class="qcm-options"><div class="qcm-option" data-idx="0" onclick="selectOption(this)"><span class="letter">A</span><span>< 80 fL</span></div>
+<div class="qcm-option" data-idx="1" onclick="selectOption(this)"><span class="letter">B</span><span>< 75 fL</span></div>
+<div class="qcm-option" data-idx="2" onclick="selectOption(this)"><span class="letter">C</span><span>< 70 fL</span></div>
+<div class="qcm-option" data-idx="3" onclick="selectOption(this)"><span class="letter">D</span><span>< 65 fL</span></div>
+</div>
+<button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button>
+<div class="qcm-explanation">6 mois–2 ans : microcytose si VGM < 70 fL.</div>
+</div>
+<div class="qcm-block" data-answer="2">
+<div class="q-text">Q4 : L'hémoglobine du nouveau-né est :</div>
+<div class="qcm-options"><div class="qcm-option" data-idx="0" onclick="selectOption(this)"><span class="letter">A</span><span>Basse (80–100 g/L)</span></div>
+<div class="qcm-option" data-idx="1" onclick="selectOption(this)"><span class="letter">B</span><span>Normale (120–160 g/L)</span></div>
+<div class="qcm-option" data-idx="2" onclick="selectOption(this)"><span class="letter">C</span><span>Élevée (140–230 g/L)</span></div>
+<div class="qcm-option" data-idx="3" onclick="selectOption(this)"><span class="letter">D</span><span>Très variable</span></div>
+</div>
+<button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button>
+<div class="qcm-explanation">HbF élevée → Hb néonatale 140–230 g/L. Diminue vers le nadir à 3 mois.</div>
+</div>
+<div class="qcm-block" data-answer="2">
+<div class="q-text">Q5 : L'hyperlymphocytose de l'enfant est le plus souvent :</div>
+<div class="qcm-options"><div class="qcm-option" data-idx="0" onclick="selectOption(this)"><span class="letter">A</span><span>Une LLC débutante</span></div>
+<div class="qcm-option" data-idx="1" onclick="selectOption(this)"><span class="letter">B</span><span>Une LAL</span></div>
+<div class="qcm-option" data-idx="2" onclick="selectOption(this)"><span class="letter">C</span><span>Réactionnelle (coqueluche, viroses)</span></div>
+<div class="qcm-option" data-idx="3" onclick="selectOption(this)"><span class="letter">D</span><span>Idiopathique</span></div>
+</div>
+<button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button>
+<div class="qcm-explanation">Chez l'enfant, la lymphocytose est presque toujours réactionnelle.</div>
+</div>
+<div class="qcm-block" data-answer="2">
+<div class="q-text">Q6 : Chez l'adolescent de 15 ans, la macrocytose est définie par VGM :</div>
+<div class="qcm-options"><div class="qcm-option" data-idx="0" onclick="selectOption(this)"><span class="letter">A</span><span>> 84 fL</span></div>
+<div class="qcm-option" data-idx="1" onclick="selectOption(this)"><span class="letter">B</span><span>> 92 fL</span></div>
+<div class="qcm-option" data-idx="2" onclick="selectOption(this)"><span class="letter">C</span><span>> 96 fL</span></div>
+<div class="qcm-option" data-idx="3" onclick="selectOption(this)"><span class="letter">D</span><span>> 100 fL</span></div>
+</div>
+<button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button>
+<div class="qcm-explanation">12–16 ans : macrocytose si VGM > 96 fL.</div>
+</div>
+<div class="qcm-block" data-answer="2">
+<div class="q-text">Q7 : Entre 15 jours et 6 mois, les plaquettes peuvent aller jusqu'à :</div>
+<div class="qcm-options"><div class="qcm-option" data-idx="0" onclick="selectOption(this)"><span class="letter">A</span><span>450 G/L</span></div>
+<div class="qcm-option" data-idx="1" onclick="selectOption(this)"><span class="letter">B</span><span>500 G/L</span></div>
+<div class="qcm-option" data-idx="2" onclick="selectOption(this)"><span class="letter">C</span><span>600 G/L</span></div>
+<div class="qcm-option" data-idx="3" onclick="selectOption(this)"><span class="letter">D</span><span>800 G/L</span></div>
+</div>
+<button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button>
+<div class="qcm-explanation">150–600 G/L entre 15 j et 6 mois = physiologique.</div>
+</div>
+<div class="qcm-block" data-answer="2">
+<div class="q-text">Q8 : Le nadir de l'hémoglobine chez le nourrisson est :</div>
+<div class="qcm-options"><div class="qcm-option" data-idx="0" onclick="selectOption(this)"><span class="letter">A</span><span>À la naissance</span></div>
+<div class="qcm-option" data-idx="1" onclick="selectOption(this)"><span class="letter">B</span><span>À 1 mois</span></div>
+<div class="qcm-option" data-idx="2" onclick="selectOption(this)"><span class="letter">C</span><span>À 3 mois</span></div>
+<div class="qcm-option" data-idx="3" onclick="selectOption(this)"><span class="letter">D</span><span>À 6 mois</span></div>
+</div>
+<button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button>
+<div class="qcm-explanation">Minimum de l'Hb vers 3 mois (~100 g/L). Anémie physiologique du nourrisson.</div>
+</div>
+<div class="qcm-block" data-answer="3">
+<div class="q-text">Q9 : Les PNN dominent les lymphocytes chez l'enfant à partir de :</div>
+<div class="qcm-options"><div class="qcm-option" data-idx="0" onclick="selectOption(this)"><span class="letter">A</span><span>6 mois</span></div>
+<div class="qcm-option" data-idx="1" onclick="selectOption(this)"><span class="letter">B</span><span>1 an</span></div>
+<div class="qcm-option" data-idx="2" onclick="selectOption(this)"><span class="letter">C</span><span>5 ans</span></div>
+<div class="qcm-option" data-idx="3" onclick="selectOption(this)"><span class="letter">D</span><span>10–12 ans</span></div>
+</div>
+<button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button>
+<div class="qcm-explanation">Vers 10–12 ans, la formule devient similaire à l'adulte (PNN > lymphocytes).</div>
+</div>
+<div class="qcm-block" data-answer="1">
+<div class="q-text">Q10 : Chez l'enfant entre 6 et 12 ans, la microcytose est définie par VGM :</div>
+<div class="qcm-options"><div class="qcm-option" data-idx="0" onclick="selectOption(this)"><span class="letter">A</span><span>< 80 fL</span></div>
+<div class="qcm-option" data-idx="1" onclick="selectOption(this)"><span class="letter">B</span><span>< 77 fL</span></div>
+<div class="qcm-option" data-idx="2" onclick="selectOption(this)"><span class="letter">C</span><span>< 75 fL</span></div>
+<div class="qcm-option" data-idx="3" onclick="selectOption(this)"><span class="letter">D</span><span>< 70 fL</span></div>
+</div>
+<button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button>
+<div class="qcm-explanation">6–12 ans : microcytose si VGM < 77 fL.</div>
+</div>
+</div></div>
+</div><div class="slide section-slide">
+<h1>V. Anomalies de la lignée rouge</h1>
+<p>Anémies et polyglobulies — Démarche diagnostique</p>
+<div class="slide-number">34 / 57</div></div><div class="slide content-slide slide-with-img">
+<div class="slide-text">
+<h2>Anémies microcytaires (VGM &lt; 80 fL)</h2>
+<div class="def-box"><strong>💡 Microcytose :</strong> VGM &lt; 80 fL = GR plus petits que la normale. Mécanisme = trouble de la synthèse de l'hémoglobine (déficit en fer, problème de la chaîne de globine, ou inflammation chronique).<div class="slide-number">35 / 57</div></div>
+<div class="def-box"><strong>💡 Ferritine :</strong> Protéine de stockage du fer à l'intérieur des cellules. Sa concentration sanguine reflète les réserves en fer de l'organisme. Basse (&lt; 15 µg/L) = carence certaine en fer.</div>
+<div class="def-box"><strong>💡 Thalassémie :</strong> Maladie génétique héréditaire (transmission autosomique récessive) due à un défaut de synthèse d'une chaîne de la globine (α ou β). Entraîne des GR microcytaires mais nombreux. Diagnostic: électrophorèse de l'hémoglobine.</div>
+<h3>Étiologies à connaître</h3>
+<div class="card-grid">
+<div class="card" style="border-left:4px solid #e74c3c"><h3>Carence martiale ★★★</h3><p>La + fréquente au monde. Fer ↓, ferritine ↓, transferrine ↑. TCMH &lt; 24 pg. Cause : hémorragie chronique, malabsorption.</p></div>
+<div class="card" style="border-left:4px solid #3498db"><h3>Inflammation chronique</h3><p>Initialement normocytaire. Ferritine ↑ (réactant de phase aiguë). Fer sérique ↓.</p></div>
+<div class="card" style="border-left:4px solid #f39c12"><h3>Thalassémies</h3><p>Génétique. GR nombreux mais petits. Électrophorèse Hb pour diagnostiquer.</p></div>
+<div class="card" style="border-left:4px solid #9b59b6"><h3>Sidéroblastique</h3><p>Rare. Trouble utilisation du fer. Sidéroblastes en couronne au myélogramme.</p></div>
+</div>
+</div>
+<div class="slide-img"><img src="images_hemogramme/p1_page8.png" alt="Page du cours" onclick="openModal(this.src)"></div>
+</div><div class="slide quiz-slide">
+<h2>Quiz — Anémie microcytaire</h2>
+<div class="qcm-container">
+<div class="qcm-block" data-answer="1">
+<div class="q-text">Q1 : La cause la plus fréquente d'anémie microcytaire est :<div class="slide-number">36 / 57</div></div>
+<div class="qcm-options"><div class="qcm-option" data-idx="0" onclick="selectOption(this)"><span class="letter">A</span><span>La thalassémie</span></div>
+<div class="qcm-option" data-idx="1" onclick="selectOption(this)"><span class="letter">B</span><span>La carence martiale (en fer)</span></div>
+<div class="qcm-option" data-idx="2" onclick="selectOption(this)"><span class="letter">C</span><span>L'anémie inflammatoire</span></div>
+<div class="qcm-option" data-idx="3" onclick="selectOption(this)"><span class="letter">D</span><span>Le syndrome myélodysplasique</span></div>
+</div>
+<button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button>
+<div class="qcm-explanation">La carence en fer (carence martiale) est la cause la plus fréquente d'anémie microcytaire dans le monde.</div>
+</div>
+<div class="qcm-block" data-answer="2">
+<div class="q-text">Q2 : Dans l'anémie inflammatoire chronique, la ferritine est :</div>
+<div class="qcm-options"><div class="qcm-option" data-idx="0" onclick="selectOption(this)"><span class="letter">A</span><span>Basse (réserves épuisées)</span></div>
+<div class="qcm-option" data-idx="1" onclick="selectOption(this)"><span class="letter">B</span><span>Normale uniquement</span></div>
+<div class="qcm-option" data-idx="2" onclick="selectOption(this)"><span class="letter">C</span><span>Élevée (protéine de l'inflammation)</span></div>
+<div class="qcm-option" data-idx="3" onclick="selectOption(this)"><span class="letter">D</span><span>Indosable</span></div>
+</div>
+<button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button>
+<div class="qcm-explanation">Ferritine = protéine de l'inflammation → élevée ou normale dans l'anémie inflammatoire. Permet de la distinguer de la carence martiale.</div>
+</div>
+</div>
+</div><div class="slide content-slide slide-with-img">
+<div class="slide-text">
+<h2>Anémies normocytaires et macrocytaires</h2>
+<div class="def-box"><strong>💡 Myélogramme :</strong> Examen qui consiste à prélever de la moelle osseuse par ponction (sternum ou crête iliaque) pour analyser les cellules au microscope. Permet de diagnostiquer les aplasies, leucémies, myélodysplasies, envahissements.<div class="slide-number">37 / 57</div></div>
+<div class="def-box"><strong>💡 MDS (Syndromes MyéloDysplasiques) :</strong> Maladies de la moelle osseuse où les cellules se forment de façon anormale (dysplasie). Touchent surtout les sujets âgés (> 60 ans). Peuvent évoluer en leucémie aiguë. Se manifestent souvent par une macrocytose + cytopénie(s).</div>
+<div class="two-col"><div class="col">
+<h3>Normocytaires (80–100 fL)</h3>
+<div class="card" style="border-left:4px solid #2ecc71;text-align:left;margin-bottom:8px"><h3 style="color:#2ecc71">Régénératives (réticulocytes &gt;120)</h3>
+<p>• <strong>Hémolyse</strong> : destruction prématurée des GR<br>• <strong>Hémorragie aiguë</strong></p></div>
+<div class="card" style="border-left:4px solid #e74c3c;text-align:left"><h3 style="color:#e74c3c">Arégénératives</h3>
+<p>• Insuffisance rénale (↓ EPO)<br>• Hypothyroïdie, aplasie, envahissement médullaire → myélogramme</p></div>
+</div><div class="col">
+<h3>Macrocytaires (&gt;100 fL) — arégénératives</h3>
+<ul>
+<li><span class="keyword">Éthylisme ★★★</span> (adulte)</li>
+<li>Déficit <span class="keyword">B9</span> (folates) : réserves 3–4 mois</li>
+<li>Déficit <span class="keyword">B12</span> (cobalamine) : réserves 3–4 ans</li>
+<li>MDS (sujet âgé++)</li>
+<li>Médicaments (hydroxyurée, méthotrexate)</li>
+<li>Hypothyroïdie, hépatopathies</li>
+</ul>
+</div></div>
+</div>
+<div class="slide-img"><img src="images_hemogramme/p1_page8.png" alt="Page du cours" onclick="openModal(this.src)"></div>
+</div><div class="slide quiz-slide">
+<h2>Quiz — Anémies normo/macro</h2>
+<div class="qcm-container">
+<div class="qcm-block" data-answer="1">
+<div class="q-text">Q1 : Chez un adulte de 65 ans avec anémie macrocytaire arégénérative, évoquer en priorité :<div class="slide-number">38 / 57</div></div>
+<div class="qcm-options"><div class="qcm-option" data-idx="0" onclick="selectOption(this)"><span class="letter">A</span><span>Hémolyse</span></div>
+<div class="qcm-option" data-idx="1" onclick="selectOption(this)"><span class="letter">B</span><span>Éthylisme ou carence B12/B9 ou MDS</span></div>
+<div class="qcm-option" data-idx="2" onclick="selectOption(this)"><span class="letter">C</span><span>Hémorragie aiguë</span></div>
+<div class="qcm-option" data-idx="3" onclick="selectOption(this)"><span class="letter">D</span><span>Carence martiale</span></div>
+</div>
+<button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button>
+<div class="qcm-explanation">Macrocytose arégénérative chez l'adulte : évoquer éthylisme, B9/B12, MDS (sujet âgé), médicaments.</div>
+</div>
+<div class="qcm-block" data-answer="2">
+<div class="q-text">Q2 : Une anémie normocytaire avec réticulocytes > 120 G/L évoque en premier :</div>
+<div class="qcm-options"><div class="qcm-option" data-idx="0" onclick="selectOption(this)"><span class="letter">A</span><span>Une aplasie médullaire</span></div>
+<div class="qcm-option" data-idx="1" onclick="selectOption(this)"><span class="letter">B</span><span>Une insuffisance rénale</span></div>
+<div class="qcm-option" data-idx="2" onclick="selectOption(this)"><span class="letter">C</span><span>Une hémolyse ou hémorragie aiguë</span></div>
+<div class="qcm-option" data-idx="3" onclick="selectOption(this)"><span class="letter">D</span><span>Une carence en B12</span></div>
+</div>
+<button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button>
+<div class="qcm-explanation">Normocytaire régénérative = la moelle réagit → hémolyse ou hémorragie aiguë.</div>
+</div>
+</div>
+</div><div class="slide content-slide slide-with-img">
+<div class="slide-text">
+<h2>Polyglobulies</h2>
+<div class="def-box"><strong>💡 Polyglobulie :</strong> Augmentation excessive des globules rouges. Définie par l'hémoglobine ET l'hématocrite, JAMAIS par le nombre de GR seul.<div class="slide-number">39 / 57</div></div>
+<div class="def-box"><strong>💡 EPO (Érythropoïétine) :</strong> Hormone produite par le rein en réponse à l'hypoxie (manque d'oxygène). Stimule la production des GR dans la moelle. Utilisée en médecine sportive (dopage) et pour traiter les anémies rénales.</div>
+<h3>Seuils</h3>
+<div class="card-grid">
+<div class="card" style="border-left:4px solid #e74c3c"><h3>Homme</h3><p>Hb &gt; 185 g/L<br>Hct &gt; 52%</p></div>
+<div class="card" style="border-left:4px solid #e91e63"><h3>Femme</h3><p>Hb &gt; 165 g/L<br>Hct &gt; 48%</p></div>
+<div class="card" style="border-left:4px solid #f39c12"><h3>Urgence</h3><p>Hct &gt; 60%</p></div>
+</div>
+<div class="two-col"><div class="col">
+<h3>Polyglobulies vraies</h3>
+<ul><li><span class="keyword">Maladie de Vaquez</span> (JAK2 V617F) = primitive</li>
+<li>Hypoxie chronique (BPCO, tabac, altitude)</li>
+<li>Tumeurs sécrétant de l'EPO (rein, foie)</li></ul>
+</div><div class="col">
+<h3>Pseudo-polyglobulie</h3>
+<ul><li>Déshydratation</li>
+<li>Diurétiques</li>
+<li>Hémoconcentration</li></ul>
+<div class="info-box"><small>Le volume plasmatique ↓ mais les GR sont normaux → Hb et Hct apparaissent élevés faussement.</small></div>
+</div></div>
+</div>
+<div class="slide-img"><img src="images_hemogramme/p2_page1.png" alt="Page du cours" onclick="openModal(this.src)"></div>
+</div><div class="slide quiz-slide">
+<h2>Quiz — Polyglobulies</h2>
+<div class="qcm-container">
+<div class="qcm-block" data-answer="1">
+<div class="q-text">Q1 : La maladie de Vaquez est :<div class="slide-number">40 / 57</div></div>
+<div class="qcm-options"><div class="qcm-option" data-idx="0" onclick="selectOption(this)"><span class="letter">A</span><span>Une anémie hémolytique auto-immune</span></div>
+<div class="qcm-option" data-idx="1" onclick="selectOption(this)"><span class="letter">B</span><span>Une polyglobulie primitive liée à la mutation JAK2 V617F</span></div>
+<div class="qcm-option" data-idx="2" onclick="selectOption(this)"><span class="letter">C</span><span>Une thalassémie majeure</span></div>
+<div class="qcm-option" data-idx="3" onclick="selectOption(this)"><span class="letter">D</span><span>Une carence en EPO</span></div>
+</div>
+<button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button>
+<div class="qcm-explanation">Vaquez = polyglobulie primitive (myéloproliférative). Mutation JAK2 V617F dans > 95% des cas.</div>
+</div>
+<div class="qcm-block" data-answer="2">
+<div class="q-text">Q2 : Une pseudo-polyglobulie par hémoconcentration est causée par :</div>
+<div class="qcm-options"><div class="qcm-option" data-idx="0" onclick="selectOption(this)"><span class="letter">A</span><span>La mutation JAK2 V617F</span></div>
+<div class="qcm-option" data-idx="1" onclick="selectOption(this)"><span class="letter">B</span><span>Une tumeur EPO-sécrétante</span></div>
+<div class="qcm-option" data-idx="2" onclick="selectOption(this)"><span class="letter">C</span><span>La déshydratation ou les diurétiques</span></div>
+<div class="qcm-option" data-idx="3" onclick="selectOption(this)"><span class="letter">D</span><span>L'altitude chronique</span></div>
+</div>
+<button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button>
+<div class="qcm-explanation">Pseudo-polyglobulie = Hb élevée par diminution du volume plasmatique (déshydratation) → le nombre de GR est normal.</div>
+</div>
+</div>
+</div><div class="slide exam-slide">
+<h2>Examen — Anomalies de la lignée rouge</h2>
+<p style="color:#2ecc71;margin-bottom:10px">10 questions pour valider vos connaissances</p>
+<div id="score-exam4" class="score-bar"><div class="score-fill" style="width:0%">0/10<div class="slide-number">41 / 57</div></div></div>
+<div class="exam-scroll"><div class="qcm-container">
+<div class="qcm-block" data-answer="1">
+<div class="q-text">Q1 : La microcytose est définie par :</div>
+<div class="qcm-options"><div class="qcm-option" data-idx="0" onclick="selectOption(this)"><span class="letter">A</span><span>VGM < 90 fL</span></div>
+<div class="qcm-option" data-idx="1" onclick="selectOption(this)"><span class="letter">B</span><span>VGM < 80 fL</span></div>
+<div class="qcm-option" data-idx="2" onclick="selectOption(this)"><span class="letter">C</span><span>VGM < 70 fL</span></div>
+<div class="qcm-option" data-idx="3" onclick="selectOption(this)"><span class="letter">D</span><span>VGM < 60 fL</span></div>
+</div>
+<button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button>
+<div class="qcm-explanation">VGM < 80 fL = microcytose chez l'adulte.</div>
+</div>
+<div class="qcm-block" data-answer="1">
+<div class="q-text">Q2 : La carence en fer se caractérise par :</div>
+<div class="qcm-options"><div class="qcm-option" data-idx="0" onclick="selectOption(this)"><span class="letter">A</span><span>Ferritine ↑, fer sérique ↑</span></div>
+<div class="qcm-option" data-idx="1" onclick="selectOption(this)"><span class="letter">B</span><span>Ferritine ↓, fer sérique ↓, transferrine ↑</span></div>
+<div class="qcm-option" data-idx="2" onclick="selectOption(this)"><span class="letter">C</span><span>Ferritine normale, CCMH normale</span></div>
+<div class="qcm-option" data-idx="3" onclick="selectOption(this)"><span class="letter">D</span><span>Ferritine ↑, transferrine ↓</span></div>
+</div>
+<button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button>
+<div class="qcm-explanation">Carence martiale = ferritine ↓ (réserves vides) + fer ↓ + transferrine ↑ (protéine transport vide).</div>
+</div>
+<div class="qcm-block" data-answer="1">
+<div class="q-text">Q3 : L'anémie de l'inflammation est :</div>
+<div class="qcm-options"><div class="qcm-option" data-idx="0" onclick="selectOption(this)"><span class="letter">A</span><span>Toujours microcytaire</span></div>
+<div class="qcm-option" data-idx="1" onclick="selectOption(this)"><span class="letter">B</span><span>D'abord normocytaire, peut devenir microcytaire si chronique</span></div>
+<div class="qcm-option" data-idx="2" onclick="selectOption(this)"><span class="letter">C</span><span>Toujours macrocytaire</span></div>
+<div class="qcm-option" data-idx="3" onclick="selectOption(this)"><span class="letter">D</span><span>Toujours régénérative</span></div>
+</div>
+<button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button>
+<div class="qcm-explanation">L'anémie inflammatoire est d'abord normocytaire, devient microcytaire si l'inflammation dure.</div>
+</div>
+<div class="qcm-block" data-answer="1">
+<div class="q-text">Q4 : La thalassémie est caractérisée par :</div>
+<div class="qcm-options"><div class="qcm-option" data-idx="0" onclick="selectOption(this)"><span class="letter">A</span><span>Des GR grands et peu nombreux</span></div>
+<div class="qcm-option" data-idx="1" onclick="selectOption(this)"><span class="letter">B</span><span>Des GR petits mais nombreux</span></div>
+<div class="qcm-option" data-idx="2" onclick="selectOption(this)"><span class="letter">C</span><span>Des GR normaux</span></div>
+<div class="qcm-option" data-idx="3" onclick="selectOption(this)"><span class="letter">D</span><span>Une absence de GR</span></div>
+</div>
+<button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button>
+<div class="qcm-explanation">Thalassémie = microcytose + GR nombreux (contraste avec carence martiale où les GR sont peu nombreux).</div>
+</div>
+<div class="qcm-block" data-answer="2">
+<div class="q-text">Q5 : Chez un éthylique chronique, le VGM est typiquement :</div>
+<div class="qcm-options"><div class="qcm-option" data-idx="0" onclick="selectOption(this)"><span class="letter">A</span><span>< 80 fL (microcytose)</span></div>
+<div class="qcm-option" data-idx="1" onclick="selectOption(this)"><span class="letter">B</span><span>80–100 fL (normal)</span></div>
+<div class="qcm-option" data-idx="2" onclick="selectOption(this)"><span class="letter">C</span><span>> 100 fL (macrocytose)</span></div>
+<div class="qcm-option" data-idx="3" onclick="selectOption(this)"><span class="letter">D</span><span>Variable</span></div>
+</div>
+<button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button>
+<div class="qcm-explanation">L'alcool est une cause classique de macrocytose (VGM > 100 fL).</div>
+</div>
+<div class="qcm-block" data-answer="1">
+<div class="q-text">Q6 : Une anémie normocytaire arégénérative chez un insuffisant rénal est due à :</div>
+<div class="qcm-options"><div class="qcm-option" data-idx="0" onclick="selectOption(this)"><span class="letter">A</span><span>Un saignement digestif</span></div>
+<div class="qcm-option" data-idx="1" onclick="selectOption(this)"><span class="letter">B</span><span>Un déficit en EPO (érythropoïétine)</span></div>
+<div class="qcm-option" data-idx="2" onclick="selectOption(this)"><span class="letter">C</span><span>Une hémolyse chronique</span></div>
+<div class="qcm-option" data-idx="3" onclick="selectOption(this)"><span class="letter">D</span><span>Une carence en B12</span></div>
+</div>
+<button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button>
+<div class="qcm-explanation">L'insuffisance rénale réduit la production d'EPO → moins de stimulation de l'érythropoïèse.</div>
+</div>
+<div class="qcm-block" data-answer="2">
+<div class="q-text">Q7 : Le myélogramme est indiqué dans :</div>
+<div class="qcm-options"><div class="qcm-option" data-idx="0" onclick="selectOption(this)"><span class="letter">A</span><span>Toute anémie microcytaire</span></div>
+<div class="qcm-option" data-idx="1" onclick="selectOption(this)"><span class="letter">B</span><span>L'anémie microcytaire par carence martiale</span></div>
+<div class="qcm-option" data-idx="2" onclick="selectOption(this)"><span class="letter">C</span><span>L'anémie normocytaire arégénérative inexpliquée</span></div>
+<div class="qcm-option" data-idx="3" onclick="selectOption(this)"><span class="letter">D</span><span>L'anémie par hémorragie aiguë</span></div>
+</div>
+<button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button>
+<div class="qcm-explanation">Myélogramme si anémie normo ou macrocytaire arégénérative inexpliquée (aplasie? envahissement? MDS?).</div>
+</div>
+<div class="qcm-block" data-answer="2">
+<div class="q-text">Q8 : La polyglobulie de Vaquez est une maladie :</div>
+<div class="qcm-options"><div class="qcm-option" data-idx="0" onclick="selectOption(this)"><span class="letter">A</span><span>Infectieuse</span></div>
+<div class="qcm-option" data-idx="1" onclick="selectOption(this)"><span class="letter">B</span><span>Auto-immune</span></div>
+<div class="qcm-option" data-idx="2" onclick="selectOption(this)"><span class="letter">C</span><span>Myéloproliférative (clonale de la moelle)</span></div>
+<div class="qcm-option" data-idx="3" onclick="selectOption(this)"><span class="letter">D</span><span>Iatrogène</span></div>
+</div>
+<button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button>
+<div class="qcm-explanation">Vaquez = maladie myéloproliférative. Expansion clonale de la lignée rouge liée à JAK2.</div>
+</div>
+<div class="qcm-block" data-answer="1">
+<div class="q-text">Q9 : Une ferritine élevée dans le contexte d'une anémie microcytaire oriente vers :</div>
+<div class="qcm-options"><div class="qcm-option" data-idx="0" onclick="selectOption(this)"><span class="letter">A</span><span>Une carence martiale</span></div>
+<div class="qcm-option" data-idx="1" onclick="selectOption(this)"><span class="letter">B</span><span>Une anémie inflammatoire chronique</span></div>
+<div class="qcm-option" data-idx="2" onclick="selectOption(this)"><span class="letter">C</span><span>Une thalassémie</span></div>
+<div class="qcm-option" data-idx="3" onclick="selectOption(this)"><span class="letter">D</span><span>Une anémie sidéroblastique</span></div>
+</div>
+<button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button>
+<div class="qcm-explanation">Ferritine = réactant de phase aiguë → élevée si inflammation. Distingue de la carence martiale (ferritine basse).</div>
+</div>
+<div class="qcm-block" data-answer="2">
+<div class="q-text">Q10 : L'EPO est produite par :</div>
+<div class="qcm-options"><div class="qcm-option" data-idx="0" onclick="selectOption(this)"><span class="letter">A</span><span>La moelle osseuse</span></div>
+<div class="qcm-option" data-idx="1" onclick="selectOption(this)"><span class="letter">B</span><span>Le foie</span></div>
+<div class="qcm-option" data-idx="2" onclick="selectOption(this)"><span class="letter">C</span><span>Le rein</span></div>
+<div class="qcm-option" data-idx="3" onclick="selectOption(this)"><span class="letter">D</span><span>La rate</span></div>
+</div>
+<button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button>
+<div class="qcm-explanation">EPO = produite par le cortex rénal en réponse à l'hypoxie. Utilisée comme traitement des anémies rénales.</div>
+</div>
+</div></div>
+</div><div class="slide section-slide">
+<h1>VI. Anomalies des leucocytes</h1>
+<p>Neutropénies, hyperleucocytoses, blastes</p>
+<div class="slide-number">42 / 57</div></div><div class="slide content-slide slide-with-img">
+<div class="slide-text">
+<h2>A. Neutropénie — Agranulocytose</h2>
+<div class="def-box"><strong>💡 Neutropénie :</strong> Diminution des PNN en dessous de 1,5 G/L. Plus la neutropénie est profonde, plus le risque infectieux est élevé.<div class="slide-number">43 / 57</div></div>
+<div class="def-box"><strong>💡 Agranulocytose :</strong> Neutropénie profonde avec PNN &lt; 0,5 G/L. Urgence médicale : le patient n'a plus de défense antibactérienne → risque de sepsis mortel, même par des bactéries habituellement peu dangereuses.</div>
+<h3>Seuils et risques</h3>
+<table>
+<tr><th>PNN (G/L)</th><th>Terme</th><th>Risque infectieux</th></tr>
+<tr><td>1,0–1,5</td><td>Neutropénie modérée</td><td>Faible</td></tr>
+<tr><td>0,5–1,0</td><td>Neutropénie sévère</td><td>Modéré</td></tr>
+<tr><td>&lt; 0,5</td><td><span class="keyword">Agranulocytose</span></td><td>Majeur (urgence)</td></tr>
+</table>
+<h3>Étiologies principales</h3>
+<ul>
+<li><strong>Médicaments ★★★</strong> : antibiotiques, anti-thyroïdiens, anti-épileptiques, chimiothérapies</li>
+<li>Maladies hématologiques : aplasie, leucémie, MDS</li>
+<li>Auto-immune : lupus</li>
+<li>Chez l'enfant : viral (récupération rapide)</li>
+</ul>
+<div class="urgence-box"><h3>⚠️ Signes d'alarme = hémogramme en urgence</h3>
+<ul><li>Angine ulcéronécrotique résistante aux antibiotiques</li>
+<li>Fièvre élevée sous traitement médicamenteux</li></ul></div>
+</div>
+<div class="slide-img"><img src="images_hemogramme/p2_page2.png" alt="Page du cours" onclick="openModal(this.src)"></div>
+</div><div class="slide quiz-slide">
+<h2>Quiz — Neutropénie</h2>
+<div class="qcm-container">
+<div class="qcm-block" data-answer="2">
+<div class="q-text">Q1 : L'agranulocytose est définie par des PNN :<div class="slide-number">44 / 57</div></div>
+<div class="qcm-options"><div class="qcm-option" data-idx="0" onclick="selectOption(this)"><span class="letter">A</span><span>< 2 G/L</span></div>
+<div class="qcm-option" data-idx="1" onclick="selectOption(this)"><span class="letter">B</span><span>< 1,5 G/L</span></div>
+<div class="qcm-option" data-idx="2" onclick="selectOption(this)"><span class="letter">C</span><span>< 0,5 G/L</span></div>
+<div class="qcm-option" data-idx="3" onclick="selectOption(this)"><span class="letter">D</span><span>< 0,1 G/L</span></div>
+</div>
+<button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button>
+<div class="qcm-explanation">Agranulocytose = PNN < 0,5 G/L. Urgence hématologique avec risque infectieux majeur.</div>
+</div>
+<div class="qcm-block" data-answer="1">
+<div class="q-text">Q2 : Une neutropénie médicamenteuse justifie :</div>
+<div class="qcm-options"><div class="qcm-option" data-idx="0" onclick="selectOption(this)"><span class="letter">A</span><span>De continuer le traitement</span></div>
+<div class="qcm-option" data-idx="1" onclick="selectOption(this)"><span class="letter">B</span><span>D'arrêter immédiatement le médicament suspect et hémogramme de contrôle</span></div>
+<div class="qcm-option" data-idx="2" onclick="selectOption(this)"><span class="letter">C</span><span>D'attendre 1 mois avant de contrôler</span></div>
+<div class="qcm-option" data-idx="3" onclick="selectOption(this)"><span class="letter">D</span><span>Un bilan auto-immun uniquement</span></div>
+</div>
+<button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button>
+<div class="qcm-explanation">Arrêt immédiat du médicament suspect + contrôle hémogramme. La récupération est souvent rapide après arrêt.</div>
+</div>
+</div>
+</div><div class="slide content-slide slide-with-img">
+<div class="slide-text">
+<h2>B. Hyperleucocytose — Causes et orientation diagnostique</h2>
+<div class="def-box"><strong>💡 Blastes :</strong> Cellules hématopoïétiques immatures, bloquées dans leur différenciation. Normalement absentes du sang et &lt; 5% dans la moelle. Leur présence dans le sang = urgence hématologique (leucémie aiguë possible).<div class="slide-number">45 / 57</div></div>
+<h3>Orientation selon le type de cellule en excès</h3>
+<table>
+<tr><th>Anomalie</th><th>Seuil</th><th>Causes principales</th></tr>
+<tr><td><span class="keyword">Polynucléose neutrophile</span></td><td>PNN &gt; 7 G/L</td><td>Infection bactérienne ★★★, inflammation, médicaments (corticoïdes), tabac</td></tr>
+<tr><td><span class="keyword">Hyperlymphocytose</span></td><td>Lympho &gt; 4 G/L</td><td>Adulte: LLC, virus (EBV, CMV). Enfant: physiologique ou viral</td></tr>
+<tr><td><span class="keyword">Hyperéosinophilie</span></td><td>PNE &gt; 0,5 G/L</td><td>Parasitoses (toxocarose...), allergies, médicaments, hémopathies</td></tr>
+<tr><td><span class="keyword">Monocytose</span></td><td>Mono &gt; 1 G/L</td><td>Infections chroniques (tuberculose), MDS, leucémie myélomonocytaire</td></tr>
+<tr><td><span class="keyword">Blastes circulants</span></td><td>Présence</td><td>Leucémie aiguë → URGENCE</td></tr>
+</table>
+<div class="highlight-box"><strong>Hyperbasophilie</strong> (&gt; 0,1 G/L) + polynucléose : évoquer une <span class="keyword">leucémie myéloïde chronique</span> (LMC).</div>
+</div>
+<div class="slide-img"><img src="images_hemogramme/p2_page3.png" alt="Page du cours" onclick="openModal(this.src)"></div>
+</div><div class="slide quiz-slide">
+<h2>Quiz — Hyperleucocytose</h2>
+<div class="qcm-container">
+<div class="qcm-block" data-answer="1">
+<div class="q-text">Q1 : Une polynucléose neutrophile isolée chez un adulte fébrile évoque en premier :<div class="slide-number">46 / 57</div></div>
+<div class="qcm-options"><div class="qcm-option" data-idx="0" onclick="selectOption(this)"><span class="letter">A</span><span>Une leucémie aiguë</span></div>
+<div class="qcm-option" data-idx="1" onclick="selectOption(this)"><span class="letter">B</span><span>Une infection bactérienne</span></div>
+<div class="qcm-option" data-idx="2" onclick="selectOption(this)"><span class="letter">C</span><span>Une LMC</span></div>
+<div class="qcm-option" data-idx="3" onclick="selectOption(this)"><span class="letter">D</span><span>Une coqueluche</span></div>
+</div>
+<button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button>
+<div class="qcm-explanation">PNN > 7 G/L + fièvre → infection bactérienne en premier. La leucémie donne souvent des blastes.</div>
+</div>
+<div class="qcm-block" data-answer="2">
+<div class="q-text">Q2 : Devant des blastes dans le sang périphérique, la conduite à tenir est :</div>
+<div class="qcm-options"><div class="qcm-option" data-idx="0" onclick="selectOption(this)"><span class="letter">A</span><span>Contrôle dans 3 mois</span></div>
+<div class="qcm-option" data-idx="1" onclick="selectOption(this)"><span class="letter">B</span><span>Hémogramme de contrôle à 1 semaine</span></div>
+<div class="qcm-option" data-idx="2" onclick="selectOption(this)"><span class="letter">C</span><span>Hospitalisation en urgence hématologique</span></div>
+<div class="qcm-option" data-idx="3" onclick="selectOption(this)"><span class="letter">D</span><span>Prescription d'antibiotiques</span></div>
+</div>
+<button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button>
+<div class="qcm-explanation">Blastes circulants = urgence hématologique → hospitalisation immédiate pour suspicion de leucémie aiguë.</div>
+</div>
+</div>
+</div><div class="slide content-slide slide-with-img">
+<div class="slide-text">
+<h2>C. Hyperéosinophilie — Démarche diagnostique</h2>
+<div class="def-box"><strong>💡 Hyperéosinophilie (HE) :</strong> PNE &gt; 0,5 G/L. Peut être réactionnelle (parasitose, allergie) ou clonale (hémopathie). Si prolongée et &gt; 1,5 G/L = Hyperéosinophilie chronique → risque de lésions cardiaques, neurologiques, cutanées.<div class="slide-number">47 / 57</div></div>
+<h3>Étiologies par fréquence</h3>
+<div class="card-grid">
+<div class="card" style="border-left:4px solid #e74c3c"><h3>Parasitoses ★★★</h3><p>Toxocarose, ascaridiose, trichinellose, bilharziose. Sérologies parasitaires.</p></div>
+<div class="card" style="border-left:4px solid #3498db"><h3>Allergies</h3><p>Asthme, eczéma, dermatite atopique. Contexte allergique évident.</p></div>
+<div class="card" style="border-left:4px solid #f39c12"><h3>Médicaments</h3><p>Nombreux médicaments (antibiotiques, AINS). DRESS syndrome.</p></div>
+<div class="card" style="border-left:4px solid #9b59b6"><h3>Hémopathies</h3><p>LMC, mastocytose, lymphome T, syndrome hyperéosinophilique clonal (mutation FIP1L1-PDGFRα).</p></div>
+</div>
+<div class="info-box"><strong>Règle d'or :</strong> Toute hyperéosinophilie doit faire rechercher une parasitose en première intention (sérologies parasitaires). Ne jamais traiter par corticoïdes sans bilan préalable (risque de dissémination parasitaire).</div>
+</div>
+<div class="slide-img"><img src="images_hemogramme/p2_page4.png" alt="Page du cours" onclick="openModal(this.src)"></div>
+</div><div class="slide quiz-slide">
+<h2>Quiz — Hyperéosinophilie</h2>
+<div class="qcm-container">
+<div class="qcm-block" data-answer="1">
+<div class="q-text">Q1 : Devant une hyperéosinophilie, le premier bilan à réaliser est :<div class="slide-number">48 / 57</div></div>
+<div class="qcm-options"><div class="qcm-option" data-idx="0" onclick="selectOption(this)"><span class="letter">A</span><span>Un myélogramme</span></div>
+<div class="qcm-option" data-idx="1" onclick="selectOption(this)"><span class="letter">B</span><span>Des sérologies parasitaires et un bilan allergologique</span></div>
+<div class="qcm-option" data-idx="2" onclick="selectOption(this)"><span class="letter">C</span><span>Un scanner thoraco-abdominal</span></div>
+<div class="qcm-option" data-idx="3" onclick="selectOption(this)"><span class="letter">D</span><span>Un dosage IgE total seul</span></div>
+</div>
+<button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button>
+<div class="qcm-explanation">HE → d'abord chercher parasitose (sérologies) et allergies. Bilan hématologique si pas d'explication.</div>
+</div>
+<div class="qcm-block" data-answer="1">
+<div class="q-text">Q2 : Une hyperéosinophilie > 1,5 G/L prolongée peut entraîner :</div>
+<div class="qcm-options"><div class="qcm-option" data-idx="0" onclick="selectOption(this)"><span class="letter">A</span><span>Uniquement des manifestations cutanées</span></div>
+<div class="qcm-option" data-idx="1" onclick="selectOption(this)"><span class="letter">B</span><span>Lésions cardiaques, neurologiques et cutanées (syndrome hyperéosinophilique)</span></div>
+<div class="qcm-option" data-idx="2" onclick="selectOption(this)"><span class="letter">C</span><span>Uniquement une anémie</span></div>
+<div class="qcm-option" data-idx="3" onclick="selectOption(this)"><span class="letter">D</span><span>Une thrombopénie</span></div>
+</div>
+<button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button>
+<div class="qcm-explanation">HE > 1,5 G/L chronique → syndrome hyperéosinophilique avec atteinte cardiaque (fibrose endocardique) et neurologique.</div>
+</div>
+</div>
+</div><div class="slide exam-slide">
+<h2>Examen — Anomalies des leucocytes</h2>
+<p style="color:#2ecc71;margin-bottom:10px">10 questions pour valider vos connaissances</p>
+<div id="score-exam5" class="score-bar"><div class="score-fill" style="width:0%">0/10<div class="slide-number">49 / 57</div></div></div>
+<div class="exam-scroll"><div class="qcm-container">
+<div class="qcm-block" data-answer="2">
+<div class="q-text">Q1 : L'agranulocytose est définie par des PNN :</div>
+<div class="qcm-options"><div class="qcm-option" data-idx="0" onclick="selectOption(this)"><span class="letter">A</span><span>< 2 G/L</span></div>
+<div class="qcm-option" data-idx="1" onclick="selectOption(this)"><span class="letter">B</span><span>< 1 G/L</span></div>
+<div class="qcm-option" data-idx="2" onclick="selectOption(this)"><span class="letter">C</span><span>< 0,5 G/L</span></div>
+<div class="qcm-option" data-idx="3" onclick="selectOption(this)"><span class="letter">D</span><span>< 0,2 G/L</span></div>
+</div>
+<button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button>
+<div class="qcm-explanation">Agranulocytose = PNN < 0,5 G/L.</div>
+</div>
+<div class="qcm-block" data-answer="1">
+<div class="q-text">Q2 : Une polynucléose neutrophile sans cause infectieuse évidente chez un patient sous corticoïdes est :</div>
+<div class="qcm-options"><div class="qcm-option" data-idx="0" onclick="selectOption(this)"><span class="letter">A</span><span>Pathologique → bilan urgent</span></div>
+<div class="qcm-option" data-idx="1" onclick="selectOption(this)"><span class="letter">B</span><span>Attendue — les corticoïdes augmentent les PNN</span></div>
+<div class="qcm-option" data-idx="2" onclick="selectOption(this)"><span class="letter">C</span><span>Signe d'allergie aux corticoïdes</span></div>
+<div class="qcm-option" data-idx="3" onclick="selectOption(this)"><span class="letter">D</span><span>Indique une leucémie</span></div>
+</div>
+<button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button>
+<div class="qcm-explanation">Corticoïdes → libèrent les PNN de la moelle → polynucléose réactionnelle normale.</div>
+</div>
+<div class="qcm-block" data-answer="1">
+<div class="q-text">Q3 : Des blastes dans le sang périphérique imposent :</div>
+<div class="qcm-options"><div class="qcm-option" data-idx="0" onclick="selectOption(this)"><span class="letter">A</span><span>Un contrôle à 3 mois</span></div>
+<div class="qcm-option" data-idx="1" onclick="selectOption(this)"><span class="letter">B</span><span>Une hospitalisation urgente</span></div>
+<div class="qcm-option" data-idx="2" onclick="selectOption(this)"><span class="letter">C</span><span>Un traitement antibiotique</span></div>
+<div class="qcm-option" data-idx="3" onclick="selectOption(this)"><span class="letter">D</span><span>Un dosage de la vitamine B12</span></div>
+</div>
+<button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button>
+<div class="qcm-explanation">Blastes = urgence hématologique.</div>
+</div>
+<div class="qcm-block" data-answer="1">
+<div class="q-text">Q4 : Chez l'enfant, une lymphocytose à 5 G/L est :</div>
+<div class="qcm-options"><div class="qcm-option" data-idx="0" onclick="selectOption(this)"><span class="letter">A</span><span>Toujours pathologique</span></div>
+<div class="qcm-option" data-idx="1" onclick="selectOption(this)"><span class="letter">B</span><span>Possiblement normale si < 10 ans</span></div>
+<div class="qcm-option" data-idx="2" onclick="selectOption(this)"><span class="letter">C</span><span>Signe d'une LAL systématiquement</span></div>
+<div class="qcm-option" data-idx="3" onclick="selectOption(this)"><span class="letter">D</span><span>Jamais observée</span></div>
+</div>
+<button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button>
+<div class="qcm-explanation">Lymphocytose pédiatrique : souvent réactionnelle (virale) et normale jusqu'à 10 ans.</div>
+</div>
+<div class="qcm-block" data-answer="2">
+<div class="q-text">Q5 : L'hyperéosinophilie de première étiologie mondiale est :</div>
+<div class="qcm-options"><div class="qcm-option" data-idx="0" onclick="selectOption(this)"><span class="letter">A</span><span>Les hémopathies malignes</span></div>
+<div class="qcm-option" data-idx="1" onclick="selectOption(this)"><span class="letter">B</span><span>Les allergies médicamenteuses</span></div>
+<div class="qcm-option" data-idx="2" onclick="selectOption(this)"><span class="letter">C</span><span>Les parasitoses</span></div>
+<div class="qcm-option" data-idx="3" onclick="selectOption(this)"><span class="letter">D</span><span>Les maladies auto-immunes</span></div>
+</div>
+<button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button>
+<div class="qcm-explanation">Parasitoses = 1ère cause d'hyperéosinophilie dans le monde.</div>
+</div>
+<div class="qcm-block" data-answer="1">
+<div class="q-text">Q6 : Une hyperbasophilie + hyperleucocytose évoque :</div>
+<div class="qcm-options"><div class="qcm-option" data-idx="0" onclick="selectOption(this)"><span class="letter">A</span><span>Une infection bactérienne sévère</span></div>
+<div class="qcm-option" data-idx="1" onclick="selectOption(this)"><span class="letter">B</span><span>Une leucémie myéloïde chronique (LMC)</span></div>
+<div class="qcm-option" data-idx="2" onclick="selectOption(this)"><span class="letter">C</span><span>Une allergie grave</span></div>
+<div class="qcm-option" data-idx="3" onclick="selectOption(this)"><span class="letter">D</span><span>Une mononucléose infectieuse</span></div>
+</div>
+<button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button>
+<div class="qcm-explanation">Hyperbasophilie + hyperleucocytose → LMC (syndrome myéloprolifératif).</div>
+</div>
+<div class="qcm-block" data-answer="1">
+<div class="q-text">Q7 : La monocytose (> 1 G/L) est classiquement associée à :</div>
+<div class="qcm-options"><div class="qcm-option" data-idx="0" onclick="selectOption(this)"><span class="letter">A</span><span>La coqueluche</span></div>
+<div class="qcm-option" data-idx="1" onclick="selectOption(this)"><span class="letter">B</span><span>La tuberculose et les MDS</span></div>
+<div class="qcm-option" data-idx="2" onclick="selectOption(this)"><span class="letter">C</span><span>Les infections urinaires</span></div>
+<div class="qcm-option" data-idx="3" onclick="selectOption(this)"><span class="letter">D</span><span>L'asthme</span></div>
+</div>
+<button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button>
+<div class="qcm-explanation">Monocytose → tuberculose, MDS, leucémie myélomonocytaire (LMMC).</div>
+</div>
+<div class="qcm-block" data-answer="1">
+<div class="q-text">Q8 : Une neutropénie médicamenteuse impose :</div>
+<div class="qcm-options"><div class="qcm-option" data-idx="0" onclick="selectOption(this)"><span class="letter">A</span><span>De poursuivre le traitement et surveiller</span></div>
+<div class="qcm-option" data-idx="1" onclick="selectOption(this)"><span class="letter">B</span><span>D'arrêter immédiatement le médicament suspect</span></div>
+<div class="qcm-option" data-idx="2" onclick="selectOption(this)"><span class="letter">C</span><span>De doubler la dose pour traiter l'infection</span></div>
+<div class="qcm-option" data-idx="3" onclick="selectOption(this)"><span class="letter">D</span><span>Un myélogramme immédiat</span></div>
+</div>
+<button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button>
+<div class="qcm-explanation">Arrêt immédiat du médicament suspect = 1ère mesure.</div>
+</div>
+<div class="qcm-block" data-answer="1">
+<div class="q-text">Q9 : La leucopénie est définie par des leucocytes :</div>
+<div class="qcm-options"><div class="qcm-option" data-idx="0" onclick="selectOption(this)"><span class="letter">A</span><span>< 6 G/L</span></div>
+<div class="qcm-option" data-idx="1" onclick="selectOption(this)"><span class="letter">B</span><span>< 4 G/L</span></div>
+<div class="qcm-option" data-idx="2" onclick="selectOption(this)"><span class="letter">C</span><span>< 2 G/L</span></div>
+<div class="qcm-option" data-idx="3" onclick="selectOption(this)"><span class="letter">D</span><span>< 1 G/L</span></div>
+</div>
+<button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button>
+<div class="qcm-explanation">Leucopénie = leucocytes < 4 G/L.</div>
+</div>
+<div class="qcm-block" data-answer="2">
+<div class="q-text">Q10 : La mononucléose infectieuse (EBV) donne typiquement :</div>
+<div class="qcm-options"><div class="qcm-option" data-idx="0" onclick="selectOption(this)"><span class="letter">A</span><span>Une polynucléose neutrophile</span></div>
+<div class="qcm-option" data-idx="1" onclick="selectOption(this)"><span class="letter">B</span><span>Une hyperéosinophilie</span></div>
+<div class="qcm-option" data-idx="2" onclick="selectOption(this)"><span class="letter">C</span><span>Un syndrome mononucléosique (hyperlymphocytose avec lymphocytes atypiques)</span></div>
+<div class="qcm-option" data-idx="3" onclick="selectOption(this)"><span class="letter">D</span><span>Une thrombopénie isolée</span></div>
+</div>
+<button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button>
+<div class="qcm-explanation">EBV → syndrome mononucléosique : hyperlymphocytose avec grands lymphocytes atypiques (activés).</div>
+</div>
+</div></div>
+</div><div class="slide section-slide">
+<h1>VII. Anomalies des plaquettes</h1>
+<p>Thrombopénies et thrombocytoses</p>
+<div class="slide-number">50 / 57</div></div><div class="slide content-slide slide-with-img">
+<div class="slide-text">
+<h2>Thrombopénies — Classification et urgences</h2>
+<div class="def-box"><strong>💡 Thrombopénie :</strong> Plaquettes &lt; 150 G/L. Plus la thrombopénie est profonde, plus le risque hémorragique est élevé. En dessous de 20 G/L, le risque d'hémorragie spontanée est majeur.<div class="slide-number">51 / 57</div></div>
+<div class="def-box"><strong>💡 Mégacaryocytes :</strong> Très grandes cellules de la moelle osseuse qui se fragmentent pour donner naissance aux plaquettes. Leur présence au myélogramme indique que la moelle produit des plaquettes (même si elles sont détruites ensuite).</div>
+<h3>Seuils et risques</h3>
+<table>
+<tr><th>Plaquettes (G/L)</th><th>Risque</th><th>Conduite</th></tr>
+<tr><td>50–150</td><td>Hémorragie provoquée</td><td>Surveiller, traiter la cause</td></tr>
+<tr><td>20–50</td><td>Hémorragie grave possible</td><td>Hospitalisation à discuter</td></tr>
+<tr><td>&lt; 20</td><td><span class="keyword">Hémorragie spontanée</span></td><td>Urgence — transfusion plaquettaire</td></tr>
+</table>
+<h3>Mécanismes</h3>
+<div class="two-col"><div class="col">
+<div class="card" style="border-left:4px solid #e74c3c;text-align:left"><h3>Défaut de production</h3><p>Aplasie médullaire, envahissement, MDS, carences</p></div>
+</div><div class="col">
+<div class="card" style="border-left:4px solid #3498db;text-align:left"><h3>Destruction/consommation</h3><p>PTI (auto-immune), médicaments (héparine-CIVD), CIVD, MAT</p></div>
+</div></div>
+</div>
+<div class="slide-img"><img src="images_hemogramme/p2_page5.png" alt="Page du cours" onclick="openModal(this.src)"></div>
+</div><div class="slide quiz-slide">
+<h2>Quiz — Thrombopénie</h2>
+<div class="qcm-container">
+<div class="qcm-block" data-answer="3">
+<div class="q-text">Q1 : En dessous de quelle valeur de plaquettes y a-t-il risque d'hémorragie spontanée ?<div class="slide-number">52 / 57</div></div>
+<div class="qcm-options"><div class="qcm-option" data-idx="0" onclick="selectOption(this)"><span class="letter">A</span><span>< 150 G/L</span></div>
+<div class="qcm-option" data-idx="1" onclick="selectOption(this)"><span class="letter">B</span><span>< 100 G/L</span></div>
+<div class="qcm-option" data-idx="2" onclick="selectOption(this)"><span class="letter">C</span><span>< 50 G/L</span></div>
+<div class="qcm-option" data-idx="3" onclick="selectOption(this)"><span class="letter">D</span><span>< 20 G/L</span></div>
+</div>
+<button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button>
+<div class="qcm-explanation">< 20 G/L = risque hémorragique spontané (purpura, hémorragie muqueuse, cérébrale). Urgence transfusionnelle.</div>
+</div>
+<div class="qcm-block" data-answer="1">
+<div class="q-text">Q2 : Le PTI (Purpura Thrombopénique Immunologique) est dû à :</div>
+<div class="qcm-options"><div class="qcm-option" data-idx="0" onclick="selectOption(this)"><span class="letter">A</span><span>Un défaut de production médullaire</span></div>
+<div class="qcm-option" data-idx="1" onclick="selectOption(this)"><span class="letter">B</span><span>Des anticorps dirigés contre les plaquettes (destruction auto-immune)</span></div>
+<div class="qcm-option" data-idx="2" onclick="selectOption(this)"><span class="letter">C</span><span>Une infection bactérienne directe</span></div>
+<div class="qcm-option" data-idx="3" onclick="selectOption(this)"><span class="letter">D</span><span>Un excès de consommation vasculaire</span></div>
+</div>
+<button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button>
+<div class="qcm-explanation">PTI = auto-anticorps anti-GPIIb/IIIa → destruction splénique des plaquettes. Traitement : corticoïdes, immunoglobulines IV.</div>
+</div>
+</div>
+</div><div class="slide content-slide slide-with-img">
+<div class="slide-text">
+<h2>Thrombocytoses — Causes et démarche</h2>
+<div class="def-box"><strong>💡 Thrombocytose :</strong> Plaquettes &gt; 450 G/L. Peut être réactionnelle (la plus fréquente) ou primitive (maladie clonale de la moelle).<div class="slide-number">53 / 57</div></div>
+<div class="two-col"><div class="col">
+<h3>Thrombocytose réactionnelle (secondaire)</h3>
+<ul>
+<li>Inflammation aiguë ou chronique (CRP ↑)</li>
+<li>Carence en fer ★★★</li>
+<li>Asplénie (après splénectomie)</li>
+<li>Post-chirurgie, post-hémorragie</li>
+<li>Infections</li>
+</ul>
+<div class="info-box"><small>La thrombocytose réactionnelle est rarement > 1 000 G/L. Ne cause généralement pas de thrombose.</small></div>
+</div><div class="col">
+<h3>Thrombocytose primitive (clonale)</h3>
+<ul>
+<li><span class="keyword">Thrombocytémie essentielle</span> (TE) — JAK2 ou CALR</li>
+<li>Leucémie myéloïde chronique</li>
+<li>Maladie de Vaquez</li>
+<li>Myélofibrose</li>
+</ul>
+<div class="highlight-box"><small>Plaquettes > 1 000 G/L + antécédent thrombotique ou plaquettes > 1 500 G/L → bilan hématologique spécialisé.</small></div>
+</div></div>
+</div>
+<div class="slide-img"><img src="images_hemogramme/p2_page6.png" alt="Page du cours" onclick="openModal(this.src)"></div>
+</div><div class="slide quiz-slide">
+<h2>Quiz — Thrombocytose</h2>
+<div class="qcm-container">
+<div class="qcm-block" data-answer="2">
+<div class="q-text">Q1 : La cause la plus fréquente de thrombocytose est :<div class="slide-number">54 / 57</div></div>
+<div class="qcm-options"><div class="qcm-option" data-idx="0" onclick="selectOption(this)"><span class="letter">A</span><span>La thrombocytémie essentielle</span></div>
+<div class="qcm-option" data-idx="1" onclick="selectOption(this)"><span class="letter">B</span><span>La LMC</span></div>
+<div class="qcm-option" data-idx="2" onclick="selectOption(this)"><span class="letter">C</span><span>La carence en fer ou l'inflammation (thrombocytose réactionnelle)</span></div>
+<div class="qcm-option" data-idx="3" onclick="selectOption(this)"><span class="letter">D</span><span>La splénomégalie</span></div>
+</div>
+<button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button>
+<div class="qcm-explanation">La thrombocytose réactionnelle (secondaire) est de loin la plus fréquente. La carence en fer en est une cause classique.</div>
+</div>
+<div class="qcm-block" data-answer="2">
+<div class="q-text">Q2 : La thrombocytémie essentielle est une maladie :</div>
+<div class="qcm-options"><div class="qcm-option" data-idx="0" onclick="selectOption(this)"><span class="letter">A</span><span>Infectieuse</span></div>
+<div class="qcm-option" data-idx="1" onclick="selectOption(this)"><span class="letter">B</span><span>Auto-immune</span></div>
+<div class="qcm-option" data-idx="2" onclick="selectOption(this)"><span class="letter">C</span><span>Myéloproliférative clonale (souvent JAK2 ou CALR)</span></div>
+<div class="qcm-option" data-idx="3" onclick="selectOption(this)"><span class="letter">D</span><span>Liée au mode de vie</span></div>
+</div>
+<button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button>
+<div class="qcm-explanation">TE = maladie myéloproliférative. Mutation JAK2 V617F dans ~60%, CALR dans ~25%.</div>
+</div>
+</div>
+</div><div class="slide exam-slide">
+<h2>Examen — Anomalies des plaquettes</h2>
+<p style="color:#2ecc71;margin-bottom:10px">10 questions pour valider vos connaissances</p>
+<div id="score-exam6" class="score-bar"><div class="score-fill" style="width:0%">0/10<div class="slide-number">55 / 57</div></div></div>
+<div class="exam-scroll"><div class="qcm-container">
+<div class="qcm-block" data-answer="1">
+<div class="q-text">Q1 : La thrombopénie est définie par :</div>
+<div class="qcm-options"><div class="qcm-option" data-idx="0" onclick="selectOption(this)"><span class="letter">A</span><span>Plaquettes < 400 G/L</span></div>
+<div class="qcm-option" data-idx="1" onclick="selectOption(this)"><span class="letter">B</span><span>Plaquettes < 150 G/L</span></div>
+<div class="qcm-option" data-idx="2" onclick="selectOption(this)"><span class="letter">C</span><span>Plaquettes < 100 G/L</span></div>
+<div class="qcm-option" data-idx="3" onclick="selectOption(this)"><span class="letter">D</span><span>Plaquettes < 50 G/L</span></div>
+</div>
+<button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button>
+<div class="qcm-explanation">Thrombopénie = plaquettes < 150 G/L.</div>
+</div>
+<div class="qcm-block" data-answer="1">
+<div class="q-text">Q2 : Le PTI est traité en première intention par :</div>
+<div class="qcm-options"><div class="qcm-option" data-idx="0" onclick="selectOption(this)"><span class="letter">A</span><span>Transfusion de plaquettes</span></div>
+<div class="qcm-option" data-idx="1" onclick="selectOption(this)"><span class="letter">B</span><span>Corticoïdes et/ou immunoglobulines IV</span></div>
+<div class="qcm-option" data-idx="2" onclick="selectOption(this)"><span class="letter">C</span><span>Antibiotiques</span></div>
+<div class="qcm-option" data-idx="3" onclick="selectOption(this)"><span class="letter">D</span><span>Anticoagulants</span></div>
+</div>
+<button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button>
+<div class="qcm-explanation">PTI = auto-immune → corticoïdes 1ère ligne. IgIV si urgence.</div>
+</div>
+<div class="qcm-block" data-answer="1">
+<div class="q-text">Q3 : La fausse thrombopénie à l'EDTA :</div>
+<div class="qcm-options"><div class="qcm-option" data-idx="0" onclick="selectOption(this)"><span class="letter">A</span><span>S'accompagne d'un purpura</span></div>
+<div class="qcm-option" data-idx="1" onclick="selectOption(this)"><span class="letter">B</span><span>Est due à une agrégation plaquettaire in vitro, sans saignement</span></div>
+<div class="qcm-option" data-idx="2" onclick="selectOption(this)"><span class="letter">C</span><span>Nécessite une transfusion urgente</span></div>
+<div class="qcm-option" data-idx="3" onclick="selectOption(this)"><span class="letter">D</span><span>Est diagnostiquée par un myélogramme</span></div>
+</div>
+<button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button>
+<div class="qcm-explanation">Fausse thrombopénie EDTA = artefact in vitro. Pas de saignement clinique.</div>
+</div>
+<div class="qcm-block" data-answer="1">
+<div class="q-text">Q4 : Une thrombocytose réactionnelle est souvent associée à :</div>
+<div class="qcm-options"><div class="qcm-option" data-idx="0" onclick="selectOption(this)"><span class="letter">A</span><span>Une pathologie clonale de la moelle</span></div>
+<div class="qcm-option" data-idx="1" onclick="selectOption(this)"><span class="letter">B</span><span>Une inflammation ou une carence en fer</span></div>
+<div class="qcm-option" data-idx="2" onclick="selectOption(this)"><span class="letter">C</span><span>Un risque thrombotique majeur</span></div>
+<div class="qcm-option" data-idx="3" onclick="selectOption(this)"><span class="letter">D</span><span>Une mutation JAK2</span></div>
+</div>
+<button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button>
+<div class="qcm-explanation">Thrombocytose réactionnelle = carence fer, inflammation, asplénie. Souvent < 1000 G/L.</div>
+</div>
+<div class="qcm-block" data-answer="1">
+<div class="q-text">Q5 : Les mégacaryocytes sont :</div>
+<div class="qcm-options"><div class="qcm-option" data-idx="0" onclick="selectOption(this)"><span class="letter">A</span><span>Les cellules précurseurs des globules rouges</span></div>
+<div class="qcm-option" data-idx="1" onclick="selectOption(this)"><span class="letter">B</span><span>Les grandes cellules médullaires qui produisent les plaquettes</span></div>
+<div class="qcm-option" data-idx="2" onclick="selectOption(this)"><span class="letter">C</span><span>Les précurseurs des PNN</span></div>
+<div class="qcm-option" data-idx="3" onclick="selectOption(this)"><span class="letter">D</span><span>Les cellules dendritiques</span></div>
+</div>
+<button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button>
+<div class="qcm-explanation">Mégacaryocytes = précurseurs des plaquettes dans la moelle. Se fragmentent pour libérer les plaquettes.</div>
+</div>
+<div class="qcm-block" data-answer="3">
+<div class="q-text">Q6 : Le seuil de plaquettes imposant une urgence transfusionnelle est :</div>
+<div class="qcm-options"><div class="qcm-option" data-idx="0" onclick="selectOption(this)"><span class="letter">A</span><span>< 150 G/L</span></div>
+<div class="qcm-option" data-idx="1" onclick="selectOption(this)"><span class="letter">B</span><span>< 80 G/L</span></div>
+<div class="qcm-option" data-idx="2" onclick="selectOption(this)"><span class="letter">C</span><span>< 50 G/L</span></div>
+<div class="qcm-option" data-idx="3" onclick="selectOption(this)"><span class="letter">D</span><span>< 20 G/L</span></div>
+</div>
+<button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button>
+<div class="qcm-explanation">< 20 G/L = urgence transfusionnelle (plaquettes).</div>
+</div>
+<div class="qcm-block" data-answer="1">
+<div class="q-text">Q7 : La thrombocytose essentielle (TE) est caractérisée par :</div>
+<div class="qcm-options"><div class="qcm-option" data-idx="0" onclick="selectOption(this)"><span class="letter">A</span><span>Une mutation du gène de l'EPO</span></div>
+<div class="qcm-option" data-idx="1" onclick="selectOption(this)"><span class="letter">B</span><span>Une mutation JAK2 ou CALR</span></div>
+<div class="qcm-option" data-idx="2" onclick="selectOption(this)"><span class="letter">C</span><span>Une trisomie 21</span></div>
+<div class="qcm-option" data-idx="3" onclick="selectOption(this)"><span class="letter">D</span><span>Une mutation du gène HBB</span></div>
+</div>
+<button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button>
+<div class="qcm-explanation">TE : JAK2 V617F (~60%) ou CALR (~25%).</div>
+</div>
+<div class="qcm-block" data-answer="1">
+<div class="q-text">Q8 : Une thrombopénie médicamenteuse à l'héparine peut entraîner :</div>
+<div class="qcm-options"><div class="qcm-option" data-idx="0" onclick="selectOption(this)"><span class="letter">A</span><span>Des hémorragies uniquement</span></div>
+<div class="qcm-option" data-idx="1" onclick="selectOption(this)"><span class="letter">B</span><span>Des thromboses paradoxales (TIH)</span></div>
+<div class="qcm-option" data-idx="2" onclick="selectOption(this)"><span class="letter">C</span><span>Une agranulocytose associée</span></div>
+<div class="qcm-option" data-idx="3" onclick="selectOption(this)"><span class="letter">D</span><span>Aucune complication</span></div>
+</div>
+<button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button>
+<div class="qcm-explanation">TIH (Thrombopénie Induite par l'Héparine) : Ac anti-PF4/héparine → activation plaquettaire → thromboses artérielles ET veineuses.</div>
+</div>
+<div class="qcm-block" data-answer="1">
+<div class="q-text">Q9 : La CIVD (Coagulation Intravasculaire Disséminée) entraîne :</div>
+<div class="qcm-options"><div class="qcm-option" data-idx="0" onclick="selectOption(this)"><span class="letter">A</span><span>Une thrombocytose</span></div>
+<div class="qcm-option" data-idx="1" onclick="selectOption(this)"><span class="letter">B</span><span>Une thrombopénie par consommation</span></div>
+<div class="qcm-option" data-idx="2" onclick="selectOption(this)"><span class="letter">C</span><span>Une hyperplaquettose</span></div>
+<div class="qcm-option" data-idx="3" onclick="selectOption(this)"><span class="letter">D</span><span>Aucun changement plaquettaire</span></div>
+</div>
+<button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button>
+<div class="qcm-explanation">CIVD = consommation massive des plaquettes et des facteurs → thrombopénie + allongement TP et TCA + fibrinogène bas.</div>
+</div>
+<div class="qcm-block" data-answer="1">
+<div class="q-text">Q10 : Une plaquettose > 1500 G/L sans cause réactionnelle justifie :</div>
+<div class="qcm-options"><div class="qcm-option" data-idx="0" onclick="selectOption(this)"><span class="letter">A</span><span>Un simple contrôle à 6 mois</span></div>
+<div class="qcm-option" data-idx="1" onclick="selectOption(this)"><span class="letter">B</span><span>Un bilan hématologique spécialisé urgent</span></div>
+<div class="qcm-option" data-idx="2" onclick="selectOption(this)"><span class="letter">C</span><span>Une anticoagulation systématique</span></div>
+<div class="qcm-option" data-idx="3" onclick="selectOption(this)"><span class="letter">D</span><span>Aucune investigation</span></div>
+</div>
+<button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button>
+<div class="qcm-explanation">Thrombocytose > 1000–1500 G/L sans cause réactionnelle → hématologue urgent (thrombocytémie essentielle, LMC...).</div>
+</div>
+</div></div>
+</div><div class="slide content-slide">
+<h2>📋 Récapitulatif — Hémogramme</h2>
+<div class="recap-grid">
+<div class="recap-card"><h3>Valeurs normales adulte (Hb)</h3><p>Homme : 130–180 g/L | Femme : 120–160 g/L<br>Anémie définie par Hb seule</p><div class="slide-number">56 / 57</div></div>
+<div class="recap-card"><h3>Indices érythrocytaires</h3><p>VGM : 80–100 fL | CCMH : 320–360 g/L | TCMH : 27–32 pg<br>Micro &lt;80 → Macro &gt;100</p></div>
+<div class="recap-card"><h3>Leucocytes normaux adulte</h3><p>Total : 4–10 G/L | PNN : 1,5–7 G/L<br>Lymphocytes : 1,5–4 G/L | Plaquettes : 150–450 G/L</p></div>
+<div class="recap-card"><h3>Urgences hématologiques</h3><p>Hb &lt; 60 g/L | PNN &lt; 0,5 G/L | Plaquettes &lt; 20 G/L<br>Blastes dans le sang</p></div>
+<div class="recap-card"><h3>Pédiatrie</h3><p>Leucocytose élevée NNé (9–30 G/L) | Lymphocytes élevés &lt;10 ans<br>Seuils VGM différents | Plaquettes 150–600 chez NNé</p></div>
+<div class="recap-card"><h3>Pièges</h3><p>Fausse anémie hémodilution (grossesse)<br>Fausse thrombopénie EDTA → contrôle sur citrate</p></div>
+</div>
+</div><div class="slide title-slide">
+<h1 style="font-size:2.5em">🎉 Félicitations !</h1>
+<div class="subtitle">Vous avez terminé le cours Hémogramme — Item 212<div class="slide-number">57 / 57</div></div>
+<p style="margin-top:20px;color:#aaa;max-width:600px">Vous maîtrisez maintenant les valeurs normales, les indications urgentes et les principales anomalies de l'hémogramme chez l'adulte et l'enfant.</p>
+<p style="color:#f39c12;margin-top:15px;font-weight:600">Prochain chapitre : Anémies (Item 213) →</p>
+</div>
+<nav>
+  <button id="prevBtn" onclick="changeSlide(-1)">← Précédent</button>
+  <button id="nextBtn" onclick="changeSlide(1)">Suivant →</button>
+</nav>
+<script>
+let current=0;
+const slides=document.querySelectorAll('.slide');
+const total=slides.length;
+function showSlide(n){
+  slides[current].classList.remove('active');
+  current=Math.max(0,Math.min(n,total-1));
+  slides[current].classList.add('active');
+  document.getElementById('progress').style.width=((current+1)/total*100)+'%';
+}
+function changeSlide(d){showSlide(current+d);}
+document.addEventListener('keydown',e=>{
+  if(e.key==='ArrowRight'||e.key===' ')changeSlide(1);
+  if(e.key==='ArrowLeft')changeSlide(-1);
+  if(e.key==='Escape')closeModal();
+});
+function selectOption(el){
+  const block=el.closest('.qcm-block');
+  if(block.classList.contains('answered'))return;
+  block.querySelectorAll('.qcm-option').forEach(o=>o.classList.remove('selected'));
+  el.classList.add('selected');
+  block.querySelector('.qcm-validate').disabled=false;
+}
+function validateQCM(btn){
+  const block=btn.closest('.qcm-block');
+  if(block.classList.contains('answered'))return;
+  const correct=parseInt(block.dataset.answer);
+  const selected=block.querySelector('.qcm-option.selected');
+  if(!selected)return;
+  block.classList.add('answered');
+  block.querySelectorAll('.qcm-option').forEach(o=>{
+    if(parseInt(o.dataset.idx)===correct)o.classList.add('correct');
+    else if(o.classList.contains('selected'))o.classList.add('wrong');
+  });
+  btn.disabled=true;
+  const examSlide=block.closest('.exam-slide');
+  if(examSlide){
+    const scoreBar=examSlide.querySelector('.score-fill');
+    const allQ=examSlide.querySelectorAll('.qcm-block');
+    const correct2=examSlide.querySelectorAll('.qcm-option.correct').length;
+    if(scoreBar){scoreBar.style.width=(correct2/allQ.length*100)+'%';scoreBar.textContent=correct2+'/'+allQ.length;}
+  }
+}
+function openModal(src){document.querySelector('.img-modal').classList.add('active');document.querySelector('.img-modal img').src=src;}
+function closeModal(){document.querySelector('.img-modal').classList.remove('active');}
+
+// ===== Topbar counter + swipe =====
+(function(){
+  function updateTopbar(){
+    var c=document.getElementById('tb-cur');
+    var t=document.getElementById('tb-tot');
+    if(c && typeof current!=='undefined') c.textContent=current+1;
+    if(t && typeof total!=='undefined') t.textContent=total;
+  }
+  // Patch showSlide to also update topbar
+  var _orig=window.showSlide;
+  if(_orig){
+    window.showSlide=function(n){_orig(n);updateTopbar();};
+  }
+  var _origC=window.changeSlide;
+  if(_origC){
+    window.changeSlide=function(d){_origC(d);updateTopbar();};
+  }
+  window.addEventListener('DOMContentLoaded',function(){updateTopbar();});
+  setTimeout(function(){updateTopbar();},50);
+
+  // Touch swipe support
+  var sx=0,sy=0;
+  document.addEventListener('touchstart',function(e){
+    sx=e.touches[0].clientX;sy=e.touches[0].clientY;
+  },{passive:true});
+  document.addEventListener('touchend',function(e){
+    var dx=e.changedTouches[0].clientX-sx;
+    var dy=e.changedTouches[0].clientY-sy;
+    if(Math.abs(dx)>Math.abs(dy)&&Math.abs(dx)>40){
+      if(dx<0) changeSlide(1); else changeSlide(-1);
+    }
+  },{passive:true});
+})();
+
+</script>
+</body>
+</html>

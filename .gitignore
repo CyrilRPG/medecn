@@ -1,0 +1,20 @@
+# PDFs (proprietary content)
+*.pdf
+
+# Python scripts
+*.py
+__pycache__/
+*.pyc
+
+# System
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+*.swp
+
+# Internal files
+*.bak
+*.txt
+GUIDE_CREATION_PRESENTATIONS.md
