@@ -28,10 +28,10 @@ h3.slide-title{font-size:1.2rem;font-weight:700;color:#3498db;margin-bottom:16px
 .content-grid{display:grid;gap:14px}
 .content-grid-2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
 .content-grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px}
-.card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.09);border-radius:10px;padding:16px}
+.card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.09);border-radius:10px;padding:16px;line-height:1.6}
 .card h4{font-size:.95rem;font-weight:700;color:#f39c12;margin-bottom:10px}
 .card ul{padding-left:18px}
-.card ul li{margin-bottom:6px;font-size:.9rem;line-height:1.5}
+.card ul li{margin-bottom:8px;font-size:.9rem;line-height:1.65}
 .def-box{background:rgba(243,156,18,.12);border-left:4px solid #f39c12;padding:12px 16px;border-radius:0 8px 8px 0;margin:12px 0}
 .def-box strong{color:#f39c12;display:block;margin-bottom:4px;font-size:.85rem;text-transform:uppercase;letter-spacing:.5px}
 .urgence-box{background:rgba(231,76,60,.2);border:2px solid #e74c3c;padding:14px 16px;border-radius:8px;margin:12px 0}
@@ -42,7 +42,7 @@ h3.slide-title{font-size:1.2rem;font-weight:700;color:#3498db;margin-bottom:16px
 .success-box strong{color:#2ecc71;display:block;margin-bottom:4px;font-size:.85rem;text-transform:uppercase;letter-spacing:.5px}
 ul.bullets li{margin-bottom:8px;font-size:.92rem;line-height:1.6;padding-left:4px}
 ul.bullets li::marker{color:#e74c3c}
-p.explain{font-size:.93rem;line-height:1.7;color:#ccc;margin-bottom:12px}
+p.explain{font-size:.93rem;line-height:1.75;color:#ccc;margin-bottom:14px}
 .table-wrap{overflow-x:auto;margin:12px 0}
 table{width:100%;border-collapse:collapse;font-size:.85rem}
 th{background:rgba(231,76,60,.2);color:#e74c3c;padding:9px 12px;text-align:left;font-weight:700;border:1px solid rgba(231,76,60,.3)}
@@ -121,7 +121,7 @@ tr:nth-child(even) td{background:rgba(255,255,255,.03)}
   <span class="tb-title">Syndromes Myéloprolifératifs – Item 317</span>
   <div class="tb-nav">
     <button class="tb-btn" onclick="changeSlide(-1)">&#8592;</button>
-    <span class="tb-counter"><span id="tb-cur">1</span>/<span id="tb-tot">92</span></span>
+    <span class="tb-counter"><span id="tb-cur">1</span>/<span id="tb-tot">90</span></span>
     <button class="tb-btn" onclick="changeSlide(1)">&#8594;</button>
   </div>
 </div>
@@ -177,8 +177,29 @@ tr:nth-child(even) td{background:rgba(255,255,255,.03)}
   </div>
 </div>
 
-<!-- SLIDE 2: HIÉRARCHISATION DES CONNAISSANCES -->
 <div class="slide" id="slide-2">
+  <h2 class="slide-title">🃏 Quiz Flash – Plan du cours</h2>
+  <p style="font-size:.85rem;color:#888;margin-bottom:14px">Appuyez sur chaque carte pour révéler la réponse</p>
+  <div class="flip-card" onclick="flipCard(this)">
+    <div class="flip-front"><div class="flip-q-num">Q1</div><div class="flip-q-text">Quels sont les 4 syndromes myéloprolifératifs classiques ?</div><div class="flip-hint">👆 Appuyer pour révéler</div></div>
+    <div class="flip-back"><div class="flip-answer">LMC · Maladie de Vaquez · Thrombocytémie essentielle · Myélofibrose primitive</div><div class="flip-expl">LMC (Ph+) et Vaquez, TE, MFP (Ph−). Tous sont des hémopathies malignes chroniques clonales de la lignée myéloïde.</div></div>
+  </div>
+  <div class="flip-card" onclick="flipCard(this)">
+    <div class="flip-front"><div class="flip-q-num">Q2</div><div class="flip-q-text">Quel item ECN regroupe les syndromes myéloprolifératifs ?</div><div class="flip-hint">👆 Appuyer pour révéler</div></div>
+    <div class="flip-back"><div class="flip-answer">Item 317</div><div class="flip-expl">L'item 317 couvre la LMC, la maladie de Vaquez et la thrombocytémie essentielle. La myélofibrose primitive est aussi incluse dans ce groupe.</div></div>
+  </div>
+  <div class="flip-card" onclick="flipCard(this)">
+    <div class="flip-front"><div class="flip-q-num">Q3</div><div class="flip-q-text">Quelle situation de départ correspond à une splénomégalie ?</div><div class="flip-hint">👆 Appuyer pour révéler</div></div>
+    <div class="flip-back"><div class="flip-answer">Situation de départ 58</div><div class="flip-expl">La splénomégalie est commune à tous les SMP. C'est souvent le signe clinique orienteur qui amène à prescrire un hémogramme.</div></div>
+  </div>
+  <div class="flip-card" onclick="flipCard(this)">
+    <div class="flip-front"><div class="flip-q-num">Q4</div><div class="flip-q-text">Quel est l'objectif pédagogique principal de l'item 317 ?</div><div class="flip-hint">👆 Appuyer pour révéler</div></div>
+    <div class="flip-back"><div class="flip-answer">Diagnostiquer une maladie de Vaquez, une thrombocytémie primitive et une leucémie myéloïde chronique</div><div class="flip-expl">L'item 317 est centré sur la démarche diagnostique devant une anomalie de l'hémogramme (hyperleucocytose, polyglobulie ou hyperplaquettose).</div></div>
+  </div>
+</div>
+
+<!-- SLIDE 2: HIÉRARCHISATION DES CONNAISSANCES -->
+<div class="slide" id="slide-3">
   <h1 class="slide-title">Hiérarchisation des connaissances</h1>
   <div class="table-wrap">
     <table>
@@ -196,8 +217,29 @@ tr:nth-child(even) td{background:rgba(255,255,255,.03)}
   </div>
 </div>
 
+<div class="slide" id="slide-4">
+  <h2 class="slide-title">🃏 Quiz Flash – Hiérarchisation des connaissances</h2>
+  <p style="font-size:.85rem;color:#888;margin-bottom:14px">Appuyez sur chaque carte pour révéler la réponse</p>
+  <div class="flip-card" onclick="flipCard(this)">
+    <div class="flip-front"><div class="flip-q-num">Q1</div><div class="flip-q-text">Quel est le rang de connaissance pour définir et classer les SMP ?</div><div class="flip-hint">👆 Appuyer pour révéler</div></div>
+    <div class="flip-back"><div class="flip-answer">Rang A — connaissance indispensable à tout étudiant</div><div class="flip-expl">La définition et la classification sont rang A : nommer les 4 SMP et comprendre leurs manifestations principales.</div></div>
+  </div>
+  <div class="flip-card" onclick="flipCard(this)">
+    <div class="flip-front"><div class="flip-q-num">Q2</div><div class="flip-q-text">Quel est le rang pour les bases physiopathologiques des SMP (BCR::ABL1, JAK2) ?</div><div class="flip-hint">👆 Appuyer pour révéler</div></div>
+    <div class="flip-back"><div class="flip-answer">Rang B</div><div class="flip-expl">La physiopathologie moléculaire (BCR::ABL1, JAK2 V617F, CALR, MPL) est rang B : utile mais non indispensable en détail.</div></div>
+  </div>
+  <div class="flip-card" onclick="flipCard(this)">
+    <div class="flip-front"><div class="flip-q-num">Q3</div><div class="flip-q-text">Quel traitement a spectaculairement amélioré le pronostic de la LMC depuis 2001 ?</div><div class="flip-hint">👆 Appuyer pour révéler</div></div>
+    <div class="flip-back"><div class="flip-answer">Les inhibiteurs de tyrosine kinase (ITK) — imatinib en tête de file</div><div class="flip-expl">L'imatinib a transformé la LMC d'une maladie mortelle en une pathologie chronique compatible avec une vie quasi normale.</div></div>
+  </div>
+  <div class="flip-card" onclick="flipCard(this)">
+    <div class="flip-front"><div class="flip-q-num">Q4</div><div class="flip-q-text">Quel est le rang pour connaître les circonstances cliniques de la LMC, Vaquez et TE ?</div><div class="flip-hint">👆 Appuyer pour révéler</div></div>
+    <div class="flip-back"><div class="flip-answer">Rang A</div><div class="flip-expl">Les circonstances de diagnostic (hémogramme fortuit, signe clinique, complication inaugurale) sont rang A. À connaître.</div></div>
+  </div>
+</div>
+
 <!-- SLIDE 3: VUE D'ENSEMBLE (IMAGE) -->
-<div class="slide" id="slide-3">
+<div class="slide" id="slide-5">
   <h1 class="slide-title">Vue d'ensemble – Les 4 SMP classiques</h1>
   <div class="img-block">
     <img src="images_myeloproliferatifs/p1_page1.png" class="slide-img" style="max-height:380px" alt="SMP aperçu">
@@ -223,8 +265,29 @@ tr:nth-child(even) td{background:rgba(255,255,255,.03)}
   </div>
 </div>
 
+<div class="slide" id="slide-6">
+  <h2 class="slide-title">🃏 Quiz Flash – Vue d'ensemble</h2>
+  <p style="font-size:.85rem;color:#888;margin-bottom:14px">Appuyez sur chaque carte pour révéler la réponse</p>
+  <div class="flip-card" onclick="flipCard(this)">
+    <div class="flip-front"><div class="flip-q-num">Q1</div><div class="flip-q-text">Quelle lignée cellulaire est atteinte dans la LMC, et quelle en est la manifestation biologique ?</div><div class="flip-hint">👆 Appuyer pour révéler</div></div>
+    <div class="flip-back"><div class="flip-answer">Lignée granuleuse → hyperleucocytose avec myélémie + basophilie</div><div class="flip-expl">La myélémie = présence de précurseurs granuleux dans le sang. La basophilie est quasi-constante dans la LMC.</div></div>
+  </div>
+  <div class="flip-card" onclick="flipCard(this)">
+    <div class="flip-front"><div class="flip-q-num">Q2</div><div class="flip-q-text">Quelle mutation est retrouvée dans plus de 95 % des maladies de Vaquez ?</div><div class="flip-hint">👆 Appuyer pour révéler</div></div>
+    <div class="flip-back"><div class="flip-answer">Mutation JAK2 V617F (valine → phénylalanine, gain de fonction)</div><div class="flip-expl">JAK2 V617F active la voie JAK-STAT en permanence, stimulant la prolifération érythroïde indépendamment de l'EPO.</div></div>
+  </div>
+  <div class="flip-card" onclick="flipCard(this)">
+    <div class="flip-front"><div class="flip-q-num">Q3</div><div class="flip-q-text">Quel chromosome anormal est caractéristique de la LMC, et comment se forme-t-il ?</div><div class="flip-hint">👆 Appuyer pour révéler</div></div>
+    <div class="flip-back"><div class="flip-answer">Chromosome Philadelphie (chr 22 raccourci) — issu de la translocation t(9;22) → fusion BCR::ABL1</div><div class="flip-expl">Le chromosome Philadelphie est présent dans 100 % des LMC. Sa détection par caryotype ou PCR est indispensable au diagnostic.</div></div>
+  </div>
+  <div class="flip-card" onclick="flipCard(this)">
+    <div class="flip-front"><div class="flip-q-num">Q4</div><div class="flip-q-text">Quelles mutations alternatives à JAK2 retrouve-t-on dans les SMP Ph négatifs ?</div><div class="flip-hint">👆 Appuyer pour révéler</div></div>
+    <div class="flip-back"><div class="flip-answer">CALR (calréticuline, ~25 %) et MPL (récepteur TPO, ~5-8 %)</div><div class="flip-expl">Dans la TE et la MFP JAK2-négatifs, on recherche CALR puis MPL. Un triple négatif (15 %) n'exclut pas le diagnostic.</div></div>
+  </div>
+</div>
+
 <!-- SLIDE 4: SECTION I HEADER -->
-<div class="slide" id="slide-4">
+<div class="slide" id="slide-7">
   <div class="slide-section-header">
     <div class="section-badge">Section I</div>
     <div class="section-title">Syndromes Myéloprolifératifs<br>Généralités</div>
@@ -233,7 +296,7 @@ tr:nth-child(even) td{background:rgba(255,255,255,.03)}
 </div>
 
 <!-- SLIDE 5: DÉFINITION ET CLASSIFICATION -->
-<div class="slide" id="slide-5">
+<div class="slide" id="slide-8">
   <h1 class="slide-title">Définition et classification des SMP</h1>
   <div class="def-box">
     <strong>Définition (rang A)</strong>
@@ -260,8 +323,29 @@ tr:nth-child(even) td{background:rgba(255,255,255,.03)}
   </div>
 </div>
 
+<div class="slide" id="slide-9">
+  <h2 class="slide-title">🃏 Quiz Flash – Définition des SMP</h2>
+  <p style="font-size:.85rem;color:#888;margin-bottom:14px">Appuyez sur chaque carte pour révéler la réponse</p>
+  <div class="flip-card" onclick="flipCard(this)">
+    <div class="flip-front"><div class="flip-q-num">Q1</div><div class="flip-q-text">Qu'est-ce qui distingue les SMP des leucémies aiguës en termes de maturation ?</div><div class="flip-hint">👆 Appuyer pour révéler</div></div>
+    <div class="flip-back"><div class="flip-answer">SMP : maturation NORMALE — cellules morphologiquement normales. LA : BLOCAGE de maturation avec blastes immatures.</div><div class="flip-expl">C'est le point fondamental. SMP = hyperproduction de cellules matures normales. Leucémie aiguë = blastes + blocage.</div></div>
+  </div>
+  <div class="flip-card" onclick="flipCard(this)">
+    <div class="flip-front"><div class="flip-q-num">Q2</div><div class="flip-q-text">Que signifie le caractère clonal d'un SMP ?</div><div class="flip-hint">👆 Appuyer pour révéler</div></div>
+    <div class="flip-back"><div class="flip-answer">La maladie est issue d'une seule cellule souche hématopoïétique anormale (mutation acquise). Tous ses descendants partagent l'anomalie.</div><div class="flip-expl">Clonal s'oppose à polyclonal (infections, inflammations). Dans les SMP, la mutation est acquise et non héréditaire.</div></div>
+  </div>
+  <div class="flip-card" onclick="flipCard(this)">
+    <div class="flip-front"><div class="flip-q-num">Q3</div><div class="flip-q-text">Quel est le risque à long terme commun à tous les SMP ?</div><div class="flip-hint">👆 Appuyer pour révéler</div></div>
+    <div class="flip-back"><div class="flip-answer">Transformation en leucémie aiguë myéloïde (LAM), de pronostic très sombre</div><div class="flip-expl">Pour la LMC : maintenant exceptionnel grâce aux ITK. Pour Vaquez/TE : survient après 10-20 ans. Possible précédé d'un SMD.</div></div>
+  </div>
+  <div class="flip-card" onclick="flipCard(this)">
+    <div class="flip-front"><div class="flip-q-num">Q4</div><div class="flip-q-text">Citez 2 différences cliniques majeures entre SMP et syndromes myélodysplasiques.</div><div class="flip-hint">👆 Appuyer pour révéler</div></div>
+    <div class="flip-back"><div class="flip-answer">SMP : hyperproduction (excès) de cellules matures normales. SMD : cytopénies + dysplasie (insuffisance médullaire qualitative et quantitative).</div><div class="flip-expl">SMP et SMD s'opposent : les SMP produisent trop, les SMD produisent mal et en quantité insuffisante. Traitements différents.</div></div>
+  </div>
+</div>
+
 <!-- SLIDE 6: TABLEAU CLASSIFICATION -->
-<div class="slide" id="slide-6">
+<div class="slide" id="slide-10">
   <h1 class="slide-title">Classification des SMP – Tableau récapitulatif</h1>
   <div class="table-wrap">
     <table>
@@ -278,8 +362,29 @@ tr:nth-child(even) td{background:rgba(255,255,255,.03)}
   </div>
 </div>
 
+<div class="slide" id="slide-11">
+  <h2 class="slide-title">🃏 Quiz Flash – Classification des SMP</h2>
+  <p style="font-size:.85rem;color:#888;margin-bottom:14px">Appuyez sur chaque carte pour révéler la réponse</p>
+  <div class="flip-card" onclick="flipCard(this)">
+    <div class="flip-front"><div class="flip-q-num">Q1</div><div class="flip-q-text">Quel SMP touche principalement la lignée érythroblastique, et quelle en est la conséquence ?</div><div class="flip-hint">👆 Appuyer pour révéler</div></div>
+    <div class="flip-back"><div class="flip-answer">Maladie de Vaquez → polyglobulie (↑Hb, ↑Ht, ↑masse érythrocytaire)</div><div class="flip-expl">La polyglobulie augmente la viscosité sanguine → risque thrombotique majeur : AVC, IDM, thrombose de Budd-Chiari.</div></div>
+  </div>
+  <div class="flip-card" onclick="flipCard(this)">
+    <div class="flip-front"><div class="flip-q-num">Q2</div><div class="flip-q-text">Quel est le seul SMP Philadelphie positif et que signifie cette dénomination ?</div><div class="flip-hint">👆 Appuyer pour révéler</div></div>
+    <div class="flip-back"><div class="flip-answer">LMC — chromosome Philadelphie = chr 22 raccourci portant la fusion BCR::ABL1</div><div class="flip-expl">Philadelphie positif signifie que la translocation t(9;22) est présente. Les SMP Ph négatifs (Vaquez, TE, MFP) en sont dépourvus.</div></div>
+  </div>
+  <div class="flip-card" onclick="flipCard(this)">
+    <div class="flip-front"><div class="flip-q-num">Q3</div><div class="flip-q-text">Quelle est la manifestation hématologique typique de la thrombocytémie essentielle ?</div><div class="flip-hint">👆 Appuyer pour révéler</div></div>
+    <div class="flip-back"><div class="flip-answer">Hyperplaquettose clonale persistante > 450 G/L</div><div class="flip-expl">L'hyperplaquettose peut dépasser 1000-2000 G/L. Risque : thromboses (artérielles) et érythromélalgies.</div></div>
+  </div>
+  <div class="flip-card" onclick="flipCard(this)">
+    <div class="flip-front"><div class="flip-q-num">Q4</div><div class="flip-q-text">Citez les 3 anomalies génétiques possibles dans la thrombocytémie essentielle, par ordre de fréquence.</div><div class="flip-hint">👆 Appuyer pour révéler</div></div>
+    <div class="flip-back"><div class="flip-answer">JAK2 V617F (~50 %) · CALR exon 9 (~25 %) · MPL W515L/K (~8 %)</div><div class="flip-expl">La recherche se fait dans cet ordre. Un triple négatif (~15 %) n'exclut pas la TE si tous les autres critères OMS sont remplis.</div></div>
+  </div>
+</div>
+
 <!-- SLIDE 7: PHYSIOPATHOLOGIE COMMUNE -->
-<div class="slide" id="slide-7">
+<div class="slide" id="slide-12">
   <h1 class="slide-title">Physiopathologie commune des SMP</h1>
   <div class="def-box">
     <strong>Principe fondamental</strong>
@@ -308,8 +413,29 @@ tr:nth-child(even) td{background:rgba(255,255,255,.03)}
   </div>
 </div>
 
+<div class="slide" id="slide-13">
+  <h2 class="slide-title">🃏 Quiz Flash – Physiopathologie commune</h2>
+  <p style="font-size:.85rem;color:#888;margin-bottom:14px">Appuyez sur chaque carte pour révéler la réponse</p>
+  <div class="flip-card" onclick="flipCard(this)">
+    <div class="flip-front"><div class="flip-q-num">Q1</div><div class="flip-q-text">Quel mécanisme moléculaire est commun à tous les SMP ?</div><div class="flip-hint">👆 Appuyer pour révéler</div></div>
+    <div class="flip-back"><div class="flip-answer">Activation constitutive de protéines à activité tyrosine kinase → signal de prolifération permanent sans stimulation externe</div><div class="flip-expl">LMC : BCR::ABL1 (TK constitutive). SMP Ph− : JAK2 muté. Les deux activent en permanence les mêmes voies de prolifération.</div></div>
+  </div>
+  <div class="flip-card" onclick="flipCard(this)">
+    <div class="flip-front"><div class="flip-q-num">Q2</div><div class="flip-q-text">Que signifie l'activation constitutive d'une tyrosine kinase ?</div><div class="flip-hint">👆 Appuyer pour révéler</div></div>
+    <div class="flip-back"><div class="flip-answer">La kinase est active en permanence, sans besoin d'un ligand (facteur de croissance) pour déclencher son activité</div><div class="flip-expl">Normalement, JAK2 est activé seulement par l'EPO ou la TPO. Muté V617F, il s'active seul → prolifération autonome.</div></div>
+  </div>
+  <div class="flip-card" onclick="flipCard(this)">
+    <div class="flip-front"><div class="flip-q-num">Q3</div><div class="flip-q-text">La cellule leucémique SMP est-elle morphologiquement anormale dans le sang ?</div><div class="flip-hint">👆 Appuyer pour révéler</div></div>
+    <div class="flip-back"><div class="flip-answer">Non — au stade chronique, les cellules sont matures et morphologiquement normales. Seul leur nombre est excessif.</div><div class="flip-expl">C'est pourquoi le diagnostic repose sur l'hémogramme (quantitatif) ET la biologie moléculaire, pas sur la morphologie.</div></div>
+  </div>
+  <div class="flip-card" onclick="flipCard(this)">
+    <div class="flip-front"><div class="flip-q-num">Q4</div><div class="flip-q-text">Quelle voie de signalisation est activée par JAK2 V617F ?</div><div class="flip-hint">👆 Appuyer pour révéler</div></div>
+    <div class="flip-back"><div class="flip-answer">Voie JAK-STAT (principalement STAT5) → transcription de gènes de prolifération et de survie</div><div class="flip-expl">JAK2 active STAT5 → facteurs anti-apoptotiques (Bcl-xL) et prolifération. Le ruxolitinib est un inhibiteur de JAK1/2 utilisé dans la MFP.</div></div>
+  </div>
+</div>
+
 <!-- SLIDE 8: BCR::ABL1 vs JAK2 -->
-<div class="slide" id="slide-8">
+<div class="slide" id="slide-14">
   <h1 class="slide-title">Les deux grandes voies oncogéniques des SMP</h1>
   <div class="content-grid-2">
     <div>
@@ -343,8 +469,29 @@ tr:nth-child(even) td{background:rgba(255,255,255,.03)}
   </div>
 </div>
 
+<div class="slide" id="slide-15">
+  <h2 class="slide-title">🃏 Quiz Flash – BCR::ABL1 vs JAK2</h2>
+  <p style="font-size:.85rem;color:#888;margin-bottom:14px">Appuyez sur chaque carte pour révéler la réponse</p>
+  <div class="flip-card" onclick="flipCard(this)">
+    <div class="flip-front"><div class="flip-q-num">Q1</div><div class="flip-q-text">Comment se forme la protéine BCR::ABL1 et où sont localisés les gènes partenaires ?</div><div class="flip-hint">👆 Appuyer pour révéler</div></div>
+    <div class="flip-back"><div class="flip-answer">Translocation t(9;22) : ABL1 (chr 9) se fusionne avec BCR (chr 22) → protéine de fusion BCR::ABL1</div><div class="flip-expl">Le chr 22 résultant est plus court (chromosome Philadelphie). BCR::ABL1 code une tyrosine kinase constitutivement active.</div></div>
+  </div>
+  <div class="flip-card" onclick="flipCard(this)">
+    <div class="flip-front"><div class="flip-q-num">Q2</div><div class="flip-q-text">Quel acide aminé est substitué dans JAK2 V617F et quel est le type de mutation ?</div><div class="flip-hint">👆 Appuyer pour révéler</div></div>
+    <div class="flip-back"><div class="flip-answer">Valine 617 → Phénylalanine — mutation ponctuelle somatique, gain de fonction</div><div class="flip-expl">V617F lève l'autoinhibition de JAK2. La mutation est somatique (acquise), non héréditaire, retrouvée dans les cellules myéloïdes.</div></div>
+  </div>
+  <div class="flip-card" onclick="flipCard(this)">
+    <div class="flip-front"><div class="flip-q-num">Q3</div><div class="flip-q-text">Quels sont les 2 effets de BCR::ABL1 au-delà de la simple prolifération ?</div><div class="flip-hint">👆 Appuyer pour révéler</div></div>
+    <div class="flip-back"><div class="flip-answer">Inhibition de l'apoptose + réduction de l'adhésion des précurseurs à la matrice médullaire (→ myélémie)</div><div class="flip-expl">La myélémie (précurseurs granuleux dans le sang) s'explique par ce défaut d'adhésion à la niche médullaire.</div></div>
+  </div>
+  <div class="flip-card" onclick="flipCard(this)">
+    <div class="flip-front"><div class="flip-q-num">Q4</div><div class="flip-q-text">Quelle mutation alternative à JAK2 retrouve-t-on dans ~25 % des TE et MFP JAK2-négatifs ?</div><div class="flip-hint">👆 Appuyer pour révéler</div></div>
+    <div class="flip-back"><div class="flip-answer">Mutation CALR (calréticuline), exon 9 — insertion ou délétion</div><div class="flip-expl">CALR muté active le récepteur MPL (thrombopoïétine) → prolifération mégacaryocytaire. Pronostic souvent meilleur que JAK2+.</div></div>
+  </div>
+</div>
+
 <!-- SLIDE 9: CIRCONSTANCES DE DIAGNOSTIC -->
-<div class="slide" id="slide-9">
+<div class="slide" id="slide-16">
   <h1 class="slide-title">Circonstances de diagnostic des SMP</h1>
   <p class="explain">Un SMP est suspecté dans trois types de situations cliniques, qui diffèrent selon la pathologie en cause :</p>
   <div class="content-grid">
@@ -378,8 +525,29 @@ tr:nth-child(even) td{background:rgba(255,255,255,.03)}
   </div>
 </div>
 
+<div class="slide" id="slide-17">
+  <h2 class="slide-title">🃏 Quiz Flash – Circonstances de diagnostic</h2>
+  <p style="font-size:.85rem;color:#888;margin-bottom:14px">Appuyez sur chaque carte pour révéler la réponse</p>
+  <div class="flip-card" onclick="flipCard(this)">
+    <div class="flip-front"><div class="flip-q-num">Q1</div><div class="flip-q-text">Dans quel contexte diagnostique sont découverts environ 40 % des SMP ?</div><div class="flip-hint">👆 Appuyer pour révéler</div></div>
+    <div class="flip-back"><div class="flip-answer">Découverte fortuite sur hémogramme de routine chez un patient asymptomatique</div><div class="flip-expl">C'est le mode de présentation le plus fréquent : bilan préopératoire, médecine du travail, suivi d'une autre pathologie.</div></div>
+  </div>
+  <div class="flip-card" onclick="flipCard(this)">
+    <div class="flip-front"><div class="flip-q-num">Q2</div><div class="flip-q-text">Quel signe clinique est commun à tous les SMP, et quel en est le mécanisme ?</div><div class="flip-hint">👆 Appuyer pour révéler</div></div>
+    <div class="flip-back"><div class="flip-answer">Splénomégalie — due à l'hématopoïèse extramédullaire et à la congestion par hyperviscosité</div><div class="flip-expl">La splénomégalie est modérée dans la TE, importante dans la LMC et Vaquez, massive dans la MFP. Elle peut causer une gêne abdominale.</div></div>
+  </div>
+  <div class="flip-card" onclick="flipCard(this)">
+    <div class="flip-front"><div class="flip-q-num">Q3</div><div class="flip-q-text">Quel symptôme est quasi-pathognomonique de la maladie de Vaquez ?</div><div class="flip-hint">👆 Appuyer pour révéler</div></div>
+    <div class="flip-back"><div class="flip-answer">Prurit aquagénique (aggravé par l'eau chaude — douche, bain)</div><div class="flip-expl">Résulte de la dégranulation mastocytaire activée par JAK2 muté. Peut précéder le diagnostic de plusieurs années.</div></div>
+  </div>
+  <div class="flip-card" onclick="flipCard(this)">
+    <div class="flip-front"><div class="flip-q-num">Q4</div><div class="flip-q-text">Quelle complication inaugurale doit toujours faire rechercher une mutation JAK2 ?</div><div class="flip-hint">👆 Appuyer pour révéler</div></div>
+    <div class="flip-back"><div class="flip-answer">Toute thrombose splanchnique : Budd-Chiari, thrombose porte ou mésentérique — même si l'hémogramme est normal</div><div class="flip-expl">La mutation JAK2 peut être présente même quand l'hémogramme est peu perturbé. C'est le point ECN à ne pas manquer.</div></div>
+  </div>
+</div>
+
 <!-- SLIDE 10: ÉVOLUTION COMMUNE -->
-<div class="slide" id="slide-10">
+<div class="slide" id="slide-18">
   <h1 class="slide-title">Évolution commune et risques partagés des SMP</h1>
   <div class="urgence-box">
     <strong>⚠️ Risque majeur à long terme commun à TOUS les SMP</strong>
@@ -414,8 +582,29 @@ tr:nth-child(even) td{background:rgba(255,255,255,.03)}
   </div>
 </div>
 
+<div class="slide" id="slide-19">
+  <h2 class="slide-title">🃏 Quiz Flash – Évolution commune des SMP</h2>
+  <p style="font-size:.85rem;color:#888;margin-bottom:14px">Appuyez sur chaque carte pour révéler la réponse</p>
+  <div class="flip-card" onclick="flipCard(this)">
+    <div class="flip-front"><div class="flip-q-num">Q1</div><div class="flip-q-text">En quoi consistent les 3 phases évolutives de la LMC non traitée ?</div><div class="flip-hint">👆 Appuyer pour révéler</div></div>
+    <div class="flip-back"><div class="flip-answer">Chronique (>90 % au Dc, 3-5 ans) → Accélérée (transitoire) → Blastique (= LAM, pronostic catastrophique)</div><div class="flip-expl">Depuis les ITK, la phase blastique est devenue exceptionnelle. La LMC est contrôlée en phase chronique dans >95 % des cas.</div></div>
+  </div>
+  <div class="flip-card" onclick="flipCard(this)">
+    <div class="flip-front"><div class="flip-q-num">Q2</div><div class="flip-q-text">Quel seuil de blastes médullaires définit la transformation en leucémie aiguë (phase blastique) ?</div><div class="flip-hint">👆 Appuyer pour révéler</div></div>
+    <div class="flip-back"><div class="flip-answer">≥ 20 % de blastes dans la moelle ou le sang périphérique</div><div class="flip-expl">C'est le même critère que pour définir une LAM selon l'OMS. Avant 20 %, avec signes d'accélération, on parle de phase accélérée.</div></div>
+  </div>
+  <div class="flip-card" onclick="flipCard(this)">
+    <div class="flip-front"><div class="flip-q-num">Q3</div><div class="flip-q-text">Vers quelle pathologie les SMP Ph négatifs évoluent-ils avant la LAM ?</div><div class="flip-hint">👆 Appuyer pour révéler</div></div>
+    <div class="flip-back"><div class="flip-answer">Myélofibrose secondaire (post-Vaquez ou post-TE), puis transformation en LAM</div><div class="flip-expl">La myélofibrose secondaire aggrave la splénomégalie et produit des cytopénies progressives. Elle survient après 10-20 ans.</div></div>
+  </div>
+  <div class="flip-card" onclick="flipCard(this)">
+    <div class="flip-front"><div class="flip-q-num">Q4</div><div class="flip-q-text">Quelle est l'espérance de vie d'un patient atteint de LMC bien contrôlée sous ITK ?</div><div class="flip-hint">👆 Appuyer pour révéler</div></div>
+    <div class="flip-back"><div class="flip-answer">Quasi-normale — comparable à la population générale appariée en âge</div><div class="flip-expl">C'est la révolution des ITK. La TE à bas risque a aussi une espérance de vie quasi-normale. La MFP primitive reste la plus grave.</div></div>
+  </div>
+</div>
+
 <!-- SLIDE 11: IMAGE GÉNÉRALITÉS -->
-<div class="slide" id="slide-11">
+<div class="slide" id="slide-20">
   <h1 class="slide-title">Aperçu histologique et biologique – Généralités</h1>
   <div class="img-block">
     <img src="images_myeloproliferatifs/p1_page3.png" class="slide-img" style="max-height:400px" alt="SMP généralités">
@@ -427,8 +616,29 @@ tr:nth-child(even) td{background:rgba(255,255,255,.03)}
   </div>
 </div>
 
+<div class="slide" id="slide-21">
+  <h2 class="slide-title">🃏 Quiz Flash – Démarche diagnostique globale</h2>
+  <p style="font-size:.85rem;color:#888;margin-bottom:14px">Appuyez sur chaque carte pour révéler la réponse</p>
+  <div class="flip-card" onclick="flipCard(this)">
+    <div class="flip-front"><div class="flip-q-num">Q1</div><div class="flip-q-text">Quels sont les 3 examens clés pour diagnostiquer un SMP ?</div><div class="flip-hint">👆 Appuyer pour révéler</div></div>
+    <div class="flip-back"><div class="flip-answer">Hémogramme + biologie moléculaire (PCR BCR::ABL1 ou mutation JAK2/CALR/MPL) ± myélogramme/BOM</div><div class="flip-expl">L'hémogramme oriente, la biologie moléculaire confirme. Le myélogramme est utile pour le % de blastes (phases) ou si molécule négative.</div></div>
+  </div>
+  <div class="flip-card" onclick="flipCard(this)">
+    <div class="flip-front"><div class="flip-q-num">Q2</div><div class="flip-q-text">Peut-on diagnostiquer une LMC sans myélogramme ni biopsie médullaire ?</div><div class="flip-hint">👆 Appuyer pour révéler</div></div>
+    <div class="flip-back"><div class="flip-answer">Oui — la PCR BCR::ABL1 quantitative sur sang périphérique est suffisante pour confirmer le diagnostic</div><div class="flip-expl">La PCR est très sensible et spécifique. Elle donne aussi un score de réponse au traitement (suivi).</div></div>
+  </div>
+  <div class="flip-card" onclick="flipCard(this)">
+    <div class="flip-front"><div class="flip-q-num">Q3</div><div class="flip-q-text">Quel test distingue une polyglobulie primitive (Vaquez) d'une polyglobulie secondaire ?</div><div class="flip-hint">👆 Appuyer pour révéler</div></div>
+    <div class="flip-back"><div class="flip-answer">Dosage de l'EPO sérique (basse dans Vaquez) + recherche de mutation JAK2 V617F</div><div class="flip-expl">EPO basse = polyglobulie primitive (JAK2 à rechercher). EPO élevée = polyglobulie secondaire (cause respiratoire, tumorale, etc.).</div></div>
+  </div>
+  <div class="flip-card" onclick="flipCard(this)">
+    <div class="flip-front"><div class="flip-q-num">Q4</div><div class="flip-q-text">Quel examen rechercher devant une thrombose splanchnique chez un patient sans SMP connu ?</div><div class="flip-hint">👆 Appuyer pour révéler</div></div>
+    <div class="flip-back"><div class="flip-answer">Mutation JAK2 V617F sur sang périphérique — en 1ère intention même si l'hémogramme est normal</div><div class="flip-expl">La thrombose splanchnique est parfois la première manifestation d'un SMP Ph négatif.</div></div>
+  </div>
+</div>
+
 <!-- SLIDE 12: FLIP QUIZ SECTION I -->
-<div class="slide" id="slide-12">
+<div class="slide" id="slide-22">
   <h2 class="slide-title">🃏 Quiz Flash – Section I : Généralités</h2>
   <p style="font-size:.85rem;color:#888;margin-bottom:14px">Appuyez sur chaque carte pour révéler la réponse</p>
 
@@ -482,7 +692,7 @@ tr:nth-child(even) td{background:rgba(255,255,255,.03)}
 </div>
 
 <!-- SLIDE 13: QCM SECTION I -->
-<div class="slide" id="slide-13">
+<div class="slide" id="slide-23">
   <h2 class="slide-title">📝 QCM – Section I : Généralités</h2>
 
   <div class="qcm-block">
@@ -590,7 +800,7 @@ tr:nth-child(even) td{background:rgba(255,255,255,.03)}
 </div>
 
 <!-- SLIDE 14: DOSSIER PROGRESSIF SECTION I -->
-<div class="slide" id="slide-14">
+<div class="slide" id="slide-24">
   <h2 class="slide-title">🏥 Dossier Progressif – Généralités SMP</h2>
   <div class="dp-case">
     <strong>📋 Cas clinique</strong>
@@ -652,7 +862,7 @@ tr:nth-child(even) td{background:rgba(255,255,255,.03)}
 </div>
 
 <!-- SLIDE 15: RÉSUMÉ SECTION I -->
-<div class="slide" id="slide-15">
+<div class="slide" id="slide-25">
   <h1 class="slide-title">Résumé – Section I : Généralités à retenir</h1>
   <div class="resume-block">
     <h4>✅ Points essentiels – Généralités SMP</h4>
@@ -670,7 +880,7 @@ tr:nth-child(even) td{background:rgba(255,255,255,.03)}
 </div>
 
 <!-- SLIDE 16: SECTION II HEADER -->
-<div class="slide" id="slide-16">
+<div class="slide" id="slide-26">
   <div class="slide-section-header">
     <div class="section-badge">Section II</div>
     <div class="section-title">Leucémie Myéloïde Chronique</div>
@@ -679,7 +889,7 @@ tr:nth-child(even) td{background:rgba(255,255,255,.03)}
 </div>
 
 <!-- SLIDE 17: LMC VIGNETTE + DÉFINITION -->
-<div class="slide" id="slide-17">
+<div class="slide" id="slide-27">
   <h1 class="slide-title">LMC – Présentation clinique et définition</h1>
   <div class="vignette">
     <strong>📋 Vignette clinique (ECN type)</strong>
@@ -695,8 +905,29 @@ tr:nth-child(even) td{background:rgba(255,255,255,.03)}
   </div>
 </div>
 
+<div class="slide" id="slide-28">
+  <h2 class="slide-title">🃏 Quiz Flash – LMC — Définition</h2>
+  <p style="font-size:.85rem;color:#888;margin-bottom:14px">Appuyez sur chaque carte pour révéler la réponse</p>
+  <div class="flip-card" onclick="flipCard(this)">
+    <div class="flip-front"><div class="flip-q-num">Q1</div><div class="flip-q-text">Définissez la LMC en une phrase clé.</div><div class="flip-hint">👆 Appuyer pour révéler</div></div>
+    <div class="flip-back"><div class="flip-answer">Hémopathie maligne clonale de la cellule souche hématopoïétique, définie par t(9;22)/BCR::ABL1, responsable d'une hyperleucocytose avec myélémie et basophilie</div><div class="flip-expl">La LMC est une entité biologique précisément définie par son anomalie génétique. Le Philadelphie est présent dans 100 % des cas.</div></div>
+  </div>
+  <div class="flip-card" onclick="flipCard(this)">
+    <div class="flip-front"><div class="flip-q-num">Q2</div><div class="flip-q-text">Qu'est-ce qu'une myélémie, et pourquoi la retrouve-t-on dans la LMC ?</div><div class="flip-hint">👆 Appuyer pour révéler</div></div>
+    <div class="flip-back"><div class="flip-answer">Présence de précurseurs granuleux (métamyélocytes, myélocytes, promyélocytes) dans le sang périphérique</div><div class="flip-expl">La myélémie résulte du défaut d'adhésion à la niche médullaire induit par BCR::ABL1. La maturation est conservée (≠ leucémie aiguë).</div></div>
+  </div>
+  <div class="flip-card" onclick="flipCard(this)">
+    <div class="flip-front"><div class="flip-q-num">Q3</div><div class="flip-q-text">Quel élément biologique différencie immédiatement la LMC d'une hyperleucocytose réactionnelle ?</div><div class="flip-hint">👆 Appuyer pour révéler</div></div>
+    <div class="flip-back"><div class="flip-answer">La basophilie (augmentation des basophiles) — quasi-constante dans la LMC, absente dans les réactions infectieuses</div><div class="flip-expl">Basophiles > 1 % (ou simplement augmentés) est un signal d'alarme pour la LMC. Dans les infections, seuls les neutrophiles augmentent.</div></div>
+  </div>
+  <div class="flip-card" onclick="flipCard(this)">
+    <div class="flip-front"><div class="flip-q-num">Q4</div><div class="flip-q-text">Quel chromosome anormal est pathognomonique de la LMC ?</div><div class="flip-hint">👆 Appuyer pour révéler</div></div>
+    <div class="flip-back"><div class="flip-answer">Chromosome Philadelphie (chr 22 raccourci), issu de la translocation t(9;22)</div><div class="flip-expl">Présent dans 100 % des LMC. Sa détection au caryotype + la PCR BCR::ABL1 confirment le diagnostic.</div></div>
+  </div>
+</div>
+
 <!-- SLIDE 18: PHYSIOPATHOLOGIE BCR::ABL1 -->
-<div class="slide" id="slide-18">
+<div class="slide" id="slide-29">
   <h1 class="slide-title">LMC – Physiopathologie : translocation t(9;22)</h1>
   <div class="img-block">
     <img src="images_myeloproliferatifs/p1_page4.png" class="slide-img" style="max-height:280px" alt="Translocation t(9;22)">
@@ -724,8 +955,29 @@ tr:nth-child(even) td{background:rgba(255,255,255,.03)}
   </div>
 </div>
 
+<div class="slide" id="slide-30">
+  <h2 class="slide-title">🃏 Quiz Flash – Physiopathologie BCR::ABL1</h2>
+  <p style="font-size:.85rem;color:#888;margin-bottom:14px">Appuyez sur chaque carte pour révéler la réponse</p>
+  <div class="flip-card" onclick="flipCard(this)">
+    <div class="flip-front"><div class="flip-q-num">Q1</div><div class="flip-q-text">Quel gène est situé sur le chromosome 9 dans la translocation t(9;22) de la LMC ?</div><div class="flip-hint">👆 Appuyer pour révéler</div></div>
+    <div class="flip-back"><div class="flip-answer">ABL1 (Abelson Leukemia Gene 1) — une tyrosine kinase normalement régulée</div><div class="flip-expl">ABL1 code une TK cytoplasmique impliquée dans la différenciation. Transloquée sur le chr 22, elle se fusionne avec BCR pour former l'oncogène.</div></div>
+  </div>
+  <div class="flip-card" onclick="flipCard(this)">
+    <div class="flip-front"><div class="flip-q-num">Q2</div><div class="flip-q-text">Quels sont les 3 effets principaux de BCR::ABL1 sur la cellule hématopoïétique ?</div><div class="flip-hint">👆 Appuyer pour révéler</div></div>
+    <div class="flip-back"><div class="flip-answer">1) Prolifération accrue · 2) Inhibition de l'apoptose · 3) Réduction de l'adhésion médullaire (→ myélémie)</div><div class="flip-expl">Ces 3 effets expliquent tous les signes cliniques : hyperleucocytose (prolifération), chronicité (survie), myélémie (adhésion réduite).</div></div>
+  </div>
+  <div class="flip-card" onclick="flipCard(this)">
+    <div class="flip-front"><div class="flip-q-num">Q3</div><div class="flip-q-text">Pourquoi la myélémie de la LMC est-elle dite 'équilibrée' ?</div><div class="flip-hint">👆 Appuyer pour révéler</div></div>
+    <div class="flip-back"><div class="flip-answer">Tous les stades de maturation granuleuse sont représentés sans hiatus (pas d'arrêt brutal à un stade immature)</div><div class="flip-expl">L'absence de hiatus de maturation différencie la LMC des leucémies aiguës où un blocage crée un vide entre blastes et cellules matures.</div></div>
+  </div>
+  <div class="flip-card" onclick="flipCard(this)">
+    <div class="flip-front"><div class="flip-q-num">Q4</div><div class="flip-q-text">Comment BCR::ABL1 inhibe-t-il l'apoptose dans les cellules leucémiques ?</div><div class="flip-hint">👆 Appuyer pour révéler</div></div>
+    <div class="flip-back"><div class="flip-answer">Via activation de PI3K/Akt et STAT5 → expression de Bcl-2, Bcl-xL (protéines anti-apoptotiques)</div><div class="flip-expl">Cette résistance à la mort cellulaire programmée contribue à l'accumulation de cellules leucémiques.</div></div>
+  </div>
+</div>
+
 <!-- SLIDE 19: HÉMOGRAMME LMC -->
-<div class="slide" id="slide-19">
+<div class="slide" id="slide-31">
   <h1 class="slide-title">LMC – L'hémogramme caractéristique</h1>
   <p class="explain">L'hémogramme est l'examen clé qui oriente vers le diagnostic de LMC. Il présente un tableau quasi-pathognomonique associant :</p>
   <div class="content-grid">
@@ -759,8 +1011,29 @@ tr:nth-child(even) td{background:rgba(255,255,255,.03)}
   </div>
 </div>
 
+<div class="slide" id="slide-32">
+  <h2 class="slide-title">🃏 Quiz Flash – Hémogramme de la LMC</h2>
+  <p style="font-size:.85rem;color:#888;margin-bottom:14px">Appuyez sur chaque carte pour révéler la réponse</p>
+  <div class="flip-card" onclick="flipCard(this)">
+    <div class="flip-front"><div class="flip-q-num">Q1</div><div class="flip-q-text">Quelle est la leucocytose typique au diagnostic de la LMC ?</div><div class="flip-hint">👆 Appuyer pour révéler</div></div>
+    <div class="flip-back"><div class="flip-answer">Souvent > 50 G/L, pouvant dépasser 100-200 G/L</div><div class="flip-expl">La leucocytose est le signe cardinal. Elle peut être découverte fortuitement ou révélée par des signes de leucostase si très importante.</div></div>
+  </div>
+  <div class="flip-card" onclick="flipCard(this)">
+    <div class="flip-front"><div class="flip-q-num">Q2</div><div class="flip-q-text">Quel signe de l'hémogramme est quasi-pathognomonique de la LMC ?</div><div class="flip-hint">👆 Appuyer pour révéler</div></div>
+    <div class="flip-back"><div class="flip-answer">Basophilie (augmentation des basophiles > 1 % et souvent > 5 %)</div><div class="flip-expl">La basophilie est retrouvée dans pratiquement toutes les LMC. C'est le premier signe à chercher face à une hyperleucocytose.</div></div>
+  </div>
+  <div class="flip-card" onclick="flipCard(this)">
+    <div class="flip-front"><div class="flip-q-num">Q3</div><div class="flip-q-text">Les plaquettes sont-elles typiquement augmentées, normales ou abaissées dans la LMC ?</div><div class="flip-hint">👆 Appuyer pour révéler</div></div>
+    <div class="flip-back"><div class="flip-answer">Souvent augmentées (thrombocytose modérée) au diagnostic — normales ou élevées, rarement abaissées</div><div class="flip-expl">La thrombocytose est fréquente. Une thrombopénie profonde orienterait plutôt vers une phase avancée ou un diagnostic alternatif.</div></div>
+  </div>
+  <div class="flip-card" onclick="flipCard(this)">
+    <div class="flip-front"><div class="flip-q-num">Q4</div><div class="flip-q-text">Qu'est-ce qu'une myélémie 'avec hiatus de maturation' et dans quelle pathologie l'observe-t-on ?</div><div class="flip-hint">👆 Appuyer pour révéler</div></div>
+    <div class="flip-back"><div class="flip-answer">Hiatus = absence d'un stade de maturation entre les blastes et les cellules matures → signe de leucémie aiguë</div><div class="flip-expl">Dans la LMC, la myélémie est SANS hiatus (tous les stades présents). Un hiatus impose d'éliminer une leucémie aiguë.</div></div>
+  </div>
+</div>
+
 <!-- SLIDE 20: DÉMARCHE DIAGNOSTIQUE LMC -->
-<div class="slide" id="slide-20">
+<div class="slide" id="slide-33">
   <h1 class="slide-title">LMC – Démarche diagnostique</h1>
   <div class="success-box">
     <strong>Examen clé : recherche du transcrit BCR::ABL1 par PCR sur sang</strong>
@@ -796,8 +1069,29 @@ tr:nth-child(even) td{background:rgba(255,255,255,.03)}
   </div>
 </div>
 
+<div class="slide" id="slide-34">
+  <h2 class="slide-title">🃏 Quiz Flash – Démarche diagnostique LMC</h2>
+  <p style="font-size:.85rem;color:#888;margin-bottom:14px">Appuyez sur chaque carte pour révéler la réponse</p>
+  <div class="flip-card" onclick="flipCard(this)">
+    <div class="flip-front"><div class="flip-q-num">Q1</div><div class="flip-q-text">Quel est l'examen clé pour confirmer le diagnostic de LMC ?</div><div class="flip-hint">👆 Appuyer pour révéler</div></div>
+    <div class="flip-back"><div class="flip-answer">PCR BCR::ABL1 quantitative sur sang périphérique</div><div class="flip-expl">La PCR est sensible, spécifique et permet aussi le suivi de la réponse au traitement. Elle remplace le caryotype en pratique courante.</div></div>
+  </div>
+  <div class="flip-card" onclick="flipCard(this)">
+    <div class="flip-front"><div class="flip-q-num">Q2</div><div class="flip-q-text">La biopsie ostéomédullaire est-elle indispensable au diagnostic initial de la LMC ?</div><div class="flip-hint">👆 Appuyer pour révéler</div></div>
+    <div class="flip-back"><div class="flip-answer">Non — la PCR BCR::ABL1 sur sang périphérique est suffisante</div><div class="flip-expl">Le myélogramme peut être réalisé pour évaluer le % de blastes (phase) mais n'est pas indispensable pour initier le traitement.</div></div>
+  </div>
+  <div class="flip-card" onclick="flipCard(this)">
+    <div class="flip-front"><div class="flip-q-num">Q3</div><div class="flip-q-text">Que recherche-t-on au myélogramme dans la LMC ?</div><div class="flip-hint">👆 Appuyer pour révéler</div></div>
+    <div class="flip-back"><div class="flip-answer">Le pourcentage de blastes — pour déterminer la phase (chronique < 10 %, accélérée 10-19 %, blastique ≥ 20 %)</div><div class="flip-expl">La phase est déterminante pour le pronostic et la stratégie thérapeutique (ITK seul vs allogreffe).</div></div>
+  </div>
+  <div class="flip-card" onclick="flipCard(this)">
+    <div class="flip-front"><div class="flip-q-num">Q4</div><div class="flip-q-text">Quel est le rôle du caryotype médullaire dans la LMC ?</div><div class="flip-hint">👆 Appuyer pour révéler</div></div>
+    <div class="flip-back"><div class="flip-answer">Confirmation du chromosome Philadelphie t(9;22) — parfois complété par FISH si caryotype normal mais PCR positive</div><div class="flip-expl">La FISH est plus sensible que le caryotype pour détecter les translocations cryptiques. Mais la PCR suffit en pratique.</div></div>
+  </div>
+</div>
+
 <!-- SLIDE 21: DIAGNOSTIC DIFFÉRENTIEL LMC -->
-<div class="slide" id="slide-21">
+<div class="slide" id="slide-35">
   <h1 class="slide-title">LMC – Diagnostic différentiel</h1>
   <div class="table-wrap">
     <table>
@@ -814,8 +1108,29 @@ tr:nth-child(even) td{background:rgba(255,255,255,.03)}
   </div>
 </div>
 
+<div class="slide" id="slide-36">
+  <h2 class="slide-title">🃏 Quiz Flash – Diagnostic différentiel LMC</h2>
+  <p style="font-size:.85rem;color:#888;margin-bottom:14px">Appuyez sur chaque carte pour révéler la réponse</p>
+  <div class="flip-card" onclick="flipCard(this)">
+    <div class="flip-front"><div class="flip-q-num">Q1</div><div class="flip-q-text">Quelle réaction médullaire peut mimer une LMC sur l'hémogramme ?</div><div class="flip-hint">👆 Appuyer pour révéler</div></div>
+    <div class="flip-back"><div class="flip-answer">Réaction leucémoïde (infection sévère, cancer, corticoïdes) avec hyperleucocytose à prédominance neutrophile</div><div class="flip-expl">Mais la réaction leucémoïde n'a PAS de basophilie ni de myélémie profonde, et la PCR BCR::ABL1 est négative.</div></div>
+  </div>
+  <div class="flip-card" onclick="flipCard(this)">
+    <div class="flip-front"><div class="flip-q-num">Q2</div><div class="flip-q-text">Comment distinguer LMC d'une réaction leucémoïde en urgence ?</div><div class="flip-hint">👆 Appuyer pour révéler</div></div>
+    <div class="flip-back"><div class="flip-answer">PCR BCR::ABL1 — positive dans la LMC (même à faible taux), toujours négative dans les réactions</div><div class="flip-expl">Le score de phosphatases alcalines leucocytaires (PAL) est historiquement utilisé : abaissé dans la LMC, élevé dans les réactions.</div></div>
+  </div>
+  <div class="flip-card" onclick="flipCard(this)">
+    <div class="flip-front"><div class="flip-q-num">Q3</div><div class="flip-q-text">Quelle autre SMP peut donner une hyperleucocytose et nécessite d'être différenciée de la LMC ?</div><div class="flip-hint">👆 Appuyer pour révéler</div></div>
+    <div class="flip-back"><div class="flip-answer">Aucune — l'hyperleucocytose avec myélémie + basophilie est très spécifique de la LMC. Les autres SMP donnent d'autres anomalies.</div><div class="flip-expl">Les autres SMP Ph négatifs peuvent donner une leucocytose modérée mais sans myélémie équilibrée ni basophilie.</div></div>
+  </div>
+  <div class="flip-card" onclick="flipCard(this)">
+    <div class="flip-front"><div class="flip-q-num">Q4</div><div class="flip-q-text">Une mastocytose systémique peut-elle donner une basophilie mimant une LMC ?</div><div class="flip-hint">👆 Appuyer pour révéler</div></div>
+    <div class="flip-back"><div class="flip-answer">Non — la mastocytose donne une augmentation des mastocytes (dans la moelle et les tissus) mais pas de myélémie équilibrée</div><div class="flip-expl">La basophilie de la LMC est une augmentation des basophiles sanguins, distincte de l'augmentation des mastocytes médullaires.</div></div>
+  </div>
+</div>
+
 <!-- SLIDE 22: LES 3 PHASES DE LA LMC -->
-<div class="slide" id="slide-22">
+<div class="slide" id="slide-37">
   <h1 class="slide-title">LMC – Les 3 phases évolutives</h1>
   <div class="img-block">
     <img src="images_myeloproliferatifs/p1_page7.png" class="slide-img" style="max-height:220px" alt="Phases LMC">
@@ -858,8 +1173,29 @@ tr:nth-child(even) td{background:rgba(255,255,255,.03)}
   </div>
 </div>
 
+<div class="slide" id="slide-38">
+  <h2 class="slide-title">🃏 Quiz Flash – Les 3 phases de la LMC</h2>
+  <p style="font-size:.85rem;color:#888;margin-bottom:14px">Appuyez sur chaque carte pour révéler la réponse</p>
+  <div class="flip-card" onclick="flipCard(this)">
+    <div class="flip-front"><div class="flip-q-num">Q1</div><div class="flip-q-text">Citez les 3 phases évolutives de la LMC et leur caractéristique principale.</div><div class="flip-hint">👆 Appuyer pour révéler</div></div>
+    <div class="flip-back"><div class="flip-answer">Chronique (>90 % au Dc, blastes < 10 %) · Accélérée (blastes 10-19 %, signes d'aggravation) · Blastique (blastes ≥ 20 %, = LAM)</div><div class="flip-expl">Sous ITK, la quasi-totalité des patients restent en phase chronique toute leur vie. Les transitions sont maintenant rares.</div></div>
+  </div>
+  <div class="flip-card" onclick="flipCard(this)">
+    <div class="flip-front"><div class="flip-q-num">Q2</div><div class="flip-q-text">Quel pourcentage de blastes médullaires définit la phase accélérée et la phase blastique ?</div><div class="flip-hint">👆 Appuyer pour révéler</div></div>
+    <div class="flip-back"><div class="flip-answer">Accélérée : 10-19 % · Blastique : ≥ 20 %</div><div class="flip-expl">Ces seuils OMS sont à connaître. La phase blastique équivaut à une LAM de novo sur LMC — pronostic très sombre.</div></div>
+  </div>
+  <div class="flip-card" onclick="flipCard(this)">
+    <div class="flip-front"><div class="flip-q-num">Q3</div><div class="flip-q-text">Quelle était la durée moyenne de la phase chronique sans traitement efficace (avant les ITK) ?</div><div class="flip-hint">👆 Appuyer pour révéler</div></div>
+    <div class="flip-back"><div class="flip-answer">3 à 5 ans</div><div class="flip-expl">Avant l'imatinib, l'évolution vers la phase blastique était inéluctable. Les ITK ont radicalement changé cette évolution.</div></div>
+  </div>
+  <div class="flip-card" onclick="flipCard(this)">
+    <div class="flip-front"><div class="flip-q-num">Q4</div><div class="flip-q-text">Qu'est-ce qu'une 'crise blastique lymphoïde' dans la LMC ?</div><div class="flip-hint">👆 Appuyer pour révéler</div></div>
+    <div class="flip-back"><div class="flip-answer">Transformation en LAL (lymphoblastes) plutôt qu'en LAM (myéloblastes) dans ~30 % des crises blastiques</div><div class="flip-expl">La crise blastique peut être myéloïde (70 %) ou lymphoïde (30 %). Dans ce cas, on ajoute une chimiothérapie anti-LAL à l'ITK.</div></div>
+  </div>
+</div>
+
 <!-- SLIDE 23: LMC – ITK MÉCANISME ET GÉNÉRATIONS -->
-<div class="slide" id="slide-23">
+<div class="slide" id="slide-39">
   <h1 class="slide-title">LMC – Inhibiteurs de tyrosine kinase (ITK)</h1>
   <div class="def-box">
     <strong>Mécanisme d'action</strong>
@@ -901,8 +1237,29 @@ tr:nth-child(even) td{background:rgba(255,255,255,.03)}
   </div>
 </div>
 
+<div class="slide" id="slide-40">
+  <h2 class="slide-title">🃏 Quiz Flash – ITK — Mécanisme et générations</h2>
+  <p style="font-size:.85rem;color:#888;margin-bottom:14px">Appuyez sur chaque carte pour révéler la réponse</p>
+  <div class="flip-card" onclick="flipCard(this)">
+    <div class="flip-front"><div class="flip-q-num">Q1</div><div class="flip-q-text">Quel est le mécanisme d'action des ITK dans la LMC ?</div><div class="flip-hint">👆 Appuyer pour révéler</div></div>
+    <div class="flip-back"><div class="flip-answer">Inhibition compétitive de BCR::ABL1 au niveau du site de liaison à l'ATP → blocage de la phosphorylation → arrêt de la prolifération</div><div class="flip-expl">Les ITK se fixent sur le domaine kinase de BCR::ABL1 et empêchent l'ATP de s'y lier. Sans ATP, la TK ne peut phosphoryler ses substrats.</div></div>
+  </div>
+  <div class="flip-card" onclick="flipCard(this)">
+    <div class="flip-front"><div class="flip-q-num">Q2</div><div class="flip-q-text">Quel est le premier ITK approuvé pour la LMC, en quelle année ?</div><div class="flip-hint">👆 Appuyer pour révéler</div></div>
+    <div class="flip-back"><div class="flip-answer">Imatinib (Glivec®) — approuvé en 2001</div><div class="flip-expl">L'imatinib a révolutionné la prise en charge. Il a fait passer la survie à 5 ans de ~50 % à >90 %.</div></div>
+  </div>
+  <div class="flip-card" onclick="flipCard(this)">
+    <div class="flip-front"><div class="flip-q-num">Q3</div><div class="flip-q-text">Pourquoi a-t-on développé des ITK de 2ème génération ?</div><div class="flip-hint">👆 Appuyer pour révéler</div></div>
+    <div class="flip-back"><div class="flip-answer">Résistance à l'imatinib (mutations de BCR::ABL1, dont T315I) et meilleure tolérance</div><div class="flip-expl">Dasatinib, nilotinib, bosutinib (2G) ; ponatinib (3G, seul actif sur T315I). La 3G est utilisée en résistance multi-ITK.</div></div>
+  </div>
+  <div class="flip-card" onclick="flipCard(this)">
+    <div class="flip-front"><div class="flip-q-num">Q4</div><div class="flip-q-text">Que signifie une réponse moléculaire majeure (RMM) dans la surveillance de la LMC ?</div><div class="flip-hint">👆 Appuyer pour révéler</div></div>
+    <div class="flip-back"><div class="flip-answer">BCR::ABL1 < 0,1 % sur l'échelle internationale (IS) — réduction ≥ 3 log par rapport au standard</div><div class="flip-expl">La RMM à 12 mois est l'objectif thérapeutique de 1ère ligne. Son absence impose un changement d'ITK.</div></div>
+  </div>
+</div>
+
 <!-- SLIDE 24: LMC – SURVEILLANCE ET SUIVI -->
-<div class="slide" id="slide-24">
+<div class="slide" id="slide-41">
   <h1 class="slide-title">LMC – Surveillance et suivi sous traitement</h1>
   <p class="explain">La LMC est un <strong>modèle de suivi hématologique</strong>. La surveillance est triple : efficacité du traitement + tolérance + observance (indispensable pour maintenir la réponse).</p>
   <div class="content-grid">
@@ -938,8 +1295,29 @@ tr:nth-child(even) td{background:rgba(255,255,255,.03)}
   </div>
 </div>
 
+<div class="slide" id="slide-42">
+  <h2 class="slide-title">🃏 Quiz Flash – Surveillance de la LMC sous ITK</h2>
+  <p style="font-size:.85rem;color:#888;margin-bottom:14px">Appuyez sur chaque carte pour révéler la réponse</p>
+  <div class="flip-card" onclick="flipCard(this)">
+    <div class="flip-front"><div class="flip-q-num">Q1</div><div class="flip-q-text">Par quel examen surveille-t-on la réponse au traitement dans la LMC ?</div><div class="flip-hint">👆 Appuyer pour révéler</div></div>
+    <div class="flip-back"><div class="flip-answer">PCR BCR::ABL1 quantitative sur sang périphérique — toutes les 3 mois puis tous les 6 mois si réponse optimale</div><div class="flip-expl">La PCR est l'outil de surveillance principal. Elle mesure la charge moléculaire résiduelle et détecte précocement les rechutes.</div></div>
+  </div>
+  <div class="flip-card" onclick="flipCard(this)">
+    <div class="flip-front"><div class="flip-q-num">Q2</div><div class="flip-q-text">Qu'est-ce qu'une réponse moléculaire profonde (RM4.5) ?</div><div class="flip-hint">👆 Appuyer pour révéler</div></div>
+    <div class="flip-back"><div class="flip-answer">BCR::ABL1 < 0,0032 % (IS) — pratiquement indétectable par les méthodes sensibles standard</div><div class="flip-expl">La RM4.5 est l'objectif pour envisager l'arrêt d'ITK (rémission sans traitement = TFR). Requiert 2 ans de RM4.5 stable minimum.</div></div>
+  </div>
+  <div class="flip-card" onclick="flipCard(this)">
+    <div class="flip-front"><div class="flip-q-num">Q3</div><div class="flip-q-text">Quand peut-on envisager l'arrêt du traitement ITK dans la LMC ?</div><div class="flip-hint">👆 Appuyer pour révéler</div></div>
+    <div class="flip-back"><div class="flip-answer">Après ≥ 3-5 ans d'ITK + RM4.5 stable ≥ 2 ans, sous surveillance moléculaire rapprochée</div><div class="flip-expl">Environ 50 % des patients en RM4.5 maintiennent la rémission sans traitement. La rechute (si elle survient) est rapidement contrôlée.</div></div>
+  </div>
+  <div class="flip-card" onclick="flipCard(this)">
+    <div class="flip-front"><div class="flip-q-num">Q4</div><div class="flip-q-text">Quelle est la principale cause de résistance à l'imatinib en dehors des mutations de BCR::ABL1 ?</div><div class="flip-hint">👆 Appuyer pour révéler</div></div>
+    <div class="flip-back"><div class="flip-answer">Non-observance du traitement (prise irrégulière) — première cause à investiguer</div><div class="flip-expl">Avant d'envisager un changement d'ITK pour résistance, il faut s'assurer de l'observance et mesurer la pharmacocinétique.</div></div>
+  </div>
+</div>
+
 <!-- SLIDE 25: LMC – ALLOGREFFE ET CAS PARTICULIERS -->
-<div class="slide" id="slide-25">
+<div class="slide" id="slide-43">
   <h1 class="slide-title">LMC – Allogreffe et situations particulières</h1>
   <div class="card" style="margin-bottom:14px">
     <h4>🏥 Allogreffe de cellules souches hématopoïétiques (CSH)</h4>
@@ -966,8 +1344,29 @@ tr:nth-child(even) td{background:rgba(255,255,255,.03)}
   </div>
 </div>
 
+<div class="slide" id="slide-44">
+  <h2 class="slide-title">🃏 Quiz Flash – Allogreffe et cas particuliers LMC</h2>
+  <p style="font-size:.85rem;color:#888;margin-bottom:14px">Appuyez sur chaque carte pour révéler la réponse</p>
+  <div class="flip-card" onclick="flipCard(this)">
+    <div class="flip-front"><div class="flip-q-num">Q1</div><div class="flip-q-text">Quelle était la place de l'allogreffe dans la LMC avant les ITK ?</div><div class="flip-hint">👆 Appuyer pour révéler</div></div>
+    <div class="flip-back"><div class="flip-answer">Seul traitement potentiellement curatif — utilisé en 1ère ligne chez les patients jeunes avec donneur compatible</div><div class="flip-expl">Avant 2001, l'allogreffe était le traitement de référence pour les patients < 50 ans. Les ITK l'ont rendue exceptionnelle.</div></div>
+  </div>
+  <div class="flip-card" onclick="flipCard(this)">
+    <div class="flip-front"><div class="flip-q-num">Q2</div><div class="flip-q-text">Dans quelles situations l'allogreffe reste-t-elle indiquée dans la LMC ?</div><div class="flip-hint">👆 Appuyer pour révéler</div></div>
+    <div class="flip-back"><div class="flip-answer">Phase blastique ou accélérée réfractaire, résistance à plusieurs ITK, mutations T315I sans réponse au ponatinib</div><div class="flip-expl">L'allogreffe reste le seul traitement curatif disponible en cas d'échec des ITK. Ses indications sont devenues très restreintes.</div></div>
+  </div>
+  <div class="flip-card" onclick="flipCard(this)">
+    <div class="flip-front"><div class="flip-q-num">Q3</div><div class="flip-q-text">Quelle mutation rend la LMC résistante à tous les ITK sauf le ponatinib ?</div><div class="flip-hint">👆 Appuyer pour révéler</div></div>
+    <div class="flip-back"><div class="flip-answer">Mutation T315I (dite 'gatekeeper') dans le domaine kinase de BCR::ABL1</div><div class="flip-expl">T315I bloque la liaison de tous les ITK de 1ère et 2ème génération. Le ponatinib (3ème génération) et l'asciminib (STAMP) restent actifs.</div></div>
+  </div>
+  <div class="flip-card" onclick="flipCard(this)">
+    <div class="flip-front"><div class="flip-q-num">Q4</div><div class="flip-q-text">Un patient avec LMC sous imatinib présente une perte de RMM. Quelle est la première étape de la prise en charge ?</div><div class="flip-hint">👆 Appuyer pour révéler</div></div>
+    <div class="flip-back"><div class="flip-answer">Vérifier l'observance + contrôler la PCR → si confirmée : rechercher une mutation de BCR::ABL1 → changer d'ITK selon le profil</div><div class="flip-expl">La non-observance est la première cause d'échec thérapeutique. La recherche de mutation guide le choix du 2ème ITK.</div></div>
+  </div>
+</div>
+
 <!-- SLIDE 26: FLIP QUIZ LMC -->
-<div class="slide" id="slide-26">
+<div class="slide" id="slide-45">
   <h2 class="slide-title">🃏 Quiz Flash – Section II : LMC</h2>
   <p style="font-size:.85rem;color:#888;margin-bottom:14px">Appuyez sur chaque carte pour révéler la réponse</p>
 
@@ -1021,7 +1420,7 @@ tr:nth-child(even) td{background:rgba(255,255,255,.03)}
 </div>
 
 <!-- SLIDE 27: QCM LMC -->
-<div class="slide" id="slide-27">
+<div class="slide" id="slide-46">
   <h2 class="slide-title">📝 QCM – Section II : LMC</h2>
 
   <div class="qcm-block">
@@ -1129,7 +1528,7 @@ tr:nth-child(even) td{background:rgba(255,255,255,.03)}
 </div>
 
 <!-- SLIDE 28: DOSSIER PROGRESSIF LMC -->
-<div class="slide" id="slide-28">
+<div class="slide" id="slide-47">
   <h2 class="slide-title">🏥 Dossier Progressif – LMC</h2>
   <div class="dp-case">
     <strong>📋 Cas clinique – reprise de la vignette</strong>
@@ -1191,7 +1590,7 @@ tr:nth-child(even) td{background:rgba(255,255,255,.03)}
 </div>
 
 <!-- SLIDE 29: RÉSUMÉ LMC -->
-<div class="slide" id="slide-29">
+<div class="slide" id="slide-48">
   <h1 class="slide-title">Résumé – LMC : points essentiels à retenir</h1>
   <div class="resume-block">
     <h4>✅ LMC – Ce qu'il faut savoir pour l'ECN</h4>
@@ -1210,7 +1609,7 @@ tr:nth-child(even) td{background:rgba(255,255,255,.03)}
 </div>
 
 <!-- SLIDE 30: SECTION III HEADER -->
-<div class="slide" id="slide-30">
+<div class="slide" id="slide-49">
   <div class="slide-section-header">
     <div class="section-badge" style="background:rgba(243,156,18,.15);border-color:rgba(243,156,18,.3);color:#f39c12">Section III</div>
     <div class="section-title">Maladie de Vaquez</div>
@@ -1219,7 +1618,7 @@ tr:nth-child(even) td{background:rgba(255,255,255,.03)}
 </div>
 
 <!-- SLIDE 31: VAQUEZ VIGNETTE + DÉFINITION -->
-<div class="slide" id="slide-31">
+<div class="slide" id="slide-50">
   <h1 class="slide-title">Maladie de Vaquez – Présentation et définition</h1>
   <div class="vignette">
     <strong>📋 Vignette clinique (ECN type)</strong>
@@ -1249,8 +1648,29 @@ tr:nth-child(even) td{background:rgba(255,255,255,.03)}
   </div>
 </div>
 
+<div class="slide" id="slide-51">
+  <h2 class="slide-title">🃏 Quiz Flash – Maladie de Vaquez — Définition</h2>
+  <p style="font-size:.85rem;color:#888;margin-bottom:14px">Appuyez sur chaque carte pour révéler la réponse</p>
+  <div class="flip-card" onclick="flipCard(this)">
+    <div class="flip-front"><div class="flip-q-num">Q1</div><div class="flip-q-text">Comment définit-on la maladie de Vaquez (polyglobulie vraie) ?</div><div class="flip-hint">👆 Appuyer pour révéler</div></div>
+    <div class="flip-back"><div class="flip-answer">Néoplasie myéloproliférative clonale Ph− touchant la lignée érythroblastique → polyglobulie primitive avec Hb et/ou Ht élevés</div><div class="flip-expl">La polyglobulie est dite 'primitive' car clonale, indépendante de l'EPO. À distinguer des polyglobulies secondaires réactionnelles.</div></div>
+  </div>
+  <div class="flip-card" onclick="flipCard(this)">
+    <div class="flip-front"><div class="flip-q-num">Q2</div><div class="flip-q-text">Quelle est la valeur seuil d'Hb définissant la polyglobulie selon l'OMS chez l'homme et la femme ?</div><div class="flip-hint">👆 Appuyer pour révéler</div></div>
+    <div class="flip-back"><div class="flip-answer">Homme : Hb > 16,5 g/dL ou Ht > 49 % · Femme : Hb > 16 g/dL ou Ht > 48 %</div><div class="flip-expl">Ces seuils OMS 2022 sont à connaître. La masse érythrocytaire isotopique (> 125 % théorique) reste le gold standard mais est peu accessible.</div></div>
+  </div>
+  <div class="flip-card" onclick="flipCard(this)">
+    <div class="flip-front"><div class="flip-q-num">Q3</div><div class="flip-q-text">Dans quel pourcentage de cas de Vaquez la mutation JAK2 V617F est-elle retrouvée ?</div><div class="flip-hint">👆 Appuyer pour révéler</div></div>
+    <div class="flip-back"><div class="flip-answer">Plus de 95 % des cas</div><div class="flip-expl">Les ~5 % restants ont une mutation JAK2 sur l'exon 12. La mutation JAK2 est quasi-constante dans la maladie de Vaquez.</div></div>
+  </div>
+  <div class="flip-card" onclick="flipCard(this)">
+    <div class="flip-front"><div class="flip-q-num">Q4</div><div class="flip-q-text">Quel signe clinique est quasi-pathognomonique de la maladie de Vaquez ?</div><div class="flip-hint">👆 Appuyer pour révéler</div></div>
+    <div class="flip-back"><div class="flip-answer">Prurit aquagénique (déclenchement au contact de l'eau chaude, type douche ou bain)</div><div class="flip-expl">Ce prurit résulte de la libération de médiateurs par les mastocytes activés par JAK2 muté. Il peut précéder le diagnostic de plusieurs années.</div></div>
+  </div>
+</div>
+
 <!-- SLIDE 32: VAQUEZ PHYSIOPATHOLOGIE JAK2 -->
-<div class="slide" id="slide-32">
+<div class="slide" id="slide-52">
   <h1 class="slide-title">Maladie de Vaquez – Physiopathologie : mutation JAK2 V617F</h1>
   <div class="img-block">
     <img src="images_myeloproliferatifs/p2_page1.png" class="slide-img" style="max-height:250px" alt="JAK2 V617F">
@@ -1278,8 +1698,29 @@ tr:nth-child(even) td{background:rgba(255,255,255,.03)}
   </div>
 </div>
 
+<div class="slide" id="slide-53">
+  <h2 class="slide-title">🃏 Quiz Flash – Physiopathologie JAK2 dans le Vaquez</h2>
+  <p style="font-size:.85rem;color:#888;margin-bottom:14px">Appuyez sur chaque carte pour révéler la réponse</p>
+  <div class="flip-card" onclick="flipCard(this)">
+    <div class="flip-front"><div class="flip-q-num">Q1</div><div class="flip-q-text">Comment la mutation JAK2 V617F entraîne-t-elle une polyglobulie ?</div><div class="flip-hint">👆 Appuyer pour révéler</div></div>
+    <div class="flip-back"><div class="flip-answer">JAK2 muté active la voie STAT5 en permanence → prolifération érythroïde indépendante de l'EPO → ↑ production de GR</div><div class="flip-expl">Normalement, l'EPO lie son récepteur qui active JAK2. Dans le Vaquez, JAK2 V617F contourne ce besoin → prolifération autonome.</div></div>
+  </div>
+  <div class="flip-card" onclick="flipCard(this)">
+    <div class="flip-front"><div class="flip-q-num">Q2</div><div class="flip-q-text">Pourquoi l'EPO sérique est-elle basse dans la maladie de Vaquez ?</div><div class="flip-hint">👆 Appuyer pour révéler</div></div>
+    <div class="flip-back"><div class="flip-answer">Les GR prolifèrent sans besoin d'EPO → rétrocontrôle négatif → production d'EPO freinée par le taux normal/élevé d'Hb</div><div class="flip-expl">EPO basse = argument fort pour une polyglobulie primitive. EPO élevée = polyglobulie secondaire (hypoxémie, EPO ectopique).</div></div>
+  </div>
+  <div class="flip-card" onclick="flipCard(this)">
+    <div class="flip-front"><div class="flip-q-num">Q3</div><div class="flip-q-text">La mutation JAK2 V617F est-elle spécifique de la maladie de Vaquez ?</div><div class="flip-hint">👆 Appuyer pour révéler</div></div>
+    <div class="flip-back"><div class="flip-answer">Non — elle est retrouvée aussi dans la TE (~50 %) et la MFP (~50 %), mais quasi-constante dans la Vaquez (> 95 %)</div><div class="flip-expl">JAK2 V617F est un marqueur de clonalité mais pas de diagnostic. C'est le contexte clinique qui distingue Vaquez, TE et MFP.</div></div>
+  </div>
+  <div class="flip-card" onclick="flipCard(this)">
+    <div class="flip-front"><div class="flip-q-num">Q4</div><div class="flip-q-text">Quels facteurs déclenchants peuvent précipiter une thrombose dans la maladie de Vaquez ?</div><div class="flip-hint">👆 Appuyer pour révéler</div></div>
+    <div class="flip-back"><div class="flip-answer">Polyglobulie (hyperviscosité) + thrombocytose + activation plaquettaire + stase vasculaire</div><div class="flip-expl">La déplétion régulière par saignées (maintien Ht < 45 %) réduit la viscosité et le risque thrombotique.</div></div>
+  </div>
+</div>
+
 <!-- SLIDE 33: VAQUEZ CIRCONSTANCES ET TABLEAU CLINIQUE -->
-<div class="slide" id="slide-33">
+<div class="slide" id="slide-54">
   <h1 class="slide-title">Maladie de Vaquez – Circonstances et tableau clinique</h1>
   <p class="explain">Survenant généralement après 50 ans, légèrement plus fréquente chez l'homme. Les circonstances de découverte sont variées :</p>
   <div class="content-grid-2">
@@ -1310,8 +1751,29 @@ tr:nth-child(even) td{background:rgba(255,255,255,.03)}
   </div>
 </div>
 
+<div class="slide" id="slide-55">
+  <h2 class="slide-title">🃏 Quiz Flash – Tableau clinique du Vaquez</h2>
+  <p style="font-size:.85rem;color:#888;margin-bottom:14px">Appuyez sur chaque carte pour révéler la réponse</p>
+  <div class="flip-card" onclick="flipCard(this)">
+    <div class="flip-front"><div class="flip-q-num">Q1</div><div class="flip-q-text">Citez 4 signes cliniques caractéristiques de la maladie de Vaquez.</div><div class="flip-hint">👆 Appuyer pour révéler</div></div>
+    <div class="flip-back"><div class="flip-answer">Érythrose (visage/extrémités) · Prurit aquagénique · Splénomégalie · Céphalées/vertiges (hyperviscosité)</div><div class="flip-expl">L'érythrose faciale est le signe 'facies' classique. La splénomégalie est présente dans ~70 % des cas au diagnostic.</div></div>
+  </div>
+  <div class="flip-card" onclick="flipCard(this)">
+    <div class="flip-front"><div class="flip-q-num">Q2</div><div class="flip-q-text">Quelle complication neurologique peut survenir en urgence dans la maladie de Vaquez ?</div><div class="flip-hint">👆 Appuyer pour révéler</div></div>
+    <div class="flip-back"><div class="flip-answer">AVC (ischémique) par hyperviscosité et/ou thrombose artérielle cérébrale</div><div class="flip-expl">Toute polynévrite ou symptôme neurologique doit faire suspecter une polyglobulie non diagnostiquée. L'AVC peut être inaugural.</div></div>
+  </div>
+  <div class="flip-card" onclick="flipCard(this)">
+    <div class="flip-front"><div class="flip-q-num">Q3</div><div class="flip-q-text">Qu'est-ce que l'érythromélalgie et dans quels SMP la retrouve-t-on ?</div><div class="flip-hint">👆 Appuyer pour révéler</div></div>
+    <div class="flip-back"><div class="flip-answer">Douleurs brûlantes des extrémités avec rougeur, aggravées par la chaleur — due à des microthomboses plaquettaires</div><div class="flip-expl">L'érythromélalgie est surtout caractéristique de la TE mais s'observe aussi dans la maladie de Vaquez. Elle répond à l'aspirine.</div></div>
+  </div>
+  <div class="flip-card" onclick="flipCard(this)">
+    <div class="flip-front"><div class="flip-q-num">Q4</div><div class="flip-q-text">Pourquoi une hypertension artérielle est-elle fréquente dans la maladie de Vaquez ?</div><div class="flip-hint">👆 Appuyer pour révéler</div></div>
+    <div class="flip-back"><div class="flip-answer">Augmentation de la viscosité sanguine → résistances vasculaires périphériques augmentées → HTA</div><div class="flip-expl">L'HTA dans le Vaquez est réversible si la polyglobulie est corrigée par les saignées. Elle contribue au risque cardiovasculaire.</div></div>
+  </div>
+</div>
+
 <!-- SLIDE 34: VAQUEZ HÉMOGRAMME ET CRITÈRES DIAGNOSTIQUES -->
-<div class="slide" id="slide-34">
+<div class="slide" id="slide-56">
   <h1 class="slide-title">Maladie de Vaquez – Hémogramme et critères diagnostiques OMS 2016</h1>
   <div class="content-grid-2">
     <div>
@@ -1350,8 +1812,29 @@ tr:nth-child(even) td{background:rgba(255,255,255,.03)}
   </div>
 </div>
 
+<div class="slide" id="slide-57">
+  <h2 class="slide-title">🃏 Quiz Flash – Hémogramme et critères diagnostiques du Vaquez</h2>
+  <p style="font-size:.85rem;color:#888;margin-bottom:14px">Appuyez sur chaque carte pour révéler la réponse</p>
+  <div class="flip-card" onclick="flipCard(this)">
+    <div class="flip-front"><div class="flip-q-num">Q1</div><div class="flip-q-text">Citez les 2 critères MAJEURS OMS de la maladie de Vaquez.</div><div class="flip-hint">👆 Appuyer pour révéler</div></div>
+    <div class="flip-back"><div class="flip-answer">1) Hb > 16,5 H / 16 F ou masse érythrocytaire > 125 % · 2) Mutation JAK2 (V617F ou exon 12)</div><div class="flip-expl">Ces 2 critères majeurs suffisent au diagnostic (si on y ajoute le mineur : BOM + EPO basse). La biopsie n'est pas indispensable.</div></div>
+  </div>
+  <div class="flip-card" onclick="flipCard(this)">
+    <div class="flip-front"><div class="flip-q-num">Q2</div><div class="flip-q-text">Quel est le critère MINEUR OMS de la maladie de Vaquez ?</div><div class="flip-hint">👆 Appuyer pour révéler</div></div>
+    <div class="flip-back"><div class="flip-answer">Biopsie ostéomédullaire (BOM) montrant une prolifération panmyéloïde avec mégacaryocytes matures ET EPO sérique subnormale/basse</div><div class="flip-expl">Le critère mineur renforce le diagnostic mais n'est pas obligatoire si les 2 critères majeurs sont présents.</div></div>
+  </div>
+  <div class="flip-card" onclick="flipCard(this)">
+    <div class="flip-front"><div class="flip-q-num">Q3</div><div class="flip-q-text">Quelle règle OMS doit être respectée pour affirmer le diagnostic de Vaquez ?</div><div class="flip-hint">👆 Appuyer pour révéler</div></div>
+    <div class="flip-back"><div class="flip-answer">3 critères majeurs OU 2 critères majeurs + 1 critère mineur</div><div class="flip-expl">En pratique : Hb élevée + JAK2 muté = Vaquez. La BOM et l'EPO sont utiles en cas de doute (JAK2 exon 12, polyglobulie limite).</div></div>
+  </div>
+  <div class="flip-card" onclick="flipCard(this)">
+    <div class="flip-front"><div class="flip-q-num">Q4</div><div class="flip-q-text">Peut-on avoir une maladie de Vaquez avec un hémogramme peu modifié ? Pourquoi ?</div><div class="flip-hint">👆 Appuyer pour révéler</div></div>
+    <div class="flip-back"><div class="flip-answer">Oui — une carence martiale associée peut masquer la polyglobulie en abaissant l'Hb dans les limites normales</div><div class="flip-expl">La ferritine basse dans un contexte de Vaquez doit alerter : c'est un piège fréquent. L'Ht peut rester normal malgré une polyglobulie vraie.</div></div>
+  </div>
+</div>
+
 <!-- SLIDE 35: VAQUEZ DÉMARCHE DIAGNOSTIQUE -->
-<div class="slide" id="slide-35">
+<div class="slide" id="slide-58">
   <h1 class="slide-title">Maladie de Vaquez – Démarche diagnostique</h1>
   <p class="explain">Devant une polyglobulie à l'hémogramme, la démarche doit être progressive, du moins invasif au plus invasif :</p>
   <div class="content-grid">
@@ -1383,8 +1866,29 @@ tr:nth-child(even) td{background:rgba(255,255,255,.03)}
   </div>
 </div>
 
+<div class="slide" id="slide-59">
+  <h2 class="slide-title">🃏 Quiz Flash – Démarche diagnostique du Vaquez</h2>
+  <p style="font-size:.85rem;color:#888;margin-bottom:14px">Appuyez sur chaque carte pour révéler la réponse</p>
+  <div class="flip-card" onclick="flipCard(this)">
+    <div class="flip-front"><div class="flip-q-num">Q1</div><div class="flip-q-text">Quel est le premier examen à réaliser devant une suspicion de maladie de Vaquez ?</div><div class="flip-hint">👆 Appuyer pour révéler</div></div>
+    <div class="flip-back"><div class="flip-answer">Recherche de mutation JAK2 V617F sur sang périphérique</div><div class="flip-expl">La PCR JAK2 est simple, rapide, réalisable en ambulatoire. Positive dans > 95 % des Vaquez.</div></div>
+  </div>
+  <div class="flip-card" onclick="flipCard(this)">
+    <div class="flip-front"><div class="flip-q-num">Q2</div><div class="flip-q-text">Pourquoi doit-on doser l'EPO sérique dans le bilan d'une polyglobulie ?</div><div class="flip-hint">👆 Appuyer pour révéler</div></div>
+    <div class="flip-back"><div class="flip-answer">Pour distinguer polyglobulie primitive (EPO basse — rétrocontrôle) de secondaire (EPO élevée — réaction à l'hypoxémie ou sécrétion ectopique)</div><div class="flip-expl">EPO basse → primaire (JAK2 à rechercher). EPO élevée → secondaire (bilan respiratoire, recherche de tumeur sécrétante).</div></div>
+  </div>
+  <div class="flip-card" onclick="flipCard(this)">
+    <div class="flip-front"><div class="flip-q-num">Q3</div><div class="flip-q-text">Quand réalise-t-on une BOM dans la maladie de Vaquez ?</div><div class="flip-hint">👆 Appuyer pour révéler</div></div>
+    <div class="flip-back"><div class="flip-answer">En cas de JAK2 négatif ou de doute diagnostique (polyglobulie limite), et pour évaluation pronostique initiale</div><div class="flip-expl">La BOM peut révéler une fibrose débutante, un facteur de mauvais pronostic. Elle n'est pas indispensable si JAK2+ et Hb élevée.</div></div>
+  </div>
+  <div class="flip-card" onclick="flipCard(this)">
+    <div class="flip-front"><div class="flip-q-num">Q4</div><div class="flip-q-text">Quel examen permet d'éliminer une polyglobulie secondaire d'origine respiratoire ?</div><div class="flip-hint">👆 Appuyer pour révéler</div></div>
+    <div class="flip-back"><div class="flip-answer">Gazométrie artérielle + exploration fonctionnelle respiratoire (EFR) + polygraphie/polysomnographie si SAS suspecté</div><div class="flip-expl">Polyglobulie secondaire : PaO₂ basse → EPO élevée → polyglobulie compensatrice. BPCO, SAS et syndrome d'Eisenmenger sont les causes fréquentes.</div></div>
+  </div>
+</div>
+
 <!-- SLIDE 36: VAQUEZ DIAGNOSTIC DIFFÉRENTIEL -->
-<div class="slide" id="slide-36">
+<div class="slide" id="slide-60">
   <h1 class="slide-title">Maladie de Vaquez – Diagnostic différentiel</h1>
   <div class="img-block">
     <img src="images_myeloproliferatifs/p2_page4.png" class="slide-img" style="max-height:220px" alt="Orientation polyglobulie">
@@ -1418,8 +1922,29 @@ tr:nth-child(even) td{background:rgba(255,255,255,.03)}
   </div>
 </div>
 
+<div class="slide" id="slide-61">
+  <h2 class="slide-title">🃏 Quiz Flash – Diagnostic différentiel du Vaquez</h2>
+  <p style="font-size:.85rem;color:#888;margin-bottom:14px">Appuyez sur chaque carte pour révéler la réponse</p>
+  <div class="flip-card" onclick="flipCard(this)">
+    <div class="flip-front"><div class="flip-q-num">Q1</div><div class="flip-q-text">Quelle est la principale cause de polyglobulie secondaire ?</div><div class="flip-hint">👆 Appuyer pour révéler</div></div>
+    <div class="flip-back"><div class="flip-answer">Hypoxémie chronique : BPCO, insuffisance respiratoire — EPO élevée en réponse à l'hypoxie</div><div class="flip-expl">C'est la cause la plus fréquente de polyglobulie secondaire. L'EPO élevée et l'absence de mutation JAK2 orientent.</div></div>
+  </div>
+  <div class="flip-card" onclick="flipCard(this)">
+    <div class="flip-front"><div class="flip-q-num">Q2</div><div class="flip-q-text">Comment distinguer polyglobulie vraie et pseudo-polyglobulie (hémoconcentration) ?</div><div class="flip-hint">👆 Appuyer pour révéler</div></div>
+    <div class="flip-back"><div class="flip-answer">Mesure de la masse érythrocytaire isotopique au Cr51 — augmentée dans la vraie polyglobulie, normale dans la pseudo</div><div class="flip-expl">La pseudo-polyglobulie (hémoconcentration) peut survenir en cas de déshydratation sévère. L'Hb est élevée mais la masse érythrocytaire est normale.</div></div>
+  </div>
+  <div class="flip-card" onclick="flipCard(this)">
+    <div class="flip-front"><div class="flip-q-num">Q3</div><div class="flip-q-text">Quelle tumeur peut sécréter de l'EPO de façon ectopique ?</div><div class="flip-hint">👆 Appuyer pour révéler</div></div>
+    <div class="flip-back"><div class="flip-answer">Cancer du rein (carcinome à cellules claires) · Hépatocarcinome · Hémangioblastome cérébelleux</div><div class="flip-expl">Ces tumeurs sécrètent de l'EPO indépendamment de l'oxygène. Bilan: échographie abdominale + scanner cérébral si suspicion.</div></div>
+  </div>
+  <div class="flip-card" onclick="flipCard(this)">
+    <div class="flip-front"><div class="flip-q-num">Q4</div><div class="flip-q-text">Quel médicament peut provoquer une polyglobulie secondaire ?</div><div class="flip-hint">👆 Appuyer pour révéler</div></div>
+    <div class="flip-back"><div class="flip-answer">Érythropoïétine (EPO) thérapeutique · Androgènes · Testostérone (dopage ou TRT)</div><div class="flip-expl">L'EPO et les androgènes stimulent directement l'érythropoïèse. L'interrogatoire sur les médicaments et le sport est indispensable.</div></div>
+  </div>
+</div>
+
 <!-- SLIDE 37: VAQUEZ COMPLICATIONS -->
-<div class="slide" id="slide-37">
+<div class="slide" id="slide-62">
   <h1 class="slide-title">Maladie de Vaquez – Complications et pronostic</h1>
   <div class="content-grid">
     <div class="urgence-box">
@@ -1455,8 +1980,29 @@ tr:nth-child(even) td{background:rgba(255,255,255,.03)}
   </div>
 </div>
 
+<div class="slide" id="slide-63">
+  <h2 class="slide-title">🃏 Quiz Flash – Complications du Vaquez</h2>
+  <p style="font-size:.85rem;color:#888;margin-bottom:14px">Appuyez sur chaque carte pour révéler la réponse</p>
+  <div class="flip-card" onclick="flipCard(this)">
+    <div class="flip-front"><div class="flip-q-num">Q1</div><div class="flip-q-text">Quelle est la complication la plus fréquente et la plus grave à court terme dans le Vaquez ?</div><div class="flip-hint">👆 Appuyer pour révéler</div></div>
+    <div class="flip-back"><div class="flip-answer">Thrombose — veineuse (TVP, EP, Budd-Chiari) ou artérielle (AVC, IDM, AOMI)</div><div class="flip-expl">Le risque thrombotique est multiplié par 4-5 vs population générale. Il est l'argument principal pour traiter tous les patients.</div></div>
+  </div>
+  <div class="flip-card" onclick="flipCard(this)">
+    <div class="flip-front"><div class="flip-q-num">Q2</div><div class="flip-q-text">Quel mécanisme physiopathologique est la principale cause de thrombose dans le Vaquez ?</div><div class="flip-hint">👆 Appuyer pour révéler</div></div>
+    <div class="flip-back"><div class="flip-answer">Hyperviscosité sanguine (↑GR) + activation plaquettaire + stase vasculaire + activation de l'endothélium</div><div class="flip-expl">Tous ces mécanismes s'additionnent. La réduction de l'hématocrite < 45 % par saignées est la mesure la plus efficace.</div></div>
+  </div>
+  <div class="flip-card" onclick="flipCard(this)">
+    <div class="flip-front"><div class="flip-q-num">Q3</div><div class="flip-q-text">Paradoxalement, une thrombocytose très élevée (> 1000-1500 G/L) peut entraîner quel risque hémorragique ?</div><div class="flip-hint">👆 Appuyer pour révéler</div></div>
+    <div class="flip-back"><div class="flip-answer">Maladie de Willebrand acquise — les plaquettes en excès adsorbent les multimères de haut poids moléculaire du facteur Willebrand</div><div class="flip-expl">Dans ce cas, l'aspirine est contre-indiquée (aggrave le saignement). La cytoréduction est prioritaire.</div></div>
+  </div>
+  <div class="flip-card" onclick="flipCard(this)">
+    <div class="flip-front"><div class="flip-q-num">Q4</div><div class="flip-q-text">Citez les 2 complications tardives (> 10 ans) de la maladie de Vaquez.</div><div class="flip-hint">👆 Appuyer pour révéler</div></div>
+    <div class="flip-back"><div class="flip-answer">Myélofibrose secondaire (post-Vaquez) → puis transformation en LAM</div><div class="flip-expl">Ces évolutions sont lentes. La transformation en LAM post-Vaquez a un pronostic très sombre (< 10 % survie à 2 ans sans allogreffe).</div></div>
+  </div>
+</div>
+
 <!-- SLIDE 38: VAQUEZ TRAITEMENT -->
-<div class="slide" id="slide-38">
+<div class="slide" id="slide-64">
   <h1 class="slide-title">Maladie de Vaquez – Principes du traitement</h1>
   <div class="success-box">
     <strong>Objectif principal : prévention des événements thromboemboliques</strong>
@@ -1500,8 +2046,29 @@ tr:nth-child(even) td{background:rgba(255,255,255,.03)}
   </div>
 </div>
 
+<div class="slide" id="slide-65">
+  <h2 class="slide-title">🃏 Quiz Flash – Traitement du Vaquez</h2>
+  <p style="font-size:.85rem;color:#888;margin-bottom:14px">Appuyez sur chaque carte pour révéler la réponse</p>
+  <div class="flip-card" onclick="flipCard(this)">
+    <div class="flip-front"><div class="flip-q-num">Q1</div><div class="flip-q-text">Quel est le traitement de 1ère intention à initier chez TOUS les patients atteints de Vaquez ?</div><div class="flip-hint">👆 Appuyer pour révéler</div></div>
+    <div class="flip-back"><div class="flip-answer">Saignées (phlébotomies) pour maintenir l'hématocrite < 45 %</div><div class="flip-expl">Les saignées réduisent immédiatement la viscosité sanguine. Objectif : Ht < 45 %, voire < 42 % chez les femmes et patients à haut risque.</div></div>
+  </div>
+  <div class="flip-card" onclick="flipCard(this)">
+    <div class="flip-front"><div class="flip-q-num">Q2</div><div class="flip-q-text">Pourquoi prescrit-on de l'aspirine à faible dose dans la maladie de Vaquez ?</div><div class="flip-hint">👆 Appuyer pour révéler</div></div>
+    <div class="flip-back"><div class="flip-answer">Prévention des thromboses (anti-agrégation plaquettaire) — sauf si thrombocytose > 1000-1500 G/L (risque de Willebrand acquis)</div><div class="flip-expl">L'aspirine 100 mg/j est prescrite chez la grande majorité des patients Vaquez. Elle réduit significativement les thromboses artérielles.</div></div>
+  </div>
+  <div class="flip-card" onclick="flipCard(this)">
+    <div class="flip-front"><div class="flip-q-num">Q3</div><div class="flip-q-text">Quel est le traitement cytoréducteur de référence dans la maladie de Vaquez ?</div><div class="flip-hint">👆 Appuyer pour révéler</div></div>
+    <div class="flip-back"><div class="flip-answer">Hydroxyurée (Hydrea®) — agent cytotoxique anti-métabolite</div><div class="flip-expl">L'hydroxyurée réduit la production de GR, plaquettes et leucocytes. Elle est indiquée en cas de haut risque thrombotique ou d'intolérance aux saignées.</div></div>
+  </div>
+  <div class="flip-card" onclick="flipCard(this)">
+    <div class="flip-front"><div class="flip-q-num">Q4</div><div class="flip-q-text">Quel traitement est utilisé en cas de résistance ou d'intolérance à l'hydroxyurée dans la Vaquez ?</div><div class="flip-hint">👆 Appuyer pour révéler</div></div>
+    <div class="flip-back"><div class="flip-answer">Ruxolitinib (JAK1/2 inhibiteur, Jakavi®) ou interféron alpha pégylé</div><div class="flip-expl">Le ruxolitinib est très efficace sur le prurit aquagénique et la splénomégalie. L'interféron est privilégié chez les femmes jeunes en âge de procréer.</div></div>
+  </div>
+</div>
+
 <!-- SLIDE 39: FLIP QUIZ VAQUEZ -->
-<div class="slide" id="slide-39">
+<div class="slide" id="slide-66">
   <h2 class="slide-title">🃏 Quiz Flash – Section III : Maladie de Vaquez</h2>
   <p style="font-size:.85rem;color:#888;margin-bottom:14px">Appuyez sur chaque carte pour révéler la réponse</p>
 
@@ -1555,7 +2122,7 @@ tr:nth-child(even) td{background:rgba(255,255,255,.03)}
 </div>
 
 <!-- SLIDE 40: QCM VAQUEZ -->
-<div class="slide" id="slide-40">
+<div class="slide" id="slide-67">
   <h2 class="slide-title">📝 QCM – Section III : Maladie de Vaquez</h2>
 
   <div class="qcm-block">
@@ -1663,7 +2230,7 @@ tr:nth-child(even) td{background:rgba(255,255,255,.03)}
 </div>
 
 <!-- SLIDE 41: DOSSIER PROGRESSIF VAQUEZ -->
-<div class="slide" id="slide-41">
+<div class="slide" id="slide-68">
   <h2 class="slide-title">🏥 Dossier Progressif – Maladie de Vaquez</h2>
   <div class="dp-case">
     <strong>📋 Cas clinique – reprise de la vignette</strong>
@@ -1725,7 +2292,7 @@ tr:nth-child(even) td{background:rgba(255,255,255,.03)}
 </div>
 
 <!-- SLIDE 42: RÉSUMÉ VAQUEZ -->
-<div class="slide" id="slide-42">
+<div class="slide" id="slide-69">
   <h1 class="slide-title">Résumé – Maladie de Vaquez : points essentiels à retenir</h1>
   <div class="resume-block">
     <h4>✅ Maladie de Vaquez – Ce qu'il faut savoir pour l'ECN</h4>
@@ -1745,7 +2312,7 @@ tr:nth-child(even) td{background:rgba(255,255,255,.03)}
 </div>
 
 <!-- SLIDE 43: SECTION IV HEADER -->
-<div class="slide" id="slide-43">
+<div class="slide" id="slide-70">
   <div class="slide-section-header">
     <div class="section-badge" style="background:rgba(46,204,113,.15);border-color:rgba(46,204,113,.3);color:#2ecc71">Section IV</div>
     <div class="section-title">Thrombocytémie Essentielle</div>
@@ -1754,7 +2321,7 @@ tr:nth-child(even) td{background:rgba(255,255,255,.03)}
 </div>
 
 <!-- SLIDE 44: TE DÉFINITION ET PHYSIOPATHOLOGIE -->
-<div class="slide" id="slide-44">
+<div class="slide" id="slide-71">
   <h1 class="slide-title">Thrombocytémie essentielle – Définition et physiopathologie</h1>
   <div class="def-box">
     <strong>Définition de la thrombocytémie essentielle (TE) – rang A</strong>
@@ -1782,8 +2349,29 @@ tr:nth-child(even) td{background:rgba(255,255,255,.03)}
   </div>
 </div>
 
+<div class="slide" id="slide-72">
+  <h2 class="slide-title">🃏 Quiz Flash – Thrombocytémie essentielle — Définition</h2>
+  <p style="font-size:.85rem;color:#888;margin-bottom:14px">Appuyez sur chaque carte pour révéler la réponse</p>
+  <div class="flip-card" onclick="flipCard(this)">
+    <div class="flip-front"><div class="flip-q-num">Q1</div><div class="flip-q-text">Comment définit-on la thrombocytémie essentielle (TE) ?</div><div class="flip-hint">👆 Appuyer pour révéler</div></div>
+    <div class="flip-back"><div class="flip-answer">SMP Ph− clonal touchant la lignée mégacaryocytaire → hyperplaquettose persistante > 450 G/L sans cause réactionnelle</div><div class="flip-expl">La TE est la plus 'bénigne' des SMP classiques. L'espérance de vie peut être quasi-normale si le risque thrombotique est bien contrôlé.</div></div>
+  </div>
+  <div class="flip-card" onclick="flipCard(this)">
+    <div class="flip-front"><div class="flip-q-num">Q2</div><div class="flip-q-text">Quel est le seuil de plaquettes pour affirmer une TE selon l'OMS ?</div><div class="flip-hint">👆 Appuyer pour révéler</div></div>
+    <div class="flip-back"><div class="flip-answer">Plaquettes ≥ 450 G/L, persistantes</div><div class="flip-expl">Ce seuil doit être persistent (au moins 2 contrôles à distance) et non expliqué par une cause réactionnelle (infection, carence martiale...).</div></div>
+  </div>
+  <div class="flip-card" onclick="flipCard(this)">
+    <div class="flip-front"><div class="flip-q-num">Q3</div><div class="flip-q-text">Quelles sont les 3 mutations possibles dans la TE, par ordre de fréquence ?</div><div class="flip-hint">👆 Appuyer pour révéler</div></div>
+    <div class="flip-back"><div class="flip-answer">JAK2 V617F (~50 %) · CALR exon 9 (~25 %) · MPL W515 (~8 %)</div><div class="flip-expl">JAK2+, CALR+ et MPL+ ont des phénotypes et pronostics légèrement différents. CALR+ a souvent une thrombocytose plus marquée mais moins de thromboses.</div></div>
+  </div>
+  <div class="flip-card" onclick="flipCard(this)">
+    <div class="flip-front"><div class="flip-q-num">Q4</div><div class="flip-q-text">Qu'est-ce qu'une TE 'triple négative' ?</div><div class="flip-hint">👆 Appuyer pour révéler</div></div>
+    <div class="flip-back"><div class="flip-answer">TE sans mutation JAK2, CALR ni MPL (~15 % des cas)</div><div class="flip-expl">Le triple négatif n'exclut pas la TE si tous les autres critères OMS sont remplis (BOM + exclusion des autres néoplasies myéloïdes).</div></div>
+  </div>
+</div>
+
 <!-- SLIDE 45: TE CIRCONSTANCES ET TABLEAU CLINIQUE -->
-<div class="slide" id="slide-45">
+<div class="slide" id="slide-73">
   <h1 class="slide-title">Thrombocytémie essentielle – Circonstances et tableau clinique</h1>
   <p class="explain">La TE est souvent <strong>asymptomatique</strong> et découverte fortuitement à la NFS. Quand des symptômes existent, ils sont principalement vasculaires :</p>
   <div class="content-grid-2">
@@ -1816,8 +2404,29 @@ tr:nth-child(even) td{background:rgba(255,255,255,.03)}
   </div>
 </div>
 
+<div class="slide" id="slide-74">
+  <h2 class="slide-title">🃏 Quiz Flash – Tableau clinique de la TE</h2>
+  <p style="font-size:.85rem;color:#888;margin-bottom:14px">Appuyez sur chaque carte pour révéler la réponse</p>
+  <div class="flip-card" onclick="flipCard(this)">
+    <div class="flip-front"><div class="flip-q-num">Q1</div><div class="flip-q-text">Quel symptôme est quasi-pathognomonique de la thrombocytémie essentielle ?</div><div class="flip-hint">👆 Appuyer pour révéler</div></div>
+    <div class="flip-back"><div class="flip-answer">Érythromélalgies : douleurs brûlantes des extrémités (pieds > mains) avec rougeur et chaleur</div><div class="flip-expl">Dues à des microthomboses des petits vaisseaux par hyperactivation plaquettaire. Elles répondent remarquablement à l'aspirine.</div></div>
+  </div>
+  <div class="flip-card" onclick="flipCard(this)">
+    <div class="flip-front"><div class="flip-q-num">Q2</div><div class="flip-q-text">Comment traite-t-on les érythromélalgies dans la TE ?</div><div class="flip-hint">👆 Appuyer pour révéler</div></div>
+    <div class="flip-back"><div class="flip-answer">Aspirine à faible dose (75-100 mg/j) — efficacité quasi-immédiate</div><div class="flip-expl">La réponse à l'aspirine est si spectaculaire qu'elle constitue presque un test diagnostique. L'aspirine bloque l'activation plaquettaire.</div></div>
+  </div>
+  <div class="flip-card" onclick="flipCard(this)">
+    <div class="flip-front"><div class="flip-q-num">Q3</div><div class="flip-q-text">La TE est-elle toujours symptomatique au diagnostic ?</div><div class="flip-hint">👆 Appuyer pour révéler</div></div>
+    <div class="flip-back"><div class="flip-answer">Non — souvent asymptomatique, découverte fortuitement sur hémogramme de routine</div><div class="flip-expl">Environ 50 % des TE sont asymptomatiques au diagnostic. La thrombocytose est détectée lors d'un bilan systématique.</div></div>
+  </div>
+  <div class="flip-card" onclick="flipCard(this)">
+    <div class="flip-front"><div class="flip-q-num">Q4</div><div class="flip-q-text">Quel est le risque évolutif justifiant la surveillance et le traitement de la TE ?</div><div class="flip-hint">👆 Appuyer pour révéler</div></div>
+    <div class="flip-back"><div class="flip-answer">Thromboses artérielles (cerveau, coronaires) et veineuses + risque tardif de myélofibrose secondaire et LAM</div><div class="flip-expl">Le risque thrombotique est le risque principal à court terme. Le risque de transformation en LAM (~1-2 % à 10 ans) est rare mais réel.</div></div>
+  </div>
+</div>
+
 <!-- SLIDE 46: TE HÉMOGRAMME ET DÉMARCHE DIAGNOSTIQUE -->
-<div class="slide" id="slide-46">
+<div class="slide" id="slide-75">
   <h1 class="slide-title">Thrombocytémie essentielle – Hémogramme et démarche diagnostique</h1>
   <div class="content-grid-2">
     <div>
@@ -1852,8 +2461,29 @@ tr:nth-child(even) td{background:rgba(255,255,255,.03)}
   </div>
 </div>
 
+<div class="slide" id="slide-76">
+  <h2 class="slide-title">🃏 Quiz Flash – Hémogramme et démarche diagnostique TE</h2>
+  <p style="font-size:.85rem;color:#888;margin-bottom:14px">Appuyez sur chaque carte pour révéler la réponse</p>
+  <div class="flip-card" onclick="flipCard(this)">
+    <div class="flip-front"><div class="flip-q-num">Q1</div><div class="flip-q-text">Quel est l'aspect typique de l'hémogramme dans la TE en dehors des plaquettes ?</div><div class="flip-hint">👆 Appuyer pour révéler</div></div>
+    <div class="flip-back"><div class="flip-answer">Souvent normal ou avec légère leucocytose — Hb normale, GR normaux</div><div class="flip-expl">L'hyperplaquettose est isolée dans la TE 'pure'. Une polyglobulie ou une hyperleucocytose associée doit faire évoquer Vaquez ou LMC.</div></div>
+  </div>
+  <div class="flip-card" onclick="flipCard(this)">
+    <div class="flip-front"><div class="flip-q-num">Q2</div><div class="flip-q-text">Quel est l'ordre des examens biologiques à demander pour confirmer une TE ?</div><div class="flip-hint">👆 Appuyer pour révéler</div></div>
+    <div class="flip-back"><div class="flip-answer">1) JAK2 V617F · 2) si négatif : CALR exon 9 · 3) si négatif : MPL · 4) si tout négatif : triple négatif</div><div class="flip-expl">L'ordre est important : JAK2 d'abord (le plus fréquent), puis CALR, puis MPL. La BOM complète le bilan.</div></div>
+  </div>
+  <div class="flip-card" onclick="flipCard(this)">
+    <div class="flip-front"><div class="flip-q-num">Q3</div><div class="flip-q-text">La biopsie ostéomédullaire (BOM) est-elle indispensable au diagnostic de TE ?</div><div class="flip-hint">👆 Appuyer pour révéler</div></div>
+    <div class="flip-back"><div class="flip-answer">Oui selon l'OMS — critère majeur : prolifération mégacaryocytaire sans fibrose ni dysplasie</div><div class="flip-expl">La BOM confirme la prolifération mégacaryocytaire typique de la TE et élimine une MFP débutante (fibrose réticulinique).</div></div>
+  </div>
+  <div class="flip-card" onclick="flipCard(this)">
+    <div class="flip-front"><div class="flip-q-num">Q4</div><div class="flip-q-text">Que retrouve-t-on à la BOM dans la TE, et comment différencier de la MFP débutante ?</div><div class="flip-hint">👆 Appuyer pour révéler</div></div>
+    <div class="flip-back"><div class="flip-answer">TE : mégacaryocytes nombreux, géants, hyperlobulés, en amas, SANS fibrose significative (grade 0-1/3)</div><div class="flip-expl">MFP débutante : fibrose réticulinique grade ≥ 2, mégacaryocytes dystrophiques. La distinction est essentielle pour le pronostic.</div></div>
+  </div>
+</div>
+
 <!-- SLIDE 47: TE CRITÈRES OMS ET DIAGNOSTIC DIFFÉRENTIEL -->
-<div class="slide" id="slide-47">
+<div class="slide" id="slide-77">
   <h1 class="slide-title">Thrombocytémie essentielle – Critères OMS 2016 et diagnostics différentiels</h1>
   <div class="content-grid-2">
     <div>
@@ -1895,8 +2525,29 @@ tr:nth-child(even) td{background:rgba(255,255,255,.03)}
   </div>
 </div>
 
+<div class="slide" id="slide-78">
+  <h2 class="slide-title">🃏 Quiz Flash – Critères OMS et diagnostic différentiel TE</h2>
+  <p style="font-size:.85rem;color:#888;margin-bottom:14px">Appuyez sur chaque carte pour révéler la réponse</p>
+  <div class="flip-card" onclick="flipCard(this)">
+    <div class="flip-front"><div class="flip-q-num">Q1</div><div class="flip-q-text">Citez les 4 critères MAJEURS OMS de la TE.</div><div class="flip-hint">👆 Appuyer pour révéler</div></div>
+    <div class="flip-back"><div class="flip-answer">1) Plaquettes ≥ 450 G/L · 2) BOM avec prolifération mégacaryocytaire typique · 3) Mutation JAK2/CALR/MPL · 4) Exclusion des autres SMP/SMD</div><div class="flip-expl">Le diagnostic nécessite TOUS les 4 critères majeurs (OMS 2022). Le 4ème critère exclut LMC, Vaquez, MFP, SMD avec délétion 5q−.</div></div>
+  </div>
+  <div class="flip-card" onclick="flipCard(this)">
+    <div class="flip-front"><div class="flip-q-num">Q2</div><div class="flip-q-text">Comment distinguer une TE d'une thrombocytose réactionnelle ?</div><div class="flip-hint">👆 Appuyer pour révéler</div></div>
+    <div class="flip-back"><div class="flip-answer">TE : clonale, mutation JAK2/CALR/MPL, persistante, BOM anormale · Réactionnelle : transitoire, cause identifiable (infection, carence, inflammation)</div><div class="flip-expl">Ferritine basse + hyperplaquettose → carence martiale. CRP élevée + thrombocytose → réaction. Ces causes sont les plus fréquentes.</div></div>
+  </div>
+  <div class="flip-card" onclick="flipCard(this)">
+    <div class="flip-front"><div class="flip-q-num">Q3</div><div class="flip-q-text">Quel SMD peut donner une thrombocytose et doit être éliminé avant de poser le diagnostic de TE ?</div><div class="flip-hint">👆 Appuyer pour révéler</div></div>
+    <div class="flip-back"><div class="flip-answer">SMD avec délétion 5q (5q−) — syndrome 5q isolé avec thrombocytose et mégacaryocytes hypolobulés</div><div class="flip-expl">Le syndrome 5q− est un SMD (et non un SMP) avec thrombocytose paradoxale. La BOM et le caryotype font la différence.</div></div>
+  </div>
+  <div class="flip-card" onclick="flipCard(this)">
+    <div class="flip-front"><div class="flip-q-num">Q4</div><div class="flip-q-text">Un patient a des plaquettes à 600 G/L avec une ferritine très basse. Quelle est la priorité diagnostique ?</div><div class="flip-hint">👆 Appuyer pour révéler</div></div>
+    <div class="flip-back"><div class="flip-answer">Corriger d'abord la carence martiale — la thrombocytose réactionnelle disparaîtra avec la correction</div><div class="flip-expl">La carence martiale est la cause la plus fréquente de thrombocytose. Avant de conclure à une TE, il faut exclure cette cause.</div></div>
+  </div>
+</div>
+
 <!-- SLIDE 48: TE COMPLICATIONS ET TRAITEMENT -->
-<div class="slide" id="slide-48">
+<div class="slide" id="slide-79">
   <h1 class="slide-title">Thrombocytémie essentielle – Complications et traitement</h1>
   <div class="content-grid-2">
     <div>
@@ -1945,8 +2596,29 @@ tr:nth-child(even) td{background:rgba(255,255,255,.03)}
   </div>
 </div>
 
+<div class="slide" id="slide-80">
+  <h2 class="slide-title">🃏 Quiz Flash – Complications et traitement de la TE</h2>
+  <p style="font-size:.85rem;color:#888;margin-bottom:14px">Appuyez sur chaque carte pour révéler la réponse</p>
+  <div class="flip-card" onclick="flipCard(this)">
+    <div class="flip-front"><div class="flip-q-num">Q1</div><div class="flip-q-text">Selon quels critères stratifie-t-on le risque thrombotique dans la TE ?</div><div class="flip-hint">👆 Appuyer pour révéler</div></div>
+    <div class="flip-back"><div class="flip-answer">Âge > 60 ans · Antécédent thrombotique · Mutation JAK2 V617F · Facteurs de risque cardiovasculaire classiques</div><div class="flip-expl">Haut risque : âge > 60 ans OU antécédent thrombotique. Ces patients nécessitent une cytoréduction en plus de l'aspirine.</div></div>
+  </div>
+  <div class="flip-card" onclick="flipCard(this)">
+    <div class="flip-front"><div class="flip-q-num">Q2</div><div class="flip-q-text">Quel est le traitement de 1ère intention en TE à HAUT risque thrombotique ?</div><div class="flip-hint">👆 Appuyer pour révéler</div></div>
+    <div class="flip-back"><div class="flip-answer">Hydroxyurée (Hydrea®) + aspirine 100 mg/j</div><div class="flip-expl">L'hydroxyurée réduit les plaquettes et le risque thrombotique. Objectif : plaquettes < 400 G/L chez les patients à haut risque.</div></div>
+  </div>
+  <div class="flip-card" onclick="flipCard(this)">
+    <div class="flip-front"><div class="flip-q-num">Q3</div><div class="flip-q-text">Quel est le traitement en TE à BAS risque thrombotique ?</div><div class="flip-hint">👆 Appuyer pour révéler</div></div>
+    <div class="flip-back"><div class="flip-answer">Aspirine 100 mg/j seule (sans cytoréduction)</div><div class="flip-expl">Les patients jeunes (< 60 ans) sans antécédent thrombotique bénéficient de l'aspirine seule. La cytoréduction est réservée aux hauts risques.</div></div>
+  </div>
+  <div class="flip-card" onclick="flipCard(this)">
+    <div class="flip-front"><div class="flip-q-num">Q4</div><div class="flip-q-text">La TE peut-elle évoluer en myélofibrose secondaire ?</div><div class="flip-hint">👆 Appuyer pour révéler</div></div>
+    <div class="flip-back"><div class="flip-answer">Oui — ~10-15 % des TE évoluent en myélofibrose secondaire à 10-15 ans, puis ~1-2 % en LAM</div><div class="flip-expl">L'évolution en MFP est plus fréquente chez les patients JAK2+ et de longue date. La MFP post-TE a un pronostic moins sombre que la MFP primitive.</div></div>
+  </div>
+</div>
+
 <!-- SLIDE 49: FLIP QUIZ TE -->
-<div class="slide" id="slide-49">
+<div class="slide" id="slide-81">
   <h2 class="slide-title">🃏 Quiz Flash – Section IV : Thrombocytémie Essentielle</h2>
   <p style="font-size:.85rem;color:#888;margin-bottom:14px">Appuyez sur chaque carte pour révéler la réponse</p>
 
@@ -2000,7 +2672,7 @@ tr:nth-child(even) td{background:rgba(255,255,255,.03)}
 </div>
 
 <!-- SLIDE 50: QCM TE -->
-<div class="slide" id="slide-50">
+<div class="slide" id="slide-82">
   <h2 class="slide-title">📝 QCM – Section IV : Thrombocytémie Essentielle</h2>
 
   <div class="qcm-block">
@@ -2108,7 +2780,7 @@ tr:nth-child(even) td{background:rgba(255,255,255,.03)}
 </div>
 
 <!-- SLIDE 51: DOSSIER PROGRESSIF TE -->
-<div class="slide" id="slide-51">
+<div class="slide" id="slide-83">
   <h2 class="slide-title">🏥 Dossier Progressif – Thrombocytémie Essentielle</h2>
   <div class="dp-case">
     <strong>📋 Cas clinique</strong>
@@ -2170,7 +2842,7 @@ tr:nth-child(even) td{background:rgba(255,255,255,.03)}
 </div>
 
 <!-- SLIDE 52: RÉSUMÉ TE -->
-<div class="slide" id="slide-52">
+<div class="slide" id="slide-84">
   <h1 class="slide-title">Résumé – Thrombocytémie Essentielle : points essentiels à retenir</h1>
   <div class="resume-block">
     <h4>✅ TE – Ce qu'il faut savoir pour l'ECN</h4>
@@ -2190,7 +2862,7 @@ tr:nth-child(even) td{background:rgba(255,255,255,.03)}
 </div>
 
 <!-- SLIDE 53: SYNTHÈSE COMPARATIVE -->
-<div class="slide" id="slide-53">
+<div class="slide" id="slide-85">
   <h1 class="slide-title">Synthèse comparative – Les 3 SMP à connaître</h1>
   <div class="table-wrap">
     <table>
@@ -2259,7 +2931,7 @@ tr:nth-child(even) td{background:rgba(255,255,255,.03)}
 </div>
 
 <!-- SLIDE 54: QCM FINAL TRANSVERSAL -->
-<div class="slide" id="slide-54">
+<div class="slide" id="slide-86">
   <h2 class="slide-title">📝 QCM Final – Questions transversales</h2>
 
   <div class="qcm-block">
@@ -2317,7 +2989,7 @@ tr:nth-child(even) td{background:rgba(255,255,255,.03)}
 </div>
 
 <!-- SLIDE 55: POINTS DE VIGILANCE ECN -->
-<div class="slide" id="slide-55">
+<div class="slide" id="slide-87">
   <h1 class="slide-title">⚠️ Points de vigilance pour l'ECN</h1>
   <div class="content-grid-2">
     <div>
@@ -2363,7 +3035,7 @@ tr:nth-child(even) td{background:rgba(255,255,255,.03)}
 </div>
 
 <!-- SLIDE 56: FIN / IMAGES RÉSUMÉ -->
-<div class="slide" id="slide-56">
+<div class="slide" id="slide-88">
   <h1 class="slide-title">Références iconographiques du cours</h1>
   <div class="content-grid-2">
     <div class="img-block">
@@ -2386,7 +3058,7 @@ tr:nth-child(even) td{background:rgba(255,255,255,.03)}
 </div>
 
 <!-- SLIDE 57: FÉLICITATIONS -->
-<div class="slide" id="slide-57">
+<div class="slide" id="slide-89">
   <div class="title-slide">
     <div class="item-badge">ITEM 317 – TERMINÉ</div>
     <h1 style="font-size:2.4rem">Félicitations ! 🎓</h1>
