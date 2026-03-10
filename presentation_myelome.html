@@ -1,0 +1,1632 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Myélome Multiple – Item 320 | MédECN</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#1a1a2e;color:#e0e0e0;font-family:'Segoe UI',Arial,sans-serif;overflow:hidden;height:100vh}
+.topbar{position:fixed;top:0;left:0;right:0;height:50px;background:rgba(13,13,26,.95);display:flex;align-items:center;justify-content:space-between;padding:0 16px;z-index:1000;border-bottom:1px solid rgba(255,255,255,.08)}
+.tb-home{color:#9b59b6;font-size:1.3rem;text-decoration:none;line-height:1}
+.tb-title{font-size:.82rem;color:#aaa;font-weight:500;letter-spacing:.3px}
+.tb-nav{display:flex;align-items:center;gap:10px}
+.tb-counter{font-size:.82rem;color:#bbb;min-width:60px;text-align:center}
+.tb-btn{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);color:#e0e0e0;border-radius:6px;padding:5px 12px;cursor:pointer;font-size:.82rem;transition:background .2s}
+.tb-btn:hover{background:rgba(255,255,255,.18)}
+.progress-bar{position:fixed;top:50px;left:0;height:3px;background:linear-gradient(90deg,#9b59b6,#8e44ad);transition:width .3s;z-index:999}
+.slides-container{padding-top:53px;height:100vh;overflow:hidden}
+.slide{display:none;height:calc(100vh - 53px);overflow-y:auto;padding:28px 36px 28px}
+.slide.active{display:block}
+.slide-section-header{text-align:center;padding:60px 20px;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:calc(100vh - 110px)}
+.section-badge{background:rgba(155,89,182,.15);border:1px solid rgba(155,89,182,.3);color:#9b59b6;padding:6px 18px;border-radius:20px;font-size:.8rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:20px}
+.section-title-lg{font-size:2.2rem;font-weight:800;color:#fff;margin-bottom:16px;line-height:1.2}
+.section-subtitle{font-size:1.1rem;color:#aaa;max-width:600px;line-height:1.6}
+h1.slide-title{font-size:1.6rem;font-weight:700;color:#9b59b6;margin-bottom:20px;padding-bottom:10px;border-bottom:2px solid rgba(155,89,182,.25)}
+h2.slide-title{font-size:1.4rem;font-weight:700;color:#f39c12;margin-bottom:18px;padding-bottom:8px;border-bottom:2px solid rgba(243,156,18,.25)}
+h3.slide-title{font-size:1.2rem;font-weight:700;color:#3498db;margin-bottom:16px;padding-bottom:6px;border-bottom:1px solid rgba(52,152,219,.25)}
+.content-grid{display:grid;gap:14px}
+.content-grid-2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.content-grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px}
+.card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.09);border-radius:10px;padding:16px;line-height:1.6}
+.card h4{font-size:.95rem;font-weight:700;color:#f39c12;margin-bottom:10px}
+.card ul{padding-left:18px}
+.card ul li{margin-bottom:8px;font-size:.9rem;line-height:1.65}
+.def-box{background:rgba(243,156,18,.12);border-left:4px solid #f39c12;padding:12px 16px;border-radius:0 8px 8px 0;margin:12px 0}
+.def-box strong{color:#f39c12;font-weight:700}
+.urgence-box{background:rgba(231,76,60,.2);border:2px solid #e74c3c;padding:14px 16px;border-radius:8px;margin:12px 0}
+.urgence-box strong{color:#e74c3c;font-weight:700}
+.info-box{background:rgba(52,152,219,.12);border-left:4px solid #3498db;padding:12px 16px;border-radius:0 8px 8px 0;margin:12px 0}
+.info-box strong{color:#3498db;font-weight:700}
+.success-box{background:rgba(46,204,113,.12);border-left:4px solid #2ecc71;padding:12px 16px;border-radius:0 8px 8px 0;margin:12px 0}
+.success-box strong{color:#2ecc71;font-weight:700}
+ul.bullets li{margin-bottom:8px;font-size:.92rem;line-height:1.65;padding-left:4px}
+ul.bullets li::marker{color:#9b59b6}
+p.explain{font-size:.93rem;line-height:1.75;color:#ccc;margin-bottom:14px}
+.table-wrap{overflow-x:auto;margin:12px 0}
+table{width:100%;border-collapse:collapse;font-size:.85rem}
+th{background:rgba(155,89,182,.2);color:#9b59b6;padding:9px 12px;text-align:left;font-weight:700;border:1px solid rgba(155,89,182,.3)}
+td{padding:8px 12px;border:1px solid rgba(255,255,255,.1);vertical-align:top;line-height:1.55}
+tr:nth-child(even) td{background:rgba(255,255,255,.03)}
+.slide-img{max-width:100%;border-radius:8px;border:1px solid rgba(255,255,255,.1);margin:12px 0}
+.img-caption{font-size:.78rem;color:#888;font-style:italic;text-align:center;margin-top:4px;margin-bottom:12px}
+.img-block{text-align:center;margin:10px 0}
+/* Flip cards */
+.flip-card{background:rgba(155,89,182,.08);border:1px solid rgba(155,89,182,.25);border-radius:10px;padding:14px 16px;margin:8px 0;cursor:pointer;user-select:none;transition:border-color .2s,background .2s}
+.flip-card:hover{border-color:rgba(155,89,182,.5);background:rgba(155,89,182,.13)}
+.flip-q-num{font-size:.75rem;font-weight:700;color:#9b59b6;text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+.flip-q-text{font-weight:600;color:#e0e0e0;font-size:.95rem;line-height:1.45}
+.flip-hint{font-size:.77rem;color:rgba(155,89,182,.6);font-style:italic;margin-top:7px}
+.flip-back{display:none;padding-top:10px;border-top:1px solid rgba(155,89,182,.25);margin-top:9px}
+.flip-card.revealed .flip-back{display:block}
+.flip-card.revealed .flip-hint{display:none}
+.flip-card.revealed{border-color:rgba(46,204,113,.35);background:rgba(46,204,113,.04)}
+.flip-answer{font-weight:700;color:#2ecc71;font-size:.98rem;margin-bottom:4px}
+.flip-expl{font-size:.82rem;color:#a8e6cf;line-height:1.55}
+/* QCM */
+.qcm-block{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.09);border-radius:10px;padding:14px 16px;margin:8px 0}
+.qcm-q{font-size:.92rem;font-weight:600;color:#e0e0e0;margin-bottom:10px;line-height:1.45}
+.qcm-q span{color:#9b59b6;font-weight:800;margin-right:6px}
+.qcm-opt{display:flex;align-items:flex-start;gap:8px;padding:7px 10px;border-radius:6px;cursor:pointer;transition:background .15s;margin:3px 0;font-size:.88rem}
+.qcm-opt:hover{background:rgba(255,255,255,.07)}
+.qcm-opt.selected{background:rgba(155,89,182,.18);border:1px solid rgba(155,89,182,.3)}
+.qcm-opt.correct{background:rgba(46,204,113,.2);border:1px solid #2ecc71;color:#2ecc71}
+.qcm-opt.wrong{background:rgba(231,76,60,.2);border:1px solid #e74c3c;color:#e74c3c}
+.qcm-opt input{margin-top:2px;flex-shrink:0}
+.qcm-expl{font-size:.8rem;color:#a8e6cf;margin-top:8px;padding:8px 10px;background:rgba(46,204,113,.08);border-radius:6px;display:none;line-height:1.55}
+.validate-btn{background:linear-gradient(135deg,#9b59b6,#8e44ad);border:none;color:#fff;padding:10px 24px;border-radius:8px;cursor:pointer;font-size:.9rem;font-weight:700;margin-top:12px;display:block;transition:opacity .2s}
+.validate-btn:hover{opacity:.85}
+.score-display{font-size:1.1rem;font-weight:700;margin-top:12px;padding:10px;background:rgba(255,255,255,.05);border-radius:8px;text-align:center;display:none}
+/* Résumé */
+.resume-block{background:rgba(46,204,113,.08);border:1px solid rgba(46,204,113,.2);border-radius:10px;padding:16px 20px;margin:10px 0}
+.resume-block h4{color:#2ecc71;margin-bottom:12px;font-size:1rem}
+.resume-block ul{padding-left:20px}
+.resume-block ul li{margin-bottom:7px;font-size:.9rem;line-height:1.55}
+/* Title slide */
+.title-slide{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:calc(100vh - 110px);text-align:center}
+.title-slide .item-badge{background:rgba(155,89,182,.15);border:1px solid rgba(155,89,182,.3);color:#9b59b6;padding:6px 18px;border-radius:20px;font-size:.8rem;font-weight:700;letter-spacing:1px;margin-bottom:24px}
+.title-slide h1{font-size:2.8rem;font-weight:900;color:#fff;line-height:1.15;margin-bottom:16px}
+.title-slide h1 span{color:#9b59b6}
+.title-slide .subtitle{font-size:1.1rem;color:#aaa;margin-bottom:30px}
+.title-slide .tags{display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
+.tag{padding:6px 14px;border-radius:20px;font-size:.8rem;font-weight:600}
+.tag-purple{background:rgba(155,89,182,.15);color:#9b59b6;border:1px solid rgba(155,89,182,.3)}
+.tag-orange{background:rgba(243,156,18,.15);color:#f39c12;border:1px solid rgba(243,156,18,.3)}
+.tag-blue{background:rgba(52,152,219,.15);color:#3498db;border:1px solid rgba(52,152,219,.3)}
+.tag-red{background:rgba(231,76,60,.15);color:#e74c3c;border:1px solid rgba(231,76,60,.3)}
+.tag-green{background:rgba(46,204,113,.15);color:#2ecc71;border:1px solid rgba(46,204,113,.3)}
+/* Dossier progressif */
+.dp-case{background:rgba(52,152,219,.1);border:1px solid rgba(52,152,219,.25);border-radius:10px;padding:14px 16px;margin-bottom:14px;font-size:.88rem;line-height:1.7;color:#cce7ff}
+.dp-case strong{color:#3498db;font-weight:700}
+/* Vignette clinique */
+.vignette{background:rgba(52,152,219,.08);border-left:4px solid #3498db;padding:14px 18px;border-radius:0 8px 8px 0;margin:12px 0;font-size:.88rem;line-height:1.7;color:#ccc}
+.vignette strong{color:#3498db;font-weight:700}
+/* Crab box */
+.crab-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:12px 0}
+.crab-card{border-radius:10px;padding:14px;text-align:center}
+.crab-c{background:rgba(243,156,18,.1);border:1px solid rgba(243,156,18,.3)}
+.crab-r{background:rgba(231,76,60,.1);border:1px solid rgba(231,76,60,.3)}
+.crab-a{background:rgba(52,152,219,.1);border:1px solid rgba(52,152,219,.3)}
+.crab-b{background:rgba(155,89,182,.1);border:1px solid rgba(155,89,182,.3)}
+.crab-card .crab-letter{font-size:2rem;font-weight:900;line-height:1}
+.crab-c .crab-letter{color:#f39c12}
+.crab-r .crab-letter{color:#e74c3c}
+.crab-a .crab-letter{color:#3498db}
+.crab-b .crab-letter{color:#9b59b6}
+.crab-card .crab-name{font-size:.85rem;font-weight:700;margin-top:4px;margin-bottom:6px}
+.crab-card .crab-def{font-size:.78rem;color:#ccc;line-height:1.45}
+/* Modal image */
+.modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:2000;cursor:zoom-out;align-items:center;justify-content:center}
+.modal.open{display:flex}
+.modal img{max-width:92vw;max-height:90vh;border-radius:8px;object-fit:contain}
+@media(max-width:768px){.content-grid-2,.content-grid-3,.crab-grid{grid-template-columns:1fr}.slide{padding:18px 16px}.section-title-lg{font-size:1.6rem}}
+
+/* QCM part 2 (multi-select style) */
+.qcm-question{font-size:.9rem;font-weight:600;color:#e0e0e0;margin-bottom:10px;line-height:1.45}
+.qcm-options{display:flex;flex-direction:column;gap:4px;margin-bottom:10px}
+.qcm-option{padding:7px 10px;border-radius:6px;cursor:pointer;font-size:.87rem;border:1px solid rgba(255,255,255,.1);transition:background .15s;color:#ccc}
+.qcm-option:hover{background:rgba(255,255,255,.07)}
+.qcm-option.selected{background:rgba(155,89,182,.18);border-color:rgba(155,89,182,.4);color:#e0e0e0}
+.qcm-option.correct-show{background:rgba(46,204,113,.2);border-color:#2ecc71;color:#2ecc71}
+.qcm-option.wrong-show{background:rgba(231,76,60,.2);border-color:#e74c3c;color:#e74c3c}
+.qcm-btn{background:linear-gradient(135deg,#9b59b6,#8e44ad);border:none;color:#fff;padding:8px 20px;border-radius:6px;cursor:pointer;font-size:.85rem;font-weight:700;margin-top:8px;transition:opacity .2s}
+.qcm-btn:hover{opacity:.85}
+.qcm-btn:disabled{opacity:.5;cursor:default}
+.qcm-feedback{font-size:.82rem;margin-top:8px;color:#a8e6cf;padding:8px 10px;background:rgba(46,204,113,.08);border-radius:6px;line-height:1.5}
+/* Section banner */
+.section-banner{padding:20px 24px;border-radius:12px;text-align:center;margin:10px 0}
+
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <a href="index.html" class="tb-home" title="Accueil">⌂</a>
+  <span class="tb-title">Myélome Multiple – Item 320</span>
+  <div class="tb-nav">
+    <button class="tb-btn" onclick="changeSlide(-1)">&#8592;</button>
+    <span class="tb-counter"><span id="tb-cur">1</span>/<span id="tb-tot">47</span></span>
+    <button class="tb-btn" onclick="changeSlide(1)">&#8594;</button>
+  </div>
+</div>
+<div class="progress-bar" id="progress-bar"></div>
+<div class="modal" id="img-modal" onclick="closeModal()"><img id="modal-img" src="" alt=""></div>
+<div class="slides-container" id="slides-container">
+
+<!-- SLIDE 0: TITRE -->
+<div class="slide active" id="slide-0">
+  <div class="title-slide">
+    <div class="item-badge">ITEM 320 – ECN HÉMATOLOGIE</div>
+    <h1>Myélome<br><span>Multiple</span></h1>
+    <p class="subtitle">Hémopathie maligne du plasmocyte · Gammapathie monoclonale · CRAB</p>
+    <div class="tags">
+      <span class="tag tag-purple">Plasmocytome</span>
+      <span class="tag tag-orange">GMSI → Myélome</span>
+      <span class="tag tag-red">Urgences CRAB</span>
+      <span class="tag tag-blue">Item 320</span>
+      <span class="tag tag-green">Autogreffe</span>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 1: PLAN + SD + HIÉRARCHISATION -->
+<div class="slide" id="slide-1">
+  <h1 class="slide-title">Plan du cours &amp; Hiérarchisation</h1>
+  <div class="content-grid-2">
+    <div class="card">
+      <h4>🗂️ Plan du cours</h4>
+      <ul class="bullets">
+        <li><strong>I.</strong> Définitions — GMSI, Myélome indolent, Myélome symptomatique</li>
+        <li><strong>II.</strong> Diagnostics différentiels</li>
+        <li><strong>III.</strong> Présentation clinique du myélome multiple</li>
+        <li><strong>IV.</strong> Bilan biologique et radiologique</li>
+        <li><strong>V.</strong> Facteurs pronostiques (R-ISS)</li>
+        <li><strong>VI.</strong> Prise en charge thérapeutique</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h4>📋 Situations de départ</h4>
+      <ul class="bullets">
+        <li>72. Douleur du rachis</li>
+        <li>193. Analyse de l'électrophorèse des protéines*</li>
+        <li>199. Créatinine augmentée</li>
+        <li>200. Dyscalcémie</li>
+        <li>210. Hyperprotidémie*</li>
+        <li>212. Protéinurie</li>
+        <li>217. Baisse de l'hémoglobine</li>
+        <li>221. Interprétation d'un myélogramme*</li>
+        <li>228. Anomalie osseuse à l'imagerie</li>
+      </ul>
+    </div>
+  </div>
+  <div class="table-wrap" style="margin-top:14px">
+    <table>
+      <tr><th>Rang</th><th>Rubrique</th><th>Intitulé</th></tr>
+      <tr><td>A</td><td>Définition</td><td>Définition du myélome, GMSI, critères CRAB</td></tr>
+      <tr><td>A</td><td>Diagnostic positif</td><td>Circonstances de découverte, examens complémentaires</td></tr>
+      <tr><td>A</td><td>Identifier urgence</td><td>Hypercalcémie, insuffisance rénale, compression médullaire</td></tr>
+      <tr><td>B</td><td>Définition</td><td>Maladie de Waldenström, critères SLiM</td></tr>
+    </table>
+  </div>
+</div>
+
+<!-- SLIDE 2: QUIZ PLAN -->
+<div class="slide" id="slide-2">
+  <h2 class="slide-title">🃏 Quiz Flash – Plan et Hiérarchisation</h2>
+  <p style="font-size:.85rem;color:#888;margin-bottom:14px">Appuyez sur chaque carte pour révéler la réponse</p>
+  <div class="flip-card" onclick="flipCard(this)">
+    <div class="flip-front"><div class="flip-q-num">Q1</div><div class="flip-q-text">Quel item ECN correspond au myélome multiple ?</div><div class="flip-hint">👆 Appuyer pour révéler</div></div>
+    <div class="flip-back"><div class="flip-answer">Item 320</div><div class="flip-expl">L'item 320 demande de savoir diagnostiquer un myélome multiple des os et connaître la démarche diagnostique devant une gammapathie monoclonale.</div></div>
+  </div>
+  <div class="flip-card" onclick="flipCard(this)">
+    <div class="flip-front"><div class="flip-q-num">Q2</div><div class="flip-q-text">Que signifie l'acronyme CRAB dans le myélome multiple ?</div><div class="flip-hint">👆 Appuyer pour révéler</div></div>
+    <div class="flip-back"><div class="flip-answer">C = Hypercalcémie · R = Insuffisance Rénale · A = Anémie · B = lésions osseuses (Bone)</div><div class="flip-expl">Les 4 critères CRAB définissent le myélome symptomatique. Leur présence impose un traitement antitumoral.</div></div>
+  </div>
+  <div class="flip-card" onclick="flipCard(this)">
+    <div class="flip-front"><div class="flip-q-num">Q3</div><div class="flip-q-text">Quel rang de connaissance a la définition du myélome et des critères CRAB ?</div><div class="flip-hint">👆 Appuyer pour révéler</div></div>
+    <div class="flip-back"><div class="flip-answer">Rang A — connaissance indispensable</div><div class="flip-expl">La définition, les critères CRAB, les circonstances de découverte et les examens de base sont rang A et doivent être maîtrisés.</div></div>
+  </div>
+  <div class="flip-card" onclick="flipCard(this)">
+    <div class="flip-front"><div class="flip-q-num">Q4</div><div class="flip-q-text">Quelle situation de départ correspond à l'analyse de l'électrophorèse des protéines sériques ?</div><div class="flip-hint">👆 Appuyer pour révéler</div></div>
+    <div class="flip-back"><div class="flip-answer">Situation de départ 193 (avec astérisque = fait l'objet d'une fiche LiSA)</div><div class="flip-expl">La SD 193 (électrophorèse des protéines sériques) est une fiche LiSA prioritaire — à maîtriser en profondeur pour l'ECN.</div></div>
+  </div>
+</div>
+
+<!-- SLIDE 3: VIGNETTE CLINIQUE -->
+<div class="slide" id="slide-3">
+  <h1 class="slide-title">Vignette clinique d'entrée — Item 320</h1>
+  <div class="vignette">
+    <strong>🩺 Cas clinique</strong>
+    M. M., 72 ans, consulte aux urgences pour <strong>altération de l'état général</strong>. Depuis plusieurs semaines : douleurs osseuses inflammatoires au rachis et aux côtes. Depuis 24h : asthénie majeure, polydipsie et polyurie.
+    Examen clinique : FC = 105/min, signes de déshydratation, pas de déficit neurologique.
+  </div>
+  <div class="content-grid-2">
+    <div class="card">
+      <h4>🧪 Résultats biologiques</h4>
+      <ul class="bullets">
+        <li>Hb : 9,6 g/dL, VGM 98 fL, <strong>arégénérative</strong></li>
+        <li>Créatininémie : 158 µmol/L (<strong>IR</strong>)</li>
+        <li>Calcémie : 3,8 mmol/L (<strong>hypercalcémie sévère</strong>)</li>
+        <li>Protidémie : 92 g/L (<strong>hyperprotidémie</strong>)</li>
+        <li>ECG : tachycardie sinusale</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h4>✅ Examens diagnostiques</h4>
+      <ul class="bullets">
+        <li>EPS : pic IgG kappa = 34 g/L</li>
+        <li>Myélogramme : 32 % de plasmocytes</li>
+        <li>Scanner osseux : nombreuses lésions lytiques (rachis, côtes, bassin)</li>
+        <li>→ <strong>Myélome multiple symptomatique</strong></li>
+        <li>CRAB : A (anémie) + R (IR) + B (lésions) + C (hypercalcémie)</li>
+      </ul>
+    </div>
+  </div>
+  <div class="urgence-box">
+    <strong>⚠️ Urgences identifiées</strong>
+    Hypercalcémie sévère → hyperhydratation + bisphosphonates IV. IR aiguë → hydratation + éviction des néphrotoxiques (AINS, PC iodés). Hospitalisation en hématologie pour traitement antitumoral.
+  </div>
+</div>
+
+<!-- SLIDE 4: QUIZ VIGNETTE -->
+<div class="slide" id="slide-4">
+  <h2 class="slide-title">🃏 Quiz Flash – Vignette clinique</h2>
+  <p style="font-size:.85rem;color:#888;margin-bottom:14px">Appuyez sur chaque carte pour révéler la réponse</p>
+  <div class="flip-card" onclick="flipCard(this)">
+    <div class="flip-front"><div class="flip-q-num">Q1</div><div class="flip-q-text">Dans la vignette, quels critères CRAB sont présents chez M. M. ?</div><div class="flip-hint">👆 Appuyer pour révéler</div></div>
+    <div class="flip-back"><div class="flip-answer">Tous les 4 : C (calcémie 3,8 mmol/L), R (créatinine 158 µmol/L), A (Hb 9,6 g/dL), B (lésions lytiques)</div><div class="flip-expl">Ce cas est un myélome symptomatique avec les 4 critères CRAB présents. Rare mais didactique.</div></div>
+  </div>
+  <div class="flip-card" onclick="flipCard(this)">
+    <div class="flip-front"><div class="flip-q-num">Q2</div><div class="flip-q-text">Pourquoi les AINS sont-ils contre-indiqués dans le myélome multiple ?</div><div class="flip-hint">👆 Appuyer pour révéler</div></div>
+    <div class="flip-back"><div class="flip-answer">Risque d'insuffisance rénale aiguë — aggravée par les AINS chez un patient déjà en IR et à risque de néphropathie à cylindres</div><div class="flip-expl">Point ECN clé : AINS et produits de contraste iodés sont contre-indiqués dans le myélome. Pour la douleur : paliers 2-3, radiothérapie localisée.</div></div>
+  </div>
+  <div class="flip-card" onclick="flipCard(this)">
+    <div class="flip-front"><div class="flip-q-num">Q3</div><div class="flip-q-text">Quel est le traitement d'urgence de l'hypercalcémie sévère dans le myélome ?</div><div class="flip-hint">👆 Appuyer pour révéler</div></div>
+    <div class="flip-back"><div class="flip-answer">Hyperhydratation IV (sérum physiologique, 3 L/m²) + bisphosphonates IV (acide zolédronique) + traitement étiologique</div><div class="flip-expl">L'hypercalcémie est une urgence vitale (troubles du rythme cardiaque). L'ECG est systématique. En cas d'IR sévère associée : discuter épuration extrarénale.</div></div>
+  </div>
+  <div class="flip-card" onclick="flipCard(this)">
+    <div class="flip-front"><div class="flip-q-num">Q4</div><div class="flip-q-text">Que retrouve-t-on à l'électrophorèse des protéines sériques (EPS) en cas de myélome ?</div><div class="flip-hint">👆 Appuyer pour révéler</div></div>
+    <div class="flip-back"><div class="flip-answer">Pic étroit (monoclonal) migrant en zone gamma (ou beta) + immunoparésie (baisse des autres immunoglobulines)</div><div class="flip-expl">Le pic monoclonal est à bande étroite (contrairement aux pics polyclonaux inflammatoires). L'IF confirme le type (IgG, IgA...) et la chaîne légère (kappa ou lambda).</div></div>
+  </div>
+</div>
+
+<!-- SLIDE 5: SECTION I HEADER -->
+<div class="slide" id="slide-5">
+  <div class="slide-section-header">
+    <div class="section-badge">Section I</div>
+    <div class="section-title-lg">Définitions</div>
+    <p class="section-subtitle">GMSI · Myélome indolent · Myélome symptomatique<br>Critères CRAB · Critères SLiM</p>
+  </div>
+</div>
+
+<!-- SLIDE 6: DÉFINITION DU MYÉLOME — GÉNÉRALITÉS -->
+<div class="slide" id="slide-6">
+  <h1 class="slide-title">Myélome multiple — Introduction et épidémiologie</h1>
+  <div class="def-box">
+    <strong>Définition</strong>
+    Le <strong>myélome multiple des os</strong> (anciennement maladie de Kahler) est une hémopathie maligne caractérisée par la <strong>prolifération multifocale de plasmocytes tumoraux</strong> au niveau de la moelle hématopoïétique. Le plasmocyte est la cellule différenciée du lymphocyte B, dont la fonction normale est la synthèse d'immunoglobulines.
+  </div>
+  <div class="content-grid-2">
+    <div class="card">
+      <h4>📊 Épidémiologie clé</h4>
+      <ul class="bullets">
+        <li>1 % de tous les cancers · 10 % des hémopathies malignes</li>
+        <li>~5 000 nouveaux cas/an en France</li>
+        <li><strong>Âge médian au diagnostic : ~70 ans</strong></li>
+        <li>Exposition aux pesticides = facteur de risque reconnu (maladie professionnelle possible)</li>
+        <li>Toujours précédé d'une phase asymptomatique (GMSI et/ou myélome indolent)</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h4>🔬 Physiopathologie</h4>
+      <ul class="bullets">
+        <li>Le plasmocyte tumoral sécrète une immunoglobuline monoclonale (pic M) en excès</li>
+        <li>L'infiltration médullaire → anémie, insuffisance médullaire</li>
+        <li>Les plasmocytes activent les ostéoclastes → lyse osseuse, hypercalcémie</li>
+        <li>Les chaînes légères libres → néphropathie tubulaire (cylindres myélomateux)</li>
+        <li>Immunoparésie → risque infectieux accru</li>
+      </ul>
+    </div>
+  </div>
+  <div class="img-block">
+    <img src="images_myelome/p1_page1.png" class="slide-img" style="max-height:280px" alt="Myélome plan" onclick="openModal(this.src)">
+    <p class="img-caption">Page 1 — Plan du cours Item 320, situations de départ</p>
+  </div>
+</div>
+
+<!-- SLIDE 7: QUIZ SLIDE 6 -->
+<div class="slide" id="slide-7">
+  <h2 class="slide-title">🃏 Quiz Flash – Introduction au myélome</h2>
+  <p style="font-size:.85rem;color:#888;margin-bottom:14px">Appuyez sur chaque carte pour révéler la réponse</p>
+  <div class="flip-card" onclick="flipCard(this)">
+    <div class="flip-front"><div class="flip-q-num">Q1</div><div class="flip-q-text">Quelle est la cellule d'origine du myélome multiple ?</div><div class="flip-hint">👆 Appuyer pour révéler</div></div>
+    <div class="flip-back"><div class="flip-answer">Le plasmocyte — cellule B différenciée, dont la fonction normale est la synthèse d'immunoglobulines</div><div class="flip-expl">Le plasmocyte tumoral sécrète en excès une immunoglobuline monoclonale pathologique. Le myélome multiple = pathologie du lymphocyte B terminal.</div></div>
+  </div>
+  <div class="flip-card" onclick="flipCard(this)">
+    <div class="flip-front"><div class="flip-q-num">Q2</div><div class="flip-q-text">Quel est l'âge médian de diagnostic du myélome multiple, et quel facteur de risque environnemental est reconnu ?</div><div class="flip-hint">👆 Appuyer pour révéler</div></div>
+    <div class="flip-back"><div class="flip-answer">Âge médian ~70 ans — Facteur de risque : exposition prolongée aux pesticides (reconnaissance en maladie professionnelle possible)</div><div class="flip-expl">Le myélome est essentiellement une maladie du sujet âgé. La recherche de comorbidités est déterminante pour le choix thérapeutique.</div></div>
+  </div>
+  <div class="flip-card" onclick="flipCard(this)">
+    <div class="flip-front"><div class="flip-q-num">Q3</div><div class="flip-q-text">Par quel mécanisme le myélome entraîne-t-il une lyse osseuse et une hypercalcémie ?</div><div class="flip-hint">👆 Appuyer pour révéler</div></div>
+    <div class="flip-back"><div class="flip-answer">Les plasmocytes tumoraux sécrètent des cytokines (IL-6, RANKL) qui activent les ostéoclastes → résorption osseuse → libération de calcium</div><div class="flip-expl">Les lésions lytiques sont des lacunes osseuses "à l'emporte-pièce" sans ostéocondensation périphérique. La lyse osseuse est aussi responsable des fractures pathologiques.</div></div>
+  </div>
+  <div class="flip-card" onclick="flipCard(this)">
+    <div class="flip-front"><div class="flip-q-num">Q4</div><div class="flip-q-text">Pourquoi le myélome entraîne-t-il un risque infectieux accru ?</div><div class="flip-hint">👆 Appuyer pour révéler</div></div>
+    <div class="flip-back"><div class="flip-answer">Immunoparésie : les immunoglobulines normales sont diminuées (refoulées par le clone) → déficit en anticorps fonctionnels → infections à germes encapsulés</div><div class="flip-expl">Les infections bactériennes (pneumocoque, méningocoque, Haemophilus) sont la 1ère cause de mortalité dans le myélome. La vaccination est indispensable.</div></div>
+  </div>
+</div>
+
+<!-- SLIDE 8: GMSI -->
+<div class="slide" id="slide-8">
+  <h1 class="slide-title">Gammapathie monoclonale de signification indéterminée (GMSI / MGUS)</h1>
+  <div class="def-box">
+    <strong>Définition GMSI (MGUS) — 3 critères cumulatifs</strong>
+    La GMSI est définie par la <strong>CONJONCTION</strong> des 3 éléments suivants :
+    <ol style="padding-left:20px;margin-top:8px;font-size:.9rem;line-height:1.65">
+      <li>Pic monoclonal sérique <strong>&lt; 30 g/L</strong></li>
+      <li>Plasmocytose médullaire <strong>&lt; 10 %</strong></li>
+      <li><strong>Absence de symptômes CRAB</strong> attribuables au clone</li>
+    </ol>
+  </div>
+  <div class="content-grid-2">
+    <div class="card">
+      <h4>📈 Épidémiologie de la GMSI</h4>
+      <ul class="bullets">
+        <li>Prévalence > 5 % des sujets après 70 ans</li>
+        <li>Risque de progression vers hémopathie : <strong>~1 % par an</strong></li>
+        <li>Évolution possible vers : myélome (IgG, IgA, chaînes légères), Waldenström (IgM), amylose AL, lymphome B indolent</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h4>🔍 Prise en charge de la GMSI</h4>
+      <ul class="bullets">
+        <li>Pas de traitement — <strong>surveillance clinique et biologique annuelle</strong></li>
+        <li>Surveillance : EPS, NFS, calcémie, créatinine, protéinurie</li>
+        <li>Pas de bilan osseux systématique (sauf symptôme)</li>
+        <li>Informer le patient du risque évolutif (faible mais réel)</li>
+      </ul>
+    </div>
+  </div>
+  <div class="info-box">
+    <strong>Point clé ECN</strong>
+    La découverte d'une GMSI NE requiert PAS de traitement. Seule une surveillance est nécessaire. C'est une entité bénigne mais à surveiller car précurseur obligatoire du myélome.
+  </div>
+</div>
+
+<!-- SLIDE 9: QUIZ GMSI -->
+<div class="slide" id="slide-9">
+  <h2 class="slide-title">🃏 Quiz Flash – GMSI</h2>
+  <p style="font-size:.85rem;color:#888;margin-bottom:14px">Appuyez sur chaque carte pour révéler la réponse</p>
+  <div class="flip-card" onclick="flipCard(this)">
+    <div class="flip-front"><div class="flip-q-num">Q1</div><div class="flip-q-text">Citez les 3 critères définissant une GMSI.</div><div class="flip-hint">👆 Appuyer pour révéler</div></div>
+    <div class="flip-back"><div class="flip-answer">Pic monoclonal &lt; 30 g/L + plasmocytose médullaire &lt; 10 % + absence de symptômes CRAB</div><div class="flip-expl">Les 3 critères doivent être présents simultanément. Si l'un manque (pic > 30, plasmo > 10% ou CRAB présent), on sort de la GMSI.</div></div>
+  </div>
+  <div class="flip-card" onclick="flipCard(this)">
+    <div class="flip-front"><div class="flip-q-num">Q2</div><div class="flip-q-text">Quel est le risque de progression d'une GMSI vers une hémopathie maligne ?</div><div class="flip-hint">👆 Appuyer pour révéler</div></div>
+    <div class="flip-back"><div class="flip-answer">~1 % par an (risque faible mais cumulatif)</div><div class="flip-expl">Après 10 ans, environ 10 % des GMSI ont évolué. La surveillance annuelle permet de détecter précocement la progression.</div></div>
+  </div>
+  <div class="flip-card" onclick="flipCard(this)">
+    <div class="flip-front"><div class="flip-q-num">Q3</div><div class="flip-q-text">Une GMSI de type IgM évolue préférentiellement vers quelle hémopathie ?</div><div class="flip-hint">👆 Appuyer pour révéler</div></div>
+    <div class="flip-back"><div class="flip-answer">Maladie de Waldenström (lymphome lymphoplasmocytaire à IgM)</div><div class="flip-expl">Les GMSI IgG et IgA évoluent plutôt vers le myélome. Les GMSI IgM → Waldenström, lymphome B indolent, amylose AL à IgM.</div></div>
+  </div>
+  <div class="flip-card" onclick="flipCard(this)">
+    <div class="flip-front"><div class="flip-q-num">Q4</div><div class="flip-q-text">Quel est le traitement d'une GMSI et la surveillance recommandée ?</div><div class="flip-hint">👆 Appuyer pour révéler</div></div>
+    <div class="flip-back"><div class="flip-answer">Pas de traitement. Surveillance clinique et biologique annuelle (EPS, NFS, calcémie, créatinine, protéinurie)</div><div class="flip-expl">La GMSI est une entité bénigne qui ne nécessite pas de traitement. La surveillance permet de détecter une progression avant l'apparition de complications.</div></div>
+  </div>
+</div>
+
+<!-- SLIDE 10: MYÉLOME INDOLENT + SYMPTOMATIQUE + CRAB/SLiM -->
+<div class="slide" id="slide-10">
+  <h1 class="slide-title">Myélome indolent vs Myélome symptomatique — CRAB &amp; SLiM</h1>
+  <div class="def-box">
+    <strong>Myélome indolent (MI)</strong>
+    Patient <strong>asymptomatique</strong> (sans CRAB) avec : pic monoclonal &gt; 30 g/L <strong>OU</strong> plasmocytose médullaire &gt; 10 %.
+    Risque de progression vers le myélome symptomatique : 10 % par an. <strong>Surveillance seule si pas de critère SLiM.</strong>
+  </div>
+  <div class="urgence-box">
+    <strong>🚨 Critères SLiM → traitement OBLIGATOIRE même sans CRAB</strong>
+    <ul style="margin-top:8px;padding-left:18px;font-size:.88rem;line-height:1.65">
+      <li><strong>S</strong>ixty — plasmocytose médullaire ≥ 60 %</li>
+      <li><strong>Li</strong>ght — ratio de chaînes légères libres sériques ≥ 100</li>
+      <li><strong>M</strong>RI — ≥ 2 lésions focales à l'IRM</li>
+    </ul>
+  </div>
+  <div class="table-wrap">
+    <table>
+      <tr><th>Entité</th><th>Pic M</th><th>Plasmo médullaire</th><th>CRAB</th><th>SLiM</th><th>Traitement</th></tr>
+      <tr><td>GMSI</td><td>&lt;30 g/L</td><td>&lt;10 %</td><td>Absent</td><td>Absent</td><td>Surveillance</td></tr>
+      <tr><td>Myélome indolent</td><td>&gt;30 g/L ou</td><td>&gt;10 %</td><td>Absent</td><td>Absent</td><td>Surveillance</td></tr>
+      <tr><td style="color:#e74c3c"><strong>Myélome symptomatique</strong></td><td>Variable</td><td>&gt;10 %</td><td><strong>≥1 présent</strong></td><td>et/ou ≥1</td><td><strong>Traitement</strong></td></tr>
+    </table>
+  </div>
+</div>
+
+<!-- SLIDE 11: QUIZ CRAB/SLiM -->
+<div class="slide" id="slide-11">
+  <h2 class="slide-title">🃏 Quiz Flash – CRAB et SLiM</h2>
+  <p style="font-size:.85rem;color:#888;margin-bottom:14px">Appuyez sur chaque carte pour révéler la réponse</p>
+  <div class="flip-card" onclick="flipCard(this)">
+    <div class="flip-front"><div class="flip-q-num">Q1</div><div class="flip-q-text">Développez les 4 lettres de l'acronyme CRAB et donnez le critère chiffré pour R et A.</div><div class="flip-hint">👆 Appuyer pour révéler</div></div>
+    <div class="flip-back"><div class="flip-answer">C = Hypercalcémie (>2,75 mmol/L ou +0,25 au-dessus de la normale) · R = Insuffisance Rénale (DFG &lt;40 mL/min ou créatinine >177 µmol/L) · A = Anémie (Hb &lt;10 g/dL) · B = lésions osseuses (Bone)</div><div class="flip-expl">Les seuils de R et A sont à connaître. La présence d'au moins un critère CRAB définit le myélome symptomatique nécessitant un traitement.</div></div>
+  </div>
+  <div class="flip-card" onclick="flipCard(this)">
+    <div class="flip-front"><div class="flip-q-num">Q2</div><div class="flip-q-text">Développez les critères SLiM et expliquez pourquoi ils déclenchent un traitement même sans CRAB.</div><div class="flip-hint">👆 Appuyer pour révéler</div></div>
+    <div class="flip-back"><div class="flip-answer">S = plasmocytose ≥60 % · Li = ratio CLL ≥100 · M = ≥2 lésions IRM. Ces critères signalent un haut risque de progression imminente vers le myélome symptomatique.</div><div class="flip-expl">Ces patients sont maintenant traités comme des myélomes symptomatiques, même sans CRAB, car le risque de complications à court terme est très élevé.</div></div>
+  </div>
+  <div class="flip-card" onclick="flipCard(this)">
+    <div class="flip-front"><div class="flip-q-num">Q3</div><div class="flip-q-text">Quelle est la différence entre GMSI et myélome indolent ?</div><div class="flip-hint">👆 Appuyer pour révéler</div></div>
+    <div class="flip-back"><div class="flip-answer">GMSI : pic &lt;30 g/L ET plasmo &lt;10 % · MI : pic &gt;30 g/L OU plasmo &gt;10 % — mais les deux sont ASYMPTOMATIQUES (sans CRAB)</div><div class="flip-expl">La distinction porte sur les seuils biologiques. La gestion est identique (surveillance) tant qu'il n'y a pas de CRAB ni de SLiM.</div></div>
+  </div>
+  <div class="flip-card" onclick="flipCard(this)">
+    <div class="flip-front"><div class="flip-q-num">Q4</div><div class="flip-q-text">À quelle fréquence surveille-t-on un myélome indolent sans critère SLiM ?</div><div class="flip-hint">👆 Appuyer pour révéler</div></div>
+    <div class="flip-back"><div class="flip-answer">Tous les 3 à 6 mois (surveillance clinique + EPS + NFS + calcémie + créatinine)</div><div class="flip-expl">Le rythme de surveillance du MI est plus rapproché que la GMSI (annuelle) car le risque de progression est plus élevé (~10%/an vs ~1%/an).</div></div>
+  </div>
+</div>
+
+<!-- SLIDE 12: QCM SECTION I -->
+<div class="slide" id="slide-12">
+  <h2 class="slide-title">📝 QCM — Section I : Définitions</h2>
+  <div class="qcm-block">
+    <div class="qcm-q"><span>Q1</span>Parmi les propositions, laquelle définit correctement une GMSI ?</div>
+    <label class="qcm-opt" onclick="selectOption(this)"><input type="radio" name="q12_1"> Pic &lt; 30 g/L, plasmocytose &lt; 10 % et présence d'une anémie</label>
+    <label class="qcm-opt correct-ans" onclick="selectOption(this)"><input type="radio" name="q12_1"> Pic &lt; 30 g/L, plasmocytose &lt; 10 % et absence de tout critère CRAB</label>
+    <label class="qcm-opt" onclick="selectOption(this)"><input type="radio" name="q12_1"> Pic &gt; 30 g/L, plasmocytose &lt; 10 % et absence de CRAB</label>
+    <label class="qcm-opt" onclick="selectOption(this)"><input type="radio" name="q12_1"> Plasmocytose &lt; 10 % et présence d'une anémie</label>
+    <div class="qcm-expl">La GMSI requiert les 3 critères : pic &lt;30 g/L + plasmo &lt;10% + absence de CRAB. Si l'un est absent, on sort de la définition.</div>
+  </div>
+  <div class="qcm-block">
+    <div class="qcm-q"><span>Q2</span>Quel critère SLiM impose à lui seul le traitement d'un myélome indolent ?</div>
+    <label class="qcm-opt" onclick="selectOption(this)"><input type="radio" name="q12_2"> Ratio de chaînes légères libres ≥ 50</label>
+    <label class="qcm-opt correct-ans" onclick="selectOption(this)"><input type="radio" name="q12_2"> Plasmocytose médullaire ≥ 60 %</label>
+    <label class="qcm-opt" onclick="selectOption(this)"><input type="radio" name="q12_2"> Présence d'une seule lésion focale à l'IRM</label>
+    <label class="qcm-opt" onclick="selectOption(this)"><input type="radio" name="q12_2"> Pic monoclonal &gt; 50 g/L</label>
+    <div class="qcm-expl">Les 3 critères SLiM sont : S = plasmo ≥60%, Li = ratio CLL ≥100, M = ≥2 lésions IRM. Une seule lésion IRM ne suffit pas.</div>
+  </div>
+  <div class="qcm-block">
+    <div class="qcm-q"><span>Q3</span>Quel est le seuil de créatinine définissant le critère R (Renal) des CRAB ?</div>
+    <label class="qcm-opt" onclick="selectOption(this)"><input type="radio" name="q12_3"> Créatinine &gt; 130 µmol/L</label>
+    <label class="qcm-opt correct-ans" onclick="selectOption(this)"><input type="radio" name="q12_3"> Créatinine &gt; 177 µmol/L ou DFG &lt; 40 mL/min</label>
+    <label class="qcm-opt" onclick="selectOption(this)"><input type="radio" name="q12_3"> Créatinine &gt; 100 µmol/L</label>
+    <label class="qcm-opt" onclick="selectOption(this)"><input type="radio" name="q12_3"> DFG &lt; 60 mL/min</label>
+    <div class="qcm-expl">Le critère R est défini par créatinine &gt;177 µmol/L ou DFG &lt;40 mL/min. Ce seuil est plus sévère que la simple réduction du DFG.</div>
+  </div>
+  <div class="qcm-block">
+    <div class="qcm-q"><span>Q4</span>À quelle fréquence surveille-t-on une GMSI sans facteur de risque ?</div>
+    <label class="qcm-opt" onclick="selectOption(this)"><input type="radio" name="q12_4"> Tous les 3 mois</label>
+    <label class="qcm-opt" onclick="selectOption(this)"><input type="radio" name="q12_4"> Tous les 6 mois</label>
+    <label class="qcm-opt correct-ans" onclick="selectOption(this)"><input type="radio" name="q12_4"> Tous les ans</label>
+    <label class="qcm-opt" onclick="selectOption(this)"><input type="radio" name="q12_4"> Aucune surveillance nécessaire</label>
+    <div class="qcm-expl">La GMSI se surveille annuellement. Le myélome indolent tous les 3-6 mois (risque de progression plus élevé).</div>
+  </div>
+  <div class="qcm-block">
+    <div class="qcm-q"><span>Q5</span>Quelle est la définition de l'anémie selon les critères CRAB ?</div>
+    <label class="qcm-opt" onclick="selectOption(this)"><input type="radio" name="q12_5"> Hb &lt; 12 g/dL</label>
+    <label class="qcm-opt correct-ans" onclick="selectOption(this)"><input type="radio" name="q12_5"> Hb &lt; 10 g/dL ou &gt; 2 g/dL en dessous de la valeur de base</label>
+    <label class="qcm-opt" onclick="selectOption(this)"><input type="radio" name="q12_5"> Hb &lt; 11 g/dL chez la femme ou &lt; 12 g/dL chez l'homme</label>
+    <label class="qcm-opt" onclick="selectOption(this)"><input type="radio" name="q12_5"> Hb &lt; 8 g/dL uniquement</label>
+    <div class="qcm-expl">Le critère A est : Hb &lt;10 g/dL OU chute &gt;2 g/dL par rapport à la valeur habituelle. Même une anémie modérée mais significative compte.</div>
+  </div>
+  <div class="qcm-block">
+    <div class="qcm-q"><span>Q6</span>Un patient a un pic IgG = 25 g/L, une plasmocytose médullaire de 8 % et pas de signe CRAB. Quel est le diagnostic ?</div>
+    <label class="qcm-opt correct-ans" onclick="selectOption(this)"><input type="radio" name="q12_6"> GMSI</label>
+    <label class="qcm-opt" onclick="selectOption(this)"><input type="radio" name="q12_6"> Myélome indolent</label>
+    <label class="qcm-opt" onclick="selectOption(this)"><input type="radio" name="q12_6"> Myélome symptomatique</label>
+    <label class="qcm-opt" onclick="selectOption(this)"><input type="radio" name="q12_6"> Maladie de Waldenström</label>
+    <div class="qcm-expl">Pic &lt;30 g/L + plasmo &lt;10% + absence de CRAB = GMSI. Surveillance annuelle, pas de traitement.</div>
+  </div>
+  <div class="qcm-block">
+    <div class="qcm-q"><span>Q7</span>Le myélome multiple est toujours précédé par :</div>
+    <label class="qcm-opt" onclick="selectOption(this)"><input type="radio" name="q12_7"> Une leucémie lymphoïde chronique</label>
+    <label class="qcm-opt correct-ans" onclick="selectOption(this)"><input type="radio" name="q12_7"> Une phase asymptomatique (GMSI et/ou myélome indolent)</label>
+    <label class="qcm-opt" onclick="selectOption(this)"><input type="radio" name="q12_7"> Une amylose systémique</label>
+    <label class="qcm-opt" onclick="selectOption(this)"><input type="radio" name="q12_7"> Une thrombocytémie essentielle</label>
+    <div class="qcm-expl">Le myélome est toujours précédé d'une GMSI et/ou d'un myélome indolent, souvent non diagnostiqués car asymptomatiques.</div>
+  </div>
+  <div class="qcm-block">
+    <div class="qcm-q"><span>Q8</span>Quel est le risque de progression d'un myélome indolent vers le myélome symptomatique ?</div>
+    <label class="qcm-opt" onclick="selectOption(this)"><input type="radio" name="q12_8"> 1 % par an</label>
+    <label class="qcm-opt correct-ans" onclick="selectOption(this)"><input type="radio" name="q12_8"> 10 % par an</label>
+    <label class="qcm-opt" onclick="selectOption(this)"><input type="radio" name="q12_8"> 25 % par an</label>
+    <label class="qcm-opt" onclick="selectOption(this)"><input type="radio" name="q12_8"> 50 % par an</label>
+    <div class="qcm-expl">MI → 10%/an de risque de progression (GMSI → 1%/an). C'est pourquoi le MI se surveille plus étroitement (3-6 mois vs annuel).</div>
+  </div>
+  <div class="qcm-block">
+    <div class="qcm-q"><span>Q9</span>Un patient a un ratio de chaînes légères libres sériques (kappa/lambda) à 120. Que faut-il conclure, si par ailleurs la plasmocytose est de 15 % et le pic est de 25 g/L ?</div>
+    <label class="qcm-opt" onclick="selectOption(this)"><input type="radio" name="q12_9"> GMSI — surveillance annuelle</label>
+    <label class="qcm-opt" onclick="selectOption(this)"><input type="radio" name="q12_9"> Myélome indolent sans critère SLiM — surveillance 3-6 mois</label>
+    <label class="qcm-opt correct-ans" onclick="selectOption(this)"><input type="radio" name="q12_9"> Myélome symptomatique par critère SLiM (ratio CLL ≥ 100) — traitement</label>
+    <label class="qcm-opt" onclick="selectOption(this)"><input type="radio" name="q12_9"> Amylose AL</label>
+    <div class="qcm-expl">Ratio CLL ≥100 est un critère SLiM qui impose le traitement même sans CRAB. Ce patient a aussi une plasmocytose &gt;10% = MI par définition, mais le SLiM impose le traitement.</div>
+  </div>
+  <div class="qcm-block">
+    <div class="qcm-q"><span>Q10</span>Quelle est la particularité du myélome à chaînes légères par rapport aux autres types ?</div>
+    <label class="qcm-opt" onclick="selectOption(this)"><input type="radio" name="q12_10"> Il est de meilleur pronostic</label>
+    <label class="qcm-opt" onclick="selectOption(this)"><input type="radio" name="q12_10"> Il ne nécessite pas de traitement</label>
+    <label class="qcm-opt correct-ans" onclick="selectOption(this)"><input type="radio" name="q12_10"> L'EPS peut ne pas montrer de pic — le diagnostic repose sur la biochimie urinaire et les chaînes légères libres sériques</label>
+    <label class="qcm-opt" onclick="selectOption(this)"><input type="radio" name="q12_10"> Il ne touche que les personnes jeunes</label>
+    <div class="qcm-expl">20% des myélomes ne synthétisent que des chaînes légères. L'EPS montre seulement une hypogammaglobulinémie. Le diagnostic repose sur les CLL sériques et l'immunofixation urinaire (protéinurie de Bence-Jones).</div>
+  </div>
+  <button class="validate-btn" onclick="validateQCM(this, 'section1_mm')">Valider mes réponses</button>
+  <div class="score-display" id="score-section1_mm"></div>
+</div>
+
+<!-- SLIDE 13: DOSSIER PROGRESSIF SECTION I -->
+<div class="slide" id="slide-13">
+  <h2 class="slide-title">🏥 Dossier Progressif — Section I : Définitions</h2>
+  <div class="dp-case">
+    <strong>🩺 Cas clinique</strong>
+    Mme D., 65 ans, sans antécédent particulier, consulte son médecin généraliste pour un bilan systématique. L'EPS réalisée dans le cadre d'un bilan de santé montre un pic à bande étroite en zone gamma évalué à 18 g/L. L'immunofixation confirme une IgA kappa monoclonale. Le reste du bilan est normal : NFS normale, créatinine 78 µmol/L, calcémie normale. Le médecin décide de compléter le bilan.
+  </div>
+  <div class="qcm-block">
+    <div class="qcm-q"><span>Q1</span>Quel est le diagnostic le plus probable chez Mme D. ?</div>
+    <label class="qcm-opt" onclick="selectOption(this)"><input type="radio" name="dp1_1"> Myélome multiple symptomatique</label>
+    <label class="qcm-opt correct-ans" onclick="selectOption(this)"><input type="radio" name="dp1_1"> Gammapathie monoclonale de signification indéterminée (GMSI)</label>
+    <label class="qcm-opt" onclick="selectOption(this)"><input type="radio" name="dp1_1"> Myélome indolent</label>
+    <label class="qcm-opt" onclick="selectOption(this)"><input type="radio" name="dp1_1"> Maladie de Waldenström</label>
+    <div class="qcm-expl">Pic &lt;30 g/L (18 g/L) + pas de signe CRAB + bilan normal = GMSI. Il faut encore confirmer la plasmocytose médullaire &lt;10%.</div>
+  </div>
+  <div class="qcm-block">
+    <div class="qcm-q"><span>Q2</span>Quel examen est nécessaire pour compléter le bilan et confirmer le diagnostic ?</div>
+    <label class="qcm-opt" onclick="selectOption(this)"><input type="radio" name="dp1_2"> TEP-scanner corps entier d'emblée</label>
+    <label class="qcm-opt correct-ans" onclick="selectOption(this)"><input type="radio" name="dp1_2"> Myélogramme pour quantifier la plasmocytose médullaire</label>
+    <label class="qcm-opt" onclick="selectOption(this)"><input type="radio" name="dp1_2"> Scanner osseux corps entier</label>
+    <label class="qcm-opt" onclick="selectOption(this)"><input type="radio" name="dp1_2"> Biopsie ostéomédullaire en urgence</label>
+    <div class="qcm-expl">Le myélogramme permet de confirmer la plasmocytose &lt;10% — critère indispensable à la définition de la GMSI.</div>
+  </div>
+  <div class="qcm-block">
+    <div class="qcm-q"><span>Q3</span>Le myélogramme montre 7 % de plasmocytes morphologiquement normaux. Quelle prise en charge proposer ?</div>
+    <label class="qcm-opt" onclick="selectOption(this)"><input type="radio" name="dp1_3"> Initier un traitement par lénalidomide</label>
+    <label class="qcm-opt correct-ans" onclick="selectOption(this)"><input type="radio" name="dp1_3"> Surveillance clinique et biologique annuelle sans traitement</label>
+    <label class="qcm-opt" onclick="selectOption(this)"><input type="radio" name="dp1_3"> Surveillance tous les 3 mois</label>
+    <label class="qcm-opt" onclick="selectOption(this)"><input type="radio" name="dp1_3"> Hospitalisation pour bilan complémentaire urgent</label>
+    <div class="qcm-expl">GMSI confirmée (pic 18 g/L &lt;30, plasmo 7% &lt;10%, sans CRAB) → surveillance annuelle sans traitement. Risque de progression ~1%/an.</div>
+  </div>
+  <div class="qcm-block">
+    <div class="qcm-q"><span>Q4</span>4 ans plus tard, le pic est à 32 g/L, la plasmocytose à 12 % et la patiente reste asymptomatique sans CRAB. Quel est le nouveau diagnostic ?</div>
+    <label class="qcm-opt" onclick="selectOption(this)"><input type="radio" name="dp1_4"> GMSI — pas de changement diagnostique</label>
+    <label class="qcm-opt correct-ans" onclick="selectOption(this)"><input type="radio" name="dp1_4"> Myélome indolent — surveillance renforcée tous les 3-6 mois</label>
+    <label class="qcm-opt" onclick="selectOption(this)"><input type="radio" name="dp1_4"> Myélome symptomatique — initier le traitement</label>
+    <label class="qcm-opt" onclick="selectOption(this)"><input type="radio" name="dp1_4"> Amylose AL — bilan spécifique</label>
+    <div class="qcm-expl">Pic &gt;30 g/L ET plasmo &gt;10% sans CRAB = myélome indolent. Surveillance renforcée (3-6 mois). Pas de traitement sauf critère SLiM.</div>
+  </div>
+  <div class="qcm-block">
+    <div class="qcm-q"><span>Q5</span>1 an après, la patiente présente un ratio de chaînes légères libres sériques à 130 et une IRM montrant 3 lésions focales osseuses. Que faire ?</div>
+    <label class="qcm-opt" onclick="selectOption(this)"><input type="radio" name="dp1_5"> Continuer la surveillance sans traitement (pas de CRAB)</label>
+    <label class="qcm-opt" onclick="selectOption(this)"><input type="radio" name="dp1_5"> Initier le traitement uniquement si les lésions douloureuses</label>
+    <label class="qcm-opt correct-ans" onclick="selectOption(this)"><input type="radio" name="dp1_5"> Initier le traitement antitumoral — 2 critères SLiM présents (Li ≥100 et M ≥2 lésions IRM)</label>
+    <label class="qcm-opt" onclick="selectOption(this)"><input type="radio" name="dp1_5"> Attendre l'apparition de symptômes CRAB</label>
+    <div class="qcm-expl">2 critères SLiM présents (Li=130≥100 et M=3 lésions ≥2) → traitement obligatoire, même sans CRAB. Ces patients ont un risque d'évolution à très court terme.</div>
+  </div>
+  <button class="validate-btn" onclick="validateQCM(this, 'dp1_mm')">Valider mes réponses</button>
+  <div class="score-display" id="score-dp1_mm"></div>
+</div>
+
+<!-- SLIDE 14: RÉSUMÉ SECTION I -->
+<div class="slide" id="slide-14">
+  <h2 class="slide-title">📋 Résumé — Section I : Définitions</h2>
+  <div class="resume-block">
+    <h4>🔑 À retenir absolument</h4>
+    <ul>
+      <li><strong>GMSI</strong> : pic &lt;30 g/L + plasmo &lt;10% + sans CRAB → surveillance annuelle, pas de traitement</li>
+      <li><strong>Myélome indolent</strong> : pic &gt;30 g/L ou plasmo &gt;10% + sans CRAB ni SLiM → surveillance 3-6 mois</li>
+      <li><strong>Myélome symptomatique</strong> : plasmo &gt;10% + CRAB ≥1 et/ou SLiM ≥1 → <strong>traitement obligatoire</strong></li>
+      <li><strong>Critères CRAB</strong> : C (calcémie &gt;2,75 mmol/L), R (créatinine &gt;177 µmol/L ou DFG &lt;40), A (Hb &lt;10 g/dL), B (lésion lytique)</li>
+      <li><strong>Critères SLiM</strong> : S (plasmo ≥60%), Li (ratio CLL ≥100), M (≥2 lésions IRM)</li>
+      <li>La <strong>GMSI de type IgM</strong> évolue vers la maladie de Waldenström, pas vers le myélome</li>
+      <li>Risque GMSI → myélome : <strong>1%/an</strong> · Risque MI → myélome : <strong>10%/an</strong></li>
+      <li><strong>Myélome à chaînes légères (20%)</strong> : EPS sans pic — diagnostic sur CLL sériques + immunofixation urinaire</li>
+    </ul>
+  </div>
+  <div class="success-box">
+    <strong>Point ECN incontournable</strong>
+    GMSI et myélome indolent = PAS de traitement. Seul le myélome symptomatique (CRAB ou SLiM) est traité. Ne pas initier de traitement chez une GMSI est un point discriminant à l'examen.
+  </div>
+</div>
+
+<div class="slide" id="slide-15">
+  <h1 class="slide-title">Section II — Diagnostic différentiel</h1>
+  <div class="section-banner" style="background:linear-gradient(135deg,rgba(155,89,182,.25),rgba(142,68,173,.15));border:1px solid rgba(155,89,182,.4)">
+    <div style="font-size:2.2rem;margin-bottom:10px">🔍</div>
+    <h2 style="color:#9b59b6;margin:0 0 6px 0;font-size:1.4rem">Distinguer le myélome de ses proches</h2>
+    <p style="color:#ccc;font-size:.92rem;margin:0">Waldenström · Amylose AL · Plasmocytome · LLC</p>
+  </div>
+  <div class="content-grid-2" style="margin-top:16px">
+    <div class="card">
+      <h4>🎯 Objectifs</h4>
+      <ul class="bullets">
+        <li>Distinguer myélome des autres gammapathies monoclonales</li>
+        <li>Identifier les critères spécifiques à chaque entité</li>
+        <li>Ne pas confondre avec GMSI ou MI</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h4>📚 Rang A — À connaître absolument</h4>
+      <ul class="bullets">
+        <li>Waldenström : IgM uniquement</li>
+        <li>Amylose AL : dépôts d'immunoglobulines</li>
+        <li>LLC : lymphocytes B matures circulants</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="slide" id="slide-16">
+  <h1 class="slide-title">Macroglobulinémie de Waldenström</h1>
+  <div class="def-box">
+    <strong>Définition (rang A)</strong>
+    Hémopathie lymphoplasmocytaire caractérisée par une infiltration médullaire lymphoplasmocytaire et la sécrétion d'une <strong>IgM monoclonale</strong>. Associée à une mutation <strong>MYD88 L265P</strong> dans &gt;90% des cas.
+  </div>
+  <div class="content-grid-2">
+    <div class="card">
+      <h4>🔑 Critères diagnostiques</h4>
+      <ul class="bullets">
+        <li>Pic <strong>IgM monoclonal</strong> (quel que soit le taux)</li>
+        <li>Infiltration médullaire &gt;10% de lymphoplasmocytes</li>
+        <li>Mutation MYD88 L265P (90%)</li>
+        <li>Pas de critères MM (pas de lésions osseuses)</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h4>🩺 Manifestations spécifiques</h4>
+      <ul class="bullets">
+        <li><strong>Syndrome d'hyperviscosité</strong> : céphalées, troubles visuels, épistaxis</li>
+        <li>Adénopathies + splénomégalie (≠ MM)</li>
+        <li>Neuropathie périphérique</li>
+        <li>Cryoglobulinémie</li>
+      </ul>
+    </div>
+  </div>
+  <div class="urgence-box" style="margin-top:12px">
+    <strong>⚠️ Piège fréquent</strong>
+    Un pic IgM ne signifie pas Waldenström : une GMSI peut aussi sécréter une IgM. Le diagnostic de Waldenström requiert l'infiltration médullaire et/ou les manifestations cliniques.
+  </div>
+  <div class="success-box" style="margin-top:10px">
+    <strong>Différence clé MM vs Waldenström</strong>
+    MM = IgG/IgA/IgD/chaînes légères · lésions osseuses · plasmocytes médullaires &gt;10%. Waldenström = IgM · lymphoplasmocytes · pas d'ostéolyse.
+  </div>
+</div>
+
+<div class="slide" id="slide-17">
+  <h2 class="slide-title">🃏 Quiz Flash — Waldenström</h2>
+  <p style="font-size:.85rem;color:#888;margin-bottom:14px">Appuyez sur chaque carte pour révéler la réponse</p>
+  <div class="flip-card" onclick="flipCard(this)">
+    <div class="flip-front"><div class="flip-q-num">Q1</div><div class="flip-q-text">Quel type d'immunoglobuline est pathognomonique de la macroglobulinémie de Waldenström ?</div><div class="flip-hint">👆 Appuyer pour révéler</div></div>
+    <div class="flip-back"><div class="flip-answer">IgM monoclonale</div><div class="flip-expl">Seule l'IgM est sécrétée dans Waldenström. Un MM peut sécréter IgG, IgA, IgD mais jamais IgM.</div></div>
+  </div>
+  <div class="flip-card" onclick="flipCard(this)">
+    <div class="flip-front"><div class="flip-q-num">Q2</div><div class="flip-q-text">Quelle mutation est retrouvée dans >90% des Waldenström ?</div><div class="flip-hint">👆 Appuyer pour révéler</div></div>
+    <div class="flip-back"><div class="flip-answer">MYD88 L265P</div><div class="flip-expl">Mutation du gène MYD88 (voie NF-kB). Très spécifique mais aussi retrouvée dans d'autres lymphomes B.</div></div>
+  </div>
+  <div class="flip-card" onclick="flipCard(this)">
+    <div class="flip-front"><div class="flip-q-num">Q3</div><div class="flip-q-text">Quelle manifestation clinique est spécifique à Waldenström et absente du myélome ?</div><div class="flip-hint">👆 Appuyer pour révéler</div></div>
+    <div class="flip-back"><div class="flip-answer">Syndrome d'hyperviscosité (céphalées, flou visuel, épistaxis) + adénopathies</div><div class="flip-expl">L'IgM est une grosse molécule pentamérique (900 kDa) qui augmente fortement la viscosité sanguine.</div></div>
+  </div>
+  <div class="flip-card" onclick="flipCard(this)">
+    <div class="flip-front"><div class="flip-q-num">Q4</div><div class="flip-q-text">Peut-on avoir une GMSI à IgM ? Comment la différencier de Waldenström ?</div><div class="flip-hint">👆 Appuyer pour révéler</div></div>
+    <div class="flip-back"><div class="flip-answer">Oui. GMSI-IgM = infiltration médullaire &lt;10%, pas de manifestations cliniques</div><div class="flip-expl">Waldenström nécessite une infiltration &gt;10% et/ou des manifestations cliniques liées à l'IgM.</div></div>
+  </div>
+</div>
+
+<div class="slide" id="slide-18">
+  <h1 class="slide-title">Amylose AL et autres gammapathies</h1>
+  <div class="def-box">
+    <strong>Amylose AL (rang A)</strong>
+    Dépôt systémique de <strong>chaînes légères monoclonales mal repliées</strong> (amyloïdes). Peut compliquer un MM ou survenir isolément. Atteinte multi-organes : rein, cœur, foie, nerfs.
+  </div>
+  <div class="content-grid-2" style="margin-top:12px">
+    <div class="card">
+      <h4>🫀 Organes cibles de l'amylose AL</h4>
+      <ul class="bullets">
+        <li><strong>Rein</strong> : syndrome néphrotique, insuffisance rénale</li>
+        <li><strong>Cœur</strong> : cardiomyopathie restrictive (épaississement septum)</li>
+        <li><strong>Foie</strong> : hépatomégalie, cholestase</li>
+        <li><strong>Nerfs</strong> : neuropathie périphérique</li>
+        <li><strong>Macroglossie</strong> : quasi pathognomonique</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h4>🔍 Autres diagnostics différentiels</h4>
+      <ul class="bullets">
+        <li><strong>Plasmocytome solitaire</strong> : lésion osseuse unique, plasmocytes médullaires normaux</li>
+        <li><strong>LLC/Leucémie lymphoïde</strong> : lymphocytes B CD5+ (≠ plasmocytes)</li>
+        <li><strong>Métastases osseuses</strong> : lésions multiples, mais pas de pic monoclonal</li>
+        <li><strong>Myélome non sécrétant</strong> : pas de pic, diagnostic difficile</li>
+      </ul>
+    </div>
+  </div>
+  <div class="info-box" style="margin-top:10px">
+    <strong>🔎 Bilan d'amylose</strong>
+    Confirmation par biopsie (graisse abdominale, glandes salivaires, rectum) + coloration rouge Congo. L'amylose peut coexister avec un MM actif.
+  </div>
+</div>
+
+<div class="slide" id="slide-19">
+  <h2 class="slide-title">🃏 Quiz Flash — Diagnostics différentiels</h2>
+  <p style="font-size:.85rem;color:#888;margin-bottom:14px">Appuyez sur chaque carte pour révéler la réponse</p>
+  <div class="flip-card" onclick="flipCard(this)">
+    <div class="flip-front"><div class="flip-q-num">Q1</div><div class="flip-q-text">Quel signe clinique est quasi pathognomonique de l'amylose AL ?</div><div class="flip-hint">👆 Appuyer pour révéler</div></div>
+    <div class="flip-back"><div class="flip-answer">Macroglossie</div><div class="flip-expl">L'hypertrophie de la langue par dépôts amyloïdes est très évocatrice. Aussi : periorbital purpura.</div></div>
+  </div>
+  <div class="flip-card" onclick="flipCard(this)">
+    <div class="flip-front"><div class="flip-q-num">Q2</div><div class="flip-q-text">Comment confirme-t-on le diagnostic d'amylose ?</div><div class="flip-hint">👆 Appuyer pour révéler</div></div>
+    <div class="flip-back"><div class="flip-answer">Biopsie (graisse abdominale/glandes salivaires) + coloration rouge Congo (biréfringence verte en lumière polarisée)</div><div class="flip-expl">Le rouge Congo et la biréfringence sont les marqueurs histologiques de référence de l'amylose.</div></div>
+  </div>
+  <div class="flip-card" onclick="flipCard(this)">
+    <div class="flip-front"><div class="flip-q-num">Q3</div><div class="flip-q-text">Quelle est la différence entre plasmocytome solitaire et myélome multiple ?</div><div class="flip-hint">👆 Appuyer pour révéler</div></div>
+    <div class="flip-back"><div class="flip-answer">Plasmocytome solitaire = une seule lésion osseuse, plasmocytes médullaires normaux (&lt;10%), pas de CRAB</div><div class="flip-expl">Le MM est systémique. Le plasmocytome peut évoluer vers le MM dans 50% des cas à 10 ans.</div></div>
+  </div>
+  <div class="flip-card" onclick="flipCard(this)">
+    <div class="flip-front"><div class="flip-q-num">Q4</div><div class="flip-q-text">Quel organe est typiquement atteint dans l'amylose cardiaque et quel en est le signe échocardiographique ?</div><div class="flip-hint">👆 Appuyer pour révéler</div></div>
+    <div class="flip-back"><div class="flip-answer">Cœur → cardiomyopathie restrictive avec épaississement concentrique du septum (aspect « granité »)</div><div class="flip-expl">L'amylose cardiaque est de mauvais pronostic. L'IRM cardiaque montre un rehaussement sous-endocardique caractéristique.</div></div>
+  </div>
+</div>
+
+<div class="slide" id="slide-20">
+  <h1 class="slide-title">Section III — Manifestations cliniques</h1>
+  <div class="section-banner" style="background:linear-gradient(135deg,rgba(155,89,182,.25),rgba(142,68,173,.15));border:1px solid rgba(155,89,182,.4)">
+    <div style="font-size:2.2rem;margin-bottom:10px">🩺</div>
+    <h2 style="color:#9b59b6;margin:0 0 6px 0;font-size:1.4rem">Quand le myélome se manifeste</h2>
+    <p style="color:#ccc;font-size:.92rem;margin:0">CRAB · Symptômes au diagnostic · Urgences</p>
+  </div>
+  <div class="info-box" style="margin-top:16px">
+    <strong>⚡ Rappel : critères CRAB</strong>
+    <strong>C</strong>alcium &gt;2,75 mmol/L · <strong>R</strong>enal (créatinine &gt;177 µmol/L) · <strong>A</strong>nemia (Hb &lt;10 g/dL) · <strong>B</strong>one (lésions ostéolytiques). Ces critères déclenchent le traitement même sans symptômes.
+  </div>
+</div>
+
+<div class="slide" id="slide-21">
+  <h1 class="slide-title">Manifestations osseuses et hématologiques</h1>
+  <div class="def-box">
+    <strong>Atteinte osseuse — 2/3 des patients au diagnostic (rang A)</strong>
+    Les plasmocytes tumoraux activent les <strong>ostéoclastes</strong> (via RANKL) et inhibent les <strong>ostéoblastes</strong> → lyse osseuse pure sans reconstruction. Résultat : <strong>douleurs osseuses</strong> (dos ++), <strong>fractures pathologiques</strong>, <strong>hypercalcémie</strong>.
+  </div>
+  <div class="content-grid-2" style="margin-top:12px">
+    <div class="card">
+      <h4>🦴 Atteinte osseuse</h4>
+      <ul class="bullets">
+        <li><strong>Douleurs osseuses</strong> : dos (rachis), côtes, bassin — 70% des patients</li>
+        <li>Fractures pathologiques (tassements vertébraux)</li>
+        <li>Compression médullaire (urgence +++)</li>
+        <li>Hypercalcémie : nausées, polyurie, confusion</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h4>🩸 Atteinte hématologique</h4>
+      <ul class="bullets">
+        <li><strong>Anémie normochrome normocytaire</strong> (70%) : asthénie, dyspnée</li>
+        <li>Mécanisme : infiltration médullaire + inhibition EPO</li>
+        <li>Leucopénie + thrombopénie si infiltration massive</li>
+        <li>Rouleaux érythrocytaires sur frottis (hyper-Ig)</li>
+      </ul>
+    </div>
+  </div>
+  <div class="urgence-box" style="margin-top:10px">
+    <strong>🚨 Urgences neurologiques à connaître</strong>
+    Compression médullaire : douleur rachidienne + déficit moteur → IRM en urgence + corticoïdes + radiothérapie urgente. Hypercalcémie sévère (&gt;3,5 mmol/L) : confusion, troubles du rythme → hyperhydratation IV urgente.
+  </div>
+</div>
+
+<div class="slide" id="slide-22">
+  <h2 class="slide-title">🃏 Quiz Flash — Atteinte osseuse</h2>
+  <p style="font-size:.85rem;color:#888;margin-bottom:14px">Appuyez sur chaque carte pour révéler la réponse</p>
+  <div class="flip-card" onclick="flipCard(this)">
+    <div class="flip-front"><div class="flip-q-num">Q1</div><div class="flip-q-text">Quel est le mécanisme de l'atteinte osseuse du myélome ? Pourquoi les scintigraphies osseuses sont-elles souvent faussement négatives ?</div><div class="flip-hint">👆 Appuyer pour révéler</div></div>
+    <div class="flip-back"><div class="flip-answer">Activation ostéoclastes + inhibition ostéoblastes → lyse pure sans reconstruction → pas de fixation en scintigraphie</div><div class="flip-expl">La scintigraphie détecte la reconstruction osseuse. Dans le MM, il n'y a que de la destruction, donc pas de signal.</div></div>
+  </div>
+  <div class="flip-card" onclick="flipCard(this)">
+    <div class="flip-front"><div class="flip-q-num">Q2</div><div class="flip-q-text">Quelle est la fréquence de l'anémie dans le myélome au diagnostic ? Quel est son mécanisme principal ?</div><div class="flip-hint">👆 Appuyer pour révéler</div></div>
+    <div class="flip-back"><div class="flip-answer">70% des patients. Mécanisme : infiltration médullaire (↓ érythropoïèse) + inhibition de l'EPO par les cytokines tumorales</div><div class="flip-expl">L'anémie est normochrome normocytaire. Sur le frottis : rouleaux d'hématies (due à l'hyperglobulinémie).</div></div>
+  </div>
+  <div class="flip-card" onclick="flipCard(this)">
+    <div class="flip-front"><div class="flip-q-num">Q3</div><div class="flip-q-text">Quelle est la conduite à tenir devant une compression médullaire sur myélome ?</div><div class="flip-hint">👆 Appuyer pour révéler</div></div>
+    <div class="flip-back"><div class="flip-answer">IRM médullaire en urgence + corticoïdes HD + radiothérapie décompressive urgente ± chirurgie de stabilisation</div><div class="flip-expl">La compression médullaire est une urgence thérapeutique. Chaque heure compte pour récupérer la fonction neurologique.</div></div>
+  </div>
+  <div class="flip-card" onclick="flipCard(this)">
+    <div class="flip-front"><div class="flip-q-num">Q4</div><div class="flip-q-text">Quels sont les signes cliniques d'hypercalcémie à connaître pour l'ECN ?</div><div class="flip-hint">👆 Appuyer pour révéler</div></div>
+    <div class="flip-back"><div class="flip-answer">« Stones, Bones, Groans, Moans » : lithiases rénales, douleurs osseuses, douleurs abdominales (nausées/constipation), troubles neuropsychiques (confusion, dépression)</div><div class="flip-expl">Traitement : hyperhydratation IV NaCl 0,9% ++ + bisphosphonates IV (zolédronate) si sévère.</div></div>
+  </div>
+</div>
+
+<div class="slide" id="slide-23">
+  <h1 class="slide-title">Manifestations rénales, infectieuses et neurologiques</h1>
+  <div class="content-grid-2">
+    <div class="card">
+      <h4>🫘 Atteinte rénale (20% au diagnostic)</h4>
+      <ul class="bullets">
+        <li><strong>Myélome cast nephropathy</strong> (tubulo-néphrite) : chaînes légères précipitent dans les tubules → IRA</li>
+        <li>Amylose AL : syndrome néphrotique</li>
+        <li>Hypercalcémie : néphropathie tubulaire</li>
+        <li>Infections → AINS/produits de contraste → néphrotoxiques à éviter</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h4>🦠 Infections (complication majeure)</h4>
+      <ul class="bullets">
+        <li>Déficit immunitaire profond : hypogammaglobulinémie résiduelle</li>
+        <li>Infections bactériennes récurrentes : pneumonie (pneumocoque ++)</li>
+        <li>Infections virales : zona, CMV (sous traitement)</li>
+        <li><strong>Prophylaxie</strong> : valaciclovir, cotrimoxazole (si bortézomib)</li>
+      </ul>
+    </div>
+  </div>
+  <div class="content-grid-2" style="margin-top:10px">
+    <div class="card">
+      <h4>🧠 Atteinte neurologique</h4>
+      <ul class="bullets">
+        <li>Neuropathie périphérique : bortézomib, thalidomide</li>
+        <li>Compression radiculaire/médullaire</li>
+        <li>Syndrome tunnel carpien (amylose)</li>
+        <li>Confusion : hypercalcémie, hyperviscosité</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h4>🩸 Autres manifestations</h4>
+      <ul class="bullets">
+        <li><strong>Hyperviscosité</strong> (rare, IgM &gt; IgG/IgA) : céphalées, flou visuel</li>
+        <li>Cryoglobulinémie : phénomène de Raynaud</li>
+        <li>Thromboses (traitements IMiD ++)</li>
+        <li>Hémorragies : thrombopénie + dysfonction plaquettaire</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="slide" id="slide-24">
+  <h2 class="slide-title">🃏 Quiz Flash — Rein, infections, neurologie</h2>
+  <p style="font-size:.85rem;color:#888;margin-bottom:14px">Appuyez sur chaque carte pour révéler la réponse</p>
+  <div class="flip-card" onclick="flipCard(this)">
+    <div class="flip-front"><div class="flip-q-num">Q1</div><div class="flip-q-text">Quel est le mécanisme principal d'insuffisance rénale dans le myélome ?</div><div class="flip-hint">👆 Appuyer pour révéler</div></div>
+    <div class="flip-back"><div class="flip-answer">Cast nephropathy : précipitation de chaînes légères monoclonales dans les tubules rénaux → obstruction tubulaire → IRA</div><div class="flip-expl">Les chaînes légères libres (kappa ou lambda) sont filtrées par le glomérule et précipitent en milieu acide dans les tubules distaux.</div></div>
+  </div>
+  <div class="flip-card" onclick="flipCard(this)">
+    <div class="flip-front"><div class="flip-q-num">Q2</div><div class="flip-q-text">Pourquoi le myélome prédispose aux infections bactériennes répétées ?</div><div class="flip-hint">👆 Appuyer pour révéler</div></div>
+    <div class="flip-back"><div class="flip-answer">Hypogammaglobulinémie résiduelle : les plasmocytes tumoraux inhibent la production d'immunoglobulines normales → déficit humoral profond</div><div class="flip-expl">Germes capsulés (pneumocoque, Haemophilus) sont les plus redoutés. Vaccination pneumocoque recommandée.</div></div>
+  </div>
+  <div class="flip-card" onclick="flipCard(this)">
+    <div class="flip-front"><div class="flip-q-num">Q3</div><div class="flip-q-text">Quelle prophylaxie antivirale est recommandée lors du traitement par bortézomib ?</div><div class="flip-hint">👆 Appuyer pour révéler</div></div>
+    <div class="flip-back"><div class="flip-answer">Valaciclovir (prophylaxie zona VZV) — obligatoire pendant tout le traitement par bortézomib</div><div class="flip-expl">Le bortézomib réactive fréquemment le VZV (zona). Sans prophylaxie, risque de zona sévère ou disséminé.</div></div>
+  </div>
+  <div class="flip-card" onclick="flipCard(this)">
+    <div class="flip-front"><div class="flip-q-num">Q4</div><div class="flip-q-text">Quels médicaments anti-myélome causent une neuropathie périphérique ?</div><div class="flip-hint">👆 Appuyer pour révéler</div></div>
+    <div class="flip-back"><div class="flip-answer">Bortézomib (IP) et thalidomide (IMiD) — neuropathie sensitive dose-dépendante</div><div class="flip-expl">Le bortézomib SC cause moins de neuropathie que la voie IV. Le lénalidomide est mieux toléré que la thalidomide sur ce plan.</div></div>
+  </div>
+</div>
+
+<div class="slide" id="slide-25">
+  <h1 class="slide-title">Section IV — Bilan diagnostique</h1>
+  <div class="section-banner" style="background:linear-gradient(135deg,rgba(155,89,182,.25),rgba(142,68,173,.15));border:1px solid rgba(155,89,182,.4)">
+    <div style="font-size:2.2rem;margin-bottom:10px">🔬</div>
+    <h2 style="color:#9b59b6;margin:0 0 6px 0;font-size:1.4rem">Confirmer et stadifier le myélome</h2>
+    <p style="color:#ccc;font-size:.92rem;margin:0">Biologie · Myélogramme · Imagerie osseuse</p>
+  </div>
+  <div class="info-box" style="margin-top:16px">
+    <strong>🎯 Triple objectif du bilan</strong>
+    1️⃣ Confirmer le diagnostic (myélogramme + EPS) · 2️⃣ Évaluer le retentissement (CRAB : rein, os, sang, calcium) · 3️⃣ Stadifier pour le pronostic (R-ISS : β2M, albumine, LDH, cytogénétique)
+  </div>
+</div>
+
+<div class="slide" id="slide-26">
+  <h1 class="slide-title">Bilan biologique — L'électrophorèse des protéines sériques</h1>
+  <div class="def-box">
+    <strong>EPS + immunofixation — examens clés (rang A)</strong>
+    L'<strong>électrophorèse des protéines sériques (EPS)</strong> met en évidence un <strong>pic étroit</strong> (pic monoclonal) dans la zone des gammaglobulines. L'immunofixation caractérise le type d'immunoglobuline (IgG kappa, IgA lambda, etc.) et est indispensable au diagnostic.
+  </div>
+  <div class="content-grid-2" style="margin-top:12px">
+    <div class="card">
+      <h4>📋 Bilan biologique minimal</h4>
+      <ul class="bullets">
+        <li>EPS + immunofixation sérique</li>
+        <li><strong>Chaînes légères libres sériques</strong> (FLC : Free Light Chain) + ratio kappa/lambda</li>
+        <li>Protéinurie des 24h + immunofixation urinaire (Bence-Jones)</li>
+        <li>NFS, créatinine, calcium, albumine, LDH, β2-microglobuline</li>
+        <li>CRP, VS (très élevée dans MM)</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h4>🦴 Myélogramme — critère histologique</h4>
+      <ul class="bullets">
+        <li><strong>Plasmocytes ≥10%</strong> (critère IMWG) — rang A</li>
+        <li>Morphologie : plasmocytes atypiques, cellules en flammes</li>
+        <li>Caryotype médullaire + FISH : del(17p), t(4;14), t(14;16), +1q</li>
+        <li>BOM si myélogramme insuffisant ou fibrose</li>
+      </ul>
+    </div>
+  </div>
+  <div class="success-box" style="margin-top:10px">
+    <strong>✅ Myélome non sécrétant (5%)</strong>
+    EPS normale + FLC normales + immunofixation négative mais plasmocytes &gt;10% à la BOM. Surveillance par PET-scan.
+  </div>
+</div>
+
+<div class="slide" id="slide-27">
+  <h2 class="slide-title">🃏 Quiz Flash — Bilan biologique</h2>
+  <p style="font-size:.85rem;color:#888;margin-bottom:14px">Appuyez sur chaque carte pour révéler la réponse</p>
+  <div class="flip-card" onclick="flipCard(this)">
+    <div class="flip-front"><div class="flip-q-num">Q1</div><div class="flip-q-text">Quel examen permet de caractériser le type d'immunoglobuline monoclonale (IgG, IgA, kappa, lambda) ?</div><div class="flip-hint">👆 Appuyer pour révéler</div></div>
+    <div class="flip-back"><div class="flip-answer">L'immunofixation sérique (et urinaire pour la protéine de Bence-Jones)</div><div class="flip-expl">L'EPS montre le pic mais ne le caractérise pas. L'immunofixation est indispensable pour typer l'immunoglobuline monoclonale.</div></div>
+  </div>
+  <div class="flip-card" onclick="flipCard(this)">
+    <div class="flip-front"><div class="flip-q-num">Q2</div><div class="flip-q-text">Quel est le seuil de plasmocytes médullaires pour diagnostiquer un myélome multiple ?</div><div class="flip-hint">👆 Appuyer pour révéler</div></div>
+    <div class="flip-back"><div class="flip-answer">≥10% de plasmocytes au myélogramme (critère IMWG)</div><div class="flip-expl">GMSI : &lt;10% + pic &lt;30g/L. Myélome indolent : &gt;10% mais sans CRAB/SLiM. Myélome actif : &gt;10% + CRAB ou SLiM.</div></div>
+  </div>
+  <div class="flip-card" onclick="flipCard(this)">
+    <div class="flip-front"><div class="flip-q-num">Q3</div><div class="flip-q-text">Qu'est-ce que la protéine de Bence-Jones ?</div><div class="flip-hint">👆 Appuyer pour révéler</div></div>
+    <div class="flip-back"><div class="flip-answer">Chaînes légères libres monoclonales éliminées dans les urines (trop petites pour être retenues par le glomérule)</div><div class="flip-expl">Détectée par immunofixation urinaire. La bandelette réactive est souvent négative (détecte l'albumine, pas les CLL). Bilan urinaire des 24h obligatoire.</div></div>
+  </div>
+  <div class="flip-card" onclick="flipCard(this)">
+    <div class="flip-front"><div class="flip-q-num">Q4</div><div class="flip-q-text">Quelles anomalies cytogénétiques sont recherchées au myélogramme et ont une valeur pronostique ?</div><div class="flip-hint">👆 Appuyer pour révéler</div></div>
+    <div class="flip-back"><div class="flip-answer">Del(17p) — t(4;14) — t(14;16) : anomalies de haut risque. +1q : intermédiaire. Hyperdiploïdie : bon pronostic</div><div class="flip-expl">Ces anomalies sont intégrées dans le R-ISS. Del(17p) = perte de TP53 → pronostic très défavorable.</div></div>
+  </div>
+</div>
+
+<div class="slide" id="slide-28">
+  <h1 class="slide-title">Imagerie osseuse — du scanner au PET-scan</h1>
+  <div class="def-box">
+    <strong>Scanner corps entier — examen de référence (rang A)</strong>
+    Le <strong>scanner corps entier sans injection</strong> (low-dose) est l'examen de première intention pour évaluer l'atteinte osseuse dans le myélome. Il remplace les radiographies standard du squelette (moins sensibles).
+  </div>
+  <div class="content-grid-2" style="margin-top:12px">
+    <div class="card">
+      <h4>🖥️ Scanner corps entier</h4>
+      <ul class="bullets">
+        <li><strong>1ère intention</strong> — lésions lytiques, fractures, compressions</li>
+        <li>Genou à genou, crâne inclus</li>
+        <li>Seuil : lésion &gt;5 mm → significative</li>
+        <li>Dosimétrie faible (low-dose)</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h4>🧲 IRM rachidienne/corps entier</h4>
+      <ul class="bullets">
+        <li>Référence pour <strong>atteinte médullaire</strong> (moelle osseuse)</li>
+        <li>Séquence T1 : hyposignal (infiltration) ; T2 : hypersignal</li>
+        <li>Obligatoire si suspicion de compression médullaire</li>
+        <li>Meilleure sensibilité que le scanner pour les petites lésions</li>
+      </ul>
+    </div>
+  </div>
+  <div class="content-grid-2" style="margin-top:10px">
+    <div class="card">
+      <h4>☢️ TEP-scanner (PET-FDG)</h4>
+      <ul class="bullets">
+        <li>Évaluation de la maladie <strong>extramédullaire</strong></li>
+        <li>Réponse au traitement (MRD imagerie)</li>
+        <li>Myélome non sécrétant (surveillance)</li>
+        <li>Non remboursé en 1ère intention au diagnostic</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h4>❌ Scintigraphie osseuse — non recommandée</h4>
+      <ul class="bullets">
+        <li>Détecte la reconstruction osseuse (ostéoblastes)</li>
+        <li>MM = lyse pure sans reconstruction → <strong>faux négatifs</strong></li>
+        <li>Remplacée par le scanner low-dose</li>
+        <li>Reste utile pour les métastases (mais pas le MM)</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="slide" id="slide-29">
+  <h2 class="slide-title">🃏 Quiz Flash — Imagerie</h2>
+  <p style="font-size:.85rem;color:#888;margin-bottom:14px">Appuyez sur chaque carte pour révéler la réponse</p>
+  <div class="flip-card" onclick="flipCard(this)">
+    <div class="flip-front"><div class="flip-q-num">Q1</div><div class="flip-q-text">Quel est l'examen de référence pour l'atteinte osseuse du myélome et pourquoi ?</div><div class="flip-hint">👆 Appuyer pour révéler</div></div>
+    <div class="flip-back"><div class="flip-answer">Scanner corps entier low-dose : meilleure sensibilité que les radio standard, faible irradiation, détecte les lésions lytiques ≥5mm</div><div class="flip-expl">Les radio standard ne détectent que les lésions &gt;30% de la corticale. Le scanner est beaucoup plus sensible.</div></div>
+  </div>
+  <div class="flip-card" onclick="flipCard(this)">
+    <div class="flip-front"><div class="flip-q-num">Q2</div><div class="flip-q-text">Quelle séquence IRM est la plus importante pour l'infiltration médullaire du myélome ?</div><div class="flip-hint">👆 Appuyer pour révéler</div></div>
+    <div class="flip-back"><div class="flip-answer">T1 : hyposignal (infiltration tumorale remplace la moelle graisseuse hyperintense normale)</div><div class="flip-expl">En T1 normal : moelle graisseuse = hypersignal (blanc). Infiltration = hyposignal (noir). T2 : hypersignal de l'infiltration active.</div></div>
+  </div>
+  <div class="flip-card" onclick="flipCard(this)">
+    <div class="flip-front"><div class="flip-q-num">Q3</div><div class="flip-q-text">Pourquoi la scintigraphie osseuse (99mTc) est-elle contre-indiquée dans le bilan du myélome ?</div><div class="flip-hint">👆 Appuyer pour révéler</div></div>
+    <div class="flip-back"><div class="flip-answer">Faux négatifs : la scintigraphie détecte la reconstruction osseuse (ostéoblastes), absente dans le MM (lyse pure sans reconstruction)</div><div class="flip-expl">Le scanner low-dose et l'IRM ont remplacé la scintigraphie pour le bilan osseux du myélome.</div></div>
+  </div>
+  <div class="flip-card" onclick="flipCard(this)">
+    <div class="flip-front"><div class="flip-q-num">Q4</div><div class="flip-q-text">Dans quel cas le PET-scan est-il particulièrement utile dans le myélome ?</div><div class="flip-hint">👆 Appuyer pour révéler</div></div>
+    <div class="flip-back"><div class="flip-answer">Myélome non sécrétant, maladie extramédullaire, évaluation de la réponse au traitement (MRD)</div><div class="flip-expl">Le PET-FDG visualise l'activité métabolique tumorale. Très utile quand il n'y a pas de marqueur biologique (myélome non sécrétant).</div></div>
+  </div>
+</div>
+
+<div class="slide" id="slide-30">
+  <h1 class="slide-title">Section V — Pronostic : score R-ISS</h1>
+  <div class="section-banner" style="background:linear-gradient(135deg,rgba(155,89,182,.25),rgba(142,68,173,.15));border:1px solid rgba(155,89,182,.4)">
+    <div style="font-size:2.2rem;margin-bottom:10px">📊</div>
+    <h2 style="color:#9b59b6;margin:0 0 6px 0;font-size:1.4rem">Révised International Staging System</h2>
+    <p style="color:#ccc;font-size:.92rem;margin:0">β2-microglobuline · Albumine · LDH · Cytogénétique</p>
+  </div>
+</div>
+
+<div class="slide" id="slide-31">
+  <h1 class="slide-title">Score R-ISS — Calcul et survie</h1>
+  <div class="def-box">
+    <strong>Révised ISS (R-ISS) — rang A</strong>
+    Le R-ISS combine le <strong>score ISS</strong> (β2-microglobuline + albumine), les <strong>LDH</strong> et la <strong>cytogénétique</strong> à haut risque pour stratifier le pronostic du myélome multiple.
+  </div>
+  <div class="table-wrap" style="margin-top:12px">
+    <table>
+      <thead><tr><th>Stade</th><th>Critères</th><th>SG à 5 ans</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><span style="color:#2ecc71;font-weight:700">Stade I</span></td>
+          <td>β2M &lt;3,5 mg/L + albumine ≥35 g/L + LDH normales + cytogénétique standard</td>
+          <td><span style="color:#2ecc71;font-weight:700">~82%</span></td>
+        </tr>
+        <tr>
+          <td><span style="color:#f39c12;font-weight:700">Stade II</span></td>
+          <td>Ni stade I ni stade III</td>
+          <td><span style="color:#f39c12;font-weight:700">~62%</span></td>
+        </tr>
+        <tr>
+          <td><span style="color:#e74c3c;font-weight:700">Stade III</span></td>
+          <td>β2M ≥5,5 mg/L + (LDH élevées OU cytogénétique haut risque)</td>
+          <td><span style="color:#e74c3c;font-weight:700">~40%</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="content-grid-2" style="margin-top:12px">
+    <div class="card">
+      <h4>⚠️ Cytogénétique haut risque</h4>
+      <ul class="bullets">
+        <li><strong>del(17p)</strong> : perte TP53 → très mauvais pronostic</li>
+        <li><strong>t(4;14)</strong> : MMSET/FGFR3</li>
+        <li><strong>t(14;16)</strong> : MAF</li>
+        <li>+1q : risque intermédiaire</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h4>📈 Signification des marqueurs</h4>
+      <ul class="bullets">
+        <li><strong>β2-microglobuline</strong> : masse tumorale + fonction rénale</li>
+        <li><strong>Albumine</strong> : état général + nutrition</li>
+        <li><strong>LDH</strong> : prolifération tumorale</li>
+        <li><strong>Cytogénétique</strong> : agressivité biologique</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="slide" id="slide-32">
+  <h2 class="slide-title">🃏 Quiz Flash — R-ISS et pronostic</h2>
+  <p style="font-size:.85rem;color:#888;margin-bottom:14px">Appuyez sur chaque carte pour révéler la réponse</p>
+  <div class="flip-card" onclick="flipCard(this)">
+    <div class="flip-front"><div class="flip-q-num">Q1</div><div class="flip-q-text">Quels sont les 4 paramètres du score R-ISS ?</div><div class="flip-hint">👆 Appuyer pour révéler</div></div>
+    <div class="flip-back"><div class="flip-answer">β2-microglobuline + albumine (= ISS) + LDH + cytogénétique haut risque</div><div class="flip-expl">R-ISS = Revised ISS. L'ISS original ne comportait que β2M et albumine. Le R-ISS ajoute LDH et cytogénétique.</div></div>
+  </div>
+  <div class="flip-card" onclick="flipCard(this)">
+    <div class="flip-front"><div class="flip-q-num">Q2</div><div class="flip-q-text">Quelle anomalie cytogénétique est de plus mauvais pronostic dans le myélome ?</div><div class="flip-hint">👆 Appuyer pour révéler</div></div>
+    <div class="flip-back"><div class="flip-answer">Del(17p) — perte du gène suppresseur de tumeur TP53</div><div class="flip-expl">La del(17p) est associée à la résistance aux traitements et une évolution rapide. Elle définit un myélome de haut risque cytogénétique.</div></div>
+  </div>
+  <div class="flip-card" onclick="flipCard(this)">
+    <div class="flip-front"><div class="flip-q-num">Q3</div><div class="flip-q-text">Quelle est la survie globale à 5 ans pour un R-ISS stade I vs stade III ?</div><div class="flip-hint">👆 Appuyer pour révéler</div></div>
+    <div class="flip-back"><div class="flip-answer">Stade I : ~82% · Stade III : ~40%</div><div class="flip-expl">Différence importante : le R-ISS permet d'adapter l'intensité du traitement (intensification vs approche moins agressive).</div></div>
+  </div>
+  <div class="flip-card" onclick="flipCard(this)">
+    <div class="flip-front"><div class="flip-q-num">Q4</div><div class="flip-q-text">Pourquoi la β2-microglobuline est-elle un marqueur pronostique dans le myélome ?</div><div class="flip-hint">👆 Appuyer pour révéler</div></div>
+    <div class="flip-back"><div class="flip-answer">Reflète la masse tumorale ET la fonction rénale (son élimination est rénale). Corrélée au nombre de plasmocytes tumoraux.</div><div class="flip-expl">Normale &lt;2 mg/L. Élevée dans le MM du fait de la charge tumorale. Aussi élevée en cas d'IRC indépendamment du MM.</div></div>
+  </div>
+</div>
+
+<div class="slide" id="slide-33">
+  <h1 class="slide-title">Section VI — Traitement du myélome multiple</h1>
+  <div class="section-banner" style="background:linear-gradient(135deg,rgba(155,89,182,.25),rgba(142,68,173,.15));border:1px solid rgba(155,89,182,.4)">
+    <div style="font-size:2.2rem;margin-bottom:10px">💊</div>
+    <h2 style="color:#9b59b6;margin:0 0 6px 0;font-size:1.4rem">Traitement spécifique et symptomatique</h2>
+    <p style="color:#ccc;font-size:.92rem;margin:0">IP · IMiD · Anti-CD38 · Autogreffe · CAR-T</p>
+  </div>
+  <div class="info-box" style="margin-top:16px">
+    <strong>⚡ Principe : traitement en fonction de l'éligibilité à l'autogreffe</strong>
+    La <strong>greffe autologue de cellules souches hématopoïétiques (autogreffe)</strong> est le gold standard &lt;70 ans sans comorbidité. Au-delà ou si contre-indication : traitement continu sans intensification.
+  </div>
+</div>
+
+<div class="slide" id="slide-34">
+  <h1 class="slide-title">Classes thérapeutiques principales</h1>
+  <div class="content-grid-2">
+    <div class="card">
+      <h4>🔵 Inhibiteurs du protéasome (IP)</h4>
+      <ul class="bullets">
+        <li><strong>Bortézomib (Velcade®)</strong> : 1ère génération, SC ou IV, neurotoxicité</li>
+        <li>Carfilzomib (Kyprolis®) : 2ème génération, cardiotoxicité</li>
+        <li>Ixazomib (Ninlaro®) : oral, 3ème génération</li>
+        <li>Mécanisme : inhibition du protéasome 26S → accumulation de protéines mal repliées → apoptose</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h4>🟠 Immunomodulateurs (IMiD)</h4>
+      <ul class="bullets">
+        <li><strong>Thalidomide</strong> : 1ère génération, tératogène +++, neuropathie</li>
+        <li><strong>Lénalidomide (Revlimid®)</strong> : 2ème génération, oral, thrombose, leucémie secondaire</li>
+        <li>Pomalidomide : 3ème génération (rechutes)</li>
+        <li>Mécanisme : dégradation des facteurs IKZF1/IKZF3 → apoptose plasmocytes</li>
+      </ul>
+    </div>
+  </div>
+  <div class="content-grid-2" style="margin-top:10px">
+    <div class="card">
+      <h4>🟣 Anti-CD38 (anticorps monoclonaux)</h4>
+      <ul class="bullets">
+        <li><strong>Daratumumab (Darzalex®)</strong> : anti-CD38, maintenant en 1ère ligne</li>
+        <li>Isatuximab (Sarclisa®) : similaire</li>
+        <li>CD38 : exprimé fortement sur les plasmocytes</li>
+        <li>Mécanisme : ADCC, CDC, apoptose directe</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h4>🔴 Nouvelles thérapeutiques</h4>
+      <ul class="bullets">
+        <li><strong>CAR-T anti-BCMA</strong> : idecabtagene vicleucel (Abecma®)</li>
+        <li>Anticorps bispécifiques BCMA×CD3 (teclistamab)</li>
+        <li>Anti-SLAMF7 : élotuzumab</li>
+        <li>Inhibiteurs de BCL2 : venetoclax (t(11;14))</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="slide" id="slide-35">
+  <h2 class="slide-title">🃏 Quiz Flash — Classes thérapeutiques</h2>
+  <p style="font-size:.85rem;color:#888;margin-bottom:14px">Appuyez sur chaque carte pour révéler la réponse</p>
+  <div class="flip-card" onclick="flipCard(this)">
+    <div class="flip-front"><div class="flip-q-num">Q1</div><div class="flip-q-text">Quel est le mécanisme d'action des inhibiteurs du protéasome (ex. bortézomib) ?</div><div class="flip-hint">👆 Appuyer pour révéler</div></div>
+    <div class="flip-back"><div class="flip-answer">Inhibition du protéasome 26S → accumulation de protéines ubiquitinées mal repliées → stress du réticulum endoplasmique → apoptose des plasmocytes sécréteurs</div><div class="flip-expl">Les plasmocytes sont particulièrement sensibles car ils produisent d'énormes quantités d'immunoglobulines → très dépendants du protéasome pour l'élimination des protéines.</div></div>
+  </div>
+  <div class="flip-card" onclick="flipCard(this)">
+    <div class="flip-front"><div class="flip-q-num">Q2</div><div class="flip-q-text">Pourquoi la thalidomide est-elle très encadrée ? Quel programme s'applique ?</div><div class="flip-hint">👆 Appuyer pour révéler</div></div>
+    <div class="flip-back"><div class="flip-answer">Tératogène majeur (phocomélie). Programme de prévention de grossesse obligatoire (contraception + test grossesse mensuel)</div><div class="flip-expl">La thalidomide est remise uniquement dans le cadre du programme THALIDOMIDE CELGENE avec contraception assurée et test de grossesse négatif.</div></div>
+  </div>
+  <div class="flip-card" onclick="flipCard(this)">
+    <div class="flip-front"><div class="flip-q-num">Q3</div><div class="flip-q-text">Sur quel antigène cible le daratumumab ? Pourquoi cela fonctionne-t-il dans le myélome ?</div><div class="flip-hint">👆 Appuyer pour révéler</div></div>
+    <div class="flip-back"><div class="flip-answer">Anti-CD38 — CD38 est fortement et uniformément exprimé sur les plasmocytes tumoraux → cytotoxicité sélective</div><div class="flip-expl">Le daratumumab est maintenant en 1ère ligne (triplette VRd-Dara). Il peut fausser le groupage sanguin (interférence avec la phénotypage RBC).</div></div>
+  </div>
+  <div class="flip-card" onclick="flipCard(this)">
+    <div class="flip-front"><div class="flip-q-num">Q4</div><div class="flip-q-text">Qu'est-ce qu'un CAR-T anti-BCMA ? Dans quel contexte est-il utilisé ?</div><div class="flip-hint">👆 Appuyer pour révéler</div></div>
+    <div class="flip-back"><div class="flip-answer">Lymphocytes T du patient génétiquement modifiés pour exprimer un récepteur chimérique (CAR) ciblant BCMA (B-Cell Maturation Antigen). Utilisé en rechute/réfractaire après au moins 3 lignes de traitement.</div><div class="flip-expl">BCMA est exprimé sur les plasmocytes matures. Taux de réponse ~70-80% en rechute réfractaire (Abecma®, Carvykti®).</div></div>
+  </div>
+</div>
+
+<div class="slide" id="slide-36">
+  <h1 class="slide-title">Stratégie thérapeutique selon l'âge</h1>
+  <div class="content-grid-2">
+    <div class="card">
+      <h4>🏃 Patient éligible à l'autogreffe (&lt;70 ans)</h4>
+      <ul class="bullets">
+        <li><strong>Induction</strong> : 4-6 cycles de VRd (bortézomib + lénalidomide + dexaméthasone) ± daratumumab</li>
+        <li><strong>Mobilisation</strong> des CSH : G-CSF ± cyclophosphamide</li>
+        <li><strong>Conditionnement</strong> : melphalan 200 mg/m² haute dose (HDM200)</li>
+        <li><strong>Autogreffe</strong> (J0)</li>
+        <li><strong>Consolidation</strong> ± 2ème autogreffe</li>
+        <li><strong>Maintenance</strong> : lénalidomide 10 mg/j pendant 2 ans (voire indéfiniment)</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h4>🚶 Patient non éligible à l'autogreffe (&gt;70 ans ou comorbidités)</h4>
+      <ul class="bullets">
+        <li>VRd (Bortézomib + Lénalidomide + Dexaméthasone) continu</li>
+        <li>Ou Dara-VRd selon l'état général</li>
+        <li>Rd (Lénalidomide + dexaméthasone) si fragilité</li>
+        <li>Pas de melphalan haute dose</li>
+        <li>Traitement jusqu'à progression ou intolérance</li>
+      </ul>
+    </div>
+  </div>
+  <div class="urgence-box" style="margin-top:12px">
+    <strong>⚠️ Thromboprophylaxie obligatoire sous IMiD</strong>
+    Lénalidomide et thalidomide → risque thromboembolique veineux majeur. HBPM ou aspirine obligatoires selon le score de risque thrombotique du patient.
+  </div>
+</div>
+
+<div class="slide" id="slide-37">
+  <h2 class="slide-title">🃏 Quiz Flash — Stratégie thérapeutique</h2>
+  <p style="font-size:.85rem;color:#888;margin-bottom:14px">Appuyez sur chaque carte pour révéler la réponse</p>
+  <div class="flip-card" onclick="flipCard(this)">
+    <div class="flip-front"><div class="flip-q-num">Q1</div><div class="flip-q-text">Quel est le conditionnement standard pour l'autogreffe dans le myélome ?</div><div class="flip-hint">👆 Appuyer pour révéler</div></div>
+    <div class="flip-back"><div class="flip-answer">Melphalan haute dose (HDM200 : 200 mg/m²)</div><div class="flip-expl">Le melphalan haute dose est myéloablatif (destruction complète de la moelle). La réinjection des CSH autologues permet la reconstitution hématopoïétique en J10-14.</div></div>
+  </div>
+  <div class="flip-card" onclick="flipCard(this)">
+    <div class="flip-front"><div class="flip-q-num">Q2</div><div class="flip-q-text">Quelle est la triplette d'induction de référence chez le patient éligible à l'autogreffe ?</div><div class="flip-hint">👆 Appuyer pour révéler</div></div>
+    <div class="flip-back"><div class="flip-answer">VRd = Bortézomib + Lénalidomide + Dexaméthasone (± daratumumab en quadruplette)</div><div class="flip-expl">La quadruplette Dara-VRd devient le standard en 2024 pour les patients éligibles à l'autogreffe selon les essais GRIFFIN/PERSEUS.</div></div>
+  </div>
+  <div class="flip-card" onclick="flipCard(this)">
+    <div class="flip-front"><div class="flip-q-num">Q3</div><div class="flip-q-text">Pourquoi une thromboprophylaxie est-elle obligatoire sous lénalidomide ?</div><div class="flip-hint">👆 Appuyer pour révéler</div></div>
+    <div class="flip-back"><div class="flip-answer">Les IMiD (lénalidomide, thalidomide) augmentent le risque de thrombose veineuse profonde et d'embolie pulmonaire (mécanisme pro-coagulant)</div><div class="flip-expl">Risque de TVP/EP ~10-15% sans prophylaxie. HBPM ou aspirine selon le score IMWG de risque thrombotique.</div></div>
+  </div>
+  <div class="flip-card" onclick="flipCard(this)">
+    <div class="flip-front"><div class="flip-q-num">Q4</div><div class="flip-q-text">Quel traitement de maintenance est recommandé après l'autogreffe ?</div><div class="flip-hint">👆 Appuyer pour révéler</div></div>
+    <div class="flip-back"><div class="flip-answer">Lénalidomide 10 mg/j pendant 2 ans minimum (voire indéfiniment selon tolérance) — améliore la survie sans progression et la SG</div><div class="flip-expl">Essais IFM 2005-02 et CALGB 100104 ont démontré le bénéfice de la maintenance par lénalidomide post-autogreffe.</div></div>
+  </div>
+</div>
+
+<div class="slide" id="slide-38">
+  <h1 class="slide-title">Traitement symptomatique — os, rein, infections</h1>
+  <div class="content-grid-2">
+    <div class="card">
+      <h4>🦴 Traitement osseux</h4>
+      <ul class="bullets">
+        <li><strong>Bisphosphonates IV</strong> : zolédronate (Zometa®) mensuel — prévention fractures et hypercalcémie</li>
+        <li>Dénosumab (anti-RANKL) si IRC (< ClCr 30)</li>
+        <li>Radiothérapie locale : fractures, compressions, douleurs réfractaires</li>
+        <li>Vertébroplastie/kyphoplastie : fractures-tassements douloureuses</li>
+        <li>Ostéonécrose de mâchoire (ONM) : complication bisphosphonates, bilan dentaire préalable obligatoire</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h4>🫘 Traitement rénal et préventif</h4>
+      <ul class="bullets">
+        <li><strong>Hyperhydratation</strong> : éviter l'IRA sur chaînes légères</li>
+        <li>Éviter AINS, produits de contraste iodés, aminosides</li>
+        <li>Dialyse si IRA sévère (attente réponse thérapeutique)</li>
+        <li><strong>Hypercalcémie</strong> : NaCl 0,9% + furosémide + zolédronate IV</li>
+        <li><strong>Infections</strong> : vaccin anti-pneumocoque, grippe annuel</li>
+        <li>Immunoglobulines IV si hypogammaglobulinémie symptomatique</li>
+      </ul>
+    </div>
+  </div>
+  <div class="success-box" style="margin-top:10px">
+    <strong>✅ Bilan dentaire avant bisphosphonates</strong>
+    Obligatoire avant tout bisphosphonate ou dénosumab pour prévenir l'ostéonécrose de mâchoire. Soins dentaires préventifs requis.
+  </div>
+</div>
+
+<div class="slide" id="slide-39">
+  <h2 class="slide-title">🃏 Quiz Flash — Traitement symptomatique</h2>
+  <p style="font-size:.85rem;color:#888;margin-bottom:14px">Appuyez sur chaque carte pour révéler la réponse</p>
+  <div class="flip-card" onclick="flipCard(this)">
+    <div class="flip-front"><div class="flip-q-num">Q1</div><div class="flip-q-text">Quel traitement osseux est prescrit systématiquement dans le myélome actif et pourquoi ?</div><div class="flip-hint">👆 Appuyer pour révéler</div></div>
+    <div class="flip-back"><div class="flip-answer">Bisphosphonates IV (zolédronate mensuel) — inhibent les ostéoclastes → réduisent les événements osseux (fractures, hypercalcémie)</div><div class="flip-expl">Le zolédronate réduit de ~40% les événements osseux. Alternative : dénosumab si ClCr &lt;30 mL/min.</div></div>
+  </div>
+  <div class="flip-card" onclick="flipCard(this)">
+    <div class="flip-front"><div class="flip-q-num">Q2</div><div class="flip-q-text">Quelle précaution dentaire est obligatoire avant bisphosphonates ? Pourquoi ?</div><div class="flip-hint">👆 Appuyer pour révéler</div></div>
+    <div class="flip-back"><div class="flip-answer">Bilan dentaire + soins préventifs — prévention de l'ostéonécrose de mâchoire (ONM : nécrose osseuse avascularire de la mâchoire)</div><div class="flip-expl">L'ONM est une complication rare mais grave des bisphosphonates/dénosumab. Risque augmenté par chirurgie dentaire post-traitement.</div></div>
+  </div>
+  <div class="flip-card" onclick="flipCard(this)">
+    <div class="flip-front"><div class="flip-q-num">Q3</div><div class="flip-q-text">Quels médicaments néphrotoxiques sont absolument contre-indiqués dans le myélome ?</div><div class="flip-hint">👆 Appuyer pour révéler</div></div>
+    <div class="flip-back"><div class="flip-answer">AINS (↑ IRA fonctionnelle) + produits de contraste iodés (↑ précipitation CLL) + aminosides (néphrotoxicité) + IEC/ARA2 (↑ risque IRA)</div><div class="flip-expl">Le rein du myélome est déjà fragilisé par les chaînes légères libres. Tout facteur aggravant doit être évité.</div></div>
+  </div>
+  <div class="flip-card" onclick="flipCard(this)">
+    <div class="flip-front"><div class="flip-q-num">Q4</div><div class="flip-q-text">Quel est le traitement en urgence de l'hypercalcémie sévère dans le myélome ?</div><div class="flip-hint">👆 Appuyer pour révéler</div></div>
+    <div class="flip-back"><div class="flip-answer">1) Hyperhydratation IV NaCl 0,9% (3-4L/j) + 2) Zolédronate IV 4 mg (effet en 48-72h) + 3) Corticoïdes + 4) Traitement du myélome dès que possible</div><div class="flip-expl">L'hypercalcémie &gt;3,5 mmol/L est une urgence vitale (troubles du rythme, insuffisance rénale, coma). La réhydratation est le geste prioritaire.</div></div>
+  </div>
+</div>
+
+<div class="slide" id="slide-40">
+  <h1 class="slide-title">🎯 Examen — QCM Sections II–VI</h1>
+  <p style="font-size:.85rem;color:#888;margin-bottom:12px">10 questions — cochez la (ou les) bonne(s) réponse(s) puis validez</p>
+
+  <div class="qcm-block">
+    <p class="qcm-question">Q1. Parmi les propositions suivantes, laquelle est vraie concernant la macroglobulinémie de Waldenström ?</p>
+    <div class="qcm-options">
+      <div class="qcm-option" onclick="selectOption(this)">A. Elle peut se présenter avec un pic IgG</div>
+      <div class="qcm-option correct-ans" onclick="selectOption(this)">B. Elle est associée à une mutation MYD88 dans &gt;90% des cas</div>
+      <div class="qcm-option correct-ans" onclick="selectOption(this)">C. Elle peut causer un syndrome d'hyperviscosité</div>
+      <div class="qcm-option" onclick="selectOption(this)">D. Elle entraîne des lésions ostéolytiques caractéristiques</div>
+      <div class="qcm-option" onclick="selectOption(this)">E. Le diagnostic requiert une plasmocytose médullaire &gt;30%</div>
+    </div>
+    <button class="qcm-btn" onclick="validateQCM(this)">Valider Q1</button>
+    <p class="qcm-feedback" style="display:none"></p>
+  </div>
+
+  <div class="qcm-block">
+    <p class="qcm-question">Q2. Concernant l'amylose AL, quelle(s) proposition(s) est(sont) exacte(s) ?</p>
+    <div class="qcm-options">
+      <div class="qcm-option correct-ans" onclick="selectOption(this)">A. La macroglossie est quasi pathognomonique</div>
+      <div class="qcm-option correct-ans" onclick="selectOption(this)">B. Le diagnostic repose sur la biopsie et le rouge Congo</div>
+      <div class="qcm-option" onclick="selectOption(this)">C. Elle ne peut pas coexister avec un myélome actif</div>
+      <div class="qcm-option correct-ans" onclick="selectOption(this)">D. L'atteinte cardiaque est de mauvais pronostic</div>
+      <div class="qcm-option" onclick="selectOption(this)">E. Elle est causée par des dépôts d'IgG entières</div>
+    </div>
+    <button class="qcm-btn" onclick="validateQCM(this)">Valider Q2</button>
+    <p class="qcm-feedback" style="display:none"></p>
+  </div>
+
+  <div class="qcm-block">
+    <p class="qcm-question">Q3. La scintigraphie osseuse est souvent négative dans le myélome car :</p>
+    <div class="qcm-options">
+      <div class="qcm-option" onclick="selectOption(this)">A. Le traceur ne passe pas la barrière osseuse dans le myélome</div>
+      <div class="qcm-option correct-ans" onclick="selectOption(this)">B. Il n'y a pas de reconstruction osseuse (lyse pure sans ostéoblastes)</div>
+      <div class="qcm-option" onclick="selectOption(this)">C. Le myélome détruit le traceur radioactif</div>
+      <div class="qcm-option" onclick="selectOption(this)">D. L'os myélomateux est trop dense pour fixer le traceur</div>
+      <div class="qcm-option" onclick="selectOption(this)">E. La scintigraphie est contre-indiquée dans le myélome</div>
+    </div>
+    <button class="qcm-btn" onclick="validateQCM(this)">Valider Q3</button>
+    <p class="qcm-feedback" style="display:none"></p>
+  </div>
+</div>
+
+<div class="slide" id="slide-41">
+  <h1 class="slide-title">🎯 Examen — QCM Sections II–VI (suite)</h1>
+  <p style="font-size:.85rem;color:#888;margin-bottom:12px">Questions 4 à 7</p>
+
+  <div class="qcm-block">
+    <p class="qcm-question">Q4. Le score R-ISS associe :</p>
+    <div class="qcm-options">
+      <div class="qcm-option correct-ans" onclick="selectOption(this)">A. β2-microglobuline et albumine</div>
+      <div class="qcm-option correct-ans" onclick="selectOption(this)">B. LDH</div>
+      <div class="qcm-option correct-ans" onclick="selectOption(this)">C. Cytogénétique à haut risque [del(17p), t(4;14), t(14;16)]</div>
+      <div class="qcm-option" onclick="selectOption(this)">D. Protéinurie des 24 heures</div>
+      <div class="qcm-option" onclick="selectOption(this)">E. Score OMS/ECOG</div>
+    </div>
+    <button class="qcm-btn" onclick="validateQCM(this)">Valider Q4</button>
+    <p class="qcm-feedback" style="display:none"></p>
+  </div>
+
+  <div class="qcm-block">
+    <p class="qcm-question">Q5. Concernant le traitement du myélome, quelle(s) affirmation(s) est(sont) correcte(s) ?</p>
+    <div class="qcm-options">
+      <div class="qcm-option correct-ans" onclick="selectOption(this)">A. L'autogreffe est proposée aux patients &lt;70 ans sans comorbidité majeure</div>
+      <div class="qcm-option" onclick="selectOption(this)">B. La scintigraphie osseuse guide la décision thérapeutique</div>
+      <div class="qcm-option correct-ans" onclick="selectOption(this)">C. Une thromboprophylaxie est obligatoire sous lénalidomide</div>
+      <div class="qcm-option correct-ans" onclick="selectOption(this)">D. Le conditionnement standard de l'autogreffe est le melphalan 200 mg/m²</div>
+      <div class="qcm-option" onclick="selectOption(this)">E. Le daratumumab cible le CD20</div>
+    </div>
+    <button class="qcm-btn" onclick="validateQCM(this)">Valider Q5</button>
+    <p class="qcm-feedback" style="display:none"></p>
+  </div>
+
+  <div class="qcm-block">
+    <p class="qcm-question">Q6. Quelle(s) urgence(s) peut-on rencontrer dans le myélome multiple ?</p>
+    <div class="qcm-options">
+      <div class="qcm-option correct-ans" onclick="selectOption(this)">A. Compression médullaire</div>
+      <div class="qcm-option correct-ans" onclick="selectOption(this)">B. Hypercalcémie sévère</div>
+      <div class="qcm-option correct-ans" onclick="selectOption(this)">C. Insuffisance rénale aiguë</div>
+      <div class="qcm-option" onclick="selectOption(this)">D. Occlusion intestinale aiguë</div>
+      <div class="qcm-option correct-ans" onclick="selectOption(this)">E. Syndrome infectieux sévère (sepsis)</div>
+    </div>
+    <button class="qcm-btn" onclick="validateQCM(this)">Valider Q6</button>
+    <p class="qcm-feedback" style="display:none"></p>
+  </div>
+
+  <div class="qcm-block">
+    <p class="qcm-question">Q7. Quelle affirmation sur les bisphosphonates dans le myélome est FAUSSE ?</p>
+    <div class="qcm-options">
+      <div class="qcm-option" onclick="selectOption(this)">A. Ils réduisent les fractures pathologiques</div>
+      <div class="qcm-option" onclick="selectOption(this)">B. Un bilan dentaire préalable est obligatoire</div>
+      <div class="qcm-option" onclick="selectOption(this)">C. L'ostéonécrose de mâchoire est une complication redoutée</div>
+      <div class="qcm-option correct-ans" onclick="selectOption(this)">D. Ils stimulent la reconstruction osseuse (activité ostéoblastique)</div>
+      <div class="qcm-option" onclick="selectOption(this)">E. Le dénosumab est une alternative si IRC sévère</div>
+    </div>
+    <button class="qcm-btn" onclick="validateQCM(this)">Valider Q7</button>
+    <p class="qcm-feedback" style="display:none"></p>
+  </div>
+</div>
+
+<div class="slide" id="slide-42">
+  <h1 class="slide-title">🎯 Examen — QCM Sections II–VI (fin)</h1>
+  <p style="font-size:.85rem;color:#888;margin-bottom:12px">Questions 8 à 10</p>
+
+  <div class="qcm-block">
+    <p class="qcm-question">Q8. L'immunofixation sérique est indispensable dans le bilan du myélome car :</p>
+    <div class="qcm-options">
+      <div class="qcm-option" onclick="selectOption(this)">A. Elle mesure le taux d'immunoglobulines totales</div>
+      <div class="qcm-option correct-ans" onclick="selectOption(this)">B. Elle caractérise le type d'immunoglobuline monoclonale (IgG, IgA, kappa, lambda)</div>
+      <div class="qcm-option" onclick="selectOption(this)">C. Elle détecte la protéine de Bence-Jones urinaire</div>
+      <div class="qcm-option" onclick="selectOption(this)">D. Elle mesure la β2-microglobuline</div>
+      <div class="qcm-option" onclick="selectOption(this)">E. Elle quantifie le pic monoclonal</div>
+    </div>
+    <button class="qcm-btn" onclick="validateQCM(this)">Valider Q8</button>
+    <p class="qcm-feedback" style="display:none"></p>
+  </div>
+
+  <div class="qcm-block">
+    <p class="qcm-question">Q9. La prophylaxie valaciclovir est obligatoire sous quel traitement du myélome ?</p>
+    <div class="qcm-options">
+      <div class="qcm-option correct-ans" onclick="selectOption(this)">A. Bortézomib</div>
+      <div class="qcm-option" onclick="selectOption(this)">B. Lénalidomide seul</div>
+      <div class="qcm-option" onclick="selectOption(this)">C. Daratumumab seul</div>
+      <div class="qcm-option" onclick="selectOption(this)">D. Zolédronate</div>
+      <div class="qcm-option" onclick="selectOption(this)">E. Aucun de ces traitements</div>
+    </div>
+    <button class="qcm-btn" onclick="validateQCM(this)">Valider Q9</button>
+    <p class="qcm-feedback" style="display:none"></p>
+  </div>
+
+  <div class="qcm-block">
+    <p class="qcm-question">Q10. Un patient de 75 ans avec myélome actif et IRC (ClCr=25 ml/min) : quel traitement osseux choisir ?</p>
+    <div class="qcm-options">
+      <div class="qcm-option" onclick="selectOption(this)">A. Zolédronate IV standard</div>
+      <div class="qcm-option correct-ans" onclick="selectOption(this)">B. Dénosumab SC</div>
+      <div class="qcm-option" onclick="selectOption(this)">C. Pamidronate IV</div>
+      <div class="qcm-option" onclick="selectOption(this)">D. Aucun traitement osseux (contre-indiqué)</div>
+      <div class="qcm-option" onclick="selectOption(this)">E. Scintigraphie osseuse pour guider la décision</div>
+    </div>
+    <button class="qcm-btn" onclick="validateQCM(this)">Valider Q10</button>
+    <p class="qcm-feedback" style="display:none"></p>
+  </div>
+</div>
+
+<div class="slide" id="slide-43">
+  <h1 class="slide-title">📂 Dossier Progressif — Monsieur R., 68 ans</h1>
+  <div class="vignette">
+    <strong>Vignette clinique</strong>
+    M. R., 68 ans, sans antécédent, est adressé par son médecin traitant pour fatigue progressive depuis 4 mois, douleurs dorsales récentes et bilan sanguin perturbé. À l'examen : pâleur cutanéo-muqueuse, douleur à la palpation du rachis dorso-lombaire, pas d'adénopathie ni splénomégalie.
+  </div>
+  <div class="content-grid-2" style="margin-top:12px">
+    <div class="dp-case">
+      <strong>Étape 1 — Bilan initial</strong>
+      <strong>NFS</strong> : Hb 8,2 g/dL (normo-normo), GB 4,2 G/L, plaquettes 142 G/L. <strong>Ionogramme</strong> : calcémie 3,1 mmol/L, créatinine 198 µmol/L. <strong>Protidémie</strong> : 95 g/L. <strong>VS</strong> : 110 mm/h.
+      <p style="margin-top:10px;color:#aaa;font-size:.85rem">❓ Interprétez ce bilan et proposez les examens complémentaires de première intention</p>
+    </div>
+    <div class="dp-case">
+      <strong>Correction étape 1</strong>
+      Syndrome CRAB complet : A (Hb 8,2 &lt;10) + R (créat 198 &gt;177) + C (Ca 3,1 &gt;2,75). Protidémie élevée → suspicion de pic monoclonal. VS très élevée → inflammation ou gammapathie. <strong>Examens urgents</strong> : EPS + immunofixation, FLC sériques, protéinurie 24h, myélogramme, scanner corps entier low-dose.
+    </div>
+  </div>
+</div>
+
+<div class="slide" id="slide-44">
+  <h1 class="slide-title">📂 Dossier Progressif — Suite</h1>
+  <div class="content-grid-2">
+    <div class="dp-case">
+      <strong>Étape 2 — Résultats complémentaires</strong>
+      <strong>EPS</strong> : pic étroit en zone gammaglobulines, taux 42 g/L. <strong>Immunofixation</strong> : IgG kappa. <strong>FLC</strong> : kappa 480 mg/L (N &lt;19,4), ratio kappa/lambda 48 (N &lt;3,1). <strong>Myélogramme</strong> : 38% de plasmocytes dystrophiques. <strong>FISH</strong> : t(4;14) positive. <strong>β2M</strong> : 6,8 mg/L. <strong>Albumine</strong> : 28 g/L. <strong>LDH</strong> : 280 UI/L (normale). <strong>Scanner</strong> : 5 lésions lytiques vertébrales, tassement T8.
+      <p style="margin-top:10px;color:#aaa;font-size:.85rem">❓ Posez le diagnostic et calculez le R-ISS. Ce patient est-il éligible à l'autogreffe ? Quel traitement proposer ?</p>
+    </div>
+    <div class="dp-case">
+      <strong>Correction étape 2</strong>
+      <strong>Diagnostic</strong> : MM IgG kappa stade <span style="color:#f39c12;font-weight:700">R-ISS II</span> (β2M ≥5,5 → ISS III, mais LDH normales : stade II). Cytogénétique haut risque : t(4;14). <strong>Éligibilité autogreffe</strong> : 68 ans, pas de comorbidité → éligible (âge ≤70 ans). <strong>Traitement</strong> : Dara-VRd × 6 cycles d'induction → mobilisation CSH → melphalan 200 mg/m² → autogreffe → maintenance lénalidomide. <strong>Traitement symptomatique</strong> : zolédronate IV (après bilan dentaire), hyperhydratation, antalgiques, valaciclovir.
+    </div>
+  </div>
+  <div class="urgence-box" style="margin-top:12px">
+    <strong>🚨 Point urgence</strong>
+    Le tassement T8 : vérifier l'absence de signes neurologiques (compression médullaire). Si déficit moteur ou troubles sphinctériens → IRM médullaire urgente + corticoïdes + radiothérapie décompressive.
+  </div>
+</div>
+
+<div class="slide" id="slide-45">
+  <h1 class="slide-title">🗂️ Résumé — Ce qu'il faut savoir pour l'ECN</h1>
+  <div class="content-grid-2">
+    <div class="card">
+      <h4>📌 Définitions clés</h4>
+      <ul class="bullets">
+        <li>GMSI : pic &lt;30, plasmo &lt;10%, sans CRAB/SLiM → surveillance</li>
+        <li>MI : pic &gt;30 ou plasmo &gt;10%, sans CRAB/SLiM → surveillance rapprochée</li>
+        <li>MM actif : CRAB ou SLiM → traitement immédiat</li>
+        <li>Waldenström : IgM + lymphoplasmocytes + MYD88</li>
+        <li>Amylose AL : chaînes légères + rouge Congo + organes cibles</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h4>🔬 Bilan à ne pas oublier</h4>
+      <ul class="bullets">
+        <li>EPS + immunofixation (sérique + urinaire)</li>
+        <li>FLC sériques + ratio kappa/lambda</li>
+        <li>Myélogramme (seuil ≥10% plasmocytes)</li>
+        <li>Scanner corps entier low-dose (≠ scintigraphie)</li>
+        <li>β2M + albumine + LDH + cytogénétique (R-ISS)</li>
+      </ul>
+    </div>
+  </div>
+  <div class="content-grid-2" style="margin-top:10px">
+    <div class="card">
+      <h4>💊 Thérapeutiques</h4>
+      <ul class="bullets">
+        <li>&lt;70 ans : Dara-VRd → autogreffe → maintenance lénalidomide</li>
+        <li>&gt;70 ans : VRd ou Rd continu</li>
+        <li>Bisphosphonates IV (bilan dentaire ++) + valaciclovir</li>
+        <li>Thromboprophylaxie obligatoire sous IMiD</li>
+        <li>CAR-T/bispécifiques en rechute réfractaire</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h4>🚨 Urgences à reconnaître</h4>
+      <ul class="bullets">
+        <li>Compression médullaire → IRM urgente + RT décompressive</li>
+        <li>Hypercalcémie sévère → hyperhydratation + zolédronate</li>
+        <li>IRA → hydratation, éviter néphrotoxiques</li>
+        <li>Infection → antibiothérapie précoce (germes capsulés)</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="slide" id="slide-46">
+  <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:60vh;text-align:center;padding:30px">
+    <div style="font-size:3rem;margin-bottom:20px">🎓</div>
+    <h1 style="color:#9b59b6;font-size:2rem;margin:0 0 16px 0">Myélome Multiple — Terminé !</h1>
+    <p style="color:#aaa;font-size:1rem;max-width:500px;line-height:1.7;margin:0 0 24px 0">Vous avez parcouru l'ensemble du programme ECN sur le myélome multiple (Items 316 + 218). Définitions · Diagnostic différentiel · Clinique · Bilan · Pronostic R-ISS · Traitement</p>
+    <div style="display:flex;gap:14px;flex-wrap:wrap;justify-content:center;margin-bottom:24px">
+      <span style="background:rgba(155,89,182,.2);border:1px solid #9b59b6;border-radius:20px;padding:6px 16px;font-size:.85rem;color:#9b59b6">IP (Bortézomib)</span>
+      <span style="background:rgba(155,89,182,.2);border:1px solid #9b59b6;border-radius:20px;padding:6px 16px;font-size:.85rem;color:#9b59b6">IMiD (Lénalidomide)</span>
+      <span style="background:rgba(155,89,182,.2);border:1px solid #9b59b6;border-radius:20px;padding:6px 16px;font-size:.85rem;color:#9b59b6">Anti-CD38 (Dara)</span>
+      <span style="background:rgba(155,89,182,.2);border:1px solid #9b59b6;border-radius:20px;padding:6px 16px;font-size:.85rem;color:#9b59b6">CAR-T BCMA</span>
+    </div>
+    <a href="index.html" style="background:#9b59b6;color:white;text-decoration:none;padding:12px 28px;border-radius:8px;font-weight:600;font-size:.95rem">← Retour au menu principal</a>
+  </div>
+</div>
+
+</div><!-- end slides-container -->
+
+<script>
+let current = 0;
+const slides = document.querySelectorAll('.slide');
+const total = slides.length;
+
+function showSlide(n) {
+  if (n < 0) n = 0;
+  if (n >= total) n = total - 1;
+  slides[current].classList.remove('active');
+  current = n;
+  slides[current].classList.add('active');
+  document.getElementById('tb-cur').textContent = current + 1;
+  const pct = ((current + 1) / total) * 100;
+  document.getElementById('progress-bar').style.width = pct + '%';
+  slides[current].scrollTop = 0;
+}
+
+function changeSlide(d) { showSlide(current + d); }
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'ArrowRight' || e.key === 'ArrowDown') changeSlide(1);
+  if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') changeSlide(-1);
+});
+
+let tx = 0, ty = 0;
+document.addEventListener('touchstart', e => { tx = e.touches[0].clientX; ty = e.touches[0].clientY; }, {passive:true});
+document.addEventListener('touchend', e => {
+  const dx = e.changedTouches[0].clientX - tx;
+  const dy = e.changedTouches[0].clientY - ty;
+  if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 40) { if (dx < 0) changeSlide(1); else changeSlide(-1); }
+}, {passive:true});
+
+function flipCard(el) { el.classList.toggle('revealed'); }
+
+// QCM part 1 (radio button style with .qcm-opt)
+function selectOption(el) {
+  const block = el.closest('.qcm-block');
+  if (!block) return;
+  // Handle radio-style (label.qcm-opt)
+  if (el.tagName === 'LABEL') {
+    const allOpts = block.querySelectorAll('.qcm-opt');
+    allOpts.forEach(o => o.classList.remove('selected'));
+    el.classList.add('selected');
+    const radio = el.querySelector('input');
+    if (radio) radio.checked = true;
+    const expl = block.querySelector('.qcm-expl');
+    if (expl) {
+      const isCorrect = el.classList.contains('correct-ans');
+      el.classList.add(isCorrect ? 'correct' : 'wrong');
+      expl.style.display = 'block';
+      if (isCorrect && expl) expl.style.background = 'rgba(46,204,113,.08)';
+    }
+  } else {
+    // div.qcm-option multi-select style
+    el.classList.toggle('selected');
+  }
+}
+
+// QCM part 2 (div style with .qcm-option + validate button)
+function validateQCM(btn) {
+  const block = btn.closest('.qcm-block');
+  if (!block) return;
+  const opts = block.querySelectorAll('.qcm-option');
+  opts.forEach(opt => {
+    const isCorrect = opt.classList.contains('correct-ans');
+    const isSelected = opt.classList.contains('selected');
+    if (isCorrect) opt.classList.add('correct-show');
+    else if (isSelected) opt.classList.add('wrong-show');
+    opt.style.pointerEvents = 'none';
+  });
+  btn.disabled = true;
+  const fb = block.querySelector('.qcm-feedback');
+  if (fb) {
+    const allCorrect = [...opts].filter(o => o.classList.contains('correct-ans'));
+    const selected = [...opts].filter(o => o.classList.contains('selected'));
+    const correctSelected = selected.filter(o => o.classList.contains('correct-ans'));
+    const score = correctSelected.length + '/' + allCorrect.length;
+    fb.textContent = '✅ Réponses correctes affichées en vert · Score : ' + score;
+    fb.style.display = 'block';
+  }
+}
+
+function openModal(src) {
+  document.getElementById('modal-img').src = src;
+  document.getElementById('img-modal').classList.add('open');
+}
+function closeModal() { document.getElementById('img-modal').classList.remove('open'); }
+
+showSlide(0);
+</script>
+
+</body>
+</html>
