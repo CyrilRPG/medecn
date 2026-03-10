@@ -6,7 +6,7 @@
 <title>Syndromes Myéloprolifératifs – Item 317 | MédECN</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
-body{background:#1a1a2e;color:#e0e0e0;font-family:'Segoe UI',Arial,sans-serif;overflow:hidden;height:100vh}
+body{background:#1a1a2e;color:#e0e0e0;font-family:'Segoe UI',Arial,sans-serif;overflow:hidden;overflow-x:hidden;height:100vh}
 .topbar{position:fixed;top:0;left:0;right:0;height:50px;background:rgba(13,13,26,.95);display:flex;align-items:center;justify-content:space-between;padding:0 16px;z-index:1000;border-bottom:1px solid rgba(255,255,255,.08)}
 .tb-home{color:#e74c3c;font-size:1.3rem;text-decoration:none;line-height:1}
 .tb-title{font-size:.82rem;color:#aaa;font-weight:500;letter-spacing:.3px}
@@ -16,29 +16,29 @@ body{background:#1a1a2e;color:#e0e0e0;font-family:'Segoe UI',Arial,sans-serif;ov
 .tb-btn:hover{background:rgba(255,255,255,.18)}
 .progress-bar{position:fixed;top:50px;left:0;height:3px;background:linear-gradient(90deg,#e74c3c,#f39c12);transition:width .3s;z-index:999}
 .slides-container{padding-top:53px;height:100vh;overflow:hidden}
-.slide{display:none;height:calc(100vh - 53px);overflow-y:auto;padding:28px 36px 28px}
+.slide{display:none;height:calc(100vh - 53px);overflow-y:auto;overflow-x:hidden;padding:16px 20px 16px}
 .slide.active{display:block}
 .slide-section-header{text-align:center;padding:60px 20px;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:calc(100vh - 110px)}
 .section-badge{background:rgba(231,76,60,.15);border:1px solid rgba(231,76,60,.3);color:#e74c3c;padding:6px 18px;border-radius:20px;font-size:.8rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:20px}
 .section-title{font-size:2.2rem;font-weight:800;color:#fff;margin-bottom:16px;line-height:1.2}
 .section-subtitle{font-size:1.1rem;color:#aaa;max-width:600px;line-height:1.6}
-h1.slide-title{font-size:1.6rem;font-weight:700;color:#e74c3c;margin-bottom:20px;padding-bottom:10px;border-bottom:2px solid rgba(231,76,60,.25)}
-h2.slide-title{font-size:1.4rem;font-weight:700;color:#f39c12;margin-bottom:18px;padding-bottom:8px;border-bottom:2px solid rgba(243,156,18,.25)}
-h3.slide-title{font-size:1.2rem;font-weight:700;color:#3498db;margin-bottom:16px;padding-bottom:6px;border-bottom:1px solid rgba(52,152,219,.25)}
+h1.slide-title{font-size:1.1rem;font-weight:700;color:#e74c3c;margin-bottom:20px;padding-bottom:10px;border-bottom:2px solid rgba(231,76,60,.25)}
+h2.slide-title{font-size:1.0rem;font-weight:700;color:#f39c12;margin-bottom:18px;padding-bottom:8px;border-bottom:2px solid rgba(243,156,18,.25)}
+h3.slide-title{font-size:.95rem;font-weight:700;color:#3498db;margin-bottom:16px;padding-bottom:6px;border-bottom:1px solid rgba(52,152,219,.25)}
 .content-grid{display:grid;gap:14px}
 .content-grid-2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
 .content-grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px}
-.card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.09);border-radius:10px;padding:16px;line-height:1.6}
+.card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.09);border-radius:10px;padding:10px 12px;line-height:1.5;font-size:.85rem}
 .card h4{font-size:.95rem;font-weight:700;color:#f39c12;margin-bottom:10px}
 .card ul{padding-left:18px}
 .card ul li{margin-bottom:8px;font-size:.9rem;line-height:1.65}
-.def-box{background:rgba(243,156,18,.12);border-left:4px solid #f39c12;padding:12px 16px;border-radius:0 8px 8px 0;margin:12px 0}
+.def-box{background:rgba(243,156,18,.12);border-left:4px solid #f39c12;padding:8px 12px;border-radius:0 8px 8px 0;margin:12px 0}
 .def-box strong{color:#f39c12;font-weight:700}
-.urgence-box{background:rgba(231,76,60,.2);border:2px solid #e74c3c;padding:14px 16px;border-radius:8px;margin:12px 0}
+.urgence-box{background:rgba(231,76,60,.2);border:2px solid #e74c3c;padding:8px 12px;border-radius:8px;margin:12px 0}
 .urgence-box strong{color:#e74c3c;font-weight:700}
-.info-box{background:rgba(52,152,219,.12);border-left:4px solid #3498db;padding:12px 16px;border-radius:0 8px 8px 0;margin:12px 0}
+.info-box{background:rgba(52,152,219,.12);border-left:4px solid #3498db;padding:8px 12px;border-radius:0 8px 8px 0;margin:12px 0}
 .info-box strong{color:#3498db;font-weight:700}
-.success-box{background:rgba(46,204,113,.12);border-left:4px solid #2ecc71;padding:12px 16px;border-radius:0 8px 8px 0;margin:12px 0}
+.success-box{background:rgba(46,204,113,.12);border-left:4px solid #2ecc71;padding:8px 12px;border-radius:0 8px 8px 0;margin:12px 0}
 .success-box strong{color:#2ecc71;font-weight:700}
 ul.bullets li{margin-bottom:8px;font-size:.92rem;line-height:1.6;padding-left:4px}
 ul.bullets li::marker{color:#e74c3c}
@@ -111,7 +111,7 @@ tr:nth-child(even) td{background:rgba(255,255,255,.03)}
 .smp-vaquez h4{color:#f39c12}
 .smp-te h4{color:#2ecc71}
 .smp-mfp h4{color:#9b59b6}
-@media(max-width:768px){.content-grid-2,.content-grid-3{grid-template-columns:1fr}.slide{padding:18px 16px}.section-title{font-size:1.6rem}}
+@media(max-width:768px){.content-grid-2,.content-grid-3{grid-template-columns:1fr}.slide{padding:12px 14px}.section-title{font-size:1.6rem}}
 </style>
 </head>
 <body>
@@ -146,6 +146,9 @@ tr:nth-child(even) td{background:rgba(255,255,255,.03)}
 <!-- SLIDE 1: PLAN DU COURS -->
 <div class="slide" id="slide-1">
   <h1 class="slide-title">Plan du cours &amp; Situations de départ</h1>
+<div class="def-box" style="margin:6px 0"><strong>📖 Situation de départ (SD)</strong> : Cas clinique standardisé utilisé en ECN pour évaluer le raisonnement médical. Chaque item ECN est rattaché à des SD précises.</div>
+<div class="def-box" style="margin:6px 0"><strong>📖 Hémopathie maligne</strong> : Maladie du sang de nature cancéreuse touchant les cellules sanguines (globules rouges, blancs ou plaquettes) ou leurs précurseurs dans la moelle osseuse.</div>
+
   <div class="content-grid-2">
     <div class="card">
       <h4>🗂️ Plan du cours</h4>
@@ -201,6 +204,10 @@ tr:nth-child(even) td{background:rgba(255,255,255,.03)}
 <!-- SLIDE 2: HIÉRARCHISATION DES CONNAISSANCES -->
 <div class="slide" id="slide-3">
   <h1 class="slide-title">Hiérarchisation des connaissances</h1>
+<div class="def-box" style="margin:6px 0"><strong>📖 Rang A</strong> : Connaissance incontournable à maîtriser absolument pour l'ECN. Représente le minimum exigible de tout médecin généraliste.</div>
+<div class="def-box" style="margin:6px 0"><strong>📖 Rang B</strong> : Connaissance complémentaire, plus spécialisée. Utile mais moins prioritaire que le rang A pour l'examen.</div>
+<div class="def-box" style="margin:6px 0"><strong>📖 Item ECN</strong> : Numéro officiel du programme national des ECN. Chaque item correspond à un sujet médical précis à maîtriser.</div>
+
   <div class="table-wrap">
     <table>
       <tr><th>Rang</th><th>Rubrique</th><th>Intitulé</th></tr>
@@ -241,6 +248,10 @@ tr:nth-child(even) td{background:rgba(255,255,255,.03)}
 <!-- SLIDE 3: VUE D'ENSEMBLE (IMAGE) -->
 <div class="slide" id="slide-5">
   <h1 class="slide-title">Vue d'ensemble – Les 4 SMP classiques</h1>
+<div class="def-box" style="margin:6px 0"><strong>📖 Syndrome myéloprolifératif (SMP)</strong> : Maladie cancéreuse chronique de la moelle osseuse où une ou plusieurs lignées de cellules sanguines se multiplient de façon excessive et incontrôlée.</div>
+<div class="def-box" style="margin:6px 0"><strong>📖 Lignée myéloïde</strong> : Famille de cellules sanguines comprenant les globules rouges, les plaquettes, et la plupart des globules blancs (neutrophiles, éosinophiles, basophiles). S'oppose à la lignée lymphoïde (lymphocytes).</div>
+<div class="def-box" style="margin:6px 0"><strong>📖 Chromosome Philadelphie (Ph+)</strong> : Anomalie chromosomique spécifique à la LMC, résultant d'un échange de matériel génétique entre les chromosomes 9 et 22. C'est le « marqueur moléculaire » de la LMC.</div>
+
   <div class="img-block">
     <img src="images_myeloproliferatifs/p1_page1.png" class="slide-img" style="max-height:380px" alt="SMP aperçu">
     <p class="img-caption">Page de référence – Classification et plan du cours</p>
@@ -298,6 +309,10 @@ tr:nth-child(even) td{background:rgba(255,255,255,.03)}
 <!-- SLIDE 5: DÉFINITION ET CLASSIFICATION -->
 <div class="slide" id="slide-8">
   <h1 class="slide-title">Définition et classification des SMP</h1>
+<div class="def-box" style="margin:6px 0"><strong>📖 Clone tumoral</strong> : Population de cellules cancéreuses toutes issues d'une seule cellule d'origine ayant subi une mutation. Toutes les cellules du clone partagent la même anomalie génétique.</div>
+<div class="def-box" style="margin:6px 0"><strong>📖 Maturation cellulaire</strong> : Processus de différenciation d'une cellule immature (souche) en cellule mature fonctionnelle. Dans les SMP, la maturation est conservée (≠ leucémies aiguës où elle est bloquée).</div>
+<div class="def-box" style="margin:6px 0"><strong>📖 Hémopathies malignes chroniques</strong> : Cancers du sang d'évolution lente (par opposition aux leucémies aiguës à évolution rapide). Les cellules produites en excès sont matures et fonctionnelles.</div>
+
   <div class="def-box">
     <strong>Définition (rang A)</strong>
     Les <strong>syndromes myéloprolifératifs (SMP)</strong> — aussi appelés <em>néoplasies myéloprolifératives</em> — sont des <strong>hémopathies malignes chroniques</strong> caractérisées par une <strong>hyperproduction de cellules myéloïdes matures</strong> par la moelle osseuse. Les cellules produites sont morphologiquement normales (pas de blocage de maturation, contrairement aux leucémies aiguës).
@@ -347,6 +362,10 @@ tr:nth-child(even) td{background:rgba(255,255,255,.03)}
 <!-- SLIDE 6: TABLEAU CLASSIFICATION -->
 <div class="slide" id="slide-10">
   <h1 class="slide-title">Classification des SMP – Tableau récapitulatif</h1>
+<div class="def-box" style="margin:6px 0"><strong>📖 Myélémie</strong> : Présence dans le sang de précurseurs des globules blancs (métamyélocytes, myélocytes) qui normalement restent dans la moelle. Signe d'une prolifération intense ou d'une libération anormale.</div>
+<div class="def-box" style="margin:6px 0"><strong>📖 Basophilie</strong> : Augmentation du nombre de basophiles (un type de globule blanc) dans le sang. La basophilie est très caractéristique de la LMC et doit toujours faire évoquer ce diagnostic.</div>
+<div class="def-box" style="margin:6px 0"><strong>📖 Polyglobulie</strong> : Augmentation anormale du nombre de globules rouges et du taux d'hémoglobine dans le sang. Caractéristique de la maladie de Vaquez.</div>
+
   <div class="table-wrap">
     <table>
       <tr><th>SMP</th><th>Lignée principale</th><th>Anomalie génétique</th><th>Manifestation principale</th></tr>
@@ -386,6 +405,10 @@ tr:nth-child(even) td{background:rgba(255,255,255,.03)}
 <!-- SLIDE 7: PHYSIOPATHOLOGIE COMMUNE -->
 <div class="slide" id="slide-12">
   <h1 class="slide-title">Physiopathologie commune des SMP</h1>
+<div class="def-box" style="margin:6px 0"><strong>📖 Cellule souche hématopoïétique (CSH)</strong> : Cellule primitive de la moelle osseuse capable de se renouveler elle-même et de se différencier en toutes les cellules sanguines. C'est dans cette cellule que la mutation oncogénique des SMP apparaît.</div>
+<div class="def-box" style="margin:6px 0"><strong>📖 Mutation somatique</strong> : Mutation génétique acquise (non héréditaire) survenant dans une cellule de l'organisme après la naissance. Dans les SMP, la mutation survient dans une CSH et est transmise à toutes ses cellules filles.</div>
+<div class="def-box" style="margin:6px 0"><strong>📖 Signalisation intracellulaire</strong> : Ensemble des messages chimiques à l'intérieur d'une cellule qui régulent sa croissance et sa survie. Dans les SMP, ces messages sont activés en permanence de façon anormale, provoquant la prolifération excessive.</div>
+
   <div class="def-box">
     <strong>Principe fondamental</strong>
     Les SMP sont des maladies <strong>acquises et clonales</strong> : elles prennent naissance dans une unique <strong>cellule souche hématopoïétique</strong>, au sein de laquelle survient une mutation génétique activatrice. Toutes les cellules descendant de ce clone partagent cette anomalie.
@@ -437,6 +460,10 @@ tr:nth-child(even) td{background:rgba(255,255,255,.03)}
 <!-- SLIDE 8: BCR::ABL1 vs JAK2 -->
 <div class="slide" id="slide-14">
   <h1 class="slide-title">Les deux grandes voies oncogéniques des SMP</h1>
+<div class="def-box" style="margin:6px 0"><strong>📖 Translocation chromosomique</strong> : Échange de segments entre deux chromosomes différents. Exemple : t(9;22) = échange entre chr 9 et chr 22, créant le chromosome Philadelphie.</div>
+<div class="def-box" style="margin:6px 0"><strong>📖 Oncogène</strong> : Gène qui, muté ou surexprimé, stimule de façon anormale la prolifération cellulaire et peut provoquer un cancer. BCR::ABL1 et JAK2 muté sont des oncogènes.</div>
+<div class="def-box" style="margin:6px 0"><strong>📖 Tyrosine kinase</strong> : Enzyme qui ajoute un groupement phosphate sur des protéines cibles, activant des voies de signalisation. Dans les SMP, ces enzymes sont activées en permanence → prolifération non contrôlée.</div>
+
   <div class="content-grid-2">
     <div>
       <div class="urgence-box">
@@ -493,6 +520,10 @@ tr:nth-child(even) td{background:rgba(255,255,255,.03)}
 <!-- SLIDE 9: CIRCONSTANCES DE DIAGNOSTIC -->
 <div class="slide" id="slide-16">
   <h1 class="slide-title">Circonstances de diagnostic des SMP</h1>
+<div class="def-box" style="margin:6px 0"><strong>📖 Découverte fortuite</strong> : Anomalie découverte par hasard lors d'un bilan sanguin de routine, sans symptôme évocateur. Fréquent dans les SMP, notamment la Vaquez et la thrombocytémie essentielle.</div>
+<div class="def-box" style="margin:6px 0"><strong>📖 Splénomégalie</strong> : Augmentation du volume de la rate. Dans les SMP, la rate grossit car elle devient un site de fabrication de cellules sanguines (hématopoïèse extra-médullaire) ou de séquestration des cellules en excès.</div>
+<div class="def-box" style="margin:6px 0"><strong>📖 NFS (Numération Formule Sanguine)</strong> : Examen de sang de base mesurant le nombre et les caractéristiques des cellules sanguines : globules rouges (Hb, VGM), globules blancs (avec formule), et plaquettes. Premier examen à demander.</div>
+
   <p class="explain">Un SMP est suspecté dans trois types de situations cliniques, qui diffèrent selon la pathologie en cause :</p>
   <div class="content-grid">
     <div class="card">
@@ -549,6 +580,10 @@ tr:nth-child(even) td{background:rgba(255,255,255,.03)}
 <!-- SLIDE 10: ÉVOLUTION COMMUNE -->
 <div class="slide" id="slide-18">
   <h1 class="slide-title">Évolution commune et risques partagés des SMP</h1>
+<div class="def-box" style="margin:6px 0"><strong>📖 Transformation en leucémie aiguë</strong> : Évolution redoutée des SMP : la maladie chronique peut se transformer en leucémie aiguë (blastique), de mauvais pronostic. Les blastes (cellules immatures) envahissent la moelle.</div>
+<div class="def-box" style="margin:6px 0"><strong>📖 Myélofibrose secondaire</strong> : Remplacement progressif de la moelle osseuse par du tissu fibreux (cicatriciel), résultant de la libération de cytokines par les cellules tumorales. Entraîne une insuffisance médullaire.</div>
+<div class="def-box" style="margin:6px 0"><strong>📖 Événement thromboembolique</strong> : Formation d'un caillot dans une veine ou une artère (thrombose). Risque majeur des SMP (surtout Vaquez et TE) dû à l'excès de cellules sanguines qui épaississent le sang.</div>
+
   <div class="urgence-box">
     <strong>⚠️ Risque majeur à long terme commun à TOUS les SMP</strong>
     <strong>Transformation en leucémie aiguë</strong> (généralement myéloïde = LAM), de pronostic très sombre. La transformation peut être précédée d'une phase de syndrome myélodysplasique.
@@ -606,6 +641,10 @@ tr:nth-child(even) td{background:rgba(255,255,255,.03)}
 <!-- SLIDE 11: IMAGE GÉNÉRALITÉS -->
 <div class="slide" id="slide-20">
   <h1 class="slide-title">Aperçu histologique et biologique – Généralités</h1>
+<div class="def-box" style="margin:6px 0"><strong>📖 Myélogramme</strong> : Examen microscopique des cellules de la moelle osseuse obtenues par aspiration à l'aiguille (ponction sternale ou iliaque). Permet de compter et d'analyser les différentes cellules médullaires.</div>
+<div class="def-box" style="margin:6px 0"><strong>📖 Biopsie ostéo-médullaire (BOM)</strong> : Prélèvement d'un fragment d'os avec sa moelle pour analyse histologique. Plus invasive que le myélogramme mais indispensable pour évaluer la fibrose médullaire (myélofibrose).</div>
+<div class="def-box" style="margin:6px 0"><strong>📖 LDH (Lacticodeshydrogénase)</strong> : Enzyme libérée lors de la destruction cellulaire. Un taux élevé de LDH traduit un fort renouvellement (destruction + production) cellulaire, signe d'une maladie active ou agressive.</div>
+
   <div class="img-block">
     <img src="images_myeloproliferatifs/p1_page3.png" class="slide-img" style="max-height:400px" alt="SMP généralités">
     <p class="img-caption">Circonstances de diagnostic et évolution des SMP</p>
@@ -891,6 +930,10 @@ tr:nth-child(even) td{background:rgba(255,255,255,.03)}
 <!-- SLIDE 17: LMC VIGNETTE + DÉFINITION -->
 <div class="slide" id="slide-27">
   <h1 class="slide-title">LMC – Présentation clinique et définition</h1>
+<div class="def-box" style="margin:6px 0"><strong>📖 Leucémie myéloïde chronique (LMC)</strong> : SMP de la lignée granuleuse (neutrophiles) causé par la translocation t(9;22). Évolution chronique en 3 phases. Guérison possible grâce aux inhibiteurs de tyrosine kinase (ITK).</div>
+<div class="def-box" style="margin:6px 0"><strong>📖 Hyperleucocytose</strong> : Augmentation importante du nombre de globules blancs (leucocytes) dans le sang, souvent >50 G/L dans la LMC. Le terme 'leuco' = blanc, 'cytose' = augmentation des cellules.</div>
+<div class="def-box" style="margin:6px 0"><strong>📖 Splénomégalie massive</strong> : Rate très augmentée de volume (parfois descendant jusqu'à la fosse iliaque). Caractéristique de la LMC car la rate devient un site majeur de prolifération des cellules tumorales.</div>
+
   <div class="vignette">
     <strong>📋 Vignette clinique (ECN type)</strong>
     Homme 54 ans, hématome de cuisse après accident de vélo → NFS : leucocytes 29,7 G/L, PNN 21,1 G/L, basophiles 1,37 G/L, myélémie (métamyélocytes + myélocytes), blastes 0,8%, Hb 133 g/L, plaquettes 717 G/L. Splénomégalie 3 cm. LDH élevées. ✓ Recherche BCR::ABL1 positive → LMC confirmée. Myélogramme : phase chronique. Caryotype : 46,XY,t(9;22).
@@ -929,6 +972,10 @@ tr:nth-child(even) td{background:rgba(255,255,255,.03)}
 <!-- SLIDE 18: PHYSIOPATHOLOGIE BCR::ABL1 -->
 <div class="slide" id="slide-29">
   <h1 class="slide-title">LMC – Physiopathologie : translocation t(9;22)</h1>
+<div class="def-box" style="margin:6px 0"><strong>📖 t(9;22) – Translocation</strong> : Échange de fragments entre les chromosomes 9 et 22. Le gène ABL1 (chr 9) se retrouve fusionné au gène BCR (chr 22), créant le chromosome Philadelphie (chr 22 raccourci).</div>
+<div class="def-box" style="margin:6px 0"><strong>📖 BCR::ABL1</strong> : Protéine de fusion anormale produite par le gène chimère BCR-ABL1. C'est une tyrosine kinase constitutivement active qui stimule en permanence la prolifération des précurseurs myéloïdes.</div>
+<div class="def-box" style="margin:6px 0"><strong>📖 Chromosome Philadelphie</strong> : Le chromosome 22 raccourci résultant de la translocation t(9;22). Présent dans plus de 95% des LMC. Son nom vient de la ville de Philadelphie où il a été découvert en 1960.</div>
+
   <div class="img-block">
     <img src="images_myeloproliferatifs/p1_page4.png" class="slide-img" style="max-height:280px" alt="Translocation t(9;22)">
     <p class="img-caption">Fig. 6.1 – Formation du gène de fusion BCR::ABL1 par translocation t(9;22)</p>
@@ -979,6 +1026,10 @@ tr:nth-child(even) td{background:rgba(255,255,255,.03)}
 <!-- SLIDE 19: HÉMOGRAMME LMC -->
 <div class="slide" id="slide-31">
   <h1 class="slide-title">LMC – L'hémogramme caractéristique</h1>
+<div class="def-box" style="margin:6px 0"><strong>📖 Myélémie équilibrée</strong> : Présence dans le sang de précurseurs granuleux à tous les stades (myéloblastes, promyélocytes, myélocytes, métamyélocytes) de façon proportionnelle, sans blocage de maturation. Très évocatrice de LMC.</div>
+<div class="def-box" style="margin:6px 0"><strong>📖 Basophilie absolue</strong> : Augmentation du nombre absolu de basophiles dans le sang (>0,1 G/L). Quasi constante dans la LMC et très caractéristique. La basophilie doit toujours faire penser à la LMC.</div>
+<div class="def-box" style="margin:6px 0"><strong>📖 Éosinophilie</strong> : Augmentation des éosinophiles (un type de GB). Souvent associée à la basophilie dans la LMC. Ces deux anomalies ensemble sont très évocatrices de LMC.</div>
+
   <p class="explain">L'hémogramme est l'examen clé qui oriente vers le diagnostic de LMC. Il présente un tableau quasi-pathognomonique associant :</p>
   <div class="content-grid">
     <div class="urgence-box">
@@ -1035,6 +1086,10 @@ tr:nth-child(even) td{background:rgba(255,255,255,.03)}
 <!-- SLIDE 20: DÉMARCHE DIAGNOSTIQUE LMC -->
 <div class="slide" id="slide-33">
   <h1 class="slide-title">LMC – Démarche diagnostique</h1>
+<div class="def-box" style="margin:6px 0"><strong>📖 PCR quantitative (Q-PCR)</strong> : Technique de biologie moléculaire qui mesure la quantité du transcrit BCR-ABL1 dans le sang. Exprimée en % selon l'échelle internationale (IS). Indispensable pour le suivi de la réponse au traitement.</div>
+<div class="def-box" style="margin:6px 0"><strong>📖 Caryotype médullaire</strong> : Analyse chromosomique des cellules de la moelle osseuse permettant de visualiser et compter les chromosomes. Permet de détecter le chromosome Philadelphie (t(9;22)) dans les cellules tumorales.</div>
+<div class="def-box" style="margin:6px 0"><strong>📖 FISH (Fluorescence In Situ Hybridization)</strong> : Technique qui utilise des sondes fluorescentes pour détecter des anomalies génétiques spécifiques sur des cellules. Plus sensible que le caryotype pour détecter BCR::ABL1.</div>
+
   <div class="success-box">
     <strong>Examen clé : recherche du transcrit BCR::ABL1 par PCR sur sang</strong>
     Un hémogramme évocateur + PCR BCR::ABL1 positive = diagnostic de LMC affirmé. C'est simple, rapide, non invasif.
@@ -1093,6 +1148,10 @@ tr:nth-child(even) td{background:rgba(255,255,255,.03)}
 <!-- SLIDE 21: DIAGNOSTIC DIFFÉRENTIEL LMC -->
 <div class="slide" id="slide-35">
   <h1 class="slide-title">LMC – Diagnostic différentiel</h1>
+<div class="def-box" style="margin:6px 0"><strong>📖 Hyperleucocytose réactionnelle</strong> : Augmentation des globules blancs en réponse à une infection, une inflammation ou un stress. Contrairement à la LMC, il n'y a pas de myélémie ni de basophilie, et les GB reviennent à la normale après traitement de la cause.</div>
+<div class="def-box" style="margin:6px 0"><strong>📖 Leucémie aiguë myéloblastique (LAM)</strong> : Cancer de la moelle où la maturation est bloquée au stade des blastes (cellules immatures). Évolution rapide (jours/semaines) contrairement à la LMC chronique.</div>
+<div class="def-box" style="margin:6px 0"><strong>📖 Réaction leuco-érythroblastique</strong> : Tableau d'hémogramme avec myélémie + érythroblastose (globules rouges immatures). Peut être réactionnel (envahissement médullaire métastatique) ou propre à un SMP.</div>
+
   <div class="table-wrap">
     <table>
       <tr><th>Tableau clinique</th><th>Diagnostic différentiel</th><th>Éléments distinctifs</th></tr>
@@ -1132,6 +1191,10 @@ tr:nth-child(even) td{background:rgba(255,255,255,.03)}
 <!-- SLIDE 22: LES 3 PHASES DE LA LMC -->
 <div class="slide" id="slide-37">
   <h1 class="slide-title">LMC – Les 3 phases évolutives</h1>
+<div class="def-box" style="margin:6px 0"><strong>📖 Phase chronique</strong> : Première phase de la LMC (dure 3-5 ans sans traitement). La maladie est contrôlable, les cellules sont matures. La plupart des patients sont en phase chronique au diagnostic.</div>
+<div class="def-box" style="margin:6px 0"><strong>📖 Phase accélérée</strong> : Phase intermédiaire avec aggravation progressive : augmentation des blastes (10-19%), résistance croissante au traitement, augmentation de la basophilie ou des anomalies chromosomiques additionnelles.</div>
+<div class="def-box" style="margin:6px 0"><strong>📖 Crise blastique (transformation aiguë)</strong> : Phase terminale de la LMC : blastes ≥20% dans le sang ou la moelle (= leucémie aiguë secondaire). Pronostic très sombre. Traduit l'échappement aux ITK.</div>
+
   <div class="img-block">
     <img src="images_myeloproliferatifs/p1_page7.png" class="slide-img" style="max-height:220px" alt="Phases LMC">
     <p class="img-caption">Fig. 6.2 – Évolution naturelle de la LMC : avant et après les ITK</p>
@@ -1197,6 +1260,10 @@ tr:nth-child(even) td{background:rgba(255,255,255,.03)}
 <!-- SLIDE 23: LMC – ITK MÉCANISME ET GÉNÉRATIONS -->
 <div class="slide" id="slide-39">
   <h1 class="slide-title">LMC – Inhibiteurs de tyrosine kinase (ITK)</h1>
+<div class="def-box" style="margin:6px 0"><strong>📖 Inhibiteur de tyrosine kinase (ITK)</strong> : Médicament qui bloque l'activité enzymatique anormale de BCR::ABL1. Révolution thérapeutique dans la LMC depuis 2001 : survie proche de la population générale.</div>
+<div class="def-box" style="margin:6px 0"><strong>📖 Imatinib (Glivec®)</strong> : Premier ITK développé contre la LMC. Bloque la poche de liaison à l'ATP de BCR::ABL1. Médicament historique qui a transformé le pronostic de la LMC. Génériqué depuis 2016.</div>
+<div class="def-box" style="margin:6px 0"><strong>📖 Réponse moléculaire majeure (RMM)</strong> : Critère de réponse au traitement : BCR-ABL1 < 0,1% sur l'échelle internationale (IS). Objectif standard du suivi. La réponse moléculaire profonde (MR4) est la condition pour envisager l'arrêt du traitement.</div>
+
   <div class="def-box">
     <strong>Mécanisme d'action</strong>
     Les ITK bloquent l'activité tyrosine kinase de BCR::ABL1 en <strong>empêchant l'ATP de se fixer au domaine kinase</strong> de BCR::ABL1. Sans ATP, BCR::ABL1 ne peut pas phosphoryler ses substrats → signal de prolifération stoppé.
@@ -1261,6 +1328,10 @@ tr:nth-child(even) td{background:rgba(255,255,255,.03)}
 <!-- SLIDE 24: LMC – SURVEILLANCE ET SUIVI -->
 <div class="slide" id="slide-41">
   <h1 class="slide-title">LMC – Surveillance et suivi sous traitement</h1>
+<div class="def-box" style="margin:6px 0"><strong>📖 Réponse hématologique complète (RHC)</strong> : NFS normalisée avec GB <10 G/L et absence de myélémie. Premier critère de réponse au traitement (obtenu dès 3 mois sous ITK chez la plupart des patients).</div>
+<div class="def-box" style="margin:6px 0"><strong>📖 Réponse cytogénétique complète (RCyC)</strong> : Disparition du chromosome Philadelphie dans les cellules médullaires au caryotype (0% de cellules Ph+). Objectif à 12-18 mois de traitement.</div>
+<div class="def-box" style="margin:6px 0"><strong>📖 Transcrit BCR-ABL1 / IS (International Scale)</strong> : Mesure standardisée au niveau mondial du taux de BCR-ABL1 exprimée en %. Permet de comparer les résultats entre laboratoires. Suivi tous les 3 mois sous ITK.</div>
+
   <p class="explain">La LMC est un <strong>modèle de suivi hématologique</strong>. La surveillance est triple : efficacité du traitement + tolérance + observance (indispensable pour maintenir la réponse).</p>
   <div class="content-grid">
     <div class="card">
@@ -1319,6 +1390,10 @@ tr:nth-child(even) td{background:rgba(255,255,255,.03)}
 <!-- SLIDE 25: LMC – ALLOGREFFE ET CAS PARTICULIERS -->
 <div class="slide" id="slide-43">
   <h1 class="slide-title">LMC – Allogreffe et situations particulières</h1>
+<div class="def-box" style="margin:6px 0"><strong>📖 Allogreffe de cellules souches hématopoïétiques</strong> : Greffe de moelle osseuse provenant d'un donneur compatible (allé = autre personne). Seul traitement potentiellement curatif mais risqué (mortalité liée à la procédure ~10-20%). Réservé aux cas de résistance aux ITK.</div>
+<div class="def-box" style="margin:6px 0"><strong>📖 GVH (Graft versus Host disease)</strong> : Réaction du greffon contre l'hôte : les lymphocytes du donneur attaquent les tissus du receveur. Complication grave de l'allogreffe, touchant peau, foie et tube digestif.</div>
+<div class="def-box" style="margin:6px 0"><strong>📖 Résistance aux ITK</strong> : Survenue de mutations dans le domaine kinase de BCR::ABL1 (mutation T315I +++) empêchant la liaison de l'ITK. Nécessite un changement d'ITK (nilotinib, dasatinib, ponatinib) ou une allogreffe.</div>
+
   <div class="card" style="margin-bottom:14px">
     <h4>🏥 Allogreffe de cellules souches hématopoïétiques (CSH)</h4>
     <p class="explain">L'allogreffe de moelle/CSH n'est plus le traitement de référence depuis l'ère des ITK. Elle ne garde que quelques indications :</p>
@@ -1620,6 +1695,10 @@ tr:nth-child(even) td{background:rgba(255,255,255,.03)}
 <!-- SLIDE 31: VAQUEZ VIGNETTE + DÉFINITION -->
 <div class="slide" id="slide-50">
   <h1 class="slide-title">Maladie de Vaquez – Présentation et définition</h1>
+<div class="def-box" style="margin:6px 0"><strong>📖 Maladie de Vaquez (polyglobulie primitive)</strong> : SMP de la lignée érythrocytaire causé par une mutation JAK2 V617F dans >95% des cas. Caractérisé par une augmentation de la masse globulaire (Hb et Ht élevés). Risque thrombotique majeur.</div>
+<div class="def-box" style="margin:6px 0"><strong>📖 Hématocrite (Ht)</strong> : Proportion du volume sanguin total occupé par les globules rouges (en %). Normalement 40-47% chez la femme, 42-52% chez l'homme. Élevé dans la Vaquez.</div>
+<div class="def-box" style="margin:6px 0"><strong>📖 Masse globulaire (MG)</strong> : Volume total de globules rouges dans tout l'organisme mesuré par méthode isotopique au chrome 51. Examen de référence pour affirmer une vraie polyglobulie (MG >125% de la théorique).</div>
+
   <div class="vignette">
     <strong>📋 Vignette clinique (ECN type)</strong>
     M. C., 73 ans, découverte fortuite d'une polyglobulie sur NFS annuelle. NFS : <strong>Hb 20,8 g/dL, Ht 60,9%</strong>, plaquettes 585 G/L, leucocytes 13,27 G/L. Érythrose faciale et palmaire. Splénomégalie 1 cm. SaO₂ normale. JAK2 muté, EPO basse (2,6 mUI/mL). → Polyglobulie de Vaquez confirmée. Traitement : saignées urgentes + aspirine → puis hydroxyurée (patient de haut risque : âge &gt;60 ans).
@@ -1672,6 +1751,10 @@ tr:nth-child(even) td{background:rgba(255,255,255,.03)}
 <!-- SLIDE 32: VAQUEZ PHYSIOPATHOLOGIE JAK2 -->
 <div class="slide" id="slide-52">
   <h1 class="slide-title">Maladie de Vaquez – Physiopathologie : mutation JAK2 V617F</h1>
+<div class="def-box" style="margin:6px 0"><strong>📖 JAK2 V617F</strong> : Mutation ponctuelle du gène JAK2 (Janus Kinase 2) au niveau de la valine 617 remplacée par une phénylalanine. Rend JAK2 constitutivement active, stimulant en permanence la lignée rouge.</div>
+<div class="def-box" style="margin:6px 0"><strong>📖 EPO (Érythropoïétine)</strong> : Hormone produite par les reins qui stimule la fabrication de globules rouges dans la moelle. Dans la Vaquez, le taux d'EPO est bas car la production de GR est autonome (indépendante de l'EPO).</div>
+<div class="def-box" style="margin:6px 0"><strong>📖 Panneuropathie myéloïde</strong> : Prolifération simultanée des 3 lignées myéloïdes (GR + GB + plaquettes) visible dans la Vaquez, bien que la lignée rouge prédomine.</div>
+
   <div class="img-block">
     <img src="images_myeloproliferatifs/p2_page1.png" class="slide-img" style="max-height:250px" alt="JAK2 V617F">
     <p class="img-caption">Fig. 6.3 – Effet de la mutation activatrice JAK2 V617F sur la signalisation cellulaire</p>
@@ -1722,6 +1805,10 @@ tr:nth-child(even) td{background:rgba(255,255,255,.03)}
 <!-- SLIDE 33: VAQUEZ CIRCONSTANCES ET TABLEAU CLINIQUE -->
 <div class="slide" id="slide-54">
   <h1 class="slide-title">Maladie de Vaquez – Circonstances et tableau clinique</h1>
+<div class="def-box" style="margin:6px 0"><strong>📖 Érythrose faciale</strong> : Rougeur du visage et des extrémités due à l'augmentation de la masse sanguine et de la viscosité. Signe clinique caractéristique de la Vaquez, souvent le premier motif de consultation.</div>
+<div class="def-box" style="margin:6px 0"><strong>📖 Prurit aquagénique</strong> : Démangeaisons intenses déclenchées par le contact avec l'eau (eau chaude ++ lors de la douche). Très évocateur de Vaquez. Mécanisme : libération d'histamine par les basophiles et mastocytes.</div>
+<div class="def-box" style="margin:6px 0"><strong>📖 Hyperviscosité sanguine</strong> : Augmentation de la viscosité du sang due à l'excès de globules rouges. Ralentit la circulation sanguine et augmente le risque de thrombose (phlébite, AVC, infarctus).</div>
+
   <p class="explain">Survenant généralement après 50 ans, légèrement plus fréquente chez l'homme. Les circonstances de découverte sont variées :</p>
   <div class="content-grid-2">
     <div class="card">
@@ -1775,6 +1862,10 @@ tr:nth-child(even) td{background:rgba(255,255,255,.03)}
 <!-- SLIDE 34: VAQUEZ HÉMOGRAMME ET CRITÈRES DIAGNOSTIQUES -->
 <div class="slide" id="slide-56">
   <h1 class="slide-title">Maladie de Vaquez – Hémogramme et critères diagnostiques OMS 2016</h1>
+<div class="def-box" style="margin:6px 0"><strong>📖 Critères OMS 2016</strong> : Référentiel international pour diagnostiquer les hémopathies malignes. Pour la Vaquez : association de critères majeurs (Hb élevée, mutation JAK2, moelle caractéristique) et mineurs (EPO basse).</div>
+<div class="def-box" style="margin:6px 0"><strong>📖 Biopsie ostéo-médullaire (BOM) panmyélose</strong> : Dans la Vaquez, la BOM montre une prolifération des 3 lignées (panmyélose) avec érythroblastes très nombreux et absence de fibrose significative. Critère majeur OMS.</div>
+<div class="def-box" style="margin:6px 0"><strong>📖 EPO sérique basse</strong> : Dans la Vaquez, l'EPO est anormalement basse (<4 UI/L) car la production de GR est autonome et l'organisme « n'a pas besoin » de stimuler l'érythropoïèse. Critère mineur OMS.</div>
+
   <div class="content-grid-2">
     <div>
       <h3 style="color:#f39c12;margin-bottom:10px">Hémogramme évocateur</h3>
@@ -1836,6 +1927,9 @@ tr:nth-child(even) td{background:rgba(255,255,255,.03)}
 <!-- SLIDE 35: VAQUEZ DÉMARCHE DIAGNOSTIQUE -->
 <div class="slide" id="slide-58">
   <h1 class="slide-title">Maladie de Vaquez – Démarche diagnostique</h1>
+<div class="def-box" style="margin:6px 0"><strong>📖 Polyglobulie primitive vs secondaire</strong> : La polyglobulie est primitive si elle est due à un SMP (Vaquez : JAK2 mutée). Elle est secondaire si elle est réactionnelle à une hypoxie chronique (BPCO, apnées du sommeil, altitude) ou à une sécrétion anormale d'EPO.</div>
+<div class="def-box" style="margin:6px 0"><strong>📖 Saturation en O₂</strong> : Mesure du taux d'oxygène fixé sur l'hémoglobine. Une SaO₂ basse (<92%) suggère une polyglobulie secondaire à une hypoxie (insuffisance respiratoire). Si SaO₂ normale → évoquer Vaquez.</div>
+
   <p class="explain">Devant une polyglobulie à l'hémogramme, la démarche doit être progressive, du moins invasif au plus invasif :</p>
   <div class="content-grid">
     <div class="card">
@@ -1890,6 +1984,10 @@ tr:nth-child(even) td{background:rgba(255,255,255,.03)}
 <!-- SLIDE 36: VAQUEZ DIAGNOSTIC DIFFÉRENTIEL -->
 <div class="slide" id="slide-60">
   <h1 class="slide-title">Maladie de Vaquez – Diagnostic différentiel</h1>
+<div class="def-box" style="margin:6px 0"><strong>📖 Polyglobulie secondaire à l'hypoxie</strong> : Augmentation des GR en réponse physiologique à un manque d'oxygène (altitude, BPCO, apnées du sommeil, cardiopathies cyanogènes). L'EPO est élevée (≠ Vaquez où elle est basse) et JAK2 est normal.</div>
+<div class="def-box" style="margin:6px 0"><strong>📖 Polyglobulie par sécrétion d'EPO</strong> : Rare : tumeurs sécrétant de l'EPO (carcinome rénal, hépatocarcinome, hémangioblastome cérébelleux). À rechercher si EPO élevée et JAK2 normal.</div>
+<div class="def-box" style="margin:6px 0"><strong>📖 Hémoconcentration / Pseudopolyglobulie</strong> : Augmentation apparente des GR par diminution du volume plasmatique (déshydratation, diurétiques). La masse globulaire est normale. NFS normalisée après réhydratation.</div>
+
   <div class="img-block">
     <img src="images_myeloproliferatifs/p2_page4.png" class="slide-img" style="max-height:220px" alt="Orientation polyglobulie">
     <p class="img-caption">Fig. 6.4 – Orientation diagnostique devant une polyglobulie</p>
@@ -1946,6 +2044,10 @@ tr:nth-child(even) td{background:rgba(255,255,255,.03)}
 <!-- SLIDE 37: VAQUEZ COMPLICATIONS -->
 <div class="slide" id="slide-62">
   <h1 class="slide-title">Maladie de Vaquez – Complications et pronostic</h1>
+<div class="def-box" style="margin:6px 0"><strong>📖 Thrombose artérielle et veineuse</strong> : Complication majeure de la Vaquez (risque ×10 vs population générale). La thrombose est favorisée par l'hyperviscosité, l'érythrocytose et la thrombocytose associée. Sites préférentiels : veines hépatiques (syndrome de Budd-Chiari), mésentériques, SNC.</div>
+<div class="def-box" style="margin:6px 0"><strong>📖 Syndrome de Budd-Chiari</strong> : Thrombose des veines sus-hépatiques (qui drainent le foie vers la veine cave). Présentation : hépatomégalie douloureuse + ascite + insuffisance hépatique. Doit faire rechercher un SMP sous-jacent.</div>
+<div class="def-box" style="margin:6px 0"><strong>📖 Transformation en myélofibrose ou leucémie</strong> : Évolution naturelle à long terme : 10-20% de transformation en myélofibrose secondaire après 10-15 ans ; <5% de transformation en leucémie aiguë.</div>
+
   <div class="content-grid">
     <div class="urgence-box">
       <strong>⚠️ Complication majeure : Thromboses (1ère cause de morbi-mortalité)</strong>
@@ -2004,6 +2106,10 @@ tr:nth-child(even) td{background:rgba(255,255,255,.03)}
 <!-- SLIDE 38: VAQUEZ TRAITEMENT -->
 <div class="slide" id="slide-64">
   <h1 class="slide-title">Maladie de Vaquez – Principes du traitement</h1>
+<div class="def-box" style="margin:6px 0"><strong>📖 Saignée thérapeutique (phlébotomie)</strong> : Retrait de 300-450 mL de sang pour diminuer rapidement la masse globulaire et l'hématocrite. Simple, rapide, efficace en urgence. Objectif : Ht <45% chez l'homme, <42% chez la femme.</div>
+<div class="def-box" style="margin:6px 0"><strong>📖 Hydroxyurée (Hydréa®)</strong> : Médicament myélosuppresseur (réduit la production de cellules sanguines) utilisé en traitement de fond de la Vaquez. Oral, bien toléré. Risque rare de leucémie secondaire à long terme.</div>
+<div class="def-box" style="margin:6px 0"><strong>📖 Ruxolitinib (Jakavi®)</strong> : Inhibiteur de JAK1/JAK2 utilisé en 2ème ligne en cas d'intolérance ou de résistance à l'hydroxyurée. Très efficace sur le prurit aquagénique et la splénomégalie.</div>
+
   <div class="success-box">
     <strong>Objectif principal : prévention des événements thromboemboliques</strong>
     Maintenir l'hématocrite &lt;45% — traiter l'hyperplaquettose — aspirine à faible dose (sauf contre-indication absolue).
@@ -2323,6 +2429,10 @@ tr:nth-child(even) td{background:rgba(255,255,255,.03)}
 <!-- SLIDE 44: TE DÉFINITION ET PHYSIOPATHOLOGIE -->
 <div class="slide" id="slide-71">
   <h1 class="slide-title">Thrombocytémie essentielle – Définition et physiopathologie</h1>
+<div class="def-box" style="margin:6px 0"><strong>📖 Thrombocytémie essentielle (TE)</strong> : SMP de la lignée mégacaryocytaire (plaquettes) défini par une hyperplaquettose persistante (>450 G/L) avec mutation JAK2, CALR ou MPL. Bon pronostic mais risque thrombotique et hémorragique.</div>
+<div class="def-box" style="margin:6px 0"><strong>📖 Mégacaryocyte</strong> : Grande cellule de la moelle osseuse qui se fragmente pour libérer les plaquettes dans le sang. Dans la TE, les mégacaryocytes sont anormalement nombreux et grands (hyperploïdes).</div>
+<div class="def-box" style="margin:6px 0"><strong>📖 Mutation CALR (Calréticuline)</strong> : Mutation du gène CALR retrouvée dans ~25% des TE et ~30% des myélofibroses. Constitue une cible diagnostique importante en l'absence de mutation JAK2.</div>
+
   <div class="def-box">
     <strong>Définition de la thrombocytémie essentielle (TE) – rang A</strong>
     La <strong>thrombocytémie essentielle</strong> (ou thrombocytémie primitive) est un SMP prédominant sur la <strong>lignée mégacaryocytaire</strong>, caractérisé par une <strong>thrombocytose</strong> (hyperplaquettose) au premier plan. C'est le <em>moins grave</em> des SMP classiques, avec une espérance de vie proche de la normale si la maladie est bien prise en charge.
@@ -2373,6 +2483,10 @@ tr:nth-child(even) td{background:rgba(255,255,255,.03)}
 <!-- SLIDE 45: TE CIRCONSTANCES ET TABLEAU CLINIQUE -->
 <div class="slide" id="slide-73">
   <h1 class="slide-title">Thrombocytémie essentielle – Circonstances et tableau clinique</h1>
+<div class="def-box" style="margin:6px 0"><strong>📖 Microcirculation</strong> : Réseau des petits vaisseaux (artérioles, capillaires, veinules) assurant les échanges entre sang et tissus. L'excès de plaquettes peut obstruer ces petits vaisseaux.</div>
+<div class="def-box" style="margin:6px 0"><strong>📖 Érythromélalgie</strong> : Douleur et rougeur brûlantes des extrémités (pieds ++) déclenchées par la chaleur. Causée par l'obstruction des petits vaisseaux par les plaquettes en excès. Pathognomonique des SMP. Très soulagée par l'aspirine.</div>
+<div class="def-box" style="margin:6px 0"><strong>📖 Thrombocytose réactionnelle</strong> : Augmentation des plaquettes en réponse à une inflammation, une carence martiale, une infection ou une splénectomie. À distinguer de la TE (JAK2/CALR normaux, cause évidente).</div>
+
   <p class="explain">La TE est souvent <strong>asymptomatique</strong> et découverte fortuitement à la NFS. Quand des symptômes existent, ils sont principalement vasculaires :</p>
   <div class="content-grid-2">
     <div>
@@ -2428,6 +2542,10 @@ tr:nth-child(even) td{background:rgba(255,255,255,.03)}
 <!-- SLIDE 46: TE HÉMOGRAMME ET DÉMARCHE DIAGNOSTIQUE -->
 <div class="slide" id="slide-75">
   <h1 class="slide-title">Thrombocytémie essentielle – Hémogramme et démarche diagnostique</h1>
+<div class="def-box" style="margin:6px 0"><strong>📖 Hyperplaquettose persistante</strong> : Plaquettes >450 G/L confirmées sur au moins 2 prélèvements espacés. La persistance est indispensable pour distinguer la TE d'une thrombocytose réactionnelle transitoire.</div>
+<div class="def-box" style="margin:6px 0"><strong>📖 Fausse hyperkaliémie</strong> : Artefact de laboratoire : les plaquettes en excès libèrent du potassium lors de la coagulation du sang dans le tube sec. La kaliémie mesurée sur tube hépariné (plasma) est normale.</div>
+<div class="def-box" style="margin:6px 0"><strong>📖 Score IPSET-thrombose</strong> : Score de risque thrombotique dans la TE basé sur l'âge (>60 ans), les antécédents thrombotiques, le taux de plaquettes (>1500 G/L → paradoxal : hémorragie) et les facteurs cardiovasculaires.</div>
+
   <div class="content-grid-2">
     <div>
       <h3 style="color:#2ecc71;margin-bottom:10px">Hémogramme de la TE</h3>
@@ -2485,6 +2603,9 @@ tr:nth-child(even) td{background:rgba(255,255,255,.03)}
 <!-- SLIDE 47: TE CRITÈRES OMS ET DIAGNOSTIC DIFFÉRENTIEL -->
 <div class="slide" id="slide-77">
   <h1 class="slide-title">Thrombocytémie essentielle – Critères OMS 2016 et diagnostics différentiels</h1>
+<div class="def-box" style="margin:6px 0"><strong>📖 Critères OMS 2016 TE</strong> : Pour diagnostiquer une TE : 1) Plaquettes >450 G/L + 2) Moelle (mégacaryocytes matures géants) + 3) Pas de critères de SMP/SMD + 4) Mutation JAK2/CALR/MPL OU exclusion des causes secondaires.</div>
+<div class="def-box" style="margin:6px 0"><strong>📖 Thrombocytose secondaire</strong> : Causes fréquentes : carence martiale (la plus fréquente), inflammation/infection aiguë, cancer solide, splénectomie, médicaments (corticoïdes, adrénaline). À rechercher systématiquement avant d'évoquer une TE.</div>
+
   <div class="content-grid-2">
     <div>
       <h3 style="color:#2ecc71;margin-bottom:10px">Critères diagnostiques OMS 2016</h3>
@@ -2549,6 +2670,10 @@ tr:nth-child(even) td{background:rgba(255,255,255,.03)}
 <!-- SLIDE 48: TE COMPLICATIONS ET TRAITEMENT -->
 <div class="slide" id="slide-79">
   <h1 class="slide-title">Thrombocytémie essentielle – Complications et traitement</h1>
+<div class="def-box" style="margin:6px 0"><strong>📖 Risque hémorragique paradoxal (>1500 G/L)</strong> : À très haute plaquettose (>1500 G/L), les plaquettes consomment les facteurs de von Willebrand → syndrome de Willebrand acquis → risque hémorragique. L'aspirine est alors CONTRE-INDIQUÉE.</div>
+<div class="def-box" style="margin:6px 0"><strong>📖 Cytoréduction</strong> : Réduction du nombre de cellules sanguines en excès par médicament (hydroxyurée, anagrélide) ou autre traitement. Objectif : ramener les plaquettes à <400-600 G/L pour réduire le risque thrombotique.</div>
+<div class="def-box" style="margin:6px 0"><strong>📖 Anagrélide (Agrylin®)</strong> : Médicament qui diminue spécifiquement la production de plaquettes en bloquant la différenciation des mégacaryocytes. Alternative à l'hydroxyurée dans la TE.</div>
+
   <div class="content-grid-2">
     <div>
       <h3 style="color:#2ecc71;margin-bottom:10px">Complications</h3>
@@ -2864,6 +2989,9 @@ tr:nth-child(even) td{background:rgba(255,255,255,.03)}
 <!-- SLIDE 53: SYNTHÈSE COMPARATIVE -->
 <div class="slide" id="slide-85">
   <h1 class="slide-title">Synthèse comparative – Les 3 SMP à connaître</h1>
+<div class="def-box" style="margin:6px 0"><strong>📖 Score IPSS/DIPSS</strong> : Scores pronostiques de la myélofibrose (International Prognostic Scoring System). Basés sur l'âge, les symptômes, l'anémie et les blastes circulants. Guident la décision thérapeutique (surveillance vs allogreffe).</div>
+<div class="def-box" style="margin:6px 0"><strong>📖 Érythropoïèse extra-médullaire</strong> : Production de globules rouges en dehors de la moelle osseuse (dans la rate et le foie), lorsque la moelle est envahie ou fibrosée. Cause de la splénomégalie massive dans la myélofibrose.</div>
+
   <div class="table-wrap">
     <table>
       <tr>
@@ -2991,6 +3119,9 @@ tr:nth-child(even) td{background:rgba(255,255,255,.03)}
 <!-- SLIDE 55: POINTS DE VIGILANCE ECN -->
 <div class="slide" id="slide-87">
   <h1 class="slide-title">⚠️ Points de vigilance pour l'ECN</h1>
+<div class="def-box" style="margin:6px 0"><strong>📖 Pièges diagnostiques ECN</strong> : Situations courantes où une erreur de diagnostic ou de prise en charge est probable. L'ECN évalue la capacité à éviter ces pièges : confondre polyglobulie primitive et secondaire, basophilie et allergie, etc.</div>
+<div class="def-box" style="margin:6px 0"><strong>📖 Fausse polyglobulie (hémoconcentration)</strong> : Augmentation apparente de l'Hb sans vrai excès de masse érythrocytaire, due à une déshydratation. À éliminer systématiquement avant tout bilan de polyglobulie.</div>
+
   <div class="content-grid-2">
     <div>
       <div class="urgence-box">

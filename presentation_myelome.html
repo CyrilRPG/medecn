@@ -6,7 +6,7 @@
 <title>Myélome Multiple – Item 320 | MédECN</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
-body{background:#1a1a2e;color:#e0e0e0;font-family:'Segoe UI',Arial,sans-serif;overflow:hidden;height:100vh}
+body{background:#1a1a2e;color:#e0e0e0;font-family:'Segoe UI',Arial,sans-serif;overflow:hidden;overflow-x:hidden;height:100vh}
 .topbar{position:fixed;top:0;left:0;right:0;height:50px;background:rgba(13,13,26,.95);display:flex;align-items:center;justify-content:space-between;padding:0 16px;z-index:1000;border-bottom:1px solid rgba(255,255,255,.08)}
 .tb-home{color:#9b59b6;font-size:1.3rem;text-decoration:none;line-height:1}
 .tb-title{font-size:.82rem;color:#aaa;font-weight:500;letter-spacing:.3px}
@@ -16,31 +16,31 @@ body{background:#1a1a2e;color:#e0e0e0;font-family:'Segoe UI',Arial,sans-serif;ov
 .tb-btn:hover{background:rgba(255,255,255,.18)}
 .progress-bar{position:fixed;top:50px;left:0;height:3px;background:linear-gradient(90deg,#9b59b6,#8e44ad);transition:width .3s;z-index:999}
 .slides-container{padding-top:53px;height:100vh;overflow:hidden}
-.slide{display:none;height:calc(100vh - 53px);overflow-y:auto;padding:28px 36px 28px}
+.slide{display:none;height:calc(100vh - 53px);overflow-y:auto;overflow-x:hidden;padding:16px 20px 16px}
 .slide.active{display:block}
 .slide-section-header{text-align:center;padding:60px 20px;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:calc(100vh - 110px)}
 .section-badge{background:rgba(155,89,182,.15);border:1px solid rgba(155,89,182,.3);color:#9b59b6;padding:6px 18px;border-radius:20px;font-size:.8rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:20px}
 .section-title-lg{font-size:2.2rem;font-weight:800;color:#fff;margin-bottom:16px;line-height:1.2}
 .section-subtitle{font-size:1.1rem;color:#aaa;max-width:600px;line-height:1.6}
-h1.slide-title{font-size:1.6rem;font-weight:700;color:#9b59b6;margin-bottom:20px;padding-bottom:10px;border-bottom:2px solid rgba(155,89,182,.25)}
-h2.slide-title{font-size:1.4rem;font-weight:700;color:#f39c12;margin-bottom:18px;padding-bottom:8px;border-bottom:2px solid rgba(243,156,18,.25)}
-h3.slide-title{font-size:1.2rem;font-weight:700;color:#3498db;margin-bottom:16px;padding-bottom:6px;border-bottom:1px solid rgba(52,152,219,.25)}
+h1.slide-title{font-size:1.1rem;font-weight:700;color:#9b59b6;margin-bottom:20px;padding-bottom:10px;border-bottom:2px solid rgba(155,89,182,.25)}
+h2.slide-title{font-size:1.0rem;font-weight:700;color:#f39c12;margin-bottom:18px;padding-bottom:8px;border-bottom:2px solid rgba(243,156,18,.25)}
+h3.slide-title{font-size:.95rem;font-weight:700;color:#3498db;margin-bottom:16px;padding-bottom:6px;border-bottom:1px solid rgba(52,152,219,.25)}
 .content-grid{display:grid;gap:14px}
 .content-grid-2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
 .content-grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px}
-.card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.09);border-radius:10px;padding:16px;line-height:1.6}
+.card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.09);border-radius:10px;padding:10px 12px;line-height:1.5;font-size:.85rem}
 .card h4{font-size:.95rem;font-weight:700;color:#f39c12;margin-bottom:10px}
 .card ul{padding-left:18px}
 .card ul li{margin-bottom:8px;font-size:.9rem;line-height:1.65}
-.def-box{background:rgba(243,156,18,.12);border-left:4px solid #f39c12;padding:12px 16px;border-radius:0 8px 8px 0;margin:12px 0}
+.def-box{background:rgba(243,156,18,.12);border-left:4px solid #f39c12;padding:8px 12px;border-radius:0 8px 8px 0;margin:12px 0}
 .def-box strong{color:#f39c12;font-weight:700}
-.urgence-box{background:rgba(231,76,60,.2);border:2px solid #e74c3c;padding:14px 16px;border-radius:8px;margin:12px 0}
+.urgence-box{background:rgba(231,76,60,.2);border:2px solid #e74c3c;padding:8px 12px;border-radius:8px;margin:12px 0}
 .urgence-box strong{color:#e74c3c;font-weight:700}
-.info-box{background:rgba(52,152,219,.12);border-left:4px solid #3498db;padding:12px 16px;border-radius:0 8px 8px 0;margin:12px 0}
+.info-box{background:rgba(52,152,219,.12);border-left:4px solid #3498db;padding:8px 12px;border-radius:0 8px 8px 0;margin:12px 0}
 .info-box strong{color:#3498db;font-weight:700}
-.success-box{background:rgba(46,204,113,.12);border-left:4px solid #2ecc71;padding:12px 16px;border-radius:0 8px 8px 0;margin:12px 0}
+.success-box{background:rgba(46,204,113,.12);border-left:4px solid #2ecc71;padding:8px 12px;border-radius:0 8px 8px 0;margin:12px 0}
 .success-box strong{color:#2ecc71;font-weight:700}
-ul.bullets li{margin-bottom:8px;font-size:.92rem;line-height:1.65;padding-left:4px}
+ul.bullets li{margin-bottom:5px;font-size:.83rem;line-height:1.5;padding-left:4px}
 ul.bullets li::marker{color:#9b59b6}
 p.explain{font-size:.93rem;line-height:1.75;color:#ccc;margin-bottom:14px}
 .table-wrap{overflow-x:auto;margin:12px 0}
@@ -119,7 +119,7 @@ tr:nth-child(even) td{background:rgba(255,255,255,.03)}
 .modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:2000;cursor:zoom-out;align-items:center;justify-content:center}
 .modal.open{display:flex}
 .modal img{max-width:92vw;max-height:90vh;border-radius:8px;object-fit:contain}
-@media(max-width:768px){.content-grid-2,.content-grid-3,.crab-grid{grid-template-columns:1fr}.slide{padding:18px 16px}.section-title-lg{font-size:1.6rem}}
+@media(max-width:768px){.content-grid-2,.content-grid-3,.crab-grid{grid-template-columns:1fr}.slide{padding:12px 14px}.section-title-lg{font-size:1.6rem}}
 
 /* QCM part 2 (multi-select style) */
 .qcm-question{font-size:.9rem;font-weight:600;color:#e0e0e0;margin-bottom:10px;line-height:1.45}
@@ -172,6 +172,9 @@ tr:nth-child(even) td{background:rgba(255,255,255,.03)}
 <!-- SLIDE 1: PLAN + SD + HIÉRARCHISATION -->
 <div class="slide" id="slide-1">
   <h1 class="slide-title">Plan du cours &amp; Hiérarchisation</h1>
+<div class="def-box" style="margin:6px 0"><strong>📖 Myélome multiple (MM)</strong> : Cancer des plasmocytes de la moelle osseuse. Les plasmocytes sont des cellules immunitaires qui fabriquent normalement des anticorps. Dans le myélome, ils prolifèrent de façon anormale et sécrètent une immunoglobuline monoclonale.</div>
+<div class="def-box" style="margin:6px 0"><strong>📖 Gammapathie monoclonale</strong> : Production anormale d'une seule immunoglobuline identique (monoclonale = toujours la même) par un clone de plasmocytes. Se traduit sur l'électrophorèse des protéines par un pic étroit.</div>
+
   <div class="content-grid-2">
     <div class="card">
       <h4>🗂️ Plan du cours</h4>
@@ -302,6 +305,10 @@ tr:nth-child(even) td{background:rgba(255,255,255,.03)}
 <!-- SLIDE 6: DÉFINITION DU MYÉLOME — GÉNÉRALITÉS -->
 <div class="slide" id="slide-6">
   <h1 class="slide-title">Myélome multiple — Introduction et épidémiologie</h1>
+<div class="def-box" style="margin:6px 0"><strong>📖 Plasmocyte</strong> : Cellule immunitaire mature dérivée du lymphocyte B, spécialisée dans la production d'anticorps (immunoglobulines). Normalement présent en petite quantité dans la moelle osseuse (<5%). Dans le myélome : >10% et anormal.</div>
+<div class="def-box" style="margin:6px 0"><strong>📖 Immunoglobuline monoclonale</strong> : Anticorps identiques produits en masse par un seul clone de plasmocytes malins. Toujours du même type (IgG, IgA, IgM...) et de la même chaîne légère (kappa ou lambda). Visible comme un pic étroit sur l'EPS.</div>
+<div class="def-box" style="margin:6px 0"><strong>📖 Incidence</strong> : Nombre de nouveaux cas par an dans la population. Pour le myélome : ~5 000 nouveaux cas/an en France. Seconde hémopathie maligne derrière les lymphomes.</div>
+
   <div class="def-box">
     <strong>Définition</strong>
     Le <strong>myélome multiple des os</strong> (anciennement maladie de Kahler) est une hémopathie maligne caractérisée par la <strong>prolifération multifocale de plasmocytes tumoraux</strong> au niveau de la moelle hématopoïétique. Le plasmocyte est la cellule différenciée du lymphocyte B, dont la fonction normale est la synthèse d'immunoglobulines.
@@ -359,6 +366,10 @@ tr:nth-child(even) td{background:rgba(255,255,255,.03)}
 <!-- SLIDE 8: GMSI -->
 <div class="slide" id="slide-8">
   <h1 class="slide-title">Gammapathie monoclonale de signification indéterminée (GMSI / MGUS)</h1>
+<div class="def-box" style="margin:6px 0"><strong>📖 GMSI / MGUS</strong> : Gammapathie Monoclonale de Signification Indéterminée. État précancéreux bénin : présence d'un petit pic monoclonal (<30 g/L) avec peu de plasmocytes médullaires (<10%) et aucune atteinte d'organe. Surveillance simple.</div>
+<div class="def-box" style="margin:6px 0"><strong>📖 Progression clonale</strong> : Évolution progressive d'un état précancéreux (GMSI) vers un état cancéreux (myélome). Risque ~1%/an pour une GMSI. La surveillance régulière permet de détecter cette évolution.</div>
+<div class="def-box" style="margin:6px 0"><strong>📖 Facteurs de risque de progression</strong> : Pour la GMSI : pic >15 g/L, immunoglobuline non-IgG, ratio de chaînes légères libres anormal. Ces facteurs augmentent le risque de progression vers un myélome actif.</div>
+
   <div class="def-box">
     <strong>Définition GMSI (MGUS) — 3 critères cumulatifs</strong>
     La GMSI est définie par la <strong>CONJONCTION</strong> des 3 éléments suivants :
@@ -418,6 +429,10 @@ tr:nth-child(even) td{background:rgba(255,255,255,.03)}
 <!-- SLIDE 10: MYÉLOME INDOLENT + SYMPTOMATIQUE + CRAB/SLiM -->
 <div class="slide" id="slide-10">
   <h1 class="slide-title">Myélome indolent vs Myélome symptomatique — CRAB &amp; SLiM</h1>
+<div class="def-box" style="margin:6px 0"><strong>📖 CRAB</strong> : Acronyme des complications organiques du myélome actif qui imposent le traitement : C=Calcium↑, R=Renal (rein), A=Anemia (anémie), B=Bone (os). La présence d'un seul critère CRAB = traitement immédiat.</div>
+<div class="def-box" style="margin:6px 0"><strong>📖 SLiM</strong> : Critères biologiques de myélome actif ajoutés en 2014 : S=Sixty (plasmocytes ≥60%), Li=Light chain ratio (ratio chaînes légères ≥100), M=MRI (≥2 lésions à l'IRM). Permettent de traiter avant les complications.</div>
+<div class="def-box" style="margin:6px 0"><strong>📖 Myélome indolent (smoldering)</strong> : État intermédiaire entre GMSI et myélome actif : pic >30 g/L OU plasmo >10%, mais sans critère CRAB ni SLiM. Pas de traitement immédiat, surveillance rapprochée tous les 3-6 mois.</div>
+
   <div class="def-box">
     <strong>Myélome indolent (MI)</strong>
     Patient <strong>asymptomatique</strong> (sans CRAB) avec : pic monoclonal &gt; 30 g/L <strong>OU</strong> plasmocytose médullaire &gt; 10 %.
@@ -652,6 +667,10 @@ tr:nth-child(even) td{background:rgba(255,255,255,.03)}
 
 <div class="slide" id="slide-16">
   <h1 class="slide-title">Macroglobulinémie de Waldenström</h1>
+<div class="def-box" style="margin:6px 0"><strong>📖 Lymphoplasmocyte</strong> : Cellule hybride entre un lymphocyte B et un plasmocyte. Caractéristique de la macroglobulinémie de Waldenström. Sécrète une IgM (la plus grosse immunoglobuline, 900 kDa).</div>
+<div class="def-box" style="margin:6px 0"><strong>📖 IgM (Immunoglobuline M)</strong> : Immunoglobuline de grande taille (pentamère de 900 kDa), première produite lors d'une réponse immunitaire. Sa grande taille augmente fortement la viscosité sanguine → syndrome d'hyperviscosité.</div>
+<div class="def-box" style="margin:6px 0"><strong>📖 MYD88 L265P</strong> : Mutation du gène MYD88 présente dans >90% des macroglobulinémies de Waldenström. MYD88 est une protéine de signalisation de la voie NF-kB. Sa mutation constitutive stimule la prolifération des lymphoplasmocytes.</div>
+
   <div class="def-box">
     <strong>Définition (rang A)</strong>
     Hémopathie lymphoplasmocytaire caractérisée par une infiltration médullaire lymphoplasmocytaire et la sécrétion d'une <strong>IgM monoclonale</strong>. Associée à une mutation <strong>MYD88 L265P</strong> dans &gt;90% des cas.
@@ -709,6 +728,10 @@ tr:nth-child(even) td{background:rgba(255,255,255,.03)}
 
 <div class="slide" id="slide-18">
   <h1 class="slide-title">Amylose AL et autres gammapathies</h1>
+<div class="def-box" style="margin:6px 0"><strong>📖 Amylose</strong> : Dépôt extracellulaire de protéines mal repliées en feuillets β, insolubles. L'amylose AL est causée par des dépôts de chaînes légères monoclonales (A = Amyloïde, L = Light chain). Coloration rouge Congo avec biréfringence verte en lumière polarisée.</div>
+<div class="def-box" style="margin:6px 0"><strong>📖 Chaînes légères libres (CLL / FLC)</strong> : Fragments de l'immunoglobuline (partie kappa ou lambda) circulant librement dans le sang et filtrés par le rein. Leur excès dans le myélome peut provoquer l'amylose rénale ou la « cast nephropathy ».</div>
+<div class="def-box" style="margin:6px 0"><strong>📖 Biréfringence en lumière polarisée</strong> : Propriété optique des dépôts amyloïdes colorés au rouge Congo : sous lumière polarisée, ils apparaissent en vert pomme. C'est le critère diagnostique histologique de l'amylose.</div>
+
   <div class="def-box">
     <strong>Amylose AL (rang A)</strong>
     Dépôt systémique de <strong>chaînes légères monoclonales mal repliées</strong> (amyloïdes). Peut compliquer un MM ou survenir isolément. Atteinte multi-organes : rein, cœur, foie, nerfs.
@@ -776,6 +799,10 @@ tr:nth-child(even) td{background:rgba(255,255,255,.03)}
 
 <div class="slide" id="slide-21">
   <h1 class="slide-title">Manifestations osseuses et hématologiques</h1>
+<div class="def-box" style="margin:6px 0"><strong>📖 RANKL / Ostéoclaste / Ostéoblaste</strong> : RANKL est un signal produit par les plasmocytes malins qui active les ostéoclastes (cellules qui détruisent l'os) et inhibe les ostéoblastes (cellules qui reconstruisent l'os). Résultat : lyse osseuse pure sans reconstruction.</div>
+<div class="def-box" style="margin:6px 0"><strong>📖 Lésion ostéolytique</strong> : Zone de destruction osseuse (trou dans l'os) causée par l'activation des ostéoclastes. Visible au scanner comme une zone sombre dans l'os. Peut provoquer fractures et douleurs.</div>
+<div class="def-box" style="margin:6px 0"><strong>📖 Anémie normochrome normocytaire</strong> : Anémie où les globules rouges ont une taille et une couleur normales (VGM normal, CCMH normal). Mécanisme : infiltration médullaire qui « chasse » les précurseurs érythroïdes normaux.</div>
+
   <div class="def-box">
     <strong>Atteinte osseuse — 2/3 des patients au diagnostic (rang A)</strong>
     Les plasmocytes tumoraux activent les <strong>ostéoclastes</strong> (via RANKL) et inhibent les <strong>ostéoblastes</strong> → lyse osseuse pure sans reconstruction. Résultat : <strong>douleurs osseuses</strong> (dos ++), <strong>fractures pathologiques</strong>, <strong>hypercalcémie</strong>.
@@ -829,6 +856,10 @@ tr:nth-child(even) td{background:rgba(255,255,255,.03)}
 
 <div class="slide" id="slide-23">
   <h1 class="slide-title">Manifestations rénales, infectieuses et neurologiques</h1>
+<div class="def-box" style="margin:6px 0"><strong>📖 Cast nephropathy (myélome cast)</strong> : Lésion rénale tubulaire causée par la précipitation des chaînes légères libres (CLL) dans les tubules rénaux distaux, formant des cylindres (casts) qui obstruent les tubules → insuffisance rénale aiguë.</div>
+<div class="def-box" style="margin:6px 0"><strong>📖 Hypogammaglobulinémie</strong> : Diminution des immunoglobulines normales (polyclonales) dans le sang, malgré l'excès d'immunoglobuline monoclonale. Les plasmocytes tumoraux inhibent les plasmocytes normaux → déficit immunitaire humoral → infections bactériennes répétées.</div>
+<div class="def-box" style="margin:6px 0"><strong>📖 Neuropathie périphérique</strong> : Atteinte des nerfs périphériques causant des fourmillements, engourdissements, douleurs ou faiblesse des membres. Dans le myélome : complication de certains traitements (bortézomib, thalidomide) ou de l'amylose.</div>
+
   <div class="content-grid-2">
     <div class="card">
       <h4>🫘 Atteinte rénale (20% au diagnostic)</h4>
@@ -907,6 +938,10 @@ tr:nth-child(even) td{background:rgba(255,255,255,.03)}
 
 <div class="slide" id="slide-26">
   <h1 class="slide-title">Bilan biologique — L'électrophorèse des protéines sériques</h1>
+<div class="def-box" style="margin:6px 0"><strong>📖 Électrophorèse des protéines sériques (EPS)</strong> : Technique séparant les protéines du sérum selon leur charge électrique. Dans le myélome, un clone de plasmocytes produit des immunoglobulines identiques qui migrent au même endroit → pic étroit (monoclonal) dans la zone des gammaglobulines.</div>
+<div class="def-box" style="margin:6px 0"><strong>📖 Pic monoclonal</strong> : Bande étroite sur l'EPS correspondant à l'immunoglobuline monoclonale produite par le clone tumoral. Sa hauteur et sa quantification (en g/L) permettent de suivre l'évolution de la maladie.</div>
+<div class="def-box" style="margin:6px 0"><strong>📖 Protéine de Bence-Jones</strong> : Chaînes légères libres monoclonales (kappa ou lambda) éliminées dans les urines car trop petites pour être retenues par le glomérule. Détectées par immunofixation urinaire (pas par bandelette réactive).</div>
+
   <div class="def-box">
     <strong>EPS + immunofixation — examens clés (rang A)</strong>
     L'<strong>électrophorèse des protéines sériques (EPS)</strong> met en évidence un <strong>pic étroit</strong> (pic monoclonal) dans la zone des gammaglobulines. L'immunofixation caractérise le type d'immunoglobuline (IgG kappa, IgA lambda, etc.) et est indispensable au diagnostic.
@@ -961,6 +996,10 @@ tr:nth-child(even) td{background:rgba(255,255,255,.03)}
 
 <div class="slide" id="slide-28">
   <h1 class="slide-title">Imagerie osseuse — du scanner au PET-scan</h1>
+<div class="def-box" style="margin:6px 0"><strong>📖 Scanner corps entier low-dose</strong> : Scanner à faible dose d'irradiation réalisé sans injection de produit de contraste de la tête aux pieds. Référence pour le bilan osseux du myélome. Détecte les lésions lytiques >5 mm.</div>
+<div class="def-box" style="margin:6px 0"><strong>📖 Hyposignal T1 (IRM)</strong> : En IRM, le signal T1 est normalement élevé (blanc) dans la moelle osseuse graisseuse normale. L'infiltration par des cellules tumorales remplace la graisse → perte de signal → zone sombre (hyposignal) caractéristique du myélome.</div>
+<div class="def-box" style="margin:6px 0"><strong>📖 TEP-FDG (PET-scan)</strong> : Examen d'imagerie fonctionnelle utilisant un sucre radioactif (FDG) capté préférentiellement par les cellules à forte activité métabolique (cellules tumorales). Utile pour le myélome non sécrétant et l'évaluation de la réponse au traitement.</div>
+
   <div class="def-box">
     <strong>Scanner corps entier — examen de référence (rang A)</strong>
     Le <strong>scanner corps entier sans injection</strong> (low-dose) est l'examen de première intention pour évaluer l'atteinte osseuse dans le myélome. Il remplace les radiographies standard du squelette (moins sensibles).
@@ -1039,6 +1078,10 @@ tr:nth-child(even) td{background:rgba(255,255,255,.03)}
 
 <div class="slide" id="slide-31">
   <h1 class="slide-title">Score R-ISS — Calcul et survie</h1>
+<div class="def-box" style="margin:6px 0"><strong>📖 β2-microglobuline</strong> : Petite protéine présente à la surface de toutes les cellules nucléées et libérée lors de leur destruction. Son taux sanguin reflète la masse tumorale ET la fonction rénale. Marqueur pronostique central du R-ISS.</div>
+<div class="def-box" style="margin:6px 0"><strong>📖 Cytogénétique haut risque</strong> : Anomalies chromosomiques des plasmocytes malins de mauvais pronostic : del(17p) = perte de TP53, t(4;14) = activation de MMSET/FGFR3, t(14;16) = activation de MAF. Détectées par FISH sur myélogramme.</div>
+<div class="def-box" style="margin:6px 0"><strong>📖 LDH (Lacticodeshydrogénase) sérique</strong> : Enzyme libérée par les cellules en cours de destruction. Un taux élevé reflète un fort renouvellement cellulaire = masse tumorale importante et/ou maladie agressive. Composant du R-ISS.</div>
+
   <div class="def-box">
     <strong>Révised ISS (R-ISS) — rang A</strong>
     Le R-ISS combine le <strong>score ISS</strong> (β2-microglobuline + albumine), les <strong>LDH</strong> et la <strong>cytogénétique</strong> à haut risque pour stratifier le pronostic du myélome multiple.
@@ -1123,6 +1166,10 @@ tr:nth-child(even) td{background:rgba(255,255,255,.03)}
 
 <div class="slide" id="slide-34">
   <h1 class="slide-title">Classes thérapeutiques principales</h1>
+<div class="def-box" style="margin:6px 0"><strong>📖 Inhibiteur du protéasome (IP)</strong> : Médicament bloquant le protéasome, complexe enzymatique qui dégrade les protéines usagées. Les plasmocytes produisent énormément d'immunoglobulines et dépendent fortement du protéasome → très sensibles aux IP.</div>
+<div class="def-box" style="margin:6px 0"><strong>📖 IMiD (Immunomodulateur)</strong> : Classe de médicaments (thalidomide, lénalidomide, pomalidomide) qui modulent le système immunitaire et ont des effets directs sur les plasmocytes malins via la dégradation des facteurs de transcription IKZF1/IKZF3.</div>
+<div class="def-box" style="margin:6px 0"><strong>📖 CD38</strong> : Antigène (protéine de surface) exprimé très fortement et uniformément sur les plasmocytes tumoraux. Cible thérapeutique des anticorps monoclonaux anti-CD38 (daratumumab, isatuximab).</div>
+
   <div class="content-grid-2">
     <div class="card">
       <h4>🔵 Inhibiteurs du protéasome (IP)</h4>
@@ -1188,6 +1235,10 @@ tr:nth-child(even) td{background:rgba(255,255,255,.03)}
 
 <div class="slide" id="slide-36">
   <h1 class="slide-title">Stratégie thérapeutique selon l'âge</h1>
+<div class="def-box" style="margin:6px 0"><strong>📖 Autogreffe de CSH (cellules souches hématopoïétiques)</strong> : Greffe avec les propres cellules souches du patient (« auto » = soi-même). Permet d'administrer une chimiothérapie très haute dose (melphalan 200 mg/m²) myéloablative, puis de « sauver » la moelle avec les CSH préalablement prélevées.</div>
+<div class="def-box" style="margin:6px 0"><strong>📖 Melphalan haute dose (HDM200)</strong> : Agent alkylant (chimiothérapie) utilisé comme conditionnement de l'autogreffe. Dose très élevée (200 mg/m²) = dose myéloablative qui détruit la moelle osseuse du patient → réinjection des CSH autologues pour reconstituer la moelle.</div>
+<div class="def-box" style="margin:6px 0"><strong>📖 Maintenance</strong> : Traitement continu à dose réduite après une phase d'induction intensive, pour maintenir la réponse obtenue et retarder la rechute. Dans le MM : lénalidomide 10 mg/j après l'autogreffe.</div>
+
   <div class="content-grid-2">
     <div class="card">
       <h4>🏃 Patient éligible à l'autogreffe (&lt;70 ans)</h4>
@@ -1240,6 +1291,10 @@ tr:nth-child(even) td{background:rgba(255,255,255,.03)}
 
 <div class="slide" id="slide-38">
   <h1 class="slide-title">Traitement symptomatique — os, rein, infections</h1>
+<div class="def-box" style="margin:6px 0"><strong>📖 Bisphosphonate (zolédronate)</strong> : Médicament qui inhibe les ostéoclastes (cellules qui détruisent l'os), réduisant les événements osseux (fractures, hypercalcémie). Administré par voie IV mensuelle dans le myélome. Risque : ostéonécrose de mâchoire (ONM).</div>
+<div class="def-box" style="margin:6px 0"><strong>📖 Ostéonécrose de mâchoire (ONM)</strong> : Complication des bisphosphonates et du dénosumab : nécrose de l'os de la mâchoire, souvent déclenchée par un soin dentaire. Prévention : bilan dentaire et soins préventifs OBLIGATOIRES avant de débuter le traitement.</div>
+<div class="def-box" style="margin:6px 0"><strong>📖 Dénosumab</strong> : Anticorps monoclonal anti-RANKL inhibant la formation des ostéoclastes. Alternative aux bisphosphonates, particulièrement utilisé si insuffisance rénale car son élimination n'est pas rénale (≠ zolédronate).</div>
+
   <div class="content-grid-2">
     <div class="card">
       <h4>🦴 Traitement osseux</h4>

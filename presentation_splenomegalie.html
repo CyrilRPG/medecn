@@ -1,0 +1,792 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Splénomégalie — Item 275 | MédECN</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#0d0d1a;color:#e8e8f0;font-family:'Segoe UI',system-ui,sans-serif;overflow:hidden;overflow-x:hidden;height:100vh}
+.topbar{position:fixed;top:0;left:0;right:0;height:50px;background:#1a1a2e;border-bottom:2px solid #8e44ad;display:flex;align-items:center;padding:0 14px;gap:10px;z-index:999}
+.topbar a{color:#8e44ad;text-decoration:none;font-size:1.2rem}
+.tb-title{font-size:.82rem;font-weight:600;color:#e8e8f0;flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tb-counter{font-size:.78rem;color:#888;white-space:nowrap}
+.tb-nav{display:flex;gap:5px}
+.tb-nav button{background:none;border:1px solid #8e44ad;color:#8e44ad;padding:3px 9px;border-radius:6px;cursor:pointer;font-size:.78rem}
+.tb-nav button:hover{background:#8e44ad;color:#fff}
+.progress-bar{position:fixed;top:50px;left:0;height:3px;background:linear-gradient(90deg,#8e44ad,#9b59b6);transition:width .3s;z-index:998}
+.presentation{margin-top:53px;height:calc(100vh - 53px);position:relative}
+.slide{display:none;height:100%;overflow-y:auto;overflow-x:hidden;padding:16px 20px}.slide.active{display:flex;flex-direction:column}
+.title-slide{background:linear-gradient(135deg,#0d0d1a 0%,#1a0d2e 100%);justify-content:center;align-items:center;text-align:center}
+.fin-slide{justify-content:center;align-items:center;text-align:center;background:linear-gradient(135deg,#0d0d1a,#1a0d2e)}
+.slide-title{font-size:1rem;font-weight:700;color:#8e44ad;border-bottom:2px solid #8e44ad;padding-bottom:5px;margin-bottom:8px}
+.content-block{background:rgba(255,255,255,.04);border-radius:8px;padding:9px 12px;margin:5px 0}
+.content-block h3{font-size:.85rem;color:#9b59b6;margin-bottom:5px}
+ul,ol{padding-left:16px}li{margin:2px 0;font-size:.83rem;line-height:1.45}
+.def-box{background:rgba(243,156,18,.12);border-left:4px solid #f39c12;padding:7px 11px;border-radius:6px;margin:5px 0;font-size:.8rem}
+.def-box strong{color:#f39c12;font-weight:700}
+.urgence-box{background:rgba(231,76,60,.2);border:2px solid #e74c3c;padding:8px 12px;border-radius:8px;margin:5px 0;font-size:.8rem}
+.urgence-box strong{color:#e74c3c;font-weight:700}
+.info-box{background:rgba(52,152,219,.15);border-left:4px solid #3498db;padding:7px 11px;border-radius:6px;margin:5px 0;font-size:.8rem}
+.info-box strong{color:#3498db;font-weight:700}
+.success-box{background:rgba(46,204,113,.12);border-left:4px solid #2ecc71;padding:7px 11px;border-radius:6px;margin:5px 0;font-size:.8rem}
+.success-box strong{color:#2ecc71;font-weight:700}
+.warning-box{background:rgba(241,196,15,.12);border-left:4px solid #f1c40f;padding:7px 11px;border-radius:6px;margin:5px 0;font-size:.8rem}
+.warning-box strong{color:#f1c40f;font-weight:700}
+.section-banner{background:linear-gradient(135deg,rgba(142,68,173,.15),rgba(142,68,173,.05));border:1px solid #8e44ad;padding:16px 20px;border-radius:12px;text-align:center;margin:16px 0}
+.section-banner h2{color:#8e44ad;font-size:1.2rem;margin-bottom:6px}
+.section-banner p{color:#aaa;font-size:.82rem}
+.flip-card{background:rgba(142,68,173,.08);border:1px solid #8e44ad;border-radius:8px;padding:10px 14px;cursor:pointer;margin:5px 0;transition:all .2s}
+.flip-card:hover{background:rgba(142,68,173,.15)}
+.flip-card .question{font-size:.83rem;font-weight:600;color:#9b59b6}
+.flip-card .answer{display:none;margin-top:7px;font-size:.8rem;color:#ccc;border-top:1px solid rgba(142,68,173,.3);padding-top:7px}
+.flip-card.revealed .answer{display:block}
+.flip-card .hint{font-size:.7rem;color:#666;margin-top:3px}
+.qcm-block{background:rgba(255,255,255,.03);border:1px solid rgba(142,68,173,.3);border-radius:8px;padding:12px;margin:7px 0}
+.qcm-question{font-size:.85rem;font-weight:600;color:#e8e8f0;margin-bottom:7px}
+.qcm-options{display:flex;flex-direction:column;gap:4px}
+.qcm-option{padding:6px 9px;border-radius:6px;cursor:pointer;font-size:.8rem;border:1px solid rgba(255,255,255,.1);transition:all .2s;user-select:none}
+.qcm-option:hover{background:rgba(255,255,255,.08)}
+.qcm-option.selected{background:rgba(142,68,173,.2);border-color:#8e44ad}
+.qcm-option.correct-show{background:rgba(46,204,113,.2);border-color:#2ecc71;color:#2ecc71}
+.qcm-option.wrong-show{background:rgba(231,76,60,.2);border-color:#e74c3c;color:#e74c3c}
+.qcm-btn{background:linear-gradient(135deg,#8e44ad,#9b59b6);color:#fff;border:none;padding:7px 18px;border-radius:18px;cursor:pointer;font-size:.82rem;font-weight:600;margin-top:7px}
+.qcm-feedback{display:none;margin-top:7px;font-size:.8rem;padding:5px 9px;border-radius:6px;background:rgba(255,255,255,.06)}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:7px}
+.vignette{background:linear-gradient(135deg,rgba(142,68,173,.1),rgba(142,68,173,.05));border:1px solid rgba(142,68,173,.4);border-radius:8px;padding:12px 16px;margin:6px 0;font-size:.83rem}
+.vignette strong{color:#9b59b6;font-weight:700}
+table{width:100%;border-collapse:collapse;font-size:.78rem;margin:6px 0}
+th{background:rgba(142,68,173,.2);color:#9b59b6;padding:5px 7px;text-align:left}
+td{padding:4px 7px;border-bottom:1px solid rgba(255,255,255,.05)}
+.dp-step{background:rgba(142,68,173,.08);border-left:3px solid #8e44ad;padding:7px 11px;border-radius:0 6px 6px 0;margin:4px 0;font-size:.81rem}
+.dp-step strong{color:#9b59b6;font-weight:700}
+@media(max-width:768px){
+  .grid-2,.grid-3{grid-template-columns:1fr}
+  .slide{padding:10px 12px}
+  .slide-title{font-size:.9rem}
+}
+</style>
+</head>
+<body>
+<div class="topbar">
+  <a href="index.html" title="Accueil">🏠</a>
+  <span class="tb-title">Splénomégalie — Item 275</span>
+  <span class="tb-counter">1 / 38</span>
+  <div class="tb-nav">
+    <button onclick="changeSlide(-1)">◀</button>
+    <button onclick="changeSlide(1)">▶</button>
+  </div>
+</div>
+<div class="progress-bar" style="width:2.6%"></div>
+<div class="presentation">
+<div class="slide title-slide" id="slide-0">
+<div style="text-align:center;padding:40px 20px">
+<div style="font-size:2.8rem;margin-bottom:12px">🫀</div>
+<h1 style="font-size:1.8rem;color:#8e44ad;margin-bottom:10px">Splénomégalie</h1>
+<p style="color:#aaa;font-size:.9rem;margin-bottom:20px">Item 275 — Hématologie / Médecine interne</p>
+<div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-bottom:24px">
+  <span style="background:#8e44ad;color:#fff;padding:5px 14px;border-radius:20px;font-size:.82rem;font-weight:700">Item 275</span>
+  <span style="background:rgba(142,68,173,.15);color:#9b59b6;padding:5px 14px;border-radius:20px;font-size:.82rem;border:1px solid #8e44ad">SD 8 · SD 16 · SD 58 · SD 220</span>
+</div>
+<div style="background:rgba(142,68,173,.08);border:1px solid rgba(142,68,173,.3);border-radius:12px;padding:16px 24px;max-width:480px;margin:0 auto;text-align:left">
+  <p style="font-size:.83rem;color:#ccc;margin-bottom:6px">🎯 <strong style="color:#9b59b6">Objectifs</strong></p>
+  <ul style="font-size:.8rem;color:#ccc;padding-left:16px">
+    <li>Reconnaître et évaluer une splénomégalie</li>
+    <li>Connaître mécanismes et conséquences (hypersplénisme)</li>
+    <li>Identifier les urgences spléniques</li>
+    <li>Construire une démarche étiologique</li>
+    <li>Connaître la conduite post-splénectomie</li>
+  </ul>
+</div>
+</div>
+</div><div class="slide " id="slide-1">
+<h1 class="slide-title">Plan du cours &amp; Situations de départ</h1>
+<div class="def-box" style="margin:5px 0"><strong>📖 Splénomégalie (SM)</strong> : Augmentation de volume de la rate : palpable à l'examen (normalement non palpable) ou > 13 cm à l'imagerie. Rate normale : 150-250g, non palpable.</div>
+<div class="def-box" style="margin:5px 0"><strong>📖 Situation de départ</strong> : SD 8 = masse abdominale · SD 16 = adénopathies (souvent associées à SM) · SD 58 = splénomégalie · SD 220 = hyperlymphocytose.</div>
+
+<div class="grid-2" style="margin-top:8px">
+  <div class="content-block">
+    <h3>📋 Plan</h3>
+    <ol style="font-size:.82rem;padding-left:16px">
+      <li>Anatomie et fonctions de la rate</li>
+      <li>Sémiologie — Diagnostic clinique</li>
+      <li>Mécanismes et conséquences</li>
+      <li>Urgences spléniques</li>
+      <li>Démarche étiologique</li>
+      <li>Post-splénectomie</li>
+    </ol>
+  </div>
+  <div class="content-block">
+    <h3>🎯 SD correspondantes</h3>
+    <div style="font-size:.82rem">
+      <div style="background:rgba(142,68,173,.1);padding:5px 9px;border-radius:6px;margin:3px 0"><strong>SD 58</strong> — Splénomégalie</div>
+      <div style="background:rgba(142,68,173,.1);padding:5px 9px;border-radius:6px;margin:3px 0"><strong>SD 8</strong> — Masse abdominale</div>
+      <div style="background:rgba(142,68,173,.1);padding:5px 9px;border-radius:6px;margin:3px 0"><strong>SD 220</strong> — Hyperlymphocytose</div>
+    </div>
+  </div>
+</div>
+</div><div class="slide " id="slide-2">
+<h1 class="slide-title">⚡ Flash Quiz</h1>
+<div style="font-size:.78rem;color:#888;margin-bottom:8px">Testez-vous sur la diapo précédente — Cliquez pour révéler</div>
+<div class="flip-card" onclick="flipCard(this)"><div class="question">❓ Qu'est-ce qu'une splénomégalie ?</div><div class="hint">👆 Cliquer pour révéler</div><div class="answer">✅ Rate palpable à l'examen clinique (normalement non palpable) ou > 13 cm à l'échographie. La rate normale pèse 150-250g et n'est pas palpable même chez les personnes minces.</div></div>
+<div class="flip-card" onclick="flipCard(this)"><div class="question">❓ Quelle est la règle fondamentale concernant la palpation de la rate ?</div><div class="hint">👆 Cliquer pour révéler</div><div class="answer">✅ Toute rate palpable est pathologique. La rate normale n'est jamais palpable. Sa découverte impose un bilan étiologique.</div></div>
+
+</div><div class="slide " id="slide-3">
+<h1 class="slide-title">Vignette clinique d'accroche</h1>
+<div class="vignette">
+  <strong>🏥 Issa, 45 ans</strong> — pesanteur flanc gauche depuis 3 mois · amaigrissement 8 kg/6 mois · fatigue intense · séjour 6 mois en Afrique subsaharienne<br>
+  <span style="font-size:.82rem;color:#ccc;margin-top:6px;display:block">Examen : rate à <strong>8 cm</strong> du rebord costal, ferme, indolore. Adénopathies cervicales et axillaires bilatérales.</span>
+</div>
+<div class="grid-2" style="margin-top:8px">
+  <div class="content-block">
+    <h3>🤔 Éléments d'orientation</h3>
+    <ul style="font-size:.82rem">
+      <li>Voyage en zone d'endémie palustre</li>
+      <li>AEG + amaigrissement</li>
+      <li>Splénoadénomégalie</li>
+      <li>SM volumineuse (8 cm)</li>
+    </ul>
+  </div>
+  <div class="urgence-box">
+    <strong>⚡ Bilan urgent :</strong> NFS + frottis + goutte épaisse + test rapide palustre → paludisme vs lymphome
+  </div>
+</div>
+</div><div class="slide " id="slide-4">
+<h1 class="slide-title">⚡ Flash Quiz</h1>
+<div style="font-size:.78rem;color:#888;margin-bottom:8px">Testez-vous sur la diapo précédente — Cliquez pour révéler</div>
+<div class="flip-card" onclick="flipCard(this)"><div class="question">❓ Devant une SM + AEG + retour d'Afrique, quelles sont les 2 hypothèses prioritaires ?</div><div class="hint">👆 Cliquer pour révéler</div><div class="answer">✅ 1. Paludisme viscéral évolutif (Plasmodium vivax ou falciparum chronique) — frottis + goutte épaisse. 2. Lymphome — NFS + LDH + TDM TAP. Les deux peuvent coexister ou se confondre cliniquement.</div></div>
+<div class="flip-card" onclick="flipCard(this)"><div class="question">❓ Quel examen confirme le paludisme en urgence ?</div><div class="hint">👆 Cliquer pour révéler</div><div class="answer">✅ Frottis sanguin + goutte épaisse (microscope) + test de diagnostic rapide (TDR) antigénique. En cas de forte suspicion, refaire si 1er frottis négatif (parasitémie variable).</div></div>
+
+</div><div class="slide " id="slide-5">
+<div class="section-banner">
+  <div style="font-size:2rem;margin-bottom:8px">🫀</div>
+  <h2>Section I — Anatomie et fonctions de la rate</h2>
+  <p>Structure · Fonctions · Rate normale</p>
+</div>
+<div class="grid-3" style="margin-top:12px">
+  <div class="content-block" style="text-align:center"><div style="font-size:1.3rem">🔴</div><h3>Filtre</h3><p style="font-size:.78rem;color:#aaa">Détruit GR sénescents et pathogènes</p></div>
+  <div class="content-block" style="text-align:center"><div style="font-size:1.3rem">🛡️</div><h3>Immunité</h3><p style="font-size:.78rem;color:#aaa">IgM contre bactéries capsulées</p></div>
+  <div class="content-block" style="text-align:center"><div style="font-size:1.3rem">🩸</div><h3>Réservoir</h3><p style="font-size:.78rem;color:#aaa">30% des plaquettes circulantes</p></div>
+</div>
+</div><div class="slide " id="slide-6">
+<h1 class="slide-title">Fonctions physiologiques de la rate</h1>
+<div class="def-box" style="margin:5px 0"><strong>📖 Pulpe rouge / pulpe blanche</strong> : Pulpe rouge : filtre le sang, détruit les GR sénescents et les corps de Jolly. Pulpe blanche : contient les lymphocytes, produit des IgM contre bactéries capsulées.</div>
+<div class="def-box" style="margin:5px 0"><strong>📖 Hématopoïèse extra-médullaire</strong> : Production de cellules sanguines en dehors de la moelle. Normale chez le fœtus (3e-5e mois). Chez l'adulte = pathologique : réactivée en cas d'insuffisance médullaire (myélofibrose) → SM massive.</div>
+<div class="def-box" style="margin:5px 0"><strong>📖 Corps de Jolly</strong> : Débris nucléaires normalement éliminés par la rate. Présence sur le frottis = signe d'asplénie (rate absente ou non fonctionnelle).</div>
+
+<div class="grid-2" style="margin-top:6px">
+  <div class="content-block">
+    <h3>🔴 Pulpe rouge</h3>
+    <ul style="font-size:.82rem">
+      <li>Phagocytose des GR sénescents (> 120 jours)</li>
+      <li>Destruction des GR parasités</li>
+      <li>Élimination des corps de Jolly</li>
+      <li>Stockage 30% des plaquettes</li>
+    </ul>
+  </div>
+  <div class="content-block">
+    <h3>🛡️ Pulpe blanche (immunité)</h3>
+    <ul style="font-size:.82rem">
+      <li>Production IgM contre bactéries <strong>capsulées</strong></li>
+      <li>Pneumocoque, méningocoque, Haemophilus</li>
+      <li>Hématopoïèse fœtale (3e-5e mois)</li>
+    </ul>
+  </div>
+</div>
+</div><div class="slide " id="slide-7">
+<h1 class="slide-title">⚡ Flash Quiz</h1>
+<div style="font-size:.78rem;color:#888;margin-bottom:8px">Testez-vous sur la diapo précédente — Cliquez pour révéler</div>
+<div class="flip-card" onclick="flipCard(this)"><div class="question">❓ Que signifie la présence de corps de Jolly sur le frottis sanguin ?</div><div class="hint">👆 Cliquer pour révéler</div><div class="answer">✅ Signe d'asplénie : la rate n'assure plus sa fonction d'épuration des débris nucléaires des GR. Observé après splénectomie, en cas d'asplénie fonctionnelle (drépanocytose, lupus) ou d'atrophie splénique.</div></div>
+<div class="flip-card" onclick="flipCard(this)"><div class="question">❓ Pourquoi les patients aspléniques sont-ils particulièrement vulnérables aux infections par Streptococcus pneumoniae ?</div><div class="hint">👆 Cliquer pour révéler</div><div class="answer">✅ La pulpe blanche de la rate produit des IgM qui opsonisent les bactéries à capsule polysaccharidique (pneumocoque, méningocoque, Haemophilus). Sans rate, cette première ligne de défense est absente → risque de sepsis fulminant.</div></div>
+
+</div><div class="slide " id="slide-8">
+<div class="section-banner">
+  <div style="font-size:2rem;margin-bottom:8px">🩺</div>
+  <h2>Section II — Sémiologie — Diagnostic clinique</h2>
+  <p>Palpation · Caractères · Confirmation imagerie</p>
+</div>
+<div class="content-block" style="margin-top:12px">
+  <h3>📐 Rate normale vs pathologique</h3>
+  <table>
+    <tr><th>Paramètre</th><th>Normal</th><th>Pathologique</th></tr>
+    <tr><td>Palpation</td><td>Non palpable</td><td>Palpée = splénomégalie</td></tr>
+    <tr><td>Taille (écho)</td><td>&lt; 12-13 cm</td><td>&gt; 13 cm</td></tr>
+    <tr><td>Poids</td><td>150-250g</td><td>&gt; 250g</td></tr>
+  </table>
+</div>
+<div class="success-box" style="margin-top:8px">
+  <strong>✅ Règle :</strong> Toute rate palpable est pathologique. Même chez les sujets très minces.
+</div>
+</div><div class="slide " id="slide-9">
+<h1 class="slide-title">Palpation de la rate — Technique</h1>
+<div class="def-box" style="margin:5px 0"><strong>📖 Débord sous-costal</strong> : Distance en cm entre le rebord costal gauche et le pôle inférieur de la rate palpée. Mesure la SM : 8 cm = grosse splénomégalie. Utilisé pour suivre l'évolution sous traitement.</div>
+<div class="def-box" style="margin:5px 0"><strong>📖 Encoche splénique</strong> : Petite échancrure sur le bord interne de la rate, caractéristique de l'organe splénique. Distingue la rate d'une autre masse de l'hypocondre gauche (rein, pancréas).</div>
+
+<div class="grid-2" style="margin-top:8px">
+  <div class="content-block">
+    <h3>🏥 Technique de palpation</h3>
+    <ul style="font-size:.82rem">
+      <li>Décubitus dorsal, genoux fléchis</li>
+      <li>Main à plat en fosse iliaque droite</li>
+      <li>Remonte vers l'hypocondre gauche</li>
+      <li>Rate descend à l'<strong>inspiration profonde</strong></li>
+      <li>Mesurer le débord en cm</li>
+    </ul>
+  </div>
+  <div class="content-block">
+    <h3>📝 Caractères à préciser</h3>
+    <ul style="font-size:.82rem">
+      <li><strong>Taille</strong> — débord en cm</li>
+      <li><strong>Encoche splénique</strong> — confirme que c'est la rate</li>
+      <li><strong>Consistance</strong> — ferme, dure, molle</li>
+      <li><strong>Douleur</strong> — infarctus ou abcès si douloureux</li>
+      <li><strong>Mobilité</strong> — suit la respiration</li>
+    </ul>
+  </div>
+</div>
+<div class="info-box"><strong>📷 Confirmation :</strong> Échographie abdominale (taille en cm). 1ère intention.</div>
+</div><div class="slide " id="slide-10">
+<h1 class="slide-title">⚡ Flash Quiz</h1>
+<div style="font-size:.78rem;color:#888;margin-bottom:8px">Testez-vous sur la diapo précédente — Cliquez pour révéler</div>
+<div class="flip-card" onclick="flipCard(this)"><div class="question">❓ Comment palpe-t-on correctement la rate ? Décrivez la technique en 4 étapes.</div><div class="hint">👆 Cliquer pour révéler</div><div class="answer">✅ 1. Patient en décubitus dorsal, genoux fléchis. 2. Main droite à plat en FID. 3. Remonter vers l'hypocondre gauche en synchronisant avec la respiration. 4. La rate descend à l'inspiration → mesurer le débord sous-costal en cm.</div></div>
+<div class="flip-card" onclick="flipCard(this)"><div class="question">❓ Comment distinguer une rate d'un rein gauche ou d'une masse du pancréas à la palpation ?</div><div class="hint">👆 Cliquer pour révéler</div><div class="answer">✅ Présence de l'encoche splénique (bord interne crénelé propre à la rate). La rate suit les mouvements respiratoires et vient de la région sous-costale gauche. Le rein est plus profond et mobile dans un autre axe.</div></div>
+
+</div><div class="slide " id="slide-11">
+<div class="section-banner">
+  <div style="font-size:2rem;margin-bottom:8px">⚙️</div>
+  <h2>Section III — Mécanismes et conséquences</h2>
+  <p>4 mécanismes de SM · Hypersplénisme · Hémodilution</p>
+</div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px;font-size:.82rem">
+  <div style="background:rgba(142,68,173,.1);padding:10px;border-radius:8px;border-left:3px solid #8e44ad">
+    <strong style="color:#9b59b6">1. Accumulation cellulaire</strong><br>Hémopathies malignes (LLC, lymphomes, LMC)
+  </div>
+  <div style="background:rgba(142,68,173,.1);padding:10px;border-radius:8px;border-left:3px solid #8e44ad">
+    <strong style="color:#9b59b6">2. Hypertension portale</strong><br>Cirrhose → congestion splénique
+  </div>
+  <div style="background:rgba(142,68,173,.1);padding:10px;border-radius:8px;border-left:3px solid #8e44ad">
+    <strong style="color:#9b59b6">3. Séquestration/hémolyse</strong><br>GR anormaux détruits en excès
+  </div>
+  <div style="background:rgba(142,68,173,.1);padding:10px;border-radius:8px;border-left:3px solid #8e44ad">
+    <strong style="color:#9b59b6">4. Hématopoïèse extra-médullaire</strong><br>Myélofibrose → SM massive
+  </div>
+</div>
+</div><div class="slide " id="slide-12">
+<h1 class="slide-title">Conséquences — Hypersplénisme</h1>
+<div class="def-box" style="margin:5px 0"><strong>📖 Hypersplénisme</strong> : Destruction excessive d'éléments sanguins par une rate hypertrophiée → cytopénies. La moelle compense par hyperplasie réactionnelle. Thrombopénie ++ (50-100 G/L).</div>
+<div class="def-box" style="margin:5px 0"><strong>📖 Hémodilution</strong> : Dans les grosses SM, le volume sanguin total augmente (rate = réservoir vasculaire) → dilution des éléments figurés. Aggrave faussement les cytopénies.</div>
+
+<div class="grid-2" style="margin-top:8px">
+  <div class="content-block">
+    <h3>📉 Cytopénies de l'hypersplénisme</h3>
+    <ul style="font-size:.82rem">
+      <li><strong>Thrombopénie</strong> — la plus marquée (50-100 G/L)</li>
+      <li><strong>Leucopénie</strong> — neutropénie modérée</li>
+      <li><strong>Anémie</strong> — normochrome normocytaire modérée</li>
+    </ul>
+  </div>
+  <div class="content-block">
+    <h3>🔬 Moelle osseuse</h3>
+    <ul style="font-size:.82rem">
+      <li>Richement cellulaire (hyperplasie réactionnelle)</li>
+      <li>Mégacaryocytes normaux et abondants</li>
+      <li>≠ Insuffisance médullaire (moelle pauvre)</li>
+    </ul>
+  </div>
+</div>
+<div class="warning-box"><strong>⚠️ Ne pas confondre :</strong> Hypersplénisme (moelle riche) ≠ Insuffisance médullaire (moelle pauvre)</div>
+</div><div class="slide " id="slide-13">
+<h1 class="slide-title">⚡ Flash Quiz</h1>
+<div style="font-size:.78rem;color:#888;margin-bottom:8px">Testez-vous sur la diapo précédente — Cliquez pour révéler</div>
+<div class="flip-card" onclick="flipCard(this)"><div class="question">❓ Quelle cytopénie est la plus fréquente et la plus marquée dans l'hypersplénisme ?</div><div class="hint">👆 Cliquer pour révéler</div><div class="answer">✅ La thrombopénie par séquestration splénique (normalement 30% des plaquettes dans la rate, jusqu'à 80% en cas de grande SM). Souvent 50-100 G/L, sans risque hémorragique majeur habituellement.</div></div>
+<div class="flip-card" onclick="flipCard(this)"><div class="question">❓ Pourquoi la moelle osseuse est-elle richement cellulaire en cas d'hypersplénisme ?</div><div class="hint">👆 Cliquer pour révéler</div><div class="answer">✅ La destruction splénique excessive des éléments sanguins stimule la moelle à compenser (hyperplasie réactionnelle). La moelle répond à la destruction périphérique en produisant plus de cellules. Cela distingue l'hypersplénisme des cytopénies centrales.</div></div>
+
+</div><div class="slide " id="slide-14">
+<h1 class="slide-title">Urgences spléniques</h1>
+<div class="def-box" style="margin:5px 0"><strong>📖 Infarctus splénique</strong> : Nécrose d'une zone de la rate par obstruction artérielle. Douleur brutale HG + fièvre + épanchement pleural gauche. Confirmation : scanner (zone hypodense triangulaire).</div>
+<div class="def-box" style="margin:5px 0"><strong>📖 Rupture de rate</strong> : Déchirure capsulaire → hémorragie intra-péritonéale massive → choc hémorragique. Peut être traumatique ou spontanée (MNI, paludisme, leucémie sur rate fragilisée). Urgence chirurgicale.</div>
+
+<div class="grid-2" style="margin-top:8px">
+  <div class="urgence-box">
+    <strong>⚡ Infarctus splénique</strong>
+    <ul style="margin-top:5px;font-size:.8rem">
+      <li>Douleur HG brutale + irradiation épaule gauche</li>
+      <li>Fièvre, épanchement pleural G</li>
+      <li>Causes : ACFA, endocardite, drépanocytose</li>
+      <li>TDM : zone hypodense triangulaire</li>
+      <li>Traitement : antalgiques + cause + anticoag si embolie</li>
+    </ul>
+  </div>
+  <div class="urgence-box">
+    <strong>⚡ Rupture de rate</strong>
+    <ul style="margin-top:5px;font-size:.8rem">
+      <li>Choc hémorragique : tachy + hypo + abd douloureux</li>
+      <li>Causes : trauma ++ · MNI · paludisme · leucémie</li>
+      <li>NFS urgente : anémie aiguë</li>
+      <li>Traitement : <strong>splénectomie d'urgence</strong> ou embolisation</li>
+    </ul>
+  </div>
+</div>
+<div class="info-box"><strong>💡 MNI + sport :</strong> CI aux sports de contact 3-4 semaines (risque de rupture sur rate fragilisée).</div>
+</div><div class="slide " id="slide-15">
+<h1 class="slide-title">⚡ Flash Quiz</h1>
+<div style="font-size:.78rem;color:#888;margin-bottom:8px">Testez-vous sur la diapo précédente — Cliquez pour révéler</div>
+<div class="flip-card" onclick="flipCard(this)"><div class="question">❓ Un patient a une ACFA et développe une douleur brutale en HG avec irradiation vers l'épaule gauche et fièvre. Quel diagnostic évoquer ?</div><div class="hint">👆 Cliquer pour révéler</div><div class="answer">✅ Infarctus splénique par embolie à partir d'un thrombus intra-auriculaire gauche (ACFA). Confirmation : TDM abdominale (zone hypodense triangulaire). Traitement : antalgiques + anticoagulation thérapeutique.</div></div>
+<div class="flip-card" onclick="flipCard(this)"><div class="question">❓ Pourquoi la MNI contre-indique-t-elle les sports de contact pendant 3-4 semaines ?</div><div class="hint">👆 Cliquer pour révéler</div><div class="answer">✅ L'EBV cause une splénomégalie dans ~50% des MNI. La rate hypertrophiée et congestive est fragilisée → risque de rupture splénique spontanée ou déclenchée par un traumatisme même minime. Risque vital.</div></div>
+
+</div><div class="slide " id="slide-16">
+<h1 class="slide-title">QCM — Sections I-III</h1>
+<div class="qcm-block">
+<div class="qcm-question">Q1. Quels sont les 3 éléments permettant d'affirmer une splénomégalie à l'examen clinique ?</div>
+<div class="qcm-options"><div class="qcm-option" onclick="selectOption(this)">A. Douleur HG + fièvre + ascite</div>
+<div class="qcm-option correct-ans" onclick="selectOption(this)">B. Rate palpable + encoche splénique + mobilité respiratoire</div>
+<div class="qcm-option" onclick="selectOption(this)">C. Splénomégalie palpable chez tout sujet mince</div>
+<div class="qcm-option" onclick="selectOption(this)">D. Splénomégalie confirmée uniquement par scanner</div></div>
+<button class="qcm-btn" onclick="validateQCM(this)">Valider</button>
+<div class="qcm-feedback"></div>
+</div>
+<div class="qcm-block">
+<div class="qcm-question">Q2. Quelle cytopénie est la plus précoce et la plus marquée dans l'hypersplénisme ?</div>
+<div class="qcm-options"><div class="qcm-option" onclick="selectOption(this)">A. Anémie profonde (Hb < 7 g/dL)</div>
+<div class="qcm-option" onclick="selectOption(this)">B. Neutropénie sévère (PNN < 0,5 G/L)</div>
+<div class="qcm-option correct-ans" onclick="selectOption(this)">C. Thrombopénie par séquestration (50-100 G/L)</div>
+<div class="qcm-option" onclick="selectOption(this)">D. Lymphopénie</div></div>
+<button class="qcm-btn" onclick="validateQCM(this)">Valider</button>
+<div class="qcm-feedback"></div>
+</div>
+<div class="qcm-block">
+<div class="qcm-question">Q3. Un patient porteur d'une ACFA développe une douleur brutale HG + fièvre + épanchement pleural gauche. Quel est le diagnostic ?</div>
+<div class="qcm-options"><div class="qcm-option" onclick="selectOption(this)">A. Rupture de rate</div>
+<div class="qcm-option correct-ans" onclick="selectOption(this)">B. Infarctus splénique par embolie</div>
+<div class="qcm-option" onclick="selectOption(this)">C. Abcès splénique</div>
+<div class="qcm-option" onclick="selectOption(this)">D. Torsion splénique</div></div>
+<button class="qcm-btn" onclick="validateQCM(this)">Valider</button>
+<div class="qcm-feedback"></div>
+</div>
+</div><div class="slide " id="slide-17">
+<div class="section-banner">
+  <div style="font-size:2rem;margin-bottom:8px">🗺️</div>
+  <h2>Section IV — Démarche étiologique</h2>
+  <p>4 grandes catégories · Bilan 1ère intention · Orientation</p>
+</div>
+<div class="grid-2" style="margin-top:12px">
+  <div style="background:rgba(52,152,219,.1);padding:10px;border-radius:8px;border:1px solid rgba(52,152,219,.3);font-size:.82rem">
+    <strong style="color:#3498db">🦠 Infectieuses</strong><br>MNI, paludisme, tuberculose, brucellose
+  </div>
+  <div style="background:rgba(231,76,60,.1);padding:10px;border-radius:8px;border:1px solid rgba(231,76,60,.3);font-size:.82rem">
+    <strong style="color:#e74c3c">🩸 Hématologiques</strong><br>LLC, LMC, lymphomes, hémolyse
+  </div>
+  <div style="background:rgba(243,156,18,.1);padding:10px;border-radius:8px;border:1px solid rgba(243,156,18,.3);font-size:.82rem">
+    <strong style="color:#f39c12">🫀 Hypertension portale</strong><br>Cirrhose ++, thrombose porte
+  </div>
+  <div style="background:rgba(46,204,113,.1);padding:10px;border-radius:8px;border:1px solid rgba(46,204,113,.3);font-size:.82rem">
+    <strong style="color:#2ecc71">🔥 Inflammatoires / surcharge</strong><br>Lupus, sarcoïdose, Gaucher
+  </div>
+</div>
+<div class="info-box" style="margin-top:8px"><strong>💡 Bilan 1ère intention :</strong> NFS + frottis + bilan hépatique + EPS + bili/haptoglobine/LDH/Coombs + écho abdominale.</div>
+</div><div class="slide " id="slide-18">
+<h1 class="slide-title">Bilan de 1ère intention devant une SM</h1>
+<div class="def-box" style="margin:5px 0"><strong>📖 Haptoglobine</strong> : Protéine qui se lie à l'hémoglobine libre. Effondrée en cas d'hémolyse (toute l'haptoglobine est consommée). Marqueur sensible d'hémolyse intravasculaire.</div>
+<div class="def-box" style="margin:5px 0"><strong>📖 Test de Coombs direct (TCD)</strong> : Détecte les anticorps fixés sur les GR du patient. Positif = anémie hémolytique auto-immune (AHAI) : anticorps 'anti-soi' attaquent les GR (lupus, LLC...).</div>
+
+<div class="grid-2" style="margin-top:8px">
+  <div class="content-block">
+    <h3>🩸 Bilan sanguin</h3>
+    <ul style="font-size:.82rem">
+      <li><strong>NFS + frottis</strong> — toujours en 1ère intention</li>
+      <li><strong>Bili + haptoglobine + LDH</strong> — hémolyse</li>
+      <li><strong>Coombs direct</strong> — AHAI</li>
+      <li><strong>Transaminases, GGT, PAL, TP, albumine</strong> — foie</li>
+      <li><strong>Électrophorèse protéines</strong> — pic monoclonal</li>
+      <li><strong>CRP, VS</strong> — inflammation</li>
+    </ul>
+  </div>
+  <div class="content-block">
+    <h3>📷 Imagerie et microbiologie</h3>
+    <ul style="font-size:.82rem">
+      <li><strong>Échographie abdominale</strong> — taille rate, foie, ascite</li>
+      <li><strong>Frottis + goutte épaisse + TDR</strong> — si retour tropical</li>
+      <li><strong>Sérologies</strong> — EBV, CMV, VIH selon contexte</li>
+      <li><strong>Myélogramme</strong> — si NFS anormale (blastes, pancytopénie)</li>
+    </ul>
+  </div>
+</div>
+</div><div class="slide " id="slide-19">
+<h1 class="slide-title">⚡ Flash Quiz</h1>
+<div style="font-size:.78rem;color:#888;margin-bottom:8px">Testez-vous sur la diapo précédente — Cliquez pour révéler</div>
+<div class="flip-card" onclick="flipCard(this)"><div class="question">❓ Devant une SM avec suspicion d'hémolyse, quels sont les 4 examens du bilan d'hémolyse ?</div><div class="hint">👆 Cliquer pour révéler</div><div class="answer">✅ Bilirubine totale et libre (ictère rétention) · LDH (destruction cellulaire) · Haptoglobine (effondrée si hémolyse IV) · Réticulocytes (↑ si moelle réactive). + Coombs direct si suspicion AHAI.</div></div>
+<div class="flip-card" onclick="flipCard(this)"><div class="question">❓ Un patient revient d'Afrique avec fièvre et SM. Quels examens de 1ère intention pour le paludisme ?</div><div class="hint">👆 Cliquer pour révéler</div><div class="answer">✅ Frottis sanguin + goutte épaisse (examen microscopique) + test de diagnostic rapide (TDR) antigénique. Si forte suspicion avec 1er frottis négatif : répéter à H6 et H12 (parasitémie variable dans le temps).</div></div>
+
+</div><div class="slide " id="slide-20">
+<h1 class="slide-title">Étiologies infectieuses — SM</h1>
+<div class="def-box" style="margin:5px 0"><strong>📖 Paludisme viscéral évolutif</strong> : Forme chronique du paludisme (P. vivax ou falciparum). SM progressive + fièvre + anémie + thrombopénie. Frottis + goutte épaisse + TDR. Traitement : antipaludéens adaptés à l'espèce.</div>
+<div class="def-box" style="margin:5px 0"><strong>📖 Leishmaniose viscérale (kala-azar)</strong> : Leishmania donovani (phlébotome). Zones tropicales et méditerranéennes. Triade : fièvre + SM + pancytopénie. Diagnostic : sérologie + myélogramme (parasites dans macrophages). Traitement : amphotéricine B liposomale.</div>
+
+<div class="grid-2" style="margin-top:8px">
+  <div class="content-block">
+    <h3>🦠 Virales</h3>
+    <ul style="font-size:.82rem">
+      <li><strong>MNI (EBV)</strong> — angine + ADP + SM (30%)</li>
+      <li><strong>CMV</strong> — tableau MNI-like</li>
+      <li><strong>Hépatites B/C</strong> — hépato-SM</li>
+    </ul>
+  </div>
+  <div class="content-block">
+    <h3>🦠 Bactériennes/parasitaires</h3>
+    <ul style="font-size:.82rem">
+      <li><strong>Paludisme</strong> — voyage + SM + fièvre</li>
+      <li><strong>Leishmaniose viscérale</strong> — kala-azar, SM + pancytopénie</li>
+      <li><strong>Brucellose</strong> — contact animal + fièvre ondulante</li>
+      <li><strong>Tuberculose</strong> — splénomégalie + granulomes</li>
+    </ul>
+  </div>
+</div>
+</div><div class="slide " id="slide-21">
+<h1 class="slide-title">⚡ Flash Quiz</h1>
+<div style="font-size:.78rem;color:#888;margin-bottom:8px">Testez-vous sur la diapo précédente — Cliquez pour révéler</div>
+<div class="flip-card" onclick="flipCard(this)"><div class="question">❓ Quelle est la triade caractéristique de la leishmaniose viscérale (kala-azar) ?</div><div class="hint">👆 Cliquer pour révéler</div><div class="answer">✅ Fièvre + splénomégalie (souvent massive) + pancytopénie (anémie + thrombopénie + leucopénie). Zones d'endémie : Afrique subsaharienne, Asie, bassin méditerranéen. Diagnostic : sérologie + myélogramme. Traitement : amphotéricine B liposomale.</div></div>
+<div class="flip-card" onclick="flipCard(this)"><div class="question">❓ La brucellose : quel est le contexte et comment la diagnostiquer ?</div><div class="hint">👆 Cliquer pour révéler</div><div class="answer">✅ Zoonose par Brucella : contact avec bovins/caprins/ovins ou ingestion de lait cru non pasteurisé. Fièvre ondulante (en vagues) + SM + arthralgies + hépatosplénomégalie. Diagnostic : sérologie de Wright (IgG et IgM anti-Brucella). Traitement : doxycycline + rifampicine × 6 semaines.</div></div>
+
+</div><div class="slide " id="slide-22">
+<h1 class="slide-title">Hypertension portale — Étiologie majeure en France</h1>
+<div class="def-box" style="margin:5px 0"><strong>📖 Hypertension portale (HTP)</strong> : Pression portale > 10 mmHg (normale < 5 mmHg). Cirrhose = cause principale (obstruction intra-hépatique). Conséquences : varices œsophagiennes, ascite, splénomégalie, encéphalopathie.</div>
+<div class="def-box" style="margin:5px 0"><strong>📖 Circulation veineuse collatérale (CVC)</strong> : Veines de dérivation développées pour contourner l'obstruction portale : varices œsophagiennes (risque hémorragie digestive +++), caput medusae (péri-ombilical), hémorroïdes.</div>
+
+<div class="grid-2" style="margin-top:8px">
+  <div class="content-block">
+    <h3>🍷 Cirrhose → HTP → SM</h3>
+    <p style="font-size:.82rem">Fibrose hépatique → obstruction flux portal → HTP → augmentation flux splénique → congestion → hypersplénisme → thrombopénie ++</p>
+    <div class="warning-box" style="margin-top:6px"><strong>⚠️ Thrombopénie sévère</strong> peut CI ponctions/biopsies</div>
+  </div>
+  <div class="content-block">
+    <h3>Étiologies HTP</h3>
+    <ul style="font-size:.82rem">
+      <li><strong>Cirrhose</strong> — alcool ++, VHC, VHB, NASH</li>
+      <li><strong>Thrombose porte</strong> — coagulation, tumeur</li>
+      <li><strong>Schistosomiase hépatique</strong></li>
+      <li><strong>Budd-Chiari</strong> — thrombose veines sus-hépatiques</li>
+    </ul>
+  </div>
+</div>
+</div><div class="slide " id="slide-23">
+<h1 class="slide-title">⚡ Flash Quiz</h1>
+<div style="font-size:.78rem;color:#888;margin-bottom:8px">Testez-vous sur la diapo précédente — Cliquez pour révéler</div>
+<div class="flip-card" onclick="flipCard(this)"><div class="question">❓ Par quel mécanisme la cirrhose provoque-t-elle une splénomégalie ?</div><div class="hint">👆 Cliquer pour révéler</div><div class="answer">✅ Cirrhose → fibrose hépatique → obstruction du flux portal → hypertension portale → augmentation de la pression splénique → congestion et hypertrophie de la rate → hypersplénisme (thrombopénie ++).</div></div>
+<div class="flip-card" onclick="flipCard(this)"><div class="question">❓ Quelles sont les complications majeures de l'hypertension portale à rechercher ?</div><div class="hint">👆 Cliquer pour révéler</div><div class="answer">✅ Varices œsophagiennes (VO) = risque d'hémorragie digestive gravissime (mortalité 20%) · Ascite · Encéphalopathie hépatique · Splénomégalie avec hypersplénisme. Dépistage VO : fibroscopie œso-gastrique.</div></div>
+
+</div><div class="slide " id="slide-24">
+<h1 class="slide-title">Hémopathies malignes — SM</h1>
+<div class="def-box" style="margin:5px 0"><strong>📖 LMC (Leucémie Myéloïde Chronique)</strong> : Translocation t(9;22) = chromosome Philadelphie = BCR-ABL. Hyperleucocytose massive (> 30-100 G/L) + déviation gauche (myélocytes, métamyélocytes) + SM souvent volumineuse. Traitement : imatinib.</div>
+<div class="def-box" style="margin:5px 0"><strong>📖 Myélofibrose primitive</strong> : Fibrose de la moelle → hématopoïèse extra-médullaire dans la rate → SM massive (parfois > 20 cm). Frottis : érythroblastes + myélocytes circulants (leuco-érythroblastose). Mauvais pronostic.</div>
+
+<div class="grid-2" style="margin-top:8px">
+  <div class="content-block">
+    <h3>🔵 Lymphoprolifératifs</h3>
+    <ul style="font-size:.82rem">
+      <li><strong>LLC</strong> — sujet âgé, lymphocytes > 5 G/L, petits ganglions</li>
+      <li><strong>Lymphomes spléniques</strong> — SM isolée possible</li>
+      <li><strong>LAL</strong> — enfant ++, urgence</li>
+    </ul>
+  </div>
+  <div class="content-block">
+    <h3>🔴 Myéloprolifératifs</h3>
+    <ul style="font-size:.82rem">
+      <li><strong>LMC</strong> — t(9;22), GB > 30 G/L, SM volumineuse</li>
+      <li><strong>Polyglobulie de Vaquez</strong> — SM + GR ↑</li>
+      <li><strong>Myélofibrose</strong> — SM massive + leuco-érythroblastose</li>
+    </ul>
+  </div>
+</div>
+</div><div class="slide " id="slide-25">
+<h1 class="slide-title">⚡ Flash Quiz</h1>
+<div style="font-size:.78rem;color:#888;margin-bottom:8px">Testez-vous sur la diapo précédente — Cliquez pour révéler</div>
+<div class="flip-card" onclick="flipCard(this)"><div class="question">❓ Quel aspect de la NFS est caractéristique de la leucémie myéloïde chronique (LMC) ?</div><div class="hint">👆 Cliquer pour révéler</div><div class="answer">✅ Hyperleucocytose massive (30-100 G/L) avec déviation gauche : présence de myélocytes, métamyélocytes, promyélocytes dans le sang + basophilie (PNB > 1 G/L). Et une splénomégalie volumineuse. Anomalie génétique : t(9;22) = BCR-ABL.</div></div>
+<div class="flip-card" onclick="flipCard(this)"><div class="question">❓ Quelle est la présentation typique de la myélofibrose primitive ?</div><div class="hint">👆 Cliquer pour révéler</div><div class="answer">✅ SM massive (parfois 20+ cm) + leuco-érythroblastose au frottis (érythroblastes + précurseurs myéloïdes circulants) + GR en larme (dacryocytes) + anémie. Myélogramme difficile : moelle fibreuse, ponction sèche.</div></div>
+
+</div><div class="slide " id="slide-26">
+<h1 class="slide-title">Anémies hémolytiques — SM</h1>
+<div class="def-box" style="margin:5px 0"><strong>📖 Sphérocytose héréditaire</strong> : Déficit en spectrine (protéine de membrane des GR) → GR sphériques et rigides → détruits dans la rate → SM + anémie hémolytique chronique + ictère. Traitement définitif : splénectomie.</div>
+<div class="def-box" style="margin:5px 0"><strong>📖 Auto-splénectomie (drépanocytose)</strong> : Chez l'adulte drépanocytaire, les crises vaso-occlusives répétées dans les petits vaisseaux spléniques détruisent progressivement la rate → asplénie fonctionnelle → corps de Jolly sur le frottis.</div>
+
+<div class="grid-2" style="margin-top:8px">
+  <div class="content-block">
+    <h3>Congénitales</h3>
+    <ul style="font-size:.82rem">
+      <li><strong>Sphérocytose</strong> — SM + ictère + lithiase biliaire pigmentaire</li>
+      <li><strong>Thalassémie</strong> — microcytaire + hémoglobines anormales</li>
+      <li><strong>Drépanocytose</strong> — enfant : SM · adulte : auto-splénectomie</li>
+    </ul>
+  </div>
+  <div class="content-block">
+    <h3>Acquises</h3>
+    <ul style="font-size:.82rem">
+      <li><strong>AHAI</strong> — Coombs direct + · lupus, LLC</li>
+      <li><strong>Paludisme</strong> — GR parasités détruits</li>
+      <li><strong>MAT</strong> — PTT, SHU</li>
+    </ul>
+  </div>
+</div>
+</div><div class="slide " id="slide-27">
+<h1 class="slide-title">⚡ Flash Quiz</h1>
+<div style="font-size:.78rem;color:#888;margin-bottom:8px">Testez-vous sur la diapo précédente — Cliquez pour révéler</div>
+<div class="flip-card" onclick="flipCard(this)"><div class="question">❓ Pourquoi un adulte drépanocytaire a-t-il souvent des corps de Jolly sur son frottis ?</div><div class="hint">👆 Cliquer pour révéler</div><div class="answer">✅ L'adulte drépanocytaire développe une asplénie fonctionnelle (auto-splénectomie) suite aux crises vaso-occlusives répétées dans les artérioles spléniques → destruction progressive de la rate. La rate ne peut plus éliminer les corps de Jolly.</div></div>
+<div class="flip-card" onclick="flipCard(this)"><div class="question">❓ Quelle est la différence entre la sphérocytose héréditaire et la drépanocytose concernant la rate ?</div><div class="hint">👆 Cliquer pour révéler</div><div class="answer">✅ Sphérocytose : SM persistante (rate détruit massivement les GR sphériques) → splénectomie curative. Drépanocytose : SM dans l'enfance → auto-splénectomie progressive chez l'adulte par crises vaso-occlusives.</div></div>
+
+</div><div class="slide " id="slide-28">
+<h1 class="slide-title">Étiologies inflammatoires et surcharge</h1>
+<div class="def-box" style="margin:5px 0"><strong>📖 Maladie de Gaucher</strong> : Surcharge lysosomale : accumulation de glucocérébroside dans les macrophages → SM massive + thrombopénie + douleurs osseuses + élévation de la chitotriosidase. Traitement : enzymothérapie substitutive.</div>
+<div class="def-box" style="margin:5px 0"><strong>📖 Syndrome de Felty</strong> : Triade : Polyarthrite Rhumatoïde + Splénomégalie + Neutropénie. Risque infectieux majeur. Splénectomie possible si neutropénie sévère.</div>
+
+<div class="grid-2" style="margin-top:8px">
+  <div class="content-block">
+    <h3>🔥 Maladies inflammatoires</h3>
+    <ul style="font-size:.82rem">
+      <li><strong>Lupus</strong> — femme jeune, anti-ADN+</li>
+      <li><strong>PR + Felty</strong> — PR + SM + neutropénie</li>
+      <li><strong>Sarcoïdose</strong> — granulomes + ECA ↑</li>
+    </ul>
+  </div>
+  <div class="content-block">
+    <h3>📦 Surcharges</h3>
+    <ul style="font-size:.82rem">
+      <li><strong>Gaucher</strong> — SM massive + thrombopénie + osseuse</li>
+      <li><strong>Amylose</strong> — dépôts amyloïdes</li>
+    </ul>
+  </div>
+</div>
+</div><div class="slide " id="slide-29">
+<h1 class="slide-title">⚡ Flash Quiz</h1>
+<div style="font-size:.78rem;color:#888;margin-bottom:8px">Testez-vous sur la diapo précédente — Cliquez pour révéler</div>
+<div class="flip-card" onclick="flipCard(this)"><div class="question">❓ Qu'est-ce que le syndrome de Felty et quel est son risque principal ?</div><div class="hint">👆 Cliquer pour révéler</div><div class="answer">✅ Triade : Polyarthrite Rhumatoïde + Splénomégalie + Neutropénie. La neutropénie sévère expose à un risque infectieux majeur (infections bactériennes récurrentes). Traitement : méthotrexate ++ · splénectomie si neutropénie réfractaire.</div></div>
+<div class="flip-card" onclick="flipCard(this)"><div class="question">❓ La maladie de Gaucher provoque-t-elle une splénomégalie massive ? Quel traitement ?</div><div class="hint">👆 Cliquer pour révéler</div><div class="answer">✅ Oui, la SM peut être très volumineuse par accumulation de glucocérébroside dans les macrophages spléniques. + Thrombopénie + douleurs osseuses. Traitement : enzymothérapie substitutive par imiglucerase (coûteuse mais efficace).</div></div>
+
+</div><div class="slide " id="slide-30">
+<h1 class="slide-title">QCM — Section IV : Étiologies</h1>
+<div class="qcm-block">
+<div class="qcm-question">Q1. Homme 68 ans : SM modérée, hyperlymphocytose 42 G/L avec petits lymphocytes matures, adénopathies bilatérales. Diagnostic probable ?</div>
+<div class="qcm-options"><div class="qcm-option" onclick="selectOption(this)">A. Lymphome de Hodgkin</div>
+<div class="qcm-option correct-ans" onclick="selectOption(this)">B. Leucémie lymphoïde chronique (LLC)</div>
+<div class="qcm-option" onclick="selectOption(this)">C. LMC</div>
+<div class="qcm-option" onclick="selectOption(this)">D. MNI (EBV)</div></div>
+<button class="qcm-btn" onclick="validateQCM(this)">Valider</button>
+<div class="qcm-feedback"></div>
+</div>
+<div class="qcm-block">
+<div class="qcm-question">Q2. Quelle est la cause la plus fréquente de SM en France ?</div>
+<div class="qcm-options"><div class="qcm-option" onclick="selectOption(this)">A. Maladie de Gaucher</div>
+<div class="qcm-option correct-ans" onclick="selectOption(this)">B. Cirrhose hépatique avec HTP</div>
+<div class="qcm-option" onclick="selectOption(this)">C. Myélofibrose</div>
+<div class="qcm-option" onclick="selectOption(this)">D. Leishmaniose viscérale</div></div>
+<button class="qcm-btn" onclick="validateQCM(this)">Valider</button>
+<div class="qcm-feedback"></div>
+</div>
+<div class="qcm-block">
+<div class="qcm-question">Q3. LMC : quelle anomalie génétique spécifique permet le diagnostic ?</div>
+<div class="qcm-options"><div class="qcm-option" onclick="selectOption(this)">A. t(8;14) = Burkitt</div>
+<div class="qcm-option correct-ans" onclick="selectOption(this)">B. t(9;22) = chromosome Philadelphie = BCR-ABL</div>
+<div class="qcm-option" onclick="selectOption(this)">C. del(17p) = TP53</div>
+<div class="qcm-option" onclick="selectOption(this)">D. t(14;18) = BCL2</div></div>
+<button class="qcm-btn" onclick="validateQCM(this)">Valider</button>
+<div class="qcm-feedback"></div>
+</div>
+</div><div class="slide " id="slide-31">
+<div class="section-banner">
+  <div style="font-size:2rem;margin-bottom:8px">💉</div>
+  <h2>Section V — Post-splénectomie</h2>
+  <p>Asplénie · Risque infectieux · Vaccinations · Antibioprophylaxie</p>
+</div>
+<div class="urgence-box" style="margin-top:12px">
+  <strong>⚡ OPSI (Overwhelming Post-Splenectomy Infection) :</strong> Infections fulminantes à bactéries capsulées. Mortalité > 50%. Pneumocoque +++. Peut tuer en moins de 24h.
+</div>
+<div class="content-block" style="margin-top:8px">
+  <h3>🦠 Bactéries capsulées à risque</h3>
+  <div style="display:flex;flex-wrap:wrap;gap:6px;font-size:.8rem;margin-top:5px">
+    <span style="background:rgba(231,76,60,.15);padding:4px 10px;border-radius:10px;color:#e74c3c;border:1px solid rgba(231,76,60,.3)">Streptococcus pneumoniae +++</span>
+    <span style="background:rgba(231,76,60,.15);padding:4px 10px;border-radius:10px;color:#e74c3c;border:1px solid rgba(231,76,60,.3)">Neisseria meningitidis</span>
+    <span style="background:rgba(231,76,60,.15);padding:4px 10px;border-radius:10px;color:#e74c3c;border:1px solid rgba(231,76,60,.3)">Haemophilus influenzae b</span>
+    <span style="background:rgba(231,76,60,.15);padding:4px 10px;border-radius:10px;color:#e74c3c;border:1px solid rgba(231,76,60,.3)">Capnocytophaga (griffure chien)</span>
+  </div>
+</div>
+</div><div class="slide " id="slide-32">
+<h1 class="slide-title">Vaccinations et antibioprophylaxie post-splénectomie</h1>
+<div class="def-box" style="margin:5px 0"><strong>📖 VPC13 vs VP23 (pneumocoque)</strong> : VPC13 (Prevenar 13) = vaccin conjugué → meilleure mémoire immunitaire (activer les lymphocytes T). VP23 (Pneumovax) = 23 sérotypes mais sans mémoire T. Séquence : VPC13 d'abord, puis VP23 à ≥ 2 mois.</div>
+<div class="def-box" style="margin:5px 0"><strong>📖 Asplénie fonctionnelle</strong> : Absence de fonction splénique malgré présence de la rate. Drépanocytose (auto-splénectomie progressive), lupus, certains traitements. Même risque infectieux que la splénectomie chirurgicale.</div>
+
+<table style="margin-top:8px;font-size:.78rem">
+  <tr><th>Vaccin</th><th>Schéma</th><th>Rappel</th></tr>
+  <tr><td><strong>Pneumocoque VPC13</strong></td><td>Avant ou dans les 2 sem post-splénectomie</td><td>VP23 à ≥ 2 mois</td></tr>
+  <tr><td><strong>Méningocoque ACYW</strong></td><td>1 dose</td><td>Tous les 3-5 ans</td></tr>
+  <tr><td><strong>Méningocoque B</strong></td><td>2 doses (1 mois d'écart)</td><td>Idem</td></tr>
+  <tr><td><strong>Haemophilus b</strong></td><td>1 dose</td><td>—</td></tr>
+  <tr><td><strong>Grippe</strong></td><td>Annuelle</td><td>Chaque automne</td></tr>
+</table>
+<div class="grid-2" style="margin-top:6px">
+  <div class="urgence-box"><strong>⚡ Antibioprophylaxie :</strong> Pénicilline V 1g/j pendant <strong>≥ 2 ans</strong> (adulte). À vie si enfant ou immunodéprimé.</div>
+  <div class="urgence-box"><strong>⚡ Fièvre post-splénectomie :</strong> C3G IV en urgence (ceftriaxone) SANS attendre les résultats. Urgence vitale.</div>
+</div>
+</div><div class="slide " id="slide-33">
+<h1 class="slide-title">⚡ Flash Quiz</h1>
+<div style="font-size:.78rem;color:#888;margin-bottom:8px">Testez-vous sur la diapo précédente — Cliquez pour révéler</div>
+<div class="flip-card" onclick="flipCard(this)"><div class="question">❓ Quel est le schéma vaccinal prioritaire post-splénectomie pour le pneumocoque ?</div><div class="hint">👆 Cliquer pour révéler</div><div class="answer">✅ VPC13 (Prevenar 13) d'abord → puis VP23 (Pneumovax) à ≥ 2 mois. L'ordre est important : VPC13 amorce la réponse T, VP23 élargit la couverture sérotypique. + Méningocoque ACYW + B + Haemophilus b + grippe annuelle.</div></div>
+<div class="flip-card" onclick="flipCard(this)"><div class="question">❓ Un patient splénectomisé fait 39°C sans foyer évident. Quelle est la conduite à tenir ?</div><div class="hint">👆 Cliquer pour révéler</div><div class="answer">✅ URGENCE VITALE : hémocultures + C3G IV (ceftriaxone 2g IV) IMMÉDIATEMENT sans attendre les résultats. Ne pas rentrer à domicile. Risque de sepsis fulminant à pneumocoque (OPSI) potentiellement mortel en < 24h.</div></div>
+
+</div><div class="slide " id="slide-34">
+<h1 class="slide-title">QCM Final</h1>
+<div class="qcm-block">
+<div class="qcm-question">Q1. Quel vaccin est PRIORITAIRE après splénectomie ?</div>
+<div class="qcm-options"><div class="qcm-option" onclick="selectOption(this)">A. Méningocoque B seul</div>
+<div class="qcm-option" onclick="selectOption(this)">B. Grippe annuelle</div>
+<div class="qcm-option correct-ans" onclick="selectOption(this)">C. Pneumocoque (VPC13 puis VP23)</div>
+<div class="qcm-option" onclick="selectOption(this)">D. Hépatite B</div></div>
+<button class="qcm-btn" onclick="validateQCM(this)">Valider</button>
+<div class="qcm-feedback"></div>
+</div>
+<div class="qcm-block">
+<div class="qcm-question">Q2. Patient splénectomisé il y a 1 an, fièvre 39°C. Conduite immédiate ?</div>
+<div class="qcm-options"><div class="qcm-option" onclick="selectOption(this)">A. Antipyrétiques, surveillance domicile</div>
+<div class="qcm-option correct-ans" onclick="selectOption(this)">B. Hémocultures + C3G IV urgence sans attendre résultats</div>
+<div class="qcm-option" onclick="selectOption(this)">C. Amoxicilline per os, revoir 48h</div>
+<div class="qcm-option" onclick="selectOption(this)">D. Ponction lombaire d'abord</div></div>
+<button class="qcm-btn" onclick="validateQCM(this)">Valider</button>
+<div class="qcm-feedback"></div>
+</div>
+<div class="qcm-block">
+<div class="qcm-question">Q3. Corps de Jolly sur frottis = ?</div>
+<div class="qcm-options"><div class="qcm-option" onclick="selectOption(this)">A. Signe d'hémolyse intravasculaire</div>
+<div class="qcm-option correct-ans" onclick="selectOption(this)">B. Asplénie (rate non fonctionnelle ou absente)</div>
+<div class="qcm-option" onclick="selectOption(this)">C. Envahissement médullaire</div>
+<div class="qcm-option" onclick="selectOption(this)">D. Infection bactérienne</div></div>
+<button class="qcm-btn" onclick="validateQCM(this)">Valider</button>
+<div class="qcm-feedback"></div>
+</div>
+</div><div class="slide " id="slide-35">
+<h1 class="slide-title">Dossier progressif — Jean-Pierre, 52 ans</h1>
+<div class="vignette"><strong>🏥</strong> Alcoolique chronique (3 verres/j depuis 20 ans), hépatite C non guérie.</div>
+<div class="dp-step" style="margin-top:6px"><strong>🔵 Situation 1</strong> — SM à 14 cm, NFS : Hb 9, GB 3,2, plaquettes 62 G/L. Mécanisme ?
+  <div class="flip-card" onclick="flipCard(this)" style="margin-top:4px"><div class="question">Révéler</div><div class="answer">Cirrhose (alcool + VHC) → HTP → SM congestive → hypersplénisme (pancytopénie). Moelle richement cellulaire (réactionnelle). Thrombopénie 62 G/L = séquestration splénique.</div></div>
+</div>
+<div class="dp-step" style="margin-top:5px"><strong>🔵 Situation 2</strong> — Foie dysmorphique, ascite, varices œsophagiennes grade II. Risque immédiat ?
+  <div class="flip-card" onclick="flipCard(this)" style="margin-top:4px"><div class="question">Révéler</div><div class="answer">Hémorragie digestive par rupture de VO (mortalité 20%). Prévention : bêta-bloquant non cardiosélectif (propranolol) + ligature endoscopique des VO.</div></div>
+</div>
+<div class="dp-step" style="margin-top:5px"><strong>🔵 Situation 3</strong> — 2 mois après : fièvre + douleur abdo + ascite ↑. Paracentèse : 350 PNN/mm³. Diagnostic et traitement ?
+  <div class="flip-card" onclick="flipCard(this)" style="margin-top:4px"><div class="question">Révéler</div><div class="answer">ILA (infection du liquide d'ascite) = PBS : PNN ≥ 250/mm³. Traitement : céfotaxime 2g × 3/j IV × 5 jours + albumine IV. Prophylaxie secondaire : norfloxacine au long cours.</div></div>
+</div>
+</div><div class="slide " id="slide-36">
+<h1 class="slide-title">Résumé — Fiche mémo Splénomégalie</h1>
+<div class="grid-2" style="margin-top:6px">
+  <div>
+    <div class="content-block">
+      <h3>🔬 4 mécanismes SM</h3>
+      <ol style="font-size:.8rem;padding-left:16px">
+        <li>Accumulation cellulaire (hémopathies)</li>
+        <li>HTP (cirrhose ++)</li>
+        <li>Séquestration/hémolyse</li>
+        <li>Hématopoïèse extra-médullaire (myélofibrose)</li>
+      </ol>
+    </div>
+    <div class="content-block" style="margin-top:6px">
+      <h3>📉 Hypersplénisme</h3>
+      <ul style="font-size:.8rem">
+        <li>Thrombopénie ++ (50-100 G/L)</li>
+        <li>Moelle richement cellulaire</li>
+      </ul>
+    </div>
+    <div class="urgence-box" style="margin-top:6px;font-size:.79rem">
+      <strong>⚡</strong> Rupture → choc → splénectomie<br>Infarctus → douleur HG → TDM
+    </div>
+  </div>
+  <div>
+    <div class="content-block">
+      <h3>🎯 Étiologies</h3>
+      <table style="font-size:.76rem">
+        <tr><th>Contexte</th><th>Cause ++</th></tr>
+        <tr><td>Voyage tropical + fièvre</td><td>Paludisme</td></tr>
+        <tr><td>Alcoolique / VHC</td><td>Cirrhose HTP</td></tr>
+        <tr><td>Adolescent + angine</td><td>MNI (EBV)</td></tr>
+        <tr><td>> 60 ans + lymphocytose</td><td>LLC</td></tr>
+        <tr><td>GB > 100 G/L + SM massive</td><td>LMC</td></tr>
+        <tr><td>SM massive + leuco-érythroblastose</td><td>Myélofibrose</td></tr>
+      </table>
+    </div>
+    <div class="content-block" style="margin-top:6px">
+      <h3>💉 Post-splénectomie</h3>
+      <ul style="font-size:.8rem">
+        <li>VPC13 + VP23 · Méningo ACYW+B · Hib</li>
+        <li>Péni V ≥ 2 ans</li>
+        <li>Fièvre = C3G IV URGENCE</li>
+      </ul>
+    </div>
+  </div>
+</div>
+</div><div class="slide fin-slide" id="slide-37">
+<div style="text-align:center;padding:40px 20px">
+  <div style="font-size:2.5rem;margin-bottom:16px">🎉</div>
+  <h2 style="font-size:1.6rem;color:#8e44ad;margin-bottom:10px">Cours terminé !</h2>
+  <p style="color:#aaa;font-size:.9rem;margin-bottom:20px">Item 275 — Splénomégalie</p>
+  <div style="background:rgba(142,68,173,.08);border:1px solid rgba(142,68,173,.3);border-radius:12px;padding:16px;max-width:440px;margin:0 auto;text-align:left">
+    <p style="font-size:.83rem;font-weight:700;color:#9b59b6;margin-bottom:8px">✅ Points essentiels</p>
+    <ul style="font-size:.8rem;color:#ccc;padding-left:16px">
+      <li>Rate non palpable = normale. Palpée = pathologique</li>
+      <li>4 mécanismes : accumulation · HTP · séquestration · hémato extra-méd</li>
+      <li>Hypersplénisme : thrombopénie ++ (50-100 G/L)</li>
+      <li>Urgences : rupture (choc) · infarctus (douleur HG)</li>
+      <li>NFS + frottis + bili + haptoglobine = 1ère intention</li>
+      <li>Cause française ++ = cirrhose (HTP)</li>
+      <li>Post-splénectomie : vaccins + Péni V ≥ 2 ans</li>
+      <li>Fièvre post-splénectomie = C3G IV URGENCE</li>
+    </ul>
+  </div>
+  <div style="margin-top:16px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
+    <button onclick="showSlide(0)" style="background:#8e44ad;color:#fff;border:none;padding:8px 20px;border-radius:20px;cursor:pointer;font-size:.85rem">🔄 Revoir</button>
+    <a href="index.html" style="background:rgba(255,255,255,.1);color:#e8e8f0;text-decoration:none;padding:8px 20px;border-radius:20px;font-size:.85rem;border:1px solid rgba(255,255,255,.2)">🏠 Accueil</a>
+  </div>
+</div>
+</div>
+</div>
+<script>
+let current=0,total=0;
+function showSlide(n){
+  const slides=document.querySelectorAll('.slide');
+  total=slides.length;
+  if(n<0)n=0;if(n>=total)n=total-1;
+  slides.forEach((s,i)=>s.classList.toggle('active',i===n));
+  current=n;
+  document.querySelector('.progress-bar').style.width=((n+1)/total*100)+'%';
+  const ctr=document.querySelector('.tb-counter');
+  if(ctr)ctr.textContent=(n+1)+' / '+total;
+}
+function changeSlide(d){showSlide(current+d);}
+function flipCard(el){el.classList.toggle('revealed');}
+function selectOption(el){
+  if(el.tagName==='LABEL'){return;}
+  el.classList.toggle('selected');
+}
+function validateQCM(btn){
+  const block=btn.closest('.qcm-block');
+  const opts=block.querySelectorAll('.qcm-option');
+  const fb=block.querySelector('.qcm-feedback');
+  let ok=true;
+  opts.forEach(opt=>{
+    if(opt.classList.contains('correct-ans')){opt.classList.add('correct-show');}
+    else if(opt.classList.contains('selected')){opt.classList.add('wrong-show');ok=false;}
+  });
+  btn.disabled=true;
+  if(fb){fb.style.display='block';fb.textContent=ok?'✅ Correct !':'❌ Revoir la réponse ci-dessus.';}
+}
+document.addEventListener('DOMContentLoaded',()=>{
+  showSlide(0);
+  document.addEventListener('keydown',e=>{
+    if(e.key==='ArrowRight'||e.key==='ArrowDown')changeSlide(1);
+    if(e.key==='ArrowLeft'||e.key==='ArrowUp')changeSlide(-1);
+  });
+  let tx=0;
+  document.addEventListener('touchstart',e=>{tx=e.touches[0].clientX;},{passive:true});
+  document.addEventListener('touchend',e=>{
+    const dx=e.changedTouches[0].clientX-tx;
+    if(Math.abs(dx)>50){changeSlide(dx<0?1:-1);}
+  },{passive:true});
+});
+</script>
+</body>
+</html>
