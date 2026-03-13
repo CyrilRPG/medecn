@@ -9,62 +9,65 @@
 body{background:#0d0d1a;color:#e8e8f0;font-family:'Segoe UI',system-ui,sans-serif;overflow:hidden;overflow-x:hidden;height:100vh}
 .topbar{position:fixed;top:0;left:0;right:0;height:50px;background:#1a1a2e;border-bottom:2px solid #27ae60;display:flex;align-items:center;padding:0 14px;gap:10px;z-index:999}
 .topbar a{color:#27ae60;text-decoration:none;font-size:1.2rem}
-.tb-title{font-size:.82rem;font-weight:600;color:#e8e8f0;flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.tb-counter{font-size:.78rem;color:#888;white-space:nowrap}
+.tb-title{font-size:.85rem;font-weight:600;color:#e8e8f0;flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tb-counter{font-size:.82rem;color:#888;white-space:nowrap}
 .tb-nav{display:flex;gap:5px}
-.tb-nav button{background:none;border:1px solid #27ae60;color:#27ae60;padding:3px 9px;border-radius:6px;cursor:pointer;font-size:.78rem}
+.tb-nav button{background:none;border:1px solid #27ae60;color:#27ae60;padding:3px 10px;border-radius:6px;cursor:pointer;font-size:.82rem}
 .tb-nav button:hover{background:#27ae60;color:#0d0d1a}
 .progress-bar{position:fixed;top:50px;left:0;height:3px;background:linear-gradient(90deg,#27ae60,#2ecc71);transition:width .3s;z-index:998}
 .presentation{margin-top:53px;height:calc(100vh - 53px);position:relative}
-.slide{display:none;height:100%;overflow-y:auto;overflow-x:hidden;padding:16px 20px}.slide.active{display:flex;flex-direction:column}
+.slide{display:none;height:100%;overflow-y:auto;overflow-x:hidden;padding:22px 32px}.slide.active{display:flex;flex-direction:column}
 .title-slide{background:linear-gradient(135deg,#0d0d1a 0%,#1a3a2a 100%);justify-content:center;align-items:center;text-align:center}
 .fin-slide{justify-content:center;align-items:center;text-align:center;background:linear-gradient(135deg,#0d0d1a,#1a3a2a)}
-.slide-title{font-size:1rem;font-weight:700;color:#27ae60;border-bottom:2px solid #27ae60;padding-bottom:5px;margin-bottom:8px}
-.content-block{background:rgba(255,255,255,.04);border-radius:8px;padding:9px 12px;margin:5px 0}
-.content-block h3{font-size:.85rem;color:#2ecc71;margin-bottom:5px}
-ul,ol{padding-left:16px}li{margin:2px 0;font-size:.83rem;line-height:1.45}
-.def-box{background:rgba(243,156,18,.12);border-left:4px solid #f39c12;padding:7px 11px;border-radius:6px;margin:5px 0;font-size:.8rem}
+.slide-title{font-size:1.35rem;font-weight:700;color:#27ae60;border-bottom:2px solid #27ae60;padding-bottom:6px;margin-bottom:12px}
+.content-block{background:rgba(255,255,255,.04);border-radius:8px;padding:12px 16px;margin:6px 0}
+.content-block h3{font-size:.95rem;color:#2ecc71;margin-bottom:6px;font-weight:600}
+ul,ol{padding-left:18px}li{margin:4px 0;font-size:.93rem;line-height:1.55}
+.def-box{background:rgba(243,156,18,.12);border-left:4px solid #f39c12;padding:9px 13px;border-radius:6px;margin:6px 0;font-size:.9rem}
 .def-box strong{color:#f39c12;font-weight:700}
-.urgence-box{background:rgba(231,76,60,.2);border:2px solid #e74c3c;padding:8px 12px;border-radius:8px;margin:5px 0;font-size:.8rem}
+.urgence-box{background:rgba(231,76,60,.2);border:2px solid #e74c3c;padding:10px 14px;border-radius:8px;margin:6px 0;font-size:.9rem}
 .urgence-box strong{color:#e74c3c;font-weight:700}
-.info-box{background:rgba(52,152,219,.15);border-left:4px solid #3498db;padding:7px 11px;border-radius:6px;margin:5px 0;font-size:.8rem}
+.info-box{background:rgba(52,152,219,.15);border-left:4px solid #3498db;padding:9px 13px;border-radius:6px;margin:6px 0;font-size:.9rem}
 .info-box strong{color:#3498db;font-weight:700}
-.success-box{background:rgba(46,204,113,.12);border-left:4px solid #2ecc71;padding:7px 11px;border-radius:6px;margin:5px 0;font-size:.8rem}
+.success-box{background:rgba(46,204,113,.12);border-left:4px solid #2ecc71;padding:9px 13px;border-radius:6px;margin:6px 0;font-size:.9rem}
 .success-box strong{color:#2ecc71;font-weight:700}
-.warning-box{background:rgba(241,196,15,.12);border-left:4px solid #f1c40f;padding:7px 11px;border-radius:6px;margin:5px 0;font-size:.8rem}
+.warning-box{background:rgba(241,196,15,.12);border-left:4px solid #f1c40f;padding:9px 13px;border-radius:6px;margin:6px 0;font-size:.9rem}
 .warning-box strong{color:#f1c40f;font-weight:700}
-.section-banner{background:linear-gradient(135deg,rgba(39,174,96,.15),rgba(39,174,96,.05));border:1px solid #27ae60;padding:16px 20px;border-radius:12px;text-align:center;margin:16px 0}
-.section-banner h2{color:#27ae60;font-size:1.2rem;margin-bottom:6px}
-.section-banner p{color:#aaa;font-size:.82rem}
-.flip-card{background:rgba(39,174,96,.08);border:1px solid #27ae60;border-radius:8px;padding:10px 14px;cursor:pointer;margin:5px 0;transition:all .2s}
+.section-banner{background:linear-gradient(135deg,rgba(39,174,96,.15),rgba(39,174,96,.05));border:1px solid #27ae60;padding:20px 24px;border-radius:12px;text-align:center;margin:20px 0}
+.section-banner h2{color:#27ae60;font-size:1.4rem;margin-bottom:8px}
+.section-banner p{color:#aaa;font-size:.9rem}
+.flip-card{background:rgba(39,174,96,.08);border:1px solid #27ae60;border-radius:8px;padding:12px 16px;cursor:pointer;margin:6px 0;transition:all .2s}
 .flip-card:hover{background:rgba(39,174,96,.15)}
-.flip-card .question{font-size:.83rem;font-weight:600;color:#2ecc71}
-.flip-card .answer{display:none;margin-top:7px;font-size:.8rem;color:#ccc;border-top:1px solid rgba(39,174,96,.3);padding-top:7px}
+.flip-card .question{font-size:.9rem;font-weight:600;color:#2ecc71}
+.flip-card .answer{display:none;margin-top:8px;font-size:.87rem;color:#ccc;border-top:1px solid rgba(39,174,96,.3);padding-top:8px}
 .flip-card.revealed .answer{display:block}
-.flip-card .hint{font-size:.7rem;color:#666;margin-top:3px}
-.qcm-block{background:rgba(255,255,255,.03);border:1px solid rgba(39,174,96,.3);border-radius:8px;padding:12px;margin:7px 0}
-.qcm-question{font-size:.85rem;font-weight:600;color:#e8e8f0;margin-bottom:7px}
-.qcm-options{display:flex;flex-direction:column;gap:4px}
-.qcm-option{padding:6px 9px;border-radius:6px;cursor:pointer;font-size:.8rem;border:1px solid rgba(255,255,255,.1);transition:all .2s;user-select:none}
+.flip-card .hint{font-size:.75rem;color:#666;margin-top:4px}
+.qcm-block{background:rgba(255,255,255,.03);border:1px solid rgba(39,174,96,.3);border-radius:8px;padding:14px;margin:8px 0}
+.qcm-question{font-size:.93rem;font-weight:600;color:#e8e8f0;margin-bottom:8px}
+.qcm-options{display:flex;flex-direction:column;gap:5px}
+.qcm-option{padding:7px 11px;border-radius:6px;cursor:pointer;font-size:.88rem;border:1px solid rgba(255,255,255,.1);transition:all .2s;user-select:none}
 .qcm-option:hover{background:rgba(255,255,255,.08)}
 .qcm-option.selected{background:rgba(39,174,96,.2);border-color:#27ae60}
 .qcm-option.correct-show{background:rgba(46,204,113,.2);border-color:#2ecc71;color:#2ecc71}
 .qcm-option.wrong-show{background:rgba(231,76,60,.2);border-color:#e74c3c;color:#e74c3c}
-.qcm-btn{background:linear-gradient(135deg,#27ae60,#2ecc71);color:#fff;border:none;padding:7px 18px;border-radius:18px;cursor:pointer;font-size:.82rem;font-weight:600;margin-top:7px}
-.qcm-feedback{display:none;margin-top:7px;font-size:.8rem;padding:5px 9px;border-radius:6px;background:rgba(255,255,255,.06)}
-.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-.grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:7px}
-.vignette{background:linear-gradient(135deg,rgba(39,174,96,.1),rgba(39,174,96,.05));border:1px solid rgba(39,174,96,.4);border-radius:8px;padding:12px 16px;margin:6px 0;font-size:.83rem}
+.qcm-btn{background:linear-gradient(135deg,#27ae60,#2ecc71);color:#fff;border:none;padding:8px 20px;border-radius:18px;cursor:pointer;font-size:.88rem;font-weight:600;margin-top:8px}
+.qcm-feedback{display:none;margin-top:8px;font-size:.87rem;padding:6px 11px;border-radius:6px;background:rgba(255,255,255,.06)}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}
+.vignette{background:linear-gradient(135deg,rgba(39,174,96,.1),rgba(39,174,96,.05));border:1px solid rgba(39,174,96,.4);border-radius:8px;padding:14px 18px;margin:8px 0;font-size:.9rem}
 .vignette strong{color:#2ecc71;font-weight:700}
-table{width:100%;border-collapse:collapse;font-size:.78rem;margin:6px 0}
-th{background:rgba(39,174,96,.2);color:#2ecc71;padding:5px 7px;text-align:left}
-td{padding:4px 7px;border-bottom:1px solid rgba(255,255,255,.05)}
-.dp-step{background:rgba(39,174,96,.08);border-left:3px solid #27ae60;padding:7px 11px;border-radius:0 6px 6px 0;margin:4px 0;font-size:.81rem}
+table{width:100%;border-collapse:collapse;font-size:.87rem;margin:8px 0}
+th{background:rgba(39,174,96,.2);color:#2ecc71;padding:7px 9px;text-align:left;font-size:.88rem}
+td{padding:6px 9px;border-bottom:1px solid rgba(255,255,255,.06);font-size:.87rem}
+.dp-step{background:rgba(39,174,96,.08);border-left:3px solid #27ae60;padding:10px 14px;border-radius:0 8px 8px 0;margin:6px 0;font-size:.9rem}
 .dp-step strong{color:#2ecc71;font-weight:700}
+.dp-answer{background:rgba(46,204,113,.08);border-left:3px solid #2ecc71;padding:8px 12px;border-radius:0 6px 6px 0;margin:3px 0 10px 10px;font-size:.87rem;display:none}
+.dp-toggle{background:rgba(39,174,96,.15);border:1px solid #27ae60;color:#2ecc71;padding:4px 12px;border-radius:14px;cursor:pointer;font-size:.8rem;margin:3px 0}
 @media(max-width:768px){
   .grid-2,.grid-3{grid-template-columns:1fr}
-  .slide{padding:10px 12px}
-  .slide-title{font-size:.9rem}
+  .slide{padding:14px 16px}
+  .slide-title{font-size:1.15rem}
+  li{font-size:.87rem}
 }
 </style>
 </head>
@@ -72,891 +75,672 @@ td{padding:4px 7px;border-bottom:1px solid rgba(255,255,255,.05)}
 <div class="topbar">
   <a href="index.html" title="Accueil">🏠</a>
   <span class="tb-title">Adénopathie superficielle — Item 220</span>
-  <span class="tb-counter">1 / 51</span>
+  <span class="tb-counter">1 / 30</span>
   <div class="tb-nav">
     <button onclick="changeSlide(-1)">◀</button>
     <button onclick="changeSlide(1)">▶</button>
   </div>
 </div>
-<div class="progress-bar" style="width:2.0%"></div>
+<div class="progress-bar" style="width:3.4%"></div>
 <div class="presentation">
 <div class="slide title-slide" id="slide-0">
 <div style="text-align:center;padding:40px 20px">
-<div style="font-size:2.8rem;margin-bottom:12px">🔍</div>
-<h1 style="font-size:1.8rem;color:#27ae60;margin-bottom:10px">Adénopathie superficielle<br>de l'adulte et de l'enfant</h1>
-<p style="color:#aaa;font-size:.9rem;margin-bottom:20px">Item 220 — Hématologie / Médecine interne</p>
-<div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-bottom:24px">
-  <span style="background:#27ae60;color:#0d0d1a;padding:5px 14px;border-radius:20px;font-size:.82rem;font-weight:700">Item 220</span>
-  <span style="background:rgba(39,174,96,.15);color:#2ecc71;padding:5px 14px;border-radius:20px;font-size:.82rem;border:1px solid #27ae60">SD 16 · SD 158</span>
+<div style="font-size:3rem;margin-bottom:14px">🔍</div>
+<h1 style="font-size:2rem;color:#27ae60;margin-bottom:12px">Adénopathie superficielle<br>de l'adulte et de l'enfant</h1>
+<p style="color:#aaa;font-size:.95rem;margin-bottom:22px">Item 220 — Hématologie / Médecine interne</p>
+<div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-bottom:26px">
+  <span style="background:#27ae60;color:#0d0d1a;padding:6px 16px;border-radius:20px;font-size:.88rem;font-weight:700">Item 220</span>
+  <span style="background:rgba(39,174,96,.15);color:#2ecc71;padding:6px 16px;border-radius:20px;font-size:.88rem;border:1px solid #27ae60">SD 16 · SD 158</span>
 </div>
-<div style="background:rgba(39,174,96,.08);border:1px solid rgba(39,174,96,.3);border-radius:12px;padding:16px 24px;max-width:480px;margin:0 auto;text-align:left">
-  <p style="font-size:.83rem;color:#ccc;margin-bottom:6px">🎯 <strong style="color:#2ecc71">Objectifs</strong></p>
-  <ul style="font-size:.8rem;color:#ccc;padding-left:16px">
-    <li>Reconnaître un ganglion pathologique</li>
-    <li>Construire une démarche diagnostique (localisée / généralisée)</li>
-    <li>Connaître les principales étiologies</li>
+<div style="background:rgba(39,174,96,.08);border:1px solid rgba(39,174,96,.3);border-radius:12px;padding:18px 28px;max-width:500px;margin:0 auto;text-align:left">
+  <p style="font-size:.9rem;color:#ccc;margin-bottom:8px">🎯 <strong style="color:#2ecc71">Objectifs ECN</strong></p>
+  <ul style="font-size:.88rem;color:#ccc;padding-left:18px">
+    <li>Reconnaître une adénopathie pathologique (critère &gt;1 cm)</li>
+    <li>Construire une démarche diagnostique (localisée vs polyadénopathie)</li>
+    <li>Connaître les principales étiologies et leurs territoires de drainage</li>
+    <li>Savoir quand réaliser cytoponction vs biopsie</li>
     <li>Particularités pédiatriques</li>
-    <li>Choisir les examens complémentaires</li>
   </ul>
 </div>
 </div>
 </div><div class="slide " id="slide-1">
-<h1 class="slide-title">Plan du cours &amp; Situations de départ</h1>
-<div class="def-box" style="margin:6px 0"><strong>📖 Adénopathie</strong> : Augmentation de volume d'un ganglion lymphatique au-delà de 1 cm, perçue à la palpation. Pathologique au-delà de ce seuil (sauf ganglion inguinal : jusqu'à 2 cm physiologique).</div>
-<div class="def-box" style="margin:6px 0"><strong>📖 Situation de départ (SD)</strong> : Cas clinique standardisé utilisé en ECN. SD 16 = 'adénopathies', SD 158 = 'tuméfaction cervicofaciale'.</div>
-
-<div class="grid-2" style="margin-top:8px">
-  <div class="content-block">
-    <h3>📋 Plan du cours</h3>
-    <ol style="font-size:.82rem;padding-left:16px">
-      <li>Sémiologie ganglionnaire</li>
-      <li>Adénopathie localisée — démarche étiologique</li>
-      <li>Polyadénopathie</li>
-      <li>Particularités pédiatriques</li>
-      <li>Examens complémentaires</li>
-    </ol>
-  </div>
-  <div class="content-block">
-    <h3>🎯 SD correspondantes</h3>
-    <div style="font-size:.82rem">
-      <div style="background:rgba(39,174,96,.1);padding:6px 10px;border-radius:6px;margin:3px 0"><strong>SD 16</strong> — Adénopathies</div>
-      <div style="background:rgba(39,174,96,.1);padding:6px 10px;border-radius:6px;margin:3px 0"><strong>SD 158</strong> — Tuméfaction cervicofaciale</div>
-    </div>
-  </div>
+<div class="section-banner" style="margin-top:60px">
+  <h2>Section I — Diagnostic d'adénopathie</h2>
+  <p>Définition · Circonstances de découverte · Sémiologie · Diagnostics différentiels</p>
 </div>
-<div class="info-box"><strong>💡 Règle d'or :</strong> Toute adénopathie sus-claviculaire est maligne jusqu'à preuve du contraire.</div>
+<div class="info-box"><strong>Plan du chapitre :</strong> Diagnostic (I) → ADP localisée (II) → Polyadénopathie (III) → Pédiatrie (IV) → Examens complémentaires (V) → Examen final</div>
 </div><div class="slide " id="slide-2">
-<h1 class="slide-title">⚡ Flash Quiz</h1>
-<div style="font-size:.78rem;color:#888;margin-bottom:8px">Testez-vous sur la diapo précédente — Cliquez pour révéler</div>
-<div class="flip-card" onclick="flipCard(this)"><div class="question">❓ Qu'est-ce qu'une adénopathie ?</div><div class="hint">👆 Cliquer pour révéler</div><div class="answer">✅ Ganglion > 1 cm palpable (> 2 cm en inguinal). Pathologique dans tous les territoires (sus-claviculaire : tout ganglion palpable est pathologique).</div></div>
-<div class="flip-card" onclick="flipCard(this)"><div class="question">❓ Quelle règle d'or retenir concernant le ganglion sus-claviculaire ?</div><div class="hint">👆 Cliquer pour révéler</div><div class="answer">✅ Tout ganglion sus-claviculaire palpable est MALIN jusqu'à preuve du contraire → bilan urgent (TDM TAP + biopsie).</div></div>
-
+<div class="slide-title">Définition et circonstances de découverte</div>
+<div class="def-box"><strong>Adénopathie :</strong> augmentation de volume pathologique d'un ganglion lymphatique. Toute adénopathie &gt;1 cm dans un territoire ganglionnaire superficiel est pathologique.</div>
+<div class="content-block"><h3>Mécanismes possibles</h3>
+<ul>
+  <li>Réaction lymphocytaire/macrophagique à une stimulation antigénique (infectieuse ou tumorale)</li>
+  <li>Prolifération tumorale primitive du tissu lymphoïde : <strong>lymphome malin</strong></li>
+  <li>Envahissement par des cellules malignes non-lymphoïdes : <strong>métastase ganglionnaire</strong></li>
+</ul></div>
+<div class="content-block"><h3>Circonstances de découverte</h3>
+<ul>
+  <li>Découverte par le patient lui-même (auto-palpation)</li>
+  <li>Examen médical systématique ou orienté</li>
+  <li>Douleur locale ou signe de compression (rare)</li>
+</ul></div>
+<div class="info-box"><strong>Les ganglions lymphatiques :</strong> 200 à 300 dans l'organisme ; drainent la lymphe d'un territoire anatomique. Organes du filtre immunitaire.</div>
+<div class="grid-2" style="margin-top:8px">
+  <div class="success-box"><strong>ADP localisée :</strong> un ou plusieurs ganglions dans le <em>même</em> territoire ganglionnaire</div>
+  <div class="warning-box"><strong>Polyadénopathie :</strong> ganglions dans des <em>territoires différents</em></div>
+</div>
 </div><div class="slide " id="slide-3">
-<h1 class="slide-title">Vignette clinique d'accroche</h1>
-<div class="vignette">
-  <strong>🏥 Amara, 28 ans</strong> — tuméfaction cervicale gauche depuis 3 semaines · fatigue intense · sueurs nocturnes · amaigrissement 5 kg/2 mois<br>
-  <span style="font-size:.82rem;color:#ccc;margin-top:6px;display:block">Examen : ganglion cervical gauche 3 cm, ferme, indolore + ganglion axillaire gauche 1,5 cm.</span>
-</div>
-<div class="grid-2" style="margin-top:8px">
-  <div class="content-block">
-    <h3>⚠️ Signes d'alarme</h3>
-    <ul style="font-size:.82rem">
-      <li>Amaigrissement > 10% du poids</li>
-      <li>Sueurs nocturnes profuses</li>
-      <li>Fièvre > 38°C inexpliquée</li>
-      <li>Ganglion > 2 cm, ferme, indolore</li>
+<div class="slide-title">Diagnostic positif — Sémiologie clinique</div>
+<div class="def-box"><strong>Critère diagnostique :</strong> tuméfaction acquise &gt;1 cm dans l'un des territoires ganglionnaires superficiels (jugulocarotidien, sous-mandibulaire, occipital, sus-claviculaire, axillaire, épitrochléen/poplité, inguinal).</div>
+<div class="content-block"><h3>Caractères sémiologiques à préciser (mnémotechnique : <span style="color:#f39c12">ADENOPATI</span>)</h3>
+<div class="grid-2">
+  <div>
+    <ul>
+      <li><strong style="color:#f39c12">A</strong>ncienneté (aiguë &lt;2 sem / chronique &gt;6 sem)</li>
+      <li><strong style="color:#f39c12">D</strong>ureté (molle=suppuration, dure/pierreuse=cancer, ferme/élastique=lymphome)</li>
+      <li><strong style="color:#f39c12">E</strong>tendue (taille en cm, mesurée systématiquement)</li>
+      <li><strong style="color:#f39c12">N</strong>ombre de ganglions atteints</li>
+      <li><strong style="color:#f39c12">O</strong>ù (territoire ganglionnaire)</li>
     </ul>
   </div>
-  <div class="urgence-box">
-    <strong>⚡ Hypothèse :</strong> Signes B + polyadénopathie = suspicion lymphome → NFS + LDH + TDM TAP + biopsie
+  <div>
+    <ul>
+      <li><strong style="color:#f39c12">P</strong>ériadénite (adénophlegmon = ganglion + tissu péri-ganglionnaire)</li>
+      <li><strong style="color:#f39c12">A</strong>dhérence aux plans superficiels/profonds (mobilité)</li>
+      <li><strong style="color:#f39c12">T</strong>rouble de la peau en regard (rouge, ulcérée, fistulisée)</li>
+      <li><strong style="color:#f39c12">I</strong>nflammation locale (douleur spontanée / à la palpation)</li>
+    </ul>
   </div>
-</div>
+</div></div>
+<div class="content-block"><h3>Signes généraux associés à rechercher</h3>
+<ul>
+  <li>Fièvre, sueurs (diurnes ou nocturnes = symptômes B), frissons</li>
+  <li>Asthénie, anorexie, amaigrissement (&gt;10% poids en 6 mois)</li>
+  <li>Prurit (suggestif de lymphome de Hodgkin)</li>
+  <li>Douleur à l'ingestion d'alcool : classique dans certains lymphomes de Hodgkin</li>
+</ul></div>
+<div class="urgence-box"><strong>⚠️ Aucun critère sémiologique de bénignité n'existe.</strong> Toute ADP persistant &gt;1 mois sans cause évidente doit être biopsiée.</div>
 </div><div class="slide " id="slide-4">
-<h1 class="slide-title">⚡ Flash Quiz</h1>
-<div style="font-size:.78rem;color:#888;margin-bottom:8px">Testez-vous sur la diapo précédente — Cliquez pour révéler</div>
-<div class="flip-card" onclick="flipCard(this)"><div class="question">❓ Quels sont les 3 signes B d'un lymphome ?</div><div class="hint">👆 Cliquer pour révéler</div><div class="answer">✅ Fièvre > 38°C > 1 semaine · Sueurs nocturnes profuses · Amaigrissement > 10% du poids en 6 mois.</div></div>
-<div class="flip-card" onclick="flipCard(this)"><div class="question">❓ Devant fièvre + polyadénopathie + amaigrissement, quelle est votre 1ère hypothèse ?</div><div class="hint">👆 Cliquer pour révéler</div><div class="answer">✅ Lymphome (hodgkinien ou non hodgkinien). Bilan : NFS + LDH + TDM cervico-TAP + TEP-FDG + biopsie ganglionnaire.</div></div>
-
+<div class="slide-title">Diagnostics différentiels des adénopathies</div>
+<div class="info-box"><strong>Eliminer avant de conclure à une adénopathie :</strong> en cas de doute, l'<strong>échographie</strong> est l'examen de choix.</div>
+<table>
+<tr><th>Structure</th><th>Caractéristiques cliniques distinctives</th></tr>
+<tr><td><strong>Lipome</strong></td><td>Tuméfaction souple/molle, sous-cutanée, stable, souvent hors d'un territoire ganglionnaire</td></tr>
+<tr><td><strong>Tumeur parotidienne</strong></td><td>Au-dessus et en arrière de l'angle mandibulaire</td></tr>
+<tr><td><strong>Tumeur sous-maxillaire</strong></td><td>Région sous-mandibulaire, accessible par voie endobuccale</td></tr>
+<tr><td><strong>Tumeur thyroïdienne</strong></td><td>Mobile à la déglutition</td></tr>
+<tr><td><strong>Kystes congénitaux cervicaux</strong></td><td>Situés dans l'axe cervical, présents depuis l'enfance</td></tr>
+<tr><td><strong>Hidrosadénite</strong></td><td>Zone sudoripare (axillaire ++), sensible, superficielle, adhérente à la peau</td></tr>
+<tr><td><strong>Masse vasculaire artérielle</strong></td><td>Pulsatile à la palpation</td></tr>
+<tr><td><strong>Hernie inguinale</strong></td><td>Impulsive à la toux, réductible (en l'absence de complication)</td></tr>
+</table>
+<div class="success-box"><strong>Schéma daté et signé :</strong> toujours réaliser un schéma des aires ganglionnaires atteintes avec taille et localisation. Document médico-légal indispensable.</div>
+<div class="content-block"><h3>Examens des autres organes lymphoïdes à associer systématiquement</h3>
+<ul>
+  <li>Palpation de <em>toutes</em> les aires ganglionnaires</li>
+  <li>Recherche splénomégalie, hépatomégalie, hypertrophie amygdalienne</li>
+</ul></div>
 </div><div class="slide " id="slide-5">
-<div class="section-banner">
-  <div style="font-size:2rem;margin-bottom:8px">🔬</div>
-  <h2>Section I — Sémiologie ganglionnaire</h2>
-  <p>Définition · ADENOPATI · Territoires de drainage · Diagnostics différentiels</p>
+<div class="slide-title">⚡ Quiz Flash — Section I</div>
+<div class="flip-card" onclick="flipCard(this)">
+  <div class="question">❓ Quel est le critère de taille pour qu'une adénopathie soit considérée pathologique ?</div>
+  <div class="hint">👆 Cliquer pour révéler</div>
+  <div class="answer">✅ &gt;1 cm dans un territoire ganglionnaire superficiel.</div>
+</div><div class="flip-card" onclick="flipCard(this)">
+  <div class="question">❓ Quelle est la signification clinique d'une adénopathie dure et pierreuse ?</div>
+  <div class="hint">👆 Cliquer pour révéler</div>
+  <div class="answer">✅ Évoque un cancer solide (métastase ganglionnaire).</div>
+</div><div class="flip-card" onclick="flipCard(this)">
+  <div class="question">❓ Que signifie le mnémotechnique ADENOPATI ?</div>
+  <div class="hint">👆 Cliquer pour révéler</div>
+  <div class="answer">✅ Ancienneté, Dureté, Étendue, Nombre, Où, PériadÉnite, Adhérence, Trouble de la peau, Inflammation.</div>
+</div><div class="flip-card" onclick="flipCard(this)">
+  <div class="question">❓ Quelle est la durée d'évolution à partir de laquelle une biopsie ganglionnaire doit être proposée ?</div>
+  <div class="hint">👆 Cliquer pour révéler</div>
+  <div class="answer">✅ Plus d'1 mois sans cause évidente.</div>
+</div><div class="flip-card" onclick="flipCard(this)">
+  <div class="question">❓ Quel examen utiliser en 1ère intention en cas de doute diagnostique entre ADP et autre tuméfaction ?</div>
+  <div class="hint">👆 Cliquer pour révéler</div>
+  <div class="answer">✅ Échographie — examen de choix pour distinguer ADP des diagnostics différentiels.</div>
+</div></div><div class="slide " id="slide-6">
+<div class="section-banner" style="margin-top:60px">
+  <h2>Section II — Adénopathie localisée</h2>
+  <p>Démarche étiologique · Territoires de drainage · Infection / Cancer / Lymphome</p>
 </div>
-<div class="grid-3" style="margin-top:12px">
-  <div class="content-block" style="text-align:center"><div style="font-size:1.4rem">📏</div><h3>Taille</h3><p style="font-size:.8rem;color:#aaa">> 1 cm (> 2 cm inguinal)</p></div>
-  <div class="content-block" style="text-align:center"><div style="font-size:1.4rem">🤜</div><h3>Consistance</h3><p style="font-size:.8rem;color:#aaa">Ferme/dur = malin</p></div>
-  <div class="content-block" style="text-align:center"><div style="font-size:1.4rem">🔄</div><h3>Mobilité</h3><p style="font-size:.8rem;color:#aaa">Fixé = envahissement</p></div>
-</div>
-</div><div class="slide " id="slide-6">
-<h1 class="slide-title">Définition — Ganglion pathologique</h1>
-<div class="def-box" style="margin:6px 0"><strong>📖 Ganglion lymphatique</strong> : Organe de l'immunité de quelques mm, filtre la lymphe, produit des lymphocytes. Normalement non palpable ou < 1 cm.</div>
-<div class="def-box" style="margin:6px 0"><strong>📖 Corps de Troisier</strong> : Ganglion sus-claviculaire gauche métastatique d'un cancer abdominal (estomac, pancréas, ovaire). Signe de dissémination avancée.</div>
-
-<table style="margin-top:8px">
-  <tr><th>Localisation</th><th>Seuil pathologique</th><th>Remarque</th></tr>
-  <tr><td>Cervical, axillaire</td><td>> 1 cm</td><td>Standard</td></tr>
-  <tr><td>Inguinal</td><td>> 2 cm</td><td>Souvent réactionnels</td></tr>
-  <tr><td>Sus-claviculaire</td><td>Tout ganglion palpable</td><td>⚠️ Malin jusqu'à preuve contraire</td></tr>
-  <tr><td>Épitrochlée</td><td>> 0,5 cm</td><td>Toujours pathologique</td></tr>
-</table>
-<div class="warning-box" style="margin-top:6px">
-  <strong>🕐 Durée :</strong> Ganglion persistant > 4-6 sem sans cause infectieuse évidente → biopsie.
-</div>
+<div class="content-block"><h3>Deux questions fondamentales</h3>
+<ul>
+  <li>ADP <strong>unique ou localisée</strong> (un ou plusieurs ganglions dans le même territoire) ?</li>
+  <li>ADP <strong>multiples / polyadénopathie</strong> (plusieurs territoires) ?</li>
+</ul></div>
+<div class="warning-box"><strong>Démarche essentielle :</strong> explorer le <strong>territoire physiologique de drainage lymphatique</strong> pour rechercher une porte d'entrée infectieuse ou une tumeur.</div>
 </div><div class="slide " id="slide-7">
-<h1 class="slide-title">⚡ Flash Quiz</h1>
-<div style="font-size:.78rem;color:#888;margin-bottom:8px">Testez-vous sur la diapo précédente — Cliquez pour révéler</div>
-<div class="flip-card" onclick="flipCard(this)"><div class="question">❓ À partir de quel diamètre un ganglion cervical est-il pathologique ?</div><div class="hint">👆 Cliquer pour révéler</div><div class="answer">✅ > 1 cm (cervical, axillaire). Exception inguinal : > 2 cm. Exception sus-claviculaire : tout ganglion palpable = pathologique.</div></div>
-<div class="flip-card" onclick="flipCard(this)"><div class="question">❓ Un patient a un ganglion épitrochlée de 0,7 cm. Est-ce pathologique ?</div><div class="hint">👆 Cliquer pour révéler</div><div class="answer">✅ Oui — le seuil épitrochlée est > 0,5 cm. Tout ganglion épitrochlée > 0,5 cm est pathologique et doit être investigué.</div></div>
-
-</div><div class="slide " id="slide-8">
-<h1 class="slide-title">Sémiologie — Interrogatoire</h1>
-<div class="def-box" style="margin:6px 0"><strong>📖 AEG (Altération de l'État Général)</strong> : Triade : amaigrissement + asthénie + anorexie. Signe d'une maladie sévère : cancer, infection grave, maladie inflammatoire chronique.</div>
-
-<div class="grid-2" style="margin-top:8px">
-  <div class="content-block">
-    <h3>📅 Caractéristiques du ganglion</h3>
-    <ul style="font-size:.82rem">
-      <li><strong>Date</strong> et mode évolutif (brutal = infectieux / progressif = tumoral)</li>
-      <li><strong>Évolution</strong> : stable, augmente, fluctue ?</li>
-      <li><strong>Douleur</strong> : inflammatoire = infectieux · indolore = tumoral</li>
-    </ul>
-  </div>
-  <div class="content-block">
-    <h3>🌡️ Signes généraux</h3>
-    <ul style="font-size:.82rem">
-      <li><strong>Fièvre</strong>, sueurs nocturnes (signes B)</li>
-      <li><strong>Amaigrissement</strong> en kg et %</li>
-      <li><strong>Prurit sine materia</strong> → Hodgkin</li>
-    </ul>
-  </div>
-</div>
-<div class="content-block" style="margin-top:6px">
-  <h3>🔍 Contexte épidémiologique</h3>
-  <div style="display:flex;flex-wrap:wrap;gap:5px;font-size:.78rem;margin-top:4px">
-    <span style="background:rgba(52,152,219,.12);padding:3px 8px;border-radius:10px;color:#3498db">Voyage tropical → paludisme, tuberculose</span>
-    <span style="background:rgba(52,152,219,.12);padding:3px 8px;border-radius:10px;color:#3498db">Contact chat → griffes du chat</span>
-    <span style="background:rgba(52,152,219,.12);padding:3px 8px;border-radius:10px;color:#3498db">Rapports non protégés → VIH, syphilis</span>
-    <span style="background:rgba(52,152,219,.12);padding:3px 8px;border-radius:10px;color:#3498db">Adolescent + angine → MNI</span>
-    <span style="background:rgba(52,152,219,.12);padding:3px 8px;border-radius:10px;color:#3498db">Tabac + alcool → carcinome ORL</span>
-  </div>
-</div>
-</div><div class="slide " id="slide-9">
-<h1 class="slide-title">⚡ Flash Quiz</h1>
-<div style="font-size:.78rem;color:#888;margin-bottom:8px">Testez-vous sur la diapo précédente — Cliquez pour révéler</div>
-<div class="flip-card" onclick="flipCard(this)"><div class="question">❓ Un ganglion douloureux apparu brutalement dans un contexte fébrile : quel mécanisme évoquez-vous ?</div><div class="hint">👆 Cliquer pour révéler</div><div class="answer">✅ Infectieux — les ganglions infectieux sont typiquement douloureux, chauds, avec une évolution rapide. Un contexte infectieux évident (angine, otite, plaie) oriente vers un ganglion satellite.</div></div>
-<div class="flip-card" onclick="flipCard(this)"><div class="question">❓ Qu'est-ce que le prurit sine materia et dans quel lymphome est-il évocateur ?</div><div class="hint">👆 Cliquer pour révéler</div><div class="answer">✅ Prurit sans cause cutanée visible, souvent nocturne. Évocateur du lymphome de Hodgkin (dans ~20% des cas). À rechercher systématiquement avec les signes B.</div></div>
-
-</div><div class="slide " id="slide-10">
-<h1 class="slide-title">Sémiologie — Examen clinique</h1>
-<div class="def-box" style="margin:6px 0"><strong>📖 Ganglion induré</strong> : Consistance dure (comme de la pierre). Caractéristique des métastases ganglionnaires d'un cancer solide.</div>
-<div class="def-box" style="margin:6px 0"><strong>📖 Fistulisation</strong> : Ouverture spontanée d'un ganglion abcédé à travers la peau. Caractéristique de la tuberculose ganglionnaire.</div>
-
-<table style="margin-top:8px">
-  <tr><th>Caractère</th><th>Infectieux</th><th>Malin</th></tr>
-  <tr><td>Taille</td><td>Variable</td><td>Souvent > 2 cm</td></tr>
-  <tr><td>Consistance</td><td>Mou, fluctuant</td><td>Ferme à dur</td></tr>
-  <tr><td>Douleur</td><td>Douloureux +++</td><td>Indolore ++</td></tr>
-  <tr><td>Mobilité</td><td>Mobile</td><td>Fixé</td></tr>
-  <tr><td>Peau</td><td>Érythème, chaleur</td><td>Normale au début</td></tr>
+<div class="slide-title">Territoires physiologiques de drainage lymphatique</div>
+<table>
+<tr><th>Localisation ADP</th><th>Territoire drainé</th><th>Pathologies à rechercher</th></tr>
+<tr><td><strong>Cervicale</strong></td><td>Cuir chevelu, dents, sinus, ORL, thyroïde</td><td>Cancers ORL, langue, thyroïde, infections dentaires</td></tr>
+<tr><td><strong>Sus-claviculaire gauche</strong><br><em>(ganglion de Troisier)</em></td><td>Tube digestif, reins, testicules, pelvis, abdomen</td><td>Cancer digestif, rénal, testiculaire, pelvien</td></tr>
+<tr><td><strong>Sus-claviculaire droite</strong></td><td>Poumons, médiastin</td><td>Cancer bronchique, médiastinal</td></tr>
+<tr><td><strong>Axillaire</strong></td><td>Seins, membres supérieurs, paroi thoracique</td><td>Cancer du sein ++</td></tr>
+<tr><td><strong>Inguinale</strong></td><td>Membres inférieurs, organes génitaux externes, anus</td><td>Cancer génitaux externes, canal anal, mélanome</td></tr>
+<tr><td colspan="3" style="text-align:center;color:#e74c3c;font-weight:700">Mélanome malin : "grand simulateur" — peut métastaser dans n'importe quel territoire</td></tr>
 </table>
-<div class="info-box" style="margin-top:6px">
-  <strong>🩺 Examen complet :</strong> Toutes les aires ganglionnaires + ORL + sein + peau + abdomen + rate.
+<div class="urgence-box"><strong>🚨 Adénopathie sus-claviculaire = étiologie maligne en premier !</strong> Une malignité est la cause la plus probable dans ce territoire, quelle que soit la présentation.</div>
+<div class="info-box"><strong>Trois groupes étiologiques principaux</strong> pour une ADP localisée : <strong>infections</strong>, <strong>cancers</strong>, <strong>lymphomes</strong></div>
+</div><div class="slide " id="slide-8">
+<div class="slide-title">Étiologies infectieuses d'une ADP localisée</div>
+<div class="content-block"><h3>Infections à évoquer selon le contexte</h3>
+<ul>
+  <li><strong>Staphylocoque / Streptocoque</strong> : présence d'une plaie ou infection cutanée dans le territoire drainé (panaris → axillaire, acné grattée → cervicale)</li>
+  <li><strong>Maladie des griffes du chat</strong> (Bartonella henselae) : contexte de griffure/morsure de chat, ADP parfois volumineuse, possible fistulisation</li>
+  <li><strong>Tularémie</strong> (Francisella tularensis) : contact avec du gibier (lièvre ++)</li>
+  <li><strong>IST pour ADP inguinale :</strong> syphilis, chancre mou (Haemophilus ducreyi), maladie de Nicolas-Favre (Chlamydia sp.)</li>
+  <li><strong>Tuberculose</strong> : ADP "froide" souvent volumineuse, sans signes inflammatoires, évoluant vers la fistulisation (écrouelle)</li>
+  <li><strong>Toxoplasmose</strong> : atteinte occipitale typique, fatigue éreintante, polyadénopathie possible. Sérodiagnostic.</li>
+</ul></div>
+<div class="content-block"><h3>Critères d'orientation vers une origine infectieuse</h3>
+<ul>
+  <li>Présence d'une <strong>porte d'entrée</strong> identifiable</li>
+  <li>Caractère <strong>inflammatoire</strong> de l'adénopathie (rouge, chaude, douloureuse)</li>
+  <li>Contexte fébrile</li>
+</ul></div>
+<div class="def-box"><strong>Cytoponction :</strong> peut être utile pour examen microbiologique dans les ADP infectieuses — permet d'identifier le germe en cause.</div>
+</div><div class="slide " id="slide-9">
+<div class="slide-title">Étiologies tumorales — Métastases ganglionnaires</div>
+<div class="info-box"><strong>Démarche :</strong> la recherche d'un cancer dans le territoire de drainage s'effectue en second lieu, chaque fois qu'une cause infectieuse ne peut être affirmée.</div>
+<table>
+<tr><th>Siège de l'ADP</th><th>Territoire de drainage</th><th>Cancers à rechercher</th></tr>
+<tr><td>Cervicale</td><td>Cuir chevelu, sphères ORL et stomato</td><td>Cancers ORL, langue</td></tr>
+<tr><td>Cervicale</td><td>Thyroïde</td><td>Cancer thyroïde</td></tr>
+<tr><td>Sus-claviculaire</td><td>Médiastin, poumons / tube digestif</td><td>Cancer bronchique, abdominal ou pelvien, sein</td></tr>
+<tr><td>Sus-claviculaire gauche</td><td>Testicules, rein</td><td>Cancer testiculaire, rénal</td></tr>
+<tr><td>Axillaire</td><td>Seins, membres supérieurs</td><td>Cancer du sein ++</td></tr>
+<tr><td>Inguinale</td><td>Périnée : anus, pénis, scrotum, vulve</td><td>Cancers organes génitaux externes, canal anal</td></tr>
+<tr><td>Tout territoire</td><td>—</td><td><strong>Mélanome malin</strong> (grand simulateur)</td></tr>
+</table>
+<div class="content-block"><h3>Examens à réaliser si cancer suspecté</h3>
+<ul>
+  <li>Imagerie ciblée : scanner (TDM), échographie, TEP-TDM au 18F-FDG</li>
+  <li>Biopsie locale de la lésion primitive si visible</li>
+  <li>Cytoponction ganglionnaire : utile si cancer primitif non encore connu</li>
+</ul></div>
+</div><div class="slide " id="slide-10">
+<div class="slide-title">Étiologies lymphomateuses — Quand évoquer un lymphome ?</div>
+<div class="urgence-box"><strong>Règle fondamentale :</strong> le diagnostic de lymphome doit être systématiquement envisagé devant toute ADP isolée sans étiologie prouvée après 4 à 6 semaines d'évolution.</div>
+<div class="content-block"><h3>Particularités du lymphome</h3>
+<ul>
+  <li>Signes généraux (symptômes B : amaigrissement, sueurs nocturnes, fièvre &gt;38°C) — inconstants !</li>
+  <li>Hémogramme souvent <strong>normal</strong> ou ne montrant que des signes inflammatoires indirects</li>
+  <li>ADP ferme, élastique, non douloureuse, non inflammatoire</li>
+  <li>Tous les territoires peuvent être atteints (y compris médiastinal)</li>
+</ul></div>
+<div class="content-block"><h3>Douleur alcool — signe évocateur</h3>
+<ul>
+  <li>Douleur de l'ADP lors de la prise d'alcool : évocatrice de <strong>lymphome de Hodgkin</strong></li>
+</ul></div>
+<div class="grid-2">
+<div class="info-box"><strong>Cytoponction :</strong><br>• Rapide, facile, en consultation<br>• Peut retrouver cellules lymphomateuses ou de Reed-Sternberg<br>• Utile pour orientation rapide<br>• ⚠️ NE SUFFIT PAS pour affirmer et typer un lymphome</div>
+<div class="urgence-box"><strong>Biopsie ganglionnaire :</strong><br>• SEUL examen permettant le diagnostic histologique<br>• Exérèse ganglionnaire (AL ou AG)<br>• Immunomarquage + biologie moléculaire + caryotype<br>• Congélation de tissu tumoral indispensable<br>• Doit être réalisée par une équipe spécialisée</div>
 </div>
 </div><div class="slide " id="slide-11">
-<h1 class="slide-title">⚡ Flash Quiz</h1>
-<div style="font-size:.78rem;color:#888;margin-bottom:8px">Testez-vous sur la diapo précédente — Cliquez pour révéler</div>
-<div class="flip-card" onclick="flipCard(this)"><div class="question">❓ Quels caractères cliniques orientent vers un ganglion malin ?</div><div class="hint">👆 Cliquer pour révéler</div><div class="answer">✅ Ferme à dur · Indolore · Fixé aux structures voisines · > 2 cm · Progression lente · Absence de contexte infectieux · AEG associée.</div></div>
-<div class="flip-card" onclick="flipCard(this)"><div class="question">❓ Quelle étiologie évoquer devant un ganglion cervical fistulisé, indolore, dans un contexte de fièvre modérée chez un immigrant ?</div><div class="hint">👆 Cliquer pour révéler</div><div class="answer">✅ Tuberculose ganglionnaire (scrofule). Ganglion nécrosé froid → fistulise spontanément. Diagnostic : IDR + IGRA + biopsie + culture BK.</div></div>
-
+<div class="slide-title">Cytoponction vs Biopsie ganglionnaire — Indications</div>
+<table>
+<tr><th>Critère</th><th>Cytoponction</th><th>Biopsie-exérèse</th></tr>
+<tr><td>Facilité</td><td>✅ En consultation, ambulatoire</td><td>⚠️ Organisation nécessaire (AL ou AG)</td></tr>
+<tr><td>Délai résultat</td><td>✅ Quelques heures</td><td>⚠️ Plusieurs jours</td></tr>
+<tr><td>Étude microbiologique</td><td>✅ Possible</td><td>✅ Possible</td></tr>
+<tr><td>Cytologie (orientation)</td><td>✅ Cellules lymphomateuses, Reed-Sternberg</td><td>✅ Histologie complète</td></tr>
+<tr><td>Classification histologique du lymphome</td><td>❌ Impossible</td><td>✅ Seul examen le permettant</td></tr>
+<tr><td>Études complémentaires (immunophénotype, biologie moléculaire, caryotype)</td><td>Limitées</td><td>✅ Complètes</td></tr>
+<tr><td>Congélation tumorale</td><td>❌ Insuffisante</td><td>✅ Obligatoire</td></tr>
+</table>
+<div class="urgence-box"><strong>Règle absolue :</strong> une cytoponction normale <strong>ne permet pas d'éliminer un lymphome</strong>. La biopsie est toujours nécessaire pour affirmer et typer un lymphome, même si des cellules lymphomateuses sont retrouvées à la cytoponction.</div>
+<div class="info-box"><strong>En pratique :</strong> cytoponction = orientation rapide en attendant la biopsie. Biopsie ganglionnaire = diagnostic de certitude. En AG : biopsie ostéomédullaire peut être associée dans le même temps si forte suspicion de lymphome.</div>
 </div><div class="slide " id="slide-12">
-<h1 class="slide-title">Mnémotechnique ADENOPATI</h1>
-<div class="def-box" style="margin:6px 0"><strong>📖 Mnémotechnique</strong> : Mot-code pour retenir les caractéristiques sémiologiques à évaluer devant toute adénopathie.</div>
-
-<div style="display:grid;grid-template-columns:auto 1fr;gap:6px;margin-top:8px">
-  <div style="background:#27ae60;color:#0d0d1a;width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:.9rem">A</div>
-  <div class="content-block" style="margin:0;padding:6px 10px;font-size:.82rem"><strong>Âge</strong> du ganglion — ancienneté</div>
-  <div style="background:#27ae60;color:#0d0d1a;width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:.9rem">D</div>
-  <div class="content-block" style="margin:0;padding:6px 10px;font-size:.82rem"><strong>Douleur</strong> — infectieux ou tumoral</div>
-  <div style="background:#27ae60;color:#0d0d1a;width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:.9rem">E</div>
-  <div class="content-block" style="margin:0;padding:6px 10px;font-size:.82rem"><strong>Extension</strong> — localisée ou généralisée</div>
-  <div style="background:#27ae60;color:#0d0d1a;width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:.9rem">N</div>
-  <div class="content-block" style="margin:0;padding:6px 10px;font-size:.82rem"><strong>Nature</strong> — consistance : mou, ferme, dur</div>
-  <div style="background:#27ae60;color:#0d0d1a;width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:.9rem">O</div>
-  <div class="content-block" style="margin:0;padding:6px 10px;font-size:.82rem"><strong>Origine</strong> — territoire de drainage</div>
-  <div style="background:#27ae60;color:#0d0d1a;width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:.9rem">P</div>
-  <div class="content-block" style="margin:0;padding:6px 10px;font-size:.82rem"><strong>Peau</strong> — inflammation, fistule</div>
-  <div style="background:#27ae60;color:#0d0d1a;width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:.9rem">A</div>
-  <div class="content-block" style="margin:0;padding:6px 10px;font-size:.82rem"><strong>Adhérence</strong> — mobile ou fixé</div>
-  <div style="background:#27ae60;color:#0d0d1a;width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:.9rem">T</div>
-  <div class="content-block" style="margin:0;padding:6px 10px;font-size:.82rem"><strong>Taille</strong> — en cm</div>
-  <div style="background:#27ae60;color:#0d0d1a;width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:.9rem">I</div>
-  <div class="content-block" style="margin:0;padding:6px 10px;font-size:.82rem"><strong>Infections</strong> — fièvre, porte d'entrée</div>
-</div>
-</div><div class="slide " id="slide-13">
-<h1 class="slide-title">⚡ Flash Quiz</h1>
-<div style="font-size:.78rem;color:#888;margin-bottom:8px">Testez-vous sur la diapo précédente — Cliquez pour révéler</div>
-<div class="flip-card" onclick="flipCard(this)"><div class="question">❓ Que signifie chaque lettre de l'acronyme ADENOPATI ?</div><div class="hint">👆 Cliquer pour révéler</div><div class="answer">✅ Âge · Douleur · Extension · Nature · Origine · Peau · Adhérence · Taille · Infections. Utilisez-le à chaque examen clinique d'une adénopathie.</div></div>
-<div class="flip-card" onclick="flipCard(this)"><div class="question">❓ Dans ADENOPATI, que signifie 'O' (Origine) ?</div><div class="hint">👆 Cliquer pour révéler</div><div class="answer">✅ Territoire de drainage lymphatique correspondant. Ex : ganglion cervical sous-maxillaire drainant la bouche et les dents → examiner la cavité buccale.</div></div>
-
-</div><div class="slide " id="slide-14">
-<h1 class="slide-title">Territoires de drainage ganglionnaire</h1>
-<div class="def-box" style="margin:6px 0"><strong>📖 Ganglion de Troisier</strong> : Sus-claviculaire gauche métastatique d'un cancer abdominal. Nommé d'après Charles-Émile Troisier. Signe de dissémination lymphatique avancée.</div>
-
-<table style="margin-top:8px;font-size:.79rem">
-  <tr><th>Territoire</th><th>Organes drainés</th><th>Bilan si ADP</th></tr>
-  <tr><td>Cervical sous-maxillaire</td><td>Bouche, dents, lèvres</td><td>Examen ORL + dentaire</td></tr>
-  <tr><td>Cervical profond</td><td>Pharynx, larynx, thyroïde</td><td>Nasofibroscopie</td></tr>
-  <tr><td>⚠️ Sus-claviculaire G</td><td>Abdomen, pelvis</td><td>Scanner TAP</td></tr>
-  <tr><td>⚠️ Sus-claviculaire D</td><td>Médiastin, poumon droit</td><td>TDM thoracique</td></tr>
-  <tr><td>Axillaire</td><td>Sein, membre sup.</td><td>Examen des seins</td></tr>
-  <tr><td>Inguinal</td><td>Organes génitaux, membre inf.</td><td>Examen génital, IST</td></tr>
-</table>
-<div class="urgence-box" style="margin-top:6px">
-  <strong>⚡ Ganglion de Troisier :</strong> Sus-claviculaire gauche = métastase d'un cancer digestif (estomac, pancréas, colon, ovaire) ou pelvien.
-</div>
-</div><div class="slide " id="slide-15">
-<h1 class="slide-title">⚡ Flash Quiz</h1>
-<div style="font-size:.78rem;color:#888;margin-bottom:8px">Testez-vous sur la diapo précédente — Cliquez pour révéler</div>
-<div class="flip-card" onclick="flipCard(this)"><div class="question">❓ Quel territoire draine le ganglion sus-claviculaire gauche ? Quels cancers sont à rechercher ?</div><div class="hint">👆 Cliquer pour révéler</div><div class="answer">✅ Il draine l'abdomen et le pelvis (canal thoracique se jette à gauche). Cancers : estomac, pancréas, colon, ovaire. C'est le ganglion de Troisier.</div></div>
-<div class="flip-card" onclick="flipCard(this)"><div class="question">❓ Si un patient a un ganglion axillaire isolé, quel organe devez-vous examiner en priorité ?</div><div class="hint">👆 Cliquer pour révéler</div><div class="answer">✅ Les seins (pour les femmes), la paroi thoracique et le membre supérieur. L'axillaire draine le sein → cancer du sein métastatique est la 1ère hypothèse chez la femme.</div></div>
-
-</div><div class="slide " id="slide-16">
-<h1 class="slide-title">Diagnostics différentiels</h1>
-<div class="def-box" style="margin:6px 0"><strong>📖 Kyste du tractus thyréoglosse</strong> : Malformation congénitale du cou : kyste médian qui remonte lors de la déglutition. Signe distinctif : mobilité verticale à la déglutition (suit la thyroïde). Bénin.</div>
-
-<table style="margin-top:8px;font-size:.79rem">
-  <tr><th>Localisation</th><th>Diagnostic différentiel</th><th>Argument distinctif</th></tr>
-  <tr><td>Cou médian</td><td>Kyste du tractus thyréoglosse</td><td>Monte à la déglutition</td></tr>
-  <tr><td>Cou latéral</td><td>Kyste branchiogène</td><td>Congénital, translucide</td></tr>
-  <tr><td>Cou</td><td>Goitre / nodule thyroïdien</td><td>Suit la déglutition, thyroïde</td></tr>
-  <tr><td>Prétragien</td><td>Tumeur parotidienne</td><td>Soulève le lobe de l'oreille</td></tr>
-  <tr><td>Aine</td><td>Hernie inguinale</td><td>Impulsive à la toux, réductible</td></tr>
-  <tr><td>Partout</td><td>Lipome</td><td>Mou, lobulé, sans signes généraux</td></tr>
-</table>
-<div class="info-box" style="margin-top:6px">
-  <strong>💡 Echographie</strong> = 1ère intention pour distinguer ganglion, kyste et lipome.
-</div>
-</div><div class="slide " id="slide-17">
-<h1 class="slide-title">⚡ Flash Quiz</h1>
-<div style="font-size:.78rem;color:#888;margin-bottom:8px">Testez-vous sur la diapo précédente — Cliquez pour révéler</div>
-<div class="flip-card" onclick="flipCard(this)"><div class="question">❓ Comment distinguer cliniquement un kyste du tractus thyréoglosse d'un ganglion cervical médian ?</div><div class="hint">👆 Cliquer pour révéler</div><div class="answer">✅ Le kyste du tractus thyréoglosse remonte lors de la déglutition (solidaire de la thyroïde par le tractus fibreux). Un ganglion reste fixe. Confirmation : échographie.</div></div>
-<div class="flip-card" onclick="flipCard(this)"><div class="question">❓ Une hernie inguinale peut-elle simuler une adénopathie inguinale ?</div><div class="hint">👆 Cliquer pour révéler</div><div class="answer">✅ Oui ! La hernie inguinale/crurale est impulsive à la toux et réductible en décubitus (le contenu rentre dans l'abdomen). L'adénopathie est non réductible et non impulsive à la toux.</div></div>
-
-</div><div class="slide " id="slide-18">
-<h1 class="slide-title">QCM — Section I : Sémiologie</h1>
-<div class="qcm-block">
-<div class="qcm-question">Q1. À partir de quel diamètre un ganglion inguinal est-il pathologique ?</div>
-<div class="qcm-options"><div class="qcm-option" onclick="selectOption(this)">A. > 0,5 cm</div>
-<div class="qcm-option" onclick="selectOption(this)">B. > 1 cm</div>
-<div class="qcm-option correct-ans" onclick="selectOption(this)">C. > 2 cm</div>
-<div class="qcm-option" onclick="selectOption(this)">D. Tout ganglion inguinal palpable</div></div>
-<button class="qcm-btn" onclick="validateQCM(this)">Valider</button>
-<div class="qcm-feedback"></div>
-</div>
-<div class="qcm-block">
-<div class="qcm-question">Q2. Un ganglion sus-claviculaire gauche de 1,2 cm chez un homme de 60 ans est découvert fortuitement. Que faites-vous ?</div>
-<div class="qcm-options"><div class="qcm-option" onclick="selectOption(this)">A. Surveillance à 3 mois</div>
-<div class="qcm-option correct-ans" onclick="selectOption(this)">B. Bilan urgent : TDM TAP + biopsie (malin jusqu'à preuve contraire)</div>
-<div class="qcm-option" onclick="selectOption(this)">C. Antibiothérapie et revoir à 6 semaines</div>
-<div class="qcm-option" onclick="selectOption(this)">D. Échographie seule</div></div>
-<button class="qcm-btn" onclick="validateQCM(this)">Valider</button>
-<div class="qcm-feedback"></div>
-</div>
-<div class="qcm-block">
-<div class="qcm-question">Q3. Dans ADENOPATI, que signifie le 'E' ?</div>
-<div class="qcm-options"><div class="qcm-option" onclick="selectOption(this)">A. Échographie</div>
-<div class="qcm-option correct-ans" onclick="selectOption(this)">B. Extension — localisée ou généralisée</div>
-<div class="qcm-option" onclick="selectOption(this)">C. Érythème cutané</div>
-<div class="qcm-option" onclick="selectOption(this)">D. Étiologie infectieuse</div></div>
-<button class="qcm-btn" onclick="validateQCM(this)">Valider</button>
-<div class="qcm-feedback"></div>
-</div>
-</div><div class="slide " id="slide-19">
-<div class="section-banner">
-  <div style="font-size:2rem;margin-bottom:8px">🗺️</div>
-  <h2>Section II — Adénopathie localisée</h2>
-  <p>Infectieux · Cancer · Lymphome · Sus-claviculaire</p>
-</div>
-<div class="grid-3" style="margin-top:12px">
-  <div style="text-align:center;padding:10px;background:rgba(52,152,219,.1);border-radius:10px;border:1px solid rgba(52,152,219,.3)">
-    <div style="font-size:1.3rem">🦠</div><h3 style="color:#3498db;font-size:.85rem">Infection</h3>
-    <p style="font-size:.75rem;color:#aaa">Satellite du foyer infectieux</p>
-  </div>
-  <div style="text-align:center;padding:10px;background:rgba(231,76,60,.1);border-radius:10px;border:1px solid rgba(231,76,60,.3)">
-    <div style="font-size:1.3rem">🎯</div><h3 style="color:#e74c3c;font-size:.85rem">Cancer solide</h3>
-    <p style="font-size:.75rem;color:#aaa">Métastase ganglionnaire</p>
-  </div>
-  <div style="text-align:center;padding:10px;background:rgba(155,89,182,.1);border-radius:10px;border:1px solid rgba(155,89,182,.3)">
-    <div style="font-size:1.3rem">🩸</div><h3 style="color:#9b59b6;font-size:.85rem">Lymphome</h3>
-    <p style="font-size:.75rem;color:#aaa">Prolifération lymphocytaire</p>
-  </div>
-</div>
-</div><div class="slide " id="slide-20">
-<h1 class="slide-title">Étiologies infectieuses — ADP localisée</h1>
-<div class="def-box" style="margin:6px 0"><strong>📖 Maladie des griffes du chat (MGC)</strong> : Infection par Bartonella henselae (griffure/morsure de chat). Adénopathie régionale (axillaire ou cervicale) volumineuse, pouvant se fistuliser. Guérison spontanée en 2-4 mois.</div>
-<div class="def-box" style="margin:6px 0"><strong>📖 Toxoplasmose</strong> : Infection par Toxoplasma gondii (chat, viande crue). Adénopathie cervicale unique chez adulte jeune. Bénigne et spontanément résolutive. Sérologie toxoplasmose positive.</div>
-
-<div class="grid-2" style="margin-top:8px">
-  <div class="content-block">
-    <h3>🦠 Infections locales communes</h3>
-    <ul style="font-size:.82rem">
-      <li><strong>Dentaire/buccale</strong> → sous-maxillaire</li>
-      <li><strong>ORL</strong> (angine, otite) → cervical</li>
-      <li><strong>Cutanée</strong> (plaie infectée) → satellite</li>
-    </ul>
-  </div>
-  <div class="content-block">
-    <h3>🐱 Infections spécifiques</h3>
-    <ul style="font-size:.82rem">
-      <li><strong>Griffes du chat</strong> (Bartonella) → axillaire ou cervical</li>
-      <li><strong>Toxoplasmose</strong> → cervical postérieur</li>
-      <li><strong>Tuberculose</strong> → fistulisation, nécrose caséeuse</li>
-    </ul>
-  </div>
-</div>
-<div class="success-box"><strong>✅ Démarche :</strong> Chercher la porte d'entrée → traiter l'infection → réévaluer à 4 semaines.</div>
-</div><div class="slide " id="slide-21">
-<h1 class="slide-title">⚡ Flash Quiz</h1>
-<div style="font-size:.78rem;color:#888;margin-bottom:8px">Testez-vous sur la diapo précédente — Cliquez pour révéler</div>
-<div class="flip-card" onclick="flipCard(this)"><div class="question">❓ Un patient de 25 ans a un ganglion axillaire gauche de 3 cm, progressivement augmenté en 3 semaines. Il a un chat. Quelle est votre 1ère hypothèse et comment la confirmer ?</div><div class="hint">👆 Cliquer pour révéler</div><div class="answer">✅ Maladie des griffes du chat (Bartonella henselae). Sérologie Bartonella + NFS. Traitement symptomatique, guérison spontanée en 2-4 mois.</div></div>
-<div class="flip-card" onclick="flipCard(this)"><div class="question">❓ Quel est le contexte typique de la toxoplasmose ganglionnaire ?</div><div class="hint">👆 Cliquer pour révéler</div><div class="answer">✅ Adulte jeune, adénopathie cervicale postérieure, évolution bénigne et spontanément résolutive. Contexte : contact avec chats ou consommation de viande crue. Sérologie toxoplasmose positive (IgM + IgG).</div></div>
-
-</div><div class="slide " id="slide-22">
-<h1 class="slide-title">Étiologies malignes — Métastases ganglionnaires</h1>
-<div class="def-box" style="margin:6px 0"><strong>📖 Métastase ganglionnaire</strong> : Cellules cancéreuses du cancer primitif migrant via la lymphe vers les ganglions régionaux. Ganglion dur, indolore, fixé. Sa localisation oriente vers le cancer primitif.</div>
-
-<div class="grid-2" style="margin-top:8px">
-  <div class="content-block">
-    <h3>🔍 Caractéristiques</h3>
-    <ul style="font-size:.82rem">
-      <li>Consistance dure (« caillouteuse »)</li>
-      <li>Indolore, souvent fixé</li>
-      <li>Évolution progressive sans contexte infectieux</li>
-      <li>Terrain : âge > 40 ans, tabac, alcool</li>
-    </ul>
-  </div>
-  <div class="content-block">
-    <h3>📍 Localisation → Primitif</h3>
-    <ul style="font-size:.82rem">
-      <li><strong>Cervical</strong> → ORL (pharynx, larynx), thyroïde</li>
-      <li><strong>Sus-claviculaire G</strong> → digestif/pelvien</li>
-      <li><strong>Sus-claviculaire D</strong> → poumon, médiastin</li>
-      <li><strong>Axillaire</strong> → sein</li>
-      <li><strong>Inguinal</strong> → organes génitaux</li>
-    </ul>
-  </div>
-</div>
-<div class="urgence-box"><strong>⚡ Règle :</strong> Ne pas biopsier le ganglion en 1ère intention si cancer primitif suspecté → retrouver le primitif d'abord.</div>
-</div><div class="slide " id="slide-23">
-<h1 class="slide-title">⚡ Flash Quiz</h1>
-<div style="font-size:.78rem;color:#888;margin-bottom:8px">Testez-vous sur la diapo précédente — Cliquez pour révéler</div>
-<div class="flip-card" onclick="flipCard(this)"><div class="question">❓ Un homme de 58 ans, tabagique, a un ganglion cervical dur de 2 cm. Quelle est la 1ère étiologie à éliminer ?</div><div class="hint">👆 Cliquer pour révéler</div><div class="answer">✅ Métastase d'un cancer ORL (pharynx, larynx, cavité buccale). Bilan : nasofibroscopie + TDM cervico-thoracique. Tabac + alcool + ganglion cervical dur = carcinome épidermoïde ORL jusqu'à preuve contraire.</div></div>
-<div class="flip-card" onclick="flipCard(this)"><div class="question">❓ Pourquoi ne faut-il pas biopsier d'emblée le ganglion si on suspecte un cancer primitif ?</div><div class="hint">👆 Cliquer pour révéler</div><div class="answer">✅ La biopsie ganglionnaire peut disséminer les cellules tumorales (risque d'ensemencement). Il faut d'abord trouver et biopsier le cancer primitif, plus accessible et moins risqué (nasofibroscopie, endoscopie, biopsie cutanée...).</div></div>
-
-</div><div class="slide " id="slide-24">
-<h1 class="slide-title">Étiologies lymphomateuses</h1>
-<div class="def-box" style="margin:6px 0"><strong>📖 Lymphome hodgkinien (LH)</strong> : Cancer du lymphocyte B (cellules de Reed-Sternberg). Adulte jeune (20-35 ans) et sujet âgé. Adénopathies cervicales ou médiastinales + signes B + prurit. Excellent pronostic (> 85% guérison).</div>
-<div class="def-box" style="margin:6px 0"><strong>📖 Lymphome non hodgkinien (LNH)</strong> : Terme regroupant tous les autres lymphomes (B ou T). Hétérogène : folliculaire (lent), diffus à grandes cellules B (agressif), etc. LDH élevée = agressivité.</div>
-
-<div class="grid-2" style="margin-top:8px">
-  <div class="content-block">
-    <h3>🔵 Hodgkin</h3>
-    <ul style="font-size:.82rem">
-      <li>Adulte jeune, bimodale (20-35 ans + > 60 ans)</li>
-      <li>ADP cervicales hautes symétriques</li>
-      <li>Médiastin élargi (RX thorax)</li>
-      <li>Signes B + prurit</li>
-      <li>Excellent pronostic (> 85% guérison)</li>
-    </ul>
-  </div>
-  <div class="content-block">
-    <h3>🟣 Non hodgkiniens</h3>
-    <ul style="font-size:.82rem">
-      <li>85% des lymphomes</li>
-      <li>Atteinte extra-ganglionnaire possible</li>
-      <li>Pronostic très variable selon le type</li>
-      <li>LDH élevée = signe d'agressivité</li>
-    </ul>
-  </div>
-</div>
-<div class="info-box"><strong>🔬 Diagnostic :</strong> Biopsie exérèse ganglionnaire (jamais cytoponction seule) + anatomopathologie + immunohistochimie.</div>
-</div><div class="slide " id="slide-25">
-<h1 class="slide-title">⚡ Flash Quiz</h1>
-<div style="font-size:.78rem;color:#888;margin-bottom:8px">Testez-vous sur la diapo précédente — Cliquez pour révéler</div>
-<div class="flip-card" onclick="flipCard(this)"><div class="question">❓ Quels sont les signes typiques d'un lymphome de Hodgkin ?</div><div class="hint">👆 Cliquer pour révéler</div><div class="answer">✅ Adulte jeune · ADP cervicales hautes symétriques · Médiastin élargi · Signes B (fièvre + sueurs + amaigrissement) · Prurit sine materia · Excellent pronostic > 85%.</div></div>
-<div class="flip-card" onclick="flipCard(this)"><div class="question">❓ Pourquoi la biopsie-exérèse est-elle préférable à la cytoponction pour le diagnostic de lymphome ?</div><div class="hint">👆 Cliquer pour révéler</div><div class="answer">✅ L'anatomopathologie nécessite l'architecture tissulaire complète (on voit comment les cellules s'organisent). La cytoponction donne des cellules isolées → insuffisant pour typer le lymphome et choisir le traitement.</div></div>
-
-</div><div class="slide " id="slide-26">
-<h1 class="slide-title">Adénopathie sus-claviculaire — Signe d'alarme majeur</h1>
-<div class="def-box" style="margin:6px 0"><strong>📖 Creux sus-claviculaire</strong> : Dépression anatomique au-dessus de la clavicule contenant des ganglions drainant des territoires profonds (abdomen, thorax). Tout ganglion palpable ici = urgence diagnostique.</div>
-
-<div class="urgence-box" style="margin-top:8px">
-  <strong>⚡ RÈGLE D'OR :</strong> Tout ganglion sus-claviculaire palpable chez l'adulte = MALIN jusqu'à preuve du contraire.
-</div>
-<div class="grid-2" style="margin-top:8px">
-  <div class="content-block">
-    <h3>⬅️ Sus-claviculaire GAUCHE</h3>
-    <p style="font-size:.8rem;color:#aaa;margin-bottom:4px">Canal thoracique → draine abdomen/pelvis</p>
-    <ul style="font-size:.82rem">
-      <li>Cancer gastrique ++</li>
-      <li>Cancer pancréatique</li>
-      <li>Cancer du colon</li>
-      <li>Cancer ovarien</li>
-    </ul>
-  </div>
-  <div class="content-block">
-    <h3>➡️ Sus-claviculaire DROIT</h3>
-    <p style="font-size:.8rem;color:#aaa;margin-bottom:4px">Draine médiastin/poumon droit</p>
-    <ul style="font-size:.82rem">
-      <li>Cancer pulmonaire droit</li>
-      <li>Cancer œsophagien</li>
-      <li>Lymphome médiastinal</li>
-    </ul>
-  </div>
-</div>
-<div class="success-box"><strong>🔍 Bilan :</strong> TDM cervico-TAP + TEP-FDG + biopsie + endoscopies digestives.</div>
-</div><div class="slide " id="slide-27">
-<h1 class="slide-title">⚡ Flash Quiz</h1>
-<div style="font-size:.78rem;color:#888;margin-bottom:8px">Testez-vous sur la diapo précédente — Cliquez pour révéler</div>
-<div class="flip-card" onclick="flipCard(this)"><div class="question">❓ Qu'est-ce que le ganglion de Troisier ? Que doit-il vous faire évoquer ?</div><div class="hint">👆 Cliquer pour révéler</div><div class="answer">✅ Adénopathie sus-claviculaire gauche métastatique d'un cancer abdominal ou pelvien. Son découverte impose un bilan digestif urgent (TDM TAP + endoscopies : gastroscopie, coloscopie) et gynécologique chez la femme.</div></div>
-<div class="flip-card" onclick="flipCard(this)"><div class="question">❓ Pourquoi le sus-claviculaire gauche draine-t-il l'abdomen alors que le droit draine le thorax ?</div><div class="hint">👆 Cliquer pour révéler</div><div class="answer">✅ Le canal thoracique (collecteur lymphatique principal du corps) se jette dans la veine sous-clavière gauche. Il draine l'abdomen, le pelvis et les membres inférieurs. Le canal droit est plus petit et draine thorax/bras droit.</div></div>
-
-</div><div class="slide " id="slide-28">
-<h1 class="slide-title">QCM — Section II : ADP localisée</h1>
-<div class="qcm-block">
-<div class="qcm-question">Q1. Homme 55 ans, tabagique alcoolique, ganglion cervical gauche dur de 2,5 cm, indolore, évolution progressive. 1ère cause probable ?</div>
-<div class="qcm-options"><div class="qcm-option" onclick="selectOption(this)">A. Lymphome hodgkinien</div>
-<div class="qcm-option correct-ans" onclick="selectOption(this)">B. Métastase cancer ORL</div>
-<div class="qcm-option" onclick="selectOption(this)">C. Griffes du chat</div>
-<div class="qcm-option" onclick="selectOption(this)">D. Réactionnel à une angine</div></div>
-<button class="qcm-btn" onclick="validateQCM(this)">Valider</button>
-<div class="qcm-feedback"></div>
-</div>
-<div class="qcm-block">
-<div class="qcm-question">Q2. Pour typer un lymphome, quel examen est le gold standard ?</div>
-<div class="qcm-options"><div class="qcm-option" onclick="selectOption(this)">A. Cytoponction ganglionnaire seule</div>
-<div class="qcm-option correct-ans" onclick="selectOption(this)">B. Biopsie exérèse complète + anatomopathologie + IHC</div>
-<div class="qcm-option" onclick="selectOption(this)">C. NFS + immunophénotypage sanguin</div>
-<div class="qcm-option" onclick="selectOption(this)">D. TEP-FDG seul</div></div>
-<button class="qcm-btn" onclick="validateQCM(this)">Valider</button>
-<div class="qcm-feedback"></div>
-</div>
-<div class="qcm-block">
-<div class="qcm-question">Q3. Femme de 45 ans, ganglion axillaire gauche de 2 cm. Quel examen en priorité ?</div>
-<div class="qcm-options"><div class="qcm-option" onclick="selectOption(this)">A. TEP-FDG</div>
-<div class="qcm-option correct-ans" onclick="selectOption(this)">B. Examen clinique des seins + mammographie ± échographie mammaire</div>
-<div class="qcm-option" onclick="selectOption(this)">C. Biopsie ganglionnaire d'emblée</div>
-<div class="qcm-option" onclick="selectOption(this)">D. NFS + frottis</div></div>
-<button class="qcm-btn" onclick="validateQCM(this)">Valider</button>
-<div class="qcm-feedback"></div>
-</div>
-</div><div class="slide " id="slide-29">
-<div class="section-banner">
-  <div style="font-size:2rem;margin-bottom:8px">🌐</div>
+<div class="slide-title">⚡ Quiz Flash — Section II</div>
+<div class="flip-card" onclick="flipCard(this)">
+  <div class="question">❓ Quelle est l'étiologie à évoquer en premier devant une ADP sus-claviculaire ?</div>
+  <div class="hint">👆 Cliquer pour révéler</div>
+  <div class="answer">✅ Étiologie maligne (cancer) en premier. ADP sus-claviculaire gauche = ganglion de Troisier (cancers digestifs, rénaux, testiculaires, pelviens). Droite = cancers broncho-pulmonaires/médiastinaux.</div>
+</div><div class="flip-card" onclick="flipCard(this)">
+  <div class="question">❓ Quels sont les 3 grands groupes étiologiques d'une ADP localisée ?</div>
+  <div class="hint">👆 Cliquer pour révéler</div>
+  <div class="answer">✅ 1) Infections locorégionales (porte d'entrée) — 2) Cancers (métastases du territoire de drainage) — 3) Lymphomes.</div>
+</div><div class="flip-card" onclick="flipCard(this)">
+  <div class="question">❓ Après combien de semaines sans diagnostic doit-on évoquer systématiquement un lymphome devant une ADP localisée ?</div>
+  <div class="hint">👆 Cliquer pour révéler</div>
+  <div class="answer">✅ 4 à 6 semaines d'évolution sans cause prouvée → biopsie indispensable.</div>
+</div><div class="flip-card" onclick="flipCard(this)">
+  <div class="question">❓ Pourquoi la cytoponction ne suffit-elle pas pour diagnostiquer un lymphome ?</div>
+  <div class="hint">👆 Cliquer pour révéler</div>
+  <div class="answer">✅ Elle ne permet pas la classification histologique du lymphome. La biopsie-exérèse est seule capable de typer le lymphome par histologie, immunomarquage et biologie moléculaire.</div>
+</div><div class="flip-card" onclick="flipCard(this)">
+  <div class="question">❓ Quel germe rechercher devant une ADP inguinale dans un contexte d'IST ?</div>
+  <div class="hint">👆 Cliquer pour révéler</div>
+  <div class="answer">✅ Syphilis (Treponema pallidum), chancre mou (Haemophilus ducreyi), maladie de Nicolas-Favre (Chlamydia sp.).</div>
+</div></div><div class="slide " id="slide-13">
+<div class="section-banner" style="margin-top:60px">
   <h2>Section III — Polyadénopathie</h2>
-  <p>Définition · Démarche · Infectieuses · Hématologiques · Inflammatoires</p>
+  <p>Hémogramme · Démarche étiologique · Biopsie</p>
 </div>
-<div class="content-block" style="margin-top:12px">
-  <h3>📖 Définition</h3>
-  <p style="font-size:.84rem">Adénopathies touchant <strong>≥ 2 territoires ganglionnaires distincts</strong>. Oriente vers causes systémiques : infections généralisées, hémopathies malignes, maladies inflammatoires.</p>
+<div class="def-box"><strong>Polyadénopathie :</strong> présence d'adénopathies dans plusieurs territoires ganglionnaires différents. La démarche diagnostique est différente de celle d'une ADP localisée.</div>
+<div class="urgence-box"><strong>🔑 Examen d'orientation principal : l'HÉMOGRAMME avec frottis sanguin</strong></div>
+</div><div class="slide " id="slide-14">
+<div class="slide-title">Hémogramme dans la polyadénopathie — Résultats et orientations</div>
+<table>
+<tr><th>Résultat hémogramme</th><th>Orientation diagnostique</th><th>Examen suivant</th></tr>
+<tr><td>Blastes ± anémie ± thrombopénie</td><td><strong>Leucémie aiguë</strong></td><td>Myélogramme en urgence</td></tr>
+<tr><td>Hyperlymphocytose de lymphocytes matures monomorphes</td><td><strong>LLC</strong> (leucémie lymphoïde chronique)</td><td>Immunophénotypage lymphocytes sanguins</td></tr>
+<tr><td>Syndrome mononucléosique (lymphocytes activés)</td><td>MNI (EBV ++), VIH, toxoplasmose</td><td>Sérologie EBV, VIH, toxoplasmose</td></tr>
+<tr><td>Lymphoplasmocytes + VS augmentée</td><td><strong>Maladie de Waldenström</strong></td><td>EPP (pic IgM monoclonal), BOM</td></tr>
+<tr><td>Plasmocytose modérée</td><td>Virose (rubéole)</td><td>Sérologie rubéole</td></tr>
+<tr><td>Cellules lymphomateuses circulantes</td><td>Lymphome avec dissémination sanguine</td><td>Immunophénotypage lymphocytes sanguins</td></tr>
+</table>
+<div class="info-box"><strong>Syndrome mononucléosique (rappel) :</strong> lymphocytes T activés réactionnels. Causes : EBV (MNI = fièvre + angine + splénomégalie), VIH primo-infection, toxoplasmose (ADP cervicales postérieures ++), CMV, rubéole.</div>
+</div><div class="slide " id="slide-15">
+<div class="slide-title">Polyadénopathie — Si hémogramme non orientant</div>
+<div class="content-block"><h3>Étiologies à rechercher par examens ciblés</h3>
+<ul>
+  <li><strong>VIH</strong> : primo-infection (sérologie VIH) → polyadénopathie diffuse</li>
+  <li><strong>Toxoplasmose</strong> sans syndrome mononucléosique (sérologie)</li>
+  <li><strong>Syphilis secondaire</strong> (sérologie TPHA/VDRL)</li>
+  <li><strong>Brucellose</strong> (Wright, contage animal)</li>
+  <li><strong>Leishmaniose viscérale</strong> (kala-azar) : fièvre + splénomégalie massive + pancytopénie</li>
+  <li><strong>Sarcoïdose</strong> : ADP médiastinales ++ (biopsie)</li>
+  <li><strong>Lupus, polyarthrite rhumatoïde</strong> (bilan auto-immun)</li>
+  <li><strong>Toxicité médicamenteuse</strong> : hydantoïnes (phénytoïne) ++</li>
+  <li><strong>Histiocytose sinusale</strong></li>
+</ul></div>
+<div class="urgence-box"><strong>🔑 Règle :</strong> La biopsie ganglionnaire reste l'examen de recherche étiologique de recours, <strong>indispensable</strong> devant tout tableau inexpliqué prolongé de plus de 4 à 6 semaines.</div>
+<div class="success-box"><strong>Rappel pratique :</strong> dans le cadre d'une polyadénopathie, penser aussi à examiner systématiquement la rate (splénomégalie), le foie (hépatomégalie) et les amygdales (hypertrophie amygdalienne).</div>
+</div><div class="slide " id="slide-16">
+<div class="slide-title">⚡ Quiz Flash — Section III</div>
+<div class="flip-card" onclick="flipCard(this)">
+  <div class="question">❓ Quel est l'examen d'orientation PRINCIPAL devant une polyadénopathie ?</div>
+  <div class="hint">👆 Cliquer pour révéler</div>
+  <div class="answer">✅ L'hémogramme avec frottis sanguin.</div>
+</div><div class="flip-card" onclick="flipCard(this)">
+  <div class="question">❓ Une hyperlymphocytose monomorphe de lymphocytes matures chez un adulte de 60 ans : quel diagnostic évoquer ?</div>
+  <div class="hint">👆 Cliquer pour révéler</div>
+  <div class="answer">✅ LLC (leucémie lymphoïde chronique). Confirmer par immunophénotypage des lymphocytes sanguins.</div>
+</div><div class="flip-card" onclick="flipCard(this)">
+  <div class="question">❓ Quel tableau clinique associé à l'EBV doit faire rechercher une MNI (syndrome mononucléosique) ?</div>
+  <div class="hint">👆 Cliquer pour révéler</div>
+  <div class="answer">✅ Fièvre + angine pseudo-membraneuse + splénomégalie + polyadénopathie. Sérologie EBV à demander.</div>
+</div><div class="flip-card" onclick="flipCard(this)">
+  <div class="question">❓ Quel médicament peut être responsable d'une polyadénopathie médicamenteuse ?</div>
+  <div class="hint">👆 Cliquer pour révéler</div>
+  <div class="answer">✅ Les hydantoïnes (phénytoïne, Dilantin). À évoquer devant toute polyadénopathie sous traitement antiépileptique.</div>
+</div><div class="flip-card" onclick="flipCard(this)">
+  <div class="question">❓ Quand faut-il absolument réaliser une biopsie ganglionnaire devant une polyadénopathie ?</div>
+  <div class="hint">👆 Cliquer pour révéler</div>
+  <div class="answer">✅ Devant tout tableau inexpliqué prolongé de plus de 4 à 6 semaines, même si l'hémogramme est normal.</div>
+</div></div><div class="slide " id="slide-17">
+<div class="section-banner" style="margin-top:60px">
+  <h2>Section IV — Adénopathies chez l'enfant</h2>
+  <p>Particularités pédiatriques · Étiologies fréquentes · Démarche diagnostique</p>
 </div>
-<div class="info-box" style="margin-top:8px">
-  <strong>💡 1er examen :</strong> Hémogramme (NFS) + frottis sanguin → oriente immédiatement vers les causes hématologiques (hyperlymphocytose, blastes, syndrome mononucléosique).
+<div class="info-box"><strong>Fréquence :</strong> la découverte d'adénopathies est fréquente chez l'enfant, en particulier une polyadénopathie cervicale, notamment en hiver (épisodes rhinopharyngés).</div>
+<div class="content-block"><h3>Règle fondamentale</h3>
+<ul>
+  <li>Les étiologies sont majoritairement <strong>infectieuses</strong></li>
+  <li>La crainte d'une cause maligne ou de système impose une démarche rigoureuse</li>
+  <li>Consultation pédiatrique/spécialisée recommandée</li>
+</ul></div>
+</div><div class="slide " id="slide-18">
+<div class="slide-title">Adénopathies de l'enfant — Étiologies</div>
+<div class="grid-2">
+<div class="content-block"><h3>Causes infectieuses virales</h3>
+<ul>
+  <li><strong>MNI (EBV)</strong> : très fréquente, fièvre + angine + splénomégalie</li>
+  <li><strong>CMV</strong> (cytomégalovirus)</li>
+  <li><strong>Rubéole</strong> : ADP occipitales caractéristiques</li>
+  <li><strong>VIH</strong> : à évoquer si contexte</li>
+</ul></div>
+<div class="content-block"><h3>Causes infectieuses bactériennes</h3>
+<ul>
+  <li><strong>Infections à pyogènes</strong> : staphylocoque, streptocoque</li>
+  <li><strong>Pasteurellose</strong> (Pasteurella multocida) : griffure/morsure de chien ou chat</li>
+  <li><strong>Maladie des griffes du chat</strong> (Bartonella henselae)</li>
+  <li><strong>Tuberculose</strong> : ADP cervicales froides, chroniques</li>
+</ul></div>
 </div>
-</div><div class="slide " id="slide-30">
-<h1 class="slide-title">Bilan devant une polyadénopathie</h1>
-<div class="def-box" style="margin:6px 0"><strong>📖 Syndrome mononucléosique</strong> : Lymphocytose avec grands lymphocytes activés (hyperbasophiles au frottis). Signe d'infection virale active : EBV (MNI), CMV, VIH primo-infection, toxoplasmose.</div>
-<div class="def-box" style="margin:6px 0"><strong>📖 Polyadénopathie</strong> : Ganglions pathologiques dans ≥ 2 aires ganglionnaires. Oriente vers causes systémiques (vs adénopathie localisée = cause régionale).</div>
-
-<div style="font-size:.82rem;margin-top:8px">
-  <div class="dp-step"><strong>Étape 1 — NFS + frottis :</strong> hyperlymphocytose (LLC, MNI) · blastes (leucémie) · syndrome mononucléosique</div>
-  <div class="dp-step"><strong>Étape 2 — Bilan infectieux :</strong> sérologies EBV, CMV, VIH, toxo, syphilis selon contexte</div>
-  <div class="dp-step"><strong>Étape 3 — Bilan inflammatoire :</strong> CRP, VS, électrophorèse protéines, ANA, anti-DNA</div>
-  <div class="dp-step"><strong>Étape 4 — Imagerie :</strong> échographie abdominale (rate, foie) ± TDM TAP</div>
-  <div class="dp-step"><strong>Étape 5 — Biopsie :</strong> si cause non identifiée après bilan complet ou suspicion lymphome</div>
-</div>
-</div><div class="slide " id="slide-31">
-<h1 class="slide-title">⚡ Flash Quiz</h1>
-<div style="font-size:.78rem;color:#888;margin-bottom:8px">Testez-vous sur la diapo précédente — Cliquez pour révéler</div>
-<div class="flip-card" onclick="flipCard(this)"><div class="question">❓ Quel est le 1er examen à réaliser devant une polyadénopathie fébrile ?</div><div class="hint">👆 Cliquer pour révéler</div><div class="answer">✅ NFS + frottis sanguin. Il peut montrer : hyperlymphocytose (LLC, MNI), blastes circulants (leucémie aiguë), syndrome mononucléosique (EBV, CMV, VIH). Oriente immédiatement la démarche.</div></div>
-<div class="flip-card" onclick="flipCard(this)"><div class="question">❓ Qu'est-ce qu'un syndrome mononucléosique et quelles infections le causent ?</div><div class="hint">👆 Cliquer pour révéler</div><div class="answer">✅ Grands lymphocytes activés (hyperbasophiles) au frottis sanguin. Causes : EBV (MNI) ++, CMV, VIH primo-infection, toxoplasmose. Sérologies spécifiques pour identifier la cause.</div></div>
-
-</div><div class="slide " id="slide-32">
-<h1 class="slide-title">Étiologies infectieuses — Polyadénopathie</h1>
-<div class="def-box" style="margin:6px 0"><strong>📖 MNI (Mononucléose Infectieuse)</strong> : Infection par EBV (Epstein-Barr Virus). Triade : angine + fièvre + polyadénopathie. Adolescent/adulte jeune. Diagnostic : syndrome mononucléosique + sérologie EBV. Contre-indication amoxicilline (éruption).</div>
-<div class="def-box" style="margin:6px 0"><strong>📖 Primo-infection VIH</strong> : 2-4 semaines après contamination. Ressemble à une MNI : fièvre + angine + polyadénopathie + éruption. Charge virale très élevée = phase très contagieuse. Diagnostic : ARN VIH (PCR) + Ag p24.</div>
-
-<div class="grid-2" style="margin-top:8px">
-  <div class="content-block">
-    <h3>🦠 Virales</h3>
-    <ul style="font-size:.82rem">
-      <li><strong>EBV (MNI)</strong> — angine + polyadénopathie + monocytose</li>
-      <li><strong>CMV</strong> — tableau proche MNI, transaminases ↑</li>
-      <li><strong>VIH primo</strong> — syndrome mononucléosique + éruption</li>
-    </ul>
-  </div>
-  <div class="content-block">
-    <h3>🦠 Bactériennes/parasitaires</h3>
-    <ul style="font-size:.82rem">
-      <li><strong>Toxoplasmose</strong> — cervicale + fatigue adulte jeune</li>
-      <li><strong>Syphilis secondaire</strong> — roséole + TPHA+</li>
-      <li><strong>Brucellose</strong> — contact animal + fièvre ondulante</li>
-      <li><strong>Tuberculose</strong> — contexte endémique</li>
-    </ul>
-  </div>
-</div>
-</div><div class="slide " id="slide-33">
-<h1 class="slide-title">⚡ Flash Quiz</h1>
-<div style="font-size:.78rem;color:#888;margin-bottom:8px">Testez-vous sur la diapo précédente — Cliquez pour révéler</div>
-<div class="flip-card" onclick="flipCard(this)"><div class="question">❓ Un adolescent de 17 ans a angine érythémateuse + polyadénopathie cervicale bilatérale + splénomégalie + grande fatigue. NFS : syndrome mononucléosique. Diagnostic ?</div><div class="hint">👆 Cliquer pour révéler</div><div class="answer">✅ Mononucléose infectieuse (EBV). Confirmer : sérologie EBV (IgM VCA positive) ou MNI-test. IMPORTANT : contre-indication à l'amoxicilline (éruption dans ~90% des MNI). Contre-indication sports de contact 3-4 semaines (risque rupture de rate).</div></div>
-<div class="flip-card" onclick="flipCard(this)"><div class="question">❓ En cas de primo-infection VIH, quel examen diagnostique est le plus précocement positif ?</div><div class="hint">👆 Cliquer pour révéler</div><div class="answer">✅ L'ARN VIH (charge virale PCR) ou l'Ag p24. La sérologie (Ac anti-VIH) se positive en 3-6 semaines. Pendant la fenêtre sérologique, seul l'ARN ou l'Ag p24 permettent le diagnostic.</div></div>
-
-</div><div class="slide " id="slide-34">
-<h1 class="slide-title">Étiologies hématologiques — Polyadénopathie</h1>
-<div class="def-box" style="margin:6px 0"><strong>📖 LLC (Leucémie Lymphoïde Chronique)</strong> : Hémopathie maligne la plus fréquente de l'adulte (> 60 ans). Petits lymphocytes B matures. Polyadénopathie + hyperlymphocytose > 5 G/L. Évolution lente.</div>
-<div class="def-box" style="margin:6px 0"><strong>📖 LAL (Leucémie Aiguë Lymphoblastique)</strong> : Prolifération de blastes lymphoïdes. Urgence. Chez l'enfant : 80% des leucémies aiguës. Polyadénopathie + splénomégalie + cytopénies (anémie, thrombopénie, neutropénie).</div>
-
-<div class="grid-2" style="margin-top:8px">
-  <div class="content-block">
-    <h3>Hémopathies</h3>
-    <ul style="font-size:.82rem">
-      <li><strong>LLC</strong> — sujet âgé, petits ganglions symétriques, lymphocytes > 5 G/L</li>
-      <li><strong>Lymphomes disséminés</strong> — stade III-IV d'Ann Arbor</li>
-      <li><strong>LAL</strong> — enfant ++, blastes, urgence</li>
-    </ul>
-  </div>
-  <div class="content-block">
-    <h3>🔍 NFS oriente</h3>
-    <table style="font-size:.78rem">
-      <tr><th>NFS</th><th>Évoquer</th></tr>
-      <tr><td>Lymphocytes > 5 G/L</td><td>LLC</td></tr>
-      <tr><td>Blastes circulants</td><td>LAL / LAM</td></tr>
-      <tr><td>Syndrome monocytose</td><td>EBV, CMV</td></tr>
-    </table>
-  </div>
-</div>
-</div><div class="slide " id="slide-35">
-<h1 class="slide-title">⚡ Flash Quiz</h1>
-<div style="font-size:.78rem;color:#888;margin-bottom:8px">Testez-vous sur la diapo précédente — Cliquez pour révéler</div>
-<div class="flip-card" onclick="flipCard(this)"><div class="question">❓ Un homme de 70 ans a des ganglions cervicaux bilatéraux de 1 cm, stables depuis 6 mois, NFS : lymphocytes 18 G/L avec petits lymphocytes matures. Diagnostic probable ?</div><div class="hint">👆 Cliquer pour révéler</div><div class="answer">✅ Leucémie lymphoïde chronique (LLC). Hyperlymphocytose > 5 G/L avec petits lymphocytes B matures. Diagnostic de certitude : immunophénotypage (CD5+, CD19+, CD23+). Stade précoce souvent : abstention thérapeutique.</div></div>
-<div class="flip-card" onclick="flipCard(this)"><div class="question">❓ Devant des blastes circulants chez un enfant avec polyadénopathie, que faire en urgence ?</div><div class="hint">👆 Cliquer pour révéler</div><div class="answer">✅ LAL (leucémie aiguë lymphoblastique) jusqu'à preuve du contraire. Myélogramme en URGENCE. Transfert immédiat en service d'hématologie pédiatrique. Pronostic > 85% de guérison avec traitement.</div></div>
-
-</div><div class="slide " id="slide-36">
-<h1 class="slide-title">Étiologies inflammatoires — Polyadénopathie</h1>
-<div class="def-box" style="margin:6px 0"><strong>📖 Lupus érythémateux systémique (LES)</strong> : Maladie auto-immune systémique. Femme jeune. Atteinte multi-organes : peau (rash malaire), articulations, rein, séreuses. Anticorps anti-ADN natif positifs.</div>
-<div class="def-box" style="margin:6px 0"><strong>📖 Sarcoïdose</strong> : Maladie inflammatoire avec granulomes non caséeux. Adénopathies hilaires bilatérales + polyadénopathies. ECA (enzyme de conversion de l'angiotensine) élevée.</div>
-
-<div class="grid-2" style="margin-top:8px">
-  <div class="content-block">
-    <h3>🔥 Auto-immunes</h3>
-    <ul style="font-size:.82rem">
-      <li><strong>Lupus</strong> — femme jeune, éruption malaire, anti-ADN+</li>
-      <li><strong>Polyarthrite rhumatoïde</strong> — syndrome de Felty</li>
-    </ul>
-  </div>
-  <div class="content-block">
-    <h3>🏔️ Granulomatoses</h3>
-    <ul style="font-size:.82rem">
-      <li><strong>Sarcoïdose</strong> — ADP hilaires + ECA ↑</li>
-      <li><strong>Tuberculose</strong> — IDR +, BK</li>
-    </ul>
-  </div>
-</div>
-<div class="content-block" style="margin-top:6px">
-  <h3>💊 Médicaments inducteurs</h3>
-  <p style="font-size:.82rem">Phénytoine, carbamazépine, allopurinol → syndrome pseudo-lymphomateux. Régresse à l'arrêt.</p>
-</div>
-</div><div class="slide " id="slide-37">
-<h1 class="slide-title">⚡ Flash Quiz</h1>
-<div style="font-size:.78rem;color:#888;margin-bottom:8px">Testez-vous sur la diapo précédente — Cliquez pour révéler</div>
-<div class="flip-card" onclick="flipCard(this)"><div class="question">❓ Une femme de 28 ans a une polyadénopathie, un rash facial en ailes de papillon, des arthralgies et une atteinte rénale. Quel diagnostic évoquer ?</div><div class="hint">👆 Cliquer pour révéler</div><div class="answer">✅ Lupus érythémateux systémique (LES). Bilan : ANA (anticorps antinucléaires) + anti-ADN natif + complément (C3, C4) + NFS + créatinine + protéinurie. Traitement par hydroxychloroquine.</div></div>
-<div class="flip-card" onclick="flipCard(this)"><div class="question">❓ Un patient sous phénytoine (antiépileptique) développe des polyadénopathies. Que faire ?</div><div class="hint">👆 Cliquer pour révéler</div><div class="answer">✅ Évoquer un syndrome pseudo-lymphomateux médicamenteux. Arrêt du médicament en cause → régression des adénopathies. Pas de biopsie en 1ère intention si contexte médicamenteux évident.</div></div>
-
-</div><div class="slide " id="slide-38">
-<h1 class="slide-title">QCM — Section III : Polyadénopathie</h1>
-<div class="qcm-block">
-<div class="qcm-question">Q1. 1er examen à réaliser devant une polyadénopathie fébrile chez l'adulte jeune ?</div>
-<div class="qcm-options"><div class="qcm-option" onclick="selectOption(this)">A. Biopsie d'emblée</div>
-<div class="qcm-option correct-ans" onclick="selectOption(this)">B. NFS avec frottis sanguin</div>
-<div class="qcm-option" onclick="selectOption(this)">C. TEP-FDG</div>
-<div class="qcm-option" onclick="selectOption(this)">D. Sérologie VIH seule</div></div>
-<button class="qcm-btn" onclick="validateQCM(this)">Valider</button>
-<div class="qcm-feedback"></div>
-</div>
-<div class="qcm-block">
-<div class="qcm-question">Q2. Homme 25 ans, angine + polyadénopathie + splénomégalie + NFS : 52% de grands lymphocytes atypiques. Diagnostic ?</div>
-<div class="qcm-options"><div class="qcm-option" onclick="selectOption(this)">A. LLC</div>
-<div class="qcm-option" onclick="selectOption(this)">B. Lymphome hodgkinien</div>
-<div class="qcm-option correct-ans" onclick="selectOption(this)">C. MNI (EBV)</div>
-<div class="qcm-option" onclick="selectOption(this)">D. Primo-infection CMV</div></div>
-<button class="qcm-btn" onclick="validateQCM(this)">Valider</button>
-<div class="qcm-feedback"></div>
-</div>
-<div class="qcm-block">
-<div class="qcm-question">Q3. Quel médicament peut induire un syndrome pseudo-lymphomateux avec polyadénopathies ?</div>
-<div class="qcm-options"><div class="qcm-option" onclick="selectOption(this)">A. Amoxicilline</div>
-<div class="qcm-option correct-ans" onclick="selectOption(this)">B. Phénytoine (antiépileptique)</div>
-<div class="qcm-option" onclick="selectOption(this)">C. Paracétamol</div>
-<div class="qcm-option" onclick="selectOption(this)">D. Oméprazole</div></div>
-<button class="qcm-btn" onclick="validateQCM(this)">Valider</button>
-<div class="qcm-feedback"></div>
-</div>
-</div><div class="slide " id="slide-39">
-<div class="section-banner">
-  <div style="font-size:2rem;margin-bottom:8px">👶</div>
-  <h2>Section IV — Particularités pédiatriques</h2>
-  <p>Chez l'enfant : infectieux +++ · Signes d'alarme · Causes malignes</p>
-</div>
-<div class="info-box" style="margin-top:12px">
-  <strong>💡 Principe :</strong> Chez l'enfant, adénopathies très fréquentes et souvent bénignes (infections ORL répétées). Mais ne pas rater une leucémie aiguë (LAL).
-</div>
-<div class="content-block" style="margin-top:8px">
-  <h3>⚠️ Signes d'alarme pédiatriques → Bilan urgent</h3>
-  <ul style="font-size:.82rem">
-    <li>Ganglion > 3 cm ou croissance rapide</li>
-    <li>Persistance > 4-6 semaines sans cause évidente</li>
-    <li>AEG, fièvre prolongée, sueurs nocturnes</li>
-    <li>Adénopathie sus-claviculaire ou médiastinale</li>
-    <li>Cytopénies (pâleur = anémie, hémorragies = thrombopénie)</li>
-  </ul>
-</div>
-</div><div class="slide " id="slide-40">
-<h1 class="slide-title">Adénopathie chez l'enfant — Étiologies</h1>
-<div class="def-box" style="margin:6px 0"><strong>📖 LAL de l'enfant</strong> : Leucémie aiguë lymphoblastique : cancer le plus fréquent de l'enfant. Pic 3-5 ans. Douleurs osseuses + pâleur + purpura + ADP + fièvre. Pronostic > 85% de guérison. Urgence diagnostique et thérapeutique.</div>
-<div class="def-box" style="margin:6px 0"><strong>📖 Lymphome de Burkitt</strong> : Lymphome très agressif, masse abdominale à croissance très rapide chez l'enfant. Forme endémique en Afrique liée à EBV. Urgence : traitement immédiat.</div>
-
-<div class="grid-2" style="margin-top:8px">
-  <div class="content-block">
-    <h3>🦠 Infectieuses (++ fréquentes)</h3>
-    <ul style="font-size:.82rem">
-      <li><strong>Infections ORL répétées</strong> — réactionnels bénins</li>
-      <li><strong>MNI (EBV)</strong> — adolescent, angine + ADP</li>
-      <li><strong>CMV</strong> — tableau MNI-like</li>
-      <li><strong>Griffes du chat</strong> — contact félin</li>
-      <li><strong>Tuberculose</strong> — zone endémique, IDR+</li>
-    </ul>
-  </div>
-  <div class="content-block">
-    <h3>🩸 Malignes (à ne pas rater)</h3>
-    <ul style="font-size:.82rem">
-      <li><strong>LAL</strong> — URGENCE, blastes, cytopénies</li>
-      <li><strong>Lymphome hodgkinien</strong> — adolescent, médiastin</li>
-      <li><strong>Burkitt</strong> — masse abdominale rapide</li>
-      <li><strong>Neuroblastome</strong> — < 5 ans, masse abdominale</li>
-    </ul>
-  </div>
-</div>
-<div class="success-box"><strong>✅ Démarche :</strong> NFS + frottis en 1ère intention. ADP persistante sans cause infectieuse > 4-6 semaines → biopsie.</div>
-</div><div class="slide " id="slide-41">
-<h1 class="slide-title">⚡ Flash Quiz</h1>
-<div style="font-size:.78rem;color:#888;margin-bottom:8px">Testez-vous sur la diapo précédente — Cliquez pour révéler</div>
-<div class="flip-card" onclick="flipCard(this)"><div class="question">❓ Un enfant de 4 ans a une pâleur, des ecchymoses multiples sans traumatisme, une fièvre à 38,5°C et des ganglions cervicaux bilatéraux. Que suspectez-vous ?</div><div class="hint">👆 Cliquer pour révéler</div><div class="answer">✅ LAL (leucémie aiguë lymphoblastique) jusqu'à preuve du contraire. Triade : pâleur (anémie) + ecchymoses (thrombopénie) + fièvre + adénopathies. NFS + frottis en urgence → myélogramme si blastes. Hématologue pédiatrique.</div></div>
-<div class="flip-card" onclick="flipCard(this)"><div class="question">❓ Jusqu'à quel âge les ganglions cervicaux sont-ils souvent physiologiques/réactionnels chez l'enfant ?</div><div class="hint">👆 Cliquer pour révéler</div><div class="answer">✅ Les petits ganglions cervicaux (< 1 cm) sont fréquents et bénins chez l'enfant en raison des infections ORL répétées. Pathologiques si > 2-3 cm, persistants > 4-6 semaines, ou associés à des signes d'alarme.</div></div>
-
-</div><div class="slide " id="slide-42">
-<div class="section-banner">
-  <div style="font-size:2rem;margin-bottom:8px">🔬</div>
+<div class="content-block"><h3>Causes non infectieuses</h3>
+<ul>
+  <li><strong>Syndrome de Kawasaki</strong> : fièvre prolongée + ADP cervicale unilatérale + éruption + muqueuses + extrémités → urgence pédiatrique (risque anévrisme coronaire)</li>
+  <li>Hémopathies malignes (leucémie aiguë lymphoblastique, lymphome) : moins fréquentes mais à éliminer</li>
+</ul></div>
+<div class="urgence-box"><strong>🚨 Syndrome de Kawasaki :</strong> fièvre &gt;5 jours + 4 des 5 critères : ADP cervicale, éruption cutanée, rougeur conjonctivale, atteinte muqueuse buccale, atteinte des extrémités. Traitement urgent : aspirine + immunoglobulines IV (prévention anévrismes coronaires).</div>
+</div><div class="slide " id="slide-19">
+<div class="slide-title">⚡ Quiz Flash — Section IV</div>
+<div class="flip-card" onclick="flipCard(this)">
+  <div class="question">❓ Quelle localisation d'ADP est caractéristique de la rubéole chez l'enfant ?</div>
+  <div class="hint">👆 Cliquer pour révéler</div>
+  <div class="answer">✅ ADP occipitales (cervicales postérieures). + éruption caractéristique (roséole).</div>
+</div><div class="flip-card" onclick="flipCard(this)">
+  <div class="question">❓ Quel germe est responsable des ADP cervicales après griffure/morsure de chien ou chat (pasteurellose) ?</div>
+  <div class="hint">👆 Cliquer pour révéler</div>
+  <div class="answer">✅ Pasteurella multocida. À distinguer de la maladie des griffes du chat (Bartonella henselae).</div>
+</div><div class="flip-card" onclick="flipCard(this)">
+  <div class="question">❓ Quels sont les 5 critères du syndrome de Kawasaki ?</div>
+  <div class="hint">👆 Cliquer pour révéler</div>
+  <div class="answer">✅ 1) Fièvre &gt;5 jours + 4 des : 2) ADP cervicale, 3) éruption cutanée, 4) rougeur conjonctivale, 5) atteinte muqueuse buccale, 6) atteinte extrémités (érythème palmoplantaire, desquamation).</div>
+</div><div class="flip-card" onclick="flipCard(this)">
+  <div class="question">❓ Quelle complication grave du syndrome de Kawasaki justifie le traitement urgent ?</div>
+  <div class="hint">👆 Cliquer pour révéler</div>
+  <div class="answer">✅ Anévrismes des artères coronaires → risque d'infarctus du myocarde. Traitement : aspirine forte dose + IgIV.</div>
+</div></div><div class="slide " id="slide-20">
+<div class="section-banner" style="margin-top:60px">
   <h2>Section V — Examens complémentaires</h2>
-  <p>Cytoponction vs Biopsie · Bilan biologique · Imagerie · Arbre décisionnel</p>
+  <p>Bilan biologique · Imagerie · Indications des gestes diagnostiques</p>
 </div>
-<div class="content-block" style="margin-top:12px">
-  <h3>🎯 Principe directeur</h3>
-  <p style="font-size:.84rem">Le choix des examens dépend du contexte. <strong>Biopsie = gold standard</strong> mais pas en 1ère intention si cancer primitif suspecté. NFS + frottis = toujours en 1ère intention devant une polyadénopathie.</p>
+</div><div class="slide " id="slide-21">
+<div class="slide-title">Bilan biologique — Examens en 1ère intention</div>
+<div class="urgence-box"><strong>Hémogramme :</strong> pratiquement <strong>systématique</strong> — recherche de polynucléose neutrophile (infection), syndrome mononucléosique, anomalies en faveur d'une hémopathie maligne (cellules anormales circulantes, cytopénies).</div>
+<div class="content-block"><h3>Bilan selon contexte</h3>
+<ul>
+  <li><strong>Inflammation :</strong> CRP, fibrinogène, VS</li>
+  <li><strong>LDH :</strong> marqueur de prolifération cellulaire (lymphomes)</li>
+  <li><strong>Bilan hépatique :</strong> transaminases, bilirubine, γ-GT</li>
+  <li><strong>Prélèvements bactériologiques :</strong> si porte d'entrée infectieuse</li>
+  <li><strong>Sérodiagnostics :</strong> EBV, VIH, toxoplasmose, brucellose, syphilis... selon clinique</li>
+  <li><strong>Sérologie VIH :</strong> à proposer systématiquement en cas de polyadénopathie</li>
+  <li><strong>Sérologie EBV :</strong> si syndrome mononucléosique</li>
+</ul></div>
+<div class="grid-2">
+  <div class="content-block"><h3>ADP localisée — orienter le bilan</h3>
+  <ul>
+    <li>Hémogramme</li>
+    <li>CRP, LDH</li>
+    <li>Sérodiagnostics ciblés</li>
+    <li>Imagerie du territoire drainé</li>
+  </ul></div>
+  <div class="content-block"><h3>Polyadénopathie — bilan plus large</h3>
+  <ul>
+    <li>Hémogramme + frottis (SYSTÉMATIQUE)</li>
+    <li>CRP, VS, fibrinogène</li>
+    <li>Bilan hépatique, LDH</li>
+    <li>Sérologies multiples (EBV, VIH, toxo, syphilis)</li>
+    <li>Radiographie thoracique (ADP médiastinales)</li>
+  </ul></div>
 </div>
-</div><div class="slide " id="slide-43">
-<h1 class="slide-title">Cytoponction vs Biopsie ganglionnaire</h1>
-<div class="def-box" style="margin:6px 0"><strong>📖 Cytoponction</strong> : Aspiration à l'aiguille fine du contenu d'un ganglion → analyse cytologique. Rapide, ambulatoire. Orientation rapide + microbiologie (tuberculose). Insuffisant seul pour typer un lymphome.</div>
-<div class="def-box" style="margin:6px 0"><strong>📖 Biopsie-exérèse ganglionnaire</strong> : Ablation chirurgicale complète → analyse histologique (architecture tissulaire préservée). Gold standard pour le lymphome. Permet immunohistochimie + biologie moléculaire.</div>
-
-<div class="grid-2" style="margin-top:8px">
-  <div class="content-block">
-    <h3>💉 Cytoponction — Quand ?</h3>
-    <ul style="font-size:.82rem">
-      <li>Orientation rapide (malin ?)</li>
-      <li>Culture microbiologique</li>
-      <li>Confirmation rechute connue</li>
-      <li><em>Pas suffisant pour typer un lymphome</em></li>
-    </ul>
-  </div>
-  <div class="content-block">
-    <h3>🏥 Biopsie — Quand ?</h3>
-    <ul style="font-size:.82rem">
-      <li>Suspicion de lymphome (gold standard)</li>
-      <li>ADP persistante sans diagnostic</li>
-      <li>Bilan négatif > 4-6 semaines</li>
-      <li>Toujours : exérèse COMPLÈTE</li>
-    </ul>
-  </div>
+</div><div class="slide " id="slide-22">
+<div class="slide-title">Imagerie dans le bilan des adénopathies</div>
+<div class="content-block"><h3>Radiographie thoracique</h3>
+<ul>
+  <li>Souvent utile en 1ère intention : étude du parenchyme pulmonaire</li>
+  <li>Recherche d'adénopathies médiastinales (lymphome de Hodgkin ++)</li>
+</ul></div>
+<div class="content-block"><h3>Échographie ganglionnaire</h3>
+<ul>
+  <li>Examen de choix en cas de <strong>doute diagnostique</strong> (ADP vs lipome, kyste, etc.)</li>
+  <li>Caractérise la structure ganglionnaire (homogène, nécrotique, vascularisation)</li>
+  <li>Guide éventuellement la ponction</li>
+</ul></div>
+<div class="content-block"><h3>Scanner (TDM) thoraco-abdomino-pelvien</h3>
+<ul>
+  <li>Recherche d'adénopathies profondes (médiastinales, abdominales, pelviennes)</li>
+  <li>Recherche étiologique (tumeur primitive)</li>
+  <li>Bilan d'extension en cas de lymphome confirmé</li>
+</ul></div>
+<div class="content-block"><h3>TEP-TDM au 18F-FDG</h3>
+<ul>
+  <li>Pas en 1ère intention pour le diagnostic étiologique</li>
+  <li>Place dans le <strong>bilan d'extension des lymphomes</strong> (examen de référence)</li>
+  <li>Évaluation de la réponse au traitement</li>
+</ul></div>
+</div><div class="slide " id="slide-23">
+<div class="slide-title">Indications des gestes diagnostiques — Résumé</div>
+<table>
+<tr><th>Geste</th><th>Indications</th><th>Limites</th></tr>
+<tr><td><strong>Cytoponction</strong></td><td>Orientation rapide ; étude microbiologique (infection) ; évocation de cellules lymphomateuses ou Reed-Sternberg</td><td>Ne permet pas de typer un lymphome. Ne remplace pas la biopsie.</td></tr>
+<tr><td><strong>Biopsie-exérèse</strong></td><td>ADP persistant &gt;4-6 semaines sans cause ; suspicion de lymphome ; confirmation diagnositque ; classification histologique</td><td>Organisation nécessaire ; équipe spécialisée ; ne pas réaliser si étiologie infectieuse probable</td></tr>
+<tr><td><strong>Biopsie radioguidée</strong></td><td>Ganglion profond inaccessible chirurgicalement</td><td>Matériel plus limité ; peut nécessiter exérèse complémentaire</td></tr>
+</table>
+<div class="success-box"><strong>Points clés pratiques :</strong><br>
+• Congélation du tissu tumoral obligatoire lors de toute biopsie ganglionnaire suspecte de lymphome<br>
+• Réalisation dans un centre spécialisé pour assurer l'acheminement correct du matériel<br>
+• Si AG + suspicion forte de lymphome : BOM possible dans le même temps opératoire</div>
+</div><div class="slide " id="slide-24">
+<div class="slide-title">⚡ Quiz Flash — Section V</div>
+<div class="flip-card" onclick="flipCard(this)">
+  <div class="question">❓ Quel est l'examen d'imagerie de 1ère intention devant une adénopathie superficielle avec doute diagnostique ?</div>
+  <div class="hint">👆 Cliquer pour révéler</div>
+  <div class="answer">✅ L'échographie ganglionnaire — confirme la nature ganglionnaire de la masse et guide la ponction.</div>
+</div><div class="flip-card" onclick="flipCard(this)">
+  <div class="question">❓ Quel examen biologique est pratiquement systématique devant une adénopathie ?</div>
+  <div class="hint">👆 Cliquer pour révéler</div>
+  <div class="answer">✅ L'hémogramme avec frottis sanguin.</div>
+</div><div class="flip-card" onclick="flipCard(this)">
+  <div class="question">❓ À quel moment et pour quelle indication demande-t-on un TEP-TDM dans le bilan des ADP ?</div>
+  <div class="hint">👆 Cliquer pour révéler</div>
+  <div class="answer">✅ Après confirmation histologique de lymphome — pour le bilan d'extension et le suivi de réponse au traitement. Pas en 1ère intention diagnostique.</div>
+</div><div class="flip-card" onclick="flipCard(this)">
+  <div class="question">❓ Quels examens sont indispensables sur la pièce de biopsie d'un ganglion suspect de lymphome ?</div>
+  <div class="hint">👆 Cliquer pour révéler</div>
+  <div class="answer">✅ Histologie standard + immunomarquage (immunohistochimie) + biologie moléculaire + caryotype + congélation de tissu tumoral.</div>
+</div></div><div class="slide " id="slide-25">
+<div class="slide-title">🎓 QCM Blanc — Adénopathie superficielle (1/2)</div>
+<div class="qcm-block" data-correct="B">
+<div class="qcm-question">Q1. Parmi les étiologies suivantes, laquelle doit-on évoquer en PREMIÈRE intention devant un tableau de polyadénopathie ?</div>
+<div class="qcm-options">
+<div class="qcm-option" onclick="selectOption(this)">A. Un cancer solide</div>
+<div class="qcm-option" onclick="selectOption(this)">B. Une infection à VIH</div>
+<div class="qcm-option" onclick="selectOption(this)">C. Un mélanome malin</div>
+<div class="qcm-option" onclick="selectOption(this)">D. La maladie des griffes du chat</div>
+<div class="qcm-option" onclick="selectOption(this)">E. Une infection dans la zone de drainage des ganglions</div>
 </div>
-<div class="urgence-box"><strong>⚡ Règle :</strong> Si suspicion de cancer primitif → retrouver le primitif d'abord, puis biopsier.</div>
-</div><div class="slide " id="slide-44">
-<h1 class="slide-title">⚡ Flash Quiz</h1>
-<div style="font-size:.78rem;color:#888;margin-bottom:8px">Testez-vous sur la diapo précédente — Cliquez pour révéler</div>
-<div class="flip-card" onclick="flipCard(this)"><div class="question">❓ Pourquoi la biopsie doit-elle être une exérèse COMPLÈTE du ganglion et non une biopsie partielle ?</div><div class="hint">👆 Cliquer pour révéler</div><div class="answer">✅ L'anatomopathologie lymphomateuse nécessite l'architecture complète du ganglion (zonation, relations cellulaires). Une biopsie partielle peut ne pas contenir les zones diagnostiques et exposer au risque de dissémination.</div></div>
-<div class="flip-card" onclick="flipCard(this)"><div class="question">❓ Dans quel cas la cytoponction est-elle suffisante sans biopsie ?</div><div class="hint">👆 Cliquer pour révéler</div><div class="answer">✅ Confirmation d'une rechute de lymphome déjà typé (évite la biopsie chirurgicale). Mise en culture pour tuberculose. Orientation rapide si cancer primitif connu avec métastase ganglionnaire attendue. Sinon insuffisante.</div></div>
-
-</div><div class="slide " id="slide-45">
-<h1 class="slide-title">Bilan biologique et imagerie</h1>
-<div class="def-box" style="margin:6px 0"><strong>📖 LDH (Lacticodeshydrogénase)</strong> : Enzyme libérée lors de la destruction cellulaire. Élévation = forte activité tumorale (lymphome agressif, grande masse). Marqueur pronostique des lymphomes.</div>
-<div class="def-box" style="margin:6px 0"><strong>📖 TEP-FDG (PET-scan)</strong> : Imagerie fonctionnelle au sucre radioactif captés par les cellules actives. Détecte les territoires ganglionnaires actifs dans tout le corps. Bilan d'extension et suivi des lymphomes.</div>
-
-<div class="grid-2" style="margin-top:8px">
-  <div class="content-block">
-    <h3>🩸 Bilan biologique</h3>
-    <ul style="font-size:.82rem">
-      <li><strong>NFS + frottis</strong> — toujours en 1ère intention</li>
-      <li><strong>CRP, VS</strong> — inflammation</li>
-      <li><strong>LDH</strong> — agressivité tumorale</li>
-      <li><strong>Électrophorèse protéines</strong> — pic monoclonal</li>
-      <li><strong>Sérologies</strong> — EBV, CMV, VIH selon contexte</li>
-    </ul>
-  </div>
-  <div class="content-block">
-    <h3>📷 Imagerie</h3>
-    <ul style="font-size:.82rem">
-      <li><strong>Échographie</strong> — 1ère intention (ganglion cervical)</li>
-      <li><strong>TDM cervico-TAP</strong> — extension, ganglions profonds</li>
-      <li><strong>TEP-FDG</strong> — bilan lymphome, suivi</li>
-      <li><strong>RX thorax</strong> — médiastin élargi</li>
-    </ul>
-  </div>
-</div>
-</div><div class="slide " id="slide-46">
-<h1 class="slide-title">⚡ Flash Quiz</h1>
-<div style="font-size:.78rem;color:#888;margin-bottom:8px">Testez-vous sur la diapo précédente — Cliquez pour révéler</div>
-<div class="flip-card" onclick="flipCard(this)"><div class="question">❓ Pourquoi dose-t-on les LDH dans le bilan d'un lymphome ?</div><div class="hint">👆 Cliquer pour révéler</div><div class="answer">✅ Les LDH reflètent l'intensité de la destruction cellulaire. Un taux élevé indique une grande masse tumorale et/ou un lymphome agressif → facteur de mauvais pronostic inclus dans les scores pronostiques (IPI pour LNH).</div></div>
-<div class="flip-card" onclick="flipCard(this)"><div class="question">❓ Quelle est la place du TEP-FDG dans le bilan des lymphomes ?</div><div class="hint">👆 Cliquer pour révéler</div><div class="answer">✅ Bilan d'extension initial (détecte tous les territoires actifs), et évaluation de la réponse en cours et après traitement. Une positivité persistante après traitement = maladie active résiduelle = mauvais signe.</div></div>
-
-</div><div class="slide " id="slide-47">
-<h1 class="slide-title">QCM Final</h1>
-<div class="qcm-block">
-<div class="qcm-question">Q1. Ganglion > 2 cm, dur, indolore, fixé, sans contexte infectieux — la 1ère hypothèse est ?</div>
-<div class="qcm-options"><div class="qcm-option" onclick="selectOption(this)">A. Infectieux réactionnel</div>
-<div class="qcm-option correct-ans" onclick="selectOption(this)">B. Maligne (cancer ou lymphome)</div>
-<div class="qcm-option" onclick="selectOption(this)">C. Lipome</div>
-<div class="qcm-option" onclick="selectOption(this)">D. Kyste sébacé</div></div>
 <button class="qcm-btn" onclick="validateQCM(this)">Valider</button>
-<div class="qcm-feedback"></div>
+<div class="qcm-feedback">✅ Réponse : <strong>B</strong> — L'infection à VIH est à évoquer en premier devant une polyadénopathie. Les cancers solides et le mélanome donnent surtout des ADP localisées.</div>
 </div>
-<div class="qcm-block">
-<div class="qcm-question">Q2. Enfant 4 ans : pâleur + ecchymoses + adénopathies + fièvre. 1er examen ?</div>
-<div class="qcm-options"><div class="qcm-option" onclick="selectOption(this)">A. Biopsie ganglionnaire d'emblée</div>
-<div class="qcm-option correct-ans" onclick="selectOption(this)">B. NFS + frottis (suspicion LAL)</div>
-<div class="qcm-option" onclick="selectOption(this)">C. TDM TAP</div>
-<div class="qcm-option" onclick="selectOption(this)">D. Sérologie EBV</div></div>
+<div class="qcm-block" data-correct="A,B,C,D,E">
+<div class="qcm-question">Q2. Parmi les suivants, quel(s) diagnostic(s) peu(ven)t être un diagnostic différentiel d'adénopathie superficielle ? (plusieurs réponses possibles)</div>
+<div class="qcm-options">
+<div class="qcm-option" onclick="selectMulti(this)">A. Une hidrosadénite</div>
+<div class="qcm-option" onclick="selectMulti(this)">B. Un lipome</div>
+<div class="qcm-option" onclick="selectMulti(this)">C. Une tumeur parotidienne</div>
+<div class="qcm-option" onclick="selectMulti(this)">D. Une tumeur de la thyroïde</div>
+<div class="qcm-option" onclick="selectMulti(this)">E. Un anévrisme artériel</div>
+</div>
 <button class="qcm-btn" onclick="validateQCM(this)">Valider</button>
-<div class="qcm-feedback"></div>
+<div class="qcm-feedback">✅ Réponse : <strong>A,B,C,D,E</strong> — Tous ces diagnostics sont des diagnostics différentiels d'ADP superficielle. L'échographie aide à les distinguer.</div>
 </div>
-<div class="qcm-block">
-<div class="qcm-question">Q3. Tout ganglion sus-claviculaire palpable chez l'adulte est considéré comme ?</div>
-<div class="qcm-options"><div class="qcm-option" onclick="selectOption(this)">A. Bénin jusqu'à preuve contraire</div>
-<div class="qcm-option" onclick="selectOption(this)">B. Infectieux en 1ère intention</div>
-<div class="qcm-option correct-ans" onclick="selectOption(this)">C. Malin jusqu'à preuve du contraire</div>
-<div class="qcm-option" onclick="selectOption(this)">D. À surveiller 3 mois avant bilan</div></div>
+<div class="qcm-block" data-correct="B">
+<div class="qcm-question">Q3. Parmi les pathologies suivantes, laquelle est habituellement associée à des adénopathies superficielles ?</div>
+<div class="qcm-options">
+<div class="qcm-option" onclick="selectOption(this)">A. La leucémie myéloïde chronique</div>
+<div class="qcm-option" onclick="selectOption(this)">B. La leucémie lymphoïde chronique</div>
+<div class="qcm-option" onclick="selectOption(this)">C. Les syndromes myélodysplasiques</div>
+<div class="qcm-option" onclick="selectOption(this)">D. La myélofibrose primitive</div>
+<div class="qcm-option" onclick="selectOption(this)">E. Le myélome multiple</div>
+</div>
 <button class="qcm-btn" onclick="validateQCM(this)">Valider</button>
-<div class="qcm-feedback"></div>
+<div class="qcm-feedback">✅ Réponse : <strong>B</strong> — La LLC donne typiquement une polyadénopathie. La LMC donne surtout une splénomégalie sans ADP. Les SMD et myélome ne donnent pas d'ADP habituellement.</div>
 </div>
-</div><div class="slide " id="slide-48">
-<h1 class="slide-title">Dossier progressif — Sophie, 32 ans</h1>
-<div class="vignette"><strong>🏥</strong> Institutrice, sans antécédent. Ganglion cervical droit 2 cm, 6 semaines. Pas de fièvre ni AEG. Elle a un chat.</div>
-<div class="dp-step" style="margin-top:6px"><strong>🔵 Situation 1</strong> — 1ère hypothèse et bilan ?
-  <div class="flip-card" onclick="flipCard(this)" style="margin-top:4px"><div class="question">Révéler</div><div class="answer">Maladie des griffes du chat (Bartonella henselae). Sérologie Bartonella + NFS. Traitement symptomatique, guérison spontanée 2-4 mois.</div></div>
+<div class="qcm-block" data-correct="C,D">
+<div class="qcm-question">Q4. Parmi les caractéristiques suivantes, laquelle est évocatrice d'une adénopathie secondaire à un cancer solide ? (plusieurs réponses possibles)</div>
+<div class="qcm-options">
+<div class="qcm-option" onclick="selectMulti(this)">A. Le caractère fluctuant de l'ADP</div>
+<div class="qcm-option" onclick="selectMulti(this)">B. Le caractère inflammatoire</div>
+<div class="qcm-option" onclick="selectMulti(this)">C. Le caractère non douloureux</div>
+<div class="qcm-option" onclick="selectMulti(this)">D. Le caractère pierreux (dur, ligneux)</div>
+<div class="qcm-option" onclick="selectMulti(this)">E. La présence d'ADP dans d'autres aires</div>
 </div>
-<div class="dp-step" style="margin-top:5px"><strong>🔵 Situation 2</strong> — Sérologie Bartonella négative. Sueurs nocturnes + perte 4 kg. Que faire ?
-  <div class="flip-card" onclick="flipCard(this)" style="margin-top:4px"><div class="question">Révéler</div><div class="answer">Signes B + ADP persistante = suspicion lymphome. TDM cervico-TAP + TEP-FDG + biopsie exérèse. Hématologue.</div></div>
+<button class="qcm-btn" onclick="validateQCM(this)">Valider</button>
+<div class="qcm-feedback">✅ Réponse : <strong>C,D</strong> — ADP maligne : dure, pierreuse/ligneuse, non douloureuse. Fluctuante = suppuration (infectieux). Inflammatoire = infectieux.</div>
 </div>
-<div class="dp-step" style="margin-top:5px"><strong>🔵 Situation 3</strong> — Biopsie : lymphome hodgkinien, sclérose nodulaire. TEP : ADP cervicales + médiastinales uniquement. Quel stade ?
-  <div class="flip-card" onclick="flipCard(this)" style="margin-top:4px"><div class="question">Révéler</div><div class="answer">Stade IIB (Ann Arbor) : 2 territoires du même côté du diaphragme + signes B. Traitement : ABVD × 4-6 cycles ± radiothérapie. Pronostic excellent.</div></div>
+<div class="qcm-block" data-correct="B">
+<div class="qcm-question">Q5. L'examen le plus informatif devant une ADP cervicale gauche isolée de 3×3 cm depuis 2 mois chez une femme jeune sans autre signe ?</div>
+<div class="qcm-options">
+<div class="qcm-option" onclick="selectOption(this)">A. Cytoponction ganglionnaire avec cytologie</div>
+<div class="qcm-option" onclick="selectOption(this)">B. Biopsie ganglionnaire avec anatomopathologie</div>
+<div class="qcm-option" onclick="selectOption(this)">C. Hémogramme avec cellules anormales</div>
+<div class="qcm-option" onclick="selectOption(this)">D. Sérologie VIH</div>
+<div class="qcm-option" onclick="selectOption(this)">E. TDM abdominale</div>
 </div>
-</div><div class="slide " id="slide-49">
-<h1 class="slide-title">Résumé — Fiche mémo Adénopathie</h1>
-<div class="grid-2" style="margin-top:6px">
-  <div>
-    <div class="content-block">
-      <h3>📏 Seuils</h3>
-      <ul style="font-size:.8rem">
-        <li>> 1 cm : cervical, axillaire</li>
-        <li>> 2 cm : inguinal</li>
-        <li>Sus-claviculaire : tout palpable</li>
-      </ul>
-    </div>
-    <div class="content-block" style="margin-top:6px">
-      <h3>🔑 ADENOPATI</h3>
-      <p style="font-size:.8rem">Âge · Douleur · Extension · Nature · Origine · Peau · Adhérence · Taille · Infections</p>
-    </div>
-    <div class="urgence-box" style="margin-top:6px;font-size:.8rem">
-      <strong>⚡</strong> Sus-claviculaire = malin jusqu'à preuve contraire
-    </div>
-  </div>
-  <div>
-    <div class="content-block">
-      <h3>🎯 Étiologies clés</h3>
-      <table style="font-size:.78rem">
-        <tr><th>Contexte</th><th>Cause ++</th></tr>
-        <tr><td>Adolescent + angine</td><td>MNI (EBV)</td></tr>
-        <tr><td>Adulte jeune + signes B</td><td>Lymphome Hodgkin</td></tr>
-        <tr><td>Adulte > 60 ans</td><td>LLC, LNH</td></tr>
-        <tr><td>Enfant + cytopénies</td><td>LAL — urgence</td></tr>
-        <tr><td>Sus-claviculaire</td><td>Cancer primitif</td></tr>
-      </table>
-    </div>
-    <div class="content-block" style="margin-top:6px">
-      <h3>🔬 Examens clés</h3>
-      <ul style="font-size:.8rem">
-        <li><strong>NFS + frottis</strong> — toujours</li>
-        <li><strong>Biopsie-exérèse</strong> — lymphome</li>
-        <li><strong>TEP-FDG</strong> — extension lymphome</li>
-      </ul>
-    </div>
-  </div>
+<button class="qcm-btn" onclick="validateQCM(this)">Valider</button>
+<div class="qcm-feedback">✅ Réponse : <strong>B</strong> — La biopsie-exérèse est l'examen de référence pour affirmer et typer un lymphome devant une ADP chronique inexpliquée. La cytoponction est un complément, pas un substitut.</div>
 </div>
-</div><div class="slide fin-slide" id="slide-50">
+</div><div class="slide " id="slide-26">
+<div class="slide-title">🎓 QCM Blanc — Adénopathie superficielle (2/2)</div>
+<div class="qcm-block" data-correct="B,E">
+<div class="qcm-question">Q6. Parmi les caractéristiques suivantes, laquelle est évocatrice d'une ADP infectieuse ? (plusieurs réponses possibles)</div>
+<div class="qcm-options">
+<div class="qcm-option" onclick="selectMulti(this)">A. Le caractère fixé aux plans profonds</div>
+<div class="qcm-option" onclick="selectMulti(this)">B. Le caractère inflammatoire</div>
+<div class="qcm-option" onclick="selectMulti(this)">C. Le caractère non douloureux</div>
+<div class="qcm-option" onclick="selectMulti(this)">D. Le caractère pierreux</div>
+<div class="qcm-option" onclick="selectMulti(this)">E. La présence d'une porte d'entrée</div>
+</div>
+<button class="qcm-btn" onclick="validateQCM(this)">Valider</button>
+<div class="qcm-feedback">✅ Réponse : <strong>B,E</strong> — ADP infectieuse : inflammatoire (rouge, chaud, douloureux), porte d'entrée identifiable. Fixation aux plans profonds et dureté pierreuse évoquent plutôt le cancer.</div>
+</div>
+<div class="qcm-block" data-correct="C,D">
+<div class="qcm-question">Q7. Quel(s) diagnostic(s) peut(vent) entraîner une adénopathie inguinale ? (plusieurs réponses possibles)</div>
+<div class="qcm-options">
+<div class="qcm-option" onclick="selectMulti(this)">A. Le cancer ORL</div>
+<div class="qcm-option" onclick="selectMulti(this)">B. Le cancer pulmonaire</div>
+<div class="qcm-option" onclick="selectMulti(this)">C. Le lymphome folliculaire</div>
+<div class="qcm-option" onclick="selectMulti(this)">D. Le mélanome malin</div>
+<div class="qcm-option" onclick="selectMulti(this)">E. Le cancer colique</div>
+</div>
+<button class="qcm-btn" onclick="validateQCM(this)">Valider</button>
+<div class="qcm-feedback">✅ Réponse : <strong>C,D</strong> — Le lymphome folliculaire peut toucher tous les territoires (y compris inguinal). Le mélanome est un 'grand simulateur' capable de métastases dans n'importe quel territoire. Le cancer ORL → ADP cervicales. Cancer pulmonaire → ADP sus-claviculaires. Cancer colique → sus-claviculaires, non inguinal.</div>
+</div>
+<div class="qcm-block" data-correct="B">
+<div class="qcm-question">Q8. Quelle investigation doit-on demander en PREMIÈRE intention devant un tableau de polyadénopathies ?</div>
+<div class="qcm-options">
+<div class="qcm-option" onclick="selectOption(this)">A. Un TEP-scanner</div>
+<div class="qcm-option" onclick="selectOption(this)">B. Un hémogramme avec frottis sanguin</div>
+<div class="qcm-option" onclick="selectOption(this)">C. Une radiographie de thorax</div>
+<div class="qcm-option" onclick="selectOption(this)">D. Une sérologie de la maladie des griffes du chat</div>
+<div class="qcm-option" onclick="selectOption(this)">E. Un myélogramme</div>
+</div>
+<button class="qcm-btn" onclick="validateQCM(this)">Valider</button>
+<div class="qcm-feedback">✅ Réponse : <strong>B</strong> — L'hémogramme avec frottis sanguin est l'examen d'orientation principal devant une polyadénopathie.</div>
+</div>
+<div class="qcm-block" data-correct="C">
+<div class="qcm-question">Q9. Parmi les étiologies suivantes, laquelle doit-on éliminer en PREMIÈRE intention devant une adénomégalie médiastinale compressive ?</div>
+<div class="qcm-options">
+<div class="qcm-option" onclick="selectOption(this)">A. Un sarcome</div>
+<div class="qcm-option" onclick="selectOption(this)">B. Une infection à VIH</div>
+<div class="qcm-option" onclick="selectOption(this)">C. Un lymphome</div>
+<div class="qcm-option" onclick="selectOption(this)">D. Une sarcoïdose</div>
+<div class="qcm-option" onclick="selectOption(this)">E. Un goitre thyroïdien plongeant</div>
+</div>
+<button class="qcm-btn" onclick="validateQCM(this)">Valider</button>
+<div class="qcm-feedback">✅ Réponse : <strong>C</strong> — Le lymphome est l'étiologie à éliminer en urgence devant une masse médiastinale compressive, car il est rapidement traitable. Biopsie en urgence.</div>
+</div>
+<div class="qcm-block" data-correct="A,C,E">
+<div class="qcm-question">Q10. Parmi les diagnostics suivants, lequel peut entraîner une adénopathie chez l'enfant ? (plusieurs réponses possibles)</div>
+<div class="qcm-options">
+<div class="qcm-option" onclick="selectMulti(this)">A. La mononucléose infectieuse à EBV</div>
+<div class="qcm-option" onclick="selectMulti(this)">B. La leucémie lymphoïde chronique</div>
+<div class="qcm-option" onclick="selectMulti(this)">C. La maladie des griffes du chat</div>
+<div class="qcm-option" onclick="selectMulti(this)">D. La sphérocytose héréditaire</div>
+<div class="qcm-option" onclick="selectMulti(this)">E. La tuberculose</div>
+</div>
+<button class="qcm-btn" onclick="validateQCM(this)">Valider</button>
+<div class="qcm-feedback">✅ Réponse : <strong>A,C,E</strong> — La LLC est rare chez l'enfant (adulte >50 ans). La sphérocytose héréditaire cause une splénomégalie, pas des ADP. MNI, griffes du chat et tuberculose sont des causes classiques d'ADP pédiatriques.</div>
+</div>
+</div><div class="slide " id="slide-27">
+<div class="slide-title">📋 Dossier Progressif — Adénopathie cervicale</div>
+<div class="vignette"><strong>Scénario :</strong> Arnaud, 24 ans, vous consulte pour une masse cervicale droite ferme de 3×2 cm, apparue il y a 7 semaines, d'évolution progressive. Il signale une asthénie modérée et des sueurs nocturnes 3 fois par semaine. Pas de fièvre. Poids stable. Pas d'antécédents. Examen clinique : état général conservé, ADP cervicale droite ferme et non douloureuse, mobile, sans périadénite. Aucune autre ADP. Pas de splénomégalie.</div>
+
+<div class="dp-step"><strong>Étape 1 :</strong> Décrivez l'adénopathie (sémiologie) et donnez le diagnostic le plus probable à évoquer en 1ère intention.</div>
+<button class="dp-toggle" onclick="toggleDP(this)">▶ Voir la réponse</button>
+<div class="dp-answer">ADP chronique (&gt;6 semaines), ferme, non douloureuse, non inflammatoire, mobile, taille 3×2 cm. <strong>Diagnostic le plus probable : lymphome</strong> (Hodgkin ++ chez l'adulte jeune). Les sueurs nocturnes correspondent aux symptômes B. Aucune porte d'entrée infectieuse identifiable.</div>
+
+<div class="dp-step"><strong>Étape 2 :</strong> Quels examens complémentaires demandez-vous en 1ère intention ?</div>
+<button class="dp-toggle" onclick="toggleDP(this)">▶ Voir la réponse</button>
+<div class="dp-answer"><strong>Bilan de 1ère intention :</strong> ① Hémogramme + frottis sanguin ② CRP, LDH, bilan hépatique ③ Sérologies VIH, EBV, toxoplasmose ④ Cytoponction ganglionnaire pour orientation rapide ⑤ Radiographie thoracique (recherche ADP médiastinale). La cytoponction ne remplace pas la biopsie.</div>
+
+<div class="dp-step"><strong>Étape 3 :</strong> La cytoponction retrouve de grandes cellules à noyaux bilobés compatibles avec des cellules de Reed-Sternberg. Que concluez-vous ? Que faites-vous ?</div>
+<button class="dp-toggle" onclick="toggleDP(this)">▶ Voir la réponse</button>
+<div class="dp-answer">La présence de cellules de Reed-Sternberg évoque fortement un <strong>lymphome de Hodgkin</strong>. Cependant, la cytoponction ne permet pas le typage histologique. Il faut impérativement réaliser une <strong>biopsie-exérèse ganglionnaire</strong> dans un centre spécialisé, avec ① histologie standard + immunohistochimie ② biologie moléculaire ③ caryotype ④ congélation de tissu tumoral. C'est le SEUL examen permettant d'affirmer et de typer le lymphome.</div>
+
+<div class="dp-step"><strong>Étape 4 :</strong> La biopsie confirme un lymphome de Hodgkin classique, type scléronodulaire. Quel bilan d'extension réalisez-vous ?</div>
+<button class="dp-toggle" onclick="toggleDP(this)">▶ Voir la réponse</button>
+<div class="dp-answer"><strong>Bilan d'extension du lymphome de Hodgkin :</strong> ① <strong>TEP-TDM corps entier</strong> (examen de référence pour le bilan d'extension) ② TDM cervico-thoraco-abdomino-pelvienne ③ Hémogramme, VS, LDH, β2-microglobuline, albuminémie ④ Bilan hépatique ⑤ Sérologies VIH, VHB, VHC ⑥ Conservation de fertilité avant traitement (si projet parental) ⑦ BOM optionnelle (TEP-TDM la remplace souvent).</div>
+
+<div class="dp-step"><strong>Étape 5 :</strong> Le bilan révèle une atteinte sus-diaphragmatique uniquement (stade II). Quels sont les principes du traitement et le suivi ?</div>
+<button class="dp-toggle" onclick="toggleDP(this)">▶ Voir la réponse</button>
+<div class="dp-answer"><strong>LH classique stade II sus-diaphragmatique :</strong> ① Chimiothérapie <strong>ABVD</strong> (Adriamycine, Bléomycine, Vinblastine, Dacarbazine) × 2-4 cycles ② Évaluation par <strong>TEP-TDM intermédiaire</strong> après 2 cycles (adapte la stratégie thérapeutique) ③ Radiothérapie des territoires initialement atteints (stade limité) — approche combined modality treatment ④ TEP-TDM de fin de traitement pour évaluer la réponse. Le traitement du LH est <strong>curatif</strong> dans la grande majorité des cas.</div>
+</div><div class="slide " id="slide-28">
+<div class="slide-title">📚 Points Clés — Adénopathie superficielle (Item 220)</div>
+<div class="grid-2">
+<div>
+<div class="success-box"><strong>Diagnostic</strong><br>• ADP pathologique : &gt;1 cm dans un territoire ganglionnaire<br>• Schéma daté et signé systématique<br>• ADENOPATI : 9 caractères sémiologiques à préciser<br>• Aucun critère de bénignité n'existe</div>
+<div class="info-box"><strong>ADP localisée</strong><br>• Explorer le territoire de drainage lymphatique<br>• 3 étiologies : infection / cancer / lymphome<br>• Sus-claviculaire = malignité en 1er !</div>
+<div class="info-box"><strong>Cytoponction vs Biopsie</strong><br>• Cytoponction = orientation rapide, microbiologie<br>• Biopsie = seule pour typer un lymphome<br>• Biopsie si ADP &gt;4-6 semaines inexpliquée</div>
+</div>
+<div>
+<div class="warning-box"><strong>Polyadénopathie</strong><br>• Hémogramme = examen d'orientation PRINCIPAL<br>• LLC, blastes, syndrome mono, lymphoplasmocytes<br>• Si normal : VIH, toxo, syphilis, sarcoïdose...</div>
+<div class="success-box"><strong>Pédiatrie</strong><br>• Causes infectieuses prédominent<br>• MNI, griffes du chat, tuberculose, Kawasaki<br>• LLC rare chez l'enfant</div>
+<div class="urgence-box"><strong>⚠️ Urgences à ne pas manquer</strong><br>• Syndrome de Kawasaki (enfant) : anévrismes coronaires<br>• Masse médiastinale compressive → biopsie urgente<br>• Blastes à l'hémogramme → myélogramme urgent</div>
+</div>
+</div>
+</div><div class="slide fin-slide" id="slide-29">
 <div style="text-align:center;padding:40px 20px">
-  <div style="font-size:2.5rem;margin-bottom:16px">🎉</div>
-  <h2 style="font-size:1.6rem;color:#27ae60;margin-bottom:10px">Cours terminé !</h2>
-  <p style="color:#aaa;font-size:.9rem;margin-bottom:20px">Item 220 — Adénopathie superficielle</p>
-  <div style="background:rgba(39,174,96,.08);border:1px solid rgba(39,174,96,.3);border-radius:12px;padding:16px;max-width:440px;margin:0 auto;text-align:left">
-    <p style="font-size:.83rem;font-weight:700;color:#2ecc71;margin-bottom:8px">✅ Points essentiels</p>
-    <ul style="font-size:.8rem;color:#ccc;padding-left:16px">
-      <li>Pathologique > 1 cm (cervical) / > 2 cm (inguinal)</li>
-      <li>Sus-claviculaire = malin jusqu'à preuve contraire</li>
-      <li>3 causes : infection · cancer · lymphome</li>
-      <li>NFS + frottis en 1ère intention toujours</li>
-      <li>Biopsie exérèse = gold standard lymphome</li>
-      <li>Chez l'enfant : infectieux++ mais ne pas rater LAL</li>
-    </ul>
-  </div>
-  <div style="margin-top:16px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
-    <button onclick="showSlide(0)" style="background:#27ae60;color:#fff;border:none;padding:8px 20px;border-radius:20px;cursor:pointer;font-size:.85rem">🔄 Revoir</button>
-    <a href="index.html" style="background:rgba(255,255,255,.1);color:#e8e8f0;text-decoration:none;padding:8px 20px;border-radius:20px;font-size:.85rem;border:1px solid rgba(255,255,255,.2)">🏠 Accueil</a>
-  </div>
+<div style="font-size:3rem;margin-bottom:16px">🎉</div>
+<h1 style="font-size:1.8rem;color:#27ae60;margin-bottom:12px">Félicitations !</h1>
+<p style="color:#aaa;font-size:.95rem;margin-bottom:24px">Vous avez terminé le chapitre Adénopathie superficielle (Item 220)</p>
+<div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-bottom:24px">
+  <span style="background:rgba(39,174,96,.15);color:#2ecc71;padding:6px 14px;border-radius:20px;font-size:.85rem;border:1px solid #27ae60">🔍 Diagnostic</span>
+  <span style="background:rgba(39,174,96,.15);color:#2ecc71;padding:6px 14px;border-radius:20px;font-size:.85rem;border:1px solid #27ae60">🗺️ Territoires de drainage</span>
+  <span style="background:rgba(39,174,96,.15);color:#2ecc71;padding:6px 14px;border-radius:20px;font-size:.85rem;border:1px solid #27ae60">🔬 Cytoponction / Biopsie</span>
+  <span style="background:rgba(39,174,96,.15);color:#2ecc71;padding:6px 14px;border-radius:20px;font-size:.85rem;border:1px solid #27ae60">👶 Pédiatrie</span>
+  <span style="background:rgba(39,174,96,.15);color:#2ecc71;padding:6px 14px;border-radius:20px;font-size:.85rem;border:1px solid #27ae60">🎓 10 QCM validés</span>
+</div>
+<button onclick="showSlide(0)" style="background:linear-gradient(135deg,#27ae60,#2ecc71);color:#fff;border:none;padding:10px 24px;border-radius:22px;cursor:pointer;font-size:.9rem;font-weight:600">↩ Recommencer</button>
 </div>
 </div>
 </div>
 <script>
-let current=0,total=0;
-function showSlide(n){
-  const slides=document.querySelectorAll('.slide');
-  total=slides.length;
-  if(n<0)n=0;if(n>=total)n=total-1;
-  slides.forEach((s,i)=>s.classList.toggle('active',i===n));
-  current=n;
-  document.querySelector('.progress-bar').style.width=((n+1)/total*100)+'%';
-  const ctr=document.querySelector('.tb-counter');
-  if(ctr)ctr.textContent=(n+1)+' / '+total;
-}
-function changeSlide(d){showSlide(current+d);}
+
 function flipCard(el){el.classList.toggle('revealed');}
-function selectOption(el){
-  if(el.tagName==='LABEL'){return;}
-  el.classList.toggle('selected');
+let current=0;
+const total=30;
+function showSlide(n){
+  document.querySelectorAll('.slide').forEach(s=>s.classList.remove('active'));
+  document.getElementById('slide-'+n).classList.add('active');
+  current=n;
+  document.querySelector('.progress-bar').style.width=((n/(total-1))*100)+'%';
+  document.querySelector('.tb-counter').textContent=(n+1)+' / '+total;
+  window.scrollTo(0,0);
 }
+function changeSlide(d){showSlide(Math.max(0,Math.min(total-1,current+d)));}
+function selectOption(el){
+  const block=el.closest('.qcm-block');
+  block.querySelectorAll('.qcm-option').forEach(o=>o.classList.remove('selected'));
+  el.classList.add('selected');
+}
+function selectMulti(el){el.classList.toggle('selected');}
 function validateQCM(btn){
   const block=btn.closest('.qcm-block');
-  const opts=block.querySelectorAll('.qcm-option');
+  const correct=block.dataset.correct.split(',');
+  block.querySelectorAll('.qcm-option').forEach((o,i)=>{
+    const letter=String.fromCharCode(65+i);
+    if(correct.includes(letter))o.classList.add('correct-show');
+    else if(o.classList.contains('selected'))o.classList.add('wrong-show');
+  });
   const fb=block.querySelector('.qcm-feedback');
-  let ok=true;
-  opts.forEach(opt=>{
-    if(opt.classList.contains('correct-ans')){opt.classList.add('correct-show');}
-    else if(opt.classList.contains('selected')){opt.classList.add('wrong-show');ok=false;}
-  });
+  if(fb)fb.style.display='block';
   btn.disabled=true;
-  if(fb){fb.style.display='block';fb.textContent=ok?'✅ Correct !':'❌ Revoir la réponse ci-dessus.';}
 }
-document.addEventListener('DOMContentLoaded',()=>{
-  showSlide(0);
-  document.addEventListener('keydown',e=>{
-    if(e.key==='ArrowRight'||e.key==='ArrowDown')changeSlide(1);
-    if(e.key==='ArrowLeft'||e.key==='ArrowUp')changeSlide(-1);
-  });
-  let tx=0;
-  document.addEventListener('touchstart',e=>{tx=e.touches[0].clientX;},{passive:true});
-  document.addEventListener('touchend',e=>{
-    const dx=e.changedTouches[0].clientX-tx;
-    if(Math.abs(dx)>50){changeSlide(dx<0?1:-1);}
-  },{passive:true});
+function toggleDP(btn){
+  const ans=btn.nextElementSibling;
+  if(ans.style.display==='block'){ans.style.display='none';btn.textContent='▶ Voir la réponse';}
+  else{ans.style.display='block';btn.textContent='▲ Masquer';}
+}
+document.addEventListener('keydown',e=>{
+  if(e.key==='ArrowRight'||e.key==='ArrowDown')changeSlide(1);
+  if(e.key==='ArrowLeft'||e.key==='ArrowUp')changeSlide(-1);
 });
+let ts=0;
+document.addEventListener('touchstart',e=>ts=e.touches[0].clientX,{passive:true});
+document.addEventListener('touchend',e=>{const d=e.changedTouches[0].clientX-ts;if(Math.abs(d)>50)changeSlide(d<0?1:-1);},{passive:true});
+document.getElementById('slide-0').classList.add('active');
+
 </script>
 </body>
 </html>
