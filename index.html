@@ -115,10 +115,10 @@ footer p{color:#444;font-size:0.85em}
   <!-- ACCUEIL : liste des matières -->
   <div id="view-matieres">
     <div class="stats-bar">
-      <div class="stat"><div class="stat-num">1</div><div class="stat-label">Matière</div></div>
-      <div class="stat"><div class="stat-num">6</div><div class="stat-label">Cours</div></div>
-      <div class="stat"><div class="stat-num">498+</div><div class="stat-label">Diapositives</div></div>
-      <div class="stat"><div class="stat-num">800+</div><div class="stat-label">Questions</div></div>
+      <div class="stat"><div class="stat-num">2</div><div class="stat-label">Matières</div></div>
+      <div class="stat"><div class="stat-num">10</div><div class="stat-label">Cours</div></div>
+      <div class="stat"><div class="stat-num">545+</div><div class="stat-label">Diapositives</div></div>
+      <div class="stat"><div class="stat-num">860+</div><div class="stat-label">Questions</div></div>
     </div>
 
     <p class="section-title">Choisissez une matière</p>
@@ -128,6 +128,13 @@ footer p{color:#444;font-size:0.85em}
         <h2>Hématologie</h2>
         <p>Maladies du sang, de la moelle osseuse et des organes lymphoïdes</p>
         <span class="matiere-badge">6 cours disponibles</span>
+      </div>
+
+      <div class="matiere-card" style="--accent:#1abc9c" onclick="showCours('nephrologie')">
+        <div class="matiere-icon">🫘</div>
+        <h2>Néphrologie</h2>
+        <p>Physiologie rénale, filtration glomérulaire, régulation, physiopathologie</p>
+        <span class="matiere-badge">1 cours disponible</span>
       </div>
 
       <div class="matiere-card" style="--accent:#3498db;opacity:0.5;cursor:not-allowed">
@@ -283,6 +290,38 @@ footer p{color:#444;font-size:0.85em}
         </div>
         <div class="cours-meta">
           <div class="cours-slides">38 diapos</div>
+          <span class="cours-status status-available">Disponible</span>
+        </div>
+        <span class="cours-arrow">→</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- VUE COURS NÉPHROLOGIE -->
+  <div id="view-cours-nephrologie" class="cours-section">
+    <div class="breadcrumb">
+      <a onclick="showMatieres()">Accueil</a>
+      <span>›</span>
+      <span style="color:#fff">Néphrologie</span>
+    </div>
+
+    <div class="cours-header">
+      <button class="back-btn" onclick="showMatieres()">←</button>
+      <div>
+        <h2>🫘 Néphrologie</h2>
+        <p style="color:#777;font-size:0.9em;margin-top:4px">Physiologie rénale — Pr Carole Planès</p>
+      </div>
+    </div>
+
+    <div class="cours-grid">
+      <a class="cours-card" href="presentation_filtration_glomerulaire.html" style="--hover:#1abc9c">
+        <div class="cours-num" style="background:linear-gradient(135deg,#1abc9c,#16a085)">1</div>
+        <div class="cours-info">
+          <h3>Filtration Glomérulaire</h3>
+          <p>Fonctions · Structure · DSR/DPR · DFG · Forces de Starling · Régulation · Physiopathologie</p>
+        </div>
+        <div class="cours-meta">
+          <div class="cours-slides">47 diapos</div>
           <span class="cours-status status-available">Disponible</span>
         </div>
         <span class="cours-arrow">→</span>
