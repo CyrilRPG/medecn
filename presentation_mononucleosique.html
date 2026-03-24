@@ -1,0 +1,1463 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Syndromes Mononucléosiques — Item 217</title>
+<style>
+/* ─── RESET & BASE ─── */
+*, *::before, *::after { box-sizing:border-box; margin:0; padding:0; }
+:root {
+  --bg-dark:#0d0d1a; --bg-card:#1a1a2e; --bg-slide:#16213e;
+  --red:#e74c3c; --orange:#f39c12; --blue:#3498db; --green:#2ecc71;
+  --text:#e8e8f0; --text-muted:#b0b0c0; --text-dim:#888;
+  --topbar-h:50px;
+}
+html,body { height:100%; background:var(--bg-dark); color:var(--text); font-family:'Segoe UI',system-ui,sans-serif; overflow:hidden; }
+
+/* ─── TOPBAR ─── */
+.topbar {
+  position:fixed; top:0; left:0; right:0; height:var(--topbar-h);
+  background:rgba(13,13,26,.95); backdrop-filter:blur(10px);
+  border-bottom:1px solid rgba(231,76,60,.3);
+  display:flex; align-items:center; justify-content:space-between;
+  padding:0 1rem; z-index:1000;
+}
+.topbar a { color:#fff; text-decoration:none; font-size:1.1rem; padding:6px 12px; border-radius:6px; border:1px solid rgba(255,255,255,.2); transition:.2s; }
+.topbar a:hover { background:rgba(255,255,255,.1); }
+.topbar-center { display:flex; align-items:center; gap:1rem; }
+#slide-counter { color:var(--text-muted); font-size:.9rem; }
+.progress-bar { width:200px; height:4px; background:rgba(255,255,255,.1); border-radius:2px; }
+.progress-fill { height:100%; background:var(--red); border-radius:2px; transition:width .3s; }
+.topbar-nav { display:flex; gap:.5rem; }
+.topbar-nav button {
+  background:rgba(231,76,60,.2); border:1px solid var(--red); color:var(--text);
+  padding:6px 16px; border-radius:6px; cursor:pointer; font-size:.9rem; transition:.2s;
+}
+.topbar-nav button:hover { background:var(--red); }
+
+/* ─── SLIDE CONTAINER ─── */
+#slides-wrapper {
+  position:fixed; top:var(--topbar-h); left:0; right:0; bottom:0;
+  overflow-y:auto; scroll-behavior:smooth;
+}
+.slide {
+  display:none; min-height:calc(100vh - var(--topbar-h));
+  padding:2rem 2.5rem; background:var(--bg-slide);
+  animation:fadeIn .25s ease;
+}
+.slide.active { display:block; }
+@keyframes fadeIn { from{opacity:0;transform:translateY(6px)} to{opacity:1;transform:translateY(0)} }
+
+/* ─── SECTION HEADER ─── */
+.section-header {
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  text-align:center; background:linear-gradient(135deg,#0d0d1a 0%,#1a1a2e 60%,#16213e 100%);
+}
+.section-number {
+  font-size:5rem; font-weight:900; color:var(--red);
+  line-height:1; margin-bottom:.5rem; text-shadow:0 0 30px rgba(231,76,60,.4);
+}
+.section-header h1 { font-size:2.5rem; color:var(--text); margin-bottom:.5rem; }
+.section-subtitle { color:var(--text-muted); font-size:1.2rem; }
+
+/* ─── TYPOGRAPHY ─── */
+h2 { font-size:1.5rem; color:var(--red); margin-bottom:1.2rem; padding-bottom:.5rem; border-bottom:2px solid rgba(231,76,60,.3); }
+h3 { font-size:1.1rem; color:var(--orange); margin-bottom:.6rem; }
+h4 { color:var(--blue); margin-bottom:.4rem; }
+p { line-height:1.7; margin-bottom:.8rem; }
+ul,ol { padding-left:1.4rem; margin-bottom:.8rem; }
+li { margin-bottom:.4rem; line-height:1.6; }
+strong { color:#fff; }
+em { color:var(--text-muted); }
+
+/* ─── TWO-COL ─── */
+.two-col { display:grid; grid-template-columns:1fr 1fr; gap:2rem; margin-bottom:1rem; }
+@media(max-width:768px){ .two-col{grid-template-columns:1fr;} }
+
+/* ─── BOXES ─── */
+.def-box {
+  display:inline; background:rgba(243,156,18,.12);
+  border-left:4px solid var(--orange); padding:1px 6px; border-radius:2px;
+}
+.urgence-box {
+  background:rgba(231,76,60,.15); border:1px solid var(--red);
+  border-radius:8px; padding:1rem; margin:.8rem 0; line-height:1.7;
+}
+
+/* ─── FLASH QUIZ ─── */
+.flash-container { margin-top:1.5rem; display:grid; grid-template-columns:1fr 1fr; gap:.8rem; }
+@media(max-width:768px){ .flash-container{grid-template-columns:1fr;} }
+.flash-block {
+  background:rgba(52,152,219,.08); border:1px solid rgba(52,152,219,.25);
+  border-radius:8px; padding:.8rem;
+}
+.flash-question { font-size:.9rem; color:var(--blue); margin-bottom:.5rem; font-style:italic; }
+.flash-input {
+  width:100%; background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.15);
+  border-radius:6px; color:var(--text); padding:.4rem .6rem; font-size:.85rem; margin-bottom:.4rem;
+}
+.flash-btn {
+  background:rgba(52,152,219,.3); border:1px solid var(--blue); color:var(--text);
+  padding:4px 12px; border-radius:5px; cursor:pointer; font-size:.8rem; transition:.2s;
+}
+.flash-btn:hover { background:var(--blue); }
+.flash-feedback { font-size:.82rem; margin-top:.3rem; min-height:1.2em; font-weight:600; }
+.flash-feedback.correct { color:var(--green); }
+.flash-feedback.wrong { color:var(--red); }
+
+/* ─── QCM ─── */
+.exam-slide { background:linear-gradient(135deg,#0d0d1a 0%,#16213e 100%); }
+.qcm-container { display:grid; grid-template-columns:1fr 1fr; gap:1rem; }
+@media(max-width:900px){ .qcm-container{grid-template-columns:1fr;} }
+.qcm-block {
+  background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.1);
+  border-radius:8px; padding:.9rem;
+}
+.qcm-question { font-size:.88rem; margin-bottom:.6rem; line-height:1.5; }
+.qcm-option {
+  padding:.35rem .7rem; margin:.25rem 0; border-radius:5px; cursor:pointer; font-size:.82rem;
+  border:1px solid rgba(255,255,255,.1); transition:.15s;
+}
+.qcm-option:hover { background:rgba(52,152,219,.15); border-color:var(--blue); }
+.qcm-option.selected { background:rgba(52,152,219,.25); border-color:var(--blue); }
+.qcm-option.correct { background:rgba(46,204,113,.25); border-color:var(--green); }
+.qcm-option.wrong { background:rgba(231,76,60,.2); border-color:var(--red); }
+.qcm-btn {
+  margin-top:.5rem; background:rgba(231,76,60,.3); border:1px solid var(--red);
+  color:var(--text); padding:4px 14px; border-radius:5px; cursor:pointer; font-size:.8rem; transition:.2s;
+}
+.qcm-btn:hover:not(:disabled) { background:var(--red); }
+.qcm-btn:disabled { opacity:.35; cursor:not-allowed; }
+.qcm-feedback { font-size:.8rem; margin-top:.3rem; font-weight:600; min-height:1.1em; }
+.qcm-feedback.correct { color:var(--green); }
+.qcm-feedback.wrong { color:var(--red); }
+.qcm-explanation { font-size:.8rem; color:var(--text-muted); margin-top:.4rem; padding:.5rem; background:rgba(255,255,255,.04); border-radius:5px; line-height:1.5; }
+
+/* ─── DOSSIER PROGRESSIF ─── */
+.dp-container { display:flex; flex-direction:column; gap:1rem; margin-top:1rem; }
+.dp-step {
+  background:rgba(255,255,255,.04); border:1px solid rgba(243,156,18,.2);
+  border-radius:8px; padding:1rem;
+}
+.dp-step h4 { color:var(--orange); margin-bottom:.4rem; font-size:.95rem; }
+.dp-step p { font-size:.88rem; margin-bottom:.6rem; color:var(--text-muted); }
+
+/* ─── SLIDE WITH IMAGE ─── */
+.slide-with-img { display:grid; grid-template-columns:1fr 310px; gap:1.5rem; align-items:start; }
+.slide-img img { width:100%; border-radius:8px; border:1px solid rgba(255,255,255,.1); cursor:zoom-in; transition:.2s; }
+.slide-img img:hover { border-color:var(--red); }
+@media(max-width:900px){ .slide-with-img{grid-template-columns:1fr;} }
+
+/* ─── MODAL ─── */
+#img-modal {
+  display:none; position:fixed; inset:0; background:rgba(0,0,0,.85);
+  z-index:2000; align-items:center; justify-content:center; cursor:zoom-out;
+}
+#img-modal.open { display:flex; }
+#img-modal img { max-width:90vw; max-height:90vh; border-radius:8px; }
+</style>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<div class="topbar">
+  <a href="index.html">🏠 Accueil</a>
+  <div class="topbar-center">
+    <span id="slide-counter">1 / 45</span>
+    <div class="progress-bar"><div class="progress-fill" id="progress-fill" style="width:2%"></div></div>
+  </div>
+  <div class="topbar-nav">
+    <button onclick="changeSlide(-1)">◀ Préc</button>
+    <button onclick="changeSlide(1)">Suiv ▶</button>
+  </div>
+</div>
+
+<!-- MODAL IMAGE -->
+<div id="img-modal" onclick="closeModal()">
+  <img id="modal-img" src="" alt="">
+</div>
+
+<!-- SLIDES -->
+<div id="slides-wrapper">
+<div class="slide title-slide" id="slide-0">
+<a class="menu-link" href="index.html">← Menu</a>
+<div class="title-content">
+<div class="title-tag">ECN · Item 217 · Hématologie – Infectiologie</div>
+<h1>Syndromes<br>Mononucléosiques</h1>
+<div class="title-subtitle">Définition · EBV · CMV · VIH · Diagnostic différentiel</div>
+<div class="title-meta"><span>🩸 Item 217</span><span>📚 44 diapos</span><span>⚡ Quiz flash intégrés</span></div>
+</div></div>
+<div class="slide content-slide" id="slide-1">
+<h2>🎯 Objectifs du cours</h2>
+<div class="two-col">
+<div>
+<div class="highlight-box"><strong>Connaître</strong>
+<ul>
+<li>La définition du syndrome mononucléosique (SM)</li>
+<li>L'aspect des grands lymphocytes hyperbasophiles (LHB) au frottis</li>
+<li>Les principales étiologies du SM</li>
+<li>La physiopathologie commune (activation des LT CD8+)</li>
+</ul></div>
+<div class="highlight-box"><strong>Diagnostiquer</strong>
+<ul>
+<li>La mononucléose infectieuse (MNI) due à l'EBV</li>
+<li>La primo-infection CMV</li>
+<li>La primo-infection VIH — <span style="color:#e74c3c;font-weight:700">urgence diagnostique</span></li>
+<li>La toxoplasmose et les autres étiologies</li>
+</ul></div>
+</div>
+<div>
+<div class="highlight-box"><strong>Gérer</strong>
+<ul>
+<li>Le traitement symptomatique de la MNI-EBV</li>
+<li>Les contre-indications spécifiques (aspirine, amoxicilline)</li>
+<li>Les complications à surveiller (rupture splénique)</li>
+<li>L'initiation des ARV en cas de primo-VIH</li>
+</ul></div>
+<div class="warning-box"><strong>⚠ Ne jamais manquer</strong>
+<ul>
+<li>Primo-infection VIH masquée en « MNI »</li>
+<li>Leucémie aiguë lymphoblastique (LHB ≠ blastes)</li>
+<li>Amoxicilline dans une angine chez l'ado/adulte</li>
+</ul></div>
+</div>
+</div></div>
+<div class="slide content-slide" id="slide-2">
+<h2>📋 Plan du cours</h2>
+<div class="two-col">
+<div>
+<div class="def-box"><strong>I. Définition et physiopathologie</strong><br>Hémogramme · Grands LHB · Mécanisme d'activation T</div>
+<div class="def-box"><strong>II. Mononucléose infectieuse (EBV)</strong><br>Épidémiologie · Triade clinique · Biologie · Diagnostic · Traitement · Complications</div>
+<div class="def-box"><strong>III. Primo-infection CMV</strong><br>Clinique · Différences avec EBV · Diagnostic · Traitement</div>
+</div>
+<div>
+<div class="def-box"><strong>IV. Primo-infection VIH 🔴</strong><br>Syndrome rétroviral aigu · Urgence diagnostique · Ag p24 · ARV</div>
+<div class="def-box"><strong>V. Autres étiologies et diagnostic différentiel</strong><br>Toxoplasmose · HHV-6 · Rubéole · Hépatites · LAL · Lymphome</div>
+</div>
+</div></div>
+<div class="slide section-slide" id="slide-3">
+<div class="section-number">I</div>
+<h2>Définition et physiopathologie</h2>
+<div class="section-subtitle">Hémogramme · Grands lymphocytes hyperbasophiles · Mécanisme d'activation T</div>
+</div>
+<div class="slide content-slide" id="slide-4">
+<h2>I — Définition du syndrome mononucléosique</h2>
+<div class="def-box"><strong>📖 Syndrome mononucléosique (SM)</strong> : anomalie de l'hémogramme caractérisée par la présence de <span class="keyword">grands lymphocytes hyperbasophiles (LHB)</span> dans le sang circulant, témoignant d'une activation intense de l'immunité cellulaire.</div>
+<div class="def-box"><strong>📖 Grands lymphocytes hyperbasophiles (LHB)</strong> : cellules de grande taille (15–25 µm), à cytoplasme abondant et très basophile (bleu-violet foncé), noyau irrégulier à chromatine dense. Ce sont des <span class="keyword">lymphocytes T CD8+ cytotoxiques activés</span> — et NON des monocytes malgré la terminologie.</div>
+<div class="highlight-box"><strong>Définition quantitative (NFS + frottis)</strong>
+<ul>
+<li>Formule leucocytaire : <span class="keyword">&gt; 50 % de lymphocytes</span></li>
+<li>Dont : <span class="keyword">&gt; 10 % de grands LHB</span> sur le frottis sanguin</li>
+<li>Leucocytose variable (souvent 10–20 G/L), rarement très élevée</li>
+</ul></div>
+<div class="schema-box"><strong>Frottis sanguin dans le SM</strong><br>
+→ Grands lymphocytes à cytoplasme abondant bleu-violet foncé (hyperbasophile)<br>
+→ Noyau à bords irréguliers, chromatine en motte<br>
+→ Parfois vacuolisés ou indentés<br>
+<span style="color:#e74c3c">⚠ À distinguer des blastes leucémiques : LHB ont un cytoplasme abondant différencié, les blastes ont un cytoplasme peu abondant, nucleoles visibles</span></div>
+<div class="info-box"><strong>🔵 Terminologie trompeuse :</strong> "Mononucléosique" vient de la présence historiquement décrite de "grosses cellules mononuclées". En réalité, les LHB sont des lymphocytes T (CD8+), pas des monocytes. Le terme persiste par tradition.</div>
+</div>
+<div class="slide quiz-slide" id="slide-5">
+<h2>⚡ Quiz flash — Définition du SM</h2>
+<div class="flash-block" data-answer="Lymphocytes T CD8+ cytotoxiques activés"><div class="q-text">❓ Quel type cellulaire constitue les grands LHB observés dans le SM ?</div><div class="flash-input-row"><input class="flash-input" type="text" placeholder="Votre réponse…" onkeydown="if(event.key==='Enter')validateFlash(this)"><button class="qcm-validate" onclick="validateFlash(this)">Vérifier</button></div><div class="qcm-explanation"></div></div>
+<div class="flash-block" data-answer="&gt; 10 % de grands LHB (avec &gt; 50 % de lymphocytes dans la formule)"><div class="q-text">❓ Quel seuil quantitatif de LHB sur le frottis définit le SM ?</div><div class="flash-input-row"><input class="flash-input" type="text" placeholder="Votre réponse…" onkeydown="if(event.key==='Enter')validateFlash(this)"><button class="qcm-validate" onclick="validateFlash(this)">Vérifier</button></div><div class="qcm-explanation"></div></div>
+<div class="flash-block" data-answer="Grande taille (15-25 µm), cytoplasme abondant et basophile (bleu-violet foncé)"><div class="q-text">❓ Quelle est la taille caractéristique des LHB ?</div><div class="flash-input-row"><input class="flash-input" type="text" placeholder="Votre réponse…" onkeydown="if(event.key==='Enter')validateFlash(this)"><button class="qcm-validate" onclick="validateFlash(this)">Vérifier</button></div><div class="qcm-explanation"></div></div>
+<div class="flash-block" data-answer="LHB : cytoplasme abondant différencié ; blastes : cytoplasme peu abondant, nucléoles visibles (cellules immatures)"><div class="q-text">❓ Pourquoi ne faut-il pas confondre LHB et blastes leucémiques au frottis ?</div><div class="flash-input-row"><input class="flash-input" type="text" placeholder="Votre réponse…" onkeydown="if(event.key==='Enter')validateFlash(this)"><button class="qcm-validate" onclick="validateFlash(this)">Vérifier</button></div><div class="qcm-explanation"></div></div>
+</div>
+<div class="slide content-slide" id="slide-6">
+<h2>I — Physiopathologie et étiologies du SM</h2>
+<div class="def-box"><strong>📖 Mécanisme commun à tous les SM :</strong> un agent infectieux <span class="keyword">lymphotrope</span> (infectant préférentiellement les lymphocytes B ou les cellules épithéliales) déclenche une réponse immunitaire cellulaire intense → prolifération de LT CD8+ cytotoxiques activés (= LHB) en réponse aux cellules infectées.</div>
+<div class="highlight-box"><strong>Principales étiologies (par fréquence)</strong>
+<div class="table-wrap"><table>
+<tr><th>Agent</th><th>Fréquence</th><th>Particularité</th></tr>
+<tr><td><strong>EBV</strong> (Epstein-Barr Virus)</td><td>50–80 %</td><td>MNI classique, MNI-test+, angine</td></tr>
+<tr><td><strong>CMV</strong> (Cytomégalovirus)</td><td>10–20 %</td><td>Tableau MNI-like sans angine, MNI-test–</td></tr>
+<tr><td><strong>VIH</strong> (primo-infection)</td><td>≈5 %</td><td>🔴 URGENCE DIAGNOSTIQUE, ulcérations</td></tr>
+<tr><td><strong>Toxoplasma gondii</strong></td><td>≈5 %</td><td>SM "froid", adénopathies cervicales</td></tr>
+<tr><td>HHV-6, rubéole, hépatites</td><td>rares</td><td>Contextes spécifiques</td></tr>
+</table></div></div>
+<div class="warning-box"><strong>⚠ Règle de base :</strong> Tout syndrome mononucléosique impose d'éliminer en PREMIER une <span class="keyword">primo-infection VIH</span> (interrogatoire sur facteurs de risque) et une <span class="keyword">leucémie aiguë</span> (fièvre + adénopathies + cytopénies).</div>
+<div class="info-box"><strong>Démarche diagnostique initiale :</strong><ul>
+<li>MNI-test (agglutinines hétérophiles) → si positif : EBV probable</li>
+<li>Si MNI-test négatif : sérologies EBV, CMV, toxoplasme, <span class="keyword">sérologie VIH (combo Ag p24 + Ac)</span></li>
+</ul></div>
+</div>
+<div class="slide quiz-slide" id="slide-7">
+<h2>⚡ Quiz flash — Physiopathologie et étiologies</h2>
+<div class="flash-block" data-answer="Infection par un agent lymphotrope → activation de l'immunité cellulaire → prolifération de LT CD8+ cytotoxiques"><div class="q-text">❓ Quel est le mécanisme physiopathologique commun à tous les syndromes mononucléosiques ?</div><div class="flash-input-row"><input class="flash-input" type="text" placeholder="Votre réponse…" onkeydown="if(event.key==='Enter')validateFlash(this)"><button class="qcm-validate" onclick="validateFlash(this)">Vérifier</button></div><div class="qcm-explanation"></div></div>
+<div class="flash-block" data-answer="1ère : EBV (50-80 %) · 2ème : CMV (10-20 %)"><div class="q-text">❓ Quelle est la 1ère cause de SM ? La 2ème ?</div><div class="flash-input-row"><input class="flash-input" type="text" placeholder="Votre réponse…" onkeydown="if(event.key==='Enter')validateFlash(this)"><button class="qcm-validate" onclick="validateFlash(this)">Vérifier</button></div><div class="qcm-explanation"></div></div>
+<div class="flash-block" data-answer="La primo-infection VIH (syndrome rétroviral aigu)"><div class="q-text">❓ Quelle étiologie du SM est une urgence diagnostique à ne jamais manquer ?</div><div class="flash-input-row"><input class="flash-input" type="text" placeholder="Votre réponse…" onkeydown="if(event.key==='Enter')validateFlash(this)"><button class="qcm-validate" onclick="validateFlash(this)">Vérifier</button></div><div class="qcm-explanation"></div></div>
+<div class="flash-block" data-answer="Sérologies EBV, CMV, toxoplasme + sérologie VIH combo (Ag p24 + Ac)"><div class="q-text">❓ Si le MNI-test est négatif, quelles sérologies demander en priorité ?</div><div class="flash-input-row"><input class="flash-input" type="text" placeholder="Votre réponse…" onkeydown="if(event.key==='Enter')validateFlash(this)"><button class="qcm-validate" onclick="validateFlash(this)">Vérifier</button></div><div class="qcm-explanation"></div></div>
+</div>
+<div class="slide exam-slide" id="slide-8">
+<h2>📝 QCM — Section I : Définition et physiopathologie</h2>
+<div class="exam-progress"><div class="exam-bar" id="bar-s1"></div></div>
+<div class="exam-score" id="score-s1">Score : <span class="score-val">0</span> / 10</div>
+<div class="qcm-block" data-answer="1"><div class="q-text">Q1. La définition quantitative du syndrome mononucléosique requiert :</div><div class="qcm-options"><div class="qcm-option" data-idx="0" onclick="selectOption(this)"><span class="letter">A</span><span>&gt; 50 % de polynucléaires neutrophiles avec cellules de grande taille</span></div><div class="qcm-option" data-idx="1" onclick="selectOption(this)"><span class="letter">B</span><span>&gt; 50 % de lymphocytes et &gt; 10 % de grands LHB sur le frottis</span></div><div class="qcm-option" data-idx="2" onclick="selectOption(this)"><span class="letter">C</span><span>Présence de blastes &gt; 20 % dans le sang</span></div><div class="qcm-option" data-idx="3" onclick="selectOption(this)"><span class="letter">D</span><span>Lymphocytose &gt; 5 G/L sans critère morphologique</span></div></div><button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button><div class="qcm-explanation">Le SM = &gt; 50 % de lymphocytes dans la formule leucocytaire ET &gt; 10 % de grands LHB sur le frottis. Ces LHB sont des LT CD8+ activés, non des blastes ni des monocytes.</div></div>
+<div class="qcm-block" data-answer="2"><div class="q-text">Q2. Les grands lymphocytes hyperbasophiles (LHB) sont en réalité :</div><div class="qcm-options"><div class="qcm-option" data-idx="0" onclick="selectOption(this)"><span class="letter">A</span><span>Des monocytes activés</span></div><div class="qcm-option" data-idx="1" onclick="selectOption(this)"><span class="letter">B</span><span>Des lymphocytes B infectés par l'EBV</span></div><div class="qcm-option" data-idx="2" onclick="selectOption(this)"><span class="letter">C</span><span>Des lymphocytes T CD8+ cytotoxiques activés</span></div><div class="qcm-option" data-idx="3" onclick="selectOption(this)"><span class="letter">D</span><span>Des cellules dendritiques circulantes</span></div></div><button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button><div class="qcm-explanation">Malgré la terminologie 'mononucléosique' (qui évoque les monocytes), les LHB sont des LT CD8+ cytotoxiques activés en réponse aux cellules infectées.</div></div>
+<div class="qcm-block" data-answer="2"><div class="q-text">Q3. Quelle est la 1ère cause de syndrome mononucléosique en France ?</div><div class="qcm-options"><div class="qcm-option" data-idx="0" onclick="selectOption(this)"><span class="letter">A</span><span>Le CMV</span></div><div class="qcm-option" data-idx="1" onclick="selectOption(this)"><span class="letter">B</span><span>La toxoplasmose</span></div><div class="qcm-option" data-idx="2" onclick="selectOption(this)"><span class="letter">C</span><span>L'EBV (virus d'Epstein-Barr)</span></div><div class="qcm-option" data-idx="3" onclick="selectOption(this)"><span class="letter">D</span><span>La primo-infection VIH</span></div></div><button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button><div class="qcm-explanation">L'EBV est responsable de 50-80 % des SM symptomatiques. La MNI (mononucléose infectieuse) due à l'EBV est la présentation clinique typique chez l'adolescent/adulte jeune.</div></div>
+<div class="qcm-block" data-answer="2"><div class="q-text">Q4. Au frottis sanguin, les LHB se distinguent des blastes leucémiques par :</div><div class="qcm-options"><div class="qcm-option" data-idx="0" onclick="selectOption(this)"><span class="letter">A</span><span>La présence de nucléoles visibles</span></div><div class="qcm-option" data-idx="1" onclick="selectOption(this)"><span class="letter">B</span><span>Leur taille inférieure à 10 µm</span></div><div class="qcm-option" data-idx="2" onclick="selectOption(this)"><span class="letter">C</span><span>Leur cytoplasme abondant et différencié (bleu foncé)</span></div><div class="qcm-option" data-idx="3" onclick="selectOption(this)"><span class="letter">D</span><span>Leur absence de noyau</span></div></div><button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button><div class="qcm-explanation">Les LHB ont un cytoplasme abondant, bien différencié, bleu-violet. Les blastes ont un cytoplasme peu abondant avec nucléoles proéminents. Cette distinction est cruciale pour ne pas manquer une LAL.</div></div>
+<div class="qcm-block" data-answer="2"><div class="q-text">Q5. Devant un SM, quelle étiologie doit toujours être éliminée en priorité ?</div><div class="qcm-options"><div class="qcm-option" data-idx="0" onclick="selectOption(this)"><span class="letter">A</span><span>Une infection à HHV-6</span></div><div class="qcm-option" data-idx="1" onclick="selectOption(this)"><span class="letter">B</span><span>Une rubéole</span></div><div class="qcm-option" data-idx="2" onclick="selectOption(this)"><span class="letter">C</span><span>Une primo-infection VIH</span></div><div class="qcm-option" data-idx="3" onclick="selectOption(this)"><span class="letter">D</span><span>Une hépatite A</span></div></div><button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button><div class="qcm-explanation">La primo-infection VIH est une urgence diagnostique à ne jamais manquer. Elle peut se présenter comme un SM classique. Le test VIH combo (Ag p24 + Ac) doit être systématiquement proposé.</div></div>
+</div>
+<div class="slide exam-slide" id="slide-9">
+<h2>📝 QCM — Section I (suite) + Dossier progressif</h2>
+<div class="qcm-block" data-answer="1"><div class="q-text">Q6. Le MNI-test (test des agglutinines hétérophiles) est :</div><div class="qcm-options"><div class="qcm-option" data-idx="0" onclick="selectOption(this)"><span class="letter">A</span><span>Positif dans 100 % des MNI-EBV</span></div><div class="qcm-option" data-idx="1" onclick="selectOption(this)"><span class="letter">B</span><span>Positif dans les MNI-EBV &gt; 12 ans, spécifique (mais peu sensible chez enfant)</span></div><div class="qcm-option" data-idx="2" onclick="selectOption(this)"><span class="letter">C</span><span>Positif dans toutes les causes de SM</span></div><div class="qcm-option" data-idx="3" onclick="selectOption(this)"><span class="letter">D</span><span>Remplacé par la PCR EBV en 1ère intention</span></div></div><button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button><div class="qcm-explanation">Le MNI-test est spécifique de la MNI-EBV chez l'adolescent/adulte (&gt; 12 ans). Sa sensibilité est moindre chez l'enfant (&lt; 12 ans). Un MNI-test négatif n'exclut pas l'EBV → sérologie EBV.</div></div>
+<div class="qcm-block" data-answer="1"><div class="q-text">Q7. Quel mécanisme physiopathologique commun déclenche le SM ?</div><div class="qcm-options"><div class="qcm-option" data-idx="0" onclick="selectOption(this)"><span class="letter">A</span><span>Hyperproduction de monocytes par la moelle</span></div><div class="qcm-option" data-idx="1" onclick="selectOption(this)"><span class="letter">B</span><span>Infection par un agent lymphotrope → activation de LT CD8+</span></div><div class="qcm-option" data-idx="2" onclick="selectOption(this)"><span class="letter">C</span><span>Déficit immunitaire combiné sévère</span></div><div class="qcm-option" data-idx="3" onclick="selectOption(this)"><span class="letter">D</span><span>Réaction auto-immune contre les hématies</span></div></div><button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button><div class="qcm-explanation">Un agent lymphotrope (EBV → LB, CMV → cellules épithéliales) déclenche une réponse LT CD8+ massive. Ces LT activés = LHB circulants.</div></div>
+<div class="qcm-block" data-answer="2"><div class="q-text">Q8. La leucocytose dans le SM est habituellement :</div><div class="qcm-options"><div class="qcm-option" data-idx="0" onclick="selectOption(this)"><span class="letter">A</span><span>Très élevée (&gt; 50 G/L)</span></div><div class="qcm-option" data-idx="1" onclick="selectOption(this)"><span class="letter">B</span><span>Basse (&lt; 2 G/L, leucopénie)</span></div><div class="qcm-option" data-idx="2" onclick="selectOption(this)"><span class="letter">C</span><span>Modérée (10-20 G/L) avec lymphocytose</span></div><div class="qcm-option" data-idx="3" onclick="selectOption(this)"><span class="letter">D</span><span>Associée à une polynucléose neutrophile</span></div></div><button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button><div class="qcm-explanation">Le SM s'accompagne d'une leucocytose modérée (10-20 G/L) avec lymphocytose prédominante. Une leucocytose &gt; 30 G/L doit faire évoquer une LAL ou une LLC.</div></div>
+<div class="qcm-block" data-answer="1"><div class="q-text">Q9. La présence de LHB est-elle synonyme de MNI-EBV ?</div><div class="qcm-options"><div class="qcm-option" data-idx="0" onclick="selectOption(this)"><span class="letter">A</span><span>Oui, c'est pathognomonique</span></div><div class="qcm-option" data-idx="1" onclick="selectOption(this)"><span class="letter">B</span><span>Non, c'est un signe biologique commun à plusieurs étiologies (EBV, CMV, VIH, toxo…)</span></div><div class="qcm-option" data-idx="2" onclick="selectOption(this)"><span class="letter">C</span><span>Non, c'est toujours une urgence hématologique</span></div><div class="qcm-option" data-idx="3" onclick="selectOption(this)"><span class="letter">D</span><span>Oui si associée à une fièvre</span></div></div><button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button><div class="qcm-explanation">Le SM (présence de LHB) est un signe biologique non spécifique. La cause doit être identifiée par le contexte clinique et les sérologies.</div></div>
+<div class="qcm-block" data-answer="1"><div class="q-text">Q10. Quel examen permettra de différencier un SM d'une leucémie aiguë ?</div><div class="qcm-options"><div class="qcm-option" data-idx="0" onclick="selectOption(this)"><span class="letter">A</span><span>La sérologie EBV seule</span></div><div class="qcm-option" data-idx="1" onclick="selectOption(this)"><span class="letter">B</span><span>Le myélogramme / la cytométrie en flux sanguine</span></div><div class="qcm-option" data-idx="2" onclick="selectOption(this)"><span class="letter">C</span><span>La PCR EBV</span></div><div class="qcm-option" data-idx="3" onclick="selectOption(this)"><span class="letter">D</span><span>La sérologie VIH</span></div></div><button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button><div class="qcm-explanation">La cytométrie en flux (ou le myélogramme) est indispensable si doute avec une LAL : les blastes sont des cellules immatures CD34+/TdT+, sans marqueurs de lymphocytes T matures.</div></div>
+<div class="dp-block">
+<h3 style="color:#f39c12;font-size:1rem;margin-bottom:8px">🏥 Dossier progressif — Section I</h3>
+<p style="font-size:.82rem;color:#a0a0c0;margin-bottom:8px"><em>M. L., 19 ans, étudiant. Consulte pour fièvre à 38,8°C depuis 8 jours, asthénie majeure, gorge douloureuse. NFS : GB = 14,2 G/L avec 72 % de lymphocytes dont 22 % de « grandes cellules à cytoplasme bleu foncé » sur le frottis. Pas d'ATCD particulier.</em></p>
+<div class="dp-step"><div class="dp-step-num">Étape 1</div><div class="dp-step-title">Quel syndrome biologique décrivez-vous ?</div><div class="qcm-block" data-answer="1"><div class="q-text">Quel est le syndrome biologique retrouvé sur la NFS ?</div><div class="qcm-options"><div class="qcm-option" data-idx="0" onclick="selectOption(this)"><span class="letter">A</span><span>Syndrome inflammatoire</span></div><div class="qcm-option" data-idx="1" onclick="selectOption(this)"><span class="letter">B</span><span>Syndrome mononucléosique (lymphocytose > 50% + > 10% LHB)</span></div><div class="qcm-option" data-idx="2" onclick="selectOption(this)"><span class="letter">C</span><span>Aplasie médullaire</span></div><div class="qcm-option" data-idx="3" onclick="selectOption(this)"><span class="letter">D</span><span>Polyglobulie</span></div></div><button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button><div class="qcm-explanation">GB 14,2 G/L avec 72% lymphocytes (>50%) et 22% LHB (>10%) = définition du syndrome mononucléosique. Les LHB = lymphocytes T CD8+ activés.</div></div></div>
+<div class="dp-step"><div class="dp-step-num">Étape 2</div><div class="dp-step-title">Quel diagnostic évoquez-vous en 1ère intention ?</div><div class="qcm-block" data-answer="2"><div class="q-text">Quelle est l'étiologie la plus probable chez ce patient ?</div><div class="qcm-options"><div class="qcm-option" data-idx="0" onclick="selectOption(this)"><span class="letter">A</span><span>Primo-infection CMV (sans angine)</span></div><div class="qcm-option" data-idx="1" onclick="selectOption(this)"><span class="letter">B</span><span>Leucémie aiguë lymphoblastique</span></div><div class="qcm-option" data-idx="2" onclick="selectOption(this)"><span class="letter">C</span><span>Mononucléose infectieuse à EBV (âge + triade)</span></div><div class="qcm-option" data-idx="3" onclick="selectOption(this)"><span class="letter">D</span><span>Toxoplasmose</span></div></div><button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button><div class="qcm-explanation">Age (19 ans) + fièvre + angine douloureuse + SM = présentation typique de MNI-EBV. L'EBV est la 1ère étiologie des SM symptomatiques chez l'adulte jeune.</div></div></div>
+<div class="dp-step"><div class="dp-step-num">Étape 3</div><div class="dp-step-title">Quel test rapide demandez-vous en 1ère intention ?</div><div class="qcm-block" data-answer="1"><div class="q-text">Quel test diagnostique réaliser en urgence ambulatoire ?</div><div class="qcm-options"><div class="qcm-option" data-idx="0" onclick="selectOption(this)"><span class="letter">A</span><span>PCR EBV</span></div><div class="qcm-option" data-idx="1" onclick="selectOption(this)"><span class="letter">B</span><span>MNI-test (agglutinines hétérophiles)</span></div><div class="qcm-option" data-idx="2" onclick="selectOption(this)"><span class="letter">C</span><span>Sérologie CMV</span></div><div class="qcm-option" data-idx="3" onclick="selectOption(this)"><span class="letter">D</span><span>Frottis sanguin seul</span></div></div><button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button><div class="qcm-explanation">Le MNI-test est le test de 1ère intention, rapide, spécifique chez l'adulte > 12 ans. Si positif → MNI-EBV confirmée. Si négatif → sérologies EBV (IgM anti-VCA) + bilan VIH.</div></div></div>
+<div class="dp-step"><div class="dp-step-num">Étape 4</div><div class="dp-step-title">Quel médicament est contre-indiqué ici ?</div><div class="qcm-block" data-answer="1"><div class="q-text">Quel antibiotique est contre-indiqué dans ce contexte ?</div><div class="qcm-options"><div class="qcm-option" data-idx="0" onclick="selectOption(this)"><span class="letter">A</span><span>Azithromycine</span></div><div class="qcm-option" data-idx="1" onclick="selectOption(this)"><span class="letter">B</span><span>Amoxicilline/ampicilline</span></div><div class="qcm-option" data-idx="2" onclick="selectOption(this)"><span class="letter">C</span><span>Céfuroxime</span></div><div class="qcm-option" data-idx="3" onclick="selectOption(this)"><span class="letter">D</span><span>Métronidazole</span></div></div><button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button><div class="qcm-explanation">L'amoxicilline (et toutes les aminopénicillines) est contre-indiquée dans la MNI-EBV car elle provoque un rash maculo-papuleux quasi-constant (99%). Ce n'est PAS une allergie vraie à la pénicilline.</div></div></div>
+<div class="dp-step"><div class="dp-step-num">Étape 5</div><div class="dp-step-title">Quelle précaution pratique majeure donner au patient ?</div><div class="qcm-block" data-answer="1"><div class="q-text">Quelle recommandation vitale faut-il donner à ce patient sportif ?</div><div class="qcm-options"><div class="qcm-option" data-idx="0" onclick="selectOption(this)"><span class="letter">A</span><span>Repos au lit strict pendant 1 mois</span></div><div class="qcm-option" data-idx="1" onclick="selectOption(this)"><span class="letter">B</span><span>Arrêt du sport pendant 4-6 semaines (risque de rupture splénique)</span></div><div class="qcm-option" data-idx="2" onclick="selectOption(this)"><span class="letter">C</span><span>Éviter toute alimentation solide</span></div><div class="qcm-option" data-idx="3" onclick="selectOption(this)"><span class="letter">D</span><span>Hospitalisation systématique en isolement</span></div></div><button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button><div class="qcm-explanation">Splénomégalie présente dans ~50% des MNI → risque de rupture splénique (urgence chirurgicale). Le sport (surtout de contact) est interdit pendant 4-6 semaines.</div></div></div>
+</div>
+</div>
+<div class="slide section-slide" id="slide-10"><div class="section-number">II</div><h2>Mononucléose infectieuse (EBV)</h2><div class="section-subtitle">Épidémiologie · Triade clinique · Biologie · Diagnostic · Traitement · Complications</div></div>
+<div class="slide content-slide" id="slide-11">
+<h2>II — EBV : épidémiologie et physiopathologie</h2>
+<div class="def-box"><strong>📖 EBV (Epstein-Barr Virus)</strong> : Herpesvirus humain de type 4 (HHV-4). Virus à ADN double-brin, de la famille des Herpesviridae. Responsable de 50–80 % des syndromes mononucléosiques.</div>
+<div class="two-col">
+<div class="highlight-box"><strong>Épidémiologie</strong><ul>
+<li>Infection ubiquitaire : <strong>95 % des adultes</strong> sont séropositifs (infection ancienne)</li>
+<li>Transmission : <span class="keyword">salive</span> ("maladie du baiser"), gouttelettes, contact rapproché</li>
+<li>Âge de primo-infection :
+<ul>
+<li>Pays en développement : avant 5 ans → <strong>asymptomatique</strong></li>
+<li>Pays développés : adolescence/adulte jeune → <strong>symptomatique (MNI)</strong></li>
+</ul></li>
+<li>MNI : typiquement 15–25 ans, incubation 30–50 jours</li>
+</ul></div>
+<div class="highlight-box"><strong>Physiopathologie</strong><ul>
+<li>EBV infecte les <span class="keyword">lymphocytes B</span> via le récepteur <strong>CD21</strong> (récepteur du complément CR2)</li>
+<li>→ Immortalisation des LB infectés (= oncogénicité latente)</li>
+<li>→ Réponse cytotoxique massive des <span class="keyword">LT CD8+</span> contre les LB infectés → LHB</li>
+<li>Latence à vie dans les LB mémoire → réactivation possible chez l'immunodéprimé</li>
+</ul></div>
+</div>
+<div class="info-box"><strong>🔵 Mémoire longue :</strong> après la primo-infection, l'EBV persiste à vie dans les LB mémoire à l'état latent. Il peut se réactiver chez l'immunodéprimé (transplanté, VIH avancé) → PTLD (Post-Transplant Lymphoproliferative Disease) ou lymphome.</div>
+</div>
+<div class="slide quiz-slide" id="slide-12">
+<h2>⚡ Quiz flash — EBV : épidémiologie et physiopathologie</h2>
+<div class="flash-block" data-answer="Le récepteur CD21 (récepteur du complément CR2)"><div class="q-text">❓ Quel récepteur l'EBV utilise-t-il pour infecter les lymphocytes B ?</div><div class="flash-input-row"><input class="flash-input" type="text" placeholder="Votre réponse…" onkeydown="if(event.key==='Enter')validateFlash(this)"><button class="qcm-validate" onclick="validateFlash(this)">Vérifier</button></div><div class="qcm-explanation"></div></div>
+<div class="flash-block" data-answer="La salive (contact rapproché, baisers) — 'maladie du baiser'"><div class="q-text">❓ Quelle est la principale voie de transmission de l'EBV ?</div><div class="flash-input-row"><input class="flash-input" type="text" placeholder="Votre réponse…" onkeydown="if(event.key==='Enter')validateFlash(this)"><button class="qcm-validate" onclick="validateFlash(this)">Vérifier</button></div><div class="qcm-explanation"></div></div>
+<div class="flash-block" data-answer="Primo-infection tardive (ado/adulte) → réponse immunitaire plus intense (LT CD8+) → syndrome clinique visible"><div class="q-text">❓ Pourquoi la MNI est-elle symptomatique chez l'adulte mais asymptomatique chez le nourrisson ?</div><div class="flash-input-row"><input class="flash-input" type="text" placeholder="Votre réponse…" onkeydown="if(event.key==='Enter')validateFlash(this)"><button class="qcm-validate" onclick="validateFlash(this)">Vérifier</button></div><div class="qcm-explanation"></div></div>
+<div class="flash-block" data-answer="~95 % des adultes dans les pays développés"><div class="q-text">❓ Quel pourcentage des adultes est séropositif pour l'EBV ?</div><div class="flash-input-row"><input class="flash-input" type="text" placeholder="Votre réponse…" onkeydown="if(event.key==='Enter')validateFlash(this)"><button class="qcm-validate" onclick="validateFlash(this)">Vérifier</button></div><div class="qcm-explanation"></div></div>
+</div>
+<div class="slide content-slide" id="slide-13">
+<h2>II — Clinique de la mononucléose infectieuse</h2>
+<div class="urgence-box"><strong>🔴 Triade classique de la MNI</strong>
+<div class="two-col" style="margin-top:8px">
+<div>
+<strong>1. Fièvre</strong><br>38–40°C, progressive, prolongée (1–3 semaines), asthéniante
+</div>
+<div>
+<strong>2. Angine</strong><br>Érythémateuse ou pseudomembraneuse (dépôts blanchâtres), parfois ulcéronécrotique
+</div>
+</div>
+<div style="margin-top:8px"><strong>3. Adénopathies</strong> : cervicales postérieures surtout, bilatérales, symétriques, sensibles ± axillaires, inguinales</div></div>
+<div class="two-col" style="margin-top:10px">
+<div>
+<div class="highlight-box"><strong>Autres signes fréquents</strong><ul>
+<li><strong>Asthénie profonde</strong> et prolongée (semaines à mois) — signe majeur</li>
+<li><strong>Splénomégalie</strong> dans ~50 % des cas (risque de rupture ⚠)</li>
+<li>Hépatomégalie modérée (~30 %)</li>
+<li>Œdème palpébral (œdème de Hoagland)</li>
+<li>Éruption maculo-papuleuse spontanée (~10 %)</li>
+</ul></div>
+</div>
+<div>
+<div class="warning-box"><strong>⚠ Signe clé : rash à l'amoxicilline</strong><br>
+Si amoxicilline ou ampicilline donnée (pour une "angine bactérienne" présumée) → <span class="keyword">rash maculo-papuleux quasi-constant (99 %)</span> dans les 48-72h.<br><br>
+Ce rash n'est PAS une allergie vraie à la pénicilline → ne pas contre-indiquer les pénicillines à vie.</div>
+<div class="info-box" style="margin-top:8px"><strong>Formes sévères</strong><ul>
+<li>Angine pseudomembraneuse obstructive (dysphagie +++ )</li>
+<li>Splénomégalie géante</li>
+<li>Ictère</li>
+</ul></div>
+</div>
+</div>
+</div>
+<div class="slide quiz-slide" id="slide-14">
+<h2>⚡ Quiz flash — Clinique de la MNI</h2>
+<div class="flash-block" data-answer="Fièvre + angine (érythémateuse ou pseudomembraneuse) + adénopathies cervicales"><div class="q-text">❓ Quelle est la triade classique de la MNI ?</div><div class="flash-input-row"><input class="flash-input" type="text" placeholder="Votre réponse…" onkeydown="if(event.key==='Enter')validateFlash(this)"><button class="qcm-validate" onclick="validateFlash(this)">Vérifier</button></div><div class="qcm-explanation"></div></div>
+<div class="flash-block" data-answer="~50 % des cas (risque de rupture splénique → sport interdit)"><div class="q-text">❓ Dans quelle proportion la splénomégalie est-elle présente dans la MNI ?</div><div class="flash-input-row"><input class="flash-input" type="text" placeholder="Votre réponse…" onkeydown="if(event.key==='Enter')validateFlash(this)"><button class="qcm-validate" onclick="validateFlash(this)">Vérifier</button></div><div class="qcm-explanation"></div></div>
+<div class="flash-block" data-answer="Rash maculo-papuleux étendu (dans les 48-72h) — ce n'est pas une vraie allergie pénicilline"><div class="q-text">❓ Quelle réaction cutanée survient quasi-constamment (99 %) si on prescrit de l'amoxicilline dans la MNI ?</div><div class="flash-input-row"><input class="flash-input" type="text" placeholder="Votre réponse…" onkeydown="if(event.key==='Enter')validateFlash(this)"><button class="qcm-validate" onclick="validateFlash(this)">Vérifier</button></div><div class="qcm-explanation"></div></div>
+<div class="flash-block" data-answer="Adénopathies cervicales POSTÉRIEURES, bilatérales, symétriques, sensibles"><div class="q-text">❓ Quelles adénopathies sont les plus caractéristiques de la MNI ?</div><div class="flash-input-row"><input class="flash-input" type="text" placeholder="Votre réponse…" onkeydown="if(event.key==='Enter')validateFlash(this)"><button class="qcm-validate" onclick="validateFlash(this)">Vérifier</button></div><div class="qcm-explanation"></div></div>
+</div>
+<div class="slide content-slide" id="slide-15">
+<h2>II — Biologie et diagnostic de la MNI</h2>
+<div class="highlight-box"><strong>Hémogramme systématique</strong><ul>
+<li>Leucocytose modérée (10–20 G/L) avec <span class="keyword">lymphocytose &gt; 50 %</span> + <span class="keyword">&gt; 10 % LHB</span></li>
+<li>Thrombopénie modérée (fréquente, généralement &gt; 50 G/L)</li>
+<li>Anémie hémolytique auto-immune à Coombs positif (rare, &lt; 5 %)</li>
+</ul></div>
+<div class="highlight-box"><strong>Cytolyse hépatique</strong> : transaminases 3–5 × N dans ~80 % des cas — quasi-constante. Révélatrice parfois d'une hépatite EBV.</div>
+<div class="table-wrap"><table>
+<tr><th>Examen</th><th>Résultat / Interprétation</th><th>Utilité</th></tr>
+<tr><td><strong>MNI-test</strong> (agglutinines hétérophiles)</td><td>Positif si MNI-EBV (&gt; 12 ans)</td><td>1ère intention, rapide, spécifique</td></tr>
+<tr><td><strong>IgM anti-VCA</strong> (antigène capsidique viral)</td><td>Positif = infection récente/aiguë</td><td>Confirme MNI si MNI-test –</td></tr>
+<tr><td><strong>IgG anti-VCA</strong></td><td>+ = contact ancien ou récent</td><td>Persiste à vie</td></tr>
+<tr><td><strong>IgG anti-EBNA</strong> (Ag nucléaire)</td><td>Positif tardivement (&gt; 3 mois)</td><td>+ = infection ancienne (guérie)</td></tr>
+<tr><td><strong>PCR EBV</strong></td><td>Charge virale EBV</td><td>Immunodéprimé seulement</td></tr>
+</table></div>
+<div class="schema-box"><strong>Profil sérologique selon le stade :</strong><br>
+Infection récente : IgM anti-VCA+ · IgG anti-VCA+ · IgG anti-EBNA <strong>NÉGATIF</strong><br>
+Infection ancienne : IgM anti-VCA– · IgG anti-VCA+ · IgG anti-EBNA <strong>POSITIF</strong>
+</div>
+</div>
+<div class="slide quiz-slide" id="slide-16">
+<h2>⚡ Quiz flash — Biologie et diagnostic MNI</h2>
+<div class="flash-block" data-answer="Cytolyse hépatique (transaminases 3-5×N) dans ~80 % des cas"><div class="q-text">❓ Quelle anomalie biologique hépatique est quasi-constante dans la MNI ?</div><div class="flash-input-row"><input class="flash-input" type="text" placeholder="Votre réponse…" onkeydown="if(event.key==='Enter')validateFlash(this)"><button class="qcm-validate" onclick="validateFlash(this)">Vérifier</button></div><div class="qcm-explanation"></div></div>
+<div class="flash-block" data-answer="IgM anti-VCA (antigène capsidique viral) positif"><div class="q-text">❓ Quel marqueur sérologique traduit une MNI-EBV en PHASE AIGUË (récente) ?</div><div class="flash-input-row"><input class="flash-input" type="text" placeholder="Votre réponse…" onkeydown="if(event.key==='Enter')validateFlash(this)"><button class="qcm-validate" onclick="validateFlash(this)">Vérifier</button></div><div class="qcm-explanation"></div></div>
+<div class="flash-block" data-answer="Après 3 mois — leur positivité = infection ancienne (guérie)"><div class="q-text">❓ Quand les IgG anti-EBNA apparaissent-ils et que signifient-ils ?</div><div class="flash-input-row"><input class="flash-input" type="text" placeholder="Votre réponse…" onkeydown="if(event.key==='Enter')validateFlash(this)"><button class="qcm-validate" onclick="validateFlash(this)">Vérifier</button></div><div class="qcm-explanation"></div></div>
+<div class="flash-block" data-answer="Chez l'immunodéprimé (transplanté, VIH) — inutile chez l'immunocompétent"><div class="q-text">❓ Chez qui la PCR EBV est-elle indiquée en première intention ?</div><div class="flash-input-row"><input class="flash-input" type="text" placeholder="Votre réponse…" onkeydown="if(event.key==='Enter')validateFlash(this)"><button class="qcm-validate" onclick="validateFlash(this)">Vérifier</button></div><div class="qcm-explanation"></div></div>
+</div>
+<div class="slide content-slide" id="slide-17">
+<h2>II — Traitement et complications de la MNI</h2>
+<div class="highlight-box"><strong>Traitement — UNIQUEMENT SYMPTOMATIQUE</strong><ul>
+<li>Repos (arrêt de travail si asthénie importante)</li>
+<li>Antalgiques/antipyrétiques : <span class="keyword">paracétamol</span> en 1ère ligne</li>
+<li>Hydratation, alimentation douce si angine douloureuse</li>
+<li><strong>Pas de traitement antiviral spécifique</strong> indiqué chez l'immunocompétent</li>
+</ul></div>
+<div class="urgence-box"><strong>🔴 CONTRE-INDICATIONS dans la MNI</strong>
+<ul>
+<li><strong>Amoxicilline / ampicilline</strong> → rash quasi-constant (99 %) — ne pas confondre avec allergie pénicilline</li>
+<li><strong>Aspirine</strong> → risque de syndrome de Reye (encéphalopathie hépatique) chez l'enfant et l'adolescent</li>
+<li><strong>Sport de contact</strong> → interdit 4–6 semaines (risque de rupture splénique)</li>
+</ul></div>
+<div class="two-col" style="margin-top:10px">
+<div class="highlight-box"><strong>Complications aiguës</strong><ul>
+<li><span class="keyword">Rupture splénique</span> (0,1–0,5 %) → douleur abdominale brutale → chirurgie en urgence</li>
+<li>Angine obstructive (corticoïdes si risque asphyxie)</li>
+<li>Anémie hémolytique auto-immune → corticoïdes</li>
+<li>Thrombopénie sévère → corticoïdes</li>
+<li>Atteintes neurologiques : méningite, encéphalite, syndrome de Guillain-Barré</li>
+<li>Myocardite, péricardite</li>
+</ul></div>
+<div class="highlight-box"><strong>Complications tardives (immunodéprimé)</strong><ul>
+<li><strong>PTLD</strong> (Post-Transplant Lymphoproliferative Disease) : prolifération LB EBV+ chez transplanté</li>
+<li><strong>Lymphome de Burkitt</strong> (EBV + cofacteur, pays tropicaux)</li>
+<li><strong>Lymphome de Hodgkin</strong> : EBV détecté dans ~40 % des cas</li>
+<li><strong>Carcinome du nasopharynx</strong> : associé à EBV</li>
+</ul></div>
+</div>
+</div>
+<div class="slide quiz-slide" id="slide-18">
+<h2>⚡ Quiz flash — Traitement et complications MNI</h2>
+<div class="flash-block" data-answer="Aucun — traitement uniquement symptomatique (paracétamol + repos)"><div class="q-text">❓ Quel traitement spécifique anti-EBV est-il recommandé dans la MNI de l'immunocompétent ?</div><div class="flash-input-row"><input class="flash-input" type="text" placeholder="Votre réponse…" onkeydown="if(event.key==='Enter')validateFlash(this)"><button class="qcm-validate" onclick="validateFlash(this)">Vérifier</button></div><div class="qcm-explanation"></div></div>
+<div class="flash-block" data-answer="Risque de syndrome de Reye (encéphalopathie hépatique grave)"><div class="q-text">❓ Pourquoi l'aspirine est-elle contre-indiquée dans la MNI chez l'enfant/adolescent ?</div><div class="flash-input-row"><input class="flash-input" type="text" placeholder="Votre réponse…" onkeydown="if(event.key==='Enter')validateFlash(this)"><button class="qcm-validate" onclick="validateFlash(this)">Vérifier</button></div><div class="qcm-explanation"></div></div>
+<div class="flash-block" data-answer="La rupture splénique (urgence chirurgicale, 0,1-0,5 % des MNI)"><div class="q-text">❓ Quelle complication aiguë justifie l'interdiction du sport pendant 4-6 semaines ?</div><div class="flash-input-row"><input class="flash-input" type="text" placeholder="Votre réponse…" onkeydown="if(event.key==='Enter')validateFlash(this)"><button class="qcm-validate" onclick="validateFlash(this)">Vérifier</button></div><div class="qcm-explanation"></div></div>
+<div class="flash-block" data-answer="PTLD (Post-Transplant Lymphoproliferative Disease)"><div class="q-text">❓ Quelle prolifération lymphoïde grave peut compliquer une infection EBV chez un transplanté ?</div><div class="flash-input-row"><input class="flash-input" type="text" placeholder="Votre réponse…" onkeydown="if(event.key==='Enter')validateFlash(this)"><button class="qcm-validate" onclick="validateFlash(this)">Vérifier</button></div><div class="qcm-explanation"></div></div>
+</div>
+<div class="slide exam-slide" id="slide-19">
+<h2>📝 QCM — Section II : MNI / EBV (1/2)</h2>
+<div class="exam-progress"><div class="exam-bar"></div></div>
+<div class="qcm-block" data-answer="2"><div class="q-text">Q1. L'EBV infecte préférentiellement :</div><div class="qcm-options"><div class="qcm-option" data-idx="0" onclick="selectOption(this)"><span class="letter">A</span><span>Les polynucléaires neutrophiles</span></div><div class="qcm-option" data-idx="1" onclick="selectOption(this)"><span class="letter">B</span><span>Les lymphocytes T CD4+</span></div><div class="qcm-option" data-idx="2" onclick="selectOption(this)"><span class="letter">C</span><span>Les lymphocytes B (via CD21)</span></div><div class="qcm-option" data-idx="3" onclick="selectOption(this)"><span class="letter">D</span><span>Les mégacaryocytes</span></div></div><button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button><div class="qcm-explanation">EBV utilise CD21 (récepteur CR2 du complément) pour entrer dans les LB. Cette infection des LB déclenche la réponse LT CD8+ cytotoxique massive responsable des LHB.</div></div>
+<div class="qcm-block" data-answer="1"><div class="q-text">Q2. La triade classique de la MNI comprend :</div><div class="qcm-options"><div class="qcm-option" data-idx="0" onclick="selectOption(this)"><span class="letter">A</span><span>Fièvre + splénomégalie + thrombopénie</span></div><div class="qcm-option" data-idx="1" onclick="selectOption(this)"><span class="letter">B</span><span>Fièvre + angine + adénopathies cervicales</span></div><div class="qcm-option" data-idx="2" onclick="selectOption(this)"><span class="letter">C</span><span>Angine + rash + hépatomégalie</span></div><div class="qcm-option" data-idx="3" onclick="selectOption(this)"><span class="letter">D</span><span>Fièvre + LHB + cytolyse</span></div></div><button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button><div class="qcm-explanation">La triade clinique de la MNI est : fièvre + angine (érythémateuse ou pseudomembraneuse) + adénopathies cervicales postérieures. La splénomégalie est fréquente mais non dans la triade classique.</div></div>
+<div class="qcm-block" data-answer="1"><div class="q-text">Q3. Quel signe biologique est quasi-constant (80 %) dans la MNI ?</div><div class="qcm-options"><div class="qcm-option" data-idx="0" onclick="selectOption(this)"><span class="letter">A</span><span>Thrombopénie profonde (&lt; 20 G/L)</span></div><div class="qcm-option" data-idx="1" onclick="selectOption(this)"><span class="letter">B</span><span>Cytolyse hépatique (ASAT/ALAT 3-5× N)</span></div><div class="qcm-option" data-idx="2" onclick="selectOption(this)"><span class="letter">C</span><span>Anémie hémolytique à Coombs positif</span></div><div class="qcm-option" data-idx="3" onclick="selectOption(this)"><span class="letter">D</span><span>Neutropénie (&lt; 1 G/L)</span></div></div><button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button><div class="qcm-explanation">La cytolyse hépatique est quasi-constante dans la MNI (80 % des cas) et généralement modérée (3-5× N). Elle traduit une hépatite virale EBV et se résout spontanément.</div></div>
+<div class="qcm-block" data-answer="1"><div class="q-text">Q4. Le MNI-test (agglutinines hétérophiles) est positif dans :</div><div class="qcm-options"><div class="qcm-option" data-idx="0" onclick="selectOption(this)"><span class="letter">A</span><span>Toutes les causes de SM</span></div><div class="qcm-option" data-idx="1" onclick="selectOption(this)"><span class="letter">B</span><span>Uniquement l'infection EBV chez l'adulte (&gt;12 ans)</span></div><div class="qcm-option" data-idx="2" onclick="selectOption(this)"><span class="letter">C</span><span>Uniquement les LAL</span></div><div class="qcm-option" data-idx="3" onclick="selectOption(this)"><span class="letter">D</span><span>Le CMV et l'EBV</span></div></div><button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button><div class="qcm-explanation">Le MNI-test est spécifique de la MNI-EBV. Sa sensibilité est meilleure chez l'adulte (>12 ans). Un test négatif n'exclut pas l'EBV → sérologie EBV si suspicion clinique forte.</div></div>
+<div class="qcm-block" data-answer="2"><div class="q-text">Q5. La présence d'IgM anti-VCA signifie :</div><div class="qcm-options"><div class="qcm-option" data-idx="0" onclick="selectOption(this)"><span class="letter">A</span><span>Infection EBV ancienne et guérie</span></div><div class="qcm-option" data-idx="1" onclick="selectOption(this)"><span class="letter">B</span><span>Vaccination contre l'EBV</span></div><div class="qcm-option" data-idx="2" onclick="selectOption(this)"><span class="letter">C</span><span>Infection EBV récente/aiguë</span></div><div class="qcm-option" data-idx="3" onclick="selectOption(this)"><span class="letter">D</span><span>Réactivation EBV sans primo-infection</span></div></div><button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button><div class="qcm-explanation">IgM anti-VCA (antigène capsidique viral) = marqueur d'infection EBV récente ou aiguë. Ils disparaissent après 3-6 mois. IgG anti-VCA + IgG anti-EBNA positifs = infection ancienne.</div></div>
+</div>
+<div class="slide exam-slide" id="slide-20">
+<h2>📝 QCM — Section II : MNI / EBV (2/2)</h2>
+<div class="qcm-block" data-answer="2"><div class="q-text">Q6. Quelle est la contre-indication ABSOLUE à éviter dans toute angine fébrile de l'ado/adulte pour ne pas provoquer un rash si c'est une MNI ?</div><div class="qcm-options"><div class="qcm-option" data-idx="0" onclick="selectOption(this)"><span class="letter">A</span><span>Azithromycine</span></div><div class="qcm-option" data-idx="1" onclick="selectOption(this)"><span class="letter">B</span><span>Ceftriaxone</span></div><div class="qcm-option" data-idx="2" onclick="selectOption(this)"><span class="letter">C</span><span>Amoxicilline/ampicilline (aminopénicillines)</span></div><div class="qcm-option" data-idx="3" onclick="selectOption(this)"><span class="letter">D</span><span>Paracétamol</span></div></div><button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button><div class="qcm-explanation">L'amoxicilline provoque un rash maculo-papuleux quasi-constant (99 %) dans la MNI. Cette réaction n'est pas une allergie vraie aux pénicillines. Éviter toutes les aminopénicillines dans toute angine de l'adolescent/adulte.</div></div>
+<div class="qcm-block" data-answer="1"><div class="q-text">Q7. Un sportif de 20 ans a une MNI confirmée avec splénomégalie. Quelle recommandation est prioritaire ?</div><div class="qcm-options"><div class="qcm-option" data-idx="0" onclick="selectOption(this)"><span class="letter">A</span><span>Hospitalisation immédiate</span></div><div class="qcm-option" data-idx="1" onclick="selectOption(this)"><span class="letter">B</span><span>Interdiction du sport pendant 4-6 semaines (risque de rupture splénique)</span></div><div class="qcm-option" data-idx="2" onclick="selectOption(this)"><span class="letter">C</span><span>Splénectomie préventive</span></div><div class="qcm-option" data-idx="3" onclick="selectOption(this)"><span class="letter">D</span><span>Traitement antiviral par acyclovir</span></div></div><button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button><div class="qcm-explanation">Rupture splénique = 0,1-0,5 % des MNI, majorée par les traumatismes. L'arrêt du sport (surtout de contact) est obligatoire pendant 4-6 semaines, délai de régression de la splénomégalie.</div></div>
+<div class="qcm-block" data-answer="1"><div class="q-text">Q8. Quel profil sérologique EBV correspond à une infection ANCIENNE et GUÉRIE ?</div><div class="qcm-options"><div class="qcm-option" data-idx="0" onclick="selectOption(this)"><span class="letter">A</span><span>IgM anti-VCA+ · IgG anti-EBNA–</span></div><div class="qcm-option" data-idx="1" onclick="selectOption(this)"><span class="letter">B</span><span>IgM anti-VCA– · IgG anti-VCA+ · IgG anti-EBNA+</span></div><div class="qcm-option" data-idx="2" onclick="selectOption(this)"><span class="letter">C</span><span>IgM anti-VCA+ · IgG anti-VCA– · IgG anti-EBNA–</span></div><div class="qcm-option" data-idx="3" onclick="selectOption(this)"><span class="letter">D</span><span>Tous les marqueurs négatifs</span></div></div><button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button><div class="qcm-explanation">Infection ancienne guérie : IgM anti-VCA négatif (disparu), IgG anti-VCA positif (persistant à vie), IgG anti-EBNA positif (apparaît après 3 mois). L'anti-EBNA positif est le marqueur de l'infection résolue.</div></div>
+<div class="qcm-block" data-answer="2"><div class="q-text">Q9. La corticothérapie dans la MNI est indiquée en cas de :</div><div class="qcm-options"><div class="qcm-option" data-idx="0" onclick="selectOption(this)"><span class="letter">A</span><span>Fièvre prolongée &gt; 5 jours</span></div><div class="qcm-option" data-idx="1" onclick="selectOption(this)"><span class="letter">B</span><span>Syndrome mononucléosique sur l'hémogramme</span></div><div class="qcm-option" data-idx="2" onclick="selectOption(this)"><span class="letter">C</span><span>Complications sévères : angine obstructive, anémie hémolytique, thrombopénie &lt; 30 G/L</span></div><div class="qcm-option" data-idx="3" onclick="selectOption(this)"><span class="letter">D</span><span>Cytolyse hépatique modérée</span></div></div><button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button><div class="qcm-explanation">La corticothérapie n'est pas indiquée en routine dans la MNI. Elle est réservée aux complications sévères : obstruction des voies aériennes par les amygdales, anémie hémolytique, thrombopénie sévère, atteinte neurologique.</div></div>
+<div class="qcm-block" data-answer="1"><div class="q-text">Q10. Quelle complication tardive de l'EBV peut survenir chez un patient sous immunosuppresseurs après transplantation ?</div><div class="qcm-options"><div class="qcm-option" data-idx="0" onclick="selectOption(this)"><span class="letter">A</span><span>Leucémie aiguë myéloïde</span></div><div class="qcm-option" data-idx="1" onclick="selectOption(this)"><span class="letter">B</span><span>PTLD (Post-Transplant Lymphoproliferative Disease)</span></div><div class="qcm-option" data-idx="2" onclick="selectOption(this)"><span class="letter">C</span><span>Polyarthrite rhumatoïde</span></div><div class="qcm-option" data-idx="3" onclick="selectOption(this)"><span class="letter">D</span><span>Infection chronique par le VIH</span></div></div><button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button><div class="qcm-explanation">Le PTLD est une prolifération lymphocytaire B monoclonale EBV-induite chez les transplantés sous immunosuppresseurs. Traitement : réduction de l'immunosuppression ± rituximab ± chimiothérapie.</div></div>
+</div>
+<div class="slide exam-slide" id="slide-21">
+<h2>🏥 Dossier progressif — Section II (MNI/EBV)</h2>
+<p style="font-size:.82rem;color:#a0a0c0;margin-bottom:8px"><em>Mme C., 22 ans. Fièvre à 39°C depuis 10 jours, angine pseudomembraneuse, adénopathies cervicales postérieures. Son médecin a prescrit de l'amoxicilline il y a 5 jours → apparition d'un rash diffus maculo-papuleux. NFS : GB 18 G/L, lymphocytes 68 %, LHB 25 %, plaquettes 85 G/L. ASAT 4× N, ALAT 3× N. Splénomégalie à 15 cm.</em></p>
+<div class="dp-block">
+<div class="dp-step"><div class="dp-step-num">Étape 1</div><div class="dp-step-title">Diagnostic</div><div class="qcm-block" data-answer="1"><div class="q-text">Quel est le diagnostic le plus probable ?</div><div class="qcm-options"><div class="qcm-option" data-idx="0" onclick="selectOption(this)"><span class="letter">A</span><span>Allergie vraie à la pénicilline</span></div><div class="qcm-option" data-idx="1" onclick="selectOption(this)"><span class="letter">B</span><span>Mononucléose infectieuse à EBV avec rash à l'amoxicilline</span></div><div class="qcm-option" data-idx="2" onclick="selectOption(this)"><span class="letter">C</span><span>Lymphome de Hodgkin</span></div><div class="qcm-option" data-idx="3" onclick="selectOption(this)"><span class="letter">D</span><span>Leucémie aiguë lymphoblastique</span></div></div><button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button><div class="qcm-explanation">MNI confirmée : triade (fièvre + angine pseudomembraneuse + adénopathies cervicales) + SM sur NFS + cytolyse hépatique + rash sous amoxicilline (quasi-pathognomonique). Ce rash n'est PAS une allergie aux pénicillines.</div></div></div>
+<div class="dp-step"><div class="dp-step-num">Étape 2</div><div class="dp-step-title">Examens complémentaires</div><div class="qcm-block" data-answer="1"><div class="q-text">Quel test diagnostique confirme l'étiologie EBV ?</div><div class="qcm-options"><div class="qcm-option" data-idx="0" onclick="selectOption(this)"><span class="letter">A</span><span>PCR EBV en urgence</span></div><div class="qcm-option" data-idx="1" onclick="selectOption(this)"><span class="letter">B</span><span>MNI-test + sérologie EBV (IgM anti-VCA)</span></div><div class="qcm-option" data-idx="2" onclick="selectOption(this)"><span class="letter">C</span><span>Myélogramme</span></div><div class="qcm-option" data-idx="3" onclick="selectOption(this)"><span class="letter">D</span><span>Sérologie CMV seule</span></div></div><button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button><div class="qcm-explanation">Le MNI-test est positif dans la MNI-EBV adulte. Si négatif ou douteux, la sérologie EBV (IgM anti-VCA = infection récente) confirme le diagnostic. La PCR EBV n'est pas indiquée chez l'immunocompétent.</div></div></div>
+<div class="dp-step"><div class="dp-step-num">Étape 3</div><div class="dp-step-title">Traitement</div><div class="qcm-block" data-answer="1"><div class="q-text">Quelle prise en charge thérapeutique indiquer ?</div><div class="qcm-options"><div class="qcm-option" data-idx="0" onclick="selectOption(this)"><span class="letter">A</span><span>Acyclovir + prednisone systématiquement</span></div><div class="qcm-option" data-idx="1" onclick="selectOption(this)"><span class="letter">B</span><span>Arrêt amoxicilline + paracétamol + repos + sport interdit 4-6 semaines</span></div><div class="qcm-option" data-idx="2" onclick="selectOption(this)"><span class="letter">C</span><span>Hospitalisation et chimiothérapie</span></div><div class="qcm-option" data-idx="3" onclick="selectOption(this)"><span class="letter">D</span><span>Corticoïdes systématiques pour la fièvre</span></div></div><button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button><div class="qcm-explanation">Traitement : STOP amoxicilline. Paracétamol + repos. Arrêt du sport obligatoire (splénomégalie à 15 cm → risque de rupture). Corticoïdes NON indiqués (plaquettes 85 G/L non &lt;30 G/L, pas d'obstruction VAS).</div></div></div>
+<div class="dp-step"><div class="dp-step-num">Étape 4</div><div class="dp-step-title">Concernant le rash à l'amoxicilline</div><div class="qcm-block" data-answer="1"><div class="q-text">Que lui dire concernant les pénicillines à l'avenir ?</div><div class="qcm-options"><div class="qcm-option" data-idx="0" onclick="selectOption(this)"><span class="letter">A</span><span>Contre-indiquer toutes les pénicillines à vie (allergie)</span></div><div class="qcm-option" data-idx="1" onclick="selectOption(this)"><span class="letter">B</span><span>Ce rash n'est PAS une vraie allergie aux pénicillines — les pénicillines restent utilisables après la MNI</span></div><div class="qcm-option" data-idx="2" onclick="selectOption(this)"><span class="letter">C</span><span>Prescrire une désensibilisation aux pénicillines</span></div><div class="qcm-option" data-idx="3" onclick="selectOption(this)"><span class="letter">D</span><span>Réaliser un bilan allergologique urgent</span></div></div><button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button><div class="qcm-explanation">Le rash sous amoxicilline dans la MNI est un phénomène immunologique lié à l'EBV (interaction amoxicilline-LB infectés), PAS une vraie allergie IgE-médiée aux pénicillines. Les pénicillines pourront être utilisées ultérieurement.</div></div></div>
+<div class="dp-step"><div class="dp-step-num">Étape 5</div><div class="dp-step-title">Évolution</div><div class="qcm-block" data-answer="0"><div class="q-text">Quelle complication peut survenir avec cette splénomégalie à 15 cm ?</div><div class="qcm-options"><div class="qcm-option" data-idx="0" onclick="selectOption(this)"><span class="letter">A</span><span>Rupture splénique → urgence chirurgicale (douleur abdominale brutale + défense)</span></div><div class="qcm-option" data-idx="1" onclick="selectOption(this)"><span class="letter">B</span><span>Septicémie à staphylocoque systématique</span></div><div class="qcm-option" data-idx="2" onclick="selectOption(this)"><span class="letter">C</span><span>Transformation en lymphome immédiate</span></div><div class="qcm-option" data-idx="3" onclick="selectOption(this)"><span class="letter">D</span><span>Insuffisance rénale aiguë</span></div></div><button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button><div class="qcm-explanation">Splénomégalie importante (15 cm) + MNI = risque de rupture splénique (0,1-0,5 %). Symptômes : douleur en coup de poignard en hypochondre gauche + état de choc. Urgence chirurgicale. Sport interdit 4-6 semaines.</div></div></div>
+</div></div>
+<div class="slide section-slide" id="slide-22"><div class="section-number">III</div><h2>Primo-infection CMV</h2><div class="section-subtitle">2ème cause de SM · MNI-like sans angine · MNI-test négatif · Femme enceinte</div></div>
+<div class="slide content-slide slide-with-img" id="slide-23">
+<div class="slide-text">
+<h2>III — Primo-infection CMV : clinique et biologie</h2>
+<div class="def-box"><strong>📖 CMV (Cytomégalovirus)</strong> : Herpesvirus humain de type 5 (HHV-5), virus à ADN double-brin. Deuxième cause de syndrome mononucléosique. Touche 50–70 % des adultes en France (séropositivité).</div>
+<div class="two-col">
+<div>
+<div class="highlight-box"><strong>Clinique — sujet immunocompétent</strong><ul>
+<li>Souvent <span class="keyword">asymptomatique</span> ou pauci-symptomatique</li>
+<li>Tableau de <strong>MNI-like</strong> : fièvre prolongée, asthénie, adénopathies</li>
+<li><strong>Différences avec MNI-EBV :</strong>
+  <ul>
+  <li>❌ Pas d'angine (ou discrète)</li>
+  <li>❌ Adénopathies moins marquées</li>
+  <li>❌ MNI-test NÉGATIF</li>
+  </ul></li>
+<li>Polyarthralgies, myalgies fréquentes</li>
+</ul></div>
+</div>
+<div>
+<div class="highlight-box"><strong>Biologie</strong><ul>
+<li>Syndrome mononucléosique sur NFS + frottis (LHB)</li>
+<li>Cytolyse hépatique modérée (possible)</li>
+</ul></div>
+<div class="urgence-box" style="margin-top:8px"><strong>🔴 Femme enceinte + SM = URGENCE</strong><br>
+Toute découverte d'un SM chez une <span class="keyword">femme enceinte</span> impose une consultation spécialisée urgente pour éliminer une infection maternelle à <strong>CMV</strong> ou <strong>Toxoplasma gondii</strong> → risque d'infection fœtale grave (surdité, malformations, retard mental).</div>
+</div>
+</div>
+<div class="info-box"><strong>Transmission du CMV :</strong> salive, sécrétions sexuelles, lait maternel, sang (transfusion), organe (transplantation). Risque professionnel pour les soignants en néonatologie.</div>
+</div>
+<div class="slide-img"><img src="images_mononucleosique/p1_page6.png" alt="CMV" onclick="openModal(this.src)">
+<p style="font-size:.72rem;color:#6c6c9a;text-align:center;margin-top:4px">Pr Planès – p.6</p></div>
+</div>
+<div class="slide quiz-slide" id="slide-24">
+<h2>⚡ Quiz flash — Primo-infection CMV</h2>
+<div class="flash-block" data-answer="CMV = pas d'angine (ou discrète) et MNI-test NÉGATIF ; EBV = angine pseudomembraneuse et MNI-test positif"><div class="q-text">❓ Quelle est la principale différence clinique entre la MNI-CMV et la MNI-EBV ?</div><div class="flash-input-row"><input class="flash-input" type="text" placeholder="Votre réponse…" onkeydown="if(event.key==='Enter')validateFlash(this)"><button class="qcm-validate" onclick="validateFlash(this)">Vérifier</button></div><div class="qcm-explanation"></div></div>
+<div class="flash-block" data-answer="Risque d'infection fœtale grave par CMV ou Toxoplasma gondii → surdité, malformations, retard mental"><div class="q-text">❓ Pourquoi un SM chez une femme enceinte impose-t-il une consultation spécialisée urgente ?</div><div class="flash-input-row"><input class="flash-input" type="text" placeholder="Votre réponse…" onkeydown="if(event.key==='Enter')validateFlash(this)"><button class="qcm-validate" onclick="validateFlash(this)">Vérifier</button></div><div class="qcm-explanation"></div></div>
+<div class="flash-block" data-answer="Négatif (le MNI-test est spécifique de l'EBV)"><div class="q-text">❓ Quel est le résultat du MNI-test dans la primo-infection CMV ?</div><div class="flash-input-row"><input class="flash-input" type="text" placeholder="Votre réponse…" onkeydown="if(event.key==='Enter')validateFlash(this)"><button class="qcm-validate" onclick="validateFlash(this)">Vérifier</button></div><div class="qcm-explanation"></div></div>
+<div class="flash-block" data-answer="Salive, sécrétions sexuelles, lait maternel (+ transfusion sanguine, transplantation)"><div class="q-text">❓ Citez 3 voies de transmission du CMV</div><div class="flash-input-row"><input class="flash-input" type="text" placeholder="Votre réponse…" onkeydown="if(event.key==='Enter')validateFlash(this)"><button class="qcm-validate" onclick="validateFlash(this)">Vérifier</button></div><div class="qcm-explanation"></div></div>
+</div>
+<div class="slide content-slide slide-with-img" id="slide-25">
+<div class="slide-text">
+<h2>III — CMV : diagnostic et traitement</h2>
+<div class="def-box"><strong>📖 Sérologie CMV</strong> : recherche des anticorps anti-CMV. La présence d'IgM anti-CMV signifie une infection récente/aiguë ; la présence d'IgG seuls (sans IgM) = infection ancienne (immunité acquise).</div>
+<div class="table-wrap"><table>
+<tr><th>Examen</th><th>Résultat</th><th>Signification</th></tr>
+<tr><td>IgM anti-CMV+</td><td>Infection récente/aiguë</td><td>Primo-infection CMV probable</td></tr>
+<tr><td>IgG anti-CMV+ (sans IgM)</td><td>Infection ancienne</td><td>Immunité acquise</td></tr>
+<tr><td>IgM+ et IgG+</td><td>Primo-infection ou réactivation</td><td>Contexte clinique déterminant</td></tr>
+<tr><td>PCR CMV (charge virale)</td><td>Quantitatif</td><td>Immunodéprimé +++ ou femme enceinte</td></tr>
+</table></div>
+<div class="two-col" style="margin-top:10px">
+<div class="highlight-box"><strong>Traitement chez l'immunocompétent</strong><ul>
+<li>Évolution <span class="keyword">spontanément bénigne</span></li>
+<li>Traitement <strong>symptomatique uniquement</strong> (repos, antalgiques)</li>
+<li>Pas d'antiviral nécessaire</li>
+<li>Guérison en quelques jours à semaines</li>
+</ul></div>
+<div class="warning-box"><strong>⚠ Chez l'immunodéprimé (transplanté, VIH)</strong><ul>
+<li>CMV = infection opportuniste sévère (rétinite, colite, pneumopathie)</li>
+<li>Traitement antiviral : <strong>ganciclovir</strong> IV ou <strong>valganciclovir</strong> per os</li>
+<li>Prophylaxie chez les transplantés à haut risque (D+/R–)</li>
+</ul></div>
+</div>
+</div>
+<div class="slide-img"><img src="images_mononucleosique/p1_page7.png" alt="CMV sérologie" onclick="openModal(this.src)">
+<p style="font-size:.72rem;color:#6c6c9a;text-align:center;margin-top:4px">p.7</p></div>
+</div>
+<div class="slide quiz-slide" id="slide-26">
+<h2>⚡ Quiz flash — CMV : diagnostic et traitement</h2>
+<div class="flash-block" data-answer="Infection CMV récente/aiguë (primo-infection ou réactivation)"><div class="q-text">❓ Que signifie la présence d'IgM anti-CMV positifs dans le sang ?</div><div class="flash-input-row"><input class="flash-input" type="text" placeholder="Votre réponse…" onkeydown="if(event.key==='Enter')validateFlash(this)"><button class="qcm-validate" onclick="validateFlash(this)">Vérifier</button></div><div class="qcm-explanation"></div></div>
+<div class="flash-block" data-answer="Ganciclovir (IV) ou valganciclovir (per os)"><div class="q-text">❓ Quel antiviral est utilisé dans les formes graves de CMV chez l'immunodéprimé ?</div><div class="flash-input-row"><input class="flash-input" type="text" placeholder="Votre réponse…" onkeydown="if(event.key==='Enter')validateFlash(this)"><button class="qcm-validate" onclick="validateFlash(this)">Vérifier</button></div><div class="qcm-explanation"></div></div>
+<div class="flash-block" data-answer="Traitement symptomatique uniquement (pas d'antiviral) — évolution spontanément bénigne"><div class="q-text">❓ Quel traitement est recommandé dans la primo-infection CMV chez un immunocompétent ?</div><div class="flash-input-row"><input class="flash-input" type="text" placeholder="Votre réponse…" onkeydown="if(event.key==='Enter')validateFlash(this)"><button class="qcm-validate" onclick="validateFlash(this)">Vérifier</button></div><div class="qcm-explanation"></div></div>
+<div class="flash-block" data-answer="Chez l'immunodéprimé (transplanté, VIH) et chez la femme enceinte"><div class="q-text">❓ Quand la PCR CMV (charge virale) est-elle indiquée en priorité ?</div><div class="flash-input-row"><input class="flash-input" type="text" placeholder="Votre réponse…" onkeydown="if(event.key==='Enter')validateFlash(this)"><button class="qcm-validate" onclick="validateFlash(this)">Vérifier</button></div><div class="qcm-explanation"></div></div>
+</div>
+<div class="slide exam-slide" id="slide-27">
+<h2>📝 QCM — Section III : Primo-infection CMV</h2>
+<div class="exam-progress"><div class="exam-bar"></div></div>
+<div class="qcm-block" data-answer="1"><div class="q-text">Q1. La primo-infection CMV chez l'immunocompétent est :</div><div class="qcm-options"><div class="qcm-option" data-idx="0" onclick="selectOption(this)"><span class="letter">A</span><span>Toujours symptomatique avec angine</span></div><div class="qcm-option" data-idx="1" onclick="selectOption(this)"><span class="letter">B</span><span>Souvent asymptomatique ou tableau de MNI-like SANS angine</span></div><div class="qcm-option" data-idx="2" onclick="selectOption(this)"><span class="letter">C</span><span>Toujours grave nécessitant une hospitalisation</span></div><div class="qcm-option" data-idx="3" onclick="selectOption(this)"><span class="letter">D</span><span>Identique cliniquement à la MNI-EBV</span></div></div><button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button><div class="qcm-explanation">Le CMV est souvent asymptomatique chez l'immunocompétent ou donne un tableau MNI-like (fièvre, asthénie, adénopathies) mais SANS angine. C'est une différence majeure avec la MNI-EBV.</div></div>
+<div class="qcm-block" data-answer="2"><div class="q-text">Q2. Le MNI-test est positif dans la primo-infection CMV ?</div><div class="qcm-options"><div class="qcm-option" data-idx="0" onclick="selectOption(this)"><span class="letter">A</span><span>Oui, toujours</span></div><div class="qcm-option" data-idx="1" onclick="selectOption(this)"><span class="letter">B</span><span>Oui, si la fièvre dure plus de 7 jours</span></div><div class="qcm-option" data-idx="2" onclick="selectOption(this)"><span class="letter">C</span><span>Non, le MNI-test est spécifique de l'EBV</span></div><div class="qcm-option" data-idx="3" onclick="selectOption(this)"><span class="letter">D</span><span>Oui, si thrombopénie associée</span></div></div><button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button><div class="qcm-explanation">Le MNI-test (agglutinines hétérophiles) est spécifique de l'EBV. Il est négatif dans le CMV, la toxoplasmose, le VIH et toutes les autres causes de SM.</div></div>
+<div class="qcm-block" data-answer="2"><div class="q-text">Q3. La découverte d'un SM chez une femme enceinte impose :</div><div class="qcm-options"><div class="qcm-option" data-idx="0" onclick="selectOption(this)"><span class="letter">A</span><span>Un traitement antiviral systématique</span></div><div class="qcm-option" data-idx="1" onclick="selectOption(this)"><span class="letter">B</span><span>Un traitement par acyclovir</span></div><div class="qcm-option" data-idx="2" onclick="selectOption(this)"><span class="letter">C</span><span>Une consultation spécialisée urgente pour éliminer CMV ou toxoplasmose fœtale</span></div><div class="qcm-option" data-idx="3" onclick="selectOption(this)"><span class="letter">D</span><span>Une amniocentèse en urgence</span></div></div><button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button><div class="qcm-explanation">Le SM chez la femme enceinte est une urgence car CMV et Toxoplasma gondii peuvent infecter le fœtus → surdité, malformations, retard psychomoteur. Consultation spécialisée urgente ± PCR CMV/sérologie toxo.</div></div>
+<div class="qcm-block" data-answer="1"><div class="q-text">Q4. Quel examen biologique confirme une primo-infection CMV aiguë ?</div><div class="qcm-options"><div class="qcm-option" data-idx="0" onclick="selectOption(this)"><span class="letter">A</span><span>IgG anti-CMV seuls positifs</span></div><div class="qcm-option" data-idx="1" onclick="selectOption(this)"><span class="letter">B</span><span>IgM anti-CMV positifs</span></div><div class="qcm-option" data-idx="2" onclick="selectOption(this)"><span class="letter">C</span><span>PCR CMV systématiquement</span></div><div class="qcm-option" data-idx="3" onclick="selectOption(this)"><span class="letter">D</span><span>MNI-test positif</span></div></div><button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button><div class="qcm-explanation">IgM anti-CMV+ = infection CMV récente/aiguë. Les IgG seuls reflètent une infection ancienne. La PCR CMV est utile chez l'immunodéprimé ou la femme enceinte, pas en routine chez l'immunocompétent.</div></div>
+<div class="qcm-block" data-answer="3"><div class="q-text">Q5. Quel traitement antiviral est recommandé dans la primo-infection CMV de l'adulte immunocompétent ?</div><div class="qcm-options"><div class="qcm-option" data-idx="0" onclick="selectOption(this)"><span class="letter">A</span><span>Acyclovir 800 mg × 5/j</span></div><div class="qcm-option" data-idx="1" onclick="selectOption(this)"><span class="letter">B</span><span>Ganciclovir IV systématique</span></div><div class="qcm-option" data-idx="2" onclick="selectOption(this)"><span class="letter">C</span><span>Valganciclovir per os × 21 jours</span></div><div class="qcm-option" data-idx="3" onclick="selectOption(this)"><span class="letter">D</span><span>Aucun antiviral — traitement symptomatique uniquement</span></div></div><button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button><div class="qcm-explanation">Chez l'immunocompétent, la primo-infection CMV évolue spontanément favorablement. Aucun antiviral n'est nécessaire. Le ganciclovir/valganciclovir est réservé aux immunodéprimés avec atteintes graves.</div></div>
+<div class="qcm-block" data-answer="2"><div class="q-text">Q6. Le CMV peut être transmis par :</div><div class="qcm-options"><div class="qcm-option" data-idx="0" onclick="selectOption(this)"><span class="letter">A</span><span>Uniquement la voie respiratoire</span></div><div class="qcm-option" data-idx="1" onclick="selectOption(this)"><span class="letter">B</span><span>Voie fécale-orale exclusivement</span></div><div class="qcm-option" data-idx="2" onclick="selectOption(this)"><span class="letter">C</span><span>Salive, sécrétions sexuelles, lait maternel, transfusion, transplantation</span></div><div class="qcm-option" data-idx="3" onclick="selectOption(this)"><span class="letter">D</span><span>Morsure d'insecte seulement</span></div></div><button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button><div class="qcm-explanation">Le CMV se transmet par de nombreuses voies : salive (kissing disease comme EBV), sécrétions génitales (IST), lait maternel, sang (transfusion), organe/CSH (transplantation).</div></div>
+<div class="qcm-block" data-answer="1"><div class="q-text">Q7. La primo-infection CMV chez le sujet immunodéprimé peut provoquer :</div><div class="qcm-options"><div class="qcm-option" data-idx="0" onclick="selectOption(this)"><span class="letter">A</span><span>Uniquement une asthénie bénigne</span></div><div class="qcm-option" data-idx="1" onclick="selectOption(this)"><span class="letter">B</span><span>Rétinite, colite, pneumopathie interstitielle graves</span></div><div class="qcm-option" data-idx="2" onclick="selectOption(this)"><span class="letter">C</span><span>Uniquement une hépatite</span></div><div class="qcm-option" data-idx="3" onclick="selectOption(this)"><span class="letter">D</span><span>Un syndrome mononucléosique léger sans complication</span></div></div><button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button><div class="qcm-explanation">Chez l'immunodéprimé (VIH, transplanté), le CMV est une infection opportuniste sévère : rétinite (cécité), colite, pneumopathie, encéphalite. Traitement : ganciclovir/valganciclovir.</div></div>
+<div class="qcm-block" data-answer="1"><div class="q-text">Q8. Quelle est la principale différence clinique entre MNI-EBV et primo-infection CMV ?</div><div class="qcm-options"><div class="qcm-option" data-idx="0" onclick="selectOption(this)"><span class="letter">A</span><span>L'asthénie (présente dans CMV, absente dans EBV)</span></div><div class="qcm-option" data-idx="1" onclick="selectOption(this)"><span class="letter">B</span><span>L'angine (présente dans EBV, absente ou discrète dans CMV)</span></div><div class="qcm-option" data-idx="2" onclick="selectOption(this)"><span class="letter">C</span><span>La fièvre (présente dans EBV, absente dans CMV)</span></div><div class="qcm-option" data-idx="3" onclick="selectOption(this)"><span class="letter">D</span><span>La splénomégalie (présente dans CMV, absente dans EBV)</span></div></div><button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button><div class="qcm-explanation">L'angine est caractéristique de la MNI-EBV (érythémateuse ou pseudomembraneuse). Elle est absente ou discrète dans la primo-infection CMV. Le MNI-test est aussi négatif dans le CMV.</div></div>
+<div class="qcm-block" data-answer="1"><div class="q-text">Q9. Chez une femme enceinte séronégative au CMV (IgG anti-CMV = 0), quel risque existe-t-il si elle contracte une primo-infection au CMV ?</div><div class="qcm-options"><div class="qcm-option" data-idx="0" onclick="selectOption(this)"><span class="letter">A</span><span>Aucun risque, le CMV est bénin pendant la grossesse</span></div><div class="qcm-option" data-idx="1" onclick="selectOption(this)"><span class="letter">B</span><span>Risque d'infection fœtale grave (surdité congénitale, retard mental, microcéphalie)</span></div><div class="qcm-option" data-idx="2" onclick="selectOption(this)"><span class="letter">C</span><span>Risque de fausse couche systématique</span></div><div class="qcm-option" data-idx="3" onclick="selectOption(this)"><span class="letter">D</span><span>Risque uniquement pour la mère (endométrite)</span></div></div><button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button><div class="qcm-explanation">La primo-infection CMV pendant la grossesse chez une femme séronégative (non immunisée) peut provoquer une infection congénitale grave : surdité (1ère cause de surdité congénitale), retard psychomoteur, microcéphalie, choriorétinite.</div></div>
+<div class="qcm-block" data-answer="1"><div class="q-text">Q10. Quel est le profil sérologique CMV d'un patient qui a fait une primo-infection CMV il y a 5 ans ?</div><div class="qcm-options"><div class="qcm-option" data-idx="0" onclick="selectOption(this)"><span class="letter">A</span><span>IgM+ / IgG–</span></div><div class="qcm-option" data-idx="1" onclick="selectOption(this)"><span class="letter">B</span><span>IgM– / IgG+ (infection ancienne, immunité acquise)</span></div><div class="qcm-option" data-idx="2" onclick="selectOption(this)"><span class="letter">C</span><span>IgM+ / IgG+</span></div><div class="qcm-option" data-idx="3" onclick="selectOption(this)"><span class="letter">D</span><span>IgM– / IgG– (pas d'infection)</span></div></div><button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button><div class="qcm-explanation">Après la guérison d'une primo-infection CMV, les IgM disparaissent (< 6 mois) et les IgG persistent à vie comme marqueur d'immunité acquise.</div></div>
+</div>
+<div class="slide exam-slide" id="slide-28">
+<h2>🏥 Dossier progressif — Section III (CMV)</h2>
+<p style="font-size:.82rem;color:#a0a0c0;margin-bottom:8px"><em>Mme G., 28 ans, enceinte de 14 semaines (séronégative CMV connue). Elle travaille en crèche. Elle consulte pour fièvre à 38,5°C depuis 5 jours, asthénie, adénopathies cervicales. NFS : GB 12 G/L, 60 % lymphocytes, 15 % LHB sur le frottis. MNI-test NÉGATIF. Pas d'angine.</em></p>
+<div class="dp-block">
+<div class="dp-step"><div class="dp-step-num">Étape 1</div><div class="dp-step-title">Syndrome biologique ?</div><div class="qcm-block" data-answer="1"><div class="q-text">Quel syndrome biologique décrivez-vous sur la NFS ?</div><div class="qcm-options"><div class="qcm-option" data-idx="0" onclick="selectOption(this)"><span class="letter">A</span><span>Syndrome inflammatoire biologique</span></div><div class="qcm-option" data-idx="1" onclick="selectOption(this)"><span class="letter">B</span><span>Syndrome mononucléosique (lymphocytose + LHB > 10 %)</span></div><div class="qcm-option" data-idx="2" onclick="selectOption(this)"><span class="letter">C</span><span>Aplasie médullaire</span></div><div class="qcm-option" data-idx="3" onclick="selectOption(this)"><span class="letter">D</span><span>Polyglobulie</span></div></div><button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button><div class="qcm-explanation">NFS : 60 % lymphocytes (> 50 %) + 15 % LHB (> 10 %) = syndrome mononucléosique. MNI-test négatif → l'EBV est peu probable → orienter vers CMV ou toxoplasmose.</div></div></div>
+<div class="dp-step"><div class="dp-step-num">Étape 2</div><div class="dp-step-title">Diagnostic évoqué ?</div><div class="qcm-block" data-answer="1"><div class="q-text">Quelle étiologie est la plus probable ici ?</div><div class="qcm-options"><div class="qcm-option" data-idx="0" onclick="selectOption(this)"><span class="letter">A</span><span>MNI à EBV (MNI-test positif)</span></div><div class="qcm-option" data-idx="1" onclick="selectOption(this)"><span class="letter">B</span><span>Primo-infection CMV (MNI-test négatif + pas d'angine + contexte professionnel)</span></div><div class="qcm-option" data-idx="2" onclick="selectOption(this)"><span class="letter">C</span><span>Toxoplasmose (seule cause possible)</span></div><div class="qcm-option" data-idx="3" onclick="selectOption(this)"><span class="letter">D</span><span>Leucémie aiguë lymphoblastique</span></div></div><button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button><div class="qcm-explanation">CMV probable : pas d'angine (≠ EBV), MNI-test négatif, femme travaillant en crèche (exposition aux jeunes enfants = facteur de risque CMV majeur), séronégative. Sérologie CMV IgM/IgG urgente.</div></div></div>
+<div class="dp-step"><div class="dp-step-num">Étape 3</div><div class="dp-step-title">Urgence ?</div><div class="qcm-block" data-answer="1"><div class="q-text">Quelle est l'urgence dans ce contexte ?</div><div class="qcm-options"><div class="qcm-option" data-idx="0" onclick="selectOption(this)"><span class="letter">A</span><span>Traitement antiviral immédiat par ganciclovir</span></div><div class="qcm-option" data-idx="1" onclick="selectOption(this)"><span class="letter">B</span><span>Consultation spécialisée urgente (gynéco-obstétrique + infectiologie) + sérologie CMV et toxo</span></div><div class="qcm-option" data-idx="2" onclick="selectOption(this)"><span class="letter">C</span><span>Amniocentèse en urgence systématique</span></div><div class="qcm-option" data-idx="3" onclick="selectOption(this)"><span class="letter">D</span><span>Attendre le résultat de la sérologie sans urgence</span></div></div><button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button><div class="qcm-explanation">SM chez femme enceinte = URGENCE DIAGNOSTIQUE. Consultation gynéco-obstétrique + infectiologie. Sérologie CMV (IgM + IgG) + sérologie toxoplasmose + PCR CMV plasmatique.</div></div></div>
+<div class="dp-step"><div class="dp-step-num">Étape 4</div><div class="dp-step-title">Risque fœtal ?</div><div class="qcm-block" data-answer="1"><div class="q-text">Si la primo-infection CMV est confirmée, quel est le risque fœtal ?</div><div class="qcm-options"><div class="qcm-option" data-idx="0" onclick="selectOption(this)"><span class="letter">A</span><span>Aucun risque, le CMV est bénin chez le fœtus</span></div><div class="qcm-option" data-idx="1" onclick="selectOption(this)"><span class="letter">B</span><span>Risque d'infection fœtale grave : surdité congénitale (1ère cause), retard psychomoteur, microcéphalie</span></div><div class="qcm-option" data-idx="2" onclick="selectOption(this)"><span class="letter">C</span><span>Risque de malformations cardiaques uniquement</span></div><div class="qcm-option" data-idx="3" onclick="selectOption(this)"><span class="letter">D</span><span>Risque d'accouchement prématuré exclusivement</span></div></div><button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button><div class="qcm-explanation">CMV = 1ère cause de surdité congénitale. Risques : surdité, choriorétinite, microcéphalie, hépatite fœtale, retard psychomoteur. La transmission fœtale survient dans ~30-40 % des primo-infections maternelles.</div></div></div>
+<div class="dp-step"><div class="dp-step-num">Étape 5</div><div class="dp-step-title">Traitement ?</div><div class="qcm-block" data-answer="2"><div class="q-text">Quelle prise en charge thérapeutique pour cette patiente ?</div><div class="qcm-options"><div class="qcm-option" data-idx="0" onclick="selectOption(this)"><span class="letter">A</span><span>Ganciclovir IV en urgence</span></div><div class="qcm-option" data-idx="1" onclick="selectOption(this)"><span class="letter">B</span><span>Valganciclovir per os systématique</span></div><div class="qcm-option" data-idx="2" onclick="selectOption(this)"><span class="letter">C</span><span>Traitement symptomatique (repos, paracétamol) + surveillance spécialisée rapprochée + discuter valacyclovir ou immunoglobulines CMV spécifiques selon protocole</span></div><div class="qcm-option" data-idx="3" onclick="selectOption(this)"><span class="letter">D</span><span>Stop travail en crèche uniquement, pas de traitement</span></div></div><button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button><div class="qcm-explanation">Prise en charge : symptomatique + consultation obstétricale urgente + surveillance écho-fœtale mensuelle + discussion pluridisciplinaire (valacyclovir en prophylaxie ou immunoglobulines CMV spécifiques selon protocoles). Pas de ganciclovir en grossesse hors cas graves.</div></div></div>
+</div></div>
+<div class="slide section-header" id="slide-29">
+  <div class="section-number">IV</div>
+  <h1>Primo-infection VIH</h1>
+  <p class="section-subtitle">Syndrome rétroviral aigu — Urgence diagnostique</p>
+  <div class="urgence-box" style="margin-top:2rem;max-width:600px">
+    ⚠️ Tout syndrome mononucléosique sans étiologie évidente = <strong>éliminer VIH en URGENCE</strong>
+  </div>
+</div>
+<div class="slide" id="slide-30">
+  <h2>IV.1 — Syndrome rétroviral aigu : clinique</h2>
+  <div class="two-col">
+    <div>
+      <h3>Contexte et délai</h3>
+      <ul>
+        <li><span class="def-box">Primo-infection VIH</span> = 2–6 semaines après contamination</li>
+        <li>50–90 % des patients symptomatiques</li>
+        <li>Durée habituelle : 1–3 semaines</li>
+        <li>Facteur de risque : pratiques sexuelles à risque, usage IV de drogues, AES</li>
+      </ul>
+      <h3 style="margin-top:1rem">Triade classique du SRA</h3>
+      <div class="urgence-box">
+        Fièvre prolongée + adénopathies diffuses + <strong>ulcérations bucco-génitales douloureuses</strong>
+      </div>
+    </div>
+    <div>
+      <h3>Signes complets</h3>
+      <ul>
+        <li>🌡️ Fièvre élevée (≥ 38,5 °C), sueurs, asthénie profonde</li>
+        <li>🔴 Exanthème maculeux tronculaire non prurigineux</li>
+        <li>💊 <strong>Angine érythémateuse ou ulcérée</strong> (pas pseudomembraneuse)</li>
+        <li>🦠 Adénopathies cervicales, axillaires, inguinales</li>
+        <li>⚠️ <span class="def-box">Ulcérations aphtoïdes</span> buccales ET génitales = quasi-pathognomoniques</li>
+        <li>🧠 Signes neuro : méningite aseptique, encéphalite, neuropathie dans les formes sévères</li>
+        <li>🩺 Splénomégalie inconstante, diarrhée, nausées</li>
+      </ul>
+    </div>
+  </div>
+  <div class="flash-container">
+    <div class="flash-block" data-answer="ulcérations bucco-génitales">
+  <p class="flash-question">⚡ Quel signe clinique est quasi-pathognomonique du syndrome rétroviral aigu par rapport à la MNI ?</p>
+  <input type="text" class="flash-input" placeholder="Votre réponse...">
+  <button class="flash-btn" onclick="validateFlash(this)">Valider</button>
+  <div class="flash-feedback"></div>
+</div>
+    <div class="flash-block" data-answer="2 à 6 semaines">
+  <p class="flash-question">⚡ Dans quel délai après contamination VIH survient la primo-infection symptomatique ?</p>
+  <input type="text" class="flash-input" placeholder="Votre réponse...">
+  <button class="flash-btn" onclick="validateFlash(this)">Valider</button>
+  <div class="flash-feedback"></div>
+</div>
+    <div class="flash-block" data-answer="50 à 90 %">
+  <p class="flash-question">⚡ Quelle proportion de primo-infections VIH est symptomatique ?</p>
+  <input type="text" class="flash-input" placeholder="Votre réponse...">
+  <button class="flash-btn" onclick="validateFlash(this)">Valider</button>
+  <div class="flash-feedback"></div>
+</div>
+    <div class="flash-block" data-answer="fièvre + adénopathies + ulcérations bucco-génitales">
+  <p class="flash-question">⚡ Nommez les 3 éléments de la triade clinique du syndrome rétroviral aigu.</p>
+  <input type="text" class="flash-input" placeholder="Votre réponse...">
+  <button class="flash-btn" onclick="validateFlash(this)">Valider</button>
+  <div class="flash-feedback"></div>
+</div>
+  </div>
+</div>
+<div class="slide" id="slide-31">
+  <h2>IV.2 — NFS et immunologie du SRA</h2>
+  <div class="two-col">
+    <div>
+      <h3>NFS</h3>
+      <ul>
+        <li>Lymphocytose avec syndrome mononucléosique (LHB)</li>
+        <li>Phase initiale : possible <span class="def-box">lymphopénie</span> transitoire (CD4 chutent brutalement)</li>
+        <li>Thrombopénie légère fréquente</li>
+        <li>CRP élevée, cytolyse hépatique modérée</li>
+      </ul>
+      <h3 style="margin-top:1rem">CD4 au cours du SRA</h3>
+      <div class="urgence-box">
+        Chute brutale des CD4 (parfois &lt; 200/mm³) → immunodépression transitoire<br>
+        Puis remontée partielle après phase aiguë mais jamais au niveau initial
+      </div>
+    </div>
+    <div>
+      <h3>Charge virale plasmatique (ARN VIH)</h3>
+      <ul>
+        <li><span class="def-box">Virémie</span> très élevée au pic : 10⁶–10⁷ copies/mL</li>
+        <li>Réplication intense → contagiosité maximale</li>
+        <li>ARN VIH détectable dès J10 après contamination</li>
+      </ul>
+      <h3 style="margin-top:1rem">Point capital</h3>
+      <ul>
+        <li>SM au cours d'une primo-VIH = <strong>CD4 bas + charge virale explosive</strong></li>
+        <li>Justifie traitement ARV immédiat</li>
+      </ul>
+    </div>
+  </div>
+  <div class="flash-container">
+    <div class="flash-block" data-answer="chute brutale transitoire">
+  <p class="flash-question">⚡ Quel est le comportement des CD4 lors du syndrome rétroviral aigu ?</p>
+  <input type="text" class="flash-input" placeholder="Votre réponse...">
+  <button class="flash-btn" onclick="validateFlash(this)">Valider</button>
+  <div class="flash-feedback"></div>
+</div>
+    <div class="flash-block" data-answer="très élevée (10⁶–10⁷ copies/mL)">
+  <p class="flash-question">⚡ La charge virale plasmatique est-elle haute ou basse au pic de la primo-infection VIH ?</p>
+  <input type="text" class="flash-input" placeholder="Votre réponse...">
+  <button class="flash-btn" onclick="validateFlash(this)">Valider</button>
+  <div class="flash-feedback"></div>
+</div>
+    <div class="flash-block" data-answer="thrombopénie légère">
+  <p class="flash-question">⚡ Quelle anomalie de NFS (en dehors du SM) est fréquente au cours du SRA ?</p>
+  <input type="text" class="flash-input" placeholder="Votre réponse...">
+  <button class="flash-btn" onclick="validateFlash(this)">Valider</button>
+  <div class="flash-feedback"></div>
+</div>
+    <div class="flash-block" data-answer="dès J10">
+  <p class="flash-question">⚡ À partir de quel délai après contamination l'ARN VIH est-il détectable ?</p>
+  <input type="text" class="flash-input" placeholder="Votre réponse...">
+  <button class="flash-btn" onclick="validateFlash(this)">Valider</button>
+  <div class="flash-feedback"></div>
+</div>
+  </div>
+</div>
+<div class="slide" id="slide-32">
+  <h2>IV.3 — Diagnostic biologique de la primo-infection VIH</h2>
+  <div class="two-col">
+    <div>
+      <h3>Test combiné Ag/Ac VIH (ELISA 4ᵉ génération)</h3>
+      <ul>
+        <li><span class="def-box">Antigène p24</span> = capside VIH, détectable dès J15–20 (avant les anticorps)</li>
+        <li>Anticorps anti-VIH apparaissent à J21–45 (<span class="def-box">fenêtre sérologique</span>)</li>
+        <li>Test combiné Ag p24 + Ac VIH1/2 = <strong>1ère intention</strong></li>
+        <li>Sensibilité ≈ 99,5 % ; spécificité ≈ 99,5 %</li>
+        <li>Résultat positif → toujours confirmer par Western-Blot</li>
+      </ul>
+      <div class="urgence-box" style="margin-top:1rem">
+        ⚠️ Test négatif en période de fenêtre ≠ non-infection<br>
+        → Répéter à 6 semaines si suspicion forte
+      </div>
+    </div>
+    <div>
+      <h3>ARN VIH (charge virale)</h3>
+      <ul>
+        <li>Si forte suspicion + test Ag/Ac négatif (trop précoce)</li>
+        <li>Détectable dès J10–12 après contamination</li>
+        <li>ARN &gt; 100 000 copies/mL = très évocateur</li>
+      </ul>
+      <h3 style="margin-top:1rem">Algorithme diagnostique</h3>
+      <ol>
+        <li>Test combiné Ag p24 + Ac VIH (ELISA 4G) <strong>[1ère intention]</strong></li>
+        <li>Si positif → Western-Blot (confirmation)</li>
+        <li>Si négatif mais forte suspicion → ARN VIH + répéter à 6 sem</li>
+        <li>Si fenêtre → TROD et test rapide insuffisants (trop tardifs)</li>
+      </ol>
+    </div>
+  </div>
+  <div class="flash-container">
+    <div class="flash-block" data-answer="test combiné Ag p24 + Ac VIH (ELISA 4ème génération)">
+  <p class="flash-question">⚡ Quel test est prescrit en première intention pour diagnostiquer une primo-infection VIH ?</p>
+  <input type="text" class="flash-input" placeholder="Votre réponse...">
+  <button class="flash-btn" onclick="validateFlash(this)">Valider</button>
+  <div class="flash-feedback"></div>
+</div>
+    <div class="flash-block" data-answer="capside du VIH, détectable dès J15-20 avant les anticorps">
+  <p class="flash-question">⚡ Qu'est-ce que l'Ag p24 et quand devient-il détectable ?</p>
+  <input type="text" class="flash-input" placeholder="Votre réponse...">
+  <button class="flash-btn" onclick="validateFlash(this)">Valider</button>
+  <div class="flash-feedback"></div>
+</div>
+    <div class="flash-block" data-answer="doser l'ARN VIH et répéter le test à 6 semaines">
+  <p class="flash-question">⚡ Que faire si le test combiné est négatif mais la suspicion de primo-VIH est forte ?</p>
+  <input type="text" class="flash-input" placeholder="Votre réponse...">
+  <button class="flash-btn" onclick="validateFlash(this)">Valider</button>
+  <div class="flash-feedback"></div>
+</div>
+    <div class="flash-block" data-answer="Western-Blot">
+  <p class="flash-question">⚡ Quel test confirme un ELISA 4G positif ?</p>
+  <input type="text" class="flash-input" placeholder="Votre réponse...">
+  <button class="flash-btn" onclick="validateFlash(this)">Valider</button>
+  <div class="flash-feedback"></div>
+</div>
+  </div>
+</div>
+<div class="slide" id="slide-33">
+  <h2>IV.4 — Prise en charge de la primo-infection VIH</h2>
+  <div class="two-col">
+    <div>
+      <h3>Traitement ARV : indication et urgence</h3>
+      <div class="urgence-box">
+        Traitement <span class="def-box">antirétroviral (ARV)</span> débuté dès le diagnostic confirmé<br>
+        Pas d'attente de CD4 au seuil — traitement universel
+      </div>
+      <ul style="margin-top:1rem">
+        <li>Objectif : charge virale indétectable (&lt; 50 copies/mL)</li>
+        <li>Schéma standard : <strong>trithérapie ARV</strong></li>
+        <li>2 inhibiteurs nucléos(t)idiques de la RT + 1 inhibiteur d'intégrase (ex: dolutégravir)</li>
+        <li>Traitement à vie (pas de guérison)</li>
+      </ul>
+      <h3 style="margin-top:1rem">Bénéfices du traitement précoce</h3>
+      <ul>
+        <li>Réduction du pool viral réservoir</li>
+        <li>Meilleure reconstruction immunitaire CD4</li>
+        <li>Réduction de la contagiosité (TasP)</li>
+      </ul>
+    </div>
+    <div>
+      <h3>Mesures associées</h3>
+      <ul>
+        <li>📋 <span class="def-box">Déclaration obligatoire</span> (DO) anonymisée — CERFA spécifique VIH</li>
+        <li>🧪 Bilan pré-thérapeutique complet : NFS, bilan hépatique, rénal, lipidique, HBsAg, sérologies</li>
+        <li>💊 Vaccination mise à jour (avant que CD4 baissent trop)</li>
+        <li>🩺 Suivi spécialisé infectiologie/VIH</li>
+        <li>👥 Dépistage des partenaires (notification)</li>
+        <li>🛡️ Prophylaxie PrEP pour partenaires séronégatifs</li>
+        <li>🚫 Signalement urgences si CD4 &lt; 200 (risque infections opportunistes)</li>
+      </ul>
+      <div class="urgence-box" style="margin-top:1rem">
+        ⚠️ Méningite aseptique + SRA sévère = hospitalisation urgente
+      </div>
+    </div>
+  </div>
+  <div class="flash-container">
+    <div class="flash-block" data-answer="trithérapie ARV (2 INTI + 1 inhibiteur d'intégrase)">
+  <p class="flash-question">⚡ Quel est le schéma standard de traitement d'une primo-infection VIH ?</p>
+  <input type="text" class="flash-input" placeholder="Votre réponse...">
+  <button class="flash-btn" onclick="validateFlash(this)">Valider</button>
+  <div class="flash-feedback"></div>
+</div>
+    <div class="flash-block" data-answer="charge virale indétectable (< 50 copies/mL)">
+  <p class="flash-question">⚡ Quel est l'objectif virologique du traitement ARV ?</p>
+  <input type="text" class="flash-input" placeholder="Votre réponse...">
+  <button class="flash-btn" onclick="validateFlash(this)">Valider</button>
+  <div class="flash-feedback"></div>
+</div>
+    <div class="flash-block" data-answer="oui, déclaration obligatoire anonymisée">
+  <p class="flash-question">⚡ La primo-infection VIH est-elle soumise à déclaration obligatoire ?</p>
+  <input type="text" class="flash-input" placeholder="Votre réponse...">
+  <button class="flash-btn" onclick="validateFlash(this)">Valider</button>
+  <div class="flash-feedback"></div>
+</div>
+    <div class="flash-block" data-answer="réduction de la contagiosité (Treatment as Prevention)">
+  <p class="flash-question">⚡ Quel bénéfice supplémentaire au traitement ARV précoce en termes de santé publique ?</p>
+  <input type="text" class="flash-input" placeholder="Votre réponse...">
+  <button class="flash-btn" onclick="validateFlash(this)">Valider</button>
+  <div class="flash-feedback"></div>
+</div>
+  </div>
+</div>
+<div class="slide exam-slide" id="slide-34">
+  <h2>📝 QCM — Section IV : Primo-infection VIH</h2>
+  <div class="qcm-container">
+    <div class="qcm-block" data-answer="B">
+  <p class="qcm-question"><strong>Q1.</strong> Quelle est la durée habituelle entre contamination VIH et premiers symptômes du syndrome rétroviral aigu ?</p>
+  <div class="qcm-option" onclick="selectOption(this)">A. 3–7 jours</div><div class="qcm-option" onclick="selectOption(this)">B. 2–6 semaines</div><div class="qcm-option" onclick="selectOption(this)">C. 3–6 mois</div><div class="qcm-option" onclick="selectOption(this)">D. 1–2 ans</div>
+  <button class="qcm-btn" onclick="validateQCM(this)" disabled>Valider</button>
+  <div class="qcm-feedback"></div>
+  <div class="qcm-explanation" style="display:none">Le SRA survient 2 à 6 semaines après la contamination, lors du pic de virémie plasmatique.</div>
+</div>
+    <div class="qcm-block" data-answer="C">
+  <p class="qcm-question"><strong>Q2.</strong> Lequel de ces signes est quasi-pathognomonique du syndrome rétroviral aigu par rapport à la MNI ?</p>
+  <div class="qcm-option" onclick="selectOption(this)">A. Angine érythémateuse</div><div class="qcm-option" onclick="selectOption(this)">B. Splénomégalie</div><div class="qcm-option" onclick="selectOption(this)">C. Ulcérations bucco-génitales</div><div class="qcm-option" onclick="selectOption(this)">D. Rash morbilliforme</div>
+  <button class="qcm-btn" onclick="validateQCM(this)" disabled>Valider</button>
+  <div class="qcm-feedback"></div>
+  <div class="qcm-explanation" style="display:none">Les ulcérations aphtoïdes bucco-génitales sont quasi-pathognomoniques du SRA, absentes dans la MNI typique.</div>
+</div>
+    <div class="qcm-block" data-answer="B">
+  <p class="qcm-question"><strong>Q3.</strong> Quel est le premier examen biologique à réaliser devant un syndrome mononucléosique sans étiologie évidente chez un adulte jeune ?</p>
+  <div class="qcm-option" onclick="selectOption(this)">A. Sérologie EBV IgM</div><div class="qcm-option" onclick="selectOption(this)">B. Test combiné Ag p24 + Ac VIH</div><div class="qcm-option" onclick="selectOption(this)">C. ARN VIH</div><div class="qcm-option" onclick="selectOption(this)">D. NFS-plaquettes seule</div>
+  <button class="qcm-btn" onclick="validateQCM(this)" disabled>Valider</button>
+  <div class="qcm-feedback"></div>
+  <div class="qcm-explanation" style="display:none">Le test combiné ELISA 4G (Ag p24 + Ac VIH) est le test de 1ère intention pour éliminer une primo-VIH.</div>
+</div>
+    <div class="qcm-block" data-answer="B">
+  <p class="qcm-question"><strong>Q4.</strong> L'antigène p24 est détectable à partir de quel délai après contamination ?</p>
+  <div class="qcm-option" onclick="selectOption(this)">A. Dès J3</div><div class="qcm-option" onclick="selectOption(this)">B. Dès J10–15</div><div class="qcm-option" onclick="selectOption(this)">C. À partir de J30</div><div class="qcm-option" onclick="selectOption(this)">D. À partir de J60</div>
+  <button class="qcm-btn" onclick="validateQCM(this)" disabled>Valider</button>
+  <div class="qcm-feedback"></div>
+  <div class="qcm-explanation" style="display:none">L'Ag p24 (capside VIH) est détectable dès J10-15, bien avant l'apparition des anticorps (J21-45).</div>
+</div>
+    <div class="qcm-block" data-answer="C">
+  <p class="qcm-question"><strong>Q5.</strong> Quel est le comportement des CD4 lors du syndrome rétroviral aigu ?</p>
+  <div class="qcm-option" onclick="selectOption(this)">A. Hausse progressive</div><div class="qcm-option" onclick="selectOption(this)">B. Stable</div><div class="qcm-option" onclick="selectOption(this)">C. Chute brutale transitoire</div><div class="qcm-option" onclick="selectOption(this)">D. Élévation permanente</div>
+  <button class="qcm-btn" onclick="validateQCM(this)" disabled>Valider</button>
+  <div class="qcm-feedback"></div>
+  <div class="qcm-explanation" style="display:none">Les CD4 chutent brutalement au cours du SRA (parfois < 200/mm³), puis remontent partiellement mais jamais au niveau initial.</div>
+</div>
+    <div class="qcm-block" data-answer="B">
+  <p class="qcm-question"><strong>Q6.</strong> Quel traitement est indiqué dès le diagnostic confirmé de primo-infection VIH ?</p>
+  <div class="qcm-option" onclick="selectOption(this)">A. Aciclovir IV</div><div class="qcm-option" onclick="selectOption(this)">B. Trithérapie ARV</div><div class="qcm-option" onclick="selectOption(this)">C. Corticoïdes</div><div class="qcm-option" onclick="selectOption(this)">D. Interféron alpha</div>
+  <button class="qcm-btn" onclick="validateQCM(this)" disabled>Valider</button>
+  <div class="qcm-feedback"></div>
+  <div class="qcm-explanation" style="display:none">La trithérapie ARV est débutée dès le diagnostic, sans attendre de seuil de CD4, objectif charge virale indétectable.</div>
+</div>
+    <div class="qcm-block" data-answer="B">
+  <p class="qcm-question"><strong>Q7.</strong> Un test combiné Ag/Ac VIH négatif réalisé 8 jours après un rapport à risque élimine-t-il formellement l'infection ?</p>
+  <div class="qcm-option" onclick="selectOption(this)">A. Oui, la sensibilité est 100 %</div><div class="qcm-option" onclick="selectOption(this)">B. Non, le test peut être négatif en fenêtre sérologique</div><div class="qcm-option" onclick="selectOption(this)">C. Oui si la charge virale est également négative</div><div class="qcm-option" onclick="selectOption(this)">D. Non, car le test est trop sensible</div>
+  <button class="qcm-btn" onclick="validateQCM(this)" disabled>Valider</button>
+  <div class="qcm-feedback"></div>
+  <div class="qcm-explanation" style="display:none">À J8, l'Ag p24 et les Ac ne sont pas encore détectables. Le test doit être répété à J15-20 (Ag p24) et à 6 semaines pour les Ac.</div>
+</div>
+    <div class="qcm-block" data-answer="B">
+  <p class="qcm-question"><strong>Q8.</strong> La primo-infection VIH est soumise à :</p>
+  <div class="qcm-option" onclick="selectOption(this)">A. Notification nominative aux services d'hygiène</div><div class="qcm-option" onclick="selectOption(this)">B. Déclaration obligatoire anonymisée</div><div class="qcm-option" onclick="selectOption(this)">C. Signalement au médecin traitant seul</div><div class="qcm-option" onclick="selectOption(this)">D. Aucune déclaration obligatoire</div>
+  <button class="qcm-btn" onclick="validateQCM(this)" disabled>Valider</button>
+  <div class="qcm-feedback"></div>
+  <div class="qcm-explanation" style="display:none">La séropositivité VIH (dont primo-infection) est soumise à déclaration obligatoire, anonymisée, via formulaire CERFA.</div>
+</div>
+    <div class="qcm-block" data-answer="C">
+  <p class="qcm-question"><strong>Q9.</strong> Quel est le schéma ARV standard en primo-infection VIH ?</p>
+  <div class="qcm-option" onclick="selectOption(this)">A. Monothérapie d'INTI</div><div class="qcm-option" onclick="selectOption(this)">B. 2 INTI + 1 IP</div><div class="qcm-option" onclick="selectOption(this)">C. 2 INTI + 1 inhibiteur d'intégrase</div><div class="qcm-option" onclick="selectOption(this)">D. 3 INTI</div>
+  <button class="qcm-btn" onclick="validateQCM(this)" disabled>Valider</button>
+  <div class="qcm-feedback"></div>
+  <div class="qcm-explanation" style="display:none">Le schéma de référence est 2 INTI (ex: ténofovir/emtricitabine) + 1 InI (dolutégravir), robuste et bien toléré.</div>
+</div>
+    <div class="qcm-block" data-answer="C">
+  <p class="qcm-question"><strong>Q10.</strong> Quelle complication neurologique grave peut survenir lors d'une primo-infection VIH sévère ?</p>
+  <div class="qcm-option" onclick="selectOption(this)">A. Abcès cérébral à toxoplasme</div><div class="qcm-option" onclick="selectOption(this)">B. Leucoencéphalite multifocale progressive</div><div class="qcm-option" onclick="selectOption(this)">C. Méningite aseptique lymphocytaire</div><div class="qcm-option" onclick="selectOption(this)">D. Myelopathie vacuolaire</div>
+  <button class="qcm-btn" onclick="validateQCM(this)" disabled>Valider</button>
+  <div class="qcm-feedback"></div>
+  <div class="qcm-explanation" style="display:none">La méningite aseptique lymphocytaire est une complication neurologique de la primo-VIH ; les autres complications (toxo, LEMP) surviennent à un stade SIDA (CD4 très bas, chronique).</div>
+</div>
+  </div>
+</div>
+<div class="slide exam-slide" id="slide-35">
+  <h2>🏥 Dossier progressif — Section IV</h2>
+  <p><em>Situation clinique :</em> Lucas, 26 ans, relations homosexuelles non protégées il y a 3 semaines. Consulte pour fièvre à 39 °C depuis 10 jours, pharyngite, adénopathies cervicales et inguinales, ulcération buccale douloureuse et une ulcération génitale. Rash maculeux du tronc. MNI-test négatif. Sérologie EBV IgM négative.</p>
+  <div class="dp-container">
+    <div class="dp-step">
+  <h4>Étape 1 — Diagnostic principal à évoquer</h4>
+  <p>Quel diagnostic devez-vous évoquer EN PRIORITÉ devant ce tableau clinique ?</p>
+  <div class="qcm-option" onclick="selectOption(this)">A. Mononucléose infectieuse à EBV</div><div class="qcm-option" onclick="selectOption(this)">B. Infection à CMV</div><div class="qcm-option" onclick="selectOption(this)">C. Primo-infection VIH</div><div class="qcm-option" onclick="selectOption(this)">D. Toxoplasmose</div>
+  <button class="qcm-btn" onclick="validateQCM(this)" disabled>Valider</button>
+  <div class="qcm-feedback"></div>
+  <div class="qcm-explanation" style="display:none">L'association fièvre + ulcérations bucco-génitales + rash + adénopathies multiples + MNI-test négatif + contexte IST = primo-infection VIH jusqu'à preuve du contraire.</div>
+</div>
+    <div class="dp-step">
+  <h4>Étape 2 — Examen clé en première intention</h4>
+  <p>Quel est l'examen biologique à demander EN URGENCE ?</p>
+  <div class="qcm-option" onclick="selectOption(this)">A. ARN VIH seul</div><div class="qcm-option" onclick="selectOption(this)">B. Test combiné Ag p24 + Ac VIH (ELISA 4G)</div><div class="qcm-option" onclick="selectOption(this)">C. Western-Blot VIH</div><div class="qcm-option" onclick="selectOption(this)">D. CD4 seul</div>
+  <button class="qcm-btn" onclick="validateQCM(this)" disabled>Valider</button>
+  <div class="qcm-feedback"></div>
+  <div class="qcm-explanation" style="display:none">Le test combiné Ag p24/Ac VIH 1ère intention. L'ARN VIH est réservé aux cas où la suspicion est forte et le test combiné négatif (trop précoce).</div>
+</div>
+    <div class="dp-step">
+  <h4>Étape 3 — Résultat Ag p24 positif — conduite à tenir</h4>
+  <p>Le test combiné revient Ag p24 positif, Ac négatifs (fenêtre sérologique). Que faites-vous ?</p>
+  <div class="qcm-option" onclick="selectOption(this)">A. Traitement ARV immédiat sans confirmation</div><div class="qcm-option" onclick="selectOption(this)">B. Western-Blot de confirmation puis ARV</div><div class="qcm-option" onclick="selectOption(this)">C. Répéter le test à 6 semaines avant tout traitement</div><div class="qcm-option" onclick="selectOption(this)">D. Considérer faux positif, pas de traitement</div>
+  <button class="qcm-btn" onclick="validateQCM(this)" disabled>Valider</button>
+  <div class="qcm-feedback"></div>
+  <div class="qcm-explanation" style="display:none">Tout résultat ELISA 4G positif doit être confirmé par Western-Blot. Dès confirmation, traitement ARV immédiat.</div>
+</div>
+    <div class="dp-step">
+  <h4>Étape 4 — Traitement</h4>
+  <p>Le Western-Blot confirme la primo-infection VIH. Quel traitement initiez-vous ?</p>
+  <div class="qcm-option" onclick="selectOption(this)">A. Aciclovir 5 mg/kg IV 14 jours</div><div class="qcm-option" onclick="selectOption(this)">B. Trithérapie ARV (2 INTI + 1 InI) dès confirmation</div><div class="qcm-option" onclick="selectOption(this)">C. Attendre que les CD4 descendent sous 350 avant de traiter</div><div class="qcm-option" onclick="selectOption(this)">D. Traitement symptomatique seul, VIH primo ne nécessite pas d'ARV</div>
+  <button class="qcm-btn" onclick="validateQCM(this)" disabled>Valider</button>
+  <div class="qcm-feedback"></div>
+  <div class="qcm-explanation" style="display:none">Traitement ARV universel dès le diagnostic, objectif ARN VIH < 50 copies/mL. Le dolutégravir (InI) est le pilier actuel.</div>
+</div>
+    <div class="dp-step">
+  <h4>Étape 5 — Obligations médico-légales</h4>
+  <p>Quelles sont les obligations déclaratives dans ce cas ?</p>
+  <div class="qcm-option" onclick="selectOption(this)">A. Aucune déclaration obligatoire pour le VIH</div><div class="qcm-option" onclick="selectOption(this)">B. Déclaration obligatoire anonymisée (CERFA VIH)</div><div class="qcm-option" onclick="selectOption(this)">C. Déclaration nominative à la DDASS</div><div class="qcm-option" onclick="selectOption(this)">D. Signalement au procureur obligatoire</div>
+  <button class="qcm-btn" onclick="validateQCM(this)" disabled>Valider</button>
+  <div class="qcm-feedback"></div>
+  <div class="qcm-explanation" style="display:none">Séropositivité VIH = déclaration obligatoire anonymisée. Le médecin informe aussi le patient de l'obligation de protection de ses partenaires.</div>
+</div>
+  </div>
+</div>
+<div class="slide section-header" id="slide-36">
+  <div class="section-number">V</div>
+  <h1>Autres étiologies & Diagnostic différentiel</h1>
+  <p class="section-subtitle">Causes rares du SM — Pièges diagnostiques</p>
+</div>
+<div class="slide" id="slide-37">
+  <h2>V.1 — Autres étiologies virales du syndrome mononucléosique</h2>
+  <div class="two-col">
+    <div>
+      <h3>Hépatites virales A et B</h3>
+      <ul>
+        <li><span class="def-box">Hépatite A</span> : transmission féco-orale, SM discret, cytolyse hépatique au premier plan</li>
+        <li><span class="def-box">Hépatite B aiguë</span> : SM inconstant, ictère, ALAT très élevées (&gt; 10N), Ag HBs positif</li>
+        <li>Diagnostic : sérologies HAV (IgM anti-HAV) et HBV (Ag HBs, IgM anti-HBc)</li>
+      </ul>
+      <h3 style="margin-top:1rem">Rubéole</h3>
+      <ul>
+        <li>SM chez adulte non immunisé, exanthème caractéristique occipito-cervical</li>
+        <li>Adénopathies occipitales et sous-occipitales prédominantes</li>
+        <li>⚠️ <span class="def-box">Rubéole chez femme enceinte</span> = urgence absolue (embryofoetopathie)</li>
+        <li>Diagnostic : IgM anti-rubéole (phase aiguë)</li>
+      </ul>
+    </div>
+    <div>
+      <h3>HHV-6 et Herpès simplex (HSV)</h3>
+      <ul>
+        <li><span class="def-box">HHV-6</span> : principal agent de la <em>roséole infantile</em> (exanthème subit), SM discret chez adulte immunodéprimé</li>
+        <li>HSV-1/2 : SM possible lors de primo-infection, gingivostomatite herpétique</li>
+        <li>Diagnostic : PCR HHV-6 ou sérologie ; PCR HSV si lésions vésiculeuses</li>
+      </ul>
+      <h3 style="margin-top:1rem">Parvovirus B19</h3>
+      <ul>
+        <li>Érythème infectieux (5ème maladie), polyarthrite chez adulte</li>
+        <li>SM discret, anémie hémolytique possible</li>
+        <li>⚠️ Anémie aplasique si drépanocytose ou immunodépression</li>
+        <li>Danger : hydrops fœtalis si grossesse</li>
+      </ul>
+    </div>
+  </div>
+  <div class="flash-container">
+    <div class="flash-block" data-answer="féco-orale">
+  <p class="flash-question">⚡ Quelle est la voie de transmission de l'hépatite A responsable de SM ?</p>
+  <input type="text" class="flash-input" placeholder="Votre réponse...">
+  <button class="flash-btn" onclick="validateFlash(this)">Valider</button>
+  <div class="flash-feedback"></div>
+</div>
+    <div class="flash-block" data-answer="risque d'embryofoetopathie rubéolique (malformations fœtales)">
+  <p class="flash-question">⚡ Pourquoi la rubéole est-elle une urgence chez la femme enceinte ?</p>
+  <input type="text" class="flash-input" placeholder="Votre réponse...">
+  <button class="flash-btn" onclick="validateFlash(this)">Valider</button>
+  <div class="flash-feedback"></div>
+</div>
+    <div class="flash-block" data-answer="HHV-6">
+  <p class="flash-question">⚡ Quel herpèsvirus est responsable de la roséole infantile ?</p>
+  <input type="text" class="flash-input" placeholder="Votre réponse...">
+  <button class="flash-btn" onclick="validateFlash(this)">Valider</button>
+  <div class="flash-feedback"></div>
+</div>
+    <div class="flash-block" data-answer="hydrops fœtalis (anasarque fœto-placentaire)">
+  <p class="flash-question">⚡ Quel danger représente le parvovirus B19 chez la femme enceinte ?</p>
+  <input type="text" class="flash-input" placeholder="Votre réponse...">
+  <button class="flash-btn" onclick="validateFlash(this)">Valider</button>
+  <div class="flash-feedback"></div>
+</div>
+  </div>
+</div>
+<div class="slide" id="slide-38">
+  <h2>V.2 — Étiologies bactériennes, parasitaires et médicamenteuses</h2>
+  <div class="two-col">
+    <div>
+      <h3>Causes bactériennes</h3>
+      <ul>
+        <li><span class="def-box">Listériose</span> (<em>Listeria monocytogenes</em>) : SM fébrile après ingestion d'aliments contaminés (fromages, charcuteries) ; gravissime si immunodépression ou grossesse (septicémie, méningite, listériose néonatale)</li>
+        <li><span class="def-box">Brucellose</span> (<em>Brucella</em>) : zoonose (contact animaux, produits laitiers crus), fièvre ondulante, hépato-splénomégalie, SM modéré — diagnostic : sérologie de Wright</li>
+        <li><span class="def-box">Leptospirose</span> : baignade en eau douce/contact rongeurs, ictère, insuffisance rénale aiguë, SM — diagnostic : sérologie MAT</li>
+      </ul>
+    </div>
+    <div>
+      <h3>Causes parasitaires</h3>
+      <ul>
+        <li><span class="def-box">Paludisme</span> : fièvre tierce ou quarte, NFS avec thrombopénie + anémie hémolyse, SM possible — éliminer SYSTÉMATIQUEMENT si retour de zone tropicale (frottis + goutte épaisse + TDR)</li>
+        <li>Toxoplasmose : déjà traitée en Section II</li>
+      </ul>
+      <h3 style="margin-top:1rem">DRESS syndrome (médicamenteux)</h3>
+      <div class="urgence-box">
+        <span class="def-box">DRESS</span> = Drug Reaction with Eosinophilia and Systemic Symptoms<br>
+        Allopurinol, anticonvulsivants, sulfamides<br>
+        <strong>SM + hyperéosinophilie + atteinte viscérale</strong><br>
+        ⚠️ Peut être fatal — arrêt immédiat du médicament suspect
+      </div>
+    </div>
+  </div>
+  <div class="flash-container">
+    <div class="flash-block" data-answer="Listeria monocytogenes">
+  <p class="flash-question">⚡ Quelle bactérie est responsable d'une listériose à risque de méningite chez l'immunodéprimé ?</p>
+  <input type="text" class="flash-input" placeholder="Votre réponse...">
+  <button class="flash-btn" onclick="validateFlash(this)">Valider</button>
+  <div class="flash-feedback"></div>
+</div>
+    <div class="flash-block" data-answer="frottis sanguin + goutte épaisse + TDR paludisme">
+  <p class="flash-question">⚡ Quel examen systématique devant tout SM avec fièvre au retour des tropiques ?</p>
+  <input type="text" class="flash-input" placeholder="Votre réponse...">
+  <button class="flash-btn" onclick="validateFlash(this)">Valider</button>
+  <div class="flash-feedback"></div>
+</div>
+    <div class="flash-block" data-answer="Drug Reaction with Eosinophilia and Systemic Symptoms">
+  <p class="flash-question">⚡ Que signifie l'acronyme DRESS ?</p>
+  <input type="text" class="flash-input" placeholder="Votre réponse...">
+  <button class="flash-btn" onclick="validateFlash(this)">Valider</button>
+  <div class="flash-feedback"></div>
+</div>
+    <div class="flash-block" data-answer="arrêt immédiat du médicament suspect + corticothérapie">
+  <p class="flash-question">⚡ Quel est le traitement du DRESS syndrome ?</p>
+  <input type="text" class="flash-input" placeholder="Votre réponse...">
+  <button class="flash-btn" onclick="validateFlash(this)">Valider</button>
+  <div class="flash-feedback"></div>
+</div>
+  </div>
+</div>
+<div class="slide" id="slide-39">
+  <h2>V.3 — Diagnostic différentiel : hémopathies lymphoïdes</h2>
+  <div class="urgence-box" style="margin-bottom:1.5rem">
+    ⚠️ Un syndrome mononucléosique peut masquer une hémopathie maligne — ne jamais négliger une NFS atypique
+  </div>
+  <div class="two-col">
+    <div>
+      <h3>Leucémie aiguë lymphoblastique (LAL)</h3>
+      <ul>
+        <li>Surtout enfant et adolescent</li>
+        <li>Blastes &gt; 20 % à la NFS (grands lymphocytes immatures)</li>
+        <li>Fièvre + asthénie + adénopathies + douleurs osseuses</li>
+        <li>⚠️ Pancytopénie (alors que SM classique → lymphocytose isolée)</li>
+        <li>Diagnostic : myélogramme impératif si blastes ou pancytopénie</li>
+      </ul>
+    </div>
+    <div>
+      <h3>Lymphome de Hodgkin (LH)</h3>
+      <ul>
+        <li>Adénopathies cervicales persistantes, dures, indolores, non inflammatoires</li>
+        <li><span class="def-box">Signes B</span> : fièvre &gt; 38 °C, sueurs nocturnes, amaigrissement &gt; 10 %</li>
+        <li>NFS : éosinophilie, hyperlymphocytose modérée (pas LHB)</li>
+        <li>Biopsie ganglionnaire = seul diagnostic (cellules de Reed-Sternberg)</li>
+      </ul>
+      <h3 style="margin-top:1rem">LLC (Leucémie Lymphoïde Chronique)</h3>
+      <ul>
+        <li>Adulte &gt; 50 ans, hyperlymphocytose persistante &gt; 5000/mm³</li>
+        <li>Pas de LHB — lymphocytes matures monomorphes</li>
+        <li>Diagnostic : immunophénotypage lymphocytaire</li>
+      </ul>
+    </div>
+  </div>
+  <div class="flash-container">
+    <div class="flash-block" data-answer="blastes > 20 % ou pancytopénie">
+  <p class="flash-question">⚡ Quel élément de la NFS permet d'orienter vers une LAL plutôt qu'un SM infectieux ?</p>
+  <input type="text" class="flash-input" placeholder="Votre réponse...">
+  <button class="flash-btn" onclick="validateFlash(this)">Valider</button>
+  <div class="flash-feedback"></div>
+</div>
+    <div class="flash-block" data-answer="cellule de Reed-Sternberg">
+  <p class="flash-question">⚡ Quelle est la cellule diagnostique du lymphome de Hodgkin à la biopsie ganglionnaire ?</p>
+  <input type="text" class="flash-input" placeholder="Votre réponse...">
+  <button class="flash-btn" onclick="validateFlash(this)">Valider</button>
+  <div class="flash-feedback"></div>
+</div>
+    <div class="flash-block" data-answer="fièvre > 38 °C + sueurs nocturnes + amaigrissement > 10 %">
+  <p class="flash-question">⚡ Quels sont les 3 signes B du lymphome de Hodgkin ?</p>
+  <input type="text" class="flash-input" placeholder="Votre réponse...">
+  <button class="flash-btn" onclick="validateFlash(this)">Valider</button>
+  <div class="flash-feedback"></div>
+</div>
+    <div class="flash-block" data-answer="LHB = grands lymphocytes activés atypiques ; LLC = lymphocytes matures monomorphes petits">
+  <p class="flash-question">⚡ Quelle différence entre les LHB du SM infectieux et les lymphocytes de la LLC ?</p>
+  <input type="text" class="flash-input" placeholder="Votre réponse...">
+  <button class="flash-btn" onclick="validateFlash(this)">Valider</button>
+  <div class="flash-feedback"></div>
+</div>
+  </div>
+</div>
+<div class="slide" id="slide-40">
+  <h2>V.4 — Démarche diagnostique globale devant un SM</h2>
+  <div class="two-col">
+    <div>
+      <h3>Étape 1 — NFS + frottis</h3>
+      <ul>
+        <li>Confirmer le SM : &gt; 50 % lymphocytes + ≥ 10 % LHB</li>
+        <li>Rechercher blastes, éosinophilie, pancytopénie</li>
+      </ul>
+      <h3 style="margin-top:1rem">Étape 2 — Tests orientés</h3>
+      <ol>
+        <li><strong>MNI-test + sérologie EBV IgM anti-VCA</strong></li>
+        <li>Si négatif : <strong>test combiné Ag p24/Ac VIH</strong> (systématique)</li>
+        <li>Sérologie CMV IgM</li>
+        <li>Sérologie toxo IgM (si femme enceinte ou immunodéprimé)</li>
+      </ol>
+    </div>
+    <div>
+      <h3>Étape 3 — Contexte spécifique</h3>
+      <ul>
+        <li>🌍 Retour tropiques : <strong>frottis + TDR paludisme</strong> en urgence</li>
+        <li>🤰 Grossesse : sérologies CMV + toxo + rubéole + parvovirus B19 urgentes</li>
+        <li>💊 Médicament récent + éosinophilie : penser DRESS</li>
+        <li>🐄 Exposition animale : sérologie Brucella/leptospirose</li>
+        <li>⚠️ Adenopathies dures persistantes : biopsie ganglionnaire</li>
+      </ul>
+      <h3 style="margin-top:1rem">Situations d'hospitalisation urgente</h3>
+      <div class="urgence-box">
+        Pancytopénie • Blastes • SM + grossesse • SM + immunodépression
+        • Suspicion LAL/lymphome • DRESS • Méningite aseptique
+      </div>
+    </div>
+  </div>
+  <div class="flash-container">
+    <div class="flash-block" data-answer="test combiné Ag p24 + Ac VIH (primo-infection VIH)">
+  <p class="flash-question">⚡ Quel test biologique doit être systématique devant tout SM sans étiologie évidente ?</p>
+  <input type="text" class="flash-input" placeholder="Votre réponse...">
+  <button class="flash-btn" onclick="validateFlash(this)">Valider</button>
+  <div class="flash-feedback"></div>
+</div>
+    <div class="flash-block" data-answer="paludisme (frottis + TDR)">
+  <p class="flash-question">⚡ Quelle urgence diagnostique doit être éliminée devant tout SM fébrile au retour des tropiques ?</p>
+  <input type="text" class="flash-input" placeholder="Votre réponse...">
+  <button class="flash-btn" onclick="validateFlash(this)">Valider</button>
+  <div class="flash-feedback"></div>
+</div>
+    <div class="flash-block" data-answer="blastes sur le frottis ou pancytopénie">
+  <p class="flash-question">⚡ Quelle anomalie hématologique impose un myélogramme urgent devant un SM ?</p>
+  <input type="text" class="flash-input" placeholder="Votre réponse...">
+  <button class="flash-btn" onclick="validateFlash(this)">Valider</button>
+  <div class="flash-feedback"></div>
+</div>
+    <div class="flash-block" data-answer="CMV + toxoplasmose + rubéole + parvovirus B19">
+  <p class="flash-question">⚡ Devant un SM chez une femme enceinte, quelles sérologies demander en urgence ?</p>
+  <input type="text" class="flash-input" placeholder="Votre réponse...">
+  <button class="flash-btn" onclick="validateFlash(this)">Valider</button>
+  <div class="flash-feedback"></div>
+</div>
+  </div>
+</div>
+<div class="slide exam-slide" id="slide-41">
+  <h2>📝 QCM — Section V : Autres étiologies & DD</h2>
+  <div class="qcm-container">
+    <div class="qcm-block" data-answer="C">
+  <p class="qcm-question"><strong>Q1.</strong> Un patient présente un SM après retour du Mali. Quel examen est IMPÉRATIF en urgence ?</p>
+  <div class="qcm-option" onclick="selectOption(this)">A. Sérologie EBV</div><div class="qcm-option" onclick="selectOption(this)">B. MNI-test</div><div class="qcm-option" onclick="selectOption(this)">C. Frottis sanguin + TDR paludisme</div><div class="qcm-option" onclick="selectOption(this)">D. Sérologie CMV</div>
+  <button class="qcm-btn" onclick="validateQCM(this)" disabled>Valider</button>
+  <div class="qcm-feedback"></div>
+  <div class="qcm-explanation" style="display:none">Paludisme = urgence diagnostique au retour des tropiques ; frottis + goutte épaisse + TDR en urgence.</div>
+</div>
+    <div class="qcm-block" data-answer="C">
+  <p class="qcm-question"><strong>Q2.</strong> Un SM avec hyperéosinophilie et atteinte viscérale après introduction d'allopurinol évoque :</p>
+  <div class="qcm-option" onclick="selectOption(this)">A. Mononucléose infectieuse</div><div class="qcm-option" onclick="selectOption(this)">B. Leucémie éosinophile</div><div class="qcm-option" onclick="selectOption(this)">C. DRESS syndrome</div><div class="qcm-option" onclick="selectOption(this)">D. Toxoplasmose</div>
+  <button class="qcm-btn" onclick="validateQCM(this)" disabled>Valider</button>
+  <div class="qcm-feedback"></div>
+  <div class="qcm-explanation" style="display:none">DRESS = Drug Reaction with Eosinophilia and Systemic Symptoms, classiquement avec allopurinol, anticonvulsivants, sulfamides.</div>
+</div>
+    <div class="qcm-block" data-answer="C">
+  <p class="qcm-question"><strong>Q3.</strong> La cellule caractéristique du lymphome de Hodgkin est :</p>
+  <div class="qcm-option" onclick="selectOption(this)">A. Cellule de Downey</div><div class="qcm-option" onclick="selectOption(this)">B. Lymphoblaste B</div><div class="qcm-option" onclick="selectOption(this)">C. Cellule de Reed-Sternberg</div><div class="qcm-option" onclick="selectOption(this)">D. Lymphocyte villosité</div>
+  <button class="qcm-btn" onclick="validateQCM(this)" disabled>Valider</button>
+  <div class="qcm-feedback"></div>
+  <div class="qcm-explanation" style="display:none">La cellule de Reed-Sternberg (grande cellule CD15+CD30+) est pathognomonique du LH.</div>
+</div>
+    <div class="qcm-block" data-answer="B">
+  <p class="qcm-question"><strong>Q4.</strong> Un SM avec blastes > 20 % à la NFS chez un adolescent oriente vers :</p>
+  <div class="qcm-option" onclick="selectOption(this)">A. MNI sévère</div><div class="qcm-option" onclick="selectOption(this)">B. Leucémie aiguë lymphoblastique</div><div class="qcm-option" onclick="selectOption(this)">C. Lymphome de Hodgkin</div><div class="qcm-option" onclick="selectOption(this)">D. LLC</div>
+  <button class="qcm-btn" onclick="validateQCM(this)" disabled>Valider</button>
+  <div class="qcm-feedback"></div>
+  <div class="qcm-explanation" style="display:none">La présence de blastes impose un myélogramme en urgence pour éliminer une LAL.</div>
+</div>
+    <div class="qcm-block" data-answer="B">
+  <p class="qcm-question"><strong>Q5.</strong> Quel aliment est la principale source de contamination par Listeria monocytogenes ?</p>
+  <div class="qcm-option" onclick="selectOption(this)">A. Eau de boisson</div><div class="qcm-option" onclick="selectOption(this)">B. Fromages à pâte molle et charcuteries</div><div class="qcm-option" onclick="selectOption(this)">C. Légumes crus</div><div class="qcm-option" onclick="selectOption(this)">D. Fruits de mer</div>
+  <button class="qcm-btn" onclick="validateQCM(this)" disabled>Valider</button>
+  <div class="qcm-feedback"></div>
+  <div class="qcm-explanation" style="display:none">Listériose alimentaire = fromages à pâte molle, rillettes, saumons fumés, etc. Gravissime chez la femme enceinte.</div>
+</div>
+    <div class="qcm-block" data-answer="B">
+  <p class="qcm-question"><strong>Q6.</strong> La brucellose est diagnostiquée par :</p>
+  <div class="qcm-option" onclick="selectOption(this)">A. Hémocultures seules</div><div class="qcm-option" onclick="selectOption(this)">B. Sérologie de Wright (agglutination)</div><div class="qcm-option" onclick="selectOption(this)">C. PCR spécifique</div><div class="qcm-option" onclick="selectOption(this)">D. Biopsie ganglionnaire</div>
+  <button class="qcm-btn" onclick="validateQCM(this)" disabled>Valider</button>
+  <div class="qcm-feedback"></div>
+  <div class="qcm-explanation" style="display:none">La sérologie de Wright (agglutination de Wright-Huddleson) est le test de référence pour la brucellose.</div>
+</div>
+    <div class="qcm-block" data-answer="B">
+  <p class="qcm-question"><strong>Q7.</strong> Les signes B d'un lymphome incluent :</p>
+  <div class="qcm-option" onclick="selectOption(this)">A. Splénomégalie + céphalées</div><div class="qcm-option" onclick="selectOption(this)">B. Fièvre > 38 °C + sueurs nocturnes + amaigrissement > 10 %</div><div class="qcm-option" onclick="selectOption(this)">C. Prurit + arthralgies</div><div class="qcm-option" onclick="selectOption(this)">D. Adénopathies + anémie</div>
+  <button class="qcm-btn" onclick="validateQCM(this)" disabled>Valider</button>
+  <div class="qcm-feedback"></div>
+  <div class="qcm-explanation" style="display:none">Signes B = fièvre > 38 °C + sueurs nocturnes profuses + perte de poids > 10 % en 6 mois. Valeur pronostique.</div>
+</div>
+    <div class="qcm-block" data-answer="C">
+  <p class="qcm-question"><strong>Q8.</strong> L'hépatite A peut provoquer un syndrome mononucléosique. Sa transmission est :</p>
+  <div class="qcm-option" onclick="selectOption(this)">A. Sexuelle</div><div class="qcm-option" onclick="selectOption(this)">B. Parentérale</div><div class="qcm-option" onclick="selectOption(this)">C. Féco-orale</div><div class="qcm-option" onclick="selectOption(this)">D. Respiratoire</div>
+  <button class="qcm-btn" onclick="validateQCM(this)" disabled>Valider</button>
+  <div class="qcm-feedback"></div>
+  <div class="qcm-explanation" style="display:none">HAV = transmission féco-orale (eau/aliments contaminés). Vaccination disponible et efficace.</div>
+</div>
+    <div class="qcm-block" data-answer="B">
+  <p class="qcm-question"><strong>Q9.</strong> Quelle différence morphologique entre les LHB du SM infectieux et les lymphocytes de la LLC ?</p>
+  <div class="qcm-option" onclick="selectOption(this)">A. LHB petits monomorphes vs LLC grands lymphocytes atypiques</div><div class="qcm-option" onclick="selectOption(this)">B. LHB grands lymphocytes activés atypiques vs LLC petits lymphocytes matures</div><div class="qcm-option" onclick="selectOption(this)">C. Aucune différence</div><div class="qcm-option" onclick="selectOption(this)">D. LHB = plasmocytes vs LLC = lymphoblastes</div>
+  <button class="qcm-btn" onclick="validateQCM(this)" disabled>Valider</button>
+  <div class="qcm-feedback"></div>
+  <div class="qcm-explanation" style="display:none">LHB (lymphocytes hyperbasophiles) = grands, atypiques, vacuolés, à cytoplasme très basophile. LLC = petits lymphocytes matures monomorphes.</div>
+</div>
+    <div class="qcm-block" data-answer="B">
+  <p class="qcm-question"><strong>Q10.</strong> Quel agent parasitaire peut provoquer un hydrops fœtalis en cas de primo-infection pendant la grossesse ?</p>
+  <div class="qcm-option" onclick="selectOption(this)">A. Toxoplasma gondii</div><div class="qcm-option" onclick="selectOption(this)">B. Parvovirus B19</div><div class="qcm-option" onclick="selectOption(this)">C. CMV</div><div class="qcm-option" onclick="selectOption(this)">D. Listeria monocytogenes</div>
+  <button class="qcm-btn" onclick="validateQCM(this)" disabled>Valider</button>
+  <div class="qcm-feedback"></div>
+  <div class="qcm-explanation" style="display:none">Parvovirus B19 infecte les érythroblastes fœtaux → anémie sévère → anasarque fœto-placentaire (hydrops).</div>
+</div>
+  </div>
+</div>
+<div class="slide exam-slide" id="slide-42">
+  <h2>🏥 Dossier progressif — Section V</h2>
+  <p><em>Situation clinique :</em> Martine, 32 ans, enceinte de 14 semaines (SA), travaille en crèche. Consulte pour fièvre à 38,5 °C, asthénie, adénopathies cervicales, SM sur NFS. Statut sérologique inconnu pour toxo, CMV, rubéole. MNI-test négatif. Test VIH négatif.</p>
+  <div class="dp-container">
+    <div class="dp-step">
+  <h4>Étape 1 — Évaluation du risque</h4>
+  <p>Quelle est la principale préoccupation devant ce tableau chez une femme enceinte travaillant en crèche ?</p>
+  <div class="qcm-option" onclick="selectOption(this)">A. Rupture splénique</div><div class="qcm-option" onclick="selectOption(this)">B. Primo-infection CMV ou toxoplasmose fœtale</div><div class="qcm-option" onclick="selectOption(this)">C. Méningite virale</div><div class="qcm-option" onclick="selectOption(this)">D. Lymphome de Hodgkin</div>
+  <button class="qcm-btn" onclick="validateQCM(this)" disabled>Valider</button>
+  <div class="qcm-feedback"></div>
+  <div class="qcm-explanation" style="display:none">Le contexte (enceinte + travaille en crèche) + SM sans EBV/VIH = éliminer CMV et toxoplasmose en urgence (risque embryofoetopathie).</div>
+</div>
+    <div class="dp-step">
+  <h4>Étape 2 — Bilan sérologique urgent</h4>
+  <p>Quelles sérologies prescrivez-vous en urgence ?</p>
+  <div class="qcm-option" onclick="selectOption(this)">A. Sérologie EBV uniquement</div><div class="qcm-option" onclick="selectOption(this)">B. CMV IgM+IgG, toxoplasmose IgM+IgG, rubéole IgM+IgG, parvovirus B19</div><div class="qcm-option" onclick="selectOption(this)">C. Hépatites A et B seules</div><div class="qcm-option" onclick="selectOption(this)">D. Aucune, SM bénin chez adulte</div>
+  <button class="qcm-btn" onclick="validateQCM(this)" disabled>Valider</button>
+  <div class="qcm-feedback"></div>
+  <div class="qcm-explanation" style="display:none">Devant tout SM chez femme enceinte sans étiologie connue : CMV + toxo + rubéole + parvovirus B19 en urgence.</div>
+</div>
+    <div class="dp-step">
+  <h4>Étape 3 — Résultat : CMV IgM positif, IgG négatif — signification</h4>
+  <p>Que signifie CMV IgM+ / IgG- chez cette femme enceinte ?</p>
+  <div class="qcm-option" onclick="selectOption(this)">A. Immunité ancienne, aucun risque</div><div class="qcm-option" onclick="selectOption(this)">B. Primo-infection CMV récente — risque de transmission fœtale</div><div class="qcm-option" onclick="selectOption(this)">C. Faux positif IgM, pas de traitement</div><div class="qcm-option" onclick="selectOption(this)">D. Réactivation CMV uniquement</div>
+  <button class="qcm-btn" onclick="validateQCM(this)" disabled>Valider</button>
+  <div class="qcm-feedback"></div>
+  <div class="qcm-explanation" style="display:none">IgM+ / IgG- = primo-infection CMV récente. Risque de transmission au fœtus (surtout 1er trimestre) avec séquelles neurosensorielles.</div>
+</div>
+    <div class="dp-step">
+  <h4>Étape 4 — Prise en charge</h4>
+  <p>Quelle est la prise en charge immédiate ?</p>
+  <div class="qcm-option" onclick="selectOption(this)">A. Traitement par ganciclovir IV immédiat</div><div class="qcm-option" onclick="selectOption(this)">B. Orientation urgente vers service de médecine fœtale spécialisée</div><div class="qcm-option" onclick="selectOption(this)">C. Arrêt de travail seul, pas de traitement</div><div class="qcm-option" onclick="selectOption(this)">D. Amniocentèse immédiate sans consultation spécialisée</div>
+  <button class="qcm-btn" onclick="validateQCM(this)" disabled>Valider</button>
+  <div class="qcm-feedback"></div>
+  <div class="qcm-explanation" style="display:none">SM chez femme enceinte + sérologie positive = orientation urgente vers service de médecine fœtale pour surveillance et suivi spécialisé.</div>
+</div>
+    <div class="dp-step">
+  <h4>Étape 5 — Prévention secondaire</h4>
+  <p>Quels conseils de prévention donner à Martine pour les prochaines grossesses ?</p>
+  <div class="qcm-option" onclick="selectOption(this)">A. Éviter tout contact avec enfants</div><div class="qcm-option" onclick="selectOption(this)">B. Hygiène des mains stricte + port de gants + pas de partage d'ustensiles</div><div class="qcm-option" onclick="selectOption(this)">C. Traitement prophylactique au CMV systématique</div><div class="qcm-option" onclick="selectOption(this)">D. Arrêt définitif de travail en crèche</div>
+  <button class="qcm-btn" onclick="validateQCM(this)" disabled>Valider</button>
+  <div class="qcm-feedback"></div>
+  <div class="qcm-explanation" style="display:none">CMV = prévention basée sur hygiène stricte des mains, gants lors de change, ne pas embrasser enfants sur la bouche, ne pas partager couverts/tasses.</div>
+</div>
+  </div>
+</div>
+<div class="slide" id="slide-43" style="background:linear-gradient(135deg,#0d0d1a 0%,#1a1a2e 100%)">
+  <h2 style="color:#e74c3c;text-align:center;font-size:2rem;margin-bottom:2rem">🎯 Take Home Messages</h2>
+  <div class="two-col">
+    <div>
+      <div class="def-box" style="margin-bottom:1rem;padding:1rem">
+        <strong>1. Définition stricte</strong><br>
+        SM = &gt; 50 % lymphocytes + ≥ 10 % LHB (grands lymphocytes hyperbasophiles activés = LT CD8+)
+      </div>
+      <div class="def-box" style="margin-bottom:1rem;padding:1rem">
+        <strong>2. EBV = cause principale</strong><br>
+        MNI : triade fièvre + angine ± pseudomembranes + adénopathies cervicales post. Repos sportif 4–6 sem. Rash amoxicilline 99 % (non allergie)
+      </div>
+      <div class="def-box" style="margin-bottom:1rem;padding:1rem">
+        <strong>3. CMV</strong><br>
+        SM sans angine, MNI-test négatif. Danger chez femme enceinte et immunodéprimé. Traitement = ganciclovir si immunodéprimé
+      </div>
+    </div>
+    <div>
+      <div class="urgence-box" style="margin-bottom:1rem;padding:1rem">
+        <strong>4. VIH = urgence diagnostique</strong><br>
+        Ulcérations bucco-génitales + SM = primo-VIH jusqu'à preuve du contraire → test combiné Ag p24/Ac systématique
+      </div>
+      <div class="urgence-box" style="margin-bottom:1rem;padding:1rem">
+        <strong>5. Femme enceinte + SM = urgence</strong><br>
+        Sérologies CMV + toxo + rubéole + parvovirus B19 + VIH en urgence → orientation médecine fœtale
+      </div>
+      <div class="urgence-box" style="margin-bottom:1rem;padding:1rem">
+        <strong>6. Éliminer hémopathie maligne</strong><br>
+        Blastes ou pancytopénie → myélogramme urgent (LAL).<br>
+        Adénopathies dures persistantes → biopsie (lymphome de Hodgkin)
+      </div>
+    </div>
+  </div>
+</div>
+<div class="slide" id="slide-44" style="display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center">
+  <div style="font-size:5rem;margin-bottom:1rem">🎓</div>
+  <h1 style="color:#e74c3c;font-size:2.5rem;margin-bottom:0.5rem">Syndromes mononucléosiques</h1>
+  <p style="color:#b0b0c0;font-size:1.3rem;margin-bottom:2rem">Item 217 — ECNi / R2C</p>
+  <div style="display:flex;gap:1rem;flex-wrap:wrap;justify-content:center">
+    <div style="background:rgba(231,76,60,0.15);border:1px solid #e74c3c;border-radius:8px;padding:1rem 1.5rem">
+      <div style="font-size:1.8rem;font-weight:bold;color:#e74c3c">44</div>
+      <div style="color:#b0b0c0;font-size:0.9rem">slides</div>
+    </div>
+    <div style="background:rgba(52,152,219,0.15);border:1px solid #3498db;border-radius:8px;padding:1rem 1.5rem">
+      <div style="font-size:1.8rem;font-weight:bold;color:#3498db">5</div>
+      <div style="color:#b0b0c0;font-size:0.9rem">sections</div>
+    </div>
+    <div style="background:rgba(46,204,113,0.15);border:1px solid #2ecc71;border-radius:8px;padding:1rem 1.5rem">
+      <div style="font-size:1.8rem;font-weight:bold;color:#2ecc71">50+</div>
+      <div style="color:#b0b0c0;font-size:0.9rem">QCM</div>
+    </div>
+  </div>
+  <p style="margin-top:2rem;color:#888">MédECN — Hématologie</p>
+</div>
+</div>
+
+<script>
+const TOTAL = 45;
+let current = 0;
+
+function showSlide(n) {
+  const all = document.querySelectorAll('.slide');
+  if(n < 0) n = 0;
+  if(n >= TOTAL) n = TOTAL-1;
+  all[current].classList.remove('active');
+  current = n;
+  all[current].classList.add('active');
+  document.getElementById('slide-counter').textContent = (current+1)+' / '+TOTAL;
+  document.getElementById('progress-fill').style.width = Math.round((current+1)/TOTAL*100)+'%';
+  document.getElementById('slides-wrapper').scrollTop = 0;
+}
+
+function changeSlide(d) { showSlide(current + d); }
+
+// QCM
+function selectOption(el) {
+  const block = el.closest('.qcm-block,.dp-step');
+  block.querySelectorAll('.qcm-option').forEach(o=>o.classList.remove('selected'));
+  el.classList.add('selected');
+  const btn = block.querySelector('.qcm-btn');
+  if(btn) btn.disabled = false;
+}
+
+function validateQCM(btn) {
+  const block = btn.closest('.qcm-block,.dp-step');
+  const correct = block.dataset.answer;
+  const selected = block.querySelector('.qcm-option.selected');
+  const letters = ['A','B','C','D'];
+  const feedback = block.querySelector('.qcm-feedback');
+  const explanation = block.querySelector('.qcm-explanation');
+  block.querySelectorAll('.qcm-option').forEach((o,i)=>{
+    if(letters[i]===correct) o.classList.add('correct');
+    else if(o.classList.contains('selected')) o.classList.add('wrong');
+    o.style.pointerEvents='none';
+  });
+  if(selected && letters[Array.from(block.querySelectorAll('.qcm-option')).indexOf(selected)]===correct) {
+    feedback.textContent='✓ Correct !'; feedback.className='qcm-feedback correct';
+  } else {
+    feedback.textContent='✗ Incorrect'; feedback.className='qcm-feedback wrong';
+  }
+  if(explanation) explanation.style.display='block';
+  btn.disabled=true;
+}
+
+// Flash
+function validateFlash(btn) {
+  const block = btn.closest('.flash-block');
+  const input = block.querySelector('.flash-input');
+  const answer = block.dataset.answer.toLowerCase().trim();
+  const given = input.value.toLowerCase().trim();
+  const feedback = block.querySelector('.flash-feedback');
+  const keywords = answer.split(/[,;\/]/);
+  const ok = keywords.some(kw=>given.includes(kw.trim()));
+  if(ok) { feedback.textContent='✓ Correct !'; feedback.className='flash-feedback correct'; }
+  else { feedback.textContent='✗ Réponse : '+block.dataset.answer; feedback.className='flash-feedback wrong'; }
+  btn.disabled=true; input.disabled=true;
+}
+
+// Image modal
+function openModal(src) {
+  document.getElementById('modal-img').src=src;
+  document.getElementById('img-modal').classList.add('open');
+}
+function closeModal() {
+  document.getElementById('img-modal').classList.remove('open');
+}
+
+// Keyboard
+document.addEventListener('keydown',e=>{
+  if(e.key==='ArrowRight'||e.key==='ArrowDown') changeSlide(1);
+  if(e.key==='ArrowLeft'||e.key==='ArrowUp') changeSlide(-1);
+  if(e.key==='Enter') {
+    const input=document.activeElement;
+    if(input&&input.classList.contains('flash-input')) {
+      const btn=input.closest('.flash-block').querySelector('.flash-btn');
+      if(btn&&!btn.disabled) validateFlash(btn);
+    }
+  }
+});
+
+// Touch swipe
+let tx=0;
+document.addEventListener('touchstart',e=>tx=e.changedTouches[0].clientX,{passive:true});
+document.addEventListener('touchend',e=>{
+  const dx=e.changedTouches[0].clientX-tx;
+  if(Math.abs(dx)>50){ if(dx<0) changeSlide(1); else changeSlide(-1); }
+},{passive:true});
+
+// Init
+showSlide(0);
+</script>
+</body>
+</html>
