@@ -68,22 +68,23 @@ html, body {
   overflow-y: auto; scroll-behavior: smooth;
 }
 .slide {
-  display: none;
+  display: none !important;
   min-height: calc(100vh - var(--bar-h));
   padding: 2rem 2.5rem;
   background: var(--bg-slide);
   animation: fadeIn .25s ease;
 }
-.slide.active { display: block; }
+.slide.active { display: block !important; }
 @keyframes fadeIn { from { opacity:0; transform: translateY(6px); } to { opacity:1; transform: translateY(0); } }
 
-/* ─── Slide type overrides ─── */
+/* ─── Slide type overrides (active only) ─── */
 .title-slide {
-  display: flex; flex-direction: column; align-items: center;
+  flex-direction: column; align-items: center;
   justify-content: center; text-align: center;
   background: linear-gradient(135deg, #0d0d1a 0%, #1a0a0a 50%, #0d0d1a 100%);
   position: relative; overflow: hidden;
 }
+.slide.active.title-slide { display: flex !important; }
 .title-slide::before {
   content: '';
   position: absolute; inset: 0;
@@ -97,11 +98,13 @@ html, body {
   background: linear-gradient(135deg, #0d0d1a 0%, #16213e 100%);
 }
 .section-slide, .section-header {
-  display: flex; flex-direction: column;
+  flex-direction: column;
   align-items: center; justify-content: center;
   text-align: center; min-height: calc(100vh - var(--bar-h));
   background: linear-gradient(135deg, #0d0d1a 0%, #1a1a2e 60%, #16213e 100%);
 }
+.slide.active.section-slide,
+.slide.active.section-header { display: flex !important; }
 
 /* ═══════════════════════════════════════
    TYPOGRAPHY
@@ -379,6 +382,7 @@ span.def-box {
 .qcm-feedback.wrong { color: var(--red); }
 
 .qcm-explanation {
+  display: none;
   font-size: .82rem; color: var(--muted);
   margin-top: .4rem; padding: .5rem;
   background: rgba(255,255,255,.04);
@@ -1659,6 +1663,19 @@ Toute découverte d'un SM chez une <span class="keyword">femme enceinte</span> i
 
 const TOTAL = 45;
 let current = 0;
+
+// Patch old QCM blocks: inject missing qcm-feedback div after button
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('.qcm-block').forEach(block => {
+    if (!block.querySelector('.qcm-feedback')) {
+      const fb = document.createElement('div');
+      fb.className = 'qcm-feedback';
+      const btn = block.querySelector('.qcm-btn, .qcm-validate');
+      if (btn) btn.after(fb);
+      else block.appendChild(fb);
+    }
+  });
+});
 
 function showSlide(n) {
   const all = document.querySelectorAll('.slide');

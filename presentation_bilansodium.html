@@ -1,0 +1,3464 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bilan sodé — Rôle du rein</title>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --bg:       #0d0d1a;
+  --bg-card:  #1a1a2e;
+  --bg-slide: #16213e;
+  --red:      #e74c3c;
+  --orange:   #f39c12;
+  --blue:     #3498db;
+  --green:    #2ecc71;
+  --purple:   #9b59b6;
+  --teal:     #1abc9c;
+  --text:     #e8e8f0;
+  --muted:    #b0b0c0;
+  --dim:      #888;
+  --bar-h:    50px;
+  --font:     clamp(0.95rem, 1.5vw, 1.05rem);
+}
+html, body {
+  height: 100%; background: var(--bg);
+  color: var(--text);
+  font-family: 'Segoe UI', system-ui, sans-serif;
+  font-size: var(--font);
+  overflow: hidden;
+}
+
+/* ── Topbar ── */
+.topbar {
+  position: fixed; top: 0; left: 0; right: 0; height: var(--bar-h);
+  background: rgba(13,13,26,.96); backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(231,76,60,.35);
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 1rem; z-index: 1000;
+}
+.topbar a {
+  color: #fff; text-decoration: none; font-size: 1rem;
+  padding: 5px 12px; border-radius: 6px;
+  border: 1px solid rgba(255,255,255,.2); transition: .2s;
+}
+.topbar a:hover { background: rgba(255,255,255,.1); }
+.topbar-center { display: flex; align-items: center; gap: 1rem; }
+#slide-counter { color: var(--muted); font-size: .88rem; white-space: nowrap; }
+.progress-bar { width: 180px; height: 4px; background: rgba(255,255,255,.1); border-radius: 2px; }
+.progress-fill { height: 100%; background: var(--red); border-radius: 2px; transition: width .3s; }
+.topbar-nav { display: flex; gap: .5rem; }
+.topbar-nav button {
+  background: rgba(231,76,60,.2); border: 1px solid var(--red);
+  color: var(--text); padding: 5px 16px; border-radius: 6px;
+  cursor: pointer; font-size: .88rem; transition: .2s;
+}
+.topbar-nav button:hover { background: var(--red); }
+
+/* ── Slide wrapper ── */
+#slides-wrapper {
+  position: fixed; top: var(--bar-h); left: 0; right: 0; bottom: 0;
+  overflow-y: auto;
+}
+
+/* ── Slides ── */
+.slide {
+  display: none !important;
+  min-height: calc(100vh - var(--bar-h));
+  padding: 2rem 3rem;
+  background: var(--bg-slide);
+  animation: fadeIn .2s ease;
+}
+.slide.active { display: block !important; }
+@keyframes fadeIn { from { opacity:0; transform:translateY(5px); } to { opacity:1; transform:translateY(0); } }
+
+/* Slide spéciales */
+.title-slide { flex-direction:column; align-items:center; justify-content:center; text-align:center;
+  background: linear-gradient(135deg, #0d0d1a 0%, #1a0a0a 50%, #0d0d1a 100%);
+  position:relative; overflow:hidden; }
+.slide.active.title-slide { display:flex !important; }
+.title-slide::before { content:''; position:absolute; inset:0;
+  background:radial-gradient(ellipse at center, rgba(231,76,60,.12) 0%, transparent 70%); }
+
+.section-slide, .section-header {
+  flex-direction:column; align-items:center; justify-content:center; text-align:center;
+  background: linear-gradient(135deg, #0d0d1a 0%, #1a1a2e 60%, #16213e 100%); }
+.slide.active.section-slide,
+.slide.active.section-header { display:flex !important; }
+
+.exam-slide  { background: linear-gradient(135deg, #0d0d1a 0%, #12100a 100%); }
+.quiz-slide  { background: linear-gradient(135deg, #0d0d1a 0%, #0a1020 100%); }
+
+/* ── Typo ── */
+h1 { font-size: 2.2rem; color: var(--text); margin-bottom: .5rem; line-height: 1.2; }
+h2 { font-size: 1.4rem; color: var(--red); margin-bottom: 1rem;
+     padding-bottom: .4rem; border-bottom: 2px solid rgba(231,76,60,.3); }
+h3 { font-size: 1.1rem; color: var(--orange); margin: 1.2rem 0 .6rem; }
+h4 { color: var(--blue); margin: .8rem 0 .4rem; font-size: 1rem; }
+p  { line-height: 1.75; margin-bottom: .75rem; }
+ul, ol { padding-left: 1.4rem; margin-bottom: .75rem; }
+li { margin-bottom: .35rem; line-height: 1.65; }
+strong { color: #fff; }
+em  { color: var(--muted); }
+pre { white-space: pre-wrap; word-break: break-word; }
+
+/* Title elements */
+.title-tag {
+  background:rgba(231,76,60,.18); border:1px solid rgba(231,76,60,.4);
+  border-radius:20px; padding:4px 16px; font-size:.82rem; color:var(--red);
+  margin-bottom:1.2rem; letter-spacing:.05em; text-transform:uppercase;
+}
+.title-subtitle { color:var(--muted); font-size:1.1rem; margin:1rem 0 1.5rem; }
+.title-meta { display:flex; gap:1.2rem; flex-wrap:wrap; justify-content:center; margin-top:1.2rem; }
+.title-meta span {
+  background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.1);
+  border-radius:8px; padding:.45rem .9rem; font-size:.88rem; color:var(--muted);
+}
+.menu-link {
+  position:absolute; top:1rem; left:1.5rem;
+  color:var(--muted)!important; font-size:.82rem;
+  background:rgba(255,255,255,.06)!important; border:1px solid rgba(255,255,255,.1)!important;
+  padding:3px 10px!important; border-radius:6px!important; text-decoration:none!important;
+}
+.section-number { font-size:5rem; font-weight:900; color:var(--red); line-height:1; margin-bottom:.5rem;
+  text-shadow:0 0 40px rgba(231,76,60,.5); }
+.section-subtitle { color:var(--muted); font-size:1.1rem; margin-top:.4rem; }
+
+/* ── Layout ── */
+.two-col { display:grid; grid-template-columns:1fr 1fr; gap:1.5rem; margin-bottom:1rem; }
+@media(max-width:768px) { .two-col { grid-template-columns:1fr; } }
+
+/* ── Content boxes ── */
+.def-box {
+  background:rgba(243,156,18,.1); border-left:4px solid var(--orange);
+  border-radius:0 6px 6px 0; padding:.7rem 1rem; margin:.6rem 0; line-height:1.7;
+}
+.highlight-box {
+  background:rgba(46,204,113,.08); border-left:4px solid var(--green);
+  border-radius:0 8px 8px 0; padding:.75rem 1rem; margin:.6rem 0; line-height:1.7;
+}
+.highlight-box ul, .highlight-box ol { margin-bottom:0; }
+.info-box {
+  background:rgba(52,152,219,.1); border-left:4px solid var(--blue);
+  border-radius:0 8px 8px 0; padding:.75rem 1rem; margin:.6rem 0; line-height:1.7;
+}
+.urgence-box {
+  background:rgba(231,76,60,.13); border:1px solid var(--red);
+  border-radius:8px; padding:.9rem 1rem; margin:.7rem 0; line-height:1.7;
+}
+.warning-box {
+  background:rgba(243,156,18,.09); border:1px solid var(--orange);
+  border-radius:8px; padding:.75rem 1rem; margin:.6rem 0; line-height:1.7;
+}
+.schema-box {
+  background:rgba(155,89,182,.12); border:1px solid rgba(155,89,182,.35);
+  border-radius:8px; padding:.85rem 1rem; margin:.7rem 0;
+  line-height:1.75; font-family:monospace; font-size:.9rem; color:#d0a8f0;
+}
+.keyword { color:var(--orange); font-weight:700;
+  background:rgba(243,156,18,.1); padding:0 4px; border-radius:3px; }
+
+/* ── Tables ── */
+.table-wrap { overflow-x:auto; margin:1rem 0; border-radius:8px; border:1px solid rgba(255,255,255,.1); }
+.table-wrap table, table { width:100%; border-collapse:collapse; font-size:.88rem; }
+th {
+  background:rgba(231,76,60,.18); color:#fff; font-weight:600;
+  padding:.55rem .85rem; text-align:left;
+  border-bottom:2px solid rgba(231,76,60,.35); white-space:nowrap;
+}
+td {
+  padding:.5rem .85rem; border-bottom:1px solid rgba(255,255,255,.07);
+  vertical-align:top; line-height:1.55;
+}
+tr:nth-child(even) td { background:rgba(255,255,255,.025); }
+tr:hover td { background:rgba(52,152,219,.06); }
+
+/* ── Flash quiz ── */
+.flash-block {
+  background:rgba(52,152,219,.07); border:1px solid rgba(52,152,219,.22);
+  border-radius:8px; padding:.85rem; margin-bottom:.75rem;
+}
+.q-text, .flash-question {
+  font-size:.92rem; color:var(--blue); margin-bottom:.5rem;
+  font-style:italic; line-height:1.5;
+}
+.flash-input-row { display:flex; gap:.5rem; margin-bottom:.35rem; }
+.flash-input {
+  flex:1; background:rgba(255,255,255,.05);
+  border:1px solid rgba(255,255,255,.15);
+  border-radius:6px; color:var(--text);
+  padding:.4rem .6rem; font-size:.88rem;
+}
+.flash-btn, .qcm-validate {
+  background:rgba(52,152,219,.28); border:1px solid var(--blue);
+  color:var(--text); padding:4px 14px; border-radius:5px;
+  cursor:pointer; font-size:.82rem; white-space:nowrap; transition:.2s;
+}
+.flash-btn:hover:not(:disabled), .qcm-validate:hover:not(:disabled) { background:var(--blue); }
+.flash-btn:disabled, .qcm-validate:disabled { opacity:.38; cursor:not-allowed; }
+.flash-feedback, .qcm-feedback {
+  font-size:.82rem; margin-top:.3rem; font-weight:600; min-height:1.1em;
+}
+.flash-feedback.correct, .qcm-feedback.correct { color:var(--green); }
+.flash-feedback.wrong,   .qcm-feedback.wrong   { color:var(--red); }
+
+/* ── QCM ── */
+.qcm-block {
+  background:rgba(255,255,255,.03); border:1px solid rgba(255,255,255,.1);
+  border-radius:8px; padding:.9rem; margin-bottom:.6rem;
+}
+.qcm-options { margin-bottom:.4rem; }
+.qcm-option {
+  padding:.35rem .7rem; margin:.2rem 0;
+  border-radius:5px; cursor:pointer; font-size:.88rem;
+  border:1px solid rgba(255,255,255,.1);
+  display:flex; align-items:center; gap:.5rem; transition:.15s;
+}
+.qcm-option:hover  { background:rgba(52,152,219,.14); border-color:var(--blue); }
+.qcm-option.selected { background:rgba(52,152,219,.22); border-color:var(--blue); }
+.qcm-option.correct  { background:rgba(46,204,113,.22); border-color:var(--green); }
+.qcm-option.wrong    { background:rgba(231,76,60,.18);  border-color:var(--red); }
+.qcm-option .letter  { font-weight:700; color:var(--blue); min-width:1.4em; }
+.qcm-btn, .qcm-validate {
+  margin-top:.45rem;
+  background:rgba(231,76,60,.25); border:1px solid var(--red);
+  color:var(--text); padding:4px 16px; border-radius:5px;
+  cursor:pointer; font-size:.82rem; transition:.2s;
+}
+.qcm-btn:hover:not(:disabled), .qcm-validate:hover:not(:disabled) { background:var(--red); }
+.qcm-btn:disabled, .qcm-validate:disabled { opacity:.32; cursor:not-allowed; }
+.qcm-explanation { display:none; font-size:.82rem; color:var(--muted);
+  margin-top:.4rem; padding:.5rem; background:rgba(255,255,255,.04);
+  border-radius:5px; line-height:1.5; }
+.exam-progress { height:4px; background:rgba(255,255,255,.08); border-radius:2px; margin-bottom:1rem; }
+.exam-bar { height:100%; background:linear-gradient(90deg,var(--red),var(--orange));
+  border-radius:2px; width:0; transition:width .5s; }
+
+/* ── Dossier progressif ── */
+.dp-block { display:flex; flex-direction:column; gap:1rem; margin-top:1rem; }
+.dp-step {
+  background:rgba(255,255,255,.03); border:1px solid rgba(243,156,18,.2);
+  border-radius:8px; padding:1rem;
+}
+.dp-step-num { font-size:.75rem; color:var(--orange); text-transform:uppercase;
+  letter-spacing:.08em; font-weight:700; margin-bottom:.2rem; }
+.dp-step-title { font-size:1rem; color:var(--blue); font-weight:600; margin-bottom:.5rem; }
+
+/* ── Modal image ── */
+#img-modal { display:none; position:fixed; inset:0; background:rgba(0,0,0,.88);
+  z-index:2000; align-items:center; justify-content:center; cursor:zoom-out; }
+#img-modal.open { display:flex; }
+#img-modal img { max-width:90vw; max-height:90vh; border-radius:8px; }
+
+/* ── Responsive ── */
+@media(max-width:768px) {
+  .slide { padding:1.2rem 1rem; }
+  h1 { font-size:1.8rem; } h2 { font-size:1.2rem; }
+  .progress-bar { width:100px; }
+}
+
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <a href="index.html">🏠 Accueil</a>
+  <div class="topbar-center">
+    <span id="slide-counter">1 / 15</span>
+    <div class="progress-bar"><div class="progress-fill" id="progress-fill" style="width:6.7%"></div></div>
+  </div>
+  <div class="topbar-nav">
+    <button onclick="changeSlide(-1)">◀ Préc</button>
+    <button onclick="changeSlide(1)">Suiv ▶</button>
+  </div>
+</div>
+
+<div id="img-modal" onclick="closeModal()"><img id="modal-img" src="" alt=""></div>
+
+<div id="slides-wrapper">
+<div class="slide title-slide active" id="slide-0">
+<a class="menu-link" href="index.html">← Menu</a>
+  <div class="title-content">
+    <div class="title-tag">ECN · Item 265 · Néphrologie</div>
+    <h1>Bilan sodé — Rôle du rein</h1>
+    <div class="title-meta">
+      <span>🩸 Item 265</span>
+      <span>📚 15 diapos</span>
+      <span>⚡ Quiz flash intégrés</span>
+    </div>
+  </div>
+</div>
+
+<div class="slide content-slide" id="slide-1">
+<h2>Bilan Sodé — Répartition du Sodium dans l'Organisme</h2>
+
+<h3>📦 Prérequis</h3>
+
+<div class="def-box">
+  <strong>🔬 NATRÉMIE</strong><br>
+  Concentration plasmatique en sodium (Na⁺) dans le plasma. Valeur normale : environ <strong>142 mmol/L de plasma</strong> (ou 151 mmol/kg d'eau plasmatique). À ne pas confondre avec la quantité totale de sodium dans l'organisme.
+</div>
+
+<div class="def-box">
+  <strong>🔬 OSMOLALITÉ</strong><br>
+  Nombre total de particules osmotiquement actives (osmoles) par kilogramme d'eau. Le sodium, en tant que cation majoritaire du milieu extracellulaire, contribue à lui seul à près de la moitié de l'osmolalité extracellulaire.
+</div>
+
+<div class="def-box">
+  <strong>🔬 ÉQUILIBRE DE GIBBS-DONNAN</strong><br>
+  Phénomène d'équilibre électrochimique : les protéines chargées négativement (anioniques) présentes dans un compartiment attirent les cations (dont Na⁺) vers ce compartiment. Cela explique les différences de concentration en sodium entre le plasma, l'interstitium et le milieu intracellulaire.
+</div>
+
+<div class="def-box">
+  <strong>🔬 COMPARTIMENTS LIQUIDIENS</strong><br>
+  L'eau corporelle totale est répartie en deux grands secteurs :
+  <ul>
+    <li><strong>Milieu extracellulaire (MEC)</strong> : plasma + interstitium</li>
+    <li><strong>Milieu intracellulaire (MIC)</strong> : à l'intérieur des cellules</li>
+  </ul>
+  Le cation dominant du MEC est le Na⁺ ; le cation dominant du MIC est le K⁺.
+</div>
+
+<div class="def-box">
+  <strong>🔬 ÉLECTRONEUTRALITÉ</strong><br>
+  Principe selon lequel, dans tout compartiment liquidien, la somme des charges positives (cations) est égale à la somme des charges négatives (anions). Dans le MEC, les principaux anions compensant le Na⁺ sont le chlorure (Cl⁻) et les bicarbonates (HCO₃⁻).
+</div>
+
+<div class="def-box">
+  <strong>🔬 SODIUM ÉCHANGEABLE / NON ÉCHANGEABLE</strong><br>
+  Le sodium corporel total se divise en :
+  <ul>
+    <li><strong>Non échangeable</strong> : fixé à l'os, ne s'échange pas facilement avec le MEC (~1/3 du total)</li>
+    <li><strong>Échangeable</strong> : libre dans les compartiments liquidiens, principalement le MEC (~2/3 du total)</li>
+  </ul>
+</div>
+
+<h3>📖 Explication</h3>
+
+<h4>1. Contenu sodé total de l'organisme</h4>
+
+<p>Le sodium est un électrolyte très abondant dans l'organisme. Sa concentration corporelle totale est de <span class="keyword">60 mmol/kg</span>, soit environ <strong>4 moles pour un individu adulte standard</strong>.</p>
+
+<div class="highlight-box">
+  ✅ <strong>Point clé — Répartition du sodium total :</strong>
+  <ul>
+    <li><strong>~1/3 : sodium non échangeable</strong> → fixé à l'os, peu mobilisable</li>
+    <li><strong>~2/3 : sodium échangeable</strong> → principalement dans le milieu extracellulaire, librement mobilisable</li>
+  </ul>
+</div>
+
+<div class="schema-box"><pre>
+SODIUM TOTAL CORPOREL (~60 mmol/kg ≈ 4 mol)
+│
+├── 1/3 — Sodium NON ÉCHANGEABLE
+│         └── Fixé à l'os
+│             (peut se détacher mais ne s'échange pas facilement
+│              avec le MEC)
+│
+└── 2/3 — Sodium ÉCHANGEABLE
+          └── Principalement dans le MILIEU EXTRACELLULAIRE
+              ├── Plasma
+              └── Interstitium
+</pre></div>
+
+<h4>2. Concentrations en sodium selon les compartiments</h4>
+
+<p>La concentration en sodium varie selon le compartiment considéré. Il est important de distinguer la concentration exprimée <em>par litre de plasma</em> et celle exprimée <em>par kilogramme d'eau</em>, car un litre de plasma contient des lipides et des protéines qui occupent un volume, réduisant la place disponible pour l'eau (et donc pour le sodium dissous).</p>
+
+<div class="table-wrap">
+  <table>
+    <thead>
+      <tr>
+        <th>Compartiment</th>
+        <th>Concentration en Na⁺</th>
+        <th>Remarques</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Plasma</strong></td>
+        <td>~142 mmol/L de plasma<br>~151 mmol/kg d'eau</td>
+        <td>Présence de lipides et protéines → moins de place pour l'eau → concentration/kg d'eau plus élevée que /L de plasma</td>
+      </tr>
+      <tr>
+        <td><strong>Interstitium</strong></td>
+        <td>~142 mmol/kg d'eau</td>
+        <td>Peu de protéines → pas de gradient lié à Gibbs-Donnan significatif par rapport au plasma</td>
+      </tr>
+      <tr>
+        <td><strong>Milieu intracellulaire</strong></td>
+        <td>12–20 mmol/kg d'eau</td>
+        <td>Na⁺ très minoritaire ; K⁺ est le cation dominant intracellulaire</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="info-box">
+  📌 <strong>Pourquoi la concentration en Na⁺ est plus basse dans le MIC ?</strong><br>
+  Par le même mécanisme de Gibbs-Donnan : les protéines intracellulaires chargées négativement attirent les cations. Mais dans le MIC, c'est le <strong>potassium (K⁺)</strong> qui est le cation dominant, et non le sodium. La pompe Na⁺/K⁺-ATPase maintient activement cet équilibre (rappel physiologique général — non détaillé dans le texte source).
+</div>
+
+<h4>3. Le sodium : cation majoritaire du milieu extracellulaire</h4>
+
+<p>Dans le <span class="keyword">milieu extracellulaire</span>, le sodium représente <strong>95 % des cations</strong>. En vertu du principe d'<span class="keyword">électroneutralité</span>, les anions (principalement Cl⁻ et HCO₃⁻) sont présents en quantité équivalente.</p>
+
+<div class="schema-box"><pre>
+COMPOSITION IONIQUE DU MILIEU EXTRACELLULAIRE
+(principe d'électroneutralité)
+
+CATIONS                        ANIONS
+┌─────────────────────┐        ┌─────────────────────┐
+│  Na⁺ : 95 % des    │  ◄──►  │  Cl⁻ (principal)    │
+│  cations du MEC     │        │  HCO₃⁻ (secondaire)  │
+│                     │        │  Autres anions       │
+│  K⁺, Ca²⁺, Mg²⁺   │        │                     │
+│  (5 % restants)     │        │                     │
+└─────────────────────┘        └─────────────────────┘
+
+→ Na⁺ seul ≈ 95% cations MEC
+→ Cations MEC ≈ 50% osmoles MEC totales (autant de cations que d'anions)
+→ Donc Na⁺ ≈ 1/2 × 95% ≈ près de la MOITIÉ de l'osmolalité extracellulaire
+</pre></div>
+
+<h4>4. Notion fondamentale : le sodium détermine le volume extracellulaire</h4>
+
+<p>C'est le concept le plus important de ce chapitre. La <span class="keyword">quantité (nombre d'osmoles) de sodium</span> dans le compartiment extracellulaire détermine le <strong>volume de ce compartiment</strong>, donc la <span class="keyword">volémie</span>.</p>
+
+<div class="highlight-box">
+  ✅ <strong>Raisonnement physiopathologique :</strong>
+  <ol>
+    <li>Na⁺ = 95 % des cations du MEC</li>
+    <li>Les anions associés (Cl⁻, HCO₃⁻) sont présents en quantité équivalente par électroneutralité</li>
+    <li>Donc Na⁺ contribue seul à <strong>près de la moitié des osmoles extracellulaires totales</strong></li>
+    <li>Ces osmoles retiennent l'eau dans le compartiment extracellulaire par osmose</li>
+    <li>→ <strong>Plus il y a de Na⁺ dans le MEC → plus le MEC est volumineux</strong></li>
+  </ol>
+</div>
+
+<div class="schema-box"><pre>
+RELATION : QUANTITÉ DE Na⁺ ↔ VOLUME EXTRACELLULAIRE
+
+Apport de Na⁺ dans le MEC
+        │
+        ▼
+↑ Nombre d'osmoles dans le MEC
+        │
+        ▼
+↑ Pression osmotique du MEC
+        │
+        ▼
+Attire l'eau vers le MEC (osmose)
+        │
+        ▼
+↑ Volume du compartiment extracellulaire = ↑ VOLÉMIE
+
+─────────────────────────────────────────────────────
+Perte de Na⁺ du MEC
+        │
+        ▼
+↓ Nombre d'osmoles dans le MEC
+        │
+        ▼
+↓ Pression osmotique du MEC
+        │
+        ▼
+Sortie d'eau du MEC (vers cellules ou vers extérieur)
+        │
+        ▼
+↓ Volume extracellulaire = ↓ VOLÉMIE
+</pre></div>
+
+<div class="warning-box">
+  ⚠️ <strong>Piège classique — Ne pas confondre :</strong>
+  <ul>
+    <li><strong>Quantité de sodium</strong> (nombre de mmoles dans le MEC) → détermine le <strong>VOLUME extracellulaire (volémie)</strong></li>
+    <li><strong>Natrémie</strong> (concentration plasmatique en Na⁺, en mmol/L) → reflet de l'<strong>OSMOLALITÉ plasmatique</strong>, régulée par les apports et pertes d'EAU, indépendamment du volume</li>
+  </ul>
+  <p>On peut avoir une hypernatrémie avec hypovolémie, ou une hyponatrémie avec hypervolémie !</p>
+</div>
+
+<div class="info-box">
+  📌 <strong>Résumé intégrateur :</strong><br>
+  <ul>
+    <li>La <strong>natrémie</strong> (concentration) → renseigne sur l'<strong>état d'hydratation</strong> (bilan hydrique)</li>
+    <li>La <strong>quantité totale de Na⁺</strong> dans le MEC → renseigne sur le <strong>remplissage vasculaire</strong> (bilan sodé)</li>
+  </ul>
+  Ces deux paramètres sont régulés par des mécanismes distincts (développés dans d'autres parties du cours).
+</div>
+
+<h3>🃏 Flashcards</h3>
+
+<div class="flash-block" data-answer="Le sodium total de l'organisme est d'environ 60 mmol/kg (soit ~4 moles). Il est réparti en 1/3 non échangeable (fixé à l'os) et 2/3 échangeable (principalement dans le milieu extracellulaire). Dans le plasma, la natrémie est d'environ 142 mmol/L de plasma (ou 151 mmol/kg d'eau).">
+  <div class="q-text">❓ (Niveau 1 — Rappel direct) Quelle est la concentration corporelle totale en sodium, et comment se répartit-il entre sodium échangeable et non échangeable ?</div>
+  <div class="flash-input-row">
+    <input class="flash-input" type="text" placeholder="Votre réponse…"
+           onkeydown="if(event.key==='Enter')validateFlash(this)">
+    <button class="qcm-validate" onclick="validateFlash(this)">Vérifier</button>
+  </div>
+  <div class="qcm-explanation"></div>
+</div>
+
+<div class="flash-block" data-answer="Le nombre d'osmoles de sodium dans le milieu extracellulaire détermine le volume de ce compartiment (la volémie). En effet, Na⁺ représente 95% des cations du MEC, soit près de la moitié de toutes les osmoles extracellulaires. Ces osmoles retiennent l'eau dans le compartiment par osmose. Ainsi, tout apport de Na⁺ dans le MEC augmente le volume extracellulaire, et toute perte de Na⁺ le diminue. La natrémie (concentration) est un paramètre distinct qui reflète l'osmolalité plasmatique et le bilan hydrique, non le bilan sodé.">
+  <div class="q-text">❓ (Niveau 2 — Compréhension) Pourquoi dit-on que le sodium détermine le volume du compartiment extracellulaire ? En quoi est-ce différent de la natrémie ?</div>
+  <div class="flash-input-row">
+    <input class="flash-input" type="text" placeholder="Votre réponse…"
+           onkeydown="if(event.key==='Enter')validateFlash(this)">
+    <button class="qcm-validate" onclick="validateFlash(this)">Vérifier</button>
+  </div>
+  <div class="qcm-explanation"></div>
+</div>
+
+<div class="flash-block" data-answer="Un patient avec une natrémie à 125 mmol/L (hyponatrémie) et des œdèmes diffus. L'hyponatrémie témoigne d'un excès d'eau par rapport au sodium (bilan hydrique positif → osmolalité basse). Les œdèmes témoignent d'un excès de sodium dans le compartiment extracellulaire (bilan sodé positif → volume extracellulaire augmenté). Ces deux paramètres sont indépendants : on peut avoir simultanément une hyponatrémie (concentration basse) ET une hypervolémie (volume augmenté), par exemple dans l'insuffisance cardiaque ou la cirrhose
+</div>
+</div>
+
+<div class="slide content-slide" id="slide-2">
+<h2>Bilan du Sodium — Physiologie Rénale</h2>
+
+<h3>📦 Prérequis</h3>
+
+<div class="def-box">
+  <strong>🔬 OSMOLALITÉ</strong><br>
+  Concentration totale des particules osmotiquement actives dans un liquide, exprimée en <strong>milliosmoles par kilogramme d'eau (mosm/kg H₂O)</strong>. L'osmolalité plasmatique normale est d'environ <strong>300 mosm/kg d'eau</strong>.
+</div>
+
+<div class="def-box">
+  <strong>🔬 MILIEU EXTRACELLULAIRE (MEC)</strong><br>
+  Compartiment liquidien situé <em>en dehors</em> des cellules. Il comprend le plasma et le liquide interstitiel. Il est riche en sodium (Na⁺), contrairement au milieu intracellulaire (riche en potassium).
+</div>
+
+<div class="def-box">
+  <strong>🔬 MILIEU INTRACELLULAIRE (MIC)</strong><br>
+  Compartiment liquidien contenu <em>à l'intérieur</em> des cellules. Sa composition ionique principale repose sur le potassium (K⁺). L'eau peut s'y déplacer librement selon les gradients osmotiques.
+</div>
+
+<div class="def-box">
+  <strong>🔬 OSMOLES EXTRACELLULAIRES</strong><br>
+  Particules actives osmotiquement présentes dans le milieu extracellulaire. Le sodium (Na⁺) et ses anions associés (principalement Cl⁻ et HCO₃⁻) en constituent la majorité, représentant environ la moitié de toutes les osmoles extracellulaires.
+</div>
+
+<div class="def-box">
+  <strong>🔬 BILAN SODÉ</strong><br>
+  Différence entre les <em>entrées</em> (apports alimentaires) et les <em>sorties</em> de sodium (rénales + extra-rénales). Un bilan <strong>nul</strong> signifie que les entrées égalent les sorties : l'organisme est en équilibre sodé.
+</div>
+
+<div class="def-box">
+  <strong>🔬 HYPEROSMOLALITÉ / HYPOSMOLALITÉ</strong><br>
+  <strong>Hyperosmolalité</strong> : osmolalité &gt; 300 mosm/kg H₂O (excès d'osmoles ou déficit en eau).<br>
+  <strong>Hyposmolalité</strong> : osmolalité &lt; 300 mosm/kg H₂O (déficit d'osmoles ou excès en eau).
+</div>
+
+<h3>📖 Explication</h3>
+
+<h4>I. Le Sodium et l'Osmolalité Extracellulaire</h4>
+
+<div class="highlight-box">
+  ✅ <strong>Point clé fondamental :</strong> L'osmolalité extracellulaire est une <span class="keyword">constante régulée</span> autour de <strong>300 mosm/kg d'eau</strong>. Le sodium, représentant <strong>95 % des cations extracellulaires</strong> et près de <strong>la moitié des osmoles</strong>, en est le principal déterminant.
+</div>
+
+<p>Parce que le sodium domine la composition osmotique du milieu extracellulaire, toute variation de la quantité de sodium dans ce compartiment se traduit par une variation de son osmolalité. L'organisme réagit alors en ajustant son <em>contenu en eau</em> (et non en osmoles) pour ramener l'osmolalité à 300 mosm/kg d'eau.</p>
+
+<h4>I.1 — Conséquences d'un Apport en Sodium</h4>
+
+<div class="schema-box"><pre>
+APPORT de NaCl (ingestion)
+        │
+        ▼
+↑ osmoles dans le MEC
+        │
+        ▼
+↑ Osmolalité extracellulaire
+  (hyperosmolalité transitoire)
+        │
+        ├──────────────────────────────────────────┐
+        ▼                                          ▼
+[Mécanisme immédiat]                    [Mécanisme différé]
+Transfert d'eau  MIC → MEC              Sensation de SOIF
+(équilibration osmotique)                      │
+        │                                      ▼
+↑ Volume MEC                              Prise de boisson
+(dilution des osmoles)                         │
+        │                                      ▼
+        └──────────────┬────────────────────────┘
+                       ▼
+        ↑ Volume MEC + ↑ eau
+                       │
+                       ▼
+         Osmolalité rétablie à 300 mosm/kg H₂O
+         (équilibre restauré)
+</pre></div>
+
+<p>Deux mécanismes se succèdent donc :</p>
+<ol>
+  <li><strong>Immédiatement</strong> : un transfert d'eau du compartiment intracellulaire vers le compartiment extracellulaire, pour équilibrer l'osmolalité entre les deux compartiments. Ce mouvement d'eau <em>dilue</em> les osmoles en excès dans le MEC.</li>
+  <li><strong>De façon différée</strong> : la sensation de soif pousse à boire, augmentant le volume extracellulaire jusqu'au rétablissement d'une osmolalité de 300 mosm/kg d'eau.</li>
+</ol>
+
+<h4>I.2 — Conséquences d'une Perte de Sodium</h4>
+
+<div class="schema-box"><pre>
+PERTE de sodium (diarrhée, sueur abondante)
+        │
+        ▼
+↓ osmoles dans le MEC
+        │
+        ▼
+↓ Osmolalité extracellulaire
+  (hyposmolalité transitoire)
+        │
+        ▼
+Transfert d'eau  MEC → MIC
+(équilibration osmotique)
+        │
+        ▼
+↓ Volume MEC
+        │
+        ▼
+Osmolalité rétablie à 300 mosm/kg H₂O
+MAIS volume extracellulaire diminué
+</pre></div>
+
+<div class="warning-box">
+  ⚠️ <strong>Piège conceptuel :</strong> En cas de perte sodée, l'osmolalité finit par se corriger (via le transfert d'eau vers le MIC), <em>mais au prix d'une diminution du volume extracellulaire</em>. Ce sont donc les <strong>variations de sodium</strong> qui font varier le <strong>volume</strong> du MEC, et non directement l'osmolalité.
+</div>
+
+<h4>II. Entrées, Sorties et Bilan du Sodium</h4>
+
+<h4>II.1 — Les Entrées : Apport Alimentaire</h4>
+
+<div class="info-box">
+  📌 L'apport principal de sodium est <strong>alimentaire</strong> : <strong>100 à 200 mmol/24h</strong>.<br>
+  Sources principales : sel de cuisine (≈ moitié), laitages, pain, charcuterie et aliments transformés (≈ autre moitié).<br>
+  Le sodium ingéré est <strong>absorbé en totalité</strong> dans le tube digestif (intestin grêle et côlon).
+</div>
+
+<h4>II.2 — Les Sorties : Extra-rénales et Rénales</h4>
+
+<div class="table-wrap">
+  <table>
+    <thead>
+      <tr>
+        <th>Type de sortie</th>
+        <th>Voie</th>
+        <th>Quantité</th>
+        <th>Régulation</th>
+        <th>Particularités</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td rowspan="2"><strong>Extra-rénale</strong><br>(non régulée)</td>
+        <td>Fèces</td>
+        <td>≈ 5 mmol/24h</td>
+        <td>❌ Non régulée</td>
+        <td>Peut ↑ fortement en cas de diarrhée</td>
+      </tr>
+      <tr>
+        <td>Sueur</td>
+        <td>Variable : 5 à 80 mmol/L</td>
+        <td>❌ Non régulée</td>
+        <td>Toujours <em>hypo-osmotique</em> par rapport au plasma ; ↑ avec chaleur ou mucoviscidose</td>
+      </tr>
+      <tr>
+        <td><strong>Rénale</strong><br>(régulée)</td>
+        <td>Urine</td>
+        <td>Adaptée aux entrées</td>
+        <td>✅ Régulée par les hormones</td>
+        <td>Sortie <strong>essentielle</strong> ; assure l'équilibre du bilan sodé</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="highlight-box">
+  ✅ <strong>Notion fondamentale :</strong> La sortie rénale est la <span class="keyword">sortie essentielle et régulée</span> du sodium. Le rein adapte l'excrétion urinaire de sodium en fonction des entrées alimentaires afin de maintenir un <strong>bilan sodé nul</strong> (entrées = sorties).
+</div>
+
+<h4>II.3 — Vision d'Ensemble du Bilan Sodé</h4>
+
+<div class="schema-box"><pre>
+┌─────────────────────────────────────────────────────┐
+│                   BILAN SODÉ                        │
+│                                                     │
+│  ENTRÉES (alimentaires)                             │
+│  ┌──────────────────────┐                           │
+│  │  NaCl ingéré         │  100–200 mmol/24h         │
+│  │  Absorption totale   │  (grêle + côlon)          │
+│  └──────────────────────┘                           │
+│              │                                      │
+│              ▼                                      │
+│     Milieu extracellulaire                          │
+│     [Na⁺] = 95% cations MEC                        │
+│     Osmolalité cible = 300 mosm/kg H₂O             │
+│              │                                      │
+│    ┌─────────┴────────────┐                         │
+│    ▼                      ▼                         │
+│  SORTIES extra-rénales   SORTIES rénales            │
+│  (non régulées)          (régulées ++ par hormones) │
+│  • Fèces : ~5 mmol/24h   • Adaptées aux entrées     │
+│  • Sueur : 5–80 mmol/L   • Bilan sodé = 0 visé     │
+└─────────────────────────────────────────────────────┘
+         ÉQUILIBRE : Entrées = Sorties → Bilan nul
+</pre></div>
+
+<div class="info-box">
+  📌 <strong>Caractéristique de la sueur :</strong> La sueur est <em>toujours hypo-osmotique</em> par rapport au plasma. Cela signifie qu'elle contient proportionnellement plus d'eau que de sodium. Sa concentration en sodium varie entre 5 et 80 mmol/L selon les conditions (chaleur, effort, pathologies comme la <span class="keyword">mucoviscidose</span> où la concentration est augmentée).
+</div>
+
+<div class="warning-box">
+  ⚠️ <strong>Piège clinique — Diarrhée et Mucoviscidose :</strong>
+  <ul>
+    <li>En cas de <strong>diarrhée</strong>, les pertes fécales de sodium, habituellement négligeables (≈5 mmol/24h), peuvent devenir <em>très significatives</em> et entraîner une déplétion sodée.</li>
+    <li>Dans la <strong>mucoviscidose</strong>, la concentration de sodium dans la sueur est anormalement élevée : cela peut conduire à des pertes sodées importantes, notamment par temps chaud.</li>
+  </ul>
+</div>
+
+<div class="urgence-box">
+  🔴 <strong>À retenir pour l'ECN :</strong> Les sorties extra-rénales de sodium sont <em>non régulées</em>. En situation pathologique (diarrhée profuse, hypersudation), ces pertes peuvent dépasser la capacité de compensation rénale et conduire à une <strong>hypovolémie</strong> avec déshydratation extracellulaire.
+</div>
+
+<h3>🃏 Flashcards</h3>
+
+<div class="flash-block" data-answer="Le sodium représente 95 % des cations extracellulaires et près de la moitié des osmoles extracellulaires. L'osmolalité extracellulaire est régulée autour de 300 mosm/kg d'eau.">
+  <div class="q-text">❓ Niveau 1 — Rappel direct : Quelle est la place du sodium dans le milieu extracellulaire, et autour de quelle valeur est régulée l'osmolalité extracellulaire ?</div>
+  <div class="flash-input-row">
+    <input class="flash-input" type="text" placeholder="Votre réponse…" onkeydown="if(event.key==='Enter')validateFlash(this)">
+    <button class="qcm-validate" onclick="validateFlash(this)">Vérifier</button>
+  </div>
+  <div class="qcm-explanation"></div>
+</div>
+
+<div class="flash-block" data-answer="Deux mécanismes : 1) Immédiatement, un transfert d'eau du compartiment intracellulaire vers le compartiment extracellulaire pour équilibrer l'osmolalité. 2) Une sensation de soif qui pousse à boire, augmentant le volume extracellulaire jusqu'au rétablissement d'une osmolalité de 300 mosm/kg d'eau.">
+  <div class="q-text">❓ Niveau 2 — Compréhension : Quels sont les deux mécanismes qui permettent de rétablir l'osmolalité extracellulaire après un apport de sodium, et dans quel ordre interviennent-ils ?</div>
+  <div class="flash-input-row">
+    <input class="flash-input" type="text" placeholder="Votre réponse…" onkeydown="if(event.key==='Enter')validateFlash(this)">
+    <button class="qcm-validate" onclick="validateFlash(this)">Vérifier</button>
+  </div>
+  <div class="qcm-explanation"></div>
+</div>
+
+<div class="flash-block" data-answer="Un patient atteint de mucoviscidose présentant une hypersudation (forte chaleur, effort) peut avoir des pertes sodées extra-rénales très importantes car la concentration en sodium de sa sueur est anormalement élevée (jusqu'à 80 mmol/L). Ces sorties extra-rénales étant non régulées, elles peuvent conduire à
+</div>
+</div>
+
+<div class="slide content-slide" id="slide-3">
+<h2>Bilan Sodé & Réabsorption Rénale du Sodium</h2>
+
+<h3>📦 Prérequis</h3>
+
+<div class="def-box">
+  <strong>🔬 BILAN SODÉ</strong><br>
+  Différence entre les apports en sodium (alimentation) et les pertes en sodium (principalement urinaires). Un bilan sodé <em>nul</em> signifie que les apports = les pertes → le volume extracellulaire (VEC) est stable. Un bilan <em>positif</em> signifie que les apports > les pertes → accumulation de sodium → augmentation du VEC. Un bilan <em>négatif</em> signifie que les apports &lt; les pertes → diminution du VEC.
+</div>
+
+<div class="def-box">
+  <strong>🔬 VOLUME EXTRACELLULAIRE (VEC)</strong><br>
+  Compartiment liquidien situé en dehors des cellules (plasma + liquide interstitiel). Le sodium est le principal osmole du secteur extracellulaire : toute variation du stock sodé entraîne une variation proportionnelle du VEC (et donc du poids corporel).
+</div>
+
+<div class="def-box">
+  <strong>🔬 DÉBIT DE FILTRATION GLOMÉRULAIRE (DFG)</strong><br>
+  Volume de plasma filtré par les glomérules par unité de temps (~120 mL/min chez l'adulte sain). Le débit de sodium filtré = [Na⁺]<sub>ultrafiltrat</sub> × DFG.
+</div>
+
+<div class="def-box">
+  <strong>🔬 Na⁺/K⁺-ATPase (pompe sodium-potassium)</strong><br>
+  Pompe membranaire active présente sur la face basolatérale des cellules tubulaires. Elle expulse 3 Na⁺ vers l'interstitium contre 2 K⁺ entrant, consommant de l'ATP. Elle crée le gradient électrochimique permettant la réabsorption passive du Na⁺ à la face luminale (apicale).
+</div>
+
+<div class="def-box">
+  <strong>🔬 RÉABSORPTION TRANSCELLULAIRE</strong><br>
+  Transport d'une substance qui traverse successivement la membrane apicale (côté lumière tubulaire) puis la membrane basolatérale (côté interstitium/capillaires péritubulaires) d'une cellule épithéliale.
+</div>
+
+<div class="def-box">
+  <strong>🔬 NÉPHRON</strong><br>
+  Unité fonctionnelle du rein. Il comprend le corpuscule rénal (glomérule + capsule de Bowman), le tube contourné proximal (TCP), l'anse de Henlé (branche descendante grêle + branche ascendante large), le tube contourné distal (TCD) et le canal collecteur (CC).
+</div>
+
+<div class="def-box">
+  <strong>🔬 HYPERVOLÉMIE / ŒDÈMES</strong><br>
+  Augmentation pathologique du VEC. Les œdèmes correspondent à l'accumulation de liquide dans le secteur interstitiel, souvent liée à une rétention hydrosodée excessive.
+</div>
+
+<h3>📖 Explication</h3>
+
+<h4>I. Le bilan sodé et ses conséquences sur le volume extracellulaire</h4>
+
+<div class="highlight-box">
+  ✅ <strong>Principe fondamental :</strong> Le rein adapte son excrétion urinaire de sodium aux apports alimentaires pour maintenir un bilan sodé nul et un VEC stable. Cette adaptation n'est pas instantanée : il existe un délai de quelques jours avant que l'équilibre soit retrouvé.
+</div>
+
+<h4>Analyse du graphique : variations du poids selon les apports sodés</h4>
+
+<p>La professeure insiste particulièrement sur ce graphique, dont la compréhension est centrale :</p>
+
+<div class="schema-box"><pre>
+APPORTS Na⁺  │  150 mmol/j        │  0 mmol/j (sans sel)   │  150 mmol/j     │  300 mmol/j
+             │                    │                         │                 │
+─────────────┼────────────────────┼─────────────────────────┼─────────────────┼──────────────
+             │       J0           │    J3 ──────── J9       │  J9 ──── J15    │  J15 ──►
+─────────────┼────────────────────┼─────────────────────────┼─────────────────┼──────────────
+Excrétion    │  = 150 mmol/j      │  ↓ progressivement      │  ↑ progressive  │  ↑ progressive
+urinaire Na⁺ │  (équilibre)       │  → 0 après qqj          │  → 150 mmol/j   │  → 300 mmol/j
+─────────────┼────────────────────┼─────────────────────────┼─────────────────┼──────────────
+Bilan sodé   │  NUL               │  NÉGATIF                │  POSITIF        │  POSITIF
+             │  (apports=pertes)  │  (apports < pertes)     │  (apports >     │  (apports >
+             │                    │                         │   pertes)       │   pertes)
+─────────────┼────────────────────┼─────────────────────────┼─────────────────┼──────────────
+Poids        │  70 kg (stable)    │  ↓ 1 à 2 kg             │  ↑ retour à     │  ↑ au-delà
+(VEC)        │                    │  (↓ VEC)                │  70 kg          │  de 70 kg
+─────────────┼────────────────────┼─────────────────────────┼─────────────────┼──────────────
+Phase        │  ÉQUILIBRE         │  ADAPTATION (lente)     │  RÉAJUSTEMENT   │  RÉAJUSTEMENT
+</pre></div>
+
+<h4>Détail de chaque phase</h4>
+
+<div class="info-box">
+  📌 <strong>J0 — État d'équilibre de référence</strong><br>
+  Individu de 70 kg, apports = 150 mmol/24h de Na⁺. L'excrétion urinaire est égale aux apports. Le bilan sodé est nul. Le poids est stable, reflet d'un VEC stable.
+</div>
+
+<div class="info-box">
+  📌 <strong>J3 à J9 — Suppression du sodium alimentaire (régime strict sans sel)</strong><br>
+  Les apports chutent brutalement à 0 mmol/j. Le rein ne peut pas réduire son excrétion instantanément : il continue d'éliminer du sodium pendant quelques jours (retard d'adaptation). L'excrétion diminue <em>progressivement</em> jusqu'à devenir nulle. Durant cette phase de transition, le bilan sodé est <span class="keyword">négatif</span> (pertes > apports) → perte de 1 à 2 kg correspondant à une diminution du VEC.
+</div>
+
+<div class="info-box">
+  📌 <strong>J9 — Retour au régime normo-sodé (150 mmol/j)</strong><br>
+  Les apports reprennent à 150 mmol/j. L'excrétion rénale s'ajuste progressivement à la hausse. Pendant la transition, les apports dépassent les pertes → bilan sodé <span class="keyword">positif</span> → augmentation du VEC → récupération du poids perdu.
+</div>
+
+<div class="info-box">
+  📌 <strong>J15 — Passage à un régime très salé (300 mmol/j)</strong><br>
+  Doublement des apports. Le rein adapte l'excrétion à la hausse, mais avec un délai. Pendant la transition, le bilan sodé est à nouveau <span class="keyword">positif</span> → nouvel accroissement transitoire du VEC → augmentation du poids au-delà de 70 kg, jusqu'à ce qu'un nouvel équilibre soit atteint à 300 mmol/j excrétés.
+</div>
+
+<h4>Application clinique</h4>
+
+<div class="highlight-box">
+  ✅ <strong>Utilisation thérapeutique :</strong> Chez les patients présentant des <span class="keyword">œdèmes</span> ou une <span class="keyword">hypervolémie</span>, la réduction des apports en sodium alimentaire permet de créer un bilan sodé négatif, de diminuer le volume circulant et d'améliorer l'état clinique.
+</div>
+
+<hr>
+
+<h4>II. Réabsorption rénale du sodium</h4>
+
+<h4>A. Vue d'ensemble : filtration massive, réabsorption quasi-totale</h4>
+
+<p>Le sodium est un petit ion très facilement filtré au niveau glomérulaire. Le <span class="keyword">débit de sodium filtré</span> est calculé comme suit :</p>
+
+<div class="schema-box"><pre>
+Débit Na⁺ filtré = [Na⁺]ultrafiltrat × DFG ≈ 25 000 mmol/j
+
+         ↕ Réabsorption tubulaire massive (99 %)
+
+Débit Na⁺ urinaire = [Na⁺]U × V̇  ≈  50 à 200 mmol/j
+                     (selon les apports alimentaires)
+
+→ Seulement 1 % du sodium filtré est excrété dans les urines !
+</pre></div>
+
+<div class="highlight-box">
+  ✅ Sur les ~25 000 mmol de Na⁺ filtrés chaque jour, 99 % sont réabsorbés tout au long du tubule. Seuls 50 à 200 mmol/24h sont excrétés, en fonction de l'alimentation.
+</div>
+
+<h4>B. Mécanisme général de la réabsorption tubulaire du sodium</h4>
+
+<p>La réabsorption du sodium est principalement <span class="keyword">active</span> et <span class="keyword">transcellulaire</span> :</p>
+
+<div class="schema-box"><pre>
+LUMIÈRE TUBULAIRE          CELLULE TUBULAIRE          INTERSTITIUM → Capillaire péritubulaire
+(côté apical)              (épithélium)               (côté basolatéral)
+
+                                                       ┌──────────────┐
+Na⁺ ──────────────────►  [entrée via               ]  │ Na⁺/K⁺-ATPase│──► Na⁺ (actif)
+  (gradient électrochim.) [transporteurs apicaux   ]  │  (active,    │
+                           [variés selon le segment]   │  consomme    │
+                                                       │  de l'ATP)   │
+                                                       └──────────────┘
+                                                              ↕ K⁺ entre dans la cellule
+
+► La pompe Na⁺/K⁺-ATPase basolatérale est PRÉSENTE TOUT AU LONG DU NÉPHRON
+► Elle maintient une [Na⁺] intracellulaire basse → gradient favorable à l'entrée apicale
+► Les transporteurs apicaux VARIENT selon le segment (≠ mécanismes d'entrée)
+</pre></div>
+
+<h4>C. Répartition de la réabsorption du Na⁺ le long du néphron</h4>
+
+<div class="schema-box"><pre>
+GLOMÉRULE
+    │
+    │  Filtration : ~25 000 mmol/j de Na⁺
+    ▼
+┌──────────────────────────┐
+│  TUBE CONTOURNÉ PROXIMAL │  ◄── 60 à 70 % du Na⁺ filtré réabsorbé
+│  (TCP)                   │       (+ même proportion d'eau)
+└──────────────────────────┘
+    │
+    ▼
+┌──────────────────────────┐
+│  BRANCHE DESCENDANTE     │  ◄── RIEN : imperméable aux ions
+│  de l'anse de Henlé      │
+└──────────────────────────┘
+    │
+    ▼
+┌──────────────────────────┐
+│  BRANCHE ASCENDANTE      │  ◄── 25 % du Na⁺ filtré réabsorbé
+│  LARGE de l'anse de Henlé│       (segment imperméable à l'eau)
+└──────────────────────────┘
+    │
+    ▼
+┌──────────────────────────┐
+│  TUBE CONTOURNÉ DISTAL   │  ◄── ~6 % du Na⁺ filtré réabsorbé
+│  (TCD)                   │
+└──────────────────────────┘
+    │
+    ▼
+┌──────────────────────────┐
+│  CANAL COLLECTEUR (CC)   │  ◄── ~2 % du Na⁺ filtré réabsorbé
+│                          │       (site de régulation fine)
+└──────────────────────────┘
+    │
+    ▼
+  URINE FINALE : ~1 % du Na⁺ filtré (50–200 mmol/j)
+</pre></div>
+
+<div class="table-wrap">
+  <table>
+    <thead>
+      <tr>
+        <th>Segment du néphron</th>
+        <th>% Na⁺ réabsorbé</th>
+        <th>Particularité</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Tube contourné proximal (TCP)</td>
+        <td><strong>60 – 70 %</strong></td>
+        <td>Réabsorption massive de Na⁺ <em>et</em> d'eau (iso-osmotique)</td>
+      </tr>
+      <tr>
+        <td>Branche descendante de l'anse de Henlé</td>
+        <td><strong>0 %</strong></td>
+        <td>Imperméable aux ions — aucune réabsorption de Na⁺</td>
+      </tr>
+      <tr>
+        <td>Branche ascendante large de l'anse de Henlé</td>
+        <td><strong>25 %</strong></td>
+        <td>Réabsorption de Na⁺ sans eau (imperméable à l'eau)</td>
+      </tr>
+      <tr>
+        <td>Tube contourné distal (TCD)</td>
+        <td><strong>~6 %</strong></td>
+        <td>Réabsorption active, début de la régulation fine</td>
+      </tr>
+      <tr>
+        <td>Canal collecteur (CC)</td>
+        <td><strong>~2 %</strong></td>
+        <td>Site de régulation hormonale fine (aldostérone)</td>
+      </tr>
+      <tr>
+        <td><strong>TOTAL RÉABSORBÉ</strong></td>
+        <td><strong>~99 %</strong></td>
+        <td
+</div>
+</div>
+
+<div class="slide content-slide" id="slide-4">
+<h2>Réabsorption du Sodium dans le Tubule Proximal</h2>
+
+<h3>📦 Prérequis</h3>
+
+<div class="def-box">
+  <strong>🔬 TUBULE PROXIMAL</strong><br>
+  Première portion du tubule rénal, faisant suite au glomérule. Il reçoit le filtrat glomérulaire et assure la réabsorption de la majorité des solutés et de l'eau filtrés.
+</div>
+
+<div class="def-box">
+  <strong>🔬 RÉABSORPTION ISOOSMOTIQUE</strong><br>
+  Réabsorption dans laquelle l'eau et les solutés sont réabsorbés dans les <em>mêmes proportions</em>, sans modification de l'osmolarité du fluide tubulaire.
+</div>
+
+<div class="def-box">
+  <strong>🔬 TRANSPORT TRANSCELLULAIRE vs PARACELLULAIRE</strong><br>
+  • <strong>Transcellulaire</strong> : passage à travers la cellule épithéliale (membrane apicale puis basolatérale) — actif.<br>
+  • <strong>Paracellulaire</strong> : passage entre les cellules via les jonctions intercellulaires — passif.
+</div>
+
+<div class="def-box">
+  <strong>🔬 POMPE Na⁺/K⁺-ATPase</strong><br>
+  Pompe membranaire basolatérale qui expulse 3 Na⁺ vers l'interstitium contre leur gradient, en faisant entrer 2 K⁺ dans la cellule, au prix d'une molécule d'ATP. Elle maintient une faible concentration intracellulaire en Na⁺, moteur du transport transcellulaire.
+</div>
+
+<div class="def-box">
+  <strong>🔬 COTRANSPORTEUR / ANTIPORT</strong><br>
+  • <strong>Cotransporteur (symport)</strong> : transporte deux substances dans le même sens en couplant leur déplacement.<br>
+  • <strong>Antiport (échangeur)</strong> : transporte deux substances en sens opposés (ex. : Na⁺ entre, H⁺ sort).
+</div>
+
+<div class="def-box">
+  <strong>🔬 ANHYDRASE CARBONIQUE</strong><br>
+  Enzyme catalysant la réaction : CO₂ + H₂O ⇌ H₂CO₃ ⇌ H⁺ + HCO₃⁻. Elle existe sous forme luminale (bordure en brosse) et intracellulaire dans le tubule proximal.
+</div>
+
+<div class="def-box">
+  <strong>🔬 AQUAPORINES</strong><br>
+  Canaux protéiques membranaires assurant le passage sélectif et rapide de l'eau à travers les membranes cellulaires.
+</div>
+
+<div class="def-box">
+  <strong>🔬 BALANCE GLOMÉRULOTUBULAIRE</strong><br>
+  Mécanisme intrinsèque par lequel le tubule proximal adapte sa réabsorption proportionnellement à la charge filtrée : si le débit de filtration glomérulaire augmente, la réabsorption tubulaire augmente dans les mêmes proportions (~ 67 % constants).
+</div>
+
+<div class="def-box">
+  <strong>🔬 DIFFÉRENCE DE POTENTIEL LUMINALE</strong><br>
+  Différence de charge électrique entre la lumière tubulaire et l'interstitium. Une lumière positive par rapport à l'interstitium négatif crée une force électrique favorisant la migration des cations (Na⁺) vers l'interstitium.
+</div>
+
+<h3>📖 Explication</h3>
+
+<h4>Vue d'ensemble : caractéristiques générales de la réabsorption proximale du Na⁺</h4>
+
+<div class="highlight-box">
+  ✅ <strong>Points clés à retenir d'emblée</strong><br>
+  <ul>
+    <li>La réabsorption du Na⁺ dans le tubule proximal est <span class="keyword">isoosmotique</span> : l'eau suit le Na⁺ dans les mêmes proportions → pas de modification de l'osmolarité du fluide tubulaire.</li>
+    <li><strong>2/3</strong> du Na⁺ réabsorbé emprunte la voie <span class="keyword">transcellulaire (active)</span>.</li>
+    <li><strong>1/3</strong> du Na⁺ réabsorbé emprunte la voie <span class="keyword">paracellulaire (passive)</span>.</li>
+    <li>Peu de régulation hormonale directe à ce niveau ; la réabsorption est principalement modulée par la <span class="keyword">balance glomérulotubulaire</span>.</li>
+  </ul>
+</div>
+
+<div class="schema-box"><pre>
+FILTRAT GLOMÉRULAIRE
+       │
+       ▼
+┌─────────────────────────────────────────────┐
+│           TUBULE PROXIMAL                   │
+│                                             │
+│  ┌──── 1ère partie ────┬── 2ème partie ───┐ │
+│  │  Transcellulaire    │ Transcellulaire  │ │
+│  │  active (2/3 Na⁺)   │ + Paracellulaire │ │
+│  │  + cotransporteurs  │ passive (Cl⁻     │ │
+│  │  + antiport Na/H    │  → ΔV → Na⁺)    │ │
+│  └─────────────────────┴─────────────────┘ │
+│                                             │
+│         ↓ Réabsorption isoosmotique ↓       │
+│         (Na⁺ + H₂O dans mêmes proportions)  │
+└─────────────────────────────────────────────┘
+       │
+       ▼
+  INTERSTITIUM → CAPILLAIRES PÉRITUBULAIRES
+</pre></div>
+
+<h4>Première phase : réabsorption transcellulaire active (1ère partie du tube proximal)</h4>
+
+<h4 style="margin-left:1.5em;">1. Moteur général : la pompe Na⁺/K⁺-ATPase basolatérale</h4>
+
+<div class="info-box">
+  📌 La <span class="keyword">bordure en brosse</span> (membrane apicale) augmente considérablement la surface d'échange et est très active métaboliquement.<br><br>
+  La <strong>pompe Na⁺/K⁺-ATPase</strong> située sur la face basolatérale :<br>
+  • Expulse le Na⁺ vers l'interstitium <strong>contre son gradient de concentration</strong><br>
+  • Fait entrer le K⁺ dans la cellule<br>
+  → Maintient une <strong>faible concentration intracellulaire en Na⁺</strong><br>
+  → Crée un gradient favorable à l'entrée passive du Na⁺ du côté apical (lumière → cellule)
+</div>
+
+<div class="schema-box"><pre>
+LUMIÈRE TUBULAIRE          CELLULE TUBULAIRE          INTERSTITIUM
+                           PROXIMALE
+  [Na⁺] élevé                                          [Na⁺] élevé
+      │                   [Na⁺] faible                      ▲
+      │                                                      │
+      │  ──gradient─→  ┌──────────────┐  ←ATP─  Na⁺/K⁺    │
+      │    apical       │              │─────────ATPase ────►│
+      │                 │   CELLULE    │  (pompe active)
+      │                 │              │
+      ▼                 └──────────────┘
+  Entrée de Na⁺
+  via cotransporteurs
+  et antiport Na⁺/H⁺
+</pre></div>
+
+<h4 style="margin-left:1.5em;">2. Cotransporteurs apicaux (symports Na⁺-dépendants)</h4>
+
+<p>L'entrée de Na⁺ dans la cellule (favorisée par le gradient créé par la pompe) est couplée à la réabsorption d'autres substances utiles du filtrat :</p>
+
+<div class="table-wrap">
+  <table>
+    <thead>
+      <tr>
+        <th>Cotransporteur</th>
+        <th>Substance coréabsorbée</th>
+        <th>Sens du transport</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Na⁺ / Glucose</td>
+        <td>Glucose</td>
+        <td>Lumière → Cellule</td>
+      </tr>
+      <tr>
+        <td>Na⁺ / Acides aminés (AA)</td>
+        <td>Acides aminés</td>
+        <td>Lumière → Cellule</td>
+      </tr>
+      <tr>
+        <td>Na⁺ / Phosphates</td>
+        <td>Phosphates</td>
+        <td>Lumière → Cellule</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<h4 style="margin-left:1.5em;">3. Antiport Na⁺/H⁺ et réabsorption des bicarbonates</h4>
+
+<p>L'<span class="keyword">antiport Na⁺/H⁺</span> joue un rôle clé dans la réabsorption des bicarbonates selon la cascade suivante :</p>
+
+<div class="schema-box"><pre>
+LUMIÈRE TUBULAIRE                              CELLULE                  INTERSTITIUM
+                                                                              
+  Na⁺ ──────────────────────────────────────►  Na⁺ (entre)
+        ANTIPORT Na⁺/H⁺
+  H⁺  ◄──────────────────────────────────────  H⁺ (sort vers lumière)
+                                                  │
+                                                  │ (produit en cellule par
+                                                  │  dissociation de H₂CO₃)
+  H⁺ + HCO₃⁻  ──►  H₂CO₃  (acide carbonique)   │
+       (filtrat)                │                 │
+                                │ Anhydrase        │
+                                │ carbonique       │
+                                ▼ (luminale)       │
+                             CO₂ + H₂O            │
+                                │                  │
+                           Traverse facilement     │
+                           la membrane apicale     │
+                                │                  │
+                                ▼                  │
+                         Dans la cellule :         │
+                         CO₂ + H₂O                │
+                              │                    │
+                         Anhydrase carbonique      │
+                         (intracellulaire)         │
+                              ▼                    │
+                         H₂CO₃ → H⁺ + HCO₃⁻       │
+                                        │          │
+                                        └──────────►  HCO₃⁻ réabsorbé
+                                                      (avec Na⁺) vers le sang
+</pre></div>
+
+<div class="highlight-box">
+  ✅ <strong>Mécanisme de réabsorption du HCO₃⁻ — résumé en 4 étapes</strong><br>
+  <ol>
+    <li>L'antiport Na⁺/H⁺ sécrète un H⁺ dans la lumière, qui réagit avec le HCO₃⁻ filtré → H₂CO₃</li>
+    <li>L'anhydrase carbonique <em>luminale</em> convertit H₂CO₃ → CO₂ + H₂O</li>
+    <li>Le CO₂ (liposoluble) diffuse librement dans la cellule et est reconverti en H⁺ + HCO₃⁻ par l'anhydrase carbonique <em>intracellulaire</em></li>
+    <li>Le HCO₃⁻ est réabsorbé côté basolatéral avec le Na⁺ vers le sang</li>
+  </ol>
+</div>
+
+<h4>Deuxième phase : réabsorption transcellulaire active + réabsorption paracellulaire passive (2ème partie du tube proximal)</h4>
+
+<div class="schema-box"><pre>
+2ème PARTIE DU TUBE PROXIMAL
+─────────────────────────────────────────────────────────────
+
+SITUATION :
+  Dans la 1ère partie, Na⁺ et HCO₃⁻ sont massivement réabsorbés
+  → Le Cl⁻ s'enrichit relativement dans le filtrat restant
+
+                ↑ [Cl⁻] dans la lumière
+                        │
+                        ▼
+        Réabsorption passive du Cl⁻
+        (via transporteurs ou jonctions intercellulaires)
+                        │
+                        ▼
+        Cl⁻ passe lumière → interstitium (charge négative sort)
+                        │
+                        ▼
+    LUMIÈRE devient ÉLECTROPOSITIVE
+    INTERSTITIUM reste ÉLECTRONÉGATIF
+                        │
+                        ▼
+    Force électrique : cations (Na⁺) migrent vers le pôle négatif
+                        │
+                        ▼
+    Réabsorption PARACELLULAIRE PASSIVE du Na⁺
+    (via jonctions intercellulaires perméables)
+
+─────────────────────────────────────────────────────────────
+</pre></div>
+
+<div class="info-box">
+  📌 <strong>Réabsorption de l'eau dans le tubule proximal</strong><br>
+  L'eau suit la réabsorption des solutés par osmose grâce à :<br>
+  • Les <span class="keyword">aquaporines</span> (les cellules tubulaires proximales en sont très riches)<br>
+  • Les <span class="keyword">jonctions intercellulaires perméables</span><br>
+  → L'eau est ainsi réabsorbée <strong>dans les mêmes proportions</strong> que les solutés, ce qui explique le caractère <strong>isoosmotique</strong> de la réabsorption proximale.
+</div>
+
+<div class="warning-box">
+  ⚠️ <strong>Piège conceptuel : passif ne signifie pas non régulé</strong><br>
+  Le transport paracellulaire est bien passif (sans consommation d'ATP directe), mais il est secondairement dépendant du transport actif transcellulaire qui crée les gradients électrochimiques nécessaires. Sans la pompe Na⁺/K⁺-ATPase et sans la réabsorption active du Cl⁻ dans la 2ème phase, la réabsorption paracellulaire du Na⁺ n'aurait pas lieu.
+</div>
+
+<div class="highlight-box">
+  ✅ <strong>Synthèse globale de la réabsorption proximale du Na⁺</strong>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th></th>
+          <th>1ère partie</th>
+          <th>2ème
+</div></div>
+</div>
+
+<div class="slide content-slide" id="slide-5">
+<h2>Évolution des concentrations tubulaires & Réabsorption dans l'anse de Henlé</h2>
+
+<h3>📦 Prérequis</h3>
+
+<div class="def-box">
+  <strong>🔬 RÉABSORPTION ISOSMOTIQUE</strong><br>
+  Réabsorption d'eau et de solutés dans les mêmes proportions, de sorte que l'osmolarité du liquide tubulaire reste identique à celle du plasma. Le rapport de concentration tubulaire/ultrafiltrat (TF/UF) reste donc constant.
+</div>
+
+<div class="def-box">
+  <strong>🔬 RAPPORT TF/UF</strong><br>
+  Rapport entre la concentration d'une substance dans le fluide tubulaire (TF = Tubular Fluid) et sa concentration dans l'ultrafiltrat glomérulaire (UF). Permet de suivre l'évolution d'une substance le long du tubule.
+</div>
+
+<div class="def-box">
+  <strong>🔬 INULINE</strong><br>
+  Polysaccharide exogène librement filtré par le glomérule, ni réabsorbé ni sécrété ni métabolisé. Utilisé comme marqueur de référence de la filtration glomérulaire (mesure du DFG).
+</div>
+
+<div class="def-box">
+  <strong>🔬 AQUAPORINES</strong><br>
+  Canaux protéiques transmembranaires permettant le passage sélectif de l'eau à travers les membranes cellulaires. Leur absence rend une structure imperméable à l'eau.
+</div>
+
+<div class="def-box">
+  <strong>🔬 COTRANSPORTEUR NKCC2</strong><br>
+  Transporteur membranaire de la branche ascendante large de l'anse de Henlé, assurant le co-transport simultané de 1 Na⁺, 1 K⁺ et 2 Cl⁻ vers l'intérieur de la cellule tubulaire. Cible du furosémide.
+</div>
+
+<div class="def-box">
+  <strong>🔬 RÉABSORPTION PARACELLULAIRE</strong><br>
+  Passage de solutés non pas à travers les cellules (transcellulaire) mais entre les cellules via les jonctions serrées, selon un gradient électrochimique.
+</div>
+
+<div class="def-box">
+  <strong>🔬 ANTIPORT Na⁺/H⁺</strong><br>
+  Transporteur membranaire qui fait entrer un ion Na⁺ dans la cellule en échange d'un ion H⁺ expulsé vers la lumière tubulaire. Inhibé par l'amiloride.
+</div>
+
+<h3>📖 Explication</h3>
+
+<h4>A. Évolution des concentrations tubulaires le long du tube proximal</h4>
+
+<p>Le tube proximal réabsorbe la majorité des substances filtrées. Chaque substance a un profil d'évolution de concentration qui lui est propre, reflétant ses mécanismes de transport.</p>
+
+<div class="schema-box"><pre>
+LUMIÈRE TUBULAIRE — évolution des concentrations le long du tube proximal
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Substance      | Début TCP    →    Milieu TCP   →    Fin TCP
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Sodium (Na⁺)   | [stable]    →    [stable]     →    [stable]
+               | TF/UF = 1         TF/UF = 1         TF/UF = 1
+               | (réabsorption isosmotique = eau réabsorbée proportionnellement)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Glucose / AA   | ↓ ↓ ↓       →    ↓ ↓          →    = 0
+               | (réabsorption totale, concentration → nulle en fin de TCP)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Chlore (Cl⁻)   | ↑ (augmente) →   ↓ (diminue)  →    [stable]
+               | (augmente d'abord, puis diminue progressivement)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Bicarbonates   | ↓ ↓          →    ↓            →    [bas mais ≠ 0]
+(HCO₃⁻)        | (fortement réabsorbés mais pas totalement)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Inuline        | ↑            →    ↑ ↑          →    ↑ ↑ ↑
+               | (non réabsorbée → se concentre car l'eau est réabsorbée)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+TCP = Tube Contourné Proximal
+</pre></div>
+
+<h4>Analyse substance par substance</h4>
+
+<div class="highlight-box">
+  <strong>✅ Sodium — TF/UF constant</strong><br>
+  La réabsorption du sodium au tube proximal est <span class="keyword">isosmotique</span> : l'eau est réabsorbée dans la même proportion que le sodium. Ainsi, même si du Na⁺ quitte la lumière tubulaire, la concentration luminale reste stable. Le rapport TF/UF = 1 tout au long du tube proximal.
+</div>
+
+<div class="highlight-box">
+  <strong>✅ Glucose et acides aminés — réabsorption totale</strong><br>
+  Ces substances sont entièrement réabsorbées au tube proximal. Leur concentration tubulaire décroît progressivement pour atteindre <strong>zéro</strong> en fin de tube proximal. Elles ne sont normalement pas présentes dans l'urine définitive.
+</div>
+
+<div class="info-box">
+  <strong>📌 Chlore — profil biphasique</strong><br>
+  La concentration tubulaire du chlore suit un profil particulier :<br>
+  <strong>Phase 1 :</strong> augmentation initiale (les bicarbonates sont fortement réabsorbés en premier, donc le Cl⁻ se concentre relativement).<br>
+  <strong>Phase 2 :</strong> diminution progressive puis stabilisation (le Cl⁻ est lui-même réabsorbé).
+</div>
+
+<div class="info-box">
+  <strong>📌 Bicarbonates — réabsorption forte mais incomplète</strong><br>
+  Les bicarbonates sont <strong>fortement</strong> réabsorbés au tube proximal, mais leur réabsorption n'est pas totale. Une fraction résiduelle reste dans la lumière tubulaire en fin de tube proximal.
+</div>
+
+<div class="info-box">
+  <strong>📌 Inuline — marqueur de concentration</strong><br>
+  L'inuline n'est ni réabsorbée, ni sécrétée, ni métabolisée. Comme l'eau est réabsorbée tout au long du tube proximal, le volume de fluide tubulaire diminue, ce qui entraîne une <strong>augmentation progressive</strong> de la concentration en inuline. Elle illustre parfaitement le phénomène de concentration par réabsorption hydrique.
+</div>
+
+<h4>B. Réabsorption dans l'anse de Henlé</h4>
+
+<p>L'anse de Henlé réabsorbe <span class="keyword">25 % du sodium filtré</span>. Sa particularité majeure est que cette réabsorption est <strong>indépendante de l'eau</strong>, ce qui entraîne une dilution progressive du fluide tubulaire.</p>
+
+<div class="schema-box"><pre>
+STRUCTURE ET FONCTIONS DE L'ANSE DE HENLÉ
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+               ┌─────────────────────────────────┐
+               │      TUBE PROXIMAL              │
+               │  (réabsorption isosmotique)     │
+               └──────────────┬──────────────────┘
+                              │ ↓ fluide isosmotique
+       ┌──────────────────────▼──────────────────────┐
+       │     BRANCHE DESCENDANTE FINE                │
+       │  ✔ Très perméable à l'EAU                  │
+       │  ✘ Peu perméable aux solutés                │
+       │  → L'eau sort → fluide se concentre ↑       │
+       └──────────────────────┬──────────────────────┘
+                              │ ↓ (fond de l'anse)
+       ┌──────────────────────▼──────────────────────┐
+       │     BRANCHE ASCENDANTE FINE                 │
+       │  ✘ Faible perméabilité à l'eau              │
+       │  ✔ Réabsorption PASSIVE de Na⁺ et Cl⁻      │
+       └──────────────────────┬──────────────────────┘
+                              │ ↑
+       ┌──────────────────────▼──────────────────────┐
+       │     BRANCHE ASCENDANTE LARGE ⭐             │
+       │  ✘ IMPERMÉABLE à l'eau (pas d'aquaporines) │
+       │  ✔ Réabsorption ACTIVE de Na⁺ et Cl⁻       │
+       │                                             │
+       │  Transporteurs :                            │
+       │   • Antiport Na⁺/H⁺ ← inhibé par Amiloride │
+       │   • NKCC2 (Na⁺/K⁺/2Cl⁻) ← inhibé par      │
+       │     Furosémide                              │
+       │                                             │
+       │  K⁺ recyclé → gradient électrique +        │
+       │  → réabsorption paracellulaire de Na⁺ ↑    │
+       └──────────────────────┬──────────────────────┘
+                              │ ↑ fluide HYPOTONIQUE
+               ┌──────────────▼──────────────────────┐
+               │   TUBE DISTAL / TCD                 │
+               └─────────────────────────────────────┘
+
+Résultat final : [Na⁺] tubulaire ↓ en fin d'anse
+(réabsorption sans eau = dilution du fluide)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+</pre></div>
+
+<h4>Détail des segments de l'anse de Henlé</h4>
+
+<div class="table-wrap">
+<table>
+  <thead>
+    <tr>
+      <th>Segment</th>
+      <th>Perméabilité à l'eau</th>
+      <th>Perméabilité aux solutés</th>
+      <th>Mécanisme de réabsorption</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Branche descendante fine</strong></td>
+      <td>✔ Très élevée</td>
+      <td>✘ Faible</td>
+      <td>Sortie passive d'eau (osmose vers interstitium hypertonique)</td>
+    </tr>
+    <tr>
+      <td><strong>Branche ascendante fine</strong></td>
+      <td>✘ Faible</td>
+      <td>✔ Faible à modérée</td>
+      <td>Réabsorption <strong>passive</strong> de Na⁺ et Cl⁻</td>
+    </tr>
+    <tr>
+      <td><strong>Branche ascendante large</strong></td>
+      <td>✘ Nulle (pas d'aquaporines)</td>
+      <td>✔ Active</td>
+      <td>Réabsorption <strong>active</strong> via antiport Na⁺/H⁺ et NKCC2 + réabsorption paracellulaire Na⁺</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<h4>La branche ascendante large : segment clé</h4>
+
+<div class="info-box">
+  <strong>📌 Mécanisme du NKCC2 et recyclage du K⁺</strong><br>
+  Le cotransporteur <span class="keyword">NKCC2</span> transporte simultanément <strong>1 Na⁺ + 1 K⁺ + 2 Cl⁻</strong> de la lumière vers l'intérieur de la cellule. Le K⁺ ainsi entré dans la cellule est recyclé vers la lumière tubulaire via des canaux K⁺. Ce recyclage crée un <strong>gradient électrique positif</strong> dans la lumière, qui favorise la réabsorption <strong>paracellulaire</strong> (entre les cellules) de cations comme le Na⁺.
+</div>
+
+<div class="schema-box"><pre>
+BRANCHE ASCENDANTE LARGE — détail cellulaire
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ LUMIÈRE          │  CELLULE TUBULAIRE  │  INTERSTITIUM
+ TUBULAIRE        │                     │
+                  │                     │
+ Na⁺ ─────────── │──► NKCC2 ──────────►│  Na⁺ (pompe Na/K ATPase)
+ K⁺  ─────────── │──►        ──────────►│  K⁺
+ 2Cl⁻ ─────────  │──►        ──────────►
+</div>
+</div>
+
+<div class="slide content-slide" id="slide-6">
+<h2>Réabsorption tubulaire distale du sodium & Balance glomérulo-tubulaire</h2>
+
+<h3>📦 Prérequis</h3>
+
+<div class="def-box"><strong>🔬 DÉBIT DE FILTRATION GLOMÉRULAIRE (DFG)</strong><br>
+Volume de plasma filtré par les glomérules par unité de temps. Valeur normale : <strong>~120 mL/min</strong>. Il détermine la quantité de sodium présentée aux tubules.</div>
+
+<div class="def-box"><strong>🔬 DÉBIT PLASMATIQUE RÉNAL (DPR)</strong><br>
+Volume de plasma entrant dans le rein par unité de temps. Valeur normale utilisée dans le cours : <strong>600 mL/min</strong>. Le DFG en représente une fraction (fraction de filtration ≈ 20 %).</div>
+
+<div class="def-box"><strong>🔬 PRESSION ONCOTIQUE (pression colloïdo-osmotique)</strong><br>
+Pression osmotique exercée par les protéines plasmatiques (albumine principalement). Elle attire l'eau et les solutés vers le compartiment où la concentration protéique est élevée. Elle joue un rôle majeur dans la réabsorption capillaire péritubulaire.</div>
+
+<div class="def-box"><strong>🔬 Na⁺/K⁺-ATPase BASOLATÉRALE</strong><br>
+Pompe membranaire présente sur le versant basolatéral des cellules tubulaires. Elle expulse 3 Na⁺ vers l'interstitium contre 2 K⁺ entrants, maintenant un gradient électrochimique favorable à la réabsorption du sodium luminal. Elle est le moteur commun à tous les segments tubulaires.</div>
+
+<div class="def-box"><strong>🔬 CANAL ENaC (Epithelial Na⁺ Channel)</strong><br>
+Canal sodique épithélial permettant l'entrée passive de Na⁺ depuis la lumière tubulaire. Présent dans le tube distal et le canal collecteur. Cible de l'amiloride et régulé par l'aldostérone.</div>
+
+<div class="def-box"><strong>🔬 TUBE DISTAL ET CANAL COLLECTEUR</strong><br>
+Segments terminaux du néphron. Ils reçoivent ~10 % du sodium filtré après réabsorption massive en proximal et dans l'anse de Henlé. Ils constituent le site principal de régulation <em>hormonale</em> du bilan sodé.</div>
+
+<div class="def-box"><strong>🔬 ARTÉRIOLE EFFÉRENTE ET CAPILLAIRES PÉRITUBULAIRES</strong><br>
+Après filtration glomérulaire, le sang quitte le glomérule par l'artériole efférente, qui se ramifie en un réseau de capillaires péritubulaires entourant les tubules proximaux. Ces capillaires récupèrent les substances réabsorbées vers l'interstitium.</div>
+
+<h3>📖 Explication</h3>
+
+<h4>I. Réabsorption sodique dans le tube distal et le canal collecteur</h4>
+
+<div class="highlight-box">✅ <strong>Point clé de proportion :</strong> À l'entrée du tube distal et du canal collecteur, il reste exactement <strong>10 % du sodium filtré</strong> à réabsorber. Les 90 % restants ont déjà été récupérés en amont (tube proximal ~67 %, anse de Henlé ~20–25 %).</div>
+
+<h4>Caractéristiques générales de la réabsorption distale</h4>
+
+<p>Deux propriétés fondamentales distinguent ce segment des segments plus proximaux :</p>
+<ul>
+  <li>La réabsorption est <span class="keyword">exclusivement active</span> (pas de voie paracellulaire significative).</li>
+  <li>Elle est <span class="keyword">indépendante de l'eau</span> : le sodium peut être réabsorbé sans entraîner d'eau, permettant une dilution ou concentration fine de l'urine.</li>
+  <li>Le <span class="keyword">canal collecteur</span> est le siège principal de la <strong>régulation hormonale</strong> (notamment par l'aldostérone).</li>
+</ul>
+
+<h4>Transporteurs majeurs du tube distal et canal collecteur</h4>
+
+<div class="table-wrap">
+<table>
+  <thead>
+    <tr>
+      <th>Transporteur</th>
+      <th>Localisation principale</th>
+      <th>Mécanisme</th>
+      <th>Inhibiteur pharmacologique</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><span class="keyword">Cotransporteur Na⁺/Cl⁻</span> (NCC)</td>
+      <td>Tube contourné distal</td>
+      <td>Cotransport électroneutre Na⁺ + Cl⁻ vers la cellule</td>
+      <td><strong>Thiazides</strong> (diurétiques thiazidiques)</td>
+    </tr>
+    <tr>
+      <td><span class="keyword">ENaC</span> (canal sodique épithélial)</td>
+      <td>Tube distal tardif + canal collecteur</td>
+      <td>Entrée passive de Na⁺ par canal (gradient électrochimique)</td>
+      <td><strong>Amiloride</strong> à faible concentration (10⁻⁶ M)</td>
+    </tr>
+    <tr>
+      <td><span class="keyword">Na⁺/K⁺-ATPase basolatérale</span></td>
+      <td>Tous segments (versant basolatéral)</td>
+      <td>Expulsion active de Na⁺ vers l'interstitium — moteur universel</td>
+      <td>Ouabaïne (expérimental)</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<div class="schema-box"><pre>
+LUMIÈRE TUBULAIRE          CELLULE TUBULAIRE          INTERSTITIUM → SANG
+                                                      
+   Na⁺ + Cl⁻  ──[NCC]──►  Na⁺ intracellulaire
+                              ↓                        Na⁺
+   Na⁺        ──[ENaC]──►  Na⁺ intracellulaire ──[Na/K-ATPase]──► K⁺ ↑
+                              ↓
+                           (gradient entretenu par la pompe)
+
+   Inhibition pharmacologique :
+   NCC  ◄── THIAZIDES
+   ENaC ◄── AMILORIDE (10⁻⁶ M)
+   Na/K-ATPase : moteur commun non inhibé par ces drogues
+</pre></div>
+
+<div class="info-box">📌 <strong>Lien pharmacologique ECN :</strong> Les diurétiques thiazidiques (hydrochlorothiazide) bloquent NCC → natriurèse. L'amiloride bloque ENaC → épargne potassique (pas de perte de K⁺ par opposition à l'aldostérone qui activerait ENaC). Ce sont des cibles thérapeutiques majeures dans l'HTA et l'insuffisance cardiaque.</div>
+
+<hr>
+
+<h4>II. Balance glomérulo-tubulaire</h4>
+
+<h4>Définition</h4>
+
+<p>La <span class="keyword">balance glomérulo-tubulaire</span> désigne la capacité du rein à adapter <strong>automatiquement</strong> la réabsorption proximale de sodium et d'eau au débit de filtration glomérulaire, de telle sorte qu'environ <strong>les 2/3 de ce qui est filtré soient toujours réabsorbés au niveau proximal</strong>, quelle que soit la valeur du DFG.</p>
+
+<div class="highlight-box">✅ <strong>Formulation synthétique :</strong> Si le DFG augmente → la réabsorption proximale augmente proportionnellement, et réciproquement. La <em>fraction</em> réabsorbée en proximal reste constante (~2/3).</div>
+
+<h4>Pourquoi ce mécanisme est-il indispensable ?</h4>
+
+<div class="schema-box"><pre>
+SCÉNARIO A — SANS balance glomérulo-tubulaire
+──────────────────────────────────────────────
+DFG : 120 → 160 mL/min
+Na⁺ filtré : 16,8 → 22,4 mmol/min
+
+Réabsorption proximale : reste constante (~11,2 mmol/min)
+                              ↓
+Na⁺ délivré au néphron distal : ↑↑ (anormalement élevé)
+                              ↓
+Néphron distal SATURÉ (non adapté à ce débit élevé)
+                              ↓
+        ⚠️ Na⁺ non réabsorbé → pertes urinaires massives
+                              ↓
+              🔴 RISQUE DE DÉSHYDRATATION
+
+SCÉNARIO B — AVEC balance glomérulo-tubulaire
+─────────────────────────────────────────────
+DFG : 120 → 160 mL/min
+Na⁺ filtré : 16,8 → 22,4 mmol/min
+
+Réabsorption proximale : s'adapte → 2/3 × 22,4 = ~14,9 mmol/min
+                              ↓
+Na⁺ délivré au néphron distal : quantité gérable
+                              ↓
+        ✅ Bilan sodé préservé — pas de déshydratation
+</pre></div>
+
+<div class="urgence-box">🔴 <strong>Sans balance glomérulo-tubulaire :</strong> toute augmentation du DFG entraînerait une surcharge sodée au niveau du néphron distal (non adapté pour réabsorber de grandes quantités), conduisant à des pertes urinaires massives de sodium et une déshydratation potentiellement sévère.</div>
+
+<h4>Mécanisme physiopathologique de la balance glomérulo-tubulaire</h4>
+
+<p>Le mécanisme repose sur une variation de la <span class="keyword">pression oncotique dans les capillaires péritubulaires</span>, directement liée aux modifications du DFG.</p>
+
+<div class="schema-box"><pre>
+SITUATION NORMALE
+─────────────────
+DPR entrant = 600 mL/min
+Protéines plasmatiques = 60 g/L
+DFG = 120 mL/min
+
+Débit artériole efférente = 600 - 120 = 480 mL/min
+Les protéines ne sont PAS filtrées
+→ Concentration protéique efférente = (600 × 60) / 480 = 75 g/L
+→ Pression oncotique péritubulaire = NORMALE/ÉLEVÉE
+
+
+AUGMENTATION DU DFG
+────────────────────
+DFG : 120 → 160 mL/min
+
+Débit artériole efférente = 600 - 160 = 440 mL/min
+Protéines toujours non filtrées (même quantité totale)
+→ Concentration protéique efférente = (600 × 60) / 440 = ↑↑ encore plus élevée
+→ Pression oncotique dans capillaire péritubulaire : ↑↑↑
+
+              ↓
+Pression oncotique ↑ dans capillaire péritubulaire
+              ↓
+Force d'attraction vers le capillaire ↑
+              ↓
+Réabsorption de Na⁺ et H₂O depuis l'interstitium vers le capillaire : ↑
+              ↓
+Réabsorption tubulaire proximale globale : ↑ (s'adapte au DFG)
+              ↓
+    ✅ Fraction réabsorbée maintenue à ~2/3
+</pre></div>
+
+<h4>Récapitulatif chiffré (exemple du cours)</h4>
+
+<div class="table-wrap">
+<table>
+  <thead>
+    <tr>
+      <th>Situation</th>
+      <th>DFG (mL/min)</th>
+      <th>Na⁺ filtré (mmol/min)</th>
+      <th>Débit artériole efférente (mL/min)</th>
+      <th>Protéines efférentes (g/L)</th>
+      <th>Réabsorption proximale</th>
+      <th>Risque</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Normale</td>
+      <td>120</td>
+      <td>~16,8</td>
+      <td>480</td>
+      <td>75</td>
+      <td>2/3 du filtré</td>
+      <td>Aucun</td>
+    </tr>
+    <tr>
+      <td>DFG ↑ <em>sans</em> balance</td>
+      <td>160</td>
+      <td>~22,4</td>
+      <td>440</td>
+      <td>↑↑</td>
+      <td>Constante (inadaptée)</td>
+      <td>🔴 Déshydratation</td>
+    </tr>
+    <tr>
+      <td>DFG ↑ <em>avec</em> balance</td>
+      <td>160</td>
+      <td>~22,4</td>
+      <td>440</td>
+      <td>↑↑ → pression oncotique ↑</td>
+      <td>↑ (toujours 2/3 du filtré)</td>
+      <td>✅ Aucun</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<div class="info-box">📌 <strong>Mécanisme clé à retenir :</strong> La balance glomérulo-tubulaire fonctionne grâce à la <strong>concentration des protéines dans l'artériole efférente</strong> (car elles ne sont pas filtrées) → ↑ pression oncotique dans les capillaires péritubulaires → ↑ réabsorption de sodium et d'eau vers le plasma. C'est un mécanisme <em>passif, automatique et proportionnel</em> au DFG.</div>
+
+<div class="warning-box">⚠️ <strong>Piège conceptuel :</strong> La balance glomérulo-tubulaire est un mécanisme <em>non hormonal</em> et automatique, à distinguer de la régulation hormonale (aldostérone, ADH) qui s'exerce principalement au niveau du canal collecteur. Ces deux niveaux de régulation sont complémentaires et non redondants.</div>
+
+<h3>🃏 Flashcards</h3>
+
+<div class="flash-block" data-answer="Les deux transporteurs majeurs du tube distal et canal collecteur sont : le cotransporteur Na⁺/Cl⁻ (NCC), inhibé par les thiazides, et le canal sodique épithélial ENaC, inhibé par l'amiloride à
+</div>
+</div>
+
+<div class="slide content-slide" id="slide-7">
+<h2>Régulation Hormonale de la Réabsorption Rénale du Sodium — Système Rénine-Angiotensine-Aldostérone (SRAA)</h2>
+
+<h3>📦 Prérequis</h3>
+
+<div class="def-box"><strong>🔬 VOLUME EXTRACELLULAIRE (VEC)</strong><br>Compartiment liquidien situé en dehors des cellules, comprenant le plasma et le liquide interstitiel. Sa diminution est l'un des principaux stimuli du SRAA.</div>
+
+<div class="def-box"><strong>🔬 VOLUME SANGUIN CIRCULANT (VSC)</strong><br>Fraction du sang effectivement en circulation et perfusant les tissus. Une baisse du VSC est détectée par les barorécepteurs rénaux et déclenche la sécrétion de rénine.</div>
+
+<div class="def-box"><strong>🔬 DÉBIT DE FILTRATION GLOMÉRULAIRE (DFG)</strong><br>Volume de plasma filtré par les glomérules rénaux par unité de temps (exprimé en mL/min). Il conditionne la quantité de sodium et de chlore atteignant la macula densa.</div>
+
+<div class="def-box"><strong>🔬 MACULA DENSA</strong><br>Structure de cellules spécialisées situées à la jonction de l'anse de Henlé et du tubule distal, en contact avec l'appareil juxtaglomérulaire. Elle détecte la concentration en Na⁺ et Cl⁻ dans le tubule et module la sécrétion de rénine.</div>
+
+<div class="def-box"><strong>🔬 CELLULES JUXTAGLOMÉRULAIRES</strong><br>Cellules myoépithéliales situées dans la paroi de l'artériole afférente du glomérule. Ce sont elles qui synthétisent et sécrètent la rénine.</div>
+
+<div class="def-box"><strong>🔬 PRESSION ONCOTIQUE</strong><br>Pression osmotique exercée par les protéines plasmatiques (principalement l'albumine). Elle favorise le retour de l'eau du secteur interstitiel vers le secteur vasculaire (ici : le capillaire péritubulaire).</div>
+
+<div class="def-box"><strong>🔬 ENZYME DE CONVERSION DE L'ANGIOTENSINE (ECA)</strong><br>Enzyme présente à la surface des cellules endothéliales (notamment glomérulaires). Elle transforme l'angiotensine I en angiotensine II, forme biologiquement active.</div>
+
+<div class="def-box"><strong>🔬 RÉCEPTEURS β₁-ADRÉNERGIQUES</strong><br>Récepteurs membranaires du système nerveux sympathique présents sur les cellules juxtaglomérulaires. Leur stimulation (par les catécholamines) entraîne une sécrétion de rénine.</div>
+
+<div class="def-box"><strong>🔬 PROSTAGLANDINES RÉNALES</strong><br>Médiateurs lipidiques à action vasodilatatrice locale sur l'artériole afférente, protégeant le DFG en conditions de vasoconstriction systémique.</div>
+
+<div class="def-box"><strong>🔬 ARTÉRIOLE AFFÉRENTE / EFFÉRENTE</strong><br>L'artériole afférente amène le sang vers le glomérule ; l'artériole efférente le draine. La vasoconstriction de l'efférente augmente la pression de filtration glomérulaire sans réduire le DFG.</div>
+
+<h3>📖 Explication</h3>
+
+<h4>I. Vue d'ensemble — Pourquoi réguler la réabsorption du sodium dans le canal collecteur ?</h4>
+
+<div class="highlight-box">✅ <strong>Point clé fondamental :</strong> Le canal collecteur est le site de régulation <em>fine</em> de la réabsorption du sodium. C'est à ce niveau que le SRAA exerce son action hormonale principale pour ajuster le bilan sodé en fonction de l'état volémique de l'organisme.</div>
+
+<h4>II. La Rénine : enzyme limitante et point de contrôle central</h4>
+
+<h4>A. Origine et nature de la rénine</h4>
+
+<p>La <span class="keyword">rénine</span> est une enzyme protéolytique sécrétée par les <strong>cellules juxtaglomérulaires</strong>, situées dans la paroi de l'<strong>artériole afférente</strong> du glomérule rénal.</p>
+
+<div class="info-box">📌 <strong>Rôle limitant :</strong> La rénine constitue l'<strong>enzyme limitante</strong> de toute la cascade de transformation de l'angiotensinogène en angiotensine II. L'organisme régule donc prioritairement la quantité de rénine libérée pour contrôler l'ensemble de la voie.</div>
+
+<h4>B. Les trois facteurs stimulant la sécrétion de rénine</h4>
+
+<div class="table-wrap">
+<table>
+  <thead>
+    <tr>
+      <th>Facteur stimulant</th>
+      <th>Mécanisme de détection</th>
+      <th>Situation clinique typique</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>↓ Pression dans l'artériole afférente</td>
+      <td>Barorécepteurs des cellules juxtaglomérulaires</td>
+      <td>Hypovolémie, déshydratation, hémorragie</td>
+    </tr>
+    <tr>
+      <td>↓ Débit de Na⁺ et Cl⁻ à la macula densa</td>
+      <td>Chémorécepteurs de la macula densa détectant la concentration tubulaire</td>
+      <td>Baisse du DFG, hypovolémie</td>
+    </tr>
+    <tr>
+      <td>Stimulation sympathique β₁</td>
+      <td>Récepteurs β₁-adrénergiques des cellules JG</td>
+      <td>Hypotension artérielle, stress, choc</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<h4>III. La Cascade du SRAA — De l'angiotensinogène à l'angiotensine II</h4>
+
+<div class="schema-box"><pre>
+╔══════════════════════════════════════════════════════════════════════╗
+║           CASCADE DU SYSTÈME RÉNINE-ANGIOTENSINE-ALDOSTÉRONE        ║
+╚══════════════════════════════════════════════════════════════════════╝
+
+  STIMULI (↓ VEC / ↓ VSC / ↓ DFG / ↑ Sympathique β₁)
+          │
+          ▼
+  ┌─────────────────────────────────┐
+  │   Cellules juxtaglomérulaires   │  ← paroi artériole AFFÉRENTE
+  │   → Sécrétion de RÉNINE ↑      │
+  └─────────────────────────────────┘
+          │
+          │  RÉNINE  (enzyme limitante ⭐)
+          │  agit sur ↓
+          ▼
+  ANGIOTENSINOGÈNE  (protéine hépatique)
+          │
+          │  RÉNINE
+          ▼
+  ANGIOTENSINE I  (AGI)  — biologiquement inactive
+          │
+          │  ECA (Enzyme de Conversion de l'Angiotensine)
+          │  [cellules endothéliales glomérulaires]
+          ▼
+  ANGIOTENSINE II  (AGII) ★ — forme ACTIVE
+          │
+          ├──→ Vasoconstriction artériole EFFÉRENTE
+          │         → ↑ Pression de filtration → maintien du DFG ✅
+          │         (artériole afférente protégée par les prostaglandines)
+          │
+          └──→ [Effets sur le canal collecteur — via aldostérone]
+                    → ↑ Réabsorption Na⁺ (et H₂O suit)
+
+
+  ⭐ Si rénine ↑  →  toute la cascade ↑  →  AGII ↑
+  ⭐ Si rénine ↓  →  toute la cascade ↓  →  AGII ↓
+
+</pre></div>
+
+<h4>IV. Rôle de l'Angiotensine II sur l'hémodynamique rénale</h4>
+
+<p>L'<span class="keyword">angiotensine II</span> exerce une <strong>vasoconstriction préférentielle sur l'artériole efférente</strong>. Ce mécanisme a pour effet d'augmenter la pression intraglomérulaire et donc de maintenir le DFG, même lorsque la perfusion rénale globale est diminuée.</p>
+
+<div class="info-box">📌 <strong>Protection de l'artériole afférente :</strong> Parallèlement à la vasoconstriction efférente induite par l'AGII, une <strong>synthèse locale de prostaglandines</strong> vasodilatatrices protège l'artériole afférente. Ce double mécanisme permet de maintenir le DFG malgré la diminution de la perfusion rénale.</div>
+
+<div class="schema-box"><pre>
+╔═══════════════════════════════════════════════════════════════════╗
+║     MAINTIEN DU DFG PAR L'AGII — Hémodynamique intraglomérulaire ║
+╚═══════════════════════════════════════════════════════════════════╝
+
+              AGII ↑
+                │
+    ┌───────────┴─────────────┐
+    ▼                         ▼
+Artériole AFFÉRENTE     Artériole EFFÉRENTE
+ ← Prostaglandines →     ← Vasoconstriction →
+   (vasodilatation)          (AGII)
+   ↓ résistance              ↑ résistance
+         │                        │
+         └──────────┬─────────────┘
+                    ▼
+           ↑ Pression capillaire glomérulaire
+                    │
+                    ▼
+           DFG MAINTENU ✅
+           (malgré ↓ perfusion rénale)
+
+</pre></div>
+
+<h4>V. Conséquence sur la réabsorption tubulaire — Rôle de la pression oncotique péritubulaire</h4>
+
+<p>Lorsque le DFG augmente, la concentration en <strong>protéines plasmatiques</strong> dans le capillaire péritubulaire augmente également (phénomène de concentration par filtration). Cela entraîne une <strong>élévation de la pression oncotique</strong> dans l'artériole efférente et le capillaire péritubulaire, ce qui favorise une réabsorption accrue de l'eau et, par couplage osmotique, du sodium.</p>
+
+<div class="schema-box"><pre>
+╔══════════════════════════════════════════════════════════╗
+║    LIEN DFG — PRESSION ONCOTIQUE — RÉABSORPTION Na⁺      ║
+╚══════════════════════════════════════════════════════════╝
+
+  ↑ DFG
+    │
+    ▼
+  ↑ Filtration du plasma
+    │
+    ▼
+  ↑ Concentration en protéines dans le capillaire péritubulaire
+    │
+    ▼
+  ↑ Pression oncotique péritubulaire
+    │
+    ▼
+  ↑ Réabsorption d'H₂O (attirée par pression oncotique)
+    │
+    ▼
+  ↑ Réabsorption de Na⁺ (suit l'eau par couplage osmotique)
+
+</pre></div>
+
+<div class="warning-box">⚠️ <strong>Piège fréquent :</strong> Ne pas confondre la <em>pression hydrostatique</em> (qui pousse l'eau hors des capillaires) et la <em>pression oncotique</em> (qui attire l'eau vers les capillaires). C'est ici la pression <strong>oncotique</strong> péritubulaire qui est augmentée et qui favorise la réabsorption.</div>
+
+<div class="highlight-box">✅ <strong>Points clés à retenir sur le SRAA :</strong>
+<ul>
+  <li>La <strong>rénine</strong> est sécrétée par les cellules juxtaglomérulaires de l'artériole afférente</li>
+  <li>Elle constitue l'<strong>enzyme limitante</strong> de toute la cascade</li>
+  <li>Trois stimuli principaux : ↓ pression afférente, ↓ Na⁺/Cl⁻ à la macula densa, stimulation β₁</li>
+  <li>L'<strong>ECA</strong> (endothélium glomérulaire) convertit AGI → AGII</li>
+  <li>L'AGII maintient le DFG par vasoconstriction efférente + protection prostaglandines sur l'afférente</li>
+  <li>↑ DFG → ↑ pression oncotique péritubulaire → ↑ réabsorption Na⁺ et H₂O</li>
+</ul>
+</div>
+
+<div class="info-box">📌 <strong>Intérêt clinique ECN :</strong> Les <strong>inhibiteurs de l'ECA (IEC)</strong> et les <strong>antagonistes des récepteurs de l'angiotensine II (ARA II / sartans)</strong> bloquent ce système à des niveaux différents. Leur utilisation en insuffisance cardiaque ou en HTA modifie directement la réabsorption sodée et la pression intraglomérulaire — d'où le risque d'insuffisance rénale aiguë en cas d'hypovolémie associée.</div>
+
+<h3>🃏 Flashcards</h3>
+
+<div class="flash-block" data-answer="La rénine est sécrétée par les cellules juxtaglomérulaires situées dans la paroi de l'artériole afférente du glomérule rénal. Elle est stimulée par : (1) la baisse de pression dans l'artériole afférente (↓ VEC/VSC), (2) la diminution du débit de Na⁺ et Cl⁻ perçu par la macula densa, (3) la stimulation sympathique β₁.">
+  <div class="q-text">❓ (Niveau 1 — Rappel direct) Où est sécrétée la rénine et quels sont ses trois facteurs de stimulation ?</div>
+  <div class="flash-input-row">
+    <input class="flash-input" type="text" placeholder="Votre réponse…" onkeydown="if(event.key==='Enter')validateFlash(this)">
+    <button class="qcm-validate" onclick="validateFlash(this)">Vérifier</button>
+  </div>
+  <div class="qcm-
+</div></div>
+</div>
+
+<div class="slide content-slide" id="slide-8">
+<h2>Régulation du bilan sodé — Système Rénine-Angiotensine-Aldostérone (SRAA) et action de l'aldostérone</h2>
+
+<h3>📦 Prérequis</h3>
+
+<div class="def-box"><strong>🔬 VOLUME SANGUIN CIRCULANT (VSC) & VOLUME EXTRACELLULAIRE (VEC)</strong><br>
+Le VSC correspond au volume de sang effectivement en circulation dans les vaisseaux. Le VEC désigne le volume de liquide présent hors des cellules (plasma + liquide interstitiel). Leur diminution (hypovolémie, déshydratation extracellulaire) déclenche des mécanismes compensateurs rénaux.</div>
+
+<div class="def-box"><strong>🔬 MACULA DENSA</strong><br>
+Structure cellulaire spécialisée située dans la paroi du tube contourné distal, au contact de l'artériole afférente. Elle détecte la concentration en Na⁺ et Cl⁻ dans le fluide tubulaire et régule la sécrétion de rénine par les cellules juxta-glomérulaires.</div>
+
+<div class="def-box"><strong>🔬 RÉNINE & ANGIOTENSINE II</strong><br>
+La rénine est une enzyme sécrétée par les cellules juxta-glomérulaires du rein. Elle clive l'angiotensinogène (hépatique) en angiotensine I, qui est ensuite convertie en <span class="keyword">angiotensine II</span> (peptide vasoconstricteur et stimulant de l'aldostérone) par l'enzyme de conversion (ECA).</div>
+
+<div class="def-box"><strong>🔬 ANTIPORT Na⁺/H⁺ (NHE3)</strong><br>
+Transporteur membranaire situé sur la face apicale du tubule proximal. Il fait entrer un ion Na⁺ dans la cellule et expulse un ion H⁺ dans la lumière tubulaire. Favorise la réabsorption du sodium (et secondairement de l'eau).</div>
+
+<div class="def-box"><strong>🔬 CORTICOSURRÉNALE vs MÉDULLOSURRÉNALE</strong><br>
+La glande surrénale comporte deux zones distinctes : le <span class="keyword">cortex surrénalien</span> (corticosurrénale) qui produit les hormones stéroïdes (dont l'aldostérone dans la zone glomérulée), et la <span class="keyword">médullosurrénale</span> qui produit les catécholamines (adrénaline, noradrénaline). Ces deux entités ne doivent pas être confondues.</div>
+
+<div class="def-box"><strong>🔬 HORMONE MINÉRALOCORTICOÏDE</strong><br>
+Hormone stéroïde dérivée du cholestérol, à nature lipidique. L'aldostérone est le principal minéralocorticoïde. Son rôle physiologique principal est la régulation de la réabsorption du sodium et de l'excrétion du potassium au niveau rénal.</div>
+
+<div class="def-box"><strong>🔬 RÉCEPTEUR MINÉRALOCORTICOÏDE (MR)</strong><br>
+Récepteur nucléaire cytoplasmique (intracellulaire) sur lequel se fixe l'aldostérone. Après liaison, le complexe aldostérone–MR migre dans le noyau et active la transcription de gènes cibles. Cible pharmacologique de la <span class="keyword">spironolactone</span>.</div>
+
+<div class="def-box"><strong>🔬 ENaC (Epithelial Sodium Channel)</strong><br>
+Canal sodique épithélial situé sur la membrane <strong>apicale</strong> (luminale) des cellules principales du canal collecteur. Permet l'entrée passive du Na⁺ de la lumière tubulaire vers la cellule selon le gradient électrochimique.</div>
+
+<div class="def-box"><strong>🔬 POMPE Na⁺/K⁺-ATPase</strong><br>
+Pompe ionique active située sur la membrane <strong>basolatérale</strong> des cellules tubulaires. Elle expulse 3 Na⁺ hors de la cellule (vers le sang) et fait entrer 2 K⁺ dans la cellule, consommant de l'ATP. Elle maintient un gradient favorable à l'entrée du Na⁺ via ENaC.</div>
+
+<div class="def-box"><strong>🔬 PEPTIDES NATRIURÉTIQUES (ANF/ANP)</strong><br>
+Hormones sécrétées par le cœur (oreillettes) en réponse à la distension (hypervolémie). Elles s'opposent au SRAA en inhibant la sécrétion d'aldostérone, favorisant l'excrétion urinaire de sodium (<em>natriurèse</em>).</div>
+
+<h3>📖 Explication</h3>
+
+<h4>1. Déclenchement du SRAA lors d'une baisse du VSC/VEC</h4>
+
+<p>Lorsque le <span class="keyword">volume sanguin circulant (VSC)</span> et le <span class="keyword">volume extracellulaire (VEC)</span> diminuent, trois types de capteurs activent la sécrétion de rénine :</p>
+
+<div class="schema-box"><pre>
+  BAISSE DU VSC / VEC
+         │
+         ├──────────────────────────────────────────────────┐
+         │                                                  │
+         ▼                                                  ▼
+ Stimulation sympathique             Baisse de pression dans
+  via récepteurs β₁                  l'artériole AFFÉRENTE
+  (nerfs sympathiques rénaux)         (barorécepteurs locaux)
+         │                                                  │
+         └──────────────────┬───────────────────────────────┘
+                            │
+                            │   +
+                            │
+              Réduction apport Na⁺/Cl⁻ détectée
+                   par la MACULA DENSA
+                            │
+                            ▼
+                   ↑ SÉCRÉTION DE RÉNINE
+                   (cellules juxta-glomérulaires)
+                            │
+                            ▼
+              Angiotensinogène ──rénine──▶ Angiotensine I
+                                                │
+                                               ECA
+                                                │
+                                                ▼
+                                        ANGIOTENSINE II
+                            ┌───────────────────┴──────────────────────┐
+                            ▼                                           ▼
+             ↑ Activité antiport Na⁺/H⁺              ↑ Sécrétion ALDOSTÉRONE
+              (tubule proximal)                         (corticosurrénale)
+             → ↑ réabsorption Na⁺ (+ eau)              → effet principal
+</pre></div>
+
+<div class="highlight-box">✅ <strong>Point clé :</strong> L'angiotensine II a deux effets rénaux distincts : une action directe sur le tubule proximal (via l'antiport Na⁺/H⁺) et une action indirecte via la stimulation de la sécrétion d'aldostérone qui agit sur les segments distaux.</div>
+
+<h4>2. Généralités sur l'aldostérone</h4>
+
+<div class="two-col">
+<div>
+<p><strong>Nature chimique</strong></p>
+<ul>
+  <li>Hormone <span class="keyword">minéralocorticoïde</span></li>
+  <li>Dérivée du <strong>cholestérol</strong></li>
+  <li>Nature <strong>lipidique</strong> → diffusion transmembranaire passive</li>
+</ul>
+</div>
+<div>
+<p><strong>Lieu de production</strong></p>
+<ul>
+  <li>Zone glomérulée de la <strong>corticosurrénale</strong></li>
+  <li>À distinguer de la médullosurrénale (catécholamines)</li>
+</ul>
+</div>
+</div>
+
+<div class="table-wrap">
+<table>
+  <thead>
+    <tr>
+      <th>Facteur</th>
+      <th>Effet sur l'aldostérone</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Angiotensine II</td>
+      <td>↑ Stimulation (effet principal)</td>
+    </tr>
+    <tr>
+      <td>↑ Kaliémie (hyperkaliémie)</td>
+      <td>↑ Stimulation</td>
+    </tr>
+    <tr>
+      <td>Peptides natriurétiques (ANF/ANP)</td>
+      <td>↓ Inhibition</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<p><strong>Tissus cibles principaux :</strong> le <span class="keyword">canal connecteur</span> (petit canal situé juste avant le canal collecteur) et le <span class="keyword">canal collecteur</span>.</p>
+
+<h4>3. Mécanisme d'action de l'aldostérone sur les cellules principales du canal collecteur</h4>
+
+<div class="schema-box"><pre>
+LUMEN TUBULAIRE              CELLULE PRINCIPALE           SANG (capillaire péritubulaire)
+(urine primitive)             (canal collecteur)
+
+                     ┌─────────────────────────────┐
+  Na⁺                │  Aldostérone (lipidique)     │
+   │   ← gradient    │  diffuse à travers la        │
+   │                 │  membrane cellulaire         │
+   │                 │         ↓                   │
+   │                 │  Se fixe sur MR              │
+   │                 │  (récepteur cytoplasmique)   │
+   │                 │         ↓                   │
+   │                 │  Complexe Aldo–MR → NOYAU    │
+   │                 │         ↓                   │
+   │                 │  ↑ Transcription de gènes    │
+   │                 │         ↓                   │
+   │                 │  Synthèse ARNm + protéines   │
+   │                 │  intermédiaires              │
+   │                 │         ↓                   │
+   │    ENaC ←──────── ↑ ENaC (membrane apicale)    │
+Na⁺ ──────────────▶ │                              │
+                     │  [Na⁺] intracell ↑           │
+                     │         ↓                   │         K⁺
+                     │  ↑ Na⁺/K⁺-ATPase ────────────────────────▶ Na⁺ → sang
+                     │  (membrane basolatérale) ◀──────────────── K⁺ entre dans cellule
+                     │                              │
+                     │  K⁺ dans cellule             │
+                     │  → pas de conductance        │
+                     │    basolatérale au K⁺        │
+                     │  → canaux K⁺ APICAUX         │
+                     │         ↓                   │
+                     │  K⁺ ───────────────────────▶ LUMEN
+                     └─────────────────────────────┘
+                     
+BILAN :
+  ↑ Réabsorption Na⁺ (apical ENaC → basolatéral Na/K-ATPase → sang)
+  ↑ Sécrétion K⁺    (Na/K-ATPase → K⁺ cellulaire → canaux K⁺ apicaux → lumen)
+</pre></div>
+
+<div class="highlight-box">✅ <strong>Couplage Na⁺/K⁺ :</strong> L'augmentation de la réabsorption du sodium est mécaniquement couplée à une augmentation de la sécrétion de potassium. Ce couplage explique pourquoi un excès d'aldostérone entraîne une hypokaliémie.</div>
+
+<h4>4. Détail du couplage Na⁺–K⁺ : explication pas à pas</h4>
+
+<ol>
+  <li><strong>↑ ENaC :</strong> Plus de Na⁺ entre dans la cellule depuis la lumière tubulaire → la concentration intracellulaire en Na⁺ augmente.</li>
+  <li><strong>Activation de la Na⁺/K⁺-ATPase :</strong> L'élévation du Na⁺ intracellulaire active la pompe basolatérale → elle expulse le Na⁺ vers le sang et fait entrer du K⁺ dans la cellule.</li>
+  <li><strong>Sort du K⁺ :</strong> Le K⁺ ainsi accumulé dans la cellule cherche à sortir. Il n'existe <em>pas</em> de conductance basolatérale pour le K⁺ dans ces cellules, mais il existe des <span class="keyword">canaux potassiques apicaux</span> → le K⁺ est sécrété dans la lumière tubulaire (puis éliminé dans l'urine).</li>
+</ol>
+
+<div class="schema-box"><pre>
+RÉSUMÉ DU COUPLAGE :
+
+↑ Aldostérone
+    │
+    ▼
+↑ ENaC (apical)
+    │
+    ▼
+↑ [Na⁺] intracellulaire
+    │
+    ▼
+↑ Na⁺/K⁺-ATPase (basolatérale)
+    │
+    ├──────────────────────────▶ Na⁺ → sang (réabsorption ✓)
+    │
+    └──────────────────────────▶ K⁺ entre dans la cellule
+                                        │
+                                  Pas de sortie côté basolatéral
+                                        │
+                                  Canaux K⁺ côté APICAL
+                                        │
+                                        ▼
+                                  K⁺ → lumen → urine (sécrétion ✓)
+</pre></div>
+
+<h4>5. Pharmacologie : la spironolactone</h4>
+
+<div class="info-box">📌 <strong>Spironolactone :</strong> Inhibiteur compétitif de la fixation de l'aldostérone sur le récepteur minéralocorticoïde (MR). En bloquant le MR, elle empêche l'activation d'ENaC et de la Na⁺/K⁺-ATPase :
+<ul>
+  <li>→ ↓ réabsorption de Na⁺ (effet natriurétique et diurétique)</li>
+  <li>→ ↓ sécrétion de K⁺ (effet <strong>hyperkaliémiant</strong> = risque d'hyperkaliémie)</li>
+</ul>
+Elle est utilisée dans l'insuffisance cardiaque, l'hyperaldostéronisme primaire, et l'ascite cirrhotique.</div>
+
+<div class="warning-box">⚠️ <strong>Piège ECN :</strong> L'aldostérone elle-même ne transporte pas directement le sodium. Elle agit via la <em
+</div>
+</div>
+
+<div class="slide content-slide" id="slide-9">
+<h2>Effet de l'aldostérone sur le bilan sodé — Évaluation du SRAA et régulation du VEC</h2>
+
+<h3>📦 Prérequis</h3>
+
+<div class="def-box">
+  <strong>🔬 ALDOSTÉRONE</strong><br>
+  Hormone stéroïde sécrétée par la zone glomérulée du cortex surrénalien. Elle agit sur les cellules principales du tube collecteur rénal pour réguler la réabsorption de Na⁺ et l'excrétion de K⁺ et H⁺.
+</div>
+
+<div class="def-box">
+  <strong>🔬 ENaC (Epithelial Sodium Channel)</strong><br>
+  Canal sodique apical situé sur la membrane luminale des cellules du tube collecteur. L'aldostérone en augmente le nombre et l'activité, permettant l'entrée de Na⁺ depuis la lumière tubulaire vers la cellule.
+</div>
+
+<div class="def-box">
+  <strong>🔬 Na/K-ATPase</strong><br>
+  Pompe basolo-latérale qui expulse 3 Na⁺ hors de la cellule vers le sang en échange de 2 K⁺. Elle maintient le gradient électrochimique permettant l'entrée de Na⁺ via ENaC.
+</div>
+
+<div class="def-box">
+  <strong>🔬 SRAA (Système Rénine-Angiotensine-Aldostérone)</strong><br>
+  Cascade hormonale de régulation de la volémie : la rénine (libérée par l'appareil juxta-glomérulaire) clive l'angiotensinogène → angiotensine I → angiotensine II (ECA) → stimule la sécrétion d'aldostérone par les surrénales.
+</div>
+
+<div class="def-box">
+  <strong>🔬 ARP (Activité Rénine Plasmatique)</strong><br>
+  Mesure de l'activité enzymatique de la rénine dans le plasma. Elle reflète l'activation du SRAA : haute si la volémie est basse, basse si la volémie est suffisante.
+</div>
+
+<div class="def-box">
+  <strong>🔬 VEC (Volume Extracellulaire)</strong><br>
+  Volume du compartiment extracellulaire (plasma + liquide interstitiel). Il est directement corrélé à la quantité totale de Na⁺ de l'organisme, car le Na⁺ est l'osmole dominante du milieu extracellulaire.
+</div>
+
+<div class="def-box">
+  <strong>🔬 Natriurèse et Kaliurèse</strong><br>
+  Natriurèse = excrétion urinaire de Na⁺ (en mmol/j). Kaliurèse = excrétion urinaire de K⁺ (en mmol/j). Ces mesures reflètent directement l'activité hormonale sur le tubule rénal.
+</div>
+
+<div class="def-box">
+  <strong>🔬 H⁺-ATPase</strong><br>
+  Pompe protonique présente sur les cellules intercalaires du tube collecteur. Elle permet la sécrétion active d'ions H⁺ dans la lumière tubulaire, contribuant à l'acidification des urines.
+</div>
+
+<h3>📖 Explication</h3>
+
+<h4>1. Effets globaux de l'aldostérone sur l'excrétion urinaire</h4>
+
+<div class="highlight-box">
+  ✅ <strong>Résumé en une phrase :</strong> L'aldostérone diminue l'excrétion urinaire de Na⁺ et augmente celle de K⁺ et de H⁺ — avec un délai de quelques heures à quelques jours.
+</div>
+
+<h4>1.1 Mécanismes cellulaires impliqués</h4>
+
+<p>L'aldostérone agit au niveau du <span class="keyword">tube collecteur</span> (et du tubule distal) via deux cibles principales :</p>
+
+<div class="schema-box"><pre>
+LUMIÈRE TUBULAIRE          CELLULE PRINCIPALE          SANG
+                          ┌──────────────────────┐
+   Na⁺ ──────────────→  │  ENaC ↑ (aldostérone) │──→ Na⁺ (via Na/K-ATPase ↑)
+                          │                        │
+   K⁺ ←──────────────── │  Canaux K⁺ apicaux ↑  │←── K⁺ (pompe Na/K-ATPase)
+                          │                        │
+   H⁺ ←──────────────── │  H⁺-ATPase ↑          │
+                          └──────────────────────┘
+         ↑ Sécrétion K⁺ et H⁺          ↑ Réabsorption Na⁺
+</pre></div>
+
+<div class="info-box">
+  📌 <strong>Cinétique d'action :</strong> L'effet de l'aldostérone n'est <em>pas immédiat</em>. Il devient perceptible après <strong>quelques heures</strong>, et peut prendre <strong>quelques jours</strong> pour être complet. Cela s'explique par son mécanisme d'action génomique (synthèse de nouvelles protéines).
+</div>
+
+<h4>1.2 Conséquences sur le Volume Extracellulaire (VEC)</h4>
+
+<p>En diminuant l'excrétion urinaire de Na⁺, l'aldostérone provoque une <strong>rétention de Na⁺</strong> dans le milieu extracellulaire. Ce Na⁺ retenu attire l'eau par osmose → <strong>augmentation du VEC</strong>.</p>
+
+<div class="schema-box"><pre>
+Aldostérone ↑
+     │
+     ├──→ ENaC ↑ + Na/K-ATPase ↑ → Réabsorption Na⁺ ↑
+     │                                       │
+     │                               Na⁺ dans le MEC ↑
+     │                                       │
+     ├──→ Canaux K⁺ apicaux ↑ → Excrétion K⁺ ↑        Osmolarité MEC ↑ → H₂O attirée → VEC ↑
+     │
+     └──→ H⁺-ATPase ↑ → Excrétion H⁺ ↑
+</pre></div>
+
+<h4>1.3 Portée quantitative de la régulation aldostéronique</h4>
+
+<div class="warning-box">
+  ⚠️ <strong>Piège fréquent :</strong> La régulation par l'aldostérone ne porte que sur <strong>1 à 2 % du Na⁺ filtré</strong>. Cela peut sembler minime, mais c'est suffisant pour réguler finement le bilan sodé, car le reste du Na⁺ est réabsorbé en amont (tubule proximal, anse de Henlé) de façon constitutive.
+</div>
+
+<h4>1.4 Régulation de la sécrétion d'aldostérone par les apports en sodium</h4>
+
+<div class="schema-box"><pre>
+Apport alimentaire en Na⁺
+         │
+  ┌──────┴──────┐
+  │             │
+Élevé         Faible (régime sans sel)
+  │             │
+  ▼             ▼
+Aldostérone ↓  Aldostérone ↑
+  │             │
+  ▼             ▼
+Excrétion      Rétention
+Na⁺ ↑          Na⁺ ↑ → VEC ↑
+
+⟹ Relation INVERSE entre apports sodés et sécrétion d'aldostérone
+</pre></div>
+
+<hr>
+
+<h4>2. Comment évaluer l'activité du SRAA ? Le rapport urinaire Na⁺/K⁺</h4>
+
+<h4>2.1 Valeurs normales d'excrétion urinaire</h4>
+
+<div class="table-wrap">
+  <table>
+    <thead>
+      <tr>
+        <th>Ion</th>
+        <th>Apports alimentaires normaux</th>
+        <th>Excrétion urinaire normale</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Na⁺</td>
+        <td>100 à 200 mmol/j</td>
+        <td>≈ 100 à 200 mmol/j (= apports)</td>
+      </tr>
+      <tr>
+        <td>K⁺</td>
+        <td>50 à 100 mmol/j</td>
+        <td>≈ 50 à 100 mmol/j (= apports)</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<p>En état d'équilibre (bilan nul), les entrées = les sorties. Ainsi, <strong>l'excrétion urinaire reflète les apports</strong>. Comme on ingère plus de Na⁺ que de K⁺ dans une alimentation normale, on urine également plus de Na⁺ que de K⁺.</p>
+
+<h4>2.2 Interprétation du rapport Na⁺/K⁺ urinaire</h4>
+
+<div class="schema-box"><pre>
+         Mesure de [Na⁺]u et [K⁺]u
+                    │
+            Calcul du rapport
+               Na⁺u / K⁺u
+                    │
+         ┌──────────┴──────────┐
+         │                     │
+      Rapport > 1           Rapport < 1
+         │                     │
+    ✅ NORMAL             🔴 SRAA ACTIVÉ
+  (natriurèse normale)    (aldostérone ↑ :
+                           Na⁺u ↓, K⁺u ↑)
+</pre></div>
+
+<div class="highlight-box">
+  ✅ <strong>Principe du rapport Na⁺/K⁺ urinaire :</strong><br>
+  Quand le SRAA est activé, l'aldostérone stimule simultanément :
+  <ul>
+    <li>La <strong>réabsorption de Na⁺</strong> → natriurèse <strong>↓</strong></li>
+    <li>La <strong>sécrétion de K⁺</strong> → kaliurèse <strong>↑</strong></li>
+  </ul>
+  Le rapport Na⁺u/K⁺u bascule donc <strong>en dessous de 1</strong>, traduisant l'activation du SRAA.
+</div>
+
+<div class="info-box">
+  📌 <strong>Application clinique :</strong> Ce rapport est un outil simple et non invasif pour évaluer l'activation du SRAA, notamment dans le cadre d'une hypertension artérielle secondaire, d'une hypovolémie ou d'une exploration d'hyperaldostéronisme.
+</div>
+
+<hr>
+
+<h4>3. Lien entre VEC, ARP, aldostérone et natriurèse — La boucle de régulation</h4>
+
+<h4>3.1 VEC élevé → SRAA freiné</h4>
+
+<p>Quand le VEC est élevé, l'organisme n'a pas besoin de retenir davantage de Na⁺ ou d'eau :</p>
+<ul>
+  <li>L'<span class="keyword">ARP est faible</span> (peu de rénine libérée)</li>
+  <li>La <span class="keyword">sécrétion d'aldostérone est faible</span></li>
+  <li>→ La natriurèse reste élevée (le rein élimine le Na⁺ en excès)</li>
+</ul>
+
+<h4>3.2 VEC faible → SRAA activé</h4>
+
+<p>Quand le VEC diminue (hémorragie, déshydratation, etc.) :</p>
+<ul>
+  <li>L'<span class="keyword">ARP augmente fortement</span></li>
+  <li>La <span class="keyword">sécrétion d'aldostérone augmente</span></li>
+  <li>→ Réabsorption de Na⁺ au niveau du tube collecteur et du tubule distal ↑</li>
+  <li>→ Na⁺ retenu dans le MEC → H₂O retenue → <strong>VEC restauré</strong></li>
+</ul>
+
+<div class="schema-box"><pre>
+VEC ↓ (hypovolémie, hémorragie…)
+     │
+     ▼
+Pression de perfusion rénale ↓
+     │
+     ▼
+Cellules juxta-glomérulaires → Rénine ↑ (ARP ↑)
+     │
+     ▼
+Angiotensinogène → Angiotensine I → Angiotensine II (ECA)
+     │
+     ▼
+Surrénales : Aldostérone ↑
+     │
+     ▼
+Tube collecteur : ENaC ↑ + Na/K-ATPase ↑
+     │
+     ├──→ Réabsorption Na⁺ ↑ → Na⁺ MEC ↑ → H₂O retenue → VEC ↑
+     │
+     └──→ Sécrétion K⁺ ↑ + H⁺ ↑
+     │
+     ▼
+VEC restauré → Rénine ↓ → Aldostérone ↓
+(boucle de rétrocontrôle négatif ✓)
+</pre></div>
+
+<div class="highlight-box">
+  ✅ <strong>Schéma général de la régulation :</strong><br>
+  VEC ↓ → SRAA activé (ARP ↑, Aldostérone ↑) → Réabsorption Na⁺ ↑ → VEC ↑ → SRAA freiné.<br>
+  C'est une boucle de <strong>rétrocontrôle négatif</strong> qui maintient l'homéostasie volémique.
+</div>
+
+<div class="table-wrap">
+  <table>
+    <thead>
+      <tr>
+        <th>Situation</th>
+        <th>VEC</th>
+        <th>ARP</th>
+        <th>Aldostérone</th>
+        <th>Natriurèse</th>
+        <th>Kaliurèse</th>
+        <th>Rapport Na⁺u/K⁺u</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Normale</td>
+        <td>Normal</td>
+        <td>Normale</td>
+        <td>Normale</td>
+        <td>100–200 mmol/j</td>
+        <td>50–100 mmol/j</td>
+</div>
+</div>
+
+<div class="slide content-slide" id="slide-10">
+<h2>Régulation de la Natriurèse : Aldostérone, ARP et ANF</h2>
+
+<h3>📦 Prérequis</h3>
+
+<div class="def-box">
+  <strong>🔬 NATRIURÈSE</strong><br>
+  Quantité de sodium (Na⁺) excrétée dans les urines. Reflet de l'équilibre sodé de l'organisme : une natriurèse faible signifie que le rein retient le sodium ; une natriurèse élevée signifie qu'il l'élimine.
+</div>
+
+<div class="def-box">
+  <strong>🔬 SRAA — Système Rénine-Angiotensine-Aldostérone</strong><br>
+  Cascade hormonale de régulation de la volémie et de la pression artérielle. La rénine (enzyme rénale) génère l'angiotensine II, qui stimule la sécrétion d'aldostérone par le cortex surrénalien. L'aldostérone augmente la réabsorption de Na⁺ au tubule distal et au canal collecteur.
+</div>
+
+<div class="def-box">
+  <strong>🔬 ARP — Activité Rénine Plasmatique</strong><br>
+  Mesure de l'activité enzymatique de la rénine dans le plasma. Une ARP élevée reflète une activation du SRAA.
+</div>
+
+<div class="def-box">
+  <strong>🔬 VEC — Volume Extracellulaire</strong><br>
+  Volume du compartiment liquidien situé en dehors des cellules (plasma + liquide interstitiel). Le bilan sodé en est le principal déterminant : un excès de Na⁺ → ↑ VEC ; un déficit de Na⁺ → ↓ VEC.
+</div>
+
+<div class="def-box">
+  <strong>🔬 ANF — Facteur Natriurétique Auriculaire (Atrial Natriuretic Factor)</strong><br>
+  Peptide sécrété par les <em>myocytes auriculaires</em> cardiaques en réponse à leur distension. Également appelé ANP (Atrial Natriuretic Peptide).
+</div>
+
+<div class="def-box">
+  <strong>🔬 CANAL COLLECTEUR MÉDULLAIRE</strong><br>
+  Segment terminal du néphron, situé dans la médullaire rénale. Site d'action clé de l'aldostérone (réabsorption de Na⁺) et de l'ANF (inhibition de cette réabsorption).
+</div>
+
+<h3>📖 Explication</h3>
+
+<h4>Vue d'ensemble : deux systèmes antagonistes de régulation du sodium</h4>
+
+<div class="highlight-box">
+  ✅ <strong>Point clé fondamental</strong><br>
+  La régulation de la natriurèse repose sur l'équilibre entre deux systèmes aux effets <strong>opposés</strong> :
+  <ul>
+    <li>Le <span class="keyword">SRAA</span> (via l'ARP et l'aldostérone) → <strong>retient</strong> le sodium → ↓ natriurèse → ↑ VEC</li>
+    <li>L'<span class="keyword">ANF</span> → <strong>élimine</strong> le sodium → ↑ natriurèse → ↓ VEC</li>
+  </ul>
+</div>
+
+<hr>
+
+<h4>1. Effet de l'Aldostérone et de l'ARP sur la natriurèse</h4>
+
+<h4>1.1 Mécanisme de l'aldostérone</h4>
+
+<p>Lorsque l'<span class="keyword">aldostérone</span> est fortement sécrétée, elle augmente la réabsorption tubulaire de sodium. En conséquence, moins de Na⁺ est excrété dans les urines : la <span class="keyword">natriurèse diminue</span>.</p>
+
+<h4>1.2 Rôle de l'ARP dans la cascade</h4>
+
+<p>Lorsque l'<span class="keyword">ARP</span> est élevée, la rénine favorise la production d'<span class="keyword">angiotensine II</span>, qui stimule à son tour la sécrétion d'aldostérone. On obtient ainsi le même résultat final : une réduction de la natriurèse.</p>
+
+<div class="schema-box"><pre>
+┌─────────────────────────────────────────────────────────────────┐
+│          CASCADE SRAA → EFFET SUR LA NATRIURÈSE                 │
+│                                                                 │
+│  ↓ VEC / ↓ Pression artérielle                                 │
+│          │                                                      │
+│          ▼                                                      │
+│   ↑ Sécrétion de RÉNINE (rein)                                  │
+│          │  ← ARP élevée                                        │
+│          ▼                                                      │
+│   Angiotensinogène ──→ Angiotensine I ──→ Angiotensine II       │
+│          (foie)              (ECA poumon)                       │
+│                                    │                            │
+│                                    ▼                            │
+│                      ↑ Sécrétion d'ALDOSTÉRONE                  │
+│                           (cortex surrénalien)                  │
+│                                    │                            │
+│                                    ▼                            │
+│                      ↑ Réabsorption Na⁺                         │
+│                      (tubule distal + canal collecteur)         │
+│                                    │                            │
+│                                    ▼                            │
+│                         ↓ NATRIURÈSE                            │
+│                                    │                            │
+│                                    ▼                            │
+│                      ↑ VEC  /  ↑ Pression sanguine              │
+│                         (boucle de correction)                  │
+└─────────────────────────────────────────────────────────────────┘
+</pre></div>
+
+<h4>1.3 Logique physiologique du SRAA</h4>
+
+<div class="info-box">
+  📌 <strong>Logique de survie</strong><br>
+  Le rôle de la rénine et de l'aldostérone est de <strong>préserver le sodium et l'eau</strong>, ce qui augmente le VEC et la pression sanguine. Ce système est donc prioritairement activé en situation de <em>déplétion volémique</em> (déshydratation, hémorragie, insuffisance cardiaque…).
+</div>
+
+<hr>
+
+<h4>2. Facteur Natriurétique Auriculaire (ANF)</h4>
+
+<h4>2.1 Stimulus d'activation de l'ANF</h4>
+
+<p>L'<span class="keyword">ANF</span> est sécrété par les <span class="keyword">myocytes auriculaires</span> lorsque ceux-ci sont <strong>distendus</strong>. Cette distension survient quand le volume sanguin circulant et le VEC sont <strong>élevés</strong> (surcharge volémique). La distension auriculaire agit ainsi comme un <em>capteur de pression/volume</em> cardiaque.</p>
+
+<h4>2.2 Effets principaux de l'ANF</h4>
+
+<div class="two-col">
+  <div>
+    <strong>Action rénale directe</strong>
+    <p>↓ Réabsorption de Na⁺ au niveau du <span class="keyword">canal collecteur médullaire</span> → plus de sodium reste dans la lumière tubulaire → ↑ natriurèse.</p>
+  </div>
+  <div>
+    <strong>Action sur le SRAA</strong>
+    <p>Inhibition du SRAA → ↓ production d'aldostérone → levée du frein sur l'excrétion de Na⁺ → ↑ natriurèse (effet indirect additif).</p>
+  </div>
+</div>
+
+<h4>2.3 Conséquences physiologiques de l'ANF</h4>
+
+<div class="schema-box"><pre>
+┌──────────────────────────────────────────────────────────────────┐
+│       CASCADE ANF → CORRECTION DE LA SURCHARGE VOLÉMIQUE         │
+│                                                                  │
+│  ↑ VEC  /  ↑ Volume sanguin circulant                           │
+│          │                                                       │
+│          ▼                                                       │
+│   DISTENSION des myocytes auriculaires (oreillettes cardiaques)  │
+│          │                                                       │
+│          ▼                                                       │
+│   ↑ Sécrétion d'ANF                                              │
+│          │                                                       │
+│     ┌────┴────────────────────────┐                              │
+│     ▼                            ▼                               │
+│ ↓ Réabsorption Na⁺          Inhibition SRAA                     │
+│ (canal collecteur médull.)       │                               │
+│                                  ▼                               │
+│                            ↓ Aldostérone                         │
+│                                  │                               │
+│                    ┌─────────────┘                               │
+│                    ▼                                             │
+│              ↑ NATRIURÈSE                                        │
+│                    │                                             │
+│                    ▼                                             │
+│       ↓ Masse de Na⁺ échangeable                                 │
+│                    │                                             │
+│                    ▼                                             │
+│       ↓ VEC  → Correction de la surcharge volémique              │
+│                 (boucle de rétrocontrôle négatif)                │
+└──────────────────────────────────────────────────────────────────┘
+</pre></div>
+
+<h4>Synthèse comparative : SRAA vs ANF</h4>
+
+<div class="table-wrap">
+  <table>
+    <thead>
+      <tr>
+        <th>Paramètre</th>
+        <th>SRAA (ARP + Aldostérone)</th>
+        <th>ANF</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Stimulus d'activation</strong></td>
+        <td>↓ VEC, ↓ pression artérielle</td>
+        <td>↑ VEC, distension auriculaire</td>
+      </tr>
+      <tr>
+        <td><strong>Organe sécréteur</strong></td>
+        <td>Rein (rénine) + surrénale (aldostérone)</td>
+        <td>Myocytes auriculaires (cœur)</td>
+      </tr>
+      <tr>
+        <td><strong>Effet sur la réabsorption de Na⁺</strong></td>
+        <td>↑ Réabsorption</td>
+        <td>↓ Réabsorption (canal collecteur médullaire)</td>
+      </tr>
+      <tr>
+        <td><strong>Effet sur la natriurèse</strong></td>
+        <td>↓ Natriurèse</td>
+        <td>↑ Natriurèse</td>
+      </tr>
+      <tr>
+        <td><strong>Effet sur le SRAA</strong></td>
+        <td>— (c'est le SRAA lui-même)</td>
+        <td>Inhibe le SRAA → ↓ aldostérone</td>
+      </tr>
+      <tr>
+        <td><strong>Conséquence sur le VEC</strong></td>
+        <td>↑ VEC</td>
+        <td>↓ VEC</td>
+      </tr>
+      <tr>
+        <td><strong>Rôle physiologique global</strong></td>
+        <td>Préserver Na⁺ et eau</td>
+        <td>Éliminer Na⁺ et eau en excès</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="warning-box">
+  ⚠️ <strong>Piège classique</strong><br>
+  L'ANF n'agit pas seulement directement sur le rein : il <strong>inhibe aussi le SRAA</strong>. Son effet natriurétique est donc double (action directe sur le canal collecteur + action indirecte via la réduction de l'aldostérone). Ne pas oublier ce double mécanisme.
+</div>
+
+<div class="highlight-box">
+  ✅ <strong>Résumé mécanistique en une phrase</strong><br>
+  Face à une surcharge volémique, l'ANF agit comme un <em>signal d'alarme auriculaire</em> qui force le rein à éliminer le sodium excédentaire, tout en coupant le système qui tendrait à le retenir (SRAA) — ramenant ainsi le VEC à la normale.
+</div>
+
+<h3>🃏 Flashcards</h3>
+
+<div class="flash-block" data-answer="Lorsque l'aldostérone est fortement sécrétée, la natriurèse diminue, car plus de sodium est réabsorbé au niveau tubulaire. De même, une ARP élevée stimule la production d'angiotensine II, qui augmente la sécrétion d'aldostérone, réduisant également la natriurèse.">
+  <div class="q-text">❓ (Niveau 1 — Rappel direct) Quel est l'effet d'une aldostérone élevée sur la natriurèse, et pourquoi ?</div>
+  <div class="flash-input-row">
+    <input class="flash-input" type="text" placeholder="Votre réponse…" onkeydown="if(event.key==='Enter')validateFlash(this)">
+    <button class="qcm-validate" onclick="validateFlash(this)">Vérifier</button>
+  </div>
+  <div class="qcm-explanation"></div>
+</div>
+
+<div class="flash-block" data-answer="L'ANF est sécrété par les myocytes auriculaires lorsqu'ils sont distendus, c'est-à-dire en situation de volume sanguin circulant et de VEC élevés (surcharge volémique). Son rôle est l'exact opposé du SRAA : il diminue la réabsorption de Na⁺ au canal collecteur médullaire, inhibe le SRAA (réduisant ainsi la production d'aldostérone), ce qui augmente la natriurèse, diminue la masse de sodium échangeable et réduit le VEC pour corriger la surcharge.">
+  <div class="q-text">❓ (Niveau 2 — Compréhension) Expliquez pourquoi l'ANF est considéré comme l'antagoniste fonctionnel du SRAA dans la régulation du VEC.</div>
+  <div class="flash-input-row">
+    <input class="flash-input" type="text" placeholder="Votre réponse…" onkeydown="if(event.key==='Enter')validateFlash(this)">
+    <button class="qcm-validate" onclick="validateFlash(this)">Vérifier</button>
+</div></div>
+</div>
+
+<div class="slide content-slide" id="slide-11">
+<h2>Physiopathologie du Bilan Sodé : Hyperaldostéronisme Primaire et Secondaire</h2>
+
+<h3>📦 Prérequis</h3>
+
+<div class="def-box">
+  <strong>🔬 ALDOSTÉRONE</strong><br>
+  Hormone minéralocorticoïde sécrétée par la zone glomérulée du cortex surrénalien. Elle agit sur le tubule collecteur rénal pour augmenter la réabsorption de Na⁺ et l'excrétion de K⁺ et H⁺. Sa sécrétion est normalement régulée par le système rénine-angiotensine (SRA) et la kaliémie.
+</div>
+
+<div class="def-box">
+  <strong>🔬 SYSTÈME RÉNINE-ANGIOTENSINE (SRA)</strong><br>
+  Cascade hormonale activée en cas de baisse du volume sanguin circulant ou de la pression de perfusion rénale. La rénine (rein) → angiotensine I → angiotensine II → stimulation de la sécrétion d'aldostérone par la surrénale.
+</div>
+
+<div class="def-box">
+  <strong>🔬 VOLUME EXTRACELLULAIRE (VEC)</strong><br>
+  Compartiment liquidien situé en dehors des cellules (plasma + liquide interstitiel). Son expansion est principalement déterminée par la quantité totale de sodium corporel, car le Na⁺ est le principal osmole extracellulaire.
+</div>
+
+<div class="def-box">
+  <strong>🔬 ANF (Atrial Natriuretic Factor)</strong><br>
+  Peptide natriurétique sécrété par les oreillettes cardiaques en réponse à l'augmentation du VEC / de la pression auriculaire. Il s'oppose à l'action de l'aldostérone en favorisant l'excrétion rénale de sodium (natriurèse).
+</div>
+
+<div class="def-box">
+  <strong>🔬 RAPPORT [Na⁺]u / [K⁺]u</strong><br>
+  Rapport des concentrations urinaires de sodium et de potassium. Lorsque l'aldostérone est activée, le rein retient le Na⁺ et excrète le K⁺ → rapport &lt; 1. En l'absence d'aldostérone ou après phénomène d'échappement, le rapport devient &gt; 1.
+</div>
+
+<div class="def-box">
+  <strong>🔬 PHÉNOMÈNE D'ÉCHAPPEMENT</strong><br>
+  Adaptation rénale qui survient au cours d'un hyperaldostéronisme prolongé : malgré la persistance de l'aldostérone, le rein finit par augmenter son excrétion de sodium (probable intervention de l'ANF), limitant ainsi l'expansion indéfinie du VEC.
+</div>
+
+<div class="def-box">
+  <strong>🔬 HYPOKALIÉMIE</strong><br>
+  Baisse de la concentration plasmatique de potassium (&lt; 3,5 mmol/L). Conséquence classique de l'hyperaldostéronisme, car l'aldostérone stimule l'excrétion tubulaire de K⁺.
+</div>
+
+<div class="def-box">
+  <strong>🔬 ALCALOSE MÉTABOLIQUE</strong><br>
+  Élévation du pH sanguin par perte de H⁺. L'aldostérone stimule l'excrétion tubulaire de H⁺, contribuant à cette alcalose.
+</div>
+
+<h3>📖 Explication</h3>
+
+<h4>1. Rappel : adaptation physiologique normale au bilan sodé</h4>
+
+<p>Avant d'aborder la physiopathologie, le cours rappelle le comportement rénal normal face aux variations d'apport en Na⁺ :</p>
+
+<div class="schema-box"><pre>
+PRIVATION en Na⁺
+      │
+      ▼
+Perte de Na⁺ (plusieurs jours d'adaptation nécessaires)
+      │
+      ▼
+↑ Sécrétion d'aldostérone  ──→  ↓ Excrétion urinaire de Na⁺
+      │
+      ▼
+Rétablissement du bilan sodé
+
+RÉINTRODUCTION de Na⁺
+      │
+      ▼
+↓ Besoin d'aldostérone  ──→  ↓ Sécrétion d'aldostérone
+
+EXCÈS de Na⁺
+      │
+      ▼
+↑ VEC  ──→  ↑ ANF  +  Pas d'aldostérone  ──→  ↑ Natriurèse
+</pre></div>
+
+<div class="highlight-box">
+  ✅ <strong>Point clé :</strong> Dans ces trois situations, l'aldostérone répond à un signal physiologique et sa sécrétion s'arrête une fois la situation rétablie. Il ne s'agit pas d'un hyperaldostéronisme pathologique.
+</div>
+
+<h4>2. Définition de l'hyperaldostéronisme « normal » (physiologique)</h4>
+
+<p>En cas de <span class="keyword">perte brutale de sodium</span> (exemple : diarrhée très importante, hémorragie), le volume sanguin circulant diminue. Le SRA est alors activé, entraînant une sécrétion d'aldostérone : c'est un <span class="keyword">hyperaldostéronisme réactionnel normal</span>.</p>
+
+<div class="schema-box"><pre>
+Perte de Na⁺ brutale (diarrhée / hémorragie)
+            │
+            ▼
+    ↓ Volume sanguin circulant
+            │
+            ▼
+    Activation du SRA
+            │
+            ▼
+    ↑ Aldostérone (hyperaldostéronisme)
+            │
+            ▼
+    [Na⁺]u / [K⁺]u &lt; 1  ←── RÉPONSE PHYSIOLOGIQUE
+            │
+            ▼
+    Situation rétablie → Disparition de l'hyperaldostéronisme
+</pre></div>
+
+<div class="info-box">
+  📌 <strong>À retenir :</strong> L'hyperaldostéronisme primaire et secondaire sont des états où l'aldostérone est sécrétée <em>en permanence</em>, ce qui les distingue fondamentalement de la réponse physiologique ci-dessus.
+</div>
+
+<h4>3. Hyperaldostéronisme primaire : Syndrome de Conn</h4>
+
+<h4>3.1 Mécanisme</h4>
+
+<p>L'<span class="keyword">hyperaldostéronisme primaire</span> (ou <span class="keyword">syndrome de Conn</span>) est causé par un <span class="keyword">adénome glomérulé</span> : une tumeur bénigne rare de la zone glomérulée de la corticosurrénale.</p>
+
+<p>Cette tumeur produit de l'aldostérone de manière <strong>autonome</strong>, c'est-à-dire <strong>sans régulation par le SRA</strong>. La sécrétion d'aldostérone est donc indépendante de la rénine et se produit en permanence, qu'il y en ait besoin ou non.</p>
+
+<div class="schema-box"><pre>
+┌─────────────────────────────────────────────────────────┐
+│           HYPERALDOSTÉRONISME PRIMAIRE (Conn)           │
+│                                                         │
+│  Adénome glomérulé (corticosurrénale)                   │
+│          │                                              │
+│          ▼ (production AUTONOME, indépendante du SRA)   │
+│  ↑↑ Aldostérone en PERMANENCE                           │
+│          │                                              │
+│    ┌─────┴──────────────────────────────────┐           │
+│    ▼                                        ▼           │
+│ ↑ Réabsorption Na⁺              ↑ Excrétion K⁺ et H⁺   │
+│    │                                        │           │
+│    ▼                                        ▼           │
+│ ↑ VEC                               Hypokaliémie        │
+│    │                             Alcalose métabolique   │
+│    ▼                                                    │
+│ HTA secondaire + œdèmes                                 │
+└─────────────────────────────────────────────────────────┘
+</pre></div>
+
+<h4>3.2 Conséquences cliniques et biologiques</h4>
+
+<div class="two-col">
+<div>
+
+<p><strong>Conséquence 1 — Rétention hydrosodée et HTA</strong></p>
+<ul>
+  <li>La réabsorption excessive de Na⁺ entraîne une <strong>augmentation du VEC</strong>.</li>
+  <li>Cliniquement : <strong>œdèmes discrets</strong>, souvent aux chevilles.</li>
+  <li>Le syndrome de Conn est une cause classique d'<strong>hypertension artérielle secondaire</strong>.</li>
+</ul>
+
+</div>
+<div>
+
+<p><strong>Conséquence 2 — Troubles ioniques</strong></p>
+<ul>
+  <li><strong>Hypokaliémie</strong> : excrétion accrue de K⁺ (kaliurèse augmentée) → baisse de la kaliémie.</li>
+  <li><strong>Alcalose métabolique</strong> : l'aldostérone stimule également l'excrétion de H⁺ → ↑ pH sanguin.</li>
+</ul>
+
+</div>
+</div>
+
+<h4>3.3 Évolution du rapport [Na⁺]u / [K⁺]u dans le syndrome de Conn</h4>
+
+<div class="schema-box"><pre>
+Phase INITIALE
+──────────────
+Aldostérone ↑↑ en permanence
+      │
+      ▼
+Rein retient Na⁺ + excrète K⁺
+      │
+      ▼
+[Na⁺]u / [K⁺]u &lt; 1
+
+Phase TARDIVE (après phénomène d'échappement)
+──────────────────────────────────────────────
+↑ VEC  ──→  ↑ ANF (probable)
+      │
+      ▼
+Adaptation rénale : ↑ excrétion Na⁺ malgré aldostérone
+      │
+      ▼
+[Na⁺]u / [K⁺]u &gt; 1
+</pre></div>
+
+<div class="warning-box">
+  ⚠️ <strong>Piège :</strong> Ne pas confondre la phase initiale (rapport &lt; 1, aldostérone très active) et la phase tardive après phénomène d'échappement (rapport &gt; 1). Ce phénomène d'échappement est limité par l'action probable de l'ANF : le rein finit par excréter davantage de Na⁺ malgré la persistance de l'aldostérone.
+</div>
+
+<div class="table-wrap">
+  <table>
+    <thead>
+      <tr>
+        <th>Paramètre</th>
+        <th>Hyperaldostéronisme physiologique (normal)</th>
+        <th>Hyperaldostéronisme primaire (Conn)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Cause</td>
+        <td>Perte de Na⁺ / hémorragie (↓ VEC)</td>
+        <td>Adénome glomérulé (tumeur bénigne surrénale)</td>
+      </tr>
+      <tr>
+        <td>Dépendance au SRA</td>
+        <td>Oui — aldostérone régulée par la rénine</td>
+        <td>Non — sécrétion autonome, indépendante de la rénine</td>
+      </tr>
+      <tr>
+        <td>Durée</td>
+        <td>Transitoire — disparaît quand la situation est rétablie</td>
+        <td>Permanente</td>
+      </tr>
+      <tr>
+        <td>[Na⁺]u / [K⁺]u</td>
+        <td>&lt; 1 (réponse normale)</td>
+        <td>&lt; 1 (initial) → &gt; 1 (après échappement)</td>
+      </tr>
+      <tr>
+        <td>Kaliémie</td>
+        <td>Normale (correction rapide)</td>
+        <td>↓ Hypokaliémie</td>
+      </tr>
+      <tr>
+        <td>pH sanguin</td>
+        <td>Normal</td>
+        <td>↑ Alcalose métabolique</td>
+      </tr>
+      <tr>
+        <td>HTA</td>
+        <td>Absente ou transitoire</td>
+        <td>HTA secondaire</td>
+      </tr>
+      <tr>
+        <td>VEC</td>
+        <td>↓ initialement, puis rétabli</td>
+        <td>↑ Expansion chronique → œdèmes</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="highlight-box">
+  ✅ <strong>Résumé des points clés du syndrome de Conn :</strong>
+  <ul>
+    <li>Tumeur bénigne rare : adénome glomérulé de la corticosurrénale</li>
+    <li>Production <strong>autonome</strong> d'aldostérone, indépendante du SRA</li>
+    <li>Conséquences : HTA secondaire + rétention hydrosodée + hypokaliémie + alcalose métabolique</li>
+    <li>Rapport [Na⁺]u / [K⁺]u : d'abord &lt; 1, puis &gt; 1 après phénomène d'échappement (probable rôle de l'ANF)</li>
+  </ul>
+</div>
+
+<div class="info-box">
+  📌 <strong>Rappel ECN :</strong> Le syndrome de Conn est une cause classique d'HTA secondaire à évoquer devant une <strong>HTA associée à une hypokaliémie spontanée</strong> (non iatrogène). Le dosage de la rénine plasmatique (effondrée) et de l'aldostérone (élevée) est central dans le bilan.
+</div>
+
+<h3>🃏 Flashcards</h3>
+
+<div class="flash-block" data-answer="L'adénome glomérulé est une tumeur bénigne rare de la zone glomérulée de la corticosurrénale, qui produit de l'aldostérone de manière autonome, sans régulation par le système rénine-angiotensine (SRA). C'est la cause du syndrome de Conn (hyperaldostéronisme primaire).">
+  <div class="q-text">❓ Question 1 (Niveau 1 — rappel direct) : Quelle est la cause anatomique de l'hyperaldostéronisme primaire (syndrome de
+</div></div>
+</div>
+
+<div class="slide content-slide" id="slide-12">
+<h2>Hyperaldostéronisme primaire et secondaire — Bilan sodique</h2>
+
+<h3>📦 Prérequis</h3>
+
+<div class="def-box">
+  <strong>🔬 SRAA — Système Rénine-Angiotensine-Aldostérone</strong><br>
+  Système hormonal de régulation de la volémie et de la pression artérielle. La <span class="keyword">rénine</span> (sécrétée par les cellules juxtaglomérulaires rénales) clive l'angiotensinogène en angiotensine I, convertie en angiotensine II, qui stimule la sécrétion d'<span class="keyword">aldostérone</span> par la corticosurrénale. L'aldostérone agit sur le tube collecteur rénal pour augmenter la réabsorption de Na⁺ et l'excrétion de K⁺.
+</div>
+
+<div class="def-box">
+  <strong>🔬 Volume circulant efficace (VCE)</strong><br>
+  Fraction du volume sanguin total effectivement perçue par les barorécepteurs rénaux comme participant à la perfusion tissulaire. Il peut être bas même si le volume extracellulaire total (VEC) est normal ou élevé (ex. : redistribution des liquides dans les œdèmes).
+</div>
+
+<div class="def-box">
+  <strong>🔬 Aldostéronémie et activité rénine plasmatique (ARP)</strong><br>
+  — <span class="keyword">Aldostéronémie</span> : concentration plasmatique d'aldostérone.<br>
+  — <span class="keyword">Activité rénine plasmatique (ARP)</span> : mesure de l'activité enzymatique de la rénine circulante. Permet de distinguer hyperaldostéronisme primaire (rénine basse) de secondaire (rénine élevée).
+</div>
+
+<div class="def-box">
+  <strong>🔬 Pression oncotique</strong><br>
+  Pression osmotique exercée par les protéines plasmatiques (principalement l'albumine) qui retient l'eau dans le compartiment vasculaire. En cas d'hypoalbuminémie, la pression oncotique chute et l'eau sort vers l'interstitium.
+</div>
+
+<div class="def-box">
+  <strong>🔬 Rapport [Na⁺]u / [K⁺]u</strong><br>
+  Rapport des concentrations urinaires de sodium et de potassium. Un rapport inférieur à 1 traduit une réabsorption tubulaire accrue de Na⁺ et une excrétion accrue de K⁺, signe d'hyperaldostéronisme actif.
+</div>
+
+<div class="def-box">
+  <strong>🔬 Syndrome néphrotique</strong><br>
+  Syndrome caractérisé par une protéinurie massive (&gt; 3 g/24h), une hypoalbuminémie, des œdèmes et une hyperlipidémie. Résulte d'une atteinte de la membrane glomérulaire avec fuite de protéines dans les urines.
+</div>
+
+<div class="def-box">
+  <strong>🔬 Corticosurrénale</strong><br>
+  Partie externe de la glande surrénale, divisée en trois zones. La zone glomérulée produit l'aldostérone. Un adénome de cette zone est responsable de l'hyperaldostéronisme primaire (syndrome de Conn).
+</div>
+
+<h3>📖 Explication</h3>
+
+<h4>Vue d'ensemble : deux grands types d'hyperaldostéronisme</h4>
+
+<div class="highlight-box">
+  ✅ <strong>Point clé central</strong><br>
+  La distinction fondamentale entre hyperaldostéronisme <strong>primaire</strong> et <strong>secondaire</strong> repose sur le niveau de la rénine :
+  <ul>
+    <li><strong>Primaire</strong> : aldostérone ↑ + rénine ↓ (excès autonome d'aldostérone, la rénine est freinée)</li>
+    <li><strong>Secondaire</strong> : aldostérone ↑ + rénine ↑ (la rénine est le moteur de l'activation)</li>
+  </ul>
+</div>
+
+<div class="schema-box"><pre>
+┌─────────────────────────────────────────────────────────────────┐
+│           HYPERALDOSTÉRONISME : CLASSIFICATION GÉNÉRALE         │
+├────────────────────────────┬────────────────────────────────────┤
+│      PRIMAIRE              │         SECONDAIRE                 │
+│  (ex. : adénome surrén.)   │  (insuffisance cardiaque,          │
+│                            │   cirrhose, sdr néphrotique…)      │
+├────────────────────────────┼────────────────────────────────────┤
+│  Aldostérone ↑↑↑           │  Aldostérone ↑↑↑                   │
+│  Rénine ↓↓↓ (freinée)      │  Rénine ↑↑↑ (activée)             │
+│  HTA présente              │  Variable selon cause              │
+│  Tumorectomie nécessaire   │  Traitement de la cause            │
+└────────────────────────────┴────────────────────────────────────┘
+</pre></div>
+
+<h4>I. Hyperaldostéronisme primaire (syndrome de Conn) — Rappel diagnostique</h4>
+
+<p>Le texte source rappelle les éléments diagnostiques biologiques clés de l'hyperaldostéronisme primaire :</p>
+
+<div class="info-box">
+  📌 <strong>Biologie diagnostique</strong><br>
+  <ul>
+    <li><span class="keyword">Aldostéronémie très élevée</span></li>
+    <li><span class="keyword">Activité rénine plasmatique très basse</span> (la rénine est freinée par la surcharge sodée engendrée par l'excès d'aldostérone)</li>
+  </ul>
+  Ces tumeurs bénignes de la corticosurrénale doivent être <strong>réséquées chirurgicalement</strong>.
+</div>
+
+<div class="warning-box">
+  ⚠️ <strong>Piège physiopathologique</strong><br>
+  Malgré les mécanismes compensateurs de natriurèse de pression (le rein tente d'éliminer le sel en excès via l'augmentation de la pression artérielle), l'<span class="keyword">hypertension artérielle persiste</span>, car le volume circulant reste élevé. La correction tensionnelle ne peut être obtenue que par la suppression de la source autonome d'aldostérone.
+</div>
+
+<div class="schema-box"><pre>
+HYPERALDOSTÉRONISME PRIMAIRE — Boucle physiopathologique
+
+  Adénome corticosurrénalien
+          │
+          ▼
+  Sécrétion autonome d'aldostérone ↑↑↑
+          │
+          ▼
+  Réabsorption Na⁺ + eau ↑   →   Excrétion K⁺ ↑
+          │                              │
+          ▼                              ▼
+  Volume circulant ↑↑          Hypokaliémie
+          │
+          ▼
+  Pression artérielle ↑↑  ──→  Natriurèse de pression
+          │                    (tentative de compensation)
+          │                              │
+          │                              ▼
+          │                    Insuffisante : HTA PERSISTE
+          │
+          ▼
+  Frein physiologique sur rénine → Rénine ↓↓↓
+  (mais aldostérone reste élevée car sécrétion autonome)
+</pre></div>
+
+<h4>II. Hyperaldostéronisme secondaire — Mécanisme général</h4>
+
+<p>L'hyperaldostéronisme secondaire est <span class="keyword">beaucoup plus fréquent</span> que le primaire. Son mécanisme commun est une <strong>augmentation permanente de la rénine</strong>, secondaire à une diminution du volume circulant efficace (réelle ou apparente).</p>
+
+<div class="schema-box"><pre>
+MÉCANISME COMMUN DE L'HYPERALDOSTÉRONISME SECONDAIRE
+
+  Diminution du Volume Circulant Efficace (réelle ou apparente)
+          │
+          ▼
+  Barorécepteurs rénaux (cellules juxtaglomérulaires) stimulés
+          │
+          ▼
+  Sécrétion de Rénine ↑↑↑  (permanente, chronique)
+          │
+          ▼
+  Angiotensinogène → Angiotensine I → Angiotensine II
+          │
+          ▼
+  Stimulation de la corticosurrénale (zone glomérulée)
+          │
+          ▼
+  Aldostérone ↑↑↑
+          │
+          ▼
+  Réabsorption Na⁺ + eau ↑  →  Rétention hydrosodée
+          │
+          ▼
+  ↑ VEC global MAIS liquide redistribué (œdèmes, épanchements)
+  → Le VCE ne s'améliore PAS → Boucle entretenue chroniquement
+</pre></div>
+
+<h4>III. Première cause : Diminution apparente ou réelle du VCE</h4>
+
+<h4>III.a. Insuffisance cardiaque congestive</h4>
+
+<div class="info-box">
+  📌 <strong>Mécanisme</strong><br>
+  <ul>
+    <li>Le <strong>volume sanguin total peut être normal</strong>, mais le <span class="keyword">débit cardiaque est réduit</span></li>
+    <li>Cela entraîne une <strong>perfusion rénale insuffisante</strong></li>
+    <li>Le rein <em>perçoit</em> ce déficit comme une baisse du VCE et sécrète de la <strong>rénine en permanence</strong></li>
+    <li>→ Activation du SRAA → <strong>Hyperaldostéronisme secondaire</strong></li>
+  </ul>
+</div>
+
+<h4>III.b. Cirrhose hépatique</h4>
+
+<div class="info-box">
+  📌 <strong>Mécanisme</strong><br>
+  <ul>
+    <li>Le volume sanguin total est <strong>mal réparti</strong></li>
+    <li><span class="keyword">Dilatation de la circulation splanchnique</span> : séquestre une partie du sang dans le système digestif</li>
+    <li>→ <strong>Perfusion rénale insuffisante</strong> malgré un VEC total qui peut être augmenté</li>
+    <li>Le rein interprète cette redistribution comme une diminution du VCE</li>
+    <li>→ Activation de la rénine → <strong>Hyperaldostéronisme secondaire</strong></li>
+  </ul>
+</div>
+
+<div class="schema-box"><pre>
+COMPARAISON : Insuffisance cardiaque vs Cirrhose
+                     (mécanisme de perception rénale du déficit)
+
+INSUFFISANCE CARDIAQUE           CIRRHOSE HÉPATIQUE
+─────────────────────────────    ─────────────────────────────
+Débit cardiaque ↓                Volume sanguin total = variable
+       │                                   │
+       ▼                                   ▼
+Perfusion rénale ↓               Vasodilatation splanchnique
+       │                         → Séquestration sanguine digestive
+       ▼                                   │
+VCE perçu comme ↓                          ▼
+       │                         Perfusion rénale ↓
+       │                                   │
+       └───────────────┬───────────────────┘
+                       ▼
+              Sécrétion rénine ↑↑↑ (permanente)
+                       │
+                       ▼
+              SRAA activé → Aldostérone ↑↑↑
+                       │
+                       ▼
+              Rétention Na⁺ + eau
+              (aggrave les œdèmes / ascite)
+</pre></div>
+
+<h4>IV. Deuxième cause : Syndrome néphrotique — Diminution réelle du VCE</h4>
+
+<h4>IV.1. Mécanisme principal</h4>
+
+<div class="info-box">
+  📌 <strong>Cascade physiopathologique initiale</strong><br>
+  <ol>
+    <li><strong>Perte massive de protéines et d'albumine dans les urines</strong> (protéinurie massive)</li>
+    <li>→ <span class="keyword">Hypoprotidémie</span> et <span class="keyword">hypoalbuminémie</span></li>
+    <li>→ <strong>Chute de la pression oncotique</strong> capillaire</li>
+    <li>→ Sortie du liquide des vaisseaux vers l'interstitium</li>
+    <li>→ <span class="keyword">Œdèmes importants</span> (pouvant atteindre jusqu'à 15 kg de rétention liquidienne)</li>
+  </ol>
+</div>
+
+<h4>IV.2. Perception rénale du volume</h4>
+
+<div class="info-box">
+  📌 <strong>Dissociation VEC total / VCE</strong><br>
+  <ul>
+    <li>Le <strong>VEC total peut rester normal</strong></li>
+    <li>Mais le <span class="keyword">volume circulant efficace est bas</span>, car le liquide est déplacé dans les œdèmes (compartiment interstitiel)</li>
+    <li>→ Le rein perçoit une <strong>perfusion insuffisante</strong></li>
+    <li>→ Sécrétion de rénine → Activation du SRAA → <strong>Aldostérone ↑</strong></li>
+  </ul>
+</div>
+
+<h4>IV.3. Conséquences sur la natriurèse et le sodium</h4>
+
+<div class="info-box">
+  📌 <strong>Marqueur biologique clé</strong><br>
+  Le rapport <span class="keyword">[Na⁺]u / [K⁺]u &lt; 1</span> est le signe d'un hyperaldostéronisme secondaire actif :
+  <ul>
+    <li>L'aldostérone augmente la réabsorption de Na⁺ → Na⁺ urinaire ↓</li>
+    <li>L'aldostérone augmente l'excrétion de K⁺ → K⁺ urinaire ↑</li>
+    <li>→ Rapport Na⁺u/K⁺u s'abaisse en dessous de 1</li>
+  </ul>
+</div>
+
+<h4>IV.4. Conséquences physiopathologiques globales</h4>
+
+<div class="schema-box"><pre>
+SYNDROME NÉPHROTIQUE — Cascade physiopathologique complète
+
+  Atteinte glomérulaire
+          │
+          ▼
+  Protéinurie massive →
+</div>
+</div>
+
+<div class="slide content-slide" id="slide-13">
+<h2>Bilan Sodé — Régulation du Volume Extracellulaire & Désordres de l'Aldostérone</h2>
+
+<h3>📦 Prérequis</h3>
+
+<div class="def-box">
+  <strong>🔬 VOLUME EXTRACELLULAIRE (VEC)</strong><br>
+  Compartiment liquidien situé en dehors des cellules. Il inclut le plasma et le liquide interstitiel. Son volume est directement déterminé par la quantité de sodium échangeable qu'il contient.
+</div>
+
+<div class="def-box">
+  <strong>🔬 SYSTÈME RÉNINE-ANGIOTENSINE-ALDOSTÉRONE (SRAA)</strong><br>
+  Cascade hormonale activée par la baisse du volume circulant effectif : le rein sécrète la <span class="keyword">rénine</span>, qui génère l'angiotensine II (AGII), qui stimule la surrénale à produire de l'<span class="keyword">aldostérone</span>. L'aldostérone augmente la réabsorption tubulaire de Na⁺.
+</div>
+
+<div class="def-box">
+  <strong>🔬 ALDOSTÉRONE</strong><br>
+  Hormone minéralocorticoïde produite par la <span class="keyword">corticosurrénale</span>. Elle agit sur le néphron distal (tube connecteur et canal collecteur) pour stimuler la réabsorption de Na⁺ et l'excrétion de K⁺.
+</div>
+
+<div class="def-box">
+  <strong>🔬 ANF (Facteur Natriurétique Auriculaire)</strong><br>
+  Peptide produit par les myocytes auriculaires lors de leur distension (= augmentation du VEC). Il s'oppose au SRAA et favorise l'excrétion urinaire de Na⁺.
+</div>
+
+<div class="def-box">
+  <strong>🔬 PHÉNOMÈNE D'ÉCHAPPEMENT RÉNAL</strong><br>
+  Phénomène par lequel le rein « échappe » à l'effet retenteur de sodium de l'aldostérone après quelques jours, limitant l'expansion volumique. Il explique que l'hyperaldostéronisme primaire ne provoque pas d'œdèmes massifs.
+</div>
+
+<div class="def-box">
+  <strong>🔬 RAPPORT [Na⁺]u / [K⁺]u</strong><br>
+  Rapport des concentrations urinaires du sodium et du potassium. Il reflète l'activité minéralocorticoïde : une aldostérone très active retient le Na⁺ et excrète le K⁺, abaissant ce rapport (&lt; 1). À l'inverse, si l'échappement est présent, le Na⁺ est excrété et le rapport remonte (≥ 1).
+</div>
+
+<h3>📖 Explication</h3>
+
+<h4>1. Le sodium comme déterminant du volume extracellulaire</h4>
+
+<div class="highlight-box">
+  ✅ <strong>Principe fondamental :</strong> C'est le contenu en Na⁺ <em>échangeable</em> du milieu extracellulaire qui détermine le volume extracellulaire (VEC). Réguler le sodium, c'est réguler la volémie.
+</div>
+
+<p>Le rein est l'organe effecteur central : il adapte en permanence l'<span class="keyword">excrétion urinaire de Na⁺</span> aux apports alimentaires, maintenant ainsi l'équilibre du bilan sodé.</p>
+
+<h4>2. La réabsorption tubulaire du sodium : vue d'ensemble</h4>
+
+<div class="schema-box"><pre>
+Na⁺ filtré au glomérule (100 %)
+        │
+        ▼
+  Tube proximal  ──────────────────────── ~65–70 % réabsorbés
+        │
+        ▼
+  Anse de Henlé  ──────────────────────── ~20–25 % réabsorbés
+        │
+        ▼
+  Tube distal    ──────────────────────── ~5–8 % réabsorbés
+        │
+        ▼
+  Néphron distal ◄──── RÉGULATION HORMONALE FINE (aldostérone / ANF)
+  (connecteur +         porte sur les 2 % restants
+   canal collecteur)
+        │
+        ▼
+   Urine finale  ────── &lt; 1 % excrété (en situation normale)
+</pre></div>
+
+<div class="info-box">
+  📌 <strong>98 % du Na⁺ filtré sont réabsorbés avant le canal collecteur</strong>, de façon non régulée (mécanismes fixes). La régulation hormonale <em>fine</em> ne porte que sur les <strong>2 % restants</strong>, au niveau du néphron distal.
+</div>
+
+<h4>3. Les deux grandes hormones de régulation du bilan sodé</h4>
+
+<div class="schema-box"><pre>
+┌─────────────────────────────────────────────────────────────────────┐
+│                  BOUCLES DE RÉGULATION DU VEC                       │
+│                                                                     │
+│   ↓ VEC                                    ↑ VEC                   │
+│     │                                        │                      │
+│     ▼                                        ▼                      │
+│  Stimulation                          Distension des               │
+│   du SRAA                           myocytes auriculaires          │
+│     │                                        │                      │
+│     ▼                                        ▼                      │
+│  Rénine ↑                              Sécrétion ANF               │
+│     │                                        │                      │
+│     ▼                                        ▼                      │
+│  AGII ↑                            Inhibition du SRAA              │
+│     │                                        │                      │
+│     ▼                                        ▼                      │
+│ Aldostérone ↑                      ↓ Réabsorption Na⁺              │
+│     │                              (canal collecteur)               │
+│     ▼                                        │                      │
+│ ↑ Réabsorption Na⁺                          ▼                      │
+│  (canal collecteur)               ↑ Excrétion urinaire Na⁺         │
+│     │                                        │                      │
+│     ▼                                        ▼                      │
+│  ↑ VEC  ← CORRECTION ✓              ↓ VEC  ← CORRECTION ✓         │
+└─────────────────────────────────────────────────────────────────────┘
+</pre></div>
+
+<div class="table-wrap">
+  <table>
+    <thead>
+      <tr>
+        <th>Hormone</th>
+        <th>Stimulus de sécrétion</th>
+        <th>Site d'action</th>
+        <th>Effet sur Na⁺ urinaire</th>
+        <th>Effet sur VEC</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Aldostérone</strong></td>
+        <td>↓ VEC → SRAA → AGII</td>
+        <td>Néphron distal (connecteur + collecteur)</td>
+        <td>↓ Excrétion (réabsorption ↑)</td>
+        <td>↑ VEC</td>
+      </tr>
+      <tr>
+        <td><strong>ANF</strong></td>
+        <td>↑ VEC → distension auriculaire</td>
+        <td>Canal collecteur + inhibition SRAA</td>
+        <td>↑ Excrétion (natriurèse ↑)</td>
+        <td>↓ VEC</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<h4>4. Hyperaldostéronisme primaire</h4>
+
+<p>Dans l'<span class="keyword">hyperaldostéronisme primaire</span>, l'aldostérone est produite de façon autonome et excessive par la corticosurrénale, <strong>indépendamment du SRAA</strong>.</p>
+
+<div class="schema-box"><pre>
+Sécrétion autonome d'aldostérone (tumeur surrénalienne, etc.)
+        │
+        ▼
+↑ Réabsorption Na⁺ au canal collecteur
+        │
+        ▼
+↑ Volume circulant  ──────────────────► Suppression du SRAA
+        │                                 → Rénine plasmatique BASSE ⬇
+        ▼
+Phénomène d'ÉCHAPPEMENT rénal
+(le rein limite la rétention sodée)
+        │
+        ▼
+Rétention hydrosodée MODÉRÉE (pas d'œdèmes massifs)
+Na⁺ finit par être excrété dans les urines
+        │
+        ▼
+Rapport [Na⁺]u / [K⁺]u ≥ 1
+(Na⁺ excrété, K⁺ excrété sous effet aldostérone)
+</pre></div>
+
+<div class="highlight-box">
+  ✅ <strong>Clé diagnostique de l'hyperaldostéronisme primaire :</strong>
+  <ul>
+    <li>Aldostérone élevée</li>
+    <li>Rénine <strong>basse</strong> (SRAA supprimé)</li>
+    <li>Rapport [Na⁺]u / [K⁺]u <strong>≥ 1</strong> (échappement rénal)</li>
+  </ul>
+</div>
+
+<h4>5. Hyperaldostéronisme secondaire</h4>
+
+<p>Dans l'<span class="keyword">hyperaldostéronisme secondaire</span>, l'hyperaldostéronisme est la <em>conséquence</em> d'une activation du SRAA, elle-même déclenchée par une diminution du <span class="keyword">volume circulant effectif</span> (réelle ou perçue).</p>
+
+<div class="schema-box"><pre>
+↓ Volume circulant effectif
+(réel : hémorragie, déshydratation)
+(perçu : insuffisance cardiaque, cirrhose, syndrome néphrotique)
+        │
+        ▼
+Stimulation du SRAA
+→ Rénine plasmatique HAUTE ⬆
+        │
+        ▼
+AGII ↑ → Aldostérone ↑
+        │
+        ▼
+↑ Réabsorption Na⁺ (pour restaurer la volémie)
+        │
+        ├──► Na⁺ retenu dans le sang → [Na⁺]u BASSE
+        │
+        └──► K⁺ excrété dans les urines → [K⁺]u HAUTE
+                │
+                ▼
+        Rapport [Na⁺]u / [K⁺]u &lt; 1
+</pre></div>
+
+<div class="highlight-box">
+  ✅ <strong>Clé diagnostique de l'hyperaldostéronisme secondaire :</strong>
+  <ul>
+    <li>Aldostérone élevée</li>
+    <li>Rénine <strong>haute</strong> (SRAA activé)</li>
+    <li>Rapport [Na⁺]u / [K⁺]u <strong>&lt; 1</strong> (Na⁺ retenu, K⁺ excrété)</li>
+  </ul>
+</div>
+
+<h4>6. Tableau comparatif : primaire vs secondaire</h4>
+
+<div class="table-wrap">
+  <table>
+    <thead>
+      <tr>
+        <th>Paramètre</th>
+        <th>Hyperaldostéronisme PRIMAIRE</th>
+        <th>Hyperaldostéronisme SECONDAIRE</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Origine</td>
+        <td>Sécrétion autonome surrénalienne</td>
+        <td>Activation du SRAA (↓ VCE)</td>
+      </tr>
+      <tr>
+        <td>Rénine plasmatique</td>
+        <td>⬇ BASSE (SRAA supprimé)</td>
+        <td>⬆ HAUTE (SRAA activé)</td>
+      </tr>
+      <tr>
+        <td>Volémie</td>
+        <td>↑ (modérée, échappement)</td>
+        <td>↓ (réelle ou perçue)</td>
+      </tr>
+      <tr>
+        <td>Phénomène d'échappement</td>
+        <td>✅ Présent</td>
+        <td>❌ Absent (le rein doit retenir le Na⁺)</td>
+      </tr>
+      <tr>
+        <td>Rapport [Na⁺]u / [K⁺]u</td>
+        <td>≥ 1</td>
+        <td>&lt; 1</td>
+      </tr>
+      <tr>
+        <td>Na⁺ urinaire</td>
+        <td>Excrété (après échappement)</td>
+        <td>Retenu (↓ natriurèse)</td>
+      </tr>
+      <tr>
+        <td>K⁺ urinaire</td>
+        <td>Excrété</td>
+        <td>Excrété</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="warning-box">
+  ⚠️ <strong>Piège classique :</strong> Dans les deux types d'hyperaldostéronisme, le K⁺ est excrété (hypokaliémie possible). Ce qui les différencie, c'est le <strong>niveau de rénine</strong> et le <strong>rapport [Na⁺]u / [K⁺]u</strong>, pas le potassium seul.
+</div>
+
+<div class="info-box">
+  📌 <strong>Résumé des 5 messages essentiels du cours :</strong>
+  <ol>
+    <li>Le Na⁺ échangeable du MEC détermine le VEC.</li>
+    <li>Le rein adapte l'excrétion de Na⁺ aux entrées.</li>
+    <li>98 % du Na⁺ filtré sont réabsorbés avant le canal collecteur ; la régulation fine porte sur les 2 % restants.</li>
+    <li>L'aldostérone (via SRAA, en cas de ↓ VEC) stimule la réabsorption de Na⁺ → ↑ VEC.</li>
+    <li>L'ANF (en cas de ↑ VEC) inhibe le SRAA et augmente l'excrétion de Na⁺ → ↓ VEC.</li>
+  </ol>
+</div>
+
+<h3>🃏 Flashcards</h3>
+
+<div class="flash-block" data-answer="98 % du Na⁺ filtré sont réabsorbés avant le canal collecteur. La régulation hormonale fine ne porte
+</div>
+</div>
+
+<div class="slide content-slide" id="slide-14">
+<h2>✅ Fin de la présentation</h2>
+<div class="highlight-box">
+  <strong>Bilan sodé — Rôle du rein</strong><br>
+  13 slides de cours · Item 265
+</div>
+<div class="info-box">
+  Utilisez les touches ◀ ▶ ou les flèches clavier pour naviguer.<br>
+  Revenez au menu en cliquant sur 🏠 Accueil.
+</div>
+</div>
+</div>
+
+<script>
+const TOTAL = 15;
+let current = 0;
+
+// Inject .qcm-feedback in old-format blocks that lack it
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('.qcm-block').forEach(block => {
+    if (!block.querySelector('.qcm-feedback')) {
+      const fb = document.createElement('div');
+      fb.className = 'qcm-feedback';
+      const btn = block.querySelector('.qcm-btn, .qcm-validate');
+      if (btn) btn.after(fb); else block.appendChild(fb);
+    }
+  });
+});
+
+function showSlide(n) {
+  const all = document.querySelectorAll('.slide');
+  if (n < 0) n = 0;
+  if (n >= TOTAL) n = TOTAL - 1;
+  all[current].classList.remove('active');
+  current = n;
+  all[current].classList.add('active');
+  document.getElementById('slide-counter').textContent = (current + 1) + ' / ' + TOTAL;
+  document.getElementById('progress-fill').style.width = Math.round((current + 1) / TOTAL * 100) + '%';
+  document.getElementById('slides-wrapper').scrollTop = 0;
+}
+function changeSlide(d) { showSlide(current + d); }
+
+function selectOption(el) {
+  const block = el.closest('.qcm-block, .dp-step');
+  block.querySelectorAll('.qcm-option').forEach(o => o.classList.remove('selected'));
+  el.classList.add('selected');
+  const btn = block.querySelector('.qcm-btn, .qcm-validate');
+  if (btn) btn.disabled = false;
+}
+
+function validateQCM(btn) {
+  const block = btn.closest('.qcm-block, .dp-step');
+  const answer = block.dataset.answer;
+  const letters = ['A','B','C','D'];
+  const options = Array.from(block.querySelectorAll('.qcm-option'));
+  const selected = block.querySelector('.qcm-option.selected');
+  const feedback = block.querySelector('.qcm-feedback');
+  const explanation = block.querySelector('.qcm-explanation');
+  let correctIdx = /^[0-9]+$/.test(answer)
+    ? parseInt(answer)
+    : letters.indexOf(answer.toUpperCase());
+  options.forEach((o, i) => {
+    if (i === correctIdx) o.classList.add('correct');
+    else if (o.classList.contains('selected')) o.classList.add('wrong');
+    o.style.pointerEvents = 'none';
+  });
+  const selIdx = options.indexOf(selected);
+  if (feedback) {
+    feedback.textContent = (selected && selIdx === correctIdx)
+      ? '✓ Correct !' : '✗ Incorrect — bonne réponse : ' + letters[correctIdx];
+    feedback.className = 'qcm-feedback ' + ((selected && selIdx === correctIdx) ? 'correct' : 'wrong');
+  }
+  if (explanation) explanation.style.display = 'block';
+  btn.disabled = true;
+}
+
+function validateFlash(el) {
+  const block = el.closest('.flash-block');
+  if (!block) return;
+  const input = block.querySelector('.flash-input');
+  const answer = (block.dataset.answer || '').toLowerCase().trim();
+  const given  = (input ? input.value : '').toLowerCase().trim();
+  const feedbackEl = block.querySelector('.flash-feedback, .qcm-explanation');
+  const btn = block.querySelector('.flash-btn, .qcm-validate');
+  const keywords = answer.split(/[,;\/]/);
+  const ok = keywords.some(kw => given.includes(kw.trim()));
+  if (feedbackEl) {
+    if (feedbackEl.classList.contains('qcm-explanation')) {
+      feedbackEl.style.display = 'block';
+      feedbackEl.innerHTML = ok
+        ? '<span style="color:#2ecc71">✓ Correct !</span>'
+        : '<span style="color:#e74c3c">✗</span> Réponse : ' + block.dataset.answer;
+    } else {
+      feedbackEl.textContent = ok ? '✓ Correct !' : '✗ Réponse : ' + block.dataset.answer;
+      feedbackEl.className = 'flash-feedback ' + (ok ? 'correct' : 'wrong');
+    }
+  }
+  if (btn) btn.disabled = true;
+  if (input) input.disabled = true;
+}
+
+function openModal(src) {
+  document.getElementById('modal-img').src = src;
+  document.getElementById('img-modal').classList.add('open');
+}
+function closeModal() { document.getElementById('img-modal').classList.remove('open'); }
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'ArrowRight' || e.key === 'ArrowDown') changeSlide(1);
+  if (e.key === 'ArrowLeft'  || e.key === 'ArrowUp')   changeSlide(-1);
+  if (e.key === 'Escape') closeModal();
+});
+let ts = 0, tx = 0;
+document.addEventListener('touchstart', e => { ts = e.touches[0].clientX; }, {passive:true});
+document.addEventListener('touchend',   e => {
+  tx = e.changedTouches[0].clientX;
+  if (Math.abs(ts - tx) > 50) changeSlide(ts > tx ? 1 : -1);
+});
+
+</script>
+</body>
+</html>
