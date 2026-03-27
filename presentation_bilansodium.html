@@ -229,6 +229,28 @@ tr:hover td { background: rgba(255,255,255,0.03); }
   .topbar-title { display: none; }
   .flash-input-row { flex-direction: column; }
 }
+
+/* ── Explications structurées ── */
+.expl-wrap { margin: 0 0 1.5rem 0; }
+.expl-wrap h4 { color: #e0e0f0; font-size: 0.97rem; margin: 1rem 0 0.4rem; font-weight: 700; }
+.expl-wrap p { color: #c0c0d8; font-size: 0.9rem; line-height: 1.75; margin-bottom: 0.4rem; }
+.expl-wrap strong { color: #f0f0ff; }
+.expl-bq {
+  border-left: 3px solid rgba(243,156,18,0.5); padding: 0.4rem 1rem;
+  color: #9898b8; font-style: italic; font-size: 0.88rem; margin: 0.3rem 0 0.9rem 0;
+  background: rgba(243,156,18,0.04); border-radius: 0 6px 6px 0;
+}
+.expl-sep { border: none; border-top: 1px solid rgba(255,255,255,0.07); margin: 1.1rem 0; }
+.expl-warn {
+  background: rgba(231,76,60,0.08); border-left: 4px solid #e74c3c;
+  border-radius: 0 8px 8px 0; padding: 0.6rem 1rem;
+  margin: 0.75rem 0; font-size: 0.88rem; color: #c8c8d8; line-height: 1.6;
+}
+.expl-info {
+  background: rgba(52,152,219,0.08); border-left: 4px solid #3498db;
+  border-radius: 0 8px 8px 0; padding: 0.6rem 1rem;
+  margin: 0.75rem 0; font-size: 0.88rem; color: #c8c8d8; line-height: 1.6;
+}
 </style>
 </head>
 <body>
@@ -236,7 +258,7 @@ tr:hover td { background: rgba(255,255,255,0.03); }
 <div class="topbar">
   <a class="topbar-home" href="index.html">← Menu</a>
   <span class="topbar-title">Bilan sodé — Rôle du rein</span>
-  <span class="topbar-counter" id="slide-counter">1 / 20</span>
+  <span class="topbar-counter" id="slide-counter">1 / 21</span>
   <div class="topbar-nav">
     <button class="topbar-btn" onclick="changeSlide(-1)">&#8249;</button>
     <button class="topbar-btn" onclick="changeSlide(1)">&#8250;</button>
@@ -285,6 +307,59 @@ Sa taille dépend de la quantité d'osmoles, principalement le Na⁺.</div>
 soit environ <strong>4 mol (≈ 92 g) pour 70 kg</strong>.
 Il se répartit en deux fractions selon leur accessibilité :</p>
 
+<div class="expl-wrap">
+
+<h4>1. 📦 Quelle quantité de sodium contient le corps humain ?</h4>
+<p>Le sodium est le <strong>cation (ion chargé positivement) le plus abondant</strong> de l'organisme.
+On compte environ <strong>60 mmol par kilogramme</strong>, soit pour un adulte de 70 kg environ
+<strong>4 200 mmol ≈ 4 mol ≈ 92 g de Na⁺ pur</strong> (ou ~230 g de NaCl).
+C'est énorme — et pourtant, dans le plasma, sa concentration semble modeste : ~142 mmol/L.</p>
+<div class="expl-bq">Ex : si vous vidiez tout le sodium de votre corps et le peciez, vous auriez environ
+une grosse poignée de gros sel de cuisine. Ce sel est réparti dans des compartiments très différents.</div>
+
+<hr class="expl-sep">
+
+<h4>2. 🦴 Le sodium "non échangeable" : emprisonné dans l'os</h4>
+<p>Un tiers du sodium total (~1 400 mmol) est <strong>fixé dans la matrice minérale de l'os cortical</strong>.
+Il est chimiquement lié aux cristaux d'hydroxyapatite et <strong>ne circule pas librement</strong>
+dans les liquides biologiques. Il ne répond pas aux hormones (aldostérone, ADH…) et ne participe pas
+à la régulation à court terme du volume ou de la pression artérielle.</p>
+<div class="expl-bq">Ex : imaginez du sel mélangé dans du béton sec — il est là, comptabilisé,
+mais impossible à utiliser immédiatement. Le corps y fait appel seulement lors de carences très prolongées.</div>
+
+<hr class="expl-sep">
+
+<h4>3. 💧 Le sodium "échangeable" : le sodium qui travaille</h4>
+<p>Les deux tiers restants (~2 800 mmol) sont dissous dans les liquides biologiques.
+On les appelle <strong>"échangeables"</strong> car ils circulent librement entre les compartiments
+et peuvent être filtrés, réabsorbés ou excrétés par le rein. Ce sodium se concentre principalement
+dans le <strong>milieu extracellulaire (MEC)</strong> : le plasma (~3,5 L) et le liquide interstitiel (~10,5 L).
+Une infime partie se trouve dans les cellules (le milieu intracellulaire — MIC — est dominé par le K⁺).</p>
+<div class="expl-bq">Ex : c'est ce sodium qui fluctue quand vous mangez très salé
+(rétention d'eau, prise de poids), quand vous transpirez (perte sodée), ou quand vous prenez
+des diurétiques (augmentation de son excrétion urinaire).</div>
+
+<hr class="expl-sep">
+
+<h4>4. 🎯 Pourquoi le sodium détermine-t-il le volume extracellulaire (VEC) ?</h4>
+<p>Le Na⁺ représente <strong>95 % des cations extracellulaires</strong>. Ses anions (Cl⁻, HCO₃⁻) accompagnent
+chaque ion pour assurer l'électroneutralité. Ensemble, ils constituent <strong>environ la moitié
+des osmoles extracellulaires</strong> (~280 mosmol/kg sur 290 au total). Or l'eau va TOUJOURS
+du compartiment le moins concentré vers le plus concentré (osmose).
+Donc : <strong>plus il y a de Na⁺ dans le MEC, plus l'eau y est attirée, et plus le VEC est grand.</strong></p>
+<div class="expl-bq">Ex : manger trop salé le soir → ↑ Na⁺ échangeable → ↑ osmolalité EC
+→ soif + rétention d'eau par l'ADH → les chevilles gonflent le lendemain matin.
+Restreindre le sel → ↓ Na⁺ échangeable → ↓ VEC → perte de 1 à 2 kg en 3–5 jours.</div>
+
+<hr class="expl-sep">
+
+<div class="expl-warn"><strong>⚠️ Piège classique : natrémie ≠ bilan sodé</strong><br>
+La <em>natrémie</em> = [Na⁺] plasmatique = quantité de Na⁺ <strong>divisée par le volume d'eau</strong>.
+C'est un <em>ratio</em>, pas une quantité absolue. Elle peut être basse (hyponatrémie) même si le
+stock total de Na⁺ est élevé (ex. insuffisance cardiaque avec œdèmes : Na⁺ en excès
+mais encore plus d'eau → natrémie diluée à 128 mmol/L).</div>
+
+</div>
 <svg viewBox="0 0 700 290" xmlns="http://www.w3.org/2000/svg"
      style="width:100%;max-height:290px;margin:1rem 0;display:block">
   <defs>
@@ -423,6 +498,63 @@ Normale : ~25 mmHg.</div>
 <h4>Formule de l'osmolalité</h4>
 <p>L'osmolalité plasmatique est la somme des contributions de chaque soluté :</p>
 
+<div class="expl-wrap">
+
+<h4>1. 🧮 La formule de l'osmolalité plasmatique</h4>
+<p>L'<strong>osmolalité</strong> mesure le nombre total de particules dissoutes par kg d'eau
+(en mosmol/kg). On peut la calculer avec la formule :<br>
+<strong>OsmEC ≈ 2 × [Na⁺] + [Urée] + [Glucose]</strong> (toutes les concentrations en mmol/L)<br>
+Valeur normale : <strong>~290 mosmol/kg</strong>.<br>
+Le facteur "2" devant le Na⁺ tient compte des anions (Cl⁻, HCO₃⁻) qui accompagnent chaque ion Na⁺
+pour respecter l'électroneutralité — ils doublent la contribution osmotique du sodium.</p>
+<div class="expl-bq">Ex : Na⁺ = 142, urée = 5, glucose = 5 → OsmEC = 2×142 + 5 + 5 = 294 mosmol/kg (normal).</div>
+
+<hr class="expl-sep">
+
+<h4>2. ✅ Les osmoles <em>efficaces</em> (= toniques) : elles déplacent l'eau</h4>
+<p>Une osmole est dite <strong>"efficace" ou "tonique"</strong> quand elle <strong>ne traverse pas librement
+les membranes cellulaires</strong>. Elle reste confinée d'un côté de la membrane et attire l'eau
+vers elle. Le <strong>Na⁺ (et ses anions)</strong> et le <strong>glucose</strong> sont des osmoles efficaces :
+leur accumulation dans le MEC tire l'eau hors des cellules (déshydratation intracellulaire).</p>
+<div class="expl-bq">Ex : un diabétique avec une glycémie à 50 mmol/L a une tonicité très élevée
+→ l'eau sort des cellules vers le MEC → les cellules se ratatinent → signe clinique :
+déshydratation intracellulaire (soif intense, confusion).</div>
+
+<hr class="expl-sep">
+
+<h4>3. ❌ Les osmoles <em>inefficaces</em> : elles ne bougent pas l'eau</h4>
+<p>Une osmole <strong>"inefficace"</strong> traverse librement les membranes. Elle s'équilibre rapidement
+des deux côtés et <strong>n'exerce aucun gradient osmotique net</strong> entre MEC et MIC.
+L'<strong>urée</strong> est le prototype : elle entre facilement dans les cellules → même concentration
+des deux côtés → zéro déplacement d'eau net. Elle augmente l'osmolalité mesurée
+<em>sans modifier la répartition de l'eau</em>.</p>
+<div class="expl-bq">Ex : en insuffisance rénale chronique, l'urée peut atteindre 40 mmol/L
+→ osmolalité calculée ~340 mosmol/kg mais tonicité (osmolalité efficace) reste normale
+→ pas de déshydratation intracellulaire malgré une osmolalité apparemment élevée.</div>
+
+<hr class="expl-sep">
+
+<h4>4. 🕳️ Le trou osmolaire : quand il y a quelque chose que vous ne mesurez pas</h4>
+<p>L'osmolalité peut aussi être <strong>mesurée directement au laboratoire</strong> (par abaissement
+du point de congélation). Si la valeur mesurée dépasse la valeur calculée de <strong>plus de
+10 mosmol/kg</strong>, il existe un <strong>trou osmolaire</strong> : cela signifie qu'il y a dans
+le plasma une substance osmotiquement active que la formule ne comptabilise pas.</p>
+<div class="expl-bq">Ex : alcool éthylique (intoxication éthylique aiguë), méthanol, éthylène glycol
+(antigel), mannitol en perfusion. Dans ces cas, le trou osmolaire oriente le diagnostic
+d'intoxication même avant le dosage spécifique.</div>
+
+<hr class="expl-sep">
+
+<h4>5. 🔗 Lien entre Na⁺ plasmatique et tonicité : ADH et soif</h4>
+<p>La natrémie est le <strong>principal déterminant de la tonicité plasmatique</strong>. Lorsqu'elle
+monte (déshydratation), deux mécanismes correcteurs s'activent en quelques minutes :<br>
+— <strong>Soif</strong> (osmorecepteurs hypothalamiques) → apport d'eau<br>
+— <strong>ADH / vasopressine</strong> (neurohypophyse) → réabsorption d'eau par le rein (canal collecteur, AQP2)<br>
+Ces deux réponses ramènent rapidement la natrémie à la normale.</p>
+<div class="expl-bq">Ex : randonnée sous la chaleur → sueurs → perte d'eau > perte de sel
+→ ↑ natrémie → soif intense → vous buvez de l'eau → natrémie se normalise en 30–60 min.</div>
+
+</div>
 <svg viewBox="0 0 700 300" xmlns="http://www.w3.org/2000/svg"
      style="width:100%;max-height:300px;margin:1rem 0;display:block">
   <defs>
@@ -586,6 +718,72 @@ FENa = (UNa × PrCr) / (PNa × UrCr) × 100. Normale : 1–2 %. Mesure la capaci
 
 <h4>Vue d'ensemble du bilan sodé</h4>
 
+<div class="expl-wrap">
+
+<h4>1. ⚖️ Qu'est-ce que le bilan sodé ?</h4>
+<p>Le <strong>bilan sodé</strong> est la différence entre les entrées et les sorties de Na⁺
+sur 24 heures. À l'état stable (normovolémie), ce bilan est <strong>nul</strong> :
+les sorties s'ajustent exactement aux entrées. Si les entrées dépassent les sorties → <strong>bilan positif</strong>
+→ le stock de Na⁺ augmente → le VEC s'expand (prise de poids, œdèmes, HTA).
+Si les sorties dépassent les entrées → <strong>bilan négatif</strong> → perte de Na⁺ → VEC diminue
+(perte de poids, hypotension).</p>
+<div class="expl-bq">Ex : un patient qui mange 10 g de sel par jour (~170 mmol de Na⁺) mais
+ne prend qu'un diurétique à faible dose → bilan légèrement positif chronique → HTA progressive.</div>
+
+<hr class="expl-sep">
+
+<h4>2. 🍽️ Les entrées de sodium : variables et non régulées</h4>
+<p>Les apports alimentaires en NaCl varient énormément : de <strong>100 à 300 mmol/j</strong>
+selon les habitudes alimentaires (régime occidental moyen : ~200 mmol/j, soit ~12 g de NaCl).
+Ces apports sont <strong>non régulés</strong> : contrairement au potassium ou au calcium,
+l'organisme n'a pas de mécanisme d'appétit pour le sel qui s'adapte aux besoins.
+On mange autant de sel qu'on en a envie ou l'habitude.</p>
+<div class="expl-bq">Ex : un adulte sédentaire mange souvent trop salé (plats préparés, charcuteries, fromages)
+sans en ressentir le besoin biologique → c'est une surcharge imposée au rein.</div>
+
+<hr class="expl-sep">
+
+<h4>3. 🚽 Les sorties rénales : la soupape ajustable (≈ 95 %)</h4>
+<p>Le <strong>rein est la voie principale d'excrétion</strong> du Na⁺ (~95 %). Sa particularité unique :
+il peut adapter sa natriurèse (excrétion urinaire de Na⁺) de <strong>quasi-zéro jusqu'à
+plusieurs centaines de mmol par jour</strong>, selon les besoins du moment.
+Si les apports augmentent → le rein excrète plus. Si le VEC chute → le rein retient tout.
+C'est cette flexibilité extraordinaire qui maintient l'équilibre sodé.</p>
+<div class="expl-bq">Ex : après 3 jours de régime désodé strict → Na⁺ urinaire
+tombe en dessous de 10 mmol/L (quasiment imperceptible dans les urines).
+Un sportif de haut niveau qui transpire énormément → Na⁺ urinaire peut monter
+à 400–500 mmol/j pour excréter le surplus.</div>
+
+<hr class="expl-sep">
+
+<h4>4. 💧 Les sorties extra-rénales : fixes et non régulables (≈ 5 %)</h4>
+<p>Les pertes en dehors du rein représentent seulement ~5 % en conditions normales :</p>
+<p>— <strong>Sueur</strong> : 5–15 mmol/j au repos (peut dépasser 100 mmol/j lors d'un effort intense
+par temps chaud). La sueur est hypotonique par rapport au plasma → perte d'eau proportionnellement
+plus grande que le sel → tendance à ↑ natrémie si non compensé.<br>
+— <strong>Selles</strong> : ~5 mmol/j (augmente massivement en cas de diarrhée sécrétoire).<br>
+— <strong>Poumons</strong> : condensat respiratoire quasi dépourvu de Na⁺ (négligeable).</p>
+<div class="expl-bq">Ex : choléra ou gastro-entérite sévère avec diarrhée profuse
+→ pertes digestives de Na⁺ pouvant atteindre 300–500 mmol/j → déshydratation EC massive
+→ choc hypovolémique en quelques heures si non traité par réhydratation orale/IV.</div>
+
+<hr class="expl-sep">
+
+<h4>5. ⏱️ L'expérience de la restriction sodée : pourquoi faut-il 3 à 5 jours ?</h4>
+<p>Si on passe brutalement d'un régime à 200 mmol/j à un régime à 20 mmol/j, voici ce qui se passe :</p>
+<p>— <strong>Jours 1–3</strong> : les sorties rénales mettent du temps à s'adapter → bilan sodé négatif
+→ perte de Na⁺ et d'eau → perte de poids (1 à 1,5 kg de liquide) → le VEC baisse légèrement
+→ cela active le SRAA → l'aldostérone monte progressivement.<br>
+— <strong>Jours 3–5</strong> : l'aldostérone maximise la réabsorption de Na⁺ → natriurèse
+s'abaisse à 20 mmol/j = niveau des nouveaux apports → bilan redevient nul.<br>
+— <strong>Nouvel état stable</strong> : équilibre à un VEC légèrement réduit, natrémie normale.</p>
+<p>Cette latence de 3 à 5 jours est <strong>beaucoup plus longue</strong> que pour le bilan hydrique
+(l'ADH s'adapte en quelques dizaines de minutes). C'est pourquoi la restriction sodée entraîne
+une perte de poids progressive — utile en pratique clinique (réduction des œdèmes, baisse de la PA).</p>
+<div class="expl-bq">Ex : prescrit à un patient hypertendu avec œdèmes → régime < 2 g de NaCl/j
+→ perte de 1–2 kg en 1 semaine → cheville moins gonflée → PA abaissée de 5–10 mmHg.</div>
+
+</div>
 <svg viewBox="0 0 700 280" xmlns="http://www.w3.org/2000/svg"
      style="width:100%;max-height:280px;margin:1rem 0;display:block">
   <defs>
@@ -971,6 +1169,69 @@ qui crée le gradient électrochimique permettant l'entrée apicale de Na⁺.</d
 
 <h4>Vue globale : 25 000 mmol/j filtrés, ~1 % excrétés</h4>
 
+<div class="expl-wrap">
+
+<h4>1. 🤯 Un chiffre qui surprend : 25 000 mmol/j filtrés, ~250 excrétés</h4>
+<p>Chaque jour, le rein filtre dans les glomérules environ <strong>180 L de plasma</strong>.
+Avec une natrémie de 142 mmol/L, cela représente une charge filtrée de Na⁺ de
+<strong>180 × 142 ≈ 25 560 mmol/j</strong> — soit plus de 1,5 kg de sel pur qui passe
+dans le tubule chaque jour ! Le rein doit réabsorber <strong>99 % de cette charge</strong>
+pour n'en laisser passer que ~150–250 mmol/j dans les urines (selon les apports alimentaires).
+Si cette réabsorption s'arrêtait 3 heures, vous seriez en état de choc hypovolémique.</p>
+<div class="expl-bq">Ex : médicaments comme les gliflozines (SGLT2i) augmentent la natriurèse
+de seulement 1 % supplémentaire de la charge filtrée → cela suffit à abaisser la PA
+et à provoquer une glycosurie.</div>
+
+<hr class="expl-sep">
+
+<h4>2. 🔋 Le moteur universel : la Na⁺/K⁺-ATPase basolatérale</h4>
+<p>Toute la réabsorption de Na⁺ dans le tubule repose sur une seule pompe :
+la <strong>Na⁺/K⁺-ATPase</strong> placée du côté basolatéral (vers le sang) de toutes les cellules
+tubulaires. Elle <strong>extrude 3 Na⁺ hors de la cellule contre 2 K⁺</strong> entrants, en consommant
+de l'ATP. Ce travail crée un faible [Na⁺] intracellulaire (~10 mmol/L vs ~142 dans la lumière)
+et une charge négative intérieure. Ce double gradient (chimique + électrique) est
+la <strong>force motrice de toute l'entrée apicale de Na⁺</strong>.</p>
+<div class="expl-bq">Ex : les cellules tubulaires sont parmi les plus grosses consommatrices
+d'énergie du corps (après le cerveau et le cœur) : la Na⁺/K⁺-ATPase représente
+~10–15 % de la consommation totale d'ATP de l'organisme au repos.</div>
+
+<hr class="expl-sep">
+
+<h4>3. 🚪 Les portes d'entrée apicales du Na⁺ au TCP</h4>
+<p>Une fois le gradient créé par la pompe basolatérale, le Na⁺ entre dans la cellule du côté
+luminal (apical) via plusieurs transporteurs spécifiques :</p>
+<p>— <strong>NHE3 (antiport Na⁺/H⁺)</strong> : le plus important. Il fait entrer Na⁺ et sortir H⁺ simultanément.
+La sortie de H⁺ dans la lumière permet la réabsorption des bicarbonates (H⁺ + HCO₃⁻ → H₂CO₃ → H₂O + CO₂).
+NHE3 réabsorbe ~33 % de la charge filtrée de Na⁺.<br>
+— <strong>SGLT2 (cotransporteur Na⁺-glucose)</strong> : fait entrer 1 Na⁺ + 1 glucose. Présent dans
+le segment S1–S2. <strong>Cible des gliflozines</strong> (dapagliflozine, empagliflozine).<br>
+— <strong>Na-phosphate, Na-acides aminés</strong> : contribuent moins mais sont essentiels
+pour la réabsorption de leurs substrats respectifs.</p>
+<div class="expl-bq">Ex : en hyperglycémie chronique (diabète), SGLT2 est saturé → glucose déborde
+dans les urines (glycosurie). Les gliflozines bloquent SGLT2 → glycosurie thérapeutique + légère natriurèse.</div>
+
+<hr class="expl-sep">
+
+<h4>4. 🌊 Réabsorption iso-osmotique : l'eau suit le Na⁺ passivement</h4>
+<p>Au TCP, la membrane apicale est <strong>très perméable à l'eau</strong> grâce aux aquaporines 1 (AQP1).
+Dès que le Na⁺ est absorbé, l'eau suit passivement par osmose sans avoir besoin d'être
+"pompée". Résultat : la réabsorption est dite <strong>iso-osmotique</strong> : le liquide tubulaire
+reste à ~290 mosmol/kg tout au long du TCP. Il n'y a pas de concentration ni de dilution
+dans ce segment — juste une réduction de volume à composition constante.</p>
+<div class="expl-bq">Ex : sur 180 L filtrés par jour, le TCP réabsorbe ~120 L (67 %) d'un coup,
+laissant ~60 L passer à l'anse de Henlé. Ce "gros travail" est automatique et non régulé
+hormonalement — il se fait en masse, le réglage fin vient plus loin.</div>
+
+<hr class="expl-sep">
+
+<div class="expl-info"><strong>💡 Balance glomérulotubulaire (BGT)</strong><br>
+Si le DFG augmente (ex : après un repas riche), la charge filtrée augmente proportionnellement.
+Le TCP réabsorbe toujours ~67 % grâce à un mécanisme intégrateur : l'↑ de débit tubulaire
+→ ↑ gradient lumino-cellulaire → ↑ activité de NHE3. De plus, ↑ DFG → ↑ fraction filtrée
+→ ↑ protéines dans les capillaires péritubulaires → ↑ pression oncotique → succion de réabsorption.
+Résultat : la réabsorption proximale est toujours proportionnelle au DFG.</div>
+
+</div>
 <svg viewBox="0 0 700 320" xmlns="http://www.w3.org/2000/svg"
      style="width:100%;max-height:320px;margin:1rem 0;display:block">
   <defs>
@@ -1165,6 +1426,69 @@ TCD+CC : ~5–7 %. Au total : ~99 % → seulement 1 % excrété (150–200 mmol/
 
 <h4>Évolution le long du néphron</h4>
 
+<div class="expl-wrap">
+
+<h4>1. 📉 Branche descendante de l'anse : concentration du liquide tubulaire</h4>
+<p>Après le TCP, le liquide (encore isotonique, ~290 mosmol/kg) entre dans la
+<strong>branche descendante fine de l'anse de Henlé</strong>. Cette branche est
+<strong>perméable à l'eau mais peu perméable au Na⁺</strong>. Comme elle plonge dans la médullaire rénale
+interne (où l'interstitium est très concentré — jusqu'à 1 200 mosmol/kg dans la papille),
+l'<strong>eau sort passivement</strong> vers l'interstitium. Le volume diminue et le [Na⁺] luminal
+augmente progressivement en descendant.</p>
+<div class="expl-bq">Ex : c'est comme si vous faisiez évaporer l'eau d'un verre de soupe —
+la concentration en sel augmente sans que le sel bouge. Ici c'est l'eau qui quitte la lumière.</div>
+
+<hr class="expl-sep">
+
+<h4>2. 📈 Branche ascendante large (BAL) : le segment diluteur — pièce maîtresse</h4>
+<p>La <strong>branche ascendante large (BAL)</strong> est le segment le plus important après le TCP.
+Sa particularité fondamentale : elle est <strong>IMPERMÉABLE à l'eau</strong> (absence d'AQP).
+Pourtant, elle pompe activement le Na⁺, K⁺ et Cl⁻ vers le sang grâce au cotransporteur
+<strong>NKCC2</strong>. Résultat : le Na⁺ sort sans que l'eau suive → le liquide tubulaire
+se dilue progressivement en remontant → à la sortie de l'anse, il est <strong>hypotonique
+(~100 mosmol/kg)</strong> alors que l'interstitium médullaire est concentré.
+C'est le <strong>segment diluteur</strong> : il prépare le liquide à être soit dilué (sans ADH)
+soit concentré (avec ADH) selon les besoins.</p>
+<div class="expl-bq">Ex : le furosémide (Lasilix®) bloque NKCC2 → le Na⁺ ne peut plus sortir de la lumière
+→ le gradient médullaire de concentration s'effondre → impossibilité de concentrer les urines
+→ diurèse hydrosodée abondante même en hypervolémie sévère.</div>
+
+<hr class="expl-sep">
+
+<h4>3. 🔧 TCD (tubule contourné distal) : réabsorption fine via NCC</h4>
+<p>Le TCD réabsorbe ~5 % supplémentaires du Na⁺ filtré via le cotransporteur <strong>NCC
+(Na⁺-Cl⁻)</strong>. Comme la BAL, le TCD est <strong>imperméable à l'eau</strong> en l'absence
+d'ADH. Le liquide reste dilué. NCC est la cible des <strong>diurétiques thiazidiques</strong>
+(hydrochlorothiazide, chlortalidone). L'inhibition de NCC augmente la quantité de Na⁺
+qui arrive au canal collecteur → plus de Na⁺ échangé contre K⁺ → risque d'hypokaliémie.</p>
+<div class="expl-bq">Ex : les thiazides sont les diurétiques de référence de l'HTA.
+Leur principal effet secondaire — l'hypokaliémie — vient justement de ce mécanisme :
+plus de Na⁺ au canal collecteur → plus de K⁺ excrété.</div>
+
+<hr class="expl-sep">
+
+<h4>4. 🚰 Canal collecteur : le robinet final réglé par ADH et aldostérone</h4>
+<p>Le canal collecteur (CC) reçoit un liquide hypotonique (~50–100 mosmol/kg). Son rôle est
+de décider combien d'eau et de Na⁺ encore réabsorber :<br>
+— <strong>Aldostérone</strong> règle la réabsorption de Na⁺ (via ENaC) — voir slide suivante.<br>
+— <strong>ADH (vasopressine)</strong> règle la réabsorption d'eau (via AQP2).
+Sans ADH : CC imperméable à l'eau → urines très diluées (jusqu'à 10–20 L/j dans le diabète
+insipide). Avec ADH : insertion d'AQP2 dans la membrane → l'eau est réabsorbée →
+urines concentrées (jusqu'à 1 200 mosmol/kg).</p>
+<div class="expl-bq">Ex : si vous ne buvez rien pendant 8 heures → ADH maximale
+→ urines très jaunes et foncées (concentrées à ~800–1000 mosmol/kg, volume ~0,5 L/j).
+Si vous buvez 3 L d'eau d'un coup → ADH effondrée → urines très diluées, incolores
+(~50 mosmol/kg, volume pouvant atteindre 15 L/j).</div>
+
+<hr class="expl-sep">
+
+<div class="expl-warn"><strong>⚠️ Résumé à retenir : le néphron est une chaîne d'usinage</strong><br>
+TCP (67 %, en masse, iso-osmotique) → Anse : concentration de la médullaire + dilution du liquide
+→ TCD (5 %, dilution) → Canal collecteur (2 %, ajustement final Na⁺ + eau selon besoins hormonaux).
+Chaque segment a ses transporteurs spécifiques, ses inhibiteurs (diurétiques) et ses régulateurs.
+</div>
+
+</div>
 <svg viewBox="0 0 700 310" xmlns="http://www.w3.org/2000/svg"
      style="width:100%;max-height:310px;margin:1rem 0;display:block">
   <defs>
@@ -1316,6 +1640,68 @@ et interviennent en cas d'alcalose.</div>
 
 <h4>Canal collecteur : site de régulation fine du Na⁺</h4>
 
+<div class="expl-wrap">
+
+<h4>1. 🏘️ Deux types de cellules dans le canal collecteur</h4>
+<p>Le canal collecteur (CC) contient deux populations cellulaires aux rôles complémentaires :<br>
+— La <strong>cellule principale</strong> (majoritaire) : réabsorbe le Na⁺ et l'eau, sécrète le K⁺.<br>
+— La <strong>cellule intercalaire de type A</strong> (minoritaire) : sécrète des H⁺ et réabsorbe
+les HCO₃⁻ → participe à l'acidification des urines et à l'équilibre acido-basique.
+La cellule intercalaire de type B fait l'inverse et intervient en cas d'alcalose métabolique.</p>
+<div class="expl-bq">Ex : en acidose métabolique (ex. diarrhée chronique), les cellules intercalaires A
+s'activent → les urines deviennent très acides (pH urinaire < 5.5) → le corps élimine
+les H⁺ par les urines pour corriger l'acidose sanguine.</div>
+
+<hr class="expl-sep">
+
+<h4>2. 🚪 ENaC : la porte d'entrée du Na⁺ dans la cellule principale</h4>
+<p><strong>ENaC</strong> (Epithelial Na Channel) est un canal ionique de la membrane <em>apicale</em>
+des cellules principales. Il laisse entrer passivement le Na⁺ de la lumière vers la cellule
+(grâce au gradient créé par la Na⁺/K⁺-ATPase basolatérale). Sa particularité par rapport
+aux cotransporteurs du TCP et de la BAL : il est <strong>régulé finement par l'aldostérone</strong>
+et par d'autres mécanismes (dégradation par ubiquitinylation via Nedd4-2, phosphorylation).
+C'est ici que se joue la régulation fine du bilan sodé — les derniers 2 % de la charge filtrée.</p>
+<div class="expl-bq">Ex : l'amiloride (Modamide®) bloque directement ENaC → natriurèse + épargne potassique.
+Utilisé dans l'HTA, le syndrome de Liddle (mutation d'ENaC gain de fonction).</div>
+
+<hr class="expl-sep">
+
+<h4>3. 🔗 ROMK et le couplage Na⁺ / K⁺ : pourquoi Na⁺ retenu = K⁺ perdu</h4>
+<p>ROMK est le canal K⁺ de la membrane apicale des cellules principales. Il exporte le K⁺
+vers la lumière tubulaire (kaliurèse). Son activité est directement couplée à celle d'ENaC :<br>
+quand ENaC laisse entrer du Na⁺, cela crée un <strong>potentiel électrique négatif dans
+la lumière</strong> (charges positives entrent dans la cellule → lumière devient – relative).
+Ce gradient électrique <strong>attire le K⁺ hors de la cellule via ROMK</strong>.<br>
+Conséquence : toute stimulation d'ENaC (par l'aldostérone notamment) augmente
+<em>simultanément</em> la réabsorption de Na⁺ <em>et</em> la sécrétion de K⁺.
+L'hyperaldostéronisme → HTA + hypokaliémie, toujours ensemble.</p>
+<div class="expl-bq">Ex : patient sous spironolactone → ↓ ENaC + ↓ ROMK
+→ légère natriurèse + risque d'hyperkaliémie (épargneur K⁺).</div>
+
+<hr class="expl-sep">
+
+<h4>4. ⏰ Comment l'aldostérone agit : un délai de 1 à 6 heures</h4>
+<p>L'aldostérone est une hormone <strong>liposoluble</strong> (stéroïde) qui traverse librement
+les membranes cellulaires. Elle se fixe sur le <strong>récepteur minéralocorticoïde (MR)</strong>
+dans le cytoplasme. Le complexe aldostérone-MR migre dans le noyau et active la transcription
+de gènes codant ENaC (sous-unités α, β, γ), la Na⁺/K⁺-ATPase et ROMK.
+La synthèse des nouvelles protéines prend <strong>1 à 6 heures</strong> (effet génomique).<br>
+Tant que l'aldostérone reste élevée, ces protéines restent surexprimées → réabsorption Na⁺
+maximale.</p>
+<div class="expl-bq">Ex : en cas d'hémorragie, le SRAA s'active en minutes → rénine ↑ → ANG II ↑
+→ aldostérone ↑ → mais la rétention sodée maximale n'est effective qu'après 2–6 heures.
+C'est pour ça que le traitement d'urgence est le remplissage vasculaire, pas d'attendre les hormones.</div>
+
+<hr class="expl-sep">
+
+<div class="expl-warn"><strong>⚠️ Syndrome de Liddle vs hyperaldostéronisme primaire</strong><br>
+Dans le <strong>syndrome de Liddle</strong>, ENaC est constitutivement actif (mutation gain de fonction
+des sous-unités β ou γ) <em>indépendamment</em> de l'aldostérone — qui est justement basse
+(le VEC élevé inhibe le SRAA). Clinique identique : HTA + hypokaliémie.
+Traitement : <strong>amiloride</strong> (bloque ENaC directement) et NON la spironolactone
+(qui bloque MR mais ne peut pas agir sur un ENaC constitutivement ouvert).</div>
+
+</div>
 <svg viewBox="0 0 700 300" xmlns="http://www.w3.org/2000/svg"
      style="width:100%;max-height:300px;margin:1rem 0;display:block">
   <defs>
@@ -1711,6 +2097,67 @@ Deux mécanismes principaux :</p>
 
 <h4>Stimuli de la sécrétion de rénine</h4>
 
+<div class="expl-wrap">
+
+<h4>1. 🔄 La balance glomérulotubulaire (BGT) : un mécanisme automatique</h4>
+<p>La BGT est la capacité du TCP à réabsorber <strong>toujours ~67 % de la charge filtrée</strong>,
+quel que soit le débit de filtration glomérulaire. Deux mécanismes physiques expliquent cela :<br>
+— <strong>Pression oncotique péritubulaire</strong> : quand le DFG augmente, la fraction
+filtrée (= DFG/DSR) augmente → davantage de protéines restent dans les capillaires péritubulaires
+→ pression oncotique ↑ → force de succion qui tire le réabsorptat vers le capillaire ↑.<br>
+— <strong>Gradient lumino-cellulaire</strong> : plus de Na⁺ dans la lumière → gradient plus fort
+→ davantage d'entrée via NHE3 et SGLT2 → réabsorption adaptée.</p>
+<div class="expl-bq">Ex : si le DFG double (ex. grossesse normale où le DFG augmente de 50 %)
+→ la charge filtrée double → le TCP absorbe deux fois plus automatiquement → la natriurèse
+finale ne change pas drastiquement.</div>
+
+<hr class="expl-sep">
+
+<h4>2. 🏭 Les cellules juxta-glomérulaires (JGA) : les capteurs de la rénine</h4>
+<p>La rénine est produite par les <strong>cellules myoépithélioïdes</strong> (= cellules JGA)
+situées dans la paroi de l'<strong>artériole afférente</strong>, juste avant le glomérule.
+Ces cellules "sentent" la pression de perfusion locale : quand la pression baisse, elles
+libèrent la rénine dans le sang. La rénine est l'enzyme qui clive l'angiotensinogène hépatique
+en angiotensine I → c'est le point de départ de toute la cascade SRAA.</p>
+<div class="expl-bq">Ex : en cas de sténose de l'artère rénale, la pression en aval de la sténose
+est basse → cellules JGA sous-perfusées → rénine ↑↑ → ANG II ↑↑ → aldostérone ↑
+→ HTA rénovasculaire.</div>
+
+<hr class="expl-sep">
+
+<h4>3. 👁️ La macula densa : le "compteur de sel" du rein</h4>
+<p>La <strong>macula densa</strong> est un groupe de cellules épithéliales spécialisées du TCD
+en contact étroit avec les cellules JGA. Elle détecte la concentration de NaCl dans
+le liquide tubulaire qui arrive à ce niveau. Quand [NaCl] tubulaire baisse
+(signal de faible débit tubulaire = faible DFG = hypovolémie), la macula densa libère
+des médiateurs pro-rénine (prostaglandines, NO) → stimulation des cellules JGA → ↑ rénine.
+Ce mécanisme s'appelle le <strong>feedback tubulo-glomérulaire</strong>.</p>
+<div class="expl-bq">Ex : en cas de déshydratation → DFG réduit → [NaCl] à la macula densa ↓
+→ signal "le débit tubulaire est faible" → ↑ rénine → cascade SRAA → rétention sodée.
+C'est un signal local intrarrénal d'économie de sodium.</div>
+
+<hr class="expl-sep">
+
+<h4>4. ⚡ Le système nerveux sympathique : accélérateur d'urgence de la rénine</h4>
+<p>Les cellules JGA reçoivent une innervation sympathique. La stimulation des <strong>récepteurs β₁</strong>
+(adrénaline, noradrénaline) déclenche directement la sécrétion de rénine.
+Ce mécanisme est particulièrement important lors d'un <strong>stress aigu ou d'une hémorragie</strong> :
+en quelques secondes, le système nerveux sympathique s'active → rénine libérée
+→ ANG II monte → vasoconstriction + rétention sodée.</p>
+<div class="expl-bq">Ex : c'est pourquoi les bêtabloquants (métoprolol, bisoprolol) ont un effet
+antihypertenseur : en bloquant les récepteurs β₁, ils diminuent la sécrétion de rénine
+(effet anti-SRAA indirect) en plus de leur effet chronotrope négatif.</div>
+
+<hr class="expl-sep">
+
+<div class="expl-info"><strong>💡 Rétrocontrôle négatif : l'ANG II inhibe sa propre production</strong><br>
+L'angiotensine II inhibe directement la sécrétion de rénine par les cellules JGA.
+C'est un rétrocontrôle négatif classique qui évite une emballement du système.
+Conséquence pratique : sous IEC ou ARA2, la chute de l'ANG II lève ce frein → rénine ↑↑
+(parfois appelée "hypersécrétion réactionnelle"). Cette ↑ de rénine sous IEC/ARA2 est
+un signe d'efficacité du médicament, pas d'un problème.</div>
+
+</div>
 <svg viewBox="0 0 700 290" xmlns="http://www.w3.org/2000/svg"
      style="width:100%;max-height:290px;margin:1rem 0;display:block">
   <defs>
@@ -1855,6 +2302,60 @@ en routine.</div>
 
 <h4>Cascade complète</h4>
 
+<div class="expl-wrap">
+
+<h4>1. 🏗️ La cascade SRAA étape par étape</h4>
+<p>Le SRAA (Système Rénine-Angiotensine-Aldostérone) est une cascade hormonale à 3 acteurs principaux :<br>
+<strong>Étape 1 — Rénine</strong> (enzyme) : sécrétée par les cellules JGA du rein.
+Elle clive l'<strong>angiotensinogène</strong> (produit par le foie, toujours disponible en grande quantité)
+→ libère l'<strong>angiotensine I</strong>, un décapeptide biologiquement inactif.<br>
+<strong>Étape 2 — ECA</strong> (Enzyme de Conversion de l'Angiotensine) : enzyme endothéliale
+présente surtout dans les <strong>capillaires pulmonaires</strong>, mais aussi rénaux et vasculaires.
+Elle clive 2 acides aminés de l'ANG I → produit l'<strong>angiotensine II</strong>, actif.<br>
+<strong>Étape 3 — Angiotensine II</strong> : l'effecteur final. Agit via ses récepteurs AT1 et AT2.</p>
+<div class="expl-bq">Ex : lors d'une randonnée avec transpiration → ↓ VEC → rénine libérée par le rein →
+passe dans le sang → rejoint le foie (angiotensinogène) → ANG I formée → passe dans les poumons
+(ECA) → ANG II → retient le Na⁺, constricte les vaisseaux, stimule la soif.</div>
+
+<hr class="expl-sep">
+
+<h4>2. 🎯 Les 5 effets majeurs de l'angiotensine II (via AT1)</h4>
+<p><strong>① Surrénale (zone glomérulée)</strong> : stimule la synthèse d'aldostérone → effet
+différé (1–6h) mais durable sur la réabsorption de Na⁺ au canal collecteur.<br>
+<strong>② TCP direct</strong> : stimule NHE3 via AT1 sur les cellules tubulaires proximales
+→ ↑ réabsorption de Na⁺ et HCO₃⁻ au TCP (effet direct, sans aldostérone).<br>
+<strong>③ Vasculaire</strong> : puissante vasoconstriction (artérioles efférentes >>afférentes)
+→ ↑ PA + ↑ pression glomérulaire → ↑ DFG maintenu malgré ↓ PA systémique.<br>
+<strong>④ Hypothalamus</strong> : stimule la soif et la sécrétion d'ADH → rétention d'eau.<br>
+<strong>⑤ Rein</strong> : constriction efférente → ↑ fraction filtrée → ↑ pression oncotique
+péritubulaire → ↑ BGT au TCP.</p>
+<div class="expl-bq">Ex : en choc hémorragique, l'ANG II monte en quelques minutes
+→ vasoconstriction intense → maintien de la PA centrale → rétention sodée
+→ sécrétion d'ADH (oligurie) → tout pour sauvegarder le volume circulant.</div>
+
+<hr class="expl-sep">
+
+<h4>3. 💊 Les médicaments qui bloquent le SRAA : où et comment</h4>
+<p>Quatre classes médicamenteuses bloquent le SRAA à des niveaux différents :<br>
+— <strong>IEC</strong> (ramipril, périndopril, énalapril) : bloquent l'ECA → ↓ ANG II.
+Conséquence biologique : ↑ rénine (réactionnelle), ↑ ANG I (non convertie), ↓ aldostérone.
+Accumulation de bradykinine (non dégradée par l'ECA) → toux sèche (10 % des patients).<br>
+— <strong>ARA2 / sartans</strong> (losartan, valsartan) : bloquent le récepteur AT1 → ↓ effets de l'ANG II.
+Avantage : pas de toux (pas de bradykinine). ANG II ↑↑ mais ne peut pas agir sur AT1.<br>
+— <strong>Aliskiren</strong> : inhibe directement la rénine → ↓↓ ANG I et II.<br>
+— <strong>Spironolactone/éplérénone</strong> : bloquent le récepteur MR → ↓ effets de l'aldostérone.</p>
+<div class="expl-bq">Ex : un patient qui tousse sous ramipril → switch vers un sartan (losartan)
+→ même efficacité antihypertensive sans toux, car pas d'accumulation de bradykinine.</div>
+
+<hr class="expl-sep">
+
+<div class="expl-warn"><strong>⚠️ Danger : association IEC + ARA2 (double blocage du SRAA)</strong><br>
+Contrairement à une idée reçue, associer IEC + ARA2 <strong>n'est pas plus efficace</strong> et est
+<strong>dangereuse</strong> : risque majeur d'hyperkaliémie et d'IRA. Seul le triple blocage
+IEC + spironolactone est parfois utilisé dans l'IC avec surveillance rapprochée.
+Association IEC + ARA2 : contre-indiquée en pratique courante.</div>
+
+</div>
 <svg viewBox="0 0 700 380" xmlns="http://www.w3.org/2000/svg"
      style="width:100%;max-height:380px;margin:1rem 0;display:block">
   <defs>
@@ -2039,6 +2540,64 @@ C'est le mécanisme d'homéostasie du K⁺ indépendant du VEC.</div>
 
 <h3>📖 Explication</h3>
 
+<div class="expl-wrap">
+
+<h4>1. 🔑 Deux stimuli indépendants de l'aldostérone : volume ET potassium</h4>
+<p>L'aldostérone joue un <strong>double rôle</strong> physiologique selon le stimulus qui la déclenche :<br>
+— <strong>Via l'angiotensine II</strong> (réponse volumique) : l'ANG II stimule la zone glomérulée
+de la surrénale → ↑ aldostérone → ↑ réabsorption Na⁺ au canal collecteur → ↑ VEC.
+C'est la réponse à l'hypovolémie ou à la baisse de PA.<br>
+— <strong>Via la kaliémie</strong> (réponse potassique) : une hyperkaliémie même minime (~0,5 mmol/L)
+dépolarise les cellules de la zone glomérulée → entrée de Ca²⁺ → activation enzymatique
+→ ↑ aldostérone → ↑ ROMK → ↑ kaliurèse → correction de la kaliémie.
+Ce mécanisme est <strong>totalement indépendant de la volémie</strong>.</p>
+<div class="expl-bq">Ex : si vous mangez un repas très riche en K⁺ (bananes, abricots secs)
+→ kaliémie ↑ légèrement → aldostérone ↑ → urines riches en K⁺ → kaliémie revenue à la normale
+en 2–3h, sans aucune modification de la PA ou du VEC. C'est la régulation silencieuse du K⁺.</div>
+
+<hr class="expl-sep">
+
+<h4>2. ⚙️ Le mécanisme intracellulaire de l'aldostérone pas à pas</h4>
+<p>L'aldostérone est un stéroïde liposoluble : elle diffuse librement à travers les membranes.
+Dans la cellule principale du canal collecteur :<br>
+<strong>① Fixation</strong> sur le récepteur minéralocorticoïde (MR) libre dans le cytoplasme.<br>
+<strong>② Translocation</strong> du complexe aldostérone-MR vers le noyau.<br>
+<strong>③ Fixation sur les ARE</strong> (Aldosterone Response Elements) de l'ADN → activation
+de la transcription des gènes cibles.<br>
+<strong>④ Synthèse</strong> de nouvelles protéines : sous-unités α-ENaC, sous-unités de la Na⁺/K⁺-ATPase, ROMK.<br>
+<strong>⑤ Insertion</strong> dans la membrane → augmentation durable de la réabsorption de Na⁺ et sécrétion de K⁺.<br>
+Délai : <strong>1–6 heures</strong>. Durée d'effet : tant que l'aldostérone est présente.</p>
+<div class="expl-bq">Ex : on donne de la fludrocortisone (analogue synthétique de l'aldostérone)
+dans la maladie d'Addison → effet sur la rétention sodée visible après 2–4 heures, effet maximum
+après 1–2 jours (accumulation des nouvelles protéines).</div>
+
+<hr class="expl-sep">
+
+<h4>3. 🛡️ Pourquoi le cortisol n'active-t-il pas le récepteur MR au repos ?</h4>
+<p>Le cortisol (produit en grande quantité : ~20–30 mg/j) a une affinité pour MR aussi grande
+que l'aldostérone. Sans protection, il activerait en permanence MR dans le rein.
+La cellule tubulaire est protégée par l'enzyme <strong>11β-HSD2</strong>
+(11β-hydroxystéroïde déshydrogénase de type 2) qui convertit le cortisol en cortisone
+(inactive pour MR) localement avant qu'il n'atteigne le récepteur.
+L'aldostérone, elle, n'est pas substrat de 11β-HSD2 → elle active MR normalement.</p>
+<div class="expl-bq">Ex : la réglisse contient de l'acide glycyrrhizique qui inhibe la 11β-HSD2
+→ le cortisol active MR → HTA + hypokaliémie + aldostérone basse.
+C'est le "syndrome d'apparent excès de minéralocorticoïdes" acquis (non génétique).</div>
+
+<hr class="expl-sep">
+
+<h4>4. 🔓 L'échappement à l'aldostérone : pourquoi le Conn n'œdématie pas ?</h4>
+<p>On s'attendrait à ce qu'une aldostérone chroniquement élevée entraîne une rétention sodée
+infinie → œdèmes massifs. En réalité, le phénomène d'<strong>échappement</strong> y met fin :<br>
+Quand le VEC s'étend suffisamment : ↑ pression de perfusion rénale + ↑ ANF sécrété
+par les oreillettes → ↑ natriurèse de pression → le rein excrète le surplus de Na⁺
+malgré l'aldostérone élevée → l'équilibre sodé est rétabli à un <strong>nouveau set-point</strong>
+avec VEC légèrement élevé et PA haute, mais sans œdème massif.</p>
+<div class="expl-bq">Ex : patient avec syndrome de Conn → HTA + hypokaliémie mais jamais d'anasarque.
+À l'opposé, un patient avec IC ou cirrhose N'échappe PAS à l'aldostérone car
+le débit cardiaque effectif reste bas malgré l'expansion du VEC → le SRAA reste activé → œdèmes progressifs.</div>
+
+</div>
 <svg viewBox="0 0 700 300" xmlns="http://www.w3.org/2000/svg"
      style="width:100%;max-height:300px;margin:1rem 0;display:block">
   <defs>
@@ -2439,6 +2998,61 @@ Mécanisme de sécurité final. Contribue à l'échappement à l'aldostérone.</
 
 <h4>Boucle de régulation VEC — SRAA vs ANF</h4>
 
+<div class="expl-wrap">
+
+<h4>1. 💓 L'ANF : le thermomètre du volume cardiaque</h4>
+<p>L'<strong>ANF (facteur natriurétique auriculaire, ou ANP)</strong> est un peptide de 28 acides aminés
+synthétisé et stocké dans les cardiomyocytes des <strong>oreillettes</strong>.
+Son stimulus : l'<strong>étirement de la paroi auriculaire</strong>, c'est-à-dire une augmentation
+de la pression de remplissage = augmentation du VEC ou de la volémie.
+C'est le "baromètre volumique" du cœur : les oreillettes sentent qu'elles sont trop pleines
+et libèrent l'ANF pour dire au rein "excrète du sel".</p>
+<div class="expl-bq">Ex : en cas de transfusion sanguine rapide → ↑ pression auriculaire
+→ ANF libéré en quelques minutes → natriurèse commençant 15–30 min après.
+C'est un des mécanismes de protection contre la surcharge volémique aiguë.</div>
+
+<hr class="expl-sep">
+
+<h4>2. 🎬 Les 5 effets de l'ANF sur le rein</h4>
+<p>L'ANF agit via un récepteur membranaire à activité guanylyl-cyclase → ↑ GMPc → effets multiples :<br>
+<strong>① ↑ DFG</strong> : vasodilatation de l'artériole afférente + légère constriction efférente
+→ ↑ pression de filtration → ↑ charge filtrée de Na⁺ → plus à excréter.<br>
+<strong>② ↓ NHE3 au TCP</strong> : phosphorylation inhibitrice → ↓ réabsorption proximale.<br>
+<strong>③ ↓ Rénine</strong> : inhibition directe des cellules JGA → ↓ production de rénine.<br>
+<strong>④ ↓ Aldostérone</strong> : inhibition directe de la zone glomérulée surrénalienne.<br>
+<strong>⑤ Vasodilatation artériolaire systémique</strong> : ↓ résistances vasculaires → ↓ PA légère.</p>
+<div class="expl-bq">Ex : en IC légère, l'ANF monte en réponse à la surcharge → compense partiellement
+la rétention sodée du SRAA. Mais dans l'IC sévère, l'ANF est si élevé et le SRAA si actif
+que les reins deviennent résistants à l'ANF → l'IC progresse malgré les taux élevés d'ANF.</div>
+
+<hr class="expl-sep">
+
+<h4>3. 🏥 BNP et NT-proBNP : biomarqueurs de l'insuffisance cardiaque</h4>
+<p>Le <strong>BNP (Brain Natriuretic Peptide)</strong> est un peptide analogue de l'ANF mais sécrété
+par les <strong>cardiomyocytes ventriculaires</strong> en réponse à la surcharge de pression ou de volume.
+Le <strong>NT-proBNP</strong> est le fragment N-terminal inactif (demi-vie plus longue, plus stable
+au laboratoire). Ces deux marqueurs s'élèvent en cas de <strong>distension ventriculaire</strong>,
+c'est-à-dire de surcharge cardiaque.
+Seuils diagnostiques d'IC aiguë : BNP > 100 pg/mL ou NT-proBNP > 300 pg/mL.</p>
+<div class="expl-bq">Ex : patient aux urgences avec dyspnée aiguë → BNP à 850 pg/mL
+→ IC aiguë probable (à distinguer de la bronchospasme ou embolie pulmonaire).
+BNP < 100 pg/mL exclut quasi-formellement l'IC comme cause de dyspnée → chercher ailleurs.</div>
+
+<hr class="expl-sep">
+
+<h4>4. ⚖️ L'antagonisme SRAA / ANF : deux systèmes en miroir</h4>
+<p>Le SRAA et l'ANF s'opposent en permanence pour maintenir le VEC dans une plage optimale :<br>
+— <strong>SRAA</strong> : activé par l'hypovolémie → retient Na⁺ et eau → ↑ VEC.<br>
+— <strong>ANF/BNP</strong> : activé par l'hypervolémie → excrète Na⁺ → ↓ VEC.<br>
+En bonne santé, ces deux systèmes s'équilibrent → normovoluémie stable.
+En pathologie, l'un des deux peut prendre le dessus : dans l'HTA essentielle → SRAA
+légèrement dominant → VEC légèrement élevé. Dans l'IC → les deux sont élevés mais
+le SRAA "gagne" car le débit cardiaque effectif reste bas.</p>
+<div class="expl-bq">Ex : sacubitril/valsartan (Entresto®) = ARA2 (↓ effets ANG II) + inhibiteur de la
+néprilysine (enzyme qui dégrade ANF/BNP) → les deux effets se renforcent → ↑ ANF actif
++ ↓ ANG II → médicament innovant dans l'IC à FEVG réduite (réduit la mortalité de 20 %).</div>
+
+</div>
 <svg viewBox="0 0 700 280" xmlns="http://www.w3.org/2000/svg"
      style="width:100%;max-height:280px;margin:1rem 0;display:block">
   <defs>
@@ -2581,6 +3195,60 @@ FENa = (UNa × PrCr) / (PNa × UrCr) × 100 : < 1 % = rétention maximale.</div>
 
 <h4>Tableau comparatif — Hypo vs Eu vs Hypervolémie</h4>
 
+<div class="expl-wrap">
+
+<h4>1. 🗺️ Trois états du VEC : comprendre le tableau d'un coup d'œil</h4>
+<p>La biologie du Na⁺ urinaire et des hormones ne se lit que dans le contexte clinique.
+Il faut toujours commencer par évaluer cliniquement le VEC du patient :<br>
+— <strong>Hypovolémie</strong> (VEC ↓) : signes de déshydratation EC (pli cutané, tachycardie,
+hypotension orthostatique, muqueuses sèches, perte de poids récente, oligurie).<br>
+— <strong>Normovolémie</strong> : aucun signe d'expansion ni de contraction du VEC.<br>
+— <strong>Hypervolémie</strong> (VEC ↑) : œdèmes déclives (chevilles, sacrum), épanchements
+(ascite, plèvre), turgescence jugulaire, crépitants pulmonaires (OAP).</p>
+<div class="expl-bq">Ex : deux patients avec UNa = 10 mmol/L et créatinine ↑ :
+l'un avec pli cutané + perte de poids → IRA fonctionnelle sur déshydratation → réhydrater.
+L'autre avec œdèmes + crépitants → IC décompensée → débit cardiaque effectif bas → SRAA activé
+malgré un VEC total élevé → diurétiques, pas de remplissage !</div>
+
+<hr class="expl-sep">
+
+<h4>2. 🔬 Interpréter le Na⁺ urinaire (UNa) et la FENa</h4>
+<p>Ces deux paramètres mesurent l'intensité de la réabsorption rénale de Na⁺ :<br>
+— <strong>UNa &lt; 20 mmol/L (FENa &lt; 1 %)</strong> : SRAA maximal → le rein retient tout
+le Na⁺ → cause : hypovolémie vraie (déshydratation, hémorragie) OU débit cardiaque effectif bas
+(IC, cirrhose, SN).<br>
+— <strong>UNa > 40 mmol/L (FENa > 2 %)</strong> : le rein ne retient pas → cause en contexte d'IRA :
+nécrose tubulaire aiguë (les tubules sont lésés → ne réabsorbent plus).<br>
+— <strong>Piège majeur</strong> : les diurétiques invalident FENa (faussement élevée même en hypovolémie).
+Dans ce cas : utiliser la <strong>FE Urée</strong> (< 35 % = IRA fonctionnelle, non affectée par diurétiques).</p>
+<div class="expl-bq">Ex : patient cirrhotique avec ascite, créatinine qui monte, UNa à 8 mmol/L →
+IRA fonctionnelle sur syndrome hépato-rénal → piège : ne pas remplir avec du SSI (aggrave l'ascite)
+→ expansion avec albumine IV + terlipressine.</div>
+
+<hr class="expl-sep">
+
+<h4>3. 🤔 Le paradoxe de l'IC, de la cirrhose et du syndrome néphrotique</h4>
+<p>Ces 3 pathologies partagent un mécanisme commun : le VEC <em>total</em> est augmenté (œdèmes)
+mais le <em>débit cardiaque effectif</em> est bas → les barorécepteurs et les reins
+interprètent cela comme une hypovolémie → SRAA activé → rétention sodée → aggravation des œdèmes.
+<br>— <strong>IC</strong> : ↓ débit cardiaque → ↓ débit cardiaque effectif.<br>
+— <strong>Cirrhose</strong> : vasodilatation splanchnique massive → pooling sanguin dans le territoire
+mésentérique → ↓ volume artériel efficace.<br>
+— <strong>Syndrome néphrotique</strong> : ↓ albumine → ↓ pression oncotique → fuite eau vers interstitium
+→ ↓ volume plasmatique effectif.</p>
+<div class="expl-bq">Ex : chez le cirrhotique avec ascite → diurétiques (spironolactone ± furosémide)
++ restriction sodée (&lt; 2 g NaCl/j) + surveiller la créatinine (risque d'IRA fonctionnelle
+si diurèse trop agressive).</div>
+
+<hr class="expl-sep">
+
+<div class="expl-warn"><strong>⚠️ IRA fonctionnelle vs organique : un diagnostic crucial</strong><br>
+<strong>Fonctionnelle (pré-rénale)</strong> : SRAA activé → UNa &lt; 20, FENa &lt; 1 %, urée/créat > 60, urines concentrées.
+Le rein est sain, il "fait son travail" face à une hypovolémie. Traitement : corriger la cause (réhydrater, améliorer le débit cardiaque).<br>
+<strong>Organique (NTA)</strong> : tubules lésés → UNa > 40, FENa > 2 %, sédiment urinaire actif (cylindres granuleux).
+Traitement : protéger le rein, éviter le sur-remplissage, néphroprotection.</div>
+
+</div>
 <svg viewBox="0 0 700 340" xmlns="http://www.w3.org/2000/svg"
      style="width:100%;max-height:340px;margin:1rem 0;display:block">
   <defs>
@@ -2758,6 +3426,63 @@ déshydratation. À distinguer du primaire par l'ARP : ↑ dans le secondaire, e
 
 <h4>Physiopathologie du syndrome de Conn</h4>
 
+<div class="expl-wrap">
+
+<h4>1. 🎭 Pourquoi le syndrome de Conn est-il sous-diagnostiqué ?</h4>
+<p>Le syndrome de Conn (hyperaldostéronisme primaire par adénome surrénalien) est la cause
+la plus fréquente d'HTA secondaire endocrine, représentant <strong>5 à 10 % de toutes les HTA</strong>.
+Il est souvent confondu avec une HTA essentielle car ses signes sont trompeurs :
+l'hypokaliémie est absente dans <strong>50 à 60 % des cas</strong> (formes normokaliémiques).
+Il faut y penser systématiquement devant une HTA résistante (≥ 3 médicaments à pleine dose)
+ou devant une HTA chez un patient jeune sans autre facteur de risque.</p>
+<div class="expl-bq">Ex : un patient de 40 ans avec HTA à 3 médicaments et K⁺ à 3,5 mmol/L (limite basse)
+→ ratio Aldo/ARP → si élevé → confirmer → scanner surrénalien → CVS
+→ chirurgie si adénome unilatéral → guérison !</div>
+
+<hr class="expl-sep">
+
+<h4>2. 🔗 La physiopathologie en cascade : comment un petit adénome cause tout ça</h4>
+<p>L'adénome de la zone glomérulée sécrète de l'aldostérone de façon <strong>autonome et continue</strong>,
+indépendamment de la rénine et de l'ANG II (qui sont effondrées par le rétrocontrôle négatif).
+Cette aldostérone en excès agit sur ENaC et ROMK dans le canal collecteur → cascade :<br>
+<strong>① Rétention Na⁺</strong> → ↑ VEC → ↑ PA systolique + diastolique.<br>
+<strong>② Perte K⁺</strong> (via ROMK) → hypokaliémie → faiblesse musculaire, crampes, polyurie
+(le K⁺ bas réduit la réponse à l'ADH → résistance acquise à l'ADH au niveau du CC).<br>
+<strong>③ Sécrétion H⁺</strong> (cellules intercalaires stimulées) → alcalose métabolique → ↑ HCO₃⁻ plasmatique.</p>
+<div class="expl-bq">Ex : la triade classique à l'ECG d'une hypokaliémie sévère → onde U, aplatissement de T,
+ST bas → risques d'arythmies → dans le Conn sévère, des torsades de pointe ont été décrites.</div>
+
+<hr class="expl-sep">
+
+<h4>3. 🔍 Le diagnostic : ratio aldostérone/rénine plasmatique (RAR)</h4>
+<p>Le <strong>RAR</strong> est le test de dépistage de référence.
+Il s'interprète ainsi : aldostérone (pg/mL) / ARP (ng/mL/h).<br>
+— Si <strong>RAR > 30 avec aldostérone > 150 pg/mL</strong> → forte probabilité d'hyperaldostéronisme primaire.<br>
+— Conditions de prélèvement essentielles : le matin, après 2h en position assise, arrêt
+des médicaments interférents (bêtabloquants, IEC, ARA2, spironolactone à arrêter 4–6 semaines avant
+si possible, remplacés par un alpha-bloquant ou inhibiteur calcique qui n'interfèrent pas).<br>
+— Le test de confirmation (test de charge sodée ou fludrocortisone) vérifie que l'aldostérone
+ne se supprime pas malgré un apport sodé élevé (chez un sujet sain, l'expansion du VEC
+inhibe l'aldostérone).</p>
+<div class="expl-bq">Ex : test de charge sodée → perfusion de 2L de SSI en 4h → mesure aldostérone.
+Résultat normal : aldostérone &lt; 50 pg/mL (supprimée). Résultat dans le Conn :
+aldostérone reste > 100 pg/mL malgré le remplissage → confirme l'autonomie surrénalienne.</div>
+
+<hr class="expl-sep">
+
+<h4>4. 🏥 Du dépistage à la chirurgie : les 5 étapes</h4>
+<p><strong>Étape 1</strong> — Suspicion clinique : HTA résistante, HTA jeune, hypokaliémie spontanée.<br>
+<strong>Étape 2</strong> — Dépistage : RAR plasmatique.<br>
+<strong>Étape 3</strong> — Confirmation : test de charge sodée ou test au fludrocortisone.<br>
+<strong>Étape 4</strong> — Localisation : scanner surrénalien (adénome vs hyperplasie bilatérale)
+puis <strong>cathétérisme des veines surrénaliennes (CVS)</strong> pour confirmer l'unilatéralité
+(indispensable avant chirurgie car le scanner peut se tromper dans 20–30 % des cas).<br>
+<strong>Étape 5</strong> — Traitement : chirurgie (adénome unilatéral) ou spironolactone/éplérénone (bilatéral).</p>
+<div class="expl-bq">Ex : après surrénalectomie gauche pour adénome de Conn → kaliémie se normalise
+en quelques jours (plus d'excès d'aldostérone). PA : améliorée dans ~50 % des cas
+(les dommages vasculaires chroniques de l'HTA persistante peuvent maintenir une HTA résiduelle).</div>
+
+</div>
 <svg viewBox="0 0 700 300" xmlns="http://www.w3.org/2000/svg"
      style="width:100%;max-height:300px;margin:1rem 0;display:block">
   <defs>
@@ -3127,6 +3852,65 @@ Situation inverse du syndrome de Conn. Traitement : fludrocortisone + hydrocorti
 
 <h4>Hyperaldostéronisme secondaire — mécanisme et causes</h4>
 
+<div class="expl-wrap">
+
+<h4>1. 🔄 Hyperaldostéronisme secondaire : normal vs pathologique</h4>
+<p>Dans l'hyperaldostéronisme <strong>secondaire</strong>, la sécrétion d'aldostérone est élevée
+<em>en réponse</em> à une activation du SRAA — ce n'est pas la surrénale qui est malade,
+c'est le signal en amont qui est trop fort. La rénine (ARP) est donc toujours
+<strong>élevée aussi</strong> (les deux montent ensemble). C'est la différence fondamentale
+avec le primaire (où l'aldostérone est autonome et la rénine est effondrée par rétrocontrôle).<br>
+Un hyperaldostéronisme secondaire <em>physiologique</em> survient lors d'une hypovolémie
+(déshydratation, hémorragie) — c'est la bonne réponse du corps.
+Il devient <em>pathologique</em> quand la cause sous-jacente est chronique.</p>
+<div class="expl-bq">Ex : une jeune femme de 25 ans court un marathon par 35°C, perd 3 L de sueur
+→ ARP et aldostérone montent → UNa s'effondre → elle retient le sel pour compenser.
+C'est de l'hyperaldostéronisme secondaire physiologique — parfaitement normal.</div>
+
+<hr class="expl-sep">
+
+<h4>2. 🩻 Sténose de l'artère rénale : le classique "HTA rénovasculaire"</h4>
+<p>Une sténose de l'artère rénale (athérosclérose chez le sujet âgé, dysplasie fibromusculaire
+chez la femme jeune) réduit la pression en aval de la sténose → les cellules JGA du rein
+concerné "croient" être en hypovolémie → ↑↑ rénine → ↑↑ ANG II → vasoconstriction +
+↑ aldostérone. Le rein controlatéral sain tente de corriger en excrétant du Na⁺,
+mais l'ANG II locale maintient l'HTA.
+Signes évocateurs : HTA sévère résistante + souffle périombilical auscultatoire + ↑ créatinine
+sous IEC (qui levait la vasoconstriction efférente protectrice).</p>
+<div class="expl-bq">Ex : test diagnostique — si la créatinine s'élève de > 30 % après introduction
+d'un IEC → penser sténose bilatérale (ou sur rein unique). L'IEC lève la vasoconstriction
+de l'artériole efférente → ↓ pression de filtration → IRA "révélatrice".</div>
+
+<hr class="expl-sep">
+
+<h4>3. ❤️ Insuffisance cardiaque, cirrhose, syndrome néphrotique : le trio des œdèmes</h4>
+<p>Ces trois pathologies provoquent une activation chronique du SRAA malgré un VEC total élevé :<br>
+— <strong>IC</strong> : ↓ débit cardiaque → ↓ perfusion rénale → SRAA activé. Le cœur ne pompe pas
+assez → les reins retiennent Na⁺ et eau → aggravation de la surcharge → cercle vicieux.<br>
+— <strong>Cirrhose</strong> : les vaisseaux splanchniques (du tube digestif) se dilatent massivement
+sous l'effet des médiateurs de la cirrhose → le sang "s'accumule" dans l'abdomen
+→ volume "effectif" perçu par les barorécepteurs centraux baisse → SRAA activé → ascite.<br>
+— <strong>Syndrome néphrotique</strong> : ↓ albumine → ↓ pression oncotique → fuite d'eau dans l'interstitium
+→ œdèmes → volume vasculaire ↓ → SRAA activé → rétention sodée.</p>
+<div class="expl-bq">Ex : ascite chez un cirrhotique → spironolactone 100–400 mg/j + furosémide 40–160 mg/j
++ restriction sodée (&lt; 2 g NaCl/j). Objectif : perte de poids ≤ 500 g/j (sans ascite périphérique)
+ou ≤ 1 kg/j (avec ascite et œdèmes). Trop rapide → risque d'IRA fonctionnelle.</div>
+
+<hr class="expl-sep">
+
+<h4>4. 🔑 La clé du diagnostic différentiel : la rénine (ARP)</h4>
+<p>Face à une aldostérone élevée, la mesure de l'ARP tranche le diagnostic :<br>
+— <strong>ARP effondrée (&lt; 0.5 ng/mL/h) avec aldostérone élevée</strong> → hyperaldostéronisme
+<strong>PRIMAIRE</strong> (la surrénale est autonome, elle échappe au contrôle de la rénine).<br>
+— <strong>ARP élevée (> 2 ng/mL/h) avec aldostérone élevée</strong> → hyperaldostéronisme
+<strong>SECONDAIRE</strong> (la rénine est activée, elle entraîne l'aldostérone avec elle).<br>
+Le <strong>ratio Aldo/ARP</strong> est élevé dans le primaire, normal ou bas dans le secondaire.
+Ce ratio est le test de dépistage standard recommandé par les sociétés d'endocrinologie.</p>
+<div class="expl-bq">Ex : patient avec HTA + K⁺ à 2,9 → dosage ARP et aldostérone simultanément.
+Résultat : Aldo = 400 pg/mL, ARP = 0.2 ng/mL/h → ratio = 2 000 (très élevé) → Conn.
+Vs : même bilan chez un cirrhotique : Aldo = 300 pg/mL, ARP = 8 ng/mL/h → ratio = 37 → secondaire.</div>
+
+</div>
 <svg viewBox="0 0 700 300" xmlns="http://www.w3.org/2000/svg"
      style="width:100%;max-height:300px;margin:1rem 0;display:block">
   <defs>
@@ -3485,6 +4269,90 @@ Situation inverse du syndrome de Conn. Traitement : fludrocortisone + hydrocorti
 </div>
 </div>
 
+<div class="slide content-slide" id="slide-tableau">
+<h2>📊 Tableau Bilan — Tout ce que vous avez appris</h2>
+
+<h3>🧪 Valeurs normales à connaître</h3>
+<div class="table-wrap"><table>
+<thead><tr><th>Paramètre</th><th>Valeur normale</th><th>Signification</th></tr></thead>
+<tbody>
+<tr><td>Natrémie [Na⁺]p</td><td>138–145 mmol/L</td><td>Concentration plasmatique — reflète le rapport Na⁺/eau</td></tr>
+<tr><td>Osmolalité plasmatique</td><td>285–295 mosmol/kg</td><td>Calculée : 2×[Na⁺] + [Urée] + [Glucose]</td></tr>
+<tr><td>Na⁺ corporel total</td><td>~60 mmol/kg</td><td>4 mol pour 70 kg — 1/3 os, 2/3 échangeable</td></tr>
+<tr><td>Na⁺ échangeable</td><td>~2 800 mmol</td><td>Principalement dans le MEC</td></tr>
+<tr><td>Charge filtrée Na⁺</td><td>~25 000 mmol/j</td><td>DFG (180 L/j) × [Na⁺]p (142 mmol/L)</td></tr>
+<tr><td>Natriurèse (UNa)</td><td>= apports (~150 mmol/j)</td><td>Variable selon le bilan sodé</td></tr>
+<tr><td>FENa (fraction excrétion)</td><td>1–2 %</td><td>&lt;1% = rétention max ; &gt;2% = NTA ou expansion VEC</td></tr>
+</tbody>
+</table></div>
+
+<h3>🏗️ Réabsorption tubulaire du Na⁺</h3>
+<div class="table-wrap"><table>
+<thead><tr><th>Segment</th><th>% réabsorbé</th><th>Transporteur clé</th><th>H₂O suit ?</th><th>Diurétique</th></tr></thead>
+<tbody>
+<tr><td><strong>TCP</strong></td><td>67 %</td><td>NHE3 (33 %), SGLT2, Na-K-ATPase</td><td>Oui (AQP1, iso-osmotique)</td><td>Acétazolamide, Gliflozines</td></tr>
+<tr><td><strong>BAL (anse)</strong></td><td>25 %</td><td>NKCC2</td><td>Non (segment diluteur !)</td><td>Furosémide, bumétanide</td></tr>
+<tr><td><strong>TCD</strong></td><td>5 %</td><td>NCC</td><td>Non</td><td>Thiazides (HCTZ, chlortalidone)</td></tr>
+<tr><td><strong>Canal collecteur</strong></td><td>2 %</td><td>ENaC (aldostérone), AQP2 (ADH)</td><td>Variable (ADH)</td><td>Amiloride, spironolactone</td></tr>
+</tbody>
+</table></div>
+
+<h3>🔄 Le SRAA — récapitulatif</h3>
+<div class="table-wrap"><table>
+<thead><tr><th>Étape</th><th>Acteur</th><th>Produit par</th><th>Stimulus</th><th>Cible thérapeutique</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>Rénine</td><td>Cellules JGA (rein)</td><td>↓ PA, ↓ [NaCl] macula densa, SNS β₁</td><td>Aliskiren</td></tr>
+<tr><td>2</td><td>ANG I → ANG II</td><td>ECA (poumon, rein)</td><td>Rénine disponible</td><td>IEC (ramipril, périndopril…)</td></tr>
+<tr><td>3</td><td>Aldostérone</td><td>Surrénale (zone glomérulée)</td><td>ANG II + hyperkaliémie</td><td>ARA2 (losartan…), spironolactone</td></tr>
+<tr><td>4</td><td>ENaC/ROMK</td><td>Cellule principale CC</td><td>Aldostérone (effet génomique 1–6h)</td><td>Amiloride (ENaC direct)</td></tr>
+</tbody>
+</table></div>
+
+<h3>⚖️ Diagnostic différentiel des hyperaldostéronismes</h3>
+<div class="table-wrap"><table>
+<thead><tr><th>Pathologie</th><th>Aldostérone</th><th>Rénine (ARP)</th><th>K⁺</th><th>VEC / PA</th><th>Traitement</th></tr></thead>
+<tbody>
+<tr><td><strong>Conn (adénome)</strong></td><td>↑↑</td><td>↓↓</td><td>↓</td><td>↑ PA, VEC légèrement ↑</td><td>Surrénalectomie</td></tr>
+<tr><td><strong>Hyperplasie bilatérale</strong></td><td>↑</td><td>↓</td><td>↓ légère</td><td>HTA modérée</td><td>Spironolactone</td></tr>
+<tr><td><strong>Sténose artère rénale</strong></td><td>↑↑</td><td>↑↑</td><td>↓</td><td>↑↑ PA</td><td>Revascularisation ± IEC</td></tr>
+<tr><td><strong>IC / Cirrhose / SN</strong></td><td>↑↑</td><td>↑↑</td><td>↓</td><td>↑↑ VEC + œdèmes</td><td>Spiro + furosémide + cause</td></tr>
+<tr><td><strong>Maladie d'Addison</strong></td><td>↓↓</td><td>↑↑</td><td>↑</td><td>↓ PA, ↓ VEC</td><td>Fludrocortisone + HC</td></tr>
+<tr><td><strong>Syndrome de Liddle</strong></td><td>↓</td><td>↓</td><td>↓</td><td>HTA</td><td>Amiloride</td></tr>
+<tr><td><strong>Excès minéralocorticoïdes apparent</strong></td><td>↓</td><td>↓</td><td>↓</td><td>HTA</td><td>Éviction réglisse, spiro</td></tr>
+</tbody>
+</table></div>
+
+<h3>🧭 Na⁺ urinaire — aide au diagnostic</h3>
+<div class="table-wrap"><table>
+<thead><tr><th>UNa</th><th>FENa</th><th>Interprétation</th><th>Exemples</th></tr></thead>
+<tbody>
+<tr><td>&lt; 20 mmol/L</td><td>&lt; 1 %</td><td>SRAA activé — rétention maximale</td><td>Déshydratation, IC, cirrhose, SN, IRA fonctionnelle</td></tr>
+<tr><td>20–40 mmol/L</td><td>1–2 %</td><td>État normal (si apports ~150 mmol/j)</td><td>Normovoluémie</td></tr>
+<tr><td>&gt; 40 mmol/L</td><td>&gt; 2 %</td><td>Excrétion sodée libre</td><td>NTA (IRA organique), hypervolémie, hyperaldostéronisme primaire, diurétiques</td></tr>
+</tbody>
+</table></div>
+
+<h3>💊 Peptides natriurétiques</h3>
+<div class="table-wrap"><table>
+<thead><tr><th>Peptide</th><th>Sécrété par</th><th>Stimulus</th><th>Seuil IC aiguë</th><th>Usage clinique</th></tr></thead>
+<tbody>
+<tr><td><strong>ANF (ANP)</strong></td><td>Oreillettes</td><td>Étirement auriculaire (↑ pression)</td><td>—</td><td>Recherche, physiopathologie</td></tr>
+<tr><td><strong>BNP</strong></td><td>Ventricules</td><td>Surcharge vol. ou pressionnelle</td><td>&gt; 100 pg/mL</td><td>Diagnostic et pronostic IC</td></tr>
+<tr><td><strong>NT-proBNP</strong></td><td>Ventricules</td><td>Idem BNP (fragment inactif)</td><td>&gt; 300 pg/mL</td><td>Idem BNP (plus stable)</td></tr>
+</tbody>
+</table></div>
+
+<h3>🚨 Points rouges à l'examen</h3>
+<div class="urgence-box">
+<strong>1. Na⁺ urinaire &lt; 20 + IRA</strong> → IRA fonctionnelle (réhydrater) — NE PAS confondre avec IRA organique (FENa > 2%)<br>
+<strong>2. HTA + K⁺ ↓ + alcalose + ARP ↓</strong> → Conn (ratio Aldo/ARP) — NE PAS négliger même en normokaliémie<br>
+<strong>3. Hyponatrémie + VEC normal + ADH inadaptée</strong> → SIADH — NE PAS corriger trop vite (&gt; 8 mmol/L/24h = myélinolyse)<br>
+<strong>4. ↑ Créatinine sous IEC/ARA2</strong> → acceptable si &lt; 30 % — stopper si &gt; 30 % ou K⁺ > 5,5<br>
+<strong>5. Diurétiques + interprétation FENa</strong> → FENa invalidée — utiliser FE Urée (&lt; 35 % = fonctionnelle)
+</div>
+</div>
+
+
 <div class="slide content-slide" id="slide-fin">
   <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:60vh;text-align:center;padding:2rem">
     <div style="font-size:3rem;margin-bottom:1rem">🎉</div>
@@ -3506,7 +4374,7 @@ Situation inverse du syndrome de Conn. Traitement : fludrocortisone + hydrocorti
 
 <script>
 let current = 0;
-const total = 20;
+const total = 21;
 const slides = document.querySelectorAll('.slide');
 
 function showSlide(n) {
