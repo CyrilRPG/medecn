@@ -1,0 +1,1421 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Explorations fonctionnelles rénales — Médecine nucléaire</title>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  background: #0d0d1a; color: #e0e0f0;
+  min-height: 100vh; overflow: hidden;
+}
+.topbar {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  height: 50px; background: rgba(13,13,26,0.97);
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+  display: flex; align-items: center; padding: 0 1rem; gap: 0.75rem;
+}
+.topbar-home {
+  text-decoration: none; color: #3498db; font-weight: 600;
+  font-size: 0.85rem; white-space: nowrap;
+  padding: 0.3rem 0.7rem; border: 1px solid rgba(52,152,219,0.4);
+  border-radius: 6px; transition: background 0.2s;
+}
+.topbar-home:hover { background: rgba(52,152,219,0.15); }
+.topbar-title { flex: 1; text-align: center; font-size: 0.85rem; color: #9090b0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.topbar-counter { font-size: 0.85rem; color: #b0b0c0; white-space: nowrap; min-width: 55px; text-align: right; }
+.topbar-nav { display: flex; gap: 0.4rem; }
+.topbar-btn { background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.15); color: #e0e0f0; padding: 0.3rem 0.7rem; border-radius: 6px; cursor: pointer; font-size: 0.85rem; transition: background 0.2s; }
+.topbar-btn:hover { background: rgba(255,255,255,0.14); }
+.progress-bar { position: fixed; top: 50px; left: 0; right: 0; height: 3px; z-index: 99; background: rgba(255,255,255,0.08); }
+.progress-fill { height: 100%; background: linear-gradient(90deg, #3498db, #2ecc71); transition: width 0.3s ease; width: 0%; }
+.slide-container { position: fixed; top: 53px; left: 0; right: 0; bottom: 0; overflow-y: auto; }
+.slide { display: none !important; }
+.slide.active { display: block !important; }
+.slide.active.title-slide { display: flex !important; }
+.title-slide {
+  flex-direction: column; align-items: center; justify-content: center;
+  text-align: center; min-height: calc(100vh - 53px); padding: 2rem;
+  background: radial-gradient(ellipse at center, rgba(52,152,219,0.08) 0%, transparent 70%);
+}
+.title-tag { color: #3498db; font-size: 0.85rem; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 1rem; }
+.title-slide h1 { font-size: clamp(1.8rem, 4vw, 3rem); font-weight: 800; line-height: 1.2; background: linear-gradient(135deg, #3498db, #2ecc71); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 1rem; }
+.title-subtitle { color: #9090b0; font-size: 1rem; margin-bottom: 1.5rem; }
+.title-meta { display: flex; gap: 1.5rem; flex-wrap: wrap; justify-content: center; }
+.title-meta span { color: #b0b0c0; font-size: 0.9rem; }
+.menu-link { position: absolute; top: 1rem; left: 1rem; color: #3498db; text-decoration: none; font-size: 0.9rem; padding: 0.4rem 0.8rem; border: 1px solid rgba(52,152,219,0.4); border-radius: 6px; transition: background 0.2s; }
+.menu-link:hover { background: rgba(52,152,219,0.15); }
+.content-slide { max-width: 880px; margin: 0 auto; padding: 1.5rem 1.5rem 3rem; }
+.content-slide h2 { font-size: 1.4rem; font-weight: 700; color: #3498db; margin-bottom: 1rem; border-bottom: 2px solid rgba(52,152,219,0.3); padding-bottom: 0.5rem; }
+.content-slide h3 { font-size: 1.05rem; font-weight: 600; color: #f39c12; margin: 1.2rem 0 0.6rem; }
+.content-slide h4 { font-size: 0.97rem; font-weight: 600; color: #2ecc71; margin: 1rem 0 0.4rem; }
+.content-slide p { line-height: 1.8; color: #c0c0d8; margin-bottom: 0.75rem; font-size: 0.95rem; }
+.content-slide ul, .content-slide ol { margin: 0.5rem 0 0.75rem 1.5rem; }
+.content-slide li { line-height: 1.8; color: #c0c0d8; font-size: 0.95rem; margin-bottom: 0.4rem; }
+.content-slide strong { color: #e8e8f8; }
+.def-box { background: rgba(243,156,18,0.1); border-left: 4px solid #f39c12; border-radius: 0 8px 8px 0; padding: 0.8rem 1rem; margin: 0.6rem 0; font-size: 0.92rem; line-height: 1.65; color: #c8c8d8; }
+.highlight-box { background: rgba(46,204,113,0.1); border-left: 4px solid #2ecc71; border-radius: 0 8px 8px 0; padding: 0.8rem 1rem; margin: 0.75rem 0; font-size: 0.92rem; line-height: 1.65; color: #c8c8d8; }
+.warning-box { background: rgba(231,76,60,0.1); border: 2px solid #e74c3c; border-radius: 8px; padding: 0.8rem 1rem; margin: 0.75rem 0; font-size: 0.92rem; line-height: 1.65; color: #c8c8d8; }
+.urgence-box { background: rgba(231,76,60,0.2); border: 2px solid #e74c3c; border-radius: 8px; padding: 0.8rem 1rem; margin: 0.75rem 0; font-size: 0.92rem; line-height: 1.65; }
+.table-wrap { overflow-x: auto; margin: 0.75rem 0; border-radius: 8px; }
+table { width: 100%; border-collapse: collapse; font-size: 0.88rem; }
+thead { background: rgba(52,152,219,0.15); }
+th { padding: 0.6rem 0.75rem; text-align: left; color: #3498db; font-weight: 600; }
+td { padding: 0.5rem 0.75rem; border-bottom: 1px solid rgba(255,255,255,0.05); color: #c0c0d8; }
+tr:last-child td { border-bottom: none; }
+tr:hover td { background: rgba(255,255,255,0.03); }
+/* QCM */
+.qcm-block { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 1rem; margin: 0.75rem 0; }
+.q-text { font-weight: 600; color: #e0e0f0; margin-bottom: 0.75rem; font-size: 0.95rem; line-height: 1.5; }
+.qcm-options { display: flex; flex-direction: column; gap: 0.5rem; margin-bottom: 0.75rem; }
+.qcm-option { display: flex; align-items: center; gap: 0.6rem; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; padding: 0.6rem 0.8rem; cursor: pointer; transition: background 0.15s, border-color 0.15s; font-size: 0.9rem; color: #c0c0d8; }
+.qcm-option:hover { background: rgba(255,255,255,0.08); }
+.qcm-option.selected { background: rgba(52,152,219,0.15); border-color: #3498db; color: #e0e0f0; }
+.qcm-option.correct { background: rgba(46,204,113,0.2); border-color: #2ecc71; color: #e0e0f0; }
+.qcm-option.wrong { background: rgba(231,76,60,0.2); border-color: #e74c3c; color: #e0e0f0; }
+.letter { min-width: 24px; height: 24px; border-radius: 50%; background: rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.8rem; color: #3498db; }
+.qcm-validate { padding: 0.5rem 1rem; border-radius: 8px; border: none; cursor: pointer; background: rgba(52,152,219,0.2); color: #3498db; font-weight: 600; font-size: 0.85rem; transition: background 0.2s; }
+.qcm-validate:disabled { opacity: 0.4; cursor: not-allowed; }
+.qcm-validate:hover:not(:disabled) { background: rgba(52,152,219,0.35); }
+.qcm-feedback { margin-top: 0.5rem; font-weight: 600; font-size: 0.9rem; }
+.qcm-explanation { display: none; margin-top: 0.75rem; padding: 0.75rem; background: rgba(255,255,255,0.04); border-radius: 8px; font-size: 0.88rem; color: #b0b0c0; line-height: 1.65; }
+/* Flash */
+.flash-block { background: rgba(52,152,219,0.07); border: 1px solid rgba(52,152,219,0.25); border-radius: 12px; padding: 1rem; margin: 0.75rem 0; }
+.flash-input-row { display: flex; gap: 0.5rem; margin: 0.6rem 0; flex-wrap: wrap; }
+.flash-input { flex: 1; min-width: 200px; padding: 0.5rem 0.75rem; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.15); border-radius: 8px; color: #e0e0f0; font-size: 0.92rem; }
+.flash-input:focus { outline: none; border-color: #3498db; }
+/* DP */
+.dp-block { background: rgba(155,89,182,0.07); border: 1px solid rgba(155,89,182,0.25); border-radius: 12px; padding: 1rem; margin: 1rem 0; }
+.dp-block h3 { color: #9b59b6; margin-bottom: 0.75rem; }
+.dp-block > p { font-style: italic; color: #9090b0; font-size: 0.9rem; margin-bottom: 0.75rem; }
+.dp-step { margin: 0.75rem 0; }
+.dp-step-num { font-size: 0.75rem; font-weight: 700; color: #9b59b6; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.2rem; }
+.dp-step-title { font-weight: 600; color: #c0c0d8; margin-bottom: 0.5rem; font-size: 0.92rem; }
+/* Explications structurées */
+.expl-wrap { margin: 0 0 1.5rem 0; }
+.expl-wrap h4 { color: #e0e0f0; font-size: 1rem; margin: 1.1rem 0 0.4rem; font-weight: 700; }
+.expl-wrap p { color: #c0c0d8; font-size: 0.95rem; line-height: 1.8; margin-bottom: 0.4rem; }
+.expl-wrap strong { color: #f0f0ff; }
+.expl-bq { border-left: 3px solid rgba(52,152,219,0.5); padding: 0.4rem 1rem; color: #9898b8; font-style: italic; font-size: 0.9rem; margin: 0.3rem 0 0.9rem 0; background: rgba(52,152,219,0.04); border-radius: 0 6px 6px 0; }
+.expl-sep { border: none; border-top: 1px solid rgba(255,255,255,0.07); margin: 1.1rem 0; }
+.expl-warn { background: rgba(231,76,60,0.08); border-left: 4px solid #e74c3c; border-radius: 0 8px 8px 0; padding: 0.6rem 1rem; margin: 0.75rem 0; font-size: 0.92rem; color: #c8c8d8; line-height: 1.65; }
+.expl-info { background: rgba(52,152,219,0.08); border-left: 4px solid #3498db; border-radius: 0 8px 8px 0; padding: 0.6rem 1rem; margin: 0.75rem 0; font-size: 0.92rem; color: #c8c8d8; line-height: 1.65; }
+/* Images bloc */
+.img-block { margin: 1.2rem 0; border-radius: 10px; overflow: hidden; border: 1px solid rgba(255,255,255,0.1); background: rgba(0,0,0,0.35); }
+.img-block img { width: 100%; max-height: 420px; object-fit: contain; display: block; background: #1a1a2e; }
+.img-caption { padding: 0.65rem 1rem; font-size: 0.84rem; color: #9090b0; font-style: italic; border-top: 1px solid rgba(255,255,255,0.07); background: rgba(0,0,0,0.2); line-height: 1.55; }
+.img-row { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; margin: 1rem 0; }
+@media (max-width: 640px) { .img-row { grid-template-columns: 1fr; } }
+.img-annot { display: inline-block; background: rgba(231,76,60,0.85); color: white; border-radius: 50%; width: 18px; height: 18px; text-align: center; line-height: 18px; font-weight: bold; font-size: 10px; margin-right: 3px; vertical-align: middle; }
+.key-hint { text-align: center; color: rgba(255,255,255,0.2); font-size: 0.75rem; margin-top: 2rem; padding-bottom: 1rem; }
+@media (max-width: 768px) { .content-slide { padding: 1rem 1rem 2.5rem; } .content-slide h2 { font-size: 1.15rem; } .title-slide h1 { font-size: 1.8rem; } }
+@media (max-width: 480px) { .topbar-title { display: none; } .flash-input-row { flex-direction: column; } }
+</style>
+</head>
+<body>
+<div class="topbar">
+  <a class="topbar-home" href="index.html">← Menu</a>
+  <span class="topbar-title">Explorations fonctionnelles rénales — Médecine nucléaire</span>
+  <span class="topbar-counter" id="slide-counter">1 / 16</span>
+  <div class="topbar-nav">
+    <button class="topbar-btn" onclick="changeSlide(-1)">&#8249;</button>
+    <button class="topbar-btn" onclick="changeSlide(1)">&#8250;</button>
+  </div>
+</div>
+<div class="progress-bar"><div class="progress-fill" id="progress-fill"></div></div>
+<div class="slide-container" id="slide-container">
+
+<!-- ═══════════════════════════════════════════ SLIDE 0 — TITRE -->
+<div class="slide title-slide active" id="slide-0">
+  <a class="menu-link" href="index.html">← Menu</a>
+  <div>
+    <div class="title-tag">UE5 · Médecine nucléaire · Pr Soussan</div>
+    <h1>Explorations<br>fonctionnelles rénales</h1>
+    <div class="title-subtitle">Scintigraphie dynamique · Statique · Cystographie · Captopril · Uro-IRM</div>
+    <div class="title-meta">
+      <span>☢️ Médecine nucléaire</span>
+      <span>📚 16 diapos</span>
+      <span>⚡ Quiz + Images cliniques</span>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════ SLIDE 1 — Introduction DFG -->
+<div class="slide content-slide" id="slide-1">
+<h2>I — Introduction : DFG et types de scintigraphies rénales</h2>
+
+<h3>📦 Prérequis</h3>
+<div class="def-box"><strong>🔬 DÉBIT DE FILTRATION GLOMÉRULAIRE (DFG)</strong><br>
+Volume de liquide filtré par les glomérules par unité de temps, exprimé en mL/min. Reflet direct de la fonction rénale globale. Valeur normale chez l'adulte jeune : ~90–120 mL/min. Un DFG &lt; 60 mL/min depuis plus de 3 mois définit la maladie rénale chronique. Un DFG &lt; 30 mL/min contre-indique l'injection de produit de contraste iodé.</div>
+
+<div class="def-box"><strong>🔬 CLAIRANCE DE L'INULINE (méthode de référence)</strong><br>
+L'inuline est un polysaccharide librement filtré par le glomérule, ni réabsorbé ni sécrété par le tubule. Sa clairance = DFG exact. Remplacée en pratique par la clairance du <strong>EDTA-51Cr</strong> (molécule d'EDTA marquée au chrome 51 radioactif) dont le comportement rénale est identique. Ces deux méthodes sont peu utilisées en routine car lourdes à mettre en œuvre.</div>
+
+<div class="def-box"><strong>🔬 FORMULE CKD-EPI (Chronic Kidney Disease Epidemiology Collaboration)</strong><br>
+Méthode recommandée par la HAS pour estimer le DFG en pratique courante. Calcul à partir de la créatininémie, de l'âge, du sexe et de la race. Plus précise que Cockcroft-Gault (qui calcule la clairance de la créatinine en mL/min). Limitation : la créatinine est <em>légèrement sécrétée</em> par les tubules → légère surestimation du DFG réel.</div>
+
+<h3>📖 Explication</h3>
+<p>Le rein remplit deux grandes missions physiologiques. Comprendre les explorations fonctionnelles rénales exige de maîtriser ces rôles, la signification du DFG, et la logique des deux grandes familles d'examens scintigraphiques.</p>
+
+<div class="expl-wrap">
+
+<h4>1. 🫘 Les deux grandes fonctions du rein</h4>
+<p>Le rein assure d'abord une <strong>fonction d'homéostasie</strong> : via la filtration glomérulaire, il maintient l'équilibre hydro-électrolytique (sodium, potassium, eau), l'équilibre acido-basique (pH sanguin entre 7,38 et 7,42) et la régulation tensionnelle (via l'axe rénine-angiotensine-aldostérone).</p>
+<p>Il assure également une <strong>fonction endocrine</strong> : il sécrète l'<strong>érythropoïétine (EPO)</strong> en réponse à l'hypoxie (stimulant la production de globules rouges par la moelle osseuse) et il active la vitamine D en sa forme active (1,25-dihydroxycholécalciférol = calcitriol) essentielle pour l'absorption intestinale du calcium.</p>
+<div class="expl-bq">Ex : un patient en insuffisance rénale chronique sévère présentera à la fois une anémie (défaut d'EPO), une hyperparathyroïdie secondaire (défaut de calcitriol → hypocalcémie → ↑ PTH), des œdèmes et une HTA (défaut d'élimination hydrosodée), et une acidose métabolique — toutes ces manifestations découlent directement de la perte des fonctions rénales.</div>
+
+<hr class="expl-sep">
+
+<h4>2. 📐 Comment mesure-t-on le DFG ? Méthodes et limites</h4>
+<p>Trois niveaux de mesure du DFG existent en pratique :</p>
+<p><strong>Niveau 1 — Méthodes de référence (mesure directe)</strong> :<br>
+— Clairance de l'inuline : gold standard absolu, mais injection IV continue + recueil urinaire minuté → lourd<br>
+— Clairance de l'<strong>EDTA-51Cr</strong> : injection unique d'EDTA marqué au chrome 51 radioactif, prélèvements sanguins successifs → méthode isotopique précise, utilisée en médecine nucléaire pour mesurer le DFG exact</p>
+<p><strong>Niveau 2 — Estimation par la créatinine (pratique courante)</strong> :<br>
+— <strong>Cockcroft-Gault</strong> : formule ancienne (clairance Cr en mL/min), peu précise car non validée pour certaines populations (obèses, sujets âgés sarcopéniques)<br>
+— <strong>CKD-EPI</strong> : formule recommandée par la HAS, plus précise, exprimée en mL/min/1,73 m². Limitation : la créatinine est légèrement sécrétée par les tubules → DFG légèrement surestimé</p>
+<p><strong>Niveau 3 — Imagerie fonctionnelle (DFG différentiel)</strong> :<br>
+La scintigraphie rénale est le <strong>seul moyen d'évaluation non invasive de la fonction rénale différentielle</strong> (de chaque rein séparément). Indispensable quand on suspecte une atteinte asymétrique (sténose unilatérale, uropathie obstructive unilatérale).</p>
+<div class="expl-bq">Ex : un patient avec hydronéphrose gauche et créatinine à 130 µmol/L → le DFG global (CKD-EPI) est abaissé mais on ne sait pas si c'est le rein gauche seul (85% de la fonction) ou les deux reins. Seule la scintigraphie rénale donne la répartition fonctionnelle droite/gauche.</div>
+
+<hr class="expl-sep">
+
+<h4>3. ☢️ Les deux types de scintigraphies rénales</h4>
+<p>Deux familles d'examens scintigraphiques rénaux existent, distinguées par le <strong>comportement de leur traceur radioactif</strong> :</p>
+<p><strong>Scintigraphie DYNAMIQUE</strong> : le traceur (MAG3 ou DTPA) est éliminé dans les urines. On acquiert des images successives pendant 40 minutes sous une gamma-caméra pour obtenir un <strong>néphrogramme</strong> (courbe activité/temps). Elle mesure la <strong>perfusion + filtration + excrétion</strong>.</p>
+<p><strong>Scintigraphie STATIQUE</strong> : le traceur (DMSA) est capté dans le parenchyme rénal et y reste. Une seule image 3–4 h après injection. Elle mesure la <strong>masse corticale fonctionnelle</strong> et visualise les cicatrices anatomiques.</p>
+<div class="expl-bq">Ex : pour un enfant avec infections urinaires à répétition, on demande une scintigraphie STATIQUE (DMSA) pour voir s'il y a des cicatrices corticales séquellaires. Pour un adulte avec suspicion de jonction pyélo-urétérale, on demande une scintigraphie DYNAMIQUE (MAG3 + furosémide) pour étudier l'excrétion.</div>
+
+<hr class="expl-sep">
+
+<div class="expl-warn"><strong>⚠️ Important : convention de vue en scintigraphie</strong><br>
+En scintigraphie rénale, les images sont acquises en <strong>vue postérieure</strong> (caméra derrière le patient). La convention est donc <strong>identique aux images anatomiques</strong> : le rein droit du patient est à droite sur l'image. Ce n'est pas une vue miroir comme en radiologie conventionnelle (face antérieure).</div>
+
+<div class="expl-warn"><strong>⚠️ Contre-indication des produits de contraste iodés si DFG &lt; 30 mL/min</strong><br>
+Cette règle ne concerne <strong>pas les traceurs isotopiques</strong> (DTPA, MAG3, DMSA) qui ne sont pas néphrotoxiques. Elle s'applique uniquement aux produits de contraste iodés (TDM, artériographie). La scintigraphie reste donc réalisable quelle que soit la valeur du DFG.</div>
+
+</div>
+
+<svg viewBox="0 0 700 260" xmlns="http://www.w3.org/2000/svg"
+     style="width:100%;max-height:260px;margin:1rem 0;display:block">
+  <defs>
+    <marker id="ef1a" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+      <polygon points="0 0,8 3,0 6" fill="#3498db"/>
+    </marker>
+    <marker id="ef1b" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+      <polygon points="0 0,8 3,0 6" fill="#2ecc71"/>
+    </marker>
+  </defs>
+  <text x="350" y="18" text-anchor="middle" fill="#3498db" font-size="13"
+        font-family="Segoe UI,sans-serif" font-weight="bold">
+    Mesure du DFG — Du gold standard à la pratique courante
+  </text>
+  <!-- Gold standard -->
+  <rect x="230" y="26" width="240" height="42" rx="8" fill="rgba(52,152,219,0.2)" stroke="#3498db" stroke-width="1.5"/>
+  <text x="350" y="44" text-anchor="middle" fill="white" font-size="12" font-family="Segoe UI,sans-serif" font-weight="bold">Gold standard</text>
+  <text x="350" y="60" text-anchor="middle" fill="#b0b0c0" font-size="11" font-family="Segoe UI,sans-serif">Inuline · EDTA-51Cr (médecine nucléaire)</text>
+  <!-- Arrow down left -->
+  <line x1="290" y1="68" x2="160" y2="105" stroke="#3498db" stroke-width="1.5" marker-end="url(#ef1a)"/>
+  <!-- Arrow down right -->
+  <line x1="410" y1="68" x2="540" y2="105" stroke="#3498db" stroke-width="1.5" marker-end="url(#ef1a)"/>
+  <!-- Cockcroft -->
+  <rect x="30" y="105" width="255" height="50" rx="6" fill="rgba(243,156,18,0.12)" stroke="#f39c12" stroke-width="1.5"/>
+  <text x="157" y="125" text-anchor="middle" fill="#f39c12" font-size="11" font-family="Segoe UI,sans-serif" font-weight="bold">Cockcroft-Gault</text>
+  <text x="157" y="143" text-anchor="middle" fill="#b0b0c0" font-size="10" font-family="Segoe UI,sans-serif">Clairance Cr (mL/min) — peu précis</text>
+  <!-- CKD-EPI -->
+  <rect x="415" y="105" width="255" height="50" rx="6" fill="rgba(46,204,113,0.12)" stroke="#2ecc71" stroke-width="1.5"/>
+  <text x="542" y="125" text-anchor="middle" fill="#2ecc71" font-size="11" font-family="Segoe UI,sans-serif" font-weight="bold">CKD-EPI ★ (recommandée HAS)</text>
+  <text x="542" y="143" text-anchor="middle" fill="#b0b0c0" font-size="10" font-family="Segoe UI,sans-serif">DFG estimé (mL/min/1,73m²)</text>
+  <!-- Scintigraphy box -->
+  <line x1="350" y1="68" x2="350" y2="170" stroke="#9b59b6" stroke-width="1.5" marker-end="url(#ef1b)" stroke-dasharray="5,3"/>
+  <rect x="185" y="170" width="330" height="55" rx="8" fill="rgba(155,89,182,0.15)" stroke="#9b59b6" stroke-width="1.5"/>
+  <text x="350" y="192" text-anchor="middle" fill="#9b59b6" font-size="12" font-family="Segoe UI,sans-serif" font-weight="bold">Scintigraphie rénale</text>
+  <text x="350" y="210" text-anchor="middle" fill="#b0b0c0" font-size="10" font-family="Segoe UI,sans-serif">Seul examen non invasif de la FONCTION RÉNALE DIFFÉRENTIELLE</text>
+  <!-- DFG limits -->
+  <rect x="15" y="235" width="310" height="22" rx="4" fill="rgba(231,76,60,0.1)" stroke="#e74c3c" stroke-width="1"/>
+  <text x="170" y="249" text-anchor="middle" fill="#e74c3c" font-size="10" font-family="Segoe UI,sans-serif" font-weight="bold">DFG &lt; 30 mL/min → CI produit de contraste iodé</text>
+  <rect x="375" y="235" width="310" height="22" rx="4" fill="rgba(46,204,113,0.1)" stroke="#2ecc71" stroke-width="1"/>
+  <text x="530" y="249" text-anchor="middle" fill="#2ecc71" font-size="10" font-family="Segoe UI,sans-serif" font-weight="bold">Traceurs isotopiques : aucune CI rénale</text>
+</svg>
+
+<h3>🃏 Flashcards</h3>
+<div class="flash-block" data-answer="DFG = volume filtré par les glomérules par unité de temps (mL/min). Valeur normale ≈ 90–120 mL/min. Or de référence : inuline ou EDTA-51Cr. Pratique courante : CKD-EPI (estimée à partir créatininémie, recommandée HAS).">
+  <div class="q-text">❓ Qu'est-ce que le DFG et quelles sont les méthodes pour le mesurer ? (niveau 1)</div>
+  <div class="flash-input-row">
+    <input class="flash-input" type="text" placeholder="Votre réponse…" onkeydown="if(event.key==='Enter')validateFlash(this)">
+    <button class="qcm-validate" onclick="validateFlash(this)">Vérifier</button>
+  </div>
+  <div class="qcm-explanation"></div>
+</div>
+<div class="flash-block" data-answer="Dynamique (MAG3/DTPA) : traceur éliminé dans les urines, images successives 40 min → néphrogramme, mesure perfusion + filtration + excrétion + DFG différentiel. Statique (DMSA) : traceur fixé dans le parenchyme, image unique 3–4h après, mesure masse corticale fonctionnelle et cicatrices.">
+  <div class="q-text">❓ Quelles sont les différences entre scintigraphie rénale dynamique et statique ? (niveau 2)</div>
+  <div class="flash-input-row">
+    <input class="flash-input" type="text" placeholder="Votre réponse…" onkeydown="if(event.key==='Enter')validateFlash(this)">
+    <button class="qcm-validate" onclick="validateFlash(this)">Vérifier</button>
+  </div>
+  <div class="qcm-explanation"></div>
+</div>
+<div class="flash-block" data-answer="La scintigraphie est le seul examen non invasif permettant de mesurer la fonction rénale différentielle (part fonctionnelle de chaque rein séparément). Indispensable quand une atteinte asymétrique est suspectée (sténose unilatérale, uropathie obstructive). La valeur normale est 45–55% par rein.">
+  <div class="q-text">❓ Pourquoi la scintigraphie est-elle irremplaçable pour évaluer la fonction rénale ? (niveau 2)</div>
+  <div class="flash-input-row">
+    <input class="flash-input" type="text" placeholder="Votre réponse…" onkeydown="if(event.key==='Enter')validateFlash(this)">
+    <button class="qcm-validate" onclick="validateFlash(this)">Vérifier</button>
+  </div>
+  <div class="qcm-explanation"></div>
+</div>
+</div>
+
+<!-- ═══════════════════════════════════════════ SLIDE 2 — Scinti dynamique principe -->
+<div class="slide content-slide" id="slide-2">
+<h2>II.A — Scintigraphie dynamique : traceurs, principe et indications</h2>
+
+<h3>📦 Prérequis</h3>
+<div class="def-box"><strong>🔬 DTPA (Diéthylènetriamine pentaacétate)</strong><br>
+Traceur radioactif marqué au <sup>99m</sup>Tc utilisé en scintigraphie dynamique. Éliminé par <strong>filtration glomérulaire exclusive</strong> (comme l'inuline). Sa clairance permet d'estimer directement le DFG. Il est excrété dans les cavités pyélocalicielles après filtration.</div>
+
+<div class="def-box"><strong>🔬 MAG3 (Mercapto-Acétyl-Triglycine) = NéphroMAG</strong><br>
+Traceur radioactif marqué au <sup>99m</sup>Tc. Éliminé par <strong>sécrétion tubulaire proximale</strong> (pas filtré). Sa clairance est plus élevée que celle du DTPA car même avec un DFG bas, les tubules peuvent encore sécréter. Meilleur traceur chez l'insuffisant rénal ou le nourrisson dont le DFG est physiologiquement bas.</div>
+
+<div class="def-box"><strong>🔬 GAMMA-CAMÉRA (caméra d'Anger)</strong><br>
+Appareil de détection des rayonnements gamma émis par le traceur radioactif injecté au patient. Permet d'obtenir des images fonctionnelles des organes cibles. En scintigraphie rénale, le patient est allongé en décubitus dorsal ou assis, la caméra positionnée en vue postérieure (derrière le dos). L'acquisition dure 40 minutes pour la scintigraphie dynamique.</div>
+
+<h3>📖 Explication</h3>
+
+<div class="expl-wrap">
+
+<h4>1. 🧪 DTPA vs MAG3 : deux mécanismes d'élimination rénale complémentaires</h4>
+<p>Le choix du traceur en scintigraphie dynamique dépend de la <strong>voie d'élimination rénale</strong> que l'on souhaite étudier et de la fonction rénale résiduelle du patient :</p>
+<p>Le <strong>DTPA (Technescan DTPA)</strong> est uniquement filtré par le glomérule. Il se comporte comme l'inuline — sa clairance est un reflet fidèle du DFG. C'est le traceur idéal pour mesurer le <strong>DFG différentiel</strong>. Cependant, si le DFG est très bas (insuffisance rénale sévère), le signal capté est faible et l'image est de mauvaise qualité.</p>
+<p>Le <strong>MAG3 (NéphroMAG)</strong> est <em>sécrété</em> activement par les cellules du tube contourné proximal, sans être filtré. Ses paramètres sont différents : la clairance du MAG3 reflète la <strong>fonction tubulaire</strong> (pas glomérulaire). Son intérêt majeur : même avec un DFG effondré, les tubules peuvent encore sécréter → <strong>signal de meilleure qualité</strong> en cas d'insuffisance rénale.</p>
+<div class="expl-bq">Ex : un nourrisson de 3 mois dont le DFG physiologique est de 20–30 mL/min → DTPA donnera un signal médiocre. MAG3 préféré car sa sécrétion tubulaire fonctionne mieux que la filtration à cet âge. De même pour un patient insuffisant rénal chronique avec DFG à 25 mL/min.</div>
+
+<hr class="expl-sep">
+
+<h4>2. 📷 La gamma-caméra : comment ça marche ?</h4>
+<p>Après injection intraveineuse du traceur radioactif (<sup>99m</sup>Tc émet des rayons gamma à 140 keV), le traceur circule dans le sang, arrive au rein, est filtré (DTPA) ou sécrété (MAG3), puis excrété dans les voies urinaires. La gamma-caméra <strong>détecte les photons gamma</strong> émis en temps réel et les convertit en une image fonctionnelle :</p>
+<p>— Les zones <strong>captant beaucoup de traceur</strong> apparaissent <strong>claires/intenses</strong> sur l'image<br>
+— Les zones <strong>ne captant pas</strong> (ischémie, obstruction) apparaissent <strong>froides (sombres)</strong><br>
+— Le néphrogramme est obtenu en traçant la courbe de l'activité mesurée dans une région d'intérêt (ROI) positionnée sur chaque rein, en fonction du temps (ordonnée = activité, abscisse = temps)</p>
+<div class="expl-bq">Ex : sur les images scintigraphiques dynamiques, on voit d'abord les deux reins se "allumer" simultanément (phase vasculaire), puis le signal monter progressivement (filtration/sécrétion), puis descendre (excrétion dans les voies urinaires). Si un rein reste "allumé" alors que l'autre s'éteint → obstacle à l'excrétion.</div>
+
+<hr class="expl-sep">
+
+<h4>3. 💊 Le rôle des diurétiques (furosémide/Lasilix)</h4>
+<p>Le furosémide (Lasilix®) est un diurétique de l'anse de Henle, à action rapide et puissante. Il est injecté <strong>20 minutes après le traceur</strong> dans certaines indications.</p>
+<p>En provoquant une <strong>hyperdiurèse soudaine</strong>, il augmente massivement le flux d'urine dans les voies urinaires. Cela permet de :</p>
+<p>— <strong>Distinguer une dilatation simple d'un vrai obstacle</strong> : si les voies sont dilatées mais non obstruées (ex : mégacalices congénitaux, dolichouretère), le Lasilix entraîne une vidange rapide (courbe descendante). Si obstruction réelle, le traceur reste en amont et la courbe reste haute ou continue à monter même après Lasilix.</p>
+<p>— <strong>Qualifier le degré d'obstruction</strong> : obstacle complet (pas de réponse au Lasilix) vs obstacle partiel (réponse partielle, courbe descend lentement)</p>
+<div class="expl-bq">Ex : enfant avec hydronéphrose gauche à l'échographie → scintigraphie MAG3 + Lasilix à J20. Si après Lasilix le rein gauche vide ses cavités en &lt; 10 min → dilatation sans obstruction vraie → surveillance seule. Si pas de vidange → syndrome de la jonction pyélo-urétérale vrai → chirurgie (pyéloplastie).</div>
+
+<hr class="expl-sep">
+
+<h4>4. 🎯 Indications de la scintigraphie dynamique</h4>
+<p>Les trois grandes indications de la scintigraphie rénale dynamique sont :</p>
+<p><strong>A) Pathologies obstructives des voies urinaires</strong> :<br>
+— <strong>Syndrome de la jonction pyélo-urétérale (SJPU)</strong> : obstacle à la jonction entre le bassinet et l'uretère → hydronéphrose. La scintigraphie quantifie la fonction rénale résiduelle et le degré d'obstruction → guide la décision chirurgicale.<br>
+— <strong>Calculs obstructifs</strong> : évaluer le retentissement fonctionnel sur le rein obstrué</p>
+<p><strong>B) Contrôle post-greffe rénale</strong> :<br>
+Surveillance précoce de la reprise de fonction du greffon → distinguer nécrose tubulaire aiguë (NTA) (perfusion présente, excrétion absente) d'un rejet (perfusion elle-même altérée)</p>
+<p><strong>C) HTA rénovasculaire (HTRV)</strong> :<br>
+Couplée au captopril pour détecter une sténose de l'artère rénale fonctionnellement significative (voir slide 8-9)</p>
+
+</div>
+
+<svg viewBox="0 0 700 250" xmlns="http://www.w3.org/2000/svg"
+     style="width:100%;max-height:250px;margin:1rem 0;display:block">
+  <defs>
+    <marker id="ef2a" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+      <polygon points="0 0,8 3,0 6" fill="#3498db"/>
+    </marker>
+  </defs>
+  <text x="350" y="18" text-anchor="middle" fill="#3498db" font-size="13"
+        font-family="Segoe UI,sans-serif" font-weight="bold">
+    DTPA vs MAG3 — Mécanisme d'élimination rénale
+  </text>
+  <!-- Glomerule box -->
+  <ellipse cx="140" cy="110" rx="80" ry="50" fill="rgba(52,152,219,0.15)" stroke="#3498db" stroke-width="1.5"/>
+  <text x="140" y="105" text-anchor="middle" fill="#3498db" font-size="12" font-family="Segoe UI,sans-serif" font-weight="bold">Glomérule</text>
+  <text x="140" y="122" text-anchor="middle" fill="#b0b0c0" font-size="11" font-family="Segoe UI,sans-serif">(filtration)</text>
+  <!-- Tubule box -->
+  <rect x="280" y="80" width="150" height="60" rx="8" fill="rgba(46,204,113,0.15)" stroke="#2ecc71" stroke-width="1.5"/>
+  <text x="355" y="108" text-anchor="middle" fill="#2ecc71" font-size="12" font-family="Segoe UI,sans-serif" font-weight="bold">TCP</text>
+  <text x="355" y="126" text-anchor="middle" fill="#b0b0c0" font-size="11" font-family="Segoe UI,sans-serif">(sécrétion active)</text>
+  <!-- Cavités pyélocalicielles -->
+  <rect x="490" y="80" width="175" height="60" rx="8" fill="rgba(155,89,182,0.15)" stroke="#9b59b6" stroke-width="1.5"/>
+  <text x="577" y="105" text-anchor="middle" fill="#9b59b6" font-size="12" font-family="Segoe UI,sans-serif" font-weight="bold">Cavités</text>
+  <text x="577" y="121" text-anchor="middle" fill="#b0b0c0" font-size="11" font-family="Segoe UI,sans-serif">pyélocalicielles</text>
+  <!-- DTPA arrow (blue, top) -->
+  <path d="M220,100 Q255,85 280,95" stroke="#3498db" stroke-width="2.5" fill="none" marker-end="url(#ef2a)"/>
+  <text x="250" y="80" text-anchor="middle" fill="#3498db" font-size="10" font-family="Segoe UI,sans-serif" font-weight="bold">DTPA</text>
+  <text x="250" y="92" text-anchor="middle" fill="#b0b0c0" font-size="9" font-family="Segoe UI,sans-serif">filtration</text>
+  <!-- MAG3 arrow (green, bottom) -->
+  <path d="M220,118 Q255,135 280,125" stroke="#2ecc71" stroke-width="2.5" fill="none"/>
+  <path d="M278,120 L282,128 L274,126 Z" fill="#2ecc71"/>
+  <text x="250" y="150" text-anchor="middle" fill="#2ecc71" font-size="10" font-family="Segoe UI,sans-serif" font-weight="bold">MAG3</text>
+  <text x="250" y="162" text-anchor="middle" fill="#b0b0c0" font-size="9" font-family="Segoe UI,sans-serif">sécrétion</text>
+  <!-- Arrow TCP to cavités -->
+  <line x1="430" y1="110" x2="490" y2="110" stroke="#9b59b6" stroke-width="2" marker-end="url(#ef2a)"/>
+  <text x="460" y="105" text-anchor="middle" fill="#b0b0c0" font-size="9" font-family="Segoe UI,sans-serif">excrétion</text>
+  <!-- DFG reflection note -->
+  <rect x="10" y="175" width="220" height="32" rx="4" fill="rgba(52,152,219,0.12)" stroke="#3498db" stroke-width="1"/>
+  <text x="120" y="193" text-anchor="middle" fill="#3498db" font-size="10" font-family="Segoe UI,sans-serif" font-weight="bold">DTPA → reflet du DFG</text>
+  <rect x="240" y="175" width="220" height="32" rx="4" fill="rgba(46,204,113,0.12)" stroke="#2ecc71" stroke-width="1"/>
+  <text x="350" y="193" text-anchor="middle" fill="#2ecc71" font-size="10" font-family="Segoe UI,sans-serif" font-weight="bold">MAG3 → préféré si DFG bas</text>
+  <rect x="470" y="175" width="215" height="32" rx="4" fill="rgba(243,156,18,0.12)" stroke="#f39c12" stroke-width="1"/>
+  <text x="577" y="193" text-anchor="middle" fill="#f39c12" font-size="10" font-family="Segoe UI,sans-serif" font-weight="bold">Les deux → excrétés dans urines</text>
+  <!-- Furosemide note -->
+  <text x="350" y="235" text-anchor="middle" fill="#9b59b6" font-size="11" font-family="Segoe UI,sans-serif" font-weight="bold">+ Furosémide (Lasilix®) à J+20 min si suspicion obstacle → hyperdiurèse pour tester l'excrétion</text>
+</svg>
+
+<h3>🃏 Flashcards</h3>
+<div class="flash-block" data-answer="DTPA : éliminé par filtration glomérulaire exclusive → reflet du DFG. MAG3 : éliminé par sécrétion tubulaire proximale → préféré si DFG bas (insuffisant rénal, nourrisson). Les deux sont éliminés dans les voies urinaires et permettent l'étude de l'excrétion.">
+  <div class="q-text">❓ Quelle différence entre DTPA et MAG3 ? Dans quel contexte préférer le MAG3 ? (niveau 1)</div>
+  <div class="flash-input-row">
+    <input class="flash-input" type="text" placeholder="Votre réponse…" onkeydown="if(event.key==='Enter')validateFlash(this)">
+    <button class="qcm-validate" onclick="validateFlash(this)">Vérifier</button>
+  </div>
+  <div class="qcm-explanation"></div>
+</div>
+<div class="flash-block" data-answer="SJPU (syndrome jonction pyélo-urétérale), calculs obstructifs, contrôle post-greffe rénale, HTA rénovasculaire (avec captopril)">
+  <div class="q-text">❓ Citez 4 indications de la scintigraphie rénale dynamique. (niveau 1)</div>
+  <div class="flash-input-row">
+    <input class="flash-input" type="text" placeholder="Votre réponse…" onkeydown="if(event.key==='Enter')validateFlash(this)">
+    <button class="qcm-validate" onclick="validateFlash(this)">Vérifier</button>
+  </div>
+  <div class="qcm-explanation"></div>
+</div>
+<div class="flash-block" data-answer="Le furosémide (Lasilix) provoque une hyperdiurèse soudaine → augmente le flux urinaire. Permet de distinguer une dilatation simple (vidange rapide après Lasilix) d'une vraie obstruction (pas de vidange même après Lasilix). Injecté 20 min après le traceur.">
+  <div class="q-text">❓ Quel est le rôle du furosémide lors de la scintigraphie dynamique et quand l'injecter ? (niveau 2)</div>
+  <div class="flash-input-row">
+    <input class="flash-input" type="text" placeholder="Votre réponse…" onkeydown="if(event.key==='Enter')validateFlash(this)">
+    <button class="qcm-validate" onclick="validateFlash(this)">Vérifier</button>
+  </div>
+  <div class="qcm-explanation"></div>
+</div>
+</div>
+
+<!-- ========== SLIDE 3 : NÉPHROGRAMME ISOTOPIQUE NORMAL ========== -->
+<div class="slide" id="slide-3">
+<div class="slide-inner">
+<h2>🎯 Le Néphrogramme Isotopique Normal</h2>
+<p class="slide-intro">Le néphrogramme est la courbe d'activité radioactive rénale enregistrée au cours du temps. Sa morphologie reflète fidèlement les trois grandes fonctions du rein : vascularisation, extraction tubulaire et excrétion urinaire.</p>
+
+<h3>📦 Prérequis</h3>
+<div class="def-box">
+  <strong>Néphrogramme</strong> : courbe activité-temps (ROI sur le rein) dérivée de la scintigraphie dynamique. Il traduit la captation puis l'élimination du traceur par chaque rein séparément.
+</div>
+<div class="def-box">
+  <strong>ROI (Region Of Interest)</strong> : zone délimitée manuellement sur les images scintigraphiques, permettant de mesurer l'activité radioactive spécifique d'un organe (rein droit, rein gauche, fond).
+</div>
+<div class="def-box">
+  <strong>T½ (demi-vie corticale)</strong> : temps nécessaire pour que l'activité rénale diminue de moitié après le pic, reflet de la qualité de l'excrétion. Normal : &lt; 10 min.
+</div>
+
+<h3>📖 Explication</h3>
+<div class="expl-wrap">
+  <h4>① Phase vasculaire (0 – 30 secondes)</h4>
+  <p>Immédiatement après l'injection intraveineuse du traceur, une montée rapide de l'activité radioactive est observée sur le néphrogramme. Cette phase correspond au <strong>premier passage sanguin</strong> dans les artères rénales et dans les glomérules. Sa hauteur et sa pente sont proportionnelles au débit sanguin rénal (DSR), normalement 600 mL/min pour les deux reins. En pratique clinique, cette phase permet d'évaluer la vascularisation rénale et d'identifier d'emblée une hypoperfusion unilatérale (sténose artérielle, infarctus rénal).</p>
+  <div class="expl-bq">Ex : dans une sténose de l'artère rénale gauche, le pic vasculaire du rein gauche est plus bas et plus tardif que celui du rein droit.</div>
+  <hr class="expl-sep">
+  <h4>② Phase fonctionnelle ou corticale (30 s – 3 min)</h4>
+  <p>Après le passage vasculaire, l'activité continue à augmenter progressivement : c'est la <strong>phase de captation tubulaire</strong>. Le MAG3 est activement sécrété par les cellules tubulaires proximales (transport actif), tandis que le DTPA est filtré passivement par les glomérules. Cette phase reflète donc directement la <strong>fonction tubulaire</strong> (ou glomérulaire selon le traceur) du parenchyme rénal. Le pic corticoïde, ou <em>Tmax</em>, est normalement atteint entre 2 et 5 minutes après injection. Un Tmax retardé ou un pic émoussé traduit une insuffisance fonctionnelle.</p>
+  <div class="expl-bq">Ex : en cas d'ischémie rénale chronique, le Tmax est retardé à 6–8 minutes et le pic est aplati, témoignant d'une réduction de la filtration/sécrétion.</div>
+  <hr class="expl-sep">
+  <h4>③ Phase excrétoire (à partir de 3–5 min)</h4>
+  <p>Après le Tmax, l'activité rénale <strong>décroît progressivement</strong> à mesure que le traceur est excrété dans les voies urinaires. La <strong>pente descendante</strong> et le calcul du T½ permettent d'évaluer le drainage urinaire. Un T½ normal est <strong>inférieur à 10 minutes</strong>. Au-delà de 20 minutes, une obstruction significative est fortement suspectée. Le rapport cortex/activité totale à 30 minutes (RCA ou <em>cortical retention ratio</em>) est normalement <strong>inférieur à 30 %</strong> : si plus de 30 % du traceur reste dans le cortex à 30 min, cela signe une rétention parenchymateuse (cicatrice, fibrose).</p>
+  <div class="expl-bq">Ex : en cas de syndrome de jonction pyélo-urétérale, la courbe s'élève progressivement sans descendre, et après injection de furosémide la descente reste lente (T½ &gt; 20 min) signant une obstruction organique.</div>
+  <hr class="expl-sep">
+  <h4>④ Paramètres quantitatifs normaux à retenir</h4>
+  <p>Les valeurs normales du néphrogramme sont les suivantes : <strong>Tmax</strong> entre 2 et 5 minutes ; <strong>T½</strong> inférieur à 10 minutes (après furosémide si nécessaire) ; <strong>RCA à 30 min</strong> inférieur à 30 % ; rapport <strong>droite/gauche</strong> de la fonction relative entre 45 et 55 % (chaque rein contribue environ pour moitié à la fonction totale). Ces paramètres sont mesurés automatiquement par le logiciel d'acquisition de la gamma-caméra et consignés dans le compte-rendu scintigraphique.</p>
+</div>
+
+<div class="img-block">
+  <img src="https://images2.urology-textbook.com/nierenszintigraphie_english.jpg" alt="Néphrogramme isotopique normal — 3 phases" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+  <div style="display:none;padding:1rem;color:#9090b0;font-style:italic">Image non disponible</div>
+  <div class="img-caption"><span class="img-annot">A</span> Phase vasculaire (0–30 s) : montée rapide liée au premier passage sanguin. <span class="img-annot">B</span> Phase corticale (30 s–3 min) : captation tubulaire progressive atteignant un Tmax à ~3 min. <span class="img-annot">C</span> Phase excrétoire (&gt; 3 min) : descente progressive du traceur vers les voies excrétrices. T½ normal &lt; 10 min après furosémide.</div>
+</div>
+
+<svg viewBox="0 0 560 160" style="width:100%;max-width:560px;display:block;margin:1.2rem auto;background:rgba(0,0,0,0.25);border-radius:10px">
+  <defs>
+    <marker id="arr3" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><polygon points="0 0,8 3,0 6" fill="#9090b0"/></marker>
+  </defs>
+  <!-- Axes -->
+  <line x1="40" y1="130" x2="530" y2="130" stroke="#9090b0" stroke-width="1.5" marker-end="url(#arr3)"/>
+  <line x1="40" y1="130" x2="40" y2="15" stroke="#9090b0" stroke-width="1.5" marker-end="url(#arr3)"/>
+  <text x="535" y="133" fill="#9090b0" font-size="10">t (min)</text>
+  <text x="8" y="20" fill="#9090b0" font-size="10">Activité</text>
+  <!-- Courbe rein normal -->
+  <path d="M55,125 C70,80 85,40 110,30 C135,20 160,25 200,35 C260,50 310,85 380,105 C430,118 490,124 520,126"
+        stroke="#3498db" stroke-width="2.5" fill="none"/>
+  <!-- Zones colorées -->
+  <rect x="55" y="15" width="60" height="115" fill="rgba(231,76,60,0.07)" rx="3"/>
+  <rect x="115" y="15" width="90" height="115" fill="rgba(52,152,219,0.07)" rx="3"/>
+  <rect x="205" y="15" width="315" height="115" fill="rgba(46,204,113,0.07)" rx="3"/>
+  <!-- Labels zones -->
+  <text x="70" y="155" fill="#e74c3c" font-size="9" text-anchor="middle">Vasculaire</text>
+  <text x="160" y="155" fill="#3498db" font-size="9" text-anchor="middle">Fonctionnelle</text>
+  <text x="360" y="155" fill="#2ecc71" font-size="9" text-anchor="middle">Excrétoire (T½ &lt; 10 min)</text>
+  <!-- Tmax marker -->
+  <line x1="110" y1="30" x2="110" y2="130" stroke="#f39c12" stroke-width="1" stroke-dasharray="4,3"/>
+  <text x="112" y="60" fill="#f39c12" font-size="9">Tmax ~3 min</text>
+  <!-- Courbe obstructive (grisé) -->
+  <path d="M55,125 C70,80 85,40 115,30 C150,22 190,28 240,38 C300,52 370,70 440,80 C490,87 520,90 525,92"
+        stroke="rgba(231,76,60,0.6)" stroke-width="1.5" fill="none" stroke-dasharray="5,3"/>
+  <text x="430" y="75" fill="rgba(231,76,60,0.9)" font-size="9">Obstruction</text>
+</svg>
+
+<div class="flashcard-section">
+<h3>🃏 Flashcards</h3>
+<div class="flashcard" onclick="this.classList.toggle('flipped')">
+  <div class="fc-front">Quelles sont les 3 phases du néphrogramme normal ?</div>
+  <div class="fc-back">① Vasculaire (0–30 s) : pic de 1er passage sanguin<br>② Fonctionnelle/corticale (30 s–3 min) : captation tubulaire → Tmax 2–5 min<br>③ Excrétoire (>3 min) : T½ &lt; 10 min, RCA 30 min &lt; 30%</div>
+</div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')">
+  <div class="fc-front">Quelle est la valeur normale du T½ après furosémide ?</div>
+  <div class="fc-back">T½ &lt; 10 min = normal<br>T½ 10–20 min = zone grise<br>T½ &gt; 20 min = obstruction significative</div>
+</div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')">
+  <div class="fc-front">Que signifie un RCA > 30% à 30 minutes ?</div>
+  <div class="fc-back">Rétention corticale excessive → cicatrice parenchymateuse, fibrose ou insuffisance tubulaire. Le traceur ne passe pas vers les voies excrétrices.</div>
+</div>
+</div>
+</div>
+</div>
+
+<!-- ========== SLIDE 4 : FONCTION RÉNALE RELATIVE ========== -->
+<div class="slide" id="slide-4">
+<div class="slide-inner">
+<h2>⚖️ Fonction Rénale Relative</h2>
+<p class="slide-intro">La scintigraphie rénale est la seule technique permettant de quantifier la <strong>contribution de chaque rein</strong> à la fonction totale. Cette mesure, appelée fonction rénale relative (FRR), est indispensable avant toute décision chirurgicale (néphrectomie, correction d'obstacle).</p>
+
+<h3>📦 Prérequis</h3>
+<div class="def-box">
+  <strong>Fonction rénale relative (FRR)</strong> : pourcentage de la fonction totale assurée par chaque rein, calculé par intégration de la courbe d'activité pendant la phase de captation (2–3 min après injection). Normale : 45–55% par côté.
+</div>
+<div class="def-box">
+  <strong>Clairance rénale effective du plasma (ERPF)</strong> : mesure absolue de la fonction tubulaire (avec MAG3) ou de la filtration glomérulaire (avec DTPA). Calculée à partir de la dose injectée, du poids et de la fixation précoce.
+</div>
+<div class="def-box">
+  <strong>Split renal function</strong> : terme anglo-saxon équivalent à FRR. Utilisé dans les comptes-rendus pour désigner la répartition fonctionnelle droite/gauche.
+</div>
+
+<h3>📖 Explication</h3>
+<div class="expl-wrap">
+  <h4>① Méthode de calcul de la FRR</h4>
+  <p>La FRR est calculée à partir de la phase de captation précoce (2–3 minutes après injection), avant que le traceur n'atteigne les voies excrétrices. On intègre l'aire sous la courbe de chaque rein pendant cette fenêtre temporelle, après soustraction du bruit de fond (<em>background correction</em>). La contribution relative est exprimée en pourcentage : <strong>FRR droite = Aire(D) / [Aire(D) + Aire(G)] × 100</strong>. Cette mesure est robuste car elle ne dépend pas de la qualité de l'excrétion, ce qui la rend valide même en présence d'une dilatation pyélocalicielle importante.</p>
+  <div class="expl-bq">Ex : un rein hydronéphrotique dilaté peut avoir une excellente FRR (45%) malgré un T½ très prolongé, car sa filtration est encore préservée. La décision de chirurgie conservatrice se base alors sur cette FRR.</div>
+  <hr class="expl-sep">
+  <h4>② Valeurs normales et seuils décisionnels</h4>
+  <p>En situation normale, chaque rein assure entre <strong>45 et 55%</strong> de la fonction totale. Une asymétrie est considérée comme significative si la FRR d'un rein descend en dessous de <strong>40%</strong>. En pratique chirurgicale, les seuils décisionnels sont : FRR <strong>&gt; 40%</strong> → chirurgie conservatrice possible (plastie de jonction, pyéloplastie) ; FRR <strong>entre 15 et 40%</strong> → discussion multidisciplinaire ; FRR <strong>&lt; 15%</strong> → rein non fonctionnel, indication à la <em>néphro-urétérectomie</em> si symptomatique ou cancéreux.</p>
+  <div class="expl-bq">Ex : hydronéphrose droite par syndrome de jonction avec FRR droite à 32% → rein récupérable → pyéloplastie proposée. Même situation avec FRR à 8% → rein quasi non fonctionnel → néphro-urétérectomie si symptomatique.</div>
+  <hr class="expl-sep">
+  <h4>③ Suivi post-thérapeutique</h4>
+  <p>La scintigraphie avec mesure de la FRR est <strong>répétée après traitement</strong> (généralement 3 à 6 mois post-chirurgie ou post-lithotritie) pour évaluer la récupération fonctionnelle. Une amélioration de la FRR du côté traité confirme le succès de l'intervention. À l'inverse, une détérioration progressive de la FRR sur des examens successifs indique une évolution vers l'insuffisance rénale irréversible et peut justifier une réévaluation du traitement.</p>
+  <div class="expl-bq">Ex : après pyéloplastie, la FRR droite remonte de 32% à 42% à 6 mois → récupération fonctionnelle satisfaisante confirmée.</div>
+  <hr class="expl-sep">
+  <h4>④ Limites de la méthode</h4>
+  <p>La principale limite de la FRR est sa <strong>dépendance à la qualité de la correction du fond</strong>. Une rate hypertrophiée ou un foie volumineux peuvent contaminer la mesure du rein gauche ou droit respectivement. Par ailleurs, en cas d'insuffisance rénale sévère (DFG &lt; 15 mL/min), la fixation du traceur est trop faible pour permettre un calcul fiable. Dans ces situations, il est recommandé de coupler la scintigraphie à une mesure absolue du DFG par EDTA-51Cr.</p>
+  <div class="expl-warn">⚠️ La FRR ne remplace PAS la mesure du DFG absolu. Une FRR de 45% est rassurante si le DFG global est à 80 mL/min, mais inquiétante si le DFG global est à 20 mL/min (le rein "normal" n'assure que 9 mL/min).</div>
+</div>
+
+<div class="img-block">
+  <img src="https://cdn.ncbi.nlm.nih.gov/pmc/blobs/1366/5659111/b880a5071f01/nihms913801f1.jpg" alt="Calcul T½ et fonction rénale relative — méthode scintigraphique" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+  <div style="display:none;padding:1rem;color:#9090b0;font-style:italic">Image non disponible</div>
+  <div class="img-caption">Illustration de la méthode de calcul du T½ et de la FRR sur néphrogramme. L'intégration de la courbe pendant la fenêtre 2–3 min (phase corticale) donne la FRR. La descente post-pic permet le calcul du T½ par extrapolation semi-logarithmique.</div>
+</div>
+
+<svg viewBox="0 0 560 170" style="width:100%;max-width:560px;display:block;margin:1.2rem auto;background:rgba(0,0,0,0.25);border-radius:10px">
+  <!-- Fond -->
+  <rect x="40" y="15" width="240" height="145" fill="rgba(52,152,219,0.05)" rx="4"/>
+  <rect x="300" y="15" width="240" height="145" fill="rgba(46,204,113,0.05)" rx="4"/>
+  <text x="160" y="32" fill="#3498db" font-size="11" font-weight="bold" text-anchor="middle">Rein Droit</text>
+  <text x="420" y="32" fill="#2ecc71" font-size="11" font-weight="bold" text-anchor="middle">Rein Gauche</text>
+  <!-- Jauge D -->
+  <rect x="100" y="50" width="120" height="18" fill="rgba(255,255,255,0.08)" rx="9"/>
+  <rect x="100" y="50" width="50" height="18" fill="rgba(231,76,60,0.8)" rx="9"/>
+  <text x="160" y="64" fill="white" font-size="10" text-anchor="middle">FRR D : 38%</text>
+  <!-- Jauge G -->
+  <rect x="360" y="50" width="120" height="18" fill="rgba(255,255,255,0.08)" rx="9"/>
+  <rect x="360" y="50" width="74" height="18" fill="rgba(52,152,219,0.8)" rx="9"/>
+  <text x="420" y="64" fill="white" font-size="10" text-anchor="middle">FRR G : 62%</text>
+  <!-- Légende seuils -->
+  <rect x="40" y="90" width="520" height="35" fill="rgba(0,0,0,0.2)" rx="6"/>
+  <text x="55" y="102" fill="#e74c3c" font-size="9" font-weight="bold">&lt; 15%</text>
+  <text x="55" y="116" fill="#e74c3c" font-size="8">Non fonctionnel</text>
+  <text x="130" y="102" fill="#f39c12" font-size="9" font-weight="bold">15–40%</text>
+  <text x="130" y="116" fill="#f39c12" font-size="8">Discussion MDT</text>
+  <text x="220" y="102" fill="#2ecc71" font-size="9" font-weight="bold">40–60%</text>
+  <text x="220" y="116" fill="#2ecc71" font-size="8">Normal/Récupérable</text>
+  <text x="310" y="102" fill="#3498db" font-size="9" font-weight="bold">&gt; 60%</text>
+  <text x="310" y="116" fill="#3498db" font-size="8">Hypertrophie compensatrice</text>
+  <!-- Formule -->
+  <rect x="40" y="135" width="520" height="22" fill="rgba(52,152,219,0.1)" rx="5"/>
+  <text x="300" y="150" fill="#3498db" font-size="10" text-anchor="middle" font-weight="bold">FRR (%) = Aire₂₋₃min(rein) / [Aire₂₋₃min(D) + Aire₂₋₃min(G)] × 100</text>
+</svg>
+
+<div class="flashcard-section">
+<h3>🃏 Flashcards</h3>
+<div class="flashcard" onclick="this.classList.toggle('flipped')">
+  <div class="fc-front">Quelle est la valeur normale de la FRR pour chaque rein ?</div>
+  <div class="fc-back">45 – 55% par rein. En dessous de 40% → asymétrie significative. En dessous de 15% → rein non fonctionnel.</div>
+</div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')">
+  <div class="fc-front">Comment calcule-t-on la FRR ? Quelle fenêtre temporelle ?</div>
+  <div class="fc-back">Aire sous la courbe pendant la phase de captation (2–3 min post-injection), après correction du fond. FRR(D) = Aire(D) / [Aire(D)+Aire(G)] × 100</div>
+</div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')">
+  <div class="fc-front">Quel seuil de FRR permet une chirurgie conservatrice ?</div>
+  <div class="fc-back">FRR &gt; 40% → chirurgie conservatrice possible (ex: pyéloplastie pour hydronéphrose). FRR &lt; 15% → rein non fonctionnel → néphro-urétérectomie si indiqué.</div>
+</div>
+</div>
+</div>
+</div>
+
+<!-- ========== SLIDE 5 : GRADES D'OBSTRUCTION — O'REILLY ========== -->
+<div class="slide" id="slide-5">
+<div class="slide-inner">
+<h2>🚧 Classification de l'Obstruction — Grades O'Reilly</h2>
+<p class="slide-intro">La réponse au furosémide lors de la scintigraphie dynamique permet de classer les obstructions selon la classification de O'Reilly (1979), encore utilisée en pratique clinique pour guider la décision thérapeutique.</p>
+
+<h3>📦 Prérequis</h3>
+<div class="def-box">
+  <strong>Test au furosémide (Lasix®)</strong> : injection IV de 0,5 mg/kg (max 40 mg) lors de la scintigraphie, au moment où les voies urinaires sont pleines (T+20 min) ou en protocole F-15 (avant l'injection du traceur). Il provoque une diurèse forcée qui "teste" la perméabilité de la voie excrétrice.
+</div>
+<div class="def-box">
+  <strong>Classification de O'Reilly</strong> : système en 4 grades (Type I à IV) basé sur la réponse de la courbe excrétoire au furosémide, permettant de distinguer une obstruction vraie d'une simple ectasie non obstructive.
+</div>
+
+<h3>📖 Explication</h3>
+<div class="expl-wrap">
+  <h4>① Type I — Non obstructif (courbe normale)</h4>
+  <p>La courbe atteint un Tmax rapide (2–4 min) puis descend spontanément avec un T½ normal <strong>&lt; 10 minutes</strong> sans injection de furosémide. Il n'y a aucune rétention de traceur dans les voies urinaires. Ce profil est rassurant et ne nécessite aucune intervention. Il peut s'observer même en cas de dilatation pyélocalicielle légère si celle-ci n'est pas obstructive (méga-pyélon non obstructif, séquelle d'infection).</p>
+  <div class="expl-bq">Ex : dilatation pyélocalicielle découverte en échographie anténatale → scintigraphie Type I → surveillance simple, pas d'indication chirurgicale.</div>
+  <hr class="expl-sep">
+  <h4>② Type II — Obstructif (pas de réponse au furosémide)</h4>
+  <p>La courbe monte progressivement sans jamais redescendre, formant un <strong>plateau ou une ascension continue</strong>. Après injection de furosémide, il n'y a <strong>aucune réponse</strong> : le traceur reste accumulé dans le bassinet. Ce profil signe une <strong>obstruction organique</strong> significative. Le T½ calculé est généralement <strong>&gt; 20 minutes</strong> ou ne peut pas être calculé (pas de descente). C'est le profil le plus grave, indiquant une obstruction serrée nécessitant une correction chirurgicale (pyéloplastie, JJ, néphrostomie).</p>
+  <div class="expl-bq">Ex : syndrome de jonction pyélo-urétérale congénital sévère → courbe Type II → indication à la pyéloplastie robotique.</div>
+  <hr class="expl-sep">
+  <h4>③ Type IIIa — Équivoque répondeur (diurèse insuffisante)</h4>
+  <p>La courbe atteint un plateau puis descend <strong>partiellement après furosémide</strong>, mais le T½ reste entre <strong>10 et 20 minutes</strong>. Ce profil est dit "équivoque" car la réponse au diurétique est partielle. Il peut s'agir d'une obstruction modérée, mais aussi d'une réponse insuffisante liée à une mauvaise hydratation, une hypotension, ou une insuffisance rénale sous-jacente qui diminue l'effet du furosémide. Un nouveau test après réhydratation est recommandé avant toute décision chirurgicale.</p>
+  <div class="expl-bq">Ex : enfant déshydraté lors de la scintigraphie → Type IIIa → examen refait après hydratation IV → Type I confirmé → pas de chirurgie.</div>
+  <hr class="expl-sep">
+  <h4>④ Type IIIb — Équivoque non-répondeur (rein trop peu fonctionnel)</h4>
+  <p>La courbe monte peu (captation faible) et la descente après furosémide est quasi nulle, non pas par obstruction, mais parce que le <strong>rein ne filtre plus assez</strong> pour répondre au diurétique. La FRR de ce rein est typiquement très basse (<strong>&lt; 10%</strong>). Il ne faut pas confondre ce profil avec un Type II : l'absence de réponse n'est pas due à une obstruction mais à une insuffisance fonctionnelle sévère. La décision thérapeutique (drainer pour récupérer de la fonction vs ablation) doit être prise après discussion multidisciplinaire et éventuellement une période de néphrostomie test.</p>
+  <div class="expl-bq">Ex : rein unique atrophique avec FRR 6% et courbe aplatie non répondante au furosémide → néphrostomie test 4 semaines → réévaluation scintigraphique → décision nephrectomie ou conservation.</div>
+</div>
+
+<div class="img-row">
+  <div class="img-block">
+    <img src="https://cdn.ncbi.nlm.nih.gov/pmc/blobs/3a85/8188835/a4bbbd1fa7d4/nihms-1588844-f0001.jpg" alt="Courbes néphrogramme par type d'obstruction O'Reilly" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+    <div style="display:none;padding:1rem;color:#9090b0;font-style:italic">Image non disponible</div>
+    <div class="img-caption">Exemples de courbes néphrogramme selon la classification O'Reilly. Notez la différence de réponse au furosémide entre Type I (descente normale), Type II (pas de descente) et Type III (réponse partielle).</div>
+  </div>
+  <div class="img-block">
+    <img src="https://cdn.ncbi.nlm.nih.gov/pmc/blobs/3a85/8188835/280d31072f8f/nihms-1588844-f0006.jpg" alt="Courbes moyennes par statut obstructif" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+    <div style="display:none;padding:1rem;color:#9090b0;font-style:italic">Image non disponible</div>
+    <div class="img-caption">Courbes moyennes par groupe (non obstructif, équivoque, obstructif). L'injection de furosémide est indiquée par la flèche verticale. L'écart entre les groupes devient maximal après furosémide.</div>
+  </div>
+</div>
+
+<div class="flashcard-section">
+<h3>🃏 Flashcards</h3>
+<div class="flashcard" onclick="this.classList.toggle('flipped')">
+  <div class="fc-front">Quelle est la dose de furosémide utilisée lors de la scintigraphie rénale ?</div>
+  <div class="fc-back">0,5 mg/kg IV (maximum 40 mg), injectée à T+20 min (voies pleines) ou en protocole F-15 (avant le traceur).</div>
+</div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')">
+  <div class="fc-front">Que signifie un T½ > 20 min après furosémide ?</div>
+  <div class="fc-back">Obstruction organique significative (Type II de O'Reilly). Indication chirurgicale à discuter (pyéloplastie, JJ, néphrostomie).</div>
+</div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')">
+  <div class="fc-front">Comment distinguer Type II (obstructif) de Type IIIb (rein peu fonctionnel) ?</div>
+  <div class="fc-back">Type II : captation normale mais pas de descente après furosémide. Type IIIb : captation très faible (FRR &lt; 10%), pas de réponse car rein insuffisant. La FRR discrimine les deux.</div>
+</div>
+</div>
+</div>
+</div>
+
+<!-- ========== QCM 1 ========== -->
+<div class="slide" id="slide-qcm1">
+<div class="slide-inner">
+<h2>❓ QCM — Scintigraphie Dynamique</h2>
+
+<div class="qcm-block">
+  <div class="qcm-question">Q1. Lors d'une scintigraphie rénale dynamique au MAG3, quelle phase reflète principalement la sécrétion tubulaire proximale ?</div>
+  <div class="qcm-options">
+    <div class="qcm-option" onclick="selectOption(this)">A. La phase vasculaire (0–30 s)</div>
+    <div class="qcm-option" onclick="selectOption(this)">B. La phase de captation corticale (30 s – 3 min)</div>
+    <div class="qcm-option" onclick="selectOption(this)">C. La phase excrétoire après furosémide</div>
+    <div class="qcm-option" onclick="selectOption(this)">D. Le temps de transit urétéral</div>
+    <div class="qcm-option" onclick="selectOption(this)">E. La rétention corticale à 30 min</div>
+  </div>
+  <button class="qcm-validate" onclick="validateQCM(this)">Valider</button>
+  <div class="qcm-feedback" data-correct="B">✅ B. Le MAG3 est sécrété activement par les cellules tubulaires proximales → la phase de captation 30 s–3 min reflète cette sécrétion tubulaire. Le DTPA, lui, est filtré par les glomérules dans la même fenêtre temporelle.</div>
+</div>
+
+<div class="qcm-block">
+  <div class="qcm-question">Q2. Un patient présente un T½ = 25 min après injection de furosémide lors d'une scintigraphie au MAG3. Quelle classification de O'Reilly lui correspond ?</div>
+  <div class="qcm-options">
+    <div class="qcm-option" onclick="selectOption(this)">A. Type I</div>
+    <div class="qcm-option" onclick="selectOption(this)">B. Type IIIa</div>
+    <div class="qcm-option" onclick="selectOption(this)">C. Type IIIb</div>
+    <div class="qcm-option" onclick="selectOption(this)">D. Type II</div>
+    <div class="qcm-option" onclick="selectOption(this)">E. Non classifiable</div>
+  </div>
+  <button class="qcm-validate" onclick="validateQCM(this)">Valider</button>
+  <div class="qcm-feedback" data-correct="D">✅ D. Type II : T½ &gt; 20 min = obstruction organique significative. Aucune réponse au furosémide → obstruction serrée nécessitant correction chirurgicale.</div>
+</div>
+
+<div class="qcm-block">
+  <div class="qcm-question">Q3. Quelle valeur de FRR indique un rein "non fonctionnel" justifiant une discussion de néphro-urétérectomie ?</div>
+  <div class="qcm-options">
+    <div class="qcm-option" onclick="selectOption(this)">A. FRR &lt; 40%</div>
+    <div class="qcm-option" onclick="selectOption(this)">B. FRR &lt; 30%</div>
+    <div class="qcm-option" onclick="selectOption(this)">C. FRR &lt; 20%</div>
+    <div class="qcm-option" onclick="selectOption(this)">D. FRR &lt; 15%</div>
+    <div class="qcm-option" onclick="selectOption(this)">E. FRR &lt; 10%</div>
+  </div>
+  <button class="qcm-validate" onclick="validateQCM(this)">Valider</button>
+  <div class="qcm-feedback" data-correct="D">✅ D. FRR &lt; 15% = rein non fonctionnel. Entre 15 et 40% : discussion multidisciplinaire. Au-dessus de 40% : chirurgie conservatrice possible.</div>
+</div>
+
+<div class="qcm-block">
+  <div class="qcm-question">Q4. Parmi les suivants, lequel est un traceur de filtration glomérulaire (non sécrété, non réabsorbé) utilisé en scintigraphie rénale dynamique ?</div>
+  <div class="qcm-options">
+    <div class="qcm-option" onclick="selectOption(this)">A. MAG3 (mercaptoacétyl-triglycine)</div>
+    <div class="qcm-option" onclick="selectOption(this)">B. DMSA (acide dimercaptosuccinique)</div>
+    <div class="qcm-option" onclick="selectOption(this)">C. DTPA (acide diéthylènetriaminepentaacétique)</div>
+    <div class="qcm-option" onclick="selectOption(this)">D. MIBI (methoxyisobutylisonitrile)</div>
+    <div class="qcm-option" onclick="selectOption(this)">E. HMPAO</div>
+  </div>
+  <button class="qcm-validate" onclick="validateQCM(this)">Valider</button>
+  <div class="qcm-feedback" data-correct="C">✅ C. Le DTPA est filtré par les glomérules sans sécrétion ni réabsorbtion tubulaire → analogue de l'inuline → mesure le DFG. Le MAG3 est sécrété tubulaire → mesure l'ERPF.</div>
+</div>
+
+<div class="qcm-block">
+  <div class="qcm-question">Q5. Quelle est la dose IV de furosémide recommandée lors d'une scintigraphie rénale de drainage chez un adulte de 70 kg ?</div>
+  <div class="qcm-options">
+    <div class="qcm-option" onclick="selectOption(this)">A. 10 mg</div>
+    <div class="qcm-option" onclick="selectOption(this)">B. 20 mg</div>
+    <div class="qcm-option" onclick="selectOption(this)">C. 35 mg</div>
+    <div class="qcm-option" onclick="selectOption(this)">D. 40 mg (dose max atteinte)</div>
+    <div class="qcm-option" onclick="selectOption(this)">E. 80 mg</div>
+  </div>
+  <button class="qcm-validate" onclick="validateQCM(this)">Valider</button>
+  <div class="qcm-feedback" data-correct="D">✅ D. 0,5 mg/kg × 70 kg = 35 mg, arrondi à 40 mg car c'est le maximum recommandé. La dose maximale est 40 mg chez l'adulte pour éviter les effets indésirables (hypokaliémie, hypotension).</div>
+</div>
+
+<div class="dp-block">
+  <div class="dp-title">📋 Dossier Progressif</div>
+  <p>Enfant de 8 ans, suivi pour hydronéphrose gauche congénitale découverte in utero. Scintigraphie MAG3 : FRR gauche = 28%, T½ gauche après furosémide = 18 min, courbe en plateau partielle avec légère descente après Lasix.</p>
+  <ol class="dp-questions">
+    <li>Quel grade O'Reilly correspond à cette scintigraphie ?</li>
+    <li>Comment interprétez-vous la FRR gauche de 28% ?</li>
+    <li>Quelle décision thérapeutique proposez-vous ?</li>
+  </ol>
+  <button class="dp-show-btn" onclick="this.nextElementSibling.style.display='block';this.style.display='none'">Afficher la correction</button>
+  <div class="dp-correction" style="display:none">
+    <strong>1.</strong> Type IIIa de O'Reilly (T½ entre 10 et 20 min, réponse partielle au furosémide → équivoque répondeur).<br><br>
+    <strong>2.</strong> FRR 28% &lt; 40% → rein récupérable mais avec asymétrie significative. Au-dessus de 15%, une chirurgie conservatrice reste possible. Discussion multidisciplinaire (urologie pédiatrique).<br><br>
+    <strong>3.</strong> Proposition de pyéloplastie de démembrement (type Anderson-Hynes) avec réévaluation scintigraphique à 6 mois pour évaluer la récupération fonctionnelle. Si refus ou attente : surveillance scintigraphique tous les 6 mois avec seuil d'alerte à FRR &lt; 20%.
+  </div>
+</div>
+
+</div>
+</div>
+
+<!-- ========== SLIDE 6 : SCINTIGRAPHIE STATIQUE AU DMSA ========== -->
+<div class="slide" id="slide-6">
+<div class="slide-inner">
+<h2>🔬 Scintigraphie Statique au DMSA</h2>
+<p class="slide-intro">La scintigraphie au DMSA (acide dimercaptosuccinique) est l'examen de référence pour évaluer le parenchyme rénal fonctionnel. Elle permet de détecter les cicatrices rénales post-infectieuses et de mesurer avec précision la fonction rénale différentielle.</p>
+
+<h3>📦 Prérequis</h3>
+<div class="def-box">
+  <strong>DMSA (Tc-99m)</strong> : traceur marqué au technétium-99m qui se fixe sur les cellules tubulaires proximales et reste dans le cortex rénal pendant plusieurs heures. Il ne passe pas dans les voies urinaires → image statique du parenchyme fonctionnel.
+</div>
+<div class="def-box">
+  <strong>Cicatrice rénale</strong> : zone de parenchyme fibreux post-infectieux ou post-ischémique, non fonctionnelle, visible sur DMSA comme un <em>défect de fixation</em> cortical avec encoche à la surface rénale. Conséquence principale des pyélonéphrites aiguës à répétition.
+</div>
+<div class="def-box">
+  <strong>Pyélonéphrite aiguë (PNA)</strong> : infection bactérienne du parenchyme rénal. En phase aiguë, le DMSA montre une zone d'hypofixation sans encoche (oedème/inflammation réversible). En phase chronique, une cicatrice définitive peut se former.
+</div>
+
+<h3>📖 Explication</h3>
+<div class="expl-wrap">
+  <h4>① Mécanisme de fixation du DMSA</h4>
+  <p>Après injection intraveineuse, le DMSA se lie à la <strong>bordure en brosse des cellules tubulaires proximales</strong> par interaction avec les groupements sulfhydryle (-SH) membranaires. Il est capté en 2 à 3 heures et reste fixé dans le cortex rénal pendant plus de 24 heures. Cette rétention stable permet d'imager le cortex fonctionnel avec une excellente résolution spatiale. Les zones non fonctionnelles (cicatrices, infarctus, tumeurs) apparaissent comme des défects d'activité — zones froides — sur les images tomographiques (SPECT/TDM).</p>
+  <div class="expl-bq">Ex : après une PNA à E. coli chez un enfant, le DMSA à la phase aiguë montre une zone hypofixante du pôle inférieur gauche. Trois mois plus tard, si cette zone persiste avec encoche corticale → cicatrice définitive.</div>
+  <hr class="expl-sep">
+  <h4>② Principales indications</h4>
+  <p>Les <strong>quatre indications principales</strong> du DMSA sont : (1) la <strong>détection des cicatrices rénales</strong> après infections urinaires hautes récidivantes, notamment chez l'enfant avec reflux vésico-urétéral (RVU) ; (2) la <strong>recherche de foyer de PNA en phase aiguë</strong> quand l'échographie et le scanner ne permettent pas de conclure (sensibilité DMSA ~90% pour PNA aiguë vs 60% pour écho) ; (3) la <strong>détection des reins ectopiques ou dupliqués</strong> fonctionnels (malformations); (4) la mesure de la <strong>FRR avant néphro-urétérectomie</strong> d'un rein controlatéral sain.</p>
+  <div class="expl-bq">Ex : enfant avec RVU bilatéral grade IV, infections urinaires récidivantes → DMSA annuel pour surveiller l'apparition de nouvelles cicatrices → indication à la chirurgie anti-reflux si dégradation progressive.</div>
+  <hr class="expl-sep">
+  <h4>③ Lecture des images DMSA</h4>
+  <p>Les images DMSA sont acquises en <strong>SPECT/TDM</strong> (tomographie), 3–4 heures après injection. On analyse : (a) la <strong>symétrie de fixation</strong> droite/gauche (FRR) ; (b) l'existence de <strong>défects focaux</strong> : polar (pôle sup/inf), médio-rénal, diffus ; (c) la <strong>morphologie corticale</strong> : encoche = cicatrice définitive, pas d'encoche = atteinte potentiellement réversible ; (d) l'<strong>homogénéité globale</strong> : fixation hétérogène diffuse → pyélonéphrite xanthogranulomateuse, tuberculose rénale. La graduation des cicatrices utilise le score de Goldraich (I à IV) basé sur le nombre et la sévérité des défects.</p>
+  <div class="expl-bq">Ex : score Goldraich IV = parenchyme globalement aminci, fixation hétérogène sur plus de 50% du cortex → rein sévèrement endommagé → indication à la néphro-urétérectomie si rein controlatéral normal.</div>
+  <hr class="expl-sep">
+  <h4>④ DMSA vs autres techniques d'imagerie</h4>
+  <p>Comparé à l'échographie (sensibilité ~50% pour PNA aiguë) et au scanner avec injection (sensibilité ~85%, mais irradiation importante), le DMSA offre la <strong>meilleure sensibilité pour les cicatrices parenchymateuses</strong> (~95%) avec une irradiation modérée (dose efficace ~1 mSv chez l'adulte). En revanche, il ne fournit aucune information morphologique sur les voies urinaires (pas de visualisation de l'uretère, de la jonction pyélo-urétérale ni de la vessie). L'IRM rénale est une alternative chez la femme enceinte ou l'enfant devant limiter l'irradiation.</p>
+  <div class="expl-warn">⚠️ Le DMSA ne montre PAS les voies urinaires. Pour une anomalie urodynamique (obstacle, reflux), il faut coupler l'examen à une scintigraphie dynamique ou une cystographie isotopique.</div>
+</div>
+
+<div class="img-row">
+  <div class="img-block">
+    <img src="https://cdn.ncbi.nlm.nih.gov/pmc/blobs/953b/4532029/d5d597b0b3bd/kjim-10-1-43-7f1.jpg" alt="DMSA — rein normal vs PNA aiguë" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+    <div style="display:none;padding:1rem;color:#9090b0;font-style:italic">Image non disponible</div>
+    <div class="img-caption">DMSA comparatif : <strong>gauche</strong> — rein normal, fixation homogène bilatérale, FRR 50/50. <strong>droite</strong> — pyélonéphrite aiguë, zone d'hypofixation polaire inférieure gauche (flèche), sans encoche à ce stade (inflammatoire réversible).</div>
+  </div>
+  <div class="img-block">
+    <img src="https://cdn.ncbi.nlm.nih.gov/pmc/blobs/9eaa/8918400/bd56e0baf23b/ajnmmi0012-0041-f1.jpg" alt="DMSA — cicatrice rénale corticale" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+    <div style="display:none;padding:1rem;color:#9090b0;font-style:italic">Image non disponible</div>
+    <div class="img-caption">Cicatrice corticale rénale sur DMSA SPECT/TDM : défect d'activité avec encoche parenchymateuse polaire supérieure droite (flèche). Amincissement cortical définitif post-PNA. FRR droite abaissée à 38%.</div>
+  </div>
+</div>
+
+<div class="flashcard-section">
+<h3>🃏 Flashcards</h3>
+<div class="flashcard" onclick="this.classList.toggle('flipped')">
+  <div class="fc-front">Comment le DMSA se fixe-t-il dans le rein ?</div>
+  <div class="fc-back">Liaison aux groupements -SH des cellules tubulaires proximales. Fixation stable en 2–3h. Reste dans le cortex &gt; 24h → image statique du parenchyme fonctionnel.</div>
+</div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')">
+  <div class="fc-front">Quelle est la différence entre hypofixation sans encoche et avec encoche sur DMSA ?</div>
+  <div class="fc-back">Sans encoche → inflammation aiguë (PNA en cours), potentiellement réversible. Avec encoche → cicatrice définitive (fibrose post-infectieuse irréversible).</div>
+</div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')">
+  <div class="fc-front">Quelle est la sensibilité du DMSA pour la détection des cicatrices rénales ?</div>
+  <div class="fc-back">~95% (meilleure technique). Écho ~50%, Scanner ~85%. DMSA = gold standard pour le suivi des cicatrices post-PNA chez l'enfant.</div>
+</div>
+</div>
+</div>
+</div>
+
+<!-- ========== SLIDE 7 : CYSTOGRAPHIE ISOTOPIQUE ========== -->
+<div class="slide" id="slide-7">
+<div class="slide-inner">
+<h2>💧 Cystographie Isotopique</h2>
+<p class="slide-intro">La cystographie isotopique est une technique d'imagerie nucléaire permettant de détecter le reflux vésico-urétéral (RVU) avec une irradiation 50 à 200 fois inférieure à la cystographie rétrograde conventionnelle, tout en maintenant une haute sensibilité.</p>
+
+<h3>📦 Prérequis</h3>
+<div class="def-box">
+  <strong>Reflux vésico-urétéral (RVU)</strong> : remontée anormale d'urine de la vessie vers les uretères et le bassinet, favorisant les pyélonéphrites et les cicatrices rénales. Classé de grade I (uretère seulement) à grade V (dilatation massive avec tortuosité).
+</div>
+<div class="def-box">
+  <strong>Cystographie directe isotopique</strong> : instillation de Tc-99m pertechnetate dans la vessie par sonde urinaire, puis remplissage progressif et enregistrement du reflux en temps réel par gamma-caméra. Technique la plus sensible pour RVU.
+</div>
+<div class="def-box">
+  <strong>Cystographie indirecte isotopique</strong> : technique sans sondage — le traceur injecté IV (MAG3) atteint la vessie naturellement, et le patient urine devant la gamma-caméra. Moins sensible que la directe mais non invasive.
+</div>
+
+<h3>📖 Explication</h3>
+<div class="expl-wrap">
+  <h4>① Cystographie directe — Technique et avantages</h4>
+  <p>La technique directe implique un <strong>sondage vésical sous conditions stériles</strong>, l'instillation de sérum physiologique + Tc-99m pertechnetate (activité ~1 MBq/mL), puis le remplissage progressif de la vessie. L'acquisition est continue par gamma-caméra. Le reflux est visualisé en temps réel dès qu'il apparaît. La <strong>dose efficace</strong> est de 0,01–0,1 mSv vs 2–3 mSv pour la cystographie rétrograde conventionnelle → réduction d'irradiation d'un facteur 50 à 200. La résolution spatiale est cependant moindre, ne permettant pas une classification précise en grades I à V (classification Morrison isotopique en 3 grades : léger, modéré, sévère).</p>
+  <div class="expl-bq">Ex : petite fille de 3 ans avec IU fébrile récidivante → cystographie directe isotopique → RVU bilatéral grade modéré détecté → antibioprophylaxie + suivi DMSA annuel.</div>
+  <hr class="expl-sep">
+  <h4>② Cystographie indirecte — Indications spécifiques</h4>
+  <p>La cystographie <strong>indirecte</strong> est réalisée en fin de scintigraphie dynamique MAG3 : lorsque le traceur a atteint la vessie (50–60 min après injection), on demande au patient de retenir puis d'uriner devant la gamma-caméra. Le reflux est visualisé si le traceur remonte dans les uretères pendant la miction. Cette technique est moins sensible (50–70%) que la directe (85–95%) mais présente l'avantage d'être <strong>non invasive</strong> (pas de sondage). Elle est préférée chez les grands enfants coopérants et chez les adultes pour le suivi du RVU déjà connu.</p>
+  <div class="expl-bq">Ex : adolescent suivi pour RVU gauche modéré sous antibioprophylaxie → cystographie indirecte annuelle non invasive → surveillance de la régression spontanée attendue.</div>
+  <hr class="expl-sep">
+  <h4>③ Place dans l'algorithme diagnostique</h4>
+  <p>Dans l'algorithme diagnostique des infections urinaires de l'enfant, la cystographie isotopique directe est recommandée après la première <strong>pyélonéphrite fébrile</strong> chez les filles de moins de 3 ans et les garçons de tout âge (recommandations HAS). Elle remplace avantageusement la cystographie rétrograde conventionnelle (moins irradiante). L'échographie rénale reste l'examen de première intention. Le DMSA est réalisé 3–6 mois après l'épisode aigu pour chercher les cicatrices.</p>
+  <div class="expl-warn">⚠️ La cystographie isotopique ne permet pas une classification précise en grades I–V (manque de résolution morphologique). En cas de besoin de grade précis avant décision chirurgicale anti-reflux, une cystographie rétrograde conventionnelle reste nécessaire.</div>
+</div>
+
+<svg viewBox="0 0 560 180" style="width:100%;max-width:560px;display:block;margin:1.2rem auto;background:rgba(0,0,0,0.25);border-radius:10px">
+  <text x="280" y="22" fill="#3498db" font-size="12" font-weight="bold" text-anchor="middle">Algorithme — IU fébrile chez l'enfant</text>
+  <!-- Echographie -->
+  <rect x="190" y="35" width="180" height="28" fill="rgba(52,152,219,0.2)" rx="6" stroke="#3498db" stroke-width="1.5"/>
+  <text x="280" y="52" fill="#e0e0f0" font-size="10" text-anchor="middle">Échographie rénale et vésicale</text>
+  <!-- Flèche vers cystographie -->
+  <line x1="280" y1="63" x2="280" y2="78" stroke="#9090b0" stroke-width="1.5" marker-end="url(#arr3)"/>
+  <!-- Cystographie -->
+  <rect x="130" y="78" width="300" height="28" fill="rgba(46,204,113,0.15)" rx="6" stroke="#2ecc71" stroke-width="1.5"/>
+  <text x="280" y="95" fill="#e0e0f0" font-size="10" text-anchor="middle">Cystographie isotopique directe (si indication)</text>
+  <!-- Branches -->
+  <line x1="200" y1="106" x2="140" y2="121" stroke="#9090b0" stroke-width="1.5"/>
+  <line x1="360" y1="106" x2="420" y2="121" stroke="#9090b0" stroke-width="1.5"/>
+  <!-- RVU + / RVU - -->
+  <rect x="70" y="121" width="130" height="25" fill="rgba(231,76,60,0.15)" rx="5" stroke="#e74c3c" stroke-width="1"/>
+  <text x="135" y="135" fill="#e74c3c" font-size="9.5" text-anchor="middle">RVU détecté</text>
+  <rect x="360" y="121" width="130" height="25" fill="rgba(46,204,113,0.15)" rx="5" stroke="#2ecc71" stroke-width="1"/>
+  <text x="425" y="135" fill="#2ecc71" font-size="9.5" text-anchor="middle">Pas de RVU</text>
+  <!-- Flèche DMSA -->
+  <line x1="135" y1="146" x2="135" y2="158" stroke="#9090b0" stroke-width="1.5" marker-end="url(#arr3)"/>
+  <text x="135" y="170" fill="#f39c12" font-size="9" text-anchor="middle">DMSA à 3–6 mois</text>
+  <text x="425" y="158" fill="#9090b0" font-size="9" text-anchor="middle">Surveillance écho</text>
+</svg>
+
+<div class="flashcard-section">
+<h3>🃏 Flashcards</h3>
+<div class="flashcard" onclick="this.classList.toggle('flipped')">
+  <div class="fc-front">Quelle est la réduction d'irradiation de la cystographie isotopique vs conventionnelle ?</div>
+  <div class="fc-back">Facteur 50 à 200 : isotopique 0,01–0,1 mSv vs conventionnelle 2–3 mSv. Idéal pour les enfants nécessitant plusieurs examens de suivi.</div>
+</div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')">
+  <div class="fc-front">Quelle est la différence technique entre cystographie directe et indirecte ?</div>
+  <div class="fc-back">Directe : sondage vésical + instillation de Tc-99m pertechnetate, sensibilité 85–95%. Indirecte : traceur IV (MAG3) atteint la vessie naturellement + miction devant gamma-caméra, sensibilité 50–70%, non invasive.</div>
+</div>
+</div>
+</div>
+</div>
+
+<!-- ========== SLIDE 8 : SRAA ET HYPERTENSION RÉNO-VASCULAIRE ========== -->
+<div class="slide" id="slide-8">
+<div class="slide-inner">
+<h2>🩺 Système Rénine-Angiotensine et Hypertension Réno-vasculaire</h2>
+<p class="slide-intro">La scintigraphie au captopril est fondée sur les mécanismes du système rénine-angiotensine-aldostérone (SRAA). La comprendre est indispensable pour interpréter cet examen clé dans le diagnostic de l'hypertension artérielle d'origine rénovasculaire.</p>
+
+<h3>📦 Prérequis</h3>
+<div class="def-box">
+  <strong>SRAA (Système Rénine-Angiotensine-Aldostérone)</strong> : cascade hormonale activée en cas d'hypoperfusion rénale. La rénine (produite par les cellules juxta-glomérulaires) clive l'angiotensinogène → angiotensine I → angiotensine II (par l'ECA). L'Ang II provoque une vasoconstriction de l'artériole efférente, maintenant la pression de filtration glomérulaire malgré la sténose.
+</div>
+<div class="def-box">
+  <strong>Hypertension rénovasculaire (HTRV)</strong> : HTA secondaire due à une sténose de l'artère rénale (SARé), entraînant une activation du SRAA et une HTA angiotensine-dépendante. Causes principales : athérosclérose (75%, homme &gt; 50 ans), dysplasie fibro-musculaire (25%, femme jeune).
+</div>
+<div class="def-box">
+  <strong>Angiotensine II (Ang II)</strong> : vasoconstricteur puissant de l'artériole efférente glomérulaire. En cas de SARé, cette vasoconstriction compense la chute de pression en amont pour maintenir le DFG du rein sténosé. C'est ce mécanisme que le captopril va bloquer.
+</div>
+
+<h3>📖 Explication</h3>
+<div class="expl-wrap">
+  <h4>① Mécanisme de l'HTRV : pourquoi le rein sténosé hypertend ?</h4>
+  <p>En cas de <strong>sténose de l'artère rénale</strong>, la pression de perfusion glomérulaire chute. Les cellules juxta-glomérulaires détectent cette hypoperfusion et sécrètent de la <strong>rénine</strong>. La rénine clive l'angiotensinogène hépatique → angiotensine I, convertie en <strong>angiotensine II</strong> par l'enzyme de conversion (ECA) dans les poumons. L'Ang II agit à deux niveaux : (1) vasoconstriction systémique → HTA ; (2) vasoconstriction de l'artériole <em>efférente</em> du rein sténosé → maintien de la pression intra-glomérulaire → préservation du DFG local malgré la sténose. Ce mécanisme compensateur est à la fois responsable de l'HTA et de la dépendance angiotensine du DFG du rein sténosé.</p>
+  <div class="expl-bq">Ex : artère rénale droite sténosée à 80% → rénine ↑↑ → Ang II ↑↑ → vasoconstriction artériole efférente droite → DFG droit maintenu → mais HTA systémique.</div>
+  <hr class="expl-sep">
+  <h4>② Rôle du captopril dans le diagnostic</h4>
+  <p>Le <strong>captopril</strong> est un inhibiteur de l'ECA (IEC). En bloquant la conversion Ang I → Ang II, il supprime la vasoconstriction de l'artériole efférente. Sur un <strong>rein sain</strong>, cela a peu d'effet sur le DFG (il n'était pas angiotensine-dépendant). Sur le <strong>rein sténosé</strong>, la disparition de l'Ang II entraîne une vasodilatation de l'artériole efférente → chute de la pression intraglomérulaire → <strong>chute brutale du DFG</strong> du rein sténosé, visible sur la scintigraphie comme une dégradation unilatérale du néphrogramme.</p>
+  <div class="expl-bq">Ex : captopril 25–50 mg per os 1 heure avant la scinti → scintigraphie de base vs sous captopril → si le rein droit perd sa fixation (Tmax retardé, RCA augmenté) uniquement sous captopril → HTRV droite confirmée.</div>
+  <hr class="expl-sep">
+  <h4>③ Critères de positivité de la scintigraphie au captopril</h4>
+  <p>La scintigraphie est dite <strong>positive pour HTRV</strong> si, sous captopril, on observe sur le rein sténosé : un <strong>retard du Tmax</strong> de plus de 2 minutes par rapport à l'examen sans captopril ; une <strong>augmentation du RCA à 20 min</strong> de plus de 10 points ; une <strong>diminution de la FRR</strong> du côté sténosé de plus de 10 points. Ces critères ont une sensibilité de 85–90% et une spécificité de 90% pour la sténose d'artère rénale hémodynamiquement significative.</p>
+</div>
+
+<svg viewBox="0 0 560 200" style="width:100%;max-width:560px;display:block;margin:1.2rem auto;background:rgba(0,0,0,0.25);border-radius:10px">
+  <text x="280" y="22" fill="#3498db" font-size="12" font-weight="bold" text-anchor="middle">Mécanisme SRAA — Rein Sténosé</text>
+  <!-- Cascade -->
+  <rect x="30" y="35" width="130" height="25" fill="rgba(52,152,219,0.2)" rx="5" stroke="#3498db" stroke-width="1"/>
+  <text x="95" y="50" fill="#e0e0f0" font-size="9.5" text-anchor="middle">Sténose artère rénale</text>
+  <line x1="160" y1="47" x2="185" y2="47" stroke="#9090b0" stroke-width="1.5" marker-end="url(#arr3)"/>
+  <rect x="185" y="35" width="110" height="25" fill="rgba(231,76,60,0.2)" rx="5" stroke="#e74c3c" stroke-width="1"/>
+  <text x="240" y="50" fill="#e0e0f0" font-size="9.5" text-anchor="middle">↓ Perfusion rénale</text>
+  <line x1="295" y1="47" x2="320" y2="47" stroke="#9090b0" stroke-width="1.5" marker-end="url(#arr3)"/>
+  <rect x="320" y="35" width="100" height="25" fill="rgba(231,76,60,0.2)" rx="5" stroke="#e74c3c" stroke-width="1"/>
+  <text x="370" y="50" fill="#e74c3c" font-size="9.5" text-anchor="middle">↑ Rénine</text>
+  <line x1="420" y1="47" x2="450" y2="47" stroke="#9090b0" stroke-width="1.5" marker-end="url(#arr3)"/>
+  <rect x="450" y="35" width="90" height="25" fill="rgba(231,76,60,0.2)" rx="5" stroke="#e74c3c" stroke-width="1"/>
+  <text x="495" y="50" fill="#e74c3c" font-size="9.5" text-anchor="middle">Ang I → Ang II</text>
+  <!-- Effets Ang II -->
+  <line x1="495" y1="60" x2="495" y2="80" stroke="#e74c3c" stroke-width="1.5" marker-end="url(#arr3)"/>
+  <rect x="360" y="80" width="270" height="50" fill="rgba(0,0,0,0.25)" rx="6"/>
+  <text x="495" y="97" fill="#e74c3c" font-size="9.5" text-anchor="middle" font-weight="bold">Effets Ang II :</text>
+  <text x="495" y="112" fill="#e0e0f0" font-size="9" text-anchor="middle">① Vasoconstriction systémique → ↑ PA</text>
+  <text x="495" y="124" fill="#e0e0f0" font-size="9" text-anchor="middle">② Vasoconstriction artériole efférente → ↑ DFG local</text>
+  <!-- Captopril bloc -->
+  <rect x="30" y="150" width="300" height="40" fill="rgba(46,204,113,0.1)" rx="6" stroke="#2ecc71" stroke-width="1.5"/>
+  <text x="180" y="167" fill="#2ecc71" font-size="10" text-anchor="middle" font-weight="bold">CAPTOPRIL (IEC)</text>
+  <text x="180" y="183" fill="#e0e0f0" font-size="9" text-anchor="middle">Bloque ECA → ↓ Ang II → ↓ vasoconstriction efférente → ↓ DFG rein sténosé</text>
+  <line x1="420" y1="105" x2="330" y2="165" stroke="#2ecc71" stroke-width="1.5" stroke-dasharray="5,3" marker-end="url(#arr3)"/>
+</svg>
+
+<div class="flashcard-section">
+<h3>🃏 Flashcards</h3>
+<div class="flashcard" onclick="this.classList.toggle('flipped')">
+  <div class="fc-front">Pourquoi l'artériole efférente se contracte-t-elle en cas de sténose de l'artère rénale ?</div>
+  <div class="fc-back">Activation du SRAA → ↑ Ang II → vasoconstriction de l'artériole efférente → maintien de la pression intra-glomérulaire malgré la chute de pression en amont de la sténose.</div>
+</div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')">
+  <div class="fc-front">Pourquoi le captopril démasque-t-il la sténose en scintigraphie ?</div>
+  <div class="fc-back">En bloquant l'ECA, le captopril supprime l'Ang II → vasodilatation efférente → chute de pression intra-glomérulaire du rein sténosé → chute du DFG unilatéral visible sur la scinti.</div>
+</div>
+</div>
+</div>
+</div>
+
+<!-- ========== SLIDE 9 : DÉROULEMENT SCINTIGRAPHIE CAPTOPRIL ========== -->
+<div class="slide" id="slide-9">
+<div class="slide-inner">
+<h2>🔎 Scintigraphie au Captopril — Déroulement et Critères</h2>
+<p class="slide-intro">Connaître le protocole et les critères diagnostiques de la scintigraphie au captopril est indispensable pour répondre aux questions d'ECN sur l'hypertension rénovasculaire.</p>
+
+<h3>📦 Prérequis</h3>
+<div class="def-box">
+  <strong>Sténose de l'artère rénale (SARé) hémodynamiquement significative</strong> : réduction de la lumière vasculaire &gt; 50–70% avec gradient de pression transténotique &gt; 20 mmHg. En dessous de ce seuil, la scintigraphie au captopril est peu informative.
+</div>
+<div class="def-box">
+  <strong>Arrêt des IEC/ARA2</strong> : obligatoire avant la scintigraphie au captopril (5 jours pour les IEC à courte durée d'action, 10 jours pour les ARA2 à longue durée). Ces médicaments bloquent déjà l'Ang II et masquent la réponse au test.
+</div>
+
+<h3>📖 Explication</h3>
+<div class="expl-wrap">
+  <h4>① Protocole comparatif (J1 sans captopril, J2 avec captopril)</h4>
+  <p>L'examen comporte <strong>deux scintigraphies</strong>, réalisées à 24 heures d'intervalle : (1) Scintigraphie de <strong>base sans captopril</strong> (J1) : conditions standards, patient bien hydraté ; (2) Scintigraphie <strong>sous captopril</strong> (J2) : administration orale de <strong>25 à 50 mg de captopril</strong> 60 minutes avant l'injection du traceur (MAG3 de préférence car meilleure extraction tubulaire). La tension artérielle est surveillée toutes les 15 min car le captopril peut provoquer une hypotension orthostatique, surtout chez les patients très dépendants de l'Ang II pour maintenir leur PA.</p>
+  <div class="expl-bq">Ex : patient HTA avec PA à 190/100 sous traitement, arrêt IEC 5 jours avant → J1 scinti de base → J2 captopril 50 mg → comparaison des deux scintigraphies → asymétrie sous captopril confirme HTRV.</div>
+  <hr class="expl-sep">
+  <h4>② Critères diagnostiques de positivité</h4>
+  <p>La scintigraphie est <strong>positive pour HTRV</strong> si, sous captopril, le rein sténosé présente <strong>au moins un</strong> des critères suivants : (a) <strong>Retard du Tmax</strong> ≥ 2 min par rapport à la scintigraphie de base ; (b) <strong>Augmentation du RCA à 20 min</strong> de ≥ 10 points (ex : RCA passe de 35% à 50%) ; (c) <strong>Diminution de la FRR</strong> du côté sténosé de ≥ 10 points (ex : FRR droite passe de 47% à 35%) ; (d) asymétrie de fixation unilatérale apparaissant uniquement sous captopril. Sensibilité globale : 85–90% ; Spécificité : 90%. Ces performances se dégradent en cas d'insuffisance rénale (créatinine &gt; 200 µmol/L) ou de sténose bilatérale.</p>
+  <div class="expl-bq">Ex : rein droit sténosé — J1 : Tmax D = 3 min, FRR D = 46% ; J2 sous captopril : Tmax D = 6 min (+3 min), FRR D = 34% (−12 points) → deux critères positifs → HTRV confirmée.</div>
+  <hr class="expl-sep">
+  <h4>③ Indications et limites</h4>
+  <p>La scintigraphie au captopril est indiquée en cas de <strong>suspicion d'HTRV</strong> : HTA résistante chez un patient avec facteurs de risque cardiovasculaires, HTA du sujet jeune (dysplasie fibro-musculaire), détérioration de la fonction rénale sous IEC/ARA2, asymétrie rénale à l'écho-Doppler. Ses principales limites sont : (1) peu performante si DFG global &lt; 30 mL/min (rein insuffisant ne filtre pas assez le traceur) ; (2) en cas de <strong>sténose bilatérale</strong>, la comparaison droite/gauche n'est plus valide (les deux reins se dégradent) ; (3) l'angio-IRM ou le scanner angio sont plus performants pour la localisation anatomique exacte avant revascularisation.</p>
+  <div class="expl-warn">⚠️ La scintigraphie au captopril répond à la question "Ce rein est-il angiotensine-dépendant ?" — pas "Y a-t-il une sténose anatomique ?". Un angio-scanner ou angio-IRM est nécessaire pour confirmer et localiser la sténose avant toute revascularisation (angioplastie, stent).</div>
+  <hr class="expl-sep">
+  <h4>④ Contre-indications et précautions</h4>
+  <p>Les <strong>contre-indications</strong> de la scintigraphie au captopril sont : rein unique fonctionnel (risque d'IRA sévère sous captopril), insuffisance rénale sévère (créatinine &gt; 300 µmol/L), grossesse, hypotension artérielle (PAS &lt; 100 mmHg). La PA doit être mesurée avant administration et après (risque d'hypotension orthostatique intense chez les patients très rénine-dépendants). Un accès IV et du sérum salé doivent être disponibles en salle d'examen.</p>
+</div>
+
+<div class="flashcard-section">
+<h3>🃏 Flashcards</h3>
+<div class="flashcard" onclick="this.classList.toggle('flipped')">
+  <div class="fc-front">Quand arrêter les IEC avant la scintigraphie au captopril ?</div>
+  <div class="fc-back">5 jours pour les IEC à courte durée d'action. 10 jours pour les ARA2 à longue durée d'action. Ces médicaments masquent la réponse au test en bloquant déjà l'Ang II.</div>
+</div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')">
+  <div class="fc-front">Quels sont les 3 critères principaux de positivité de la scintigraphie au captopril ?</div>
+  <div class="fc-back">① Retard Tmax ≥ 2 min sous captopril<br>② Augmentation RCA 20 min ≥ 10 points<br>③ Diminution FRR côté sténosé ≥ 10 points<br>(sensibilité 85–90%, spécificité 90%)</div>
+</div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')">
+  <div class="fc-front">Pourquoi la scintigraphie au captopril est-elle peu performante en cas de sténose bilatérale ?</div>
+  <div class="fc-back">La comparaison droite/gauche n'est plus valide : les deux reins se dégradent sous captopril. L'asymétrie diagnostique disparaît. L'angio-IRM ou scanner est préféré dans ce cas.</div>
+</div>
+</div>
+</div>
+</div>
+
+<!-- ========== QCM 2 ========== -->
+<div class="slide" id="slide-qcm2">
+<div class="slide-inner">
+<h2>❓ QCM — DMSA, Cystographie et SRAA</h2>
+
+<div class="qcm-block">
+  <div class="qcm-question">Q1. Quelle est la durée de fixation du DMSA dans le cortex rénal après injection IV ?</div>
+  <div class="qcm-options">
+    <div class="qcm-option" onclick="selectOption(this)">A. 15 à 30 minutes</div>
+    <div class="qcm-option" onclick="selectOption(this)">B. 1 à 2 heures</div>
+    <div class="qcm-option" onclick="selectOption(this)">C. 2 à 3 heures (acquisition), reste &gt; 24h dans le cortex</div>
+    <div class="qcm-option" onclick="selectOption(this)">D. 6 à 8 heures seulement</div>
+    <div class="qcm-option" onclick="selectOption(this)">E. Élimination complète en 12 heures</div>
+  </div>
+  <button class="qcm-validate" onclick="validateQCM(this)">Valider</button>
+  <div class="qcm-feedback" data-correct="C">✅ C. Le DMSA se fixe en 2–3 heures (moment de l'acquisition) et reste dans le cortex rénal plus de 24 heures, offrant une image statique stable du parenchyme fonctionnel.</div>
+</div>
+
+<div class="qcm-block">
+  <div class="qcm-question">Q2. Sur un DMSA, une hypofixation polaire inférieure gauche AVEC encoche corticale signifie :</div>
+  <div class="qcm-options">
+    <div class="qcm-option" onclick="selectOption(this)">A. Pyélonéphrite aiguë en cours (réversible)</div>
+    <div class="qcm-option" onclick="selectOption(this)">B. Tumeur rénale (cancer)</div>
+    <div class="qcm-option" onclick="selectOption(this)">C. Cicatrice rénale définitive post-infectieuse</div>
+    <div class="qcm-option" onclick="selectOption(this)">D. Kystes rénaux simples</div>
+    <div class="qcm-option" onclick="selectOption(this)">E. Anomalie de positionnement de la caméra</div>
+  </div>
+  <button class="qcm-validate" onclick="validateQCM(this)">Valider</button>
+  <div class="qcm-feedback" data-correct="C">✅ C. L'encoche corticale signe une cicatrice définitive (fibrose irréversible). Sans encoche = inflammation potentiellement réversible (PNA aiguë). L'encoche correspond à la rétraction du parenchyme fibrotique.</div>
+</div>
+
+<div class="qcm-block">
+  <div class="qcm-question">Q3. Quelle est la réduction de dose d'irradiation de la cystographie isotopique directe par rapport à la cystographie rétrograde conventionnelle ?</div>
+  <div class="qcm-options">
+    <div class="qcm-option" onclick="selectOption(this)">A. Facteur 2 à 5</div>
+    <div class="qcm-option" onclick="selectOption(this)">B. Facteur 10</div>
+    <div class="qcm-option" onclick="selectOption(this)">C. Facteur 20</div>
+    <div class="qcm-option" onclick="selectOption(this)">D. Facteur 50 à 200</div>
+    <div class="qcm-option" onclick="selectOption(this)">E. Irradiation identique</div>
+  </div>
+  <button class="qcm-validate" onclick="validateQCM(this)">Valider</button>
+  <div class="qcm-feedback" data-correct="D">✅ D. Facteur 50 à 200. Isotopique : 0,01–0,1 mSv. Conventionnelle : 2–3 mSv. Intérêt majeur chez l'enfant nécessitant une surveillance répétée du RVU.</div>
+</div>
+
+<div class="qcm-block">
+  <div class="qcm-question">Q4. Un patient est sous ramipril (IEC). Avant une scintigraphie au captopril, combien de jours doit-il arrêter ce traitement ?</div>
+  <div class="qcm-options">
+    <div class="qcm-option" onclick="selectOption(this)">A. 1 jour</div>
+    <div class="qcm-option" onclick="selectOption(this)">B. 3 jours</div>
+    <div class="qcm-option" onclick="selectOption(this)">C. 5 jours</div>
+    <div class="qcm-option" onclick="selectOption(this)">D. 10 jours</div>
+    <div class="qcm-option" onclick="selectOption(this)">E. Pas d'arrêt nécessaire</div>
+  </div>
+  <button class="qcm-validate" onclick="validateQCM(this)">Valider</button>
+  <div class="qcm-feedback" data-correct="C">✅ C. 5 jours pour les IEC (ramipril, enalapril). 10 jours pour les ARA2 à demi-vie longue (irbésartan, olmésartan). L'arrêt est indispensable pour que le SRAA soit actif lors du test.</div>
+</div>
+
+<div class="qcm-block">
+  <div class="qcm-question">Q5. Parmi les indications suivantes, laquelle EST une indication de scintigraphie au DMSA selon les recommandations ?</div>
+  <div class="qcm-options">
+    <div class="qcm-option" onclick="selectOption(this)">A. Calcul rénal (lithiase) pour évaluer le volume de la pierre</div>
+    <div class="qcm-option" onclick="selectOption(this)">B. Suspicion de reflux vésico-urétéral (diagnostic initial)</div>
+    <div class="qcm-option" onclick="selectOption(this)">C. Détection de cicatrices rénales 3–6 mois après PNA fébrile chez l'enfant</div>
+    <div class="qcm-option" onclick="selectOption(this)">D. Évaluation de la vidange vésicale post-mictionnelle</div>
+    <div class="qcm-option" onclick="selectOption(this)">E. Dépistage du cancer du rein</div>
+  </div>
+  <button class="qcm-validate" onclick="validateQCM(this)">Valider</button>
+  <div class="qcm-feedback" data-correct="C">✅ C. Le DMSA à 3–6 mois post-PNA est l'indication principale chez l'enfant pour détecter les cicatrices corticales définitives. Pour le RVU (B), c'est la cystographie isotopique qui est indiquée. Le DMSA ne visualise pas les voies urinaires.</div>
+</div>
+
+<div class="dp-block">
+  <div class="dp-title">📋 Dossier Progressif</div>
+  <p>Homme 54 ans, HTA résistante sous 3 antihypertenseurs dont un IEC depuis 6 mois. Créatinine à 140 µmol/L. Echo-Doppler : accélération systolique de l'artère rénale droite à 3,2 m/s (normale &lt; 1,8 m/s). Suspicion de SARé droite athéroscléreuse.</p>
+  <ol class="dp-questions">
+    <li>Quelle scintigraphie demandez-vous pour confirmer le caractère hémodynamiquement significatif de cette sténose ?</li>
+    <li>Quelle condition médicamenteuse est indispensable avant de réaliser cet examen ?</li>
+    <li>Quels critères scintigraphiques confirmeront l'HTRV droite ?</li>
+  </ol>
+  <button class="dp-show-btn" onclick="this.nextElementSibling.style.display='block';this.style.display='none'">Afficher la correction</button>
+  <div class="dp-correction" style="display:none">
+    <strong>1.</strong> Scintigraphie rénale dynamique au MAG3 avec test au captopril (protocole comparatif J1 sans / J2 avec captopril 25–50 mg per os).<br><br>
+    <strong>2.</strong> Arrêt de l'IEC (énalapril) <strong>5 jours avant</strong> l'examen. Le SRAA doit être actif pour que le test soit interprétable. Même chose pour tout ARA2 (10 jours).<br><br>
+    <strong>3.</strong> Critères de positivité pour le rein droit sous captopril : retard du Tmax ≥ 2 min, augmentation du RCA à 20 min ≥ 10 points, et/ou diminution de la FRR droite ≥ 10 points par rapport à la scintigraphie de base. La sensibilité est 85–90%, spécificité 90% pour une SARé hémodynamiquement significative.
+  </div>
+</div>
+
+</div>
+</div>
+
+<!-- ========== SLIDE 10 : URO-IRM ========== -->
+<div class="slide" id="slide-10">
+<div class="slide-inner">
+<h2>🧲 Uro-IRM (IRM des voies urinaires)</h2>
+<p class="slide-intro">L'uro-IRM est une technique non irradiante permettant d'explorer les voies urinaires en détail. Elle combine anatomie (coupes morphologiques) et fonctionnalité (perfusion et excrétion rénales), constituant une alternative au scanner sans irradiation.</p>
+
+<h3>📦 Prérequis</h3>
+<div class="def-box">
+  <strong>Uro-IRM</strong> : examen IRM combinant des séquences T2 (urine = hypersignal blanc → voies urinaires bien visibles), des séquences de diffusion ADC et une IRM fonctionnelle dynamique avec gadolinium (évaluation de la perfusion et de l'excrétion rénales).
+</div>
+<div class="def-box">
+  <strong>Gadolinium</strong> : agent de contraste paramagnétique utilisé en IRM. Filtré par les glomérules (comme le DTPA), il permet d'imager la vascularisation rénale et l'excrétion vers les voies urinaires. Contre-indiqué si DFG &lt; 30 mL/min (risque de fibrose systémique néphrogénique avec certains chélates linéaires).
+</div>
+<div class="def-box">
+  <strong>Séquence HASTE/RARE T2</strong> : séquence rapide fortement pondérée T2, donnant une urotomographie (image analogue à l'UIV sans injection) en visualisant l'eau dans les voies urinaires. Très utile chez l'enfant et la femme enceinte (pas d'injection nécessaire).
+</div>
+
+<h3>📖 Explication</h3>
+<div class="expl-wrap">
+  <h4>① Séquences T2 — Aspect morphologique des voies urinaires</h4>
+  <p>Les séquences T2 montrent l'<strong>urine en hypersignal</strong> (blanc brillant) dans les cavités pyélocalicielles, les uretères et la vessie. Cette <em>urotomographie IRM</em> permet d'identifier précisément le siège, l'étendue et les contours d'une dilatation pyélo-calicielle, d'une urétérohydronéphrose, d'un calcul (hyposignal sur T2), ou d'une tumeur de la voie excrétrice. La résolution spatiale en T2 est suffisante pour orienter vers la cause de la dilatation avant injection de gadolinium.</p>
+  <div class="expl-bq">Ex : femme enceinte à 28 SA avec colique néphrétique droite → uro-IRM T2 sans injection → dilatation urétérale droite avec arrêt brutal à la jonction urétéro-lombaire → calcul enclavé confirmé sans irradiation fœtale.</div>
+  <hr class="expl-sep">
+  <h4>② IRM fonctionnelle dynamique au gadolinium</h4>
+  <p>La séquence dynamique avec gadolinium permet d'obtenir une <strong>courbe de perfusion rénale</strong> analogue au néphrogramme scintigraphique : phase corticale précoce (gadolinium dans les glomérules), phase médullaire, puis excrétion vers les cavités. Le calcul du Tmax et du temps d'excrétion est possible. Le gadolinium filtré mesure le DFG relatif (analogue DTPA). La qualité de l'excrétion peut être évaluée et comparée au côté contralatéral.</p>
+  <div class="expl-bq">Ex : enfant de 6 ans avec duplication rénale gauche et dilatation de l'hémi-rein supérieur → uro-IRM → visualisation des deux systèmes collecteurs, mesure de la FRR de chaque hémi-rein, guide la décision d'héminéphrectomie.</div>
+  <hr class="expl-sep">
+  <h4>③ Indications préférentielles de l'uro-IRM</h4>
+  <p>L'uro-IRM est recommandée dans les situations où l'irradiation est particulièrement problématique : (1) <strong>Enfant</strong> (suivi de malformations urologiques complexes, duplication, méga-uretère) ; (2) <strong>Femme enceinte</strong> (suspicion de dilatation pyélo-calicielle ou pathologie urinaire sans irradiation) ; (3) <strong>Contre-indication au scanner</strong> (allergie à l'iode, insuffisance rénale modérée si gadolinium linéaire évité) ; (4) <strong>Bilan de tumeur de la voie excrétrice</strong> (complémentarité morphologique et fonctionnelle supérieure au scanner).</p>
+  <div class="expl-warn">⚠️ Le gadolinium est CONTRE-INDIQUÉ si DFG &lt; 30 mL/min en raison du risque de fibrose systémique néphrogénique (FSN) avec certains chélates linéaires. Les chélates macrocycliques (gadotérate, gadobutrol) sont plus sûrs mais restent déconseillés en dessous de ce seuil. En cas d'insuffisance rénale sévère, l'uro-IRM T2 sans injection reste possible.</div>
+</div>
+
+<svg viewBox="0 0 560 155" style="width:100%;max-width:560px;display:block;margin:1.2rem auto;background:rgba(0,0,0,0.25);border-radius:10px">
+  <text x="280" y="18" fill="#3498db" font-size="11" font-weight="bold" text-anchor="middle">Comparaison des techniques d'exploration rénale</text>
+  <text x="30" y="36" fill="#9090b0" font-size="9" font-weight="bold">Technique</text>
+  <text x="150" y="36" fill="#9090b0" font-size="9" font-weight="bold">Irradiation</text>
+  <text x="250" y="36" fill="#9090b0" font-size="9" font-weight="bold">FRR</text>
+  <text x="310" y="36" fill="#9090b0" font-size="9" font-weight="bold">Voies urinaires</text>
+  <text x="440" y="36" fill="#9090b0" font-size="9" font-weight="bold">Cicatrices</text>
+  <line x1="20" y1="41" x2="540" y2="41" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
+  <text x="30" y="57" fill="#3498db" font-size="9">Scinti MAG3</text>
+  <text x="150" y="57" fill="#f39c12" font-size="9">+++ (3–5 mSv)</text>
+  <text x="250" y="57" fill="#2ecc71" font-size="9">✓✓✓</text>
+  <text x="310" y="57" fill="#2ecc71" font-size="9">✓✓ excrétion</text>
+  <text x="440" y="57" fill="#e74c3c" font-size="9">✗</text>
+  <text x="30" y="73" fill="#3498db" font-size="9">DMSA</text>
+  <text x="150" y="73" fill="#2ecc71" font-size="9">+ (~1 mSv)</text>
+  <text x="250" y="73" fill="#2ecc71" font-size="9">✓✓✓</text>
+  <text x="310" y="73" fill="#e74c3c" font-size="9">✗</text>
+  <text x="440" y="73" fill="#2ecc71" font-size="9">✓✓✓</text>
+  <text x="30" y="89" fill="#3498db" font-size="9">Scanner injecté</text>
+  <text x="150" y="89" fill="#e74c3c" font-size="9">++++ (10–20 mSv)</text>
+  <text x="250" y="89" fill="#9090b0" font-size="9">~</text>
+  <text x="310" y="89" fill="#2ecc71" font-size="9">✓✓✓</text>
+  <text x="440" y="89" fill="#f39c12" font-size="9">✓✓</text>
+  <text x="30" y="105" fill="#3498db" font-size="9">Uro-IRM</text>
+  <text x="150" y="105" fill="#2ecc71" font-size="9">0 (non irradiant)</text>
+  <text x="250" y="105" fill="#f39c12" font-size="9">✓✓</text>
+  <text x="310" y="105" fill="#2ecc71" font-size="9">✓✓✓</text>
+  <text x="440" y="105" fill="#f39c12" font-size="9">✓✓</text>
+  <text x="30" y="121" fill="#3498db" font-size="9">Scinti captopril</text>
+  <text x="150" y="121" fill="#f39c12" font-size="9">++ (5 mSv)</text>
+  <text x="250" y="121" fill="#2ecc71" font-size="9">✓✓✓</text>
+  <text x="310" y="121" fill="#2ecc71" font-size="9">✓ excrétion</text>
+  <text x="440" y="121" fill="#9090b0" font-size="9">—</text>
+  <text x="30" y="137" fill="#3498db" font-size="9">Cysto. isotopique</text>
+  <text x="150" y="137" fill="#2ecc71" font-size="9">+ (0,01–0,1 mSv)</text>
+  <text x="250" y="137" fill="#9090b0" font-size="9">—</text>
+  <text x="310" y="137" fill="#2ecc71" font-size="9">✓✓✓ reflux</text>
+  <text x="440" y="137" fill="#e74c3c" font-size="9">✗</text>
+</svg>
+
+<div class="flashcard-section">
+<h3>🃏 Flashcards</h3>
+<div class="flashcard" onclick="this.classList.toggle('flipped')">
+  <div class="fc-front">Pourquoi l'uro-IRM est-elle préférée chez la femme enceinte ?</div>
+  <div class="fc-back">Non irradiante. Les séquences T2 sans injection permettent de visualiser les voies urinaires et détecter une obstruction sans exposer le fœtus aux rayonnements ionisants.</div>
+</div>
+<div class="flashcard" onclick="this.classList.toggle('flipped')">
+  <div class="fc-front">À partir de quel seuil de DFG le gadolinium est-il contre-indiqué ?</div>
+  <div class="fc-back">DFG &lt; 30 mL/min : risque de fibrose systémique néphrogénique (FSN) avec chélates linéaires. Les chélates macrocycliques sont plus sûrs mais restent déconseillés sous ce seuil.</div>
+</div>
+</div>
+</div>
+</div>
+
+<!-- ========== QCM 3 ========== -->
+<div class="slide" id="slide-qcm3">
+<div class="slide-inner">
+<h2>❓ QCM — Uro-IRM, Captopril et Synthèse</h2>
+
+<div class="qcm-block">
+  <div class="qcm-question">Q1. Quelle séquence IRM permet de visualiser les voies urinaires sans injection de gadolinium, analogue à l'UIV ?</div>
+  <div class="qcm-options">
+    <div class="qcm-option" onclick="selectOption(this)">A. Séquence T1 écho de gradient</div>
+    <div class="qcm-option" onclick="selectOption(this)">B. Séquence HASTE/RARE T2 fortement pondérée</div>
+    <div class="qcm-option" onclick="selectOption(this)">C. Séquence de diffusion DWI</div>
+    <div class="qcm-option" onclick="selectOption(this)">D. Séquence FLAIR</div>
+    <div class="qcm-option" onclick="selectOption(this)">E. Séquence T1 après saturation de graisse</div>
+  </div>
+  <button class="qcm-validate" onclick="validateQCM(this)">Valider</button>
+  <div class="qcm-feedback" data-correct="B">✅ B. La séquence T2 fortement pondérée (HASTE/RARE) donne un hypersignal à l'urine → visualisation des voies urinaires sans injection, analogue à l'UIV. Très utile chez la femme enceinte.</div>
+</div>
+
+<div class="qcm-block">
+  <div class="qcm-question">Q2. Un enfant de 5 ans a un suivi annuel pour duplication rénale gauche. Quelle technique est la plus adaptée pour minimiser l'irradiation tout en évaluant morphologie et fonction ?</div>
+  <div class="qcm-options">
+    <div class="qcm-option" onclick="selectOption(this)">A. Scanner abdomino-pelvien avec injection</div>
+    <div class="qcm-option" onclick="selectOption(this)">B. UIV (urographie intraveineuse)</div>
+    <div class="qcm-option" onclick="selectOption(this)">C. Uro-IRM (IRM fonctionnelle + T2)</div>
+    <div class="qcm-option" onclick="selectOption(this)">D. Scintigraphie DTPA seule</div>
+    <div class="qcm-option" onclick="selectOption(this)">E. Échographie seule</div>
+  </div>
+  <button class="qcm-validate" onclick="validateQCM(this)">Valider</button>
+  <div class="qcm-feedback" data-correct="C">✅ C. L'uro-IRM est idéale chez l'enfant pour le suivi de malformations complexes : non irradiante, excellente résolution morphologique et possibilité d'évaluation fonctionnelle. Le scanner serait trop irradiant pour une surveillance annuelle.</div>
+</div>
+
+<div class="qcm-block">
+  <div class="qcm-question">Q3. Parmi les examens suivants, lequel est le gold standard pour mesurer précisément le DFG absolu ?</div>
+  <div class="qcm-options">
+    <div class="qcm-option" onclick="selectOption(this)">A. Formule CKD-EPI (créatinine sérique)</div>
+    <div class="qcm-option" onclick="selectOption(this)">B. Clairance de la créatinine (Cockroft-Gault)</div>
+    <div class="qcm-option" onclick="selectOption(this)">C. Clairance de l'inuline ou EDTA-51Cr</div>
+    <div class="qcm-option" onclick="selectOption(this)">D. Scintigraphie au MAG3</div>
+    <div class="qcm-option" onclick="selectOption(this)">E. Dosage de la cystatine C seule</div>
+  </div>
+  <button class="qcm-validate" onclick="validateQCM(this)">Valider</button>
+  <div class="qcm-feedback" data-correct="C">✅ C. La clairance de l'inuline (ou son équivalent isotopique EDTA-51Cr) est le gold standard absolu. L'inuline est filtrée par les glomérules sans sécrétion ni réabsorption tubulaire. CKD-EPI est une estimation, non une mesure directe.</div>
+</div>
+
+<div class="qcm-block">
+  <div class="qcm-question">Q4. Quel est le traceur de choix pour la scintigraphie rénale dynamique en cas de suspicion de sténose de l'artère rénale, et pourquoi ?</div>
+  <div class="qcm-options">
+    <div class="qcm-option" onclick="selectOption(this)">A. DTPA car il mesure le DFG glomérulaire</div>
+    <div class="qcm-option" onclick="selectOption(this)">B. MAG3 car il a une meilleure extraction plasmatique (sécrétion tubulaire active)</div>
+    <div class="qcm-option" onclick="selectOption(this)">C. DMSA car il reste longtemps dans le cortex</div>
+    <div class="qcm-option" onclick="selectOption(this)">D. Pertechnetate car il mesure le débit sanguin</div>
+    <div class="qcm-option" onclick="selectOption(this)">E. HMPAO car il mesure la perfusion</div>
+  </div>
+  <button class="qcm-validate" onclick="validateQCM(this)">Valider</button>
+  <div class="qcm-feedback" data-correct="B">✅ B. Le MAG3 est préféré car son extraction plasmatique (~65%) est bien supérieure à celle du DTPA (~20%). En cas de rein insuffisant (comme dans la sténose sévère), le MAG3 donne des courbes de meilleure qualité diagnostique car le rein « capture » plus de traceur par passage.</div>
+</div>
+
+<div class="qcm-block">
+  <div class="qcm-question">Q5. Quel examen est recommandé en PREMIÈRE intention lors de la suspicion de reflux vésico-urétéral chez un nourrisson après une première pyélonéphrite fébrile ?</div>
+  <div class="qcm-options">
+    <div class="qcm-option" onclick="selectOption(this)">A. DMSA dans les 48 heures</div>
+    <div class="qcm-option" onclick="selectOption(this)">B. Cystographie rétrograde conventionnelle</div>
+    <div class="qcm-option" onclick="selectOption(this)">C. Échographie rénale et vésicale</div>
+    <div class="qcm-option" onclick="selectOption(this)">D. Scanner abdomino-pelvien injecté</div>
+    <div class="qcm-option" onclick="selectOption(this)">E. Scintigraphie au MAG3</div>
+  </div>
+  <button class="qcm-validate" onclick="validateQCM(this)">Valider</button>
+  <div class="qcm-feedback" data-correct="C">✅ C. L'échographie rénale et vésicale est l'examen de première intention (non irradiant, accessible, rapide). La cystographie isotopique (directe) sera réalisée secondairement si l'écho est anormale ou si la PNA est récidivante. Le DMSA est réalisé à 3–6 mois pour les cicatrices.</div>
+</div>
+
+<div class="dp-block">
+  <div class="dp-title">📋 Dossier Progressif — Synthèse</div>
+  <p>Femme de 32 ans, enceinte à 22 SA (G2P1), douleur lombaire droite depuis 48h, fièvre à 38,8°C, ECBU : E. coli, leucocytes +++. Pas d'allergie connue. Créatinine : 72 µmol/L.</p>
+  <ol class="dp-questions">
+    <li>Quel examen d'imagerie réalisez-vous en urgence pour évaluer les voies urinaires ?</li>
+    <li>Un mois après l'accouchement, l'échographie montre une dilatation pyélocalicielle droite persistante. Quel examen pour évaluer le drainage et la fonction rénale droite ?</li>
+    <li>Le néphrogramme MAG3 droit montre un T½ = 22 min après furosémide. Quel grade O'Reilly ? Quelle décision ?</li>
+  </ol>
+  <button class="dp-show-btn" onclick="this.nextElementSibling.style.display='block';this.style.display='none'">Afficher la correction</button>
+  <div class="dp-correction" style="display:none">
+    <strong>1.</strong> Uro-IRM (séquences T2 sans injection de gadolinium), première intention chez la femme enceinte : non irradiante, visualise la dilatation urétérale et son niveau, élimine un calcul obstructif ou une compression extrinsèque (utérus gravide).<br><br>
+    <strong>2.</strong> Scintigraphie rénale dynamique au MAG3 avec test au furosémide (1 mois post-partum, hors allaitement ou pause de 24h). Évalue : FRR droite (asymétrie ?), T½ (obstruction ?), Tmax (fonction tubulaire droite).<br><br>
+    <strong>3.</strong> T½ = 22 min &gt; 20 min → <strong>Type II de O'Reilly</strong> → obstruction organique. Discussion chirurgicale : si FRR droite &gt; 40% → pyéloplastie de démembrement. Si FRR &lt; 15% → rein non fonctionnel → discussion néphro-urétérectomie. Entre 15–40% → discussion multidisciplinaire.
+  </div>
+</div>
+
+</div>
+</div>
+
+<!-- ========== BILAN RÉCAPITULATIF ========== -->
+<div class="slide" id="slide-bilan">
+<div class="slide-inner">
+<h2>📊 Bilan Récapitulatif — Explorations fonctionnelles rénales</h2>
+
+<div class="bilan-grid">
+  <div class="bilan-card">
+    <div class="bilan-card-title">🔬 DFG & Clairances</div>
+    <ul>
+      <li>Gold standard : <strong>clairance inuline / EDTA-51Cr</strong></li>
+      <li>Pratique : CKD-EPI (créatinine sérique)</li>
+      <li>DTPA = filtration glomérulaire (analogue inuline)</li>
+      <li>MAG3 = sécrétion tubulaire (ERPF)</li>
+    </ul>
+  </div>
+  <div class="bilan-card">
+    <div class="bilan-card-title">🏃 Scinti dynamique MAG3</div>
+    <ul>
+      <li>3 phases : vasculaire / corticale (Tmax) / excrétoire (T½)</li>
+      <li>T½ normal : <strong>&lt; 10 min</strong></li>
+      <li>FRR normale : <strong>45–55%</strong> par rein</li>
+      <li>Furosémide 0,5 mg/kg IV (max 40 mg)</li>
+    </ul>
+  </div>
+  <div class="bilan-card">
+    <div class="bilan-card-title">🚧 Classification O'Reilly</div>
+    <ul>
+      <li>Type I : T½ &lt; 10 min — non obstructif</li>
+      <li>Type II : T½ &gt; 20 min — obstruction organique</li>
+      <li>Type IIIa : T½ 10–20 min — équivoque répondeur</li>
+      <li>Type IIIb : rein insuffisant, pas de réponse</li>
+    </ul>
+  </div>
+  <div class="bilan-card">
+    <div class="bilan-card-title">🔍 DMSA statique</div>
+    <ul>
+      <li>Fixation tubulaire proximale, image corticale stable</li>
+      <li>Indication : cicatrices post-PNA, malformations</li>
+      <li>Sensibilité cicatrices : <strong>~95%</strong></li>
+      <li>Encoche = cicatrice définitive ; sans encoche = réversible</li>
+    </ul>
+  </div>
+  <div class="bilan-card">
+    <div class="bilan-card-title">💧 Cystographie isotopique</div>
+    <ul>
+      <li>Directe : sondage + Tc-99m, sensibilité 85–95%</li>
+      <li>Indirecte : MAG3 IV + miction, non invasive, 50–70%</li>
+      <li>Réduction irradiation : facteur 50–200 vs conventionnelle</li>
+      <li>Indication : RVU chez l'enfant après PNA fébrile</li>
+    </ul>
+  </div>
+  <div class="bilan-card">
+    <div class="bilan-card-title">🩺 Scinti captopril (HTRV)</div>
+    <ul>
+      <li>Arrêt IEC 5 jours, ARA2 10 jours avant</li>
+      <li>Critères : retard Tmax ≥ 2 min, ↑ RCA ≥ 10 pts, ↓ FRR ≥ 10 pts</li>
+      <li>Sensibilité 85–90%, spécificité 90%</li>
+      <li>Limites : DFG &lt; 30, sténose bilatérale</li>
+    </ul>
+  </div>
+  <div class="bilan-card">
+    <div class="bilan-card-title">🧲 Uro-IRM</div>
+    <ul>
+      <li>Non irradiante → enfant, grossesse</li>
+      <li>T2 sans injection : urotomographie (analogue UIV)</li>
+      <li>Gadolinium CI si DFG &lt; 30 mL/min</li>
+      <li>FRR possible par IRM fonctionnelle dynamique</li>
+    </ul>
+  </div>
+  <div class="bilan-card">
+    <div class="bilan-card-title">⚡ FRR — Seuils à retenir</div>
+    <ul>
+      <li>&gt; 40% : chirurgie conservatrice possible</li>
+      <li>15–40% : discussion multidisciplinaire</li>
+      <li>&lt; 15% : rein non fonctionnel</li>
+      <li>Normal : 45–55% par rein</li>
+    </ul>
+  </div>
+</div>
+</div>
+</div>
+
+<!-- ========== SLIDE FIN ========== -->
+<div class="slide" id="slide-fin">
+<div class="slide-inner title-slide" style="background:radial-gradient(ellipse at center, rgba(52,152,219,0.1) 0%, transparent 70%)">
+  <div class="title-tag">✅ Fin du cours</div>
+  <h1 style="font-size:clamp(1.6rem,3.5vw,2.5rem)">Explorations fonctionnelles rénales</h1>
+  <p class="title-subtitle">Maîtrisé · Item ECNi — Médecine nucléaire</p>
+  <div style="display:flex;gap:1rem;flex-wrap:wrap;justify-content:center;margin:1.5rem 0">
+    <div style="background:rgba(52,152,219,0.12);border:1px solid rgba(52,152,219,0.3);border-radius:10px;padding:0.8rem 1.4rem;text-align:center">
+      <div style="font-size:1.6rem;font-weight:800;color:#3498db">10</div>
+      <div style="font-size:0.8rem;color:#9090b0">Diapositives cours</div>
+    </div>
+    <div style="background:rgba(46,204,113,0.12);border:1px solid rgba(46,204,113,0.3);border-radius:10px;padding:0.8rem 1.4rem;text-align:center">
+      <div style="font-size:1.6rem;font-weight:800;color:#2ecc71">15</div>
+      <div style="font-size:0.8rem;color:#9090b0">QCM + 3 DP</div>
+    </div>
+    <div style="background:rgba(243,156,18,0.12);border:1px solid rgba(243,156,18,0.3);border-radius:10px;padding:0.8rem 1.4rem;text-align:center">
+      <div style="font-size:1.6rem;font-weight:800;color:#f39c12">20</div>
+      <div style="font-size:0.8rem;color:#9090b0">Flashcards</div>
+    </div>
+    <div style="background:rgba(155,89,182,0.12);border:1px solid rgba(155,89,182,0.3);border-radius:10px;padding:0.8rem 1.4rem;text-align:center">
+      <div style="font-size:1.6rem;font-weight:800;color:#9b59b6">6</div>
+      <div style="font-size:0.8rem;color:#9090b0">Images cliniques</div>
+    </div>
+  </div>
+  <a href="index.html" class="topbar-home" style="font-size:1rem;padding:0.6rem 1.4rem">← Retour au sommaire</a>
+</div>
+</div>
+
+</div><!-- end slide-container -->
+
+<script>
+const SLIDES = ['slide-0','slide-1','slide-2','slide-3','slide-4','slide-5',
+  'slide-qcm1','slide-6','slide-7','slide-8','slide-9','slide-qcm2',
+  'slide-10','slide-qcm3','slide-bilan','slide-fin'];
+let current = 0;
+
+function showSlide(n){
+  n = Math.max(0, Math.min(SLIDES.length-1, n));
+  document.querySelectorAll('.slide').forEach(s=>s.classList.remove('active'));
+  const el = document.getElementById(SLIDES[n]);
+  if(el){ el.classList.add('active'); el.scrollTop=0; }
+  current = n;
+  document.getElementById('counter').textContent = (n+1)+'/'+SLIDES.length;
+  const pct = SLIDES.length>1 ? (n/(SLIDES.length-1))*100 : 0;
+  document.querySelector('.progress-fill').style.width = pct+'%';
+}
+function changeSlide(d){ showSlide(current+d); }
+
+function selectOption(el){
+  const block = el.closest('.qcm-block');
+  block.querySelectorAll('.qcm-option').forEach(o=>o.classList.remove('selected'));
+  el.classList.add('selected');
+}
+function validateQCM(btn){
+  const block = btn.closest('.qcm-block');
+  const sel = block.querySelector('.qcm-option.selected');
+  const fb = block.querySelector('.qcm-feedback');
+  const correct = fb.dataset.correct;
+  if(!sel){ fb.textContent='⚠️ Sélectionnez une réponse.'; fb.style.display='block'; return; }
+  block.querySelectorAll('.qcm-option').forEach(o=>{
+    const letter = o.textContent.trim().charAt(0);
+    if(letter===correct) o.style.background='rgba(46,204,113,0.25)';
+    else if(o===sel && letter!==correct) o.style.background='rgba(231,76,60,0.25)';
+  });
+  fb.style.display='block';
+  btn.disabled=true;
+}
+
+function validateFlash(btn){
+  const card = btn.closest('.flashcard-item');
+  const ans = card.querySelector('.flash-answer');
+  ans.style.display='block';
+  btn.style.display='none';
+}
+
+document.addEventListener('keydown',e=>{
+  if(e.key==='ArrowRight'||e.key===' ') changeSlide(1);
+  if(e.key==='ArrowLeft') changeSlide(-1);
+});
+let tx=0;
+document.addEventListener('touchstart',e=>{ tx=e.touches[0].clientX; });
+document.addEventListener('touchend',e=>{ const d=tx-e.changedTouches[0].clientX; if(Math.abs(d)>50) changeSlide(d>0?1:-1); });
+
+window.addEventListener('DOMContentLoaded',()=>showSlide(0));
+</script>
+</body>
+</html>
