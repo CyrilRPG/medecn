@@ -113,13 +113,105 @@ tr:hover td { background: rgba(255,255,255,0.03); }
 .key-hint { text-align: center; color: rgba(255,255,255,0.2); font-size: 0.75rem; margin-top: 2rem; padding-bottom: 1rem; }
 @media (max-width: 768px) { .content-slide { padding: 1rem 1rem 2.5rem; } .content-slide h2 { font-size: 1.15rem; } .title-slide h1 { font-size: 1.8rem; } }
 @media (max-width: 480px) { .topbar-title { display: none; } .flash-input-row { flex-direction: column; } }
+
+/* ── SLIDE-INNER : alias de content-slide pour les slides 3+ ── */
+.slide-inner {
+  max-width: 880px; margin: 0 auto; padding: 1.5rem 1.5rem 3rem;
+}
+.slide-inner h2 { font-size: 1.4rem; font-weight: 700; color: #3498db; margin-bottom: 1rem; border-bottom: 2px solid rgba(52,152,219,0.3); padding-bottom: 0.5rem; }
+.slide-inner h3 { font-size: 1.05rem; font-weight: 600; color: #f39c12; margin: 1.2rem 0 0.6rem; }
+.slide-inner h4 { font-size: 0.97rem; font-weight: 600; color: #2ecc71; margin: 1rem 0 0.4rem; }
+.slide-inner p { line-height: 1.8; color: #c0c0d8; margin-bottom: 0.75rem; font-size: 0.95rem; }
+.slide-inner ul, .slide-inner ol { margin: 0.5rem 0 0.75rem 1.5rem; }
+.slide-inner li { line-height: 1.8; color: #c0c0d8; font-size: 0.95rem; margin-bottom: 0.4rem; }
+.slide-inner strong { color: #e8e8f8; }
+
+/* ── SLIDE INTRO paragraph ── */
+.slide-intro {
+  background: rgba(52,152,219,0.07); border-left: 4px solid #3498db;
+  border-radius: 0 8px 8px 0; padding: 0.75rem 1rem; margin: 0.5rem 0 1.2rem;
+  font-size: 0.95rem; line-height: 1.75; color: #b0b0c8; font-style: italic;
+}
+
+/* ── QCM question text (alternative à .q-text) ── */
+.qcm-question {
+  font-weight: 600; color: #e0e0f0; margin-bottom: 0.75rem;
+  font-size: 0.95rem; line-height: 1.5;
+}
+
+/* ── FLASHCARDS flip ── */
+.flashcard-section { margin: 1.5rem 0 0.5rem; }
+.flashcard-section h3 { font-size: 1.05rem; font-weight: 600; color: #f39c12; margin: 0 0 0.75rem; }
+.flashcard {
+  background: rgba(52,152,219,0.08); border: 1px solid rgba(52,152,219,0.25);
+  border-radius: 12px; padding: 1rem; margin: 0.6rem 0; cursor: pointer;
+  transition: background 0.2s; min-height: 60px; position: relative;
+}
+.flashcard:hover { background: rgba(52,152,219,0.14); }
+.flashcard .fc-front { color: #e0e0f0; font-weight: 600; font-size: 0.92rem; line-height: 1.5; }
+.flashcard .fc-back {
+  display: none; margin-top: 0.75rem; padding-top: 0.75rem;
+  border-top: 1px solid rgba(255,255,255,0.1);
+  color: #b0b0c8; font-size: 0.9rem; line-height: 1.65;
+}
+.flashcard.flipped .fc-back { display: block; }
+.flashcard.flipped .fc-front { color: #9090b0; font-size: 0.88rem; }
+.flashcard::after {
+  content: '↕ cliquer'; position: absolute; bottom: 0.5rem; right: 0.75rem;
+  font-size: 0.72rem; color: rgba(255,255,255,0.2);
+}
+
+/* ── BILAN grid ── */
+.bilan-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(280px,1fr));
+  gap: 1rem; margin: 1rem 0;
+}
+.bilan-card {
+  background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 12px; padding: 1rem 1.1rem;
+}
+.bilan-card-title {
+  font-weight: 700; color: #3498db; font-size: 0.95rem; margin-bottom: 0.6rem;
+  border-bottom: 1px solid rgba(52,152,219,0.2); padding-bottom: 0.4rem;
+}
+.bilan-card ul { margin-left: 1.1rem; }
+.bilan-card li { font-size: 0.88rem; color: #b0b0c8; line-height: 1.7; margin-bottom: 0.2rem; }
+
+/* ── DP Dossier Progressif ── */
+.dp-block {
+  background: rgba(155,89,182,0.07); border: 1px solid rgba(155,89,182,0.25);
+  border-radius: 12px; padding: 1rem; margin: 1rem 0;
+}
+.dp-title { font-weight: 700; color: #9b59b6; font-size: 0.95rem; margin-bottom: 0.6rem; }
+.dp-block > p { font-style: italic; color: #9090b0; font-size: 0.9rem; margin-bottom: 0.75rem; line-height: 1.65; }
+.dp-questions { margin-left: 1.4rem; margin-bottom: 0.75rem; }
+.dp-questions li { color: #c0c0d8; font-size: 0.9rem; line-height: 1.7; margin-bottom: 0.4rem; }
+.dp-show-btn {
+  padding: 0.45rem 1rem; border-radius: 8px; border: 1px solid rgba(155,89,182,0.4);
+  background: rgba(155,89,182,0.12); color: #9b59b6; font-size: 0.85rem;
+  font-weight: 600; cursor: pointer; transition: background 0.2s;
+}
+.dp-show-btn:hover { background: rgba(155,89,182,0.25); }
+.dp-correction {
+  margin-top: 0.75rem; padding: 0.75rem; background: rgba(155,89,182,0.06);
+  border-radius: 8px; font-size: 0.88rem; color: #b0b0c0; line-height: 1.7;
+}
+
+/* ── Responsive slide-inner ── */
+@media (max-width: 768px) {
+  .slide-inner { padding: 1rem 1rem 2.5rem; }
+  .slide-inner h2 { font-size: 1.15rem; }
+  .bilan-grid { grid-template-columns: 1fr; }
+  .img-row { grid-template-columns: 1fr; }
+}
+
 </style>
 </head>
 <body>
 <div class="topbar">
   <a class="topbar-home" href="index.html">← Menu</a>
   <span class="topbar-title">Explorations fonctionnelles rénales — Médecine nucléaire</span>
-  <span class="topbar-counter" id="slide-counter">1 / 16</span>
+  <span class="topbar-counter" id="counter">1 / 16</span>
   <div class="topbar-nav">
     <button class="topbar-btn" onclick="changeSlide(-1)">&#8249;</button>
     <button class="topbar-btn" onclick="changeSlide(1)">&#8250;</button>
