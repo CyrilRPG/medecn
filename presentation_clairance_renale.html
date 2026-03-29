@@ -1,0 +1,1452 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Clairance rénale — UE5 Physiologie · MédECN</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:"Segoe UI",system-ui,sans-serif;background:#0d0d1a;color:#e0e0f0;min-height:100vh;overflow:hidden}
+.topbar{position:fixed;top:0;left:0;right:0;z-index:100;height:50px;background:rgba(13,13,26,.97);border-bottom:1px solid rgba(255,255,255,.1);display:flex;align-items:center;padding:0 1rem;gap:.75rem}
+.topbar-home{text-decoration:none;color:#3498db;font-weight:600;font-size:.85rem;white-space:nowrap;padding:.3rem .7rem;border:1px solid rgba(52,152,219,.4);border-radius:6px;transition:background .2s}
+.topbar-home:hover{background:rgba(52,152,219,.15)}
+.topbar-title{flex:1;text-align:center;font-size:.85rem;color:#9090b0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.topbar-counter{font-size:.85rem;color:#b0b0c0;white-space:nowrap;min-width:55px;text-align:right}
+.topbar-nav{display:flex;gap:.4rem}
+.topbar-btn{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.15);color:#e0e0f0;padding:.3rem .7rem;border-radius:6px;cursor:pointer;font-size:.85rem;transition:background .2s}
+.topbar-btn:hover{background:rgba(255,255,255,.14)}
+.progress-bar{position:fixed;top:50px;left:0;right:0;height:3px;z-index:99;background:rgba(255,255,255,.08)}
+.progress-fill{height:100%;background:linear-gradient(90deg,#3498db,#2ecc71);transition:width .3s ease;width:0%}
+.slide-container{position:fixed;top:53px;left:0;right:0;bottom:0;overflow-y:auto}
+.slide{display:none !important}
+.slide.active{display:block !important}
+.slide.active.title-slide{display:flex !important}
+.title-slide{flex-direction:column;align-items:center;justify-content:center;text-align:center;min-height:calc(100vh - 53px);padding:2rem;background:radial-gradient(ellipse at center,rgba(52,152,219,.08) 0%,transparent 70%)}
+.title-tag{color:#3498db;font-size:.85rem;font-weight:600;letter-spacing:.05em;text-transform:uppercase;margin-bottom:1rem}
+.title-slide h1{font-size:clamp(1.8rem,4vw,3rem);font-weight:800;line-height:1.2;background:linear-gradient(135deg,#3498db,#2ecc71);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:1rem}
+.title-subtitle{color:#9090b0;font-size:1rem;margin-bottom:1.5rem;max-width:600px;line-height:1.6}
+.title-meta{display:flex;gap:1.5rem;flex-wrap:wrap;justify-content:center}
+.title-meta span{color:#b0b0c0;font-size:.9rem}
+.menu-link{position:absolute;top:1rem;left:1rem;color:#3498db;text-decoration:none;font-size:.9rem;padding:.4rem .8rem;border:1px solid rgba(52,152,219,.4);border-radius:6px;transition:background .2s}
+.menu-link:hover{background:rgba(52,152,219,.15)}
+/* Content */
+.content-slide{max-width:880px;margin:0 auto;padding:1.5rem 1.5rem 3rem}
+.content-slide h2{font-size:1.4rem;font-weight:700;color:#3498db;margin-bottom:1rem;border-bottom:2px solid rgba(52,152,219,.3);padding-bottom:.5rem}
+.content-slide h3{font-size:1.05rem;font-weight:600;color:#f39c12;margin:1.2rem 0 .6rem}
+.content-slide h4{font-size:.97rem;font-weight:600;color:#2ecc71;margin:1rem 0 .4rem}
+.content-slide p{line-height:1.8;color:#c0c0d8;margin-bottom:.75rem;font-size:.95rem}
+.content-slide ul,.content-slide ol{margin:.5rem 0 .75rem 1.5rem}
+.content-slide li{line-height:1.8;color:#c0c0d8;font-size:.95rem;margin-bottom:.4rem}
+.content-slide strong{color:#e8e8f8}
+/* Boxes */
+.def-box{background:rgba(243,156,18,.1);border-left:4px solid #f39c12;border-radius:0 8px 8px 0;padding:.8rem 1rem;margin:.6rem 0;font-size:.92rem;line-height:1.65;color:#c8c8d8}
+.highlight-box{background:rgba(46,204,113,.1);border-left:4px solid #2ecc71;border-radius:0 8px 8px 0;padding:.8rem 1rem;margin:.75rem 0;font-size:.92rem;line-height:1.65;color:#c8c8d8}
+.warning-box{background:rgba(231,76,60,.1);border:2px solid #e74c3c;border-radius:8px;padding:.8rem 1rem;margin:.75rem 0;font-size:.92rem;line-height:1.65;color:#c8c8d8}
+.urgence-box{background:rgba(231,76,60,.2);border:2px solid #e74c3c;border-radius:8px;padding:.8rem 1rem;margin:.75rem 0;font-size:.92rem;line-height:1.65}
+/* Explication structurée */
+.expl-wrap{margin:0 0 1.5rem 0}
+.expl-wrap h4{color:#e0e0f0;font-size:1rem;margin:1.1rem 0 .4rem;font-weight:700}
+.expl-wrap p{color:#c0c0d8;font-size:.95rem;line-height:1.8;margin-bottom:.4rem}
+.expl-wrap strong{color:#f0f0ff}
+.expl-bq{border-left:3px solid rgba(52,152,219,.5);padding:.4rem 1rem;color:#9898b8;font-style:italic;font-size:.9rem;margin:.3rem 0 .9rem 0;background:rgba(52,152,219,.04);border-radius:0 6px 6px 0}
+.expl-sep{border:none;border-top:1px solid rgba(255,255,255,.07);margin:1.1rem 0}
+.expl-warn{background:rgba(231,76,60,.08);border-left:4px solid #e74c3c;border-radius:0 8px 8px 0;padding:.6rem 1rem;margin:.75rem 0;font-size:.92rem;color:#c8c8d8;line-height:1.65}
+.expl-info{background:rgba(52,152,219,.08);border-left:4px solid #3498db;border-radius:0 8px 8px 0;padding:.6rem 1rem;margin:.75rem 0;font-size:.92rem;color:#c8c8d8;line-height:1.65}
+/* QCM */
+.qcm-block{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:12px;padding:1rem;margin:.75rem 0}
+.q-text{font-weight:600;color:#e0e0f0;margin-bottom:.75rem;font-size:.95rem;line-height:1.5}
+.qcm-options{display:flex;flex-direction:column;gap:.5rem;margin-bottom:.75rem}
+.qcm-option{display:flex;align-items:flex-start;gap:.6rem;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:8px;padding:.6rem .8rem;cursor:pointer;transition:background .15s,border-color .15s;font-size:.9rem;color:#c0c0d8}
+.qcm-option:hover{background:rgba(255,255,255,.08)}
+.qcm-option.selected{background:rgba(52,152,219,.15);border-color:#3498db;color:#e0e0f0}
+.qcm-option.correct{background:rgba(46,204,113,.2);border-color:#2ecc71;color:#e0e0f0}
+.qcm-option.wrong{background:rgba(231,76,60,.2);border-color:#e74c3c;color:#e0e0f0}
+.letter{min-width:24px;height:24px;border-radius:50%;background:rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.8rem;color:#3498db;flex-shrink:0;margin-top:1px}
+.qcm-validate{padding:.5rem 1rem;border-radius:8px;border:none;cursor:pointer;background:rgba(52,152,219,.2);color:#3498db;font-weight:600;font-size:.85rem;transition:background .2s}
+.qcm-validate:disabled{opacity:.4;cursor:not-allowed}
+.qcm-validate:hover:not(:disabled){background:rgba(52,152,219,.35)}
+.qcm-feedback{margin-top:.5rem;font-weight:600;font-size:.9rem}
+.qcm-explanation{display:none;margin-top:.75rem;padding:.75rem;background:rgba(255,255,255,.04);border-radius:8px;font-size:.88rem;color:#b0b0c0;line-height:1.65}
+/* Flash */
+.flash-block{background:rgba(52,152,219,.07);border:1px solid rgba(52,152,219,.25);border-radius:12px;padding:1rem;margin:.75rem 0}
+.flash-input-row{display:flex;gap:.5rem;margin:.6rem 0;flex-wrap:wrap}
+.flash-input{flex:1;min-width:200px;padding:.5rem .75rem;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.15);border-radius:8px;color:#e0e0f0;font-size:.92rem}
+.flash-input:focus{outline:none;border-color:#3498db}
+/* Bilan */
+.bilan-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1rem;margin:1rem 0}
+.bilan-card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:12px;padding:1rem 1.1rem}
+.bilan-card-title{font-weight:700;color:#3498db;font-size:.95rem;margin-bottom:.6rem;border-bottom:1px solid rgba(52,152,219,.2);padding-bottom:.4rem}
+.bilan-card ul{margin-left:1.1rem}
+.bilan-card li{font-size:.88rem;color:#b0b0c0;line-height:1.7;margin-bottom:.2rem}
+/* Table */
+.table-wrap{overflow-x:auto;margin:.75rem 0;border-radius:8px}
+table{width:100%;border-collapse:collapse;font-size:.88rem}
+thead{background:rgba(52,152,219,.15)}
+th{padding:.6rem .75rem;text-align:left;color:#3498db;font-weight:600}
+td{padding:.5rem .75rem;border-bottom:1px solid rgba(255,255,255,.05);color:#c0c0d8}
+tr:last-child td{border-bottom:none}
+tr:hover td{background:rgba(255,255,255,.03)}
+/* fin */
+.key-hint{text-align:center;color:rgba(255,255,255,.2);font-size:.75rem;margin-top:2rem;padding-bottom:1rem}
+@media(max-width:768px){.content-slide{padding:1rem 1rem 2.5rem}.content-slide h2{font-size:1.15rem}.title-slide h1{font-size:1.8rem}}
+@media(max-width:480px){.topbar-title{display:none}.flash-input-row{flex-direction:column}}
+</style>
+</head>
+<body>
+<div class="topbar">
+  <a class="topbar-home" href="index.html">← Menu</a>
+  <span class="topbar-title">Clairance rénale — UE5 Physiologie</span>
+  <span class="topbar-counter" id="counter">1 / 16</span>
+  <div class="topbar-nav">
+    <button class="topbar-btn" onclick="changeSlide(-1)">&#8249;</button>
+    <button class="topbar-btn" onclick="changeSlide(1)">&#8250;</button>
+  </div>
+</div>
+<div class="progress-bar"><div class="progress-fill" id="progress-fill"></div></div>
+<div class="slide-container" id="slide-container">
+
+<!-- ══════════════════════ SLIDE 0 — TITRE ══════════════════════ -->
+<div class="slide title-slide active" id="slide-0">
+  <a class="menu-link" href="index.html">← Menu</a>
+  <div>
+    <div class="title-tag">UE5 · Voies urinaires · Dr Carole Planès</div>
+    <h1>Clairance rénale</h1>
+    <div class="title-subtitle">Filtration · Réabsorption · Sécrétion · DFG · PAH · Glucose · Osmolalité · Eau libre</div>
+    <div class="title-meta">
+      <span>🫘 Physiologie rénale</span>
+      <span>📚 16 diapos</span>
+      <span>⚡ Quiz + Flashcards</span>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════ SLIDE 1 — Organisation fonctionnelle du néphron ══════════════════════ -->
+<div class="slide content-slide" id="slide-1">
+<h2>I — Organisation fonctionnelle du néphron et transferts rénaux</h2>
+
+<h3>📦 Prérequis</h3>
+<div class="def-box"><strong>Gradient de concentration</strong> : différence de concentration d'une substance entre deux compartiments. Lorsqu'un gradient existe, les substances ont tendance à diffuser passivement du milieu le plus concentré vers le moins concentré. C'est le moteur de nombreux échanges biologiques.</div>
+<div class="def-box"><strong>Forces de Starling</strong> : forces qui gouvernent les échanges de fluide entre le sang et le tissu interstitiel à travers la paroi capillaire. Deux forces opposées : la pression hydrostatique capillaire (pousse le liquide vers l'extérieur) et la pression oncotique des protéines plasmatiques (retient l'eau dans le sang).</div>
+<div class="def-box"><strong>Capillaire péritubulaire</strong> : réseau de petits vaisseaux sanguins qui entoure le tubule rénal. C'est l'interface entre le sang et le tubule — les substances réabsorbées rejoignent le sang par ces capillaires, et les substances sécrétées en partent.</div>
+
+<h3>📖 Explication</h3>
+<div class="expl-wrap">
+
+<h4>🫘 Le néphron — unité fonctionnelle du rein</h4>
+<p>Un rein humain contient environ <strong>1 million de néphrons</strong>. Chaque néphron est une petite usine de traitement du sang. Il est composé, dans l'ordre, d'une <strong>artériole afférente</strong> (qui amène le sang), d'un <strong>glomérule</strong> (pelote de capillaires où s'effectue la filtration), d'une <strong>artériole efférente</strong> (qui repart après le glomérule), d'un <strong>réseau capillaire péritubulaire</strong> (qui longe le tubule pour permettre les échanges) et d'un <strong>tubule rénal</strong> (le tuyau où l'ultrafiltrat est transformé).</p>
+<p>La disposition en série du glomérule entre l'artériole afférente et l'artériole efférente est cruciale : elle maintient une <strong>pression hydrostatique élevée</strong> dans les capillaires glomérulaires, ce qui force le plasma à traverser la paroi capillaire vers la capsule de Bowman — c'est la filtration glomérulaire.</p>
+<div class="expl-bq">Ex : Imaginez une station d'épuration. L'artériole afférente est l'arrivée d'eau brute. Le glomérule est le premier filtre grossier. Le tubule est la ligne de traitement secondaire où on raffine. L'urine définitive est le produit final épuré.</div>
+
+<hr class="expl-sep">
+
+<h4>🔄 Les 4 transferts rénaux — bien les distinguer</h4>
+<p>Le <strong>terme clairance</strong> vient de l'anglais "to clear" — se débarrasser de quelque chose. Comprendre les 4 mécanismes de transfert est fondamental avant d'aborder le concept de clairance.</p>
+<p><strong>1) La filtration glomérulaire</strong> est un processus <strong>entièrement passif</strong> — il ne consomme pas d'ATP. Son moteur est la pression d'ultrafiltration résultant des forces de Starling. Attention : toutes les substances ne sont pas filtrables. Les grosses molécules comme l'albumine (70 kDa) ne passent pas car elles sont trop grandes et chargées négativement.</p>
+<p><strong>2) La réabsorption tubulaire</strong> est le passage d'une substance du fluide tubulaire vers le sang. Elle traverse l'interstitium pour rejoindre le capillaire péritubulaire. Elle est <strong>majoritairement active</strong> (nécessite de l'ATP) mais peut être passive pour certaines molécules qui suivent des gradients électriques ou osmotiques.</p>
+<p><strong>3) La sécrétion tubulaire</strong> est le passage inverse : une substance quitte le sang (capillaire péritubulaire), traverse l'interstitium et rejoint la lumière du tubule. C'est un processus <strong>actif</strong> qui consomme de l'énergie.</p>
+<p><strong>4) L'excrétion</strong> est simplement la quantité finale retrouvée dans les urines. C'est la résultante de tout ce qui a été filtré, réabsorbé et sécrété.</p>
+<div class="expl-warn"><strong>⚠️ Piège classique — Sécrétion ≠ Excrétion</strong><br>La sécrétion est un <em>transfert</em> du sang vers le tubule (processus). L'excrétion est la <em>quantité finale</em> dans l'urine (résultat). Une substance peut être filtrée + sécrétée mais avoir une excrétion inférieure à ce qu'on attendrait si elle est aussi réabsorbée.</div>
+
+</div>
+
+<svg viewBox="0 0 700 250" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-height:250px;margin:1rem 0;display:block">
+  <defs>
+    <marker id="arr1" markerWidth="7" markerHeight="5" refX="7" refY="2.5" orient="auto"><polygon points="0 0,7 2.5,0 5" fill="#3498db"/></marker>
+    <marker id="arr2" markerWidth="7" markerHeight="5" refX="7" refY="2.5" orient="auto"><polygon points="0 0,7 2.5,0 5" fill="#e74c3c"/></marker>
+    <marker id="arr3" markerWidth="7" markerHeight="5" refX="7" refY="2.5" orient="auto"><polygon points="0 0,7 2.5,0 5" fill="#2ecc71"/></marker>
+  </defs>
+  <text x="350" y="18" text-anchor="middle" fill="#3498db" font-size="13" font-family="Segoe UI,sans-serif" font-weight="bold">Le néphron — 4 transferts</text>
+  <!-- Artériole afférente -->
+  <rect x="15" y="75" width="100" height="35" rx="6" fill="rgba(52,152,219,.2)" stroke="#3498db" stroke-width="1.5"/>
+  <text x="65" y="97" text-anchor="middle" fill="#3498db" font-size="10" font-family="Segoe UI,sans-serif" font-weight="bold">Artériole afférente</text>
+  <!-- Glomérule -->
+  <circle cx="200" cy="92" r="35" fill="rgba(243,156,18,.15)" stroke="#f39c12" stroke-width="2"/>
+  <text x="200" y="88" text-anchor="middle" fill="#f39c12" font-size="10" font-family="Segoe UI,sans-serif" font-weight="bold">Glomérule</text>
+  <text x="200" y="102" text-anchor="middle" fill="#c0c0d8" font-size="9" font-family="Segoe UI,sans-serif">Filtration passive</text>
+  <!-- Flèche filtration vers tubule -->
+  <line x1="200" y1="127" x2="200" y2="155" stroke="#f39c12" stroke-width="2" marker-end="url(#arr1)"/>
+  <text x="215" y="145" fill="#f39c12" font-size="9" font-family="Segoe UI,sans-serif">Filtrat</text>
+  <!-- Artériole efférente -->
+  <line x1="118" y1="92" x2="150" y2="92" stroke="#3498db" stroke-width="1.5" marker-end="url(#arr1)"/>
+  <rect x="265" y="75" width="105" height="35" rx="6" fill="rgba(52,152,219,.12)" stroke="#3498db" stroke-width="1.5"/>
+  <line x1="235" y1="92" x2="263" y2="92" stroke="#3498db" stroke-width="1.5" marker-end="url(#arr1)"/>
+  <text x="317" y="92" text-anchor="middle" fill="#3498db" font-size="9.5" font-family="Segoe UI,sans-serif" font-weight="bold">Artériole efférente</text>
+  <text x="317" y="105" text-anchor="middle" fill="#c0c0d8" font-size="8.5" font-family="Segoe UI,sans-serif">→ Cap. péritubulaire</text>
+  <!-- Tubule -->
+  <rect x="120" y="160" width="430" height="40" rx="8" fill="rgba(46,204,113,.12)" stroke="#2ecc71" stroke-width="1.5"/>
+  <text x="335" y="183" text-anchor="middle" fill="#2ecc71" font-size="11" font-family="Segoe UI,sans-serif" font-weight="bold">TUBULE RÉNAL</text>
+  <!-- Flèche réabsorption (tubule → sang) -->
+  <path d="M390 160 Q430 130 370 110" stroke="#e74c3c" stroke-width="1.5" fill="none" marker-end="url(#arr2)"/>
+  <text x="435" y="130" fill="#e74c3c" font-size="9" font-family="Segoe UI,sans-serif">Réabsorption</text>
+  <text x="435" y="141" fill="#9090b0" font-size="8" font-family="Segoe UI,sans-serif">tubule→sang</text>
+  <!-- Flèche sécrétion (sang → tubule) -->
+  <path d="M490 110 Q540 130 480 155" stroke="#9b59b6" stroke-width="1.5" fill="none" marker-end="url(#arr3)"/>
+  <text x="545" y="130" fill="#9b59b6" font-size="9" font-family="Segoe UI,sans-serif">Sécrétion</text>
+  <text x="545" y="141" fill="#9090b0" font-size="8" font-family="Segoe UI,sans-serif">sang→tubule</text>
+  <!-- Urine -->
+  <rect x="565" y="160" width="120" height="40" rx="8" fill="rgba(52,152,219,.15)" stroke="#3498db" stroke-width="1.5"/>
+  <line x1="550" y1="180" x2="563" y2="180" stroke="#3498db" stroke-width="1.5" marker-end="url(#arr1)"/>
+  <text x="625" y="178" text-anchor="middle" fill="#3498db" font-size="10.5" font-family="Segoe UI,sans-serif" font-weight="bold">URINE</text>
+  <text x="625" y="192" text-anchor="middle" fill="#c0c0d8" font-size="9" font-family="Segoe UI,sans-serif">Excrétion finale</text>
+</svg>
+
+<div class="highlight-box">Le néphron filtre passivement le plasma au glomérule, puis transforme l'ultrafiltrat sur toute la longueur du tubule par réabsorption et sécrétion actives. La résultante = l'urine définitive. Clairance = "to clear" = se débarrasser d'une substance.</div>
+
+<h3>🃏 Flashcards</h3>
+<div class="flash-block" data-answer="5 structures en série : artériole afférente → glomérule (filtration) → artériole efférente → réseau capillaire péritubulaire → tubule rénal. Le réseau péritubulaire entoure le tubule et permet les échanges de réabsorption et sécrétion.">
+  <div class="q-text">❓ Citez les 5 composants du néphron dans l'ordre anatomique. (niveau 1)</div>
+  <div class="flash-input-row">
+    <input class="flash-input" type="text" placeholder="Votre réponse…" onkeydown="if(event.key==='Enter')validateFlash(this)">
+    <button class="qcm-validate" onclick="validateFlash(this)">Vérifier</button>
+  </div>
+  <div class="qcm-explanation"></div>
+</div>
+<div class="flash-block" data-answer="Filtration = passif (forces de Starling, pas d'ATP). Réabsorption = majoritairement active (ATP), parfois passive. Sécrétion = active (ATP). L'excrétion n'est pas un transfert mais le résultat final retrouvé dans l'urine.">
+  <div class="q-text">❓ Parmi les 4 transferts rénaux, lesquels nécessitent de l'ATP ? (niveau 2)</div>
+  <div class="flash-input-row">
+    <input class="flash-input" type="text" placeholder="Votre réponse…" onkeydown="if(event.key==='Enter')validateFlash(this)">
+    <button class="qcm-validate" onclick="validateFlash(this)">Vérifier</button>
+  </div>
+  <div class="qcm-explanation"></div>
+</div>
+</div>
+
+<!-- ══════════════════════ SLIDE 2 — Débits massiques ══════════════════════ -->
+<div class="slide content-slide" id="slide-2">
+<h2>II — Débits massiques : définition et relation fondamentale</h2>
+
+<h3>📦 Prérequis</h3>
+<div class="def-box"><strong>Concentration (C)</strong> : quantité d'une substance dissoute par unité de volume (ex : mg/L, µmol/L). Si la concentration double et que le volume reste identique, la quantité totale double.</div>
+<div class="def-box"><strong>Débit volumique</strong> : volume de liquide qui passe par un point en une unité de temps (ex : mL/min). Le débit urinaire est la quantité d'urine produite par minute.</div>
+<div class="def-box"><strong>Débit massique</strong> : quantité de matière (masse) transportée par unité de temps (ex : mg/min). C'est le produit d'une concentration par un débit volumique.</div>
+
+<h3>📖 Explication</h3>
+<div class="expl-wrap">
+
+<h4>📊 Débit massique filtré → ce qui entre dans le tubule</h4>
+<p>Le <strong>débit massique filtré</strong> est la quantité d'une substance qui passe du plasma vers le filtrat glomérulaire par unité de temps. Le fluide vecteur est ici le filtrat glomérulaire, et son débit est le <strong>DFG (Débit de Filtration Glomérulaire)</strong>.</p>
+<p>La formule est : <strong>Débit massique filtré (mg/min) = Concentration plasmatique (Cp) × DFG (mL/min)</strong>. Cette formule est simple et directe : plus la substance est concentrée dans le plasma, et plus le DFG est grand, plus on filtre cette substance.</p>
+<div class="expl-bq">Ex : La créatinine plasmatique est à 0,1 mg/mL et le DFG est de 120 mL/min → débit filtré = 0,1 × 120 = 12 mg/min de créatinine filtrée toutes les minutes.</div>
+
+<hr class="expl-sep">
+
+<h4>📊 Débit massique excrété → ce qui sort dans l'urine</h4>
+<p>Le <strong>débit massique excrété</strong> est la quantité d'une substance retrouvée dans les urines par minute. Le fluide vecteur est ici l'urine, et son débit est le <strong>débit urinaire V (mL/min)</strong>.</p>
+<p>La formule est : <strong>Débit massique excrété (mg/min) = Concentration urinaire (Cu) × Débit urinaire (V)</strong>. Cette formule s'applique à toute substance urinaire, quel que soit son comportement tubulaire.</p>
+<div class="expl-bq">Ex : La créatinine urinaire est à 15 mg/mL et le débit urinaire est de 1 mL/min → débit excrété = 15 × 1 = 15 mg/min. Ici l'excrété > filtré → on a une légère sécrétion tubulaire (c'est cohérent pour la créatinine).</div>
+
+<hr class="expl-sep">
+
+<h4>⚖️ La relation fondamentale — bilan rénal d'une substance</h4>
+<p>Pour comprendre ce que le rein fait à une substance, on compare toujours le débit filtré et le débit excrété. La relation fondamentale qui relie tous les processus est :</p>
+<p style="text-align:center;font-size:1.05rem;font-weight:700;color:#3498db;padding:.75rem;background:rgba(52,152,219,.08);border-radius:8px;margin:.75rem 0"><strong>Débit excrété = Débit filtré − Débit réabsorbé + Débit sécrété</strong></p>
+<p>Cette formule est universelle. Elle permet de calculer n'importe lequel des 4 termes si les 3 autres sont connus. Le comportement global du rein vis-à-vis d'une substance se détermine en comparant le débit excrété et le débit filtré.</p>
+<div class="expl-bq">Ex : Pour le sodium, on filtre environ 25 200 mmol/jour et on en excrète seulement ~200 mmol/jour → le rein réabsorbe ~99% du sodium filtré. Sans cette réabsorption massive, on mourrait de déplétion sodée en quelques heures.</div>
+
+</div>
+
+<svg viewBox="0 0 700 200" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-height:200px;margin:1rem 0;display:block">
+  <defs>
+    <marker id="a2" markerWidth="7" markerHeight="5" refX="7" refY="2.5" orient="auto"><polygon points="0 0,7 2.5,0 5" fill="#3498db"/></marker>
+    <marker id="b2" markerWidth="7" markerHeight="5" refX="7" refY="2.5" orient="auto"><polygon points="0 0,7 2.5,0 5" fill="#e74c3c"/></marker>
+    <marker id="c2" markerWidth="7" markerHeight="5" refX="7" refY="2.5" orient="auto"><polygon points="0 0,7 2.5,0 5" fill="#9b59b6"/></marker>
+  </defs>
+  <text x="350" y="18" text-anchor="middle" fill="#3498db" font-size="13" font-family="Segoe UI,sans-serif" font-weight="bold">Relation fondamentale des débits</text>
+  <!-- Plasma -->
+  <rect x="20" y="55" width="130" height="80" rx="8" fill="rgba(52,152,219,.15)" stroke="#3498db" stroke-width="2"/>
+  <text x="85" y="85" text-anchor="middle" fill="#3498db" font-size="11" font-family="Segoe UI,sans-serif" font-weight="bold">PLASMA</text>
+  <text x="85" y="100" text-anchor="middle" fill="#c0c0d8" font-size="9.5" font-family="Segoe UI,sans-serif">Cp × DFG</text>
+  <text x="85" y="113" text-anchor="middle" fill="#c0c0d8" font-size="9" font-family="Segoe UI,sans-serif">= débit filtré</text>
+  <!-- Filtration -->
+  <line x1="150" y1="95" x2="200" y2="95" stroke="#3498db" stroke-width="2" marker-end="url(#a2)"/>
+  <text x="175" y="88" text-anchor="middle" fill="#3498db" font-size="9" font-family="Segoe UI,sans-serif">Filtration</text>
+  <!-- Tubule -->
+  <rect x="200" y="40" width="310" height="110" rx="8" fill="rgba(46,204,113,.08)" stroke="#2ecc71" stroke-width="1.5"/>
+  <text x="355" y="60" text-anchor="middle" fill="#2ecc71" font-size="11" font-family="Segoe UI,sans-serif" font-weight="bold">TUBULE</text>
+  <text x="355" y="78" text-anchor="middle" fill="#9090b0" font-size="9" font-family="Segoe UI,sans-serif">Débit excrété = Filtré − Réabsorbé + Sécrété</text>
+  <!-- Réabsorption (tubule vers plasma) -->
+  <path d="M250 150 Q200 175 165 145" stroke="#e74c3c" stroke-width="1.5" fill="none" marker-end="url(#b2)"/>
+  <text x="190" y="175" text-anchor="middle" fill="#e74c3c" font-size="9" font-family="Segoe UI,sans-serif">Réabsorption</text>
+  <!-- Sécrétion (plasma vers tubule) -->
+  <path d="M135 130 Q170 155 215 140" stroke="#9b59b6" stroke-width="1.5" fill="none" marker-end="url(#c2)"/>
+  <text x="145" y="158" text-anchor="middle" fill="#9b59b6" font-size="9" font-family="Segoe UI,sans-serif">Sécrétion</text>
+  <!-- Urine -->
+  <line x1="510" y1="95" x2="555" y2="95" stroke="#3498db" stroke-width="2" marker-end="url(#a2)"/>
+  <rect x="555" y="55" width="130" height="80" rx="8" fill="rgba(52,152,219,.12)" stroke="#3498db" stroke-width="2"/>
+  <text x="620" y="85" text-anchor="middle" fill="#3498db" font-size="11" font-family="Segoe UI,sans-serif" font-weight="bold">URINE</text>
+  <text x="620" y="100" text-anchor="middle" fill="#c0c0d8" font-size="9.5" font-family="Segoe UI,sans-serif">Cu × V</text>
+  <text x="620" y="113" text-anchor="middle" fill="#c0c0d8" font-size="9" font-family="Segoe UI,sans-serif">= débit excrété</text>
+</svg>
+
+<div class="highlight-box">Deux formules à maîtriser : Débit filtré = Cp × DFG | Débit excrété = Cu × V. La relation fondamentale : Excrété = Filtré − Réabsorbé + Sécrété. Comparer ces deux débits révèle le comportement rénal de toute substance.</div>
+
+<h3>🃏 Flashcards</h3>
+<div class="flash-block" data-answer="Débit massique filtré = Cp (concentration plasmatique) × DFG (débit de filtration glomérulaire). Unité = mg/min. Ex : créatininémie 0,1 mg/mL × DFG 120 mL/min = 12 mg/min de créatinine filtrée.">
+  <div class="q-text">❓ Quelle est la formule du débit massique filtré ? Donnez un exemple chiffré. (niveau 1)</div>
+  <div class="flash-input-row">
+    <input class="flash-input" type="text" placeholder="Votre réponse…" onkeydown="if(event.key==='Enter')validateFlash(this)">
+    <button class="qcm-validate" onclick="validateFlash(this)">Vérifier</button>
+  </div>
+  <div class="qcm-explanation"></div>
+</div>
+<div class="flash-block" data-answer="Débit excrété = Débit filtré − Débit réabsorbé + Débit sécrété. C'est la relation fondamentale universelle. Elle permet de calculer n'importe quel terme si les autres sont connus.">
+  <div class="q-text">❓ Énoncez la relation fondamentale entre débits massiques filtré, réabsorbé, sécrété et excrété. (niveau 2)</div>
+  <div class="flash-input-row">
+    <input class="flash-input" type="text" placeholder="Votre réponse…" onkeydown="if(event.key==='Enter')validateFlash(this)">
+    <button class="qcm-validate" onclick="validateFlash(this)">Vérifier</button>
+  </div>
+  <div class="qcm-explanation"></div>
+</div>
+</div>
+
+<!-- ══════════════════════ SLIDE 3 — Les 4 situations ══════════════════════ -->
+<div class="slide content-slide" id="slide-3">
+<h2>II (suite) — Les 4 situations de comportement rénal</h2>
+
+<h3>📦 Prérequis</h3>
+<div class="def-box"><strong>Débit excrété vs débit filtré</strong> : comparer ces deux débits est la clé pour identifier le comportement rénal d'une substance. Si excrété = filtré → pas d'échanges tubulaires. Si excrété &lt; filtré → réabsorption nette. Si excrété &gt; filtré → sécrétion nette.</div>
+<div class="def-box"><strong>Régulation fine</strong> : capacité du tubule distal à ajuster l'excrétion d'une substance selon les besoins de l'organisme, en modifiant le ratio réabsorption/sécrétion. Ex : le potassium est principalement réabsorbé mais peut être sécrété si l'organisme est en excès.</div>
+
+<h3>📖 Explication</h3>
+<div class="expl-wrap">
+
+<h4>🟢 Situation 1 — Substance uniquement filtrée (Excrété = Filtré)</h4>
+<p>La substance passe le filtre glomérulaire et traverse le tubule sans être touchée. <strong>Aucune réabsorption, aucune sécrétion</strong>. On retrouve intégralement dans les urines ce qui a été filtré. C'est la situation idéale pour mesurer le DFG, car la clairance de cette substance sera exactement égale au DFG.</p>
+<p>Le prototype est l'<strong>inuline</strong>, un petit polysaccharide exogène. On l'injecte en perfusion pour maintenir une concentration plasmatique stable, puis on mesure sa clairance — qui donne directement le DFG. C'est la méthode de référence absolue, le "gold standard".</p>
+<div class="expl-bq">Ex : On injecte de l'inuline à un sujet. On mesure [inuline]plasma = 1 mg/mL, [inuline]urine = 120 mg/mL, débit urinaire = 1 mL/min → Clairance inuline = 120 × 1 / 1 = 120 mL/min = DFG.</div>
+
+<hr class="expl-sep">
+
+<h4>🟡 Situation 2 — Filtration + Réabsorption (Excrété &lt; Filtré)</h4>
+<p>La substance est filtrée, puis une partie est récupérée par les cellules tubulaires et renvoyée dans le sang. <strong>C'est la situation la plus fréquente en physiologie rénale</strong>. Le rein réabsorbe massivement pour ne pas gaspiller les substances utiles à l'organisme.</p>
+<p>Le <strong>sodium (Na⁺)</strong> en est l'exemple parfait : environ <strong>99%</strong> du sodium filtré est réabsorbé tout le long du tubule (TCP, anse de Henlé, tubule distal, canal collecteur). Le <strong>glucose</strong> est totalement réabsorbé au TCP chez le sujet sain — on n'en retrouve pas dans les urines.</p>
+<div class="expl-bq">Ex : Si on filtre 25 000 mmol/jour de Na+ et qu'on en excrète 100 mmol/jour → réabsorption = 24 900 mmol/jour soit 99,6%. Perdre cette réabsorption = mort par hyponatrémie en quelques heures.</div>
+
+<hr class="expl-sep">
+
+<h4>🔵 Situation 3 — Filtration + Sécrétion (Excrété &gt; Filtré)</h4>
+<p>La substance est filtrée, et en plus le tubule prend activement de la substance dans le sang péritubulaire pour l'ajouter dans la lumière tubulaire. On excrète donc <strong>plus que ce qui a été simplement filtré</strong>. Cette situation est utilisée par le rein pour éliminer rapidement certaines molécules.</p>
+<p>Le prototype est l'<strong>acide para-aminohippurique (PAH)</strong>, une molécule exogène utilisée pour mesurer le débit plasmatique rénal. À faible concentration, le PAH est totalement extrait du sang à chaque passage rénal — filtré <em>et</em> massivement sécrété.</p>
+<div class="expl-bq">Ex : Le PAH filtré représente environ 20% de l'excrétion totale (proportionnel au DFG) ; les 80% restants viennent de la sécrétion tubulaire active. À faible concentration plasmatique, tout le PAH arrivant au rein disparaît du sang en un seul passage.</div>
+
+<hr class="expl-sep">
+
+<h4>🟤 Situation 4 — Filtration + Réabsorption + Sécrétion (résultante variable)</h4>
+<p>La substance subit les trois processus simultanément. Le débit excrété final dépend de l'équilibre entre réabsorption et sécrétion, et peut varier selon le contexte physiologique. <strong>On ne peut pas prédire</strong> le rapport excrété/filtré sans connaître les conditions du moment.</p>
+<p>Le meilleur exemple est le <strong>potassium (K⁺)</strong> : il est massivement réabsorbé au TCP (~65%) et à l'anse (~25%). Mais dans le tubule distal et le canal collecteur, il peut être <em>sécrété</em> ou <em>réabsorbé</em> selon la kaliémie, l'aldostérone et l'apport alimentaire. Cette régulation fine permet de maintenir la kaliémie entre 3,5 et 5 mmol/L.</p>
+<div class="expl-bq">Ex : Sous régime riche en potassium → aldostérone ↑ → sécrétion de K+ dans le tubule distal ↑ → kaliurie ↑. Sous régime pauvre en K+ → sécrétion tubulaire minimale → réabsorption maximale → kaliurie quasi nulle. Même substance, comportement complètement différent selon les besoins.</div>
+
+</div>
+
+<svg viewBox="0 0 700 200" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-height:200px;margin:1rem 0;display:block">
+  <text x="350" y="18" text-anchor="middle" fill="#3498db" font-size="13" font-family="Segoe UI,sans-serif" font-weight="bold">Les 4 situations — comparaison Excrété vs Filtré</text>
+  <!-- Situation 1 -->
+  <rect x="10" y="32" width="160" height="75" rx="8" fill="rgba(46,204,113,.12)" stroke="#2ecc71" stroke-width="1.5"/>
+  <text x="90" y="52" text-anchor="middle" fill="#2ecc71" font-size="10.5" font-family="Segoe UI,sans-serif" font-weight="bold">① Uniquement filtrée</text>
+  <text x="90" y="68" text-anchor="middle" fill="#c0c0d8" font-size="9.5" font-family="Segoe UI,sans-serif">Excrété = Filtré</text>
+  <text x="90" y="82" text-anchor="middle" fill="#9090b0" font-size="9" font-family="Segoe UI,sans-serif">Inuline</text>
+  <text x="90" y="98" text-anchor="middle" fill="#2ecc71" font-size="9.5" font-family="Segoe UI,sans-serif">C = DFG</text>
+  <!-- Situation 2 -->
+  <rect x="183" y="32" width="160" height="75" rx="8" fill="rgba(243,156,18,.12)" stroke="#f39c12" stroke-width="1.5"/>
+  <text x="263" y="52" text-anchor="middle" fill="#f39c12" font-size="10.5" font-family="Segoe UI,sans-serif" font-weight="bold">② Filtration + Réabs.</text>
+  <text x="263" y="68" text-anchor="middle" fill="#c0c0d8" font-size="9.5" font-family="Segoe UI,sans-serif">Excrété &lt; Filtré</text>
+  <text x="263" y="82" text-anchor="middle" fill="#9090b0" font-size="9" font-family="Segoe UI,sans-serif">Na⁺, glucose</text>
+  <text x="263" y="98" text-anchor="middle" fill="#f39c12" font-size="9.5" font-family="Segoe UI,sans-serif">C &lt; DFG</text>
+  <!-- Situation 3 -->
+  <rect x="356" y="32" width="160" height="75" rx="8" fill="rgba(52,152,219,.12)" stroke="#3498db" stroke-width="1.5"/>
+  <text x="436" y="52" text-anchor="middle" fill="#3498db" font-size="10.5" font-family="Segoe UI,sans-serif" font-weight="bold">③ Filtration + Sécr.</text>
+  <text x="436" y="68" text-anchor="middle" fill="#c0c0d8" font-size="9.5" font-family="Segoe UI,sans-serif">Excrété &gt; Filtré</text>
+  <text x="436" y="82" text-anchor="middle" fill="#9090b0" font-size="9" font-family="Segoe UI,sans-serif">PAH</text>
+  <text x="436" y="98" text-anchor="middle" fill="#3498db" font-size="9.5" font-family="Segoe UI,sans-serif">C &gt; DFG (jusqu'au DPR)</text>
+  <!-- Situation 4 -->
+  <rect x="529" y="32" width="160" height="75" rx="8" fill="rgba(155,89,182,.12)" stroke="#9b59b6" stroke-width="1.5"/>
+  <text x="609" y="52" text-anchor="middle" fill="#9b59b6" font-size="10.5" font-family="Segoe UI,sans-serif" font-weight="bold">④ Filtration+Réabs+Sécr</text>
+  <text x="609" y="68" text-anchor="middle" fill="#c0c0d8" font-size="9.5" font-family="Segoe UI,sans-serif">Excrété variable</text>
+  <text x="609" y="82" text-anchor="middle" fill="#9090b0" font-size="9" font-family="Segoe UI,sans-serif">K⁺, créatinine</text>
+  <text x="609" y="98" text-anchor="middle" fill="#9b59b6" font-size="9.5" font-family="Segoe UI,sans-serif">C selon équilibre</text>
+  <!-- Spectre clairances -->
+  <text x="350" y="135" text-anchor="middle" fill="#9090b0" font-size="10" font-family="Segoe UI,sans-serif">Spectre des clairances :</text>
+  <line x1="30" y1="160" x2="670" y2="160" stroke="rgba(255,255,255,.2)" stroke-width="1.5"/>
+  <circle cx="30" cy="160" r="4" fill="#f39c12"/>
+  <text x="30" y="178" text-anchor="middle" fill="#f39c12" font-size="9" font-family="Segoe UI,sans-serif">C = 0</text>
+  <text x="30" y="188" text-anchor="middle" fill="#9090b0" font-size="8" font-family="Segoe UI,sans-serif">Réabs. totale</text>
+  <circle cx="310" cy="160" r="4" fill="#2ecc71"/>
+  <text x="310" y="178" text-anchor="middle" fill="#2ecc71" font-size="9" font-family="Segoe UI,sans-serif">C = DFG</text>
+  <text x="310" y="188" text-anchor="middle" fill="#9090b0" font-size="8" font-family="Segoe UI,sans-serif">Filtr. uniquement</text>
+  <circle cx="670" cy="160" r="4" fill="#3498db"/>
+  <text x="670" y="178" text-anchor="middle" fill="#3498db" font-size="9" font-family="Segoe UI,sans-serif">C = DPR</text>
+  <text x="670" y="188" text-anchor="middle" fill="#9090b0" font-size="8" font-family="Segoe UI,sans-serif">Sécr. totale</text>
+</svg>
+
+<div class="highlight-box">4 situations selon le comportement tubulaire. La clairance reflète ce comportement : C = 0 (réabsorption totale comme le glucose) → C = DFG (filtration seule comme l'inuline) → C = DPR (sécrétion totale comme le PAH à faible concentration).</div>
+
+<h3>🃏 Flashcards</h3>
+<div class="flash-block" data-answer="Situation 3 : filtration + sécrétion. Le PAH est filtré (20% de l'excrétion) ET massivement sécrété par le tubule proximal (80% de l'excrétion). Débit excrété > débit filtré. À faible concentration, toute la substance est extraite du sang → clairance PAH = DPR.">
+  <div class="q-text">❓ Dans quelle situation se trouve le PAH ? Pourquoi son débit excrété est-il supérieur au débit filtré ? (niveau 2)</div>
+  <div class="flash-input-row">
+    <input class="flash-input" type="text" placeholder="Votre réponse…" onkeydown="if(event.key==='Enter')validateFlash(this)">
+    <button class="qcm-validate" onclick="validateFlash(this)">Vérifier</button>
+  </div>
+  <div class="qcm-explanation"></div>
+</div>
+<div class="flash-block" data-answer="Situation 4 : filtration + réabsorption + sécrétion. Le K+ est réabsorbé à 65% au TCP et 25% à l'anse, mais sécrété ou réabsorbé dans le tubule distal selon la kaliémie et l'aldostérone. Cette régulation fine maintient la kaliémie entre 3,5 et 5 mmol/L.">
+  <div class="q-text">❓ Dans quelle situation se trouve le potassium ? Quelle en est la signification physiologique ? (niveau 3)</div>
+  <div class="flash-input-row">
+    <input class="flash-input" type="text" placeholder="Votre réponse…" onkeydown="if(event.key==='Enter')validateFlash(this)">
+    <button class="qcm-validate" onclick="validateFlash(this)">Vérifier</button>
+  </div>
+  <div class="qcm-explanation"></div>
+</div>
+</div>
+
+<!-- ══════════════════════ SLIDE 4 — Concept de clairance ══════════════════════ -->
+<div class="slide content-slide" id="slide-4">
+<h2>II (suite) — Le concept de clairance : définition et formule</h2>
+
+<h3>📦 Prérequis</h3>
+<div class="def-box"><strong>Volume virtuel</strong> : un volume qui n'existe pas physiquement mais qui est un outil de calcul. Le rein ne "prend" pas un certain volume de plasma et ne l'épure totalement — il réduit la concentration dans tout le plasma. Mais mathématiquement, le résultat est identique à celui qu'on obtiendrait en épurant complètement un certain volume.</div>
+<div class="def-box"><strong>Débit volumique (mL/min)</strong> : unité de la clairance. C'est différent d'un débit massique (mg/min). La clairance exprime la capacité du rein à épurer un volume de plasma par unité de temps, pas une masse.</div>
+
+<h3>📖 Explication</h3>
+<div class="expl-wrap">
+
+<h4>📐 Définition de la clairance — à connaître par cœur</h4>
+<p>La <strong>clairance</strong> (notée C) est le <strong>volume virtuel de plasma totalement débarrassé d'une substance en une minute par le rein</strong>. Cette définition est fondamentale et doit être récitée mot pour mot à l'examen.</p>
+<p>Pourquoi "virtuel" ? Parce que le rein ne prélève pas réellement un volume de plasma et l'épure intégralement. Il réduit la concentration de la substance dans <em>tout</em> le plasma circulant. Mais on peut calculer quel volume de plasma aurait dû être totalement épuré pour produire la même réduction de concentration — c'est ce volume fictif qu'on appelle la clairance.</p>
+<div class="expl-bq">Ex : Si la créatininémie est à 100 µmol/L et que le rein en excrète 12 000 µmol/min → cela revient à épurer complètement 120 mL de plasma par minute (12 000 / 100 = 120 mL/min). La clairance de la créatinine est de 120 mL/min.</div>
+
+<hr class="expl-sep">
+
+<h4>🧮 Formule de la clairance</h4>
+<p>La formule découle directement de la définition. Si on appelle C la clairance, Cu la concentration urinaire, V le débit urinaire (mL/min) et Cp la concentration plasmatique :</p>
+<p style="text-align:center;font-size:1.1rem;font-weight:700;color:#3498db;padding:.75rem;background:rgba(52,152,219,.1);border-radius:8px;margin:.75rem 0"><strong>C (mL/min) = Cu × V / Cp</strong></p>
+<p>Au numérateur : <strong>Cu × V = débit massique excrété</strong> (quantité éliminée par minute). Au dénominateur : <strong>Cp</strong> = concentration dans le plasma. Le résultat est bien un volume (mL/min) : quantité/min ÷ concentration = volume/min.</p>
+<div class="expl-bq">Ex numérique du cours : créatininurie = 3 510 µmol/L, diurèse = 2,6 L/24h = 1,806 mL/min, créatininémie = 102 µmol/L. C = (3510 × 1,806) / 102 = 6 339 / 102 ≈ 62 mL/min. C'est une valeur correcte pour un patient âgé — on dialyse à partir de 20-25 mL/min.</div>
+
+<hr class="expl-sep">
+
+<h4>🔗 Lien entre clairance et DFG — quand ça marche</h4>
+<p>La clairance n'est égale au DFG que dans un cas précis : quand la substance est <strong>uniquement filtrée</strong> (situation 1 — pas de réabsorption, pas de sécrétion). Dans ce cas, débit filtré = débit excrété → Cu × V = Cp × DFG → C = DFG.</p>
+<p>Pour toutes les autres substances, la clairance reflète le comportement global (filtration + réabsorption + sécrétion). Une clairance inférieure au DFG signifie une réabsorption nette. Une clairance supérieure au DFG signifie une sécrétion nette.</p>
+<div class="expl-warn"><strong>⚠️ Attention</strong> — La clairance est toujours comprise entre 0 (substance totalement réabsorbée) et le DPR (débit plasmatique rénal, ~660 mL/min), qui est la valeur maximale quand une substance est totalement extraite du plasma en un seul passage rénal.</div>
+
+</div>
+
+<svg viewBox="0 0 700 190" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-height:190px;margin:1rem 0;display:block">
+  <text x="350" y="18" text-anchor="middle" fill="#3498db" font-size="13" font-family="Segoe UI,sans-serif" font-weight="bold">Formule C = Cu × V / Cp — interprétation</text>
+  <!-- Boîte Cu × V -->
+  <rect x="30" y="40" width="200" height="70" rx="8" fill="rgba(52,152,219,.12)" stroke="#3498db" stroke-width="2"/>
+  <text x="130" y="65" text-anchor="middle" fill="#3498db" font-size="12" font-family="Segoe UI,sans-serif" font-weight="bold">Cu × V</text>
+  <text x="130" y="82" text-anchor="middle" fill="#c0c0d8" font-size="10" font-family="Segoe UI,sans-serif">Débit massique excrété</text>
+  <text x="130" y="98" text-anchor="middle" fill="#9090b0" font-size="9" font-family="Segoe UI,sans-serif">µmol/min</text>
+  <!-- Barre de division -->
+  <line x1="30" y1="125" x2="230" y2="125" stroke="rgba(255,255,255,.3)" stroke-width="2"/>
+  <!-- Boîte Cp -->
+  <rect x="30" y="135" width="200" height="40" rx="8" fill="rgba(243,156,18,.12)" stroke="#f39c12" stroke-width="2"/>
+  <text x="130" y="158" text-anchor="middle" fill="#f39c12" font-size="12" font-family="Segoe UI,sans-serif" font-weight="bold">Cp — Concentration plasmatique (µmol/mL)</text>
+  <!-- Égal -->
+  <text x="260" y="100" text-anchor="middle" fill="#e0e0f0" font-size="24" font-family="Segoe UI,sans-serif">=</text>
+  <!-- Résultat -->
+  <rect x="290" y="50" width="200" height="110" rx="8" fill="rgba(46,204,113,.12)" stroke="#2ecc71" stroke-width="2"/>
+  <text x="390" y="82" text-anchor="middle" fill="#2ecc71" font-size="14" font-family="Segoe UI,sans-serif" font-weight="bold">C (mL/min)</text>
+  <text x="390" y="102" text-anchor="middle" fill="#c0c0d8" font-size="10" font-family="Segoe UI,sans-serif">Volume virtuel de plasma</text>
+  <text x="390" y="116" text-anchor="middle" fill="#c0c0d8" font-size="10" font-family="Segoe UI,sans-serif">épuré par minute</text>
+  <text x="390" y="145" text-anchor="middle" fill="#9090b0" font-size="9" font-family="Segoe UI,sans-serif">Si C = DFG → substance uniquement filtrée</text>
+  <!-- Valeurs de référence -->
+  <rect x="510" y="40" width="175" height="130" rx="8" fill="rgba(255,255,255,.04)" stroke="rgba(255,255,255,.1)" stroke-width="1"/>
+  <text x="597" y="62" text-anchor="middle" fill="#9090b0" font-size="10" font-family="Segoe UI,sans-serif" font-weight="bold">Valeurs de référence</text>
+  <text x="522" y="82" fill="#f39c12" font-size="9.5" font-family="Segoe UI,sans-serif">C = 0 → réabsorption totale</text>
+  <text x="522" y="97" fill="#9090b0" font-size="8.5" font-family="Segoe UI,sans-serif">  (glucose chez sujet sain)</text>
+  <text x="522" y="115" fill="#2ecc71" font-size="9.5" font-family="Segoe UI,sans-serif">C = 120 mL/min → DFG</text>
+  <text x="522" y="130" fill="#9090b0" font-size="8.5" font-family="Segoe UI,sans-serif">  (inuline, filtr. pure)</text>
+  <text x="522" y="148" fill="#3498db" font-size="9.5" font-family="Segoe UI,sans-serif">C = 660 mL/min → DPR</text>
+  <text x="522" y="163" fill="#9090b0" font-size="8.5" font-family="Segoe UI,sans-serif">  (PAH à faible conc.)</text>
+</svg>
+
+<div class="highlight-box">Clairance C = Cu × V / Cp — volume virtuel de plasma épuré/min. C = DFG uniquement si la substance est filtrée sans réabsorption ni sécrétion. Valeurs clés : C = 0 (glucose) | C = DFG ≈ 120 mL/min (inuline) | C = DPR ≈ 660 mL/min (PAH faible dose).</div>
+
+<h3>🃏 Flashcards</h3>
+<div class="flash-block" data-answer="La clairance est le volume virtuel de plasma totalement débarrassé d'une substance en une minute par le rein. C = Cu × V / Cp. Unité : mL/min. 'Virtuel' car le rein n'épure pas réellement un volume précis — c'est un équivalent mathématique.">
+  <div class="q-text">❓ Définissez la clairance et donnez sa formule. Pourquoi parle-t-on de volume "virtuel" ? (niveau 1)</div>
+  <div class="flash-input-row">
+    <input class="flash-input" type="text" placeholder="Votre réponse…" onkeydown="if(event.key==='Enter')validateFlash(this)">
+    <button class="qcm-validate" onclick="validateFlash(this)">Vérifier</button>
+  </div>
+  <div class="qcm-explanation"></div>
+</div>
+<div class="flash-block" data-answer="Uniquement si la substance est filtrée sans réabsorption ni sécrétion (situation 1). Dans ce cas : débit filtré = débit excrété → Cp × DFG = Cu × V → C = DFG. L'inuline est le seul exemple parfait.">
+  <div class="q-text">❓ Dans quel cas précis la clairance est-elle égale au DFG ? (niveau 2)</div>
+  <div class="flash-input-row">
+    <input class="flash-input" type="text" placeholder="Votre réponse…" onkeydown="if(event.key==='Enter')validateFlash(this)">
+    <button class="qcm-validate" onclick="validateFlash(this)">Vérifier</button>
+  </div>
+  <div class="qcm-explanation"></div>
+</div>
+</div>
+
+<!-- ══════════════════════ SLIDE 5 — Inuline et DFG ══════════════════════ -->
+<div class="slide content-slide" id="slide-5">
+<h2>III — L'inuline : mesure directe du DFG</h2>
+
+<h3>📦 Prérequis</h3>
+<div class="def-box"><strong>DFG (Débit de Filtration Glomérulaire)</strong> : volume de plasma filtré par l'ensemble des glomérules par minute. Valeur normale ≈ 90–120 mL/min chez l'adulte jeune. C'est l'indicateur de référence de la fonction rénale. Un DFG &lt; 60 mL/min depuis &gt; 3 mois définit la maladie rénale chronique.</div>
+<div class="def-box"><strong>Méthode de référence (gold standard)</strong> : méthode considérée comme l'étalon absolu pour mesurer une grandeur. Toutes les autres méthodes sont évaluées par comparaison à elle. En pratique, la méthode de référence n'est pas toujours utilisable en routine car elle peut être trop contraignante.</div>
+<div class="def-box"><strong>Substance exogène</strong> : molécule étrangère à l'organisme, introduite intentionnellement. Elle n'est pas produite par le corps et n'est pas métabolisée — ce qui simplifie les calculs car sa seule voie d'élimination est le rein.</div>
+
+<h3>📖 Explication</h3>
+<div class="expl-wrap">
+
+<h4>🧪 Pourquoi l'inuline est le marqueur idéal pour mesurer le DFG</h4>
+<p>L'<strong>inuline</strong> est un polysaccharide (petit sucre) extrait de chicorée ou d'artichaut. Elle n'est pas produite par l'organisme humain. Pour mesurer le DFG, on l'injecte en perfusion intraveineuse continue jusqu'à atteindre une concentration plasmatique stable.</p>
+<p>L'inuline remplit toutes les conditions du marqueur idéal : elle est <strong>librement filtrée</strong> (petite molécule, non liée aux protéines, passe librement le filtre glomérulaire), <strong>non réabsorbée</strong> (le tubule n'a pas de transporteur pour l'inuline), <strong>non sécrétée</strong> (le tubule n'en ajoute pas non plus), et <strong>non métabolisée, ni synthétisée</strong> par le tubule. Tout ce qui est filtré se retrouve donc intégralement dans les urines.</p>
+<div class="expl-bq">Ex : On injecte de l'inuline en continu. À l'état stable : [inuline]plasma = 1 mg/mL. On recueille les urines pendant 2h : [inuline]urine = 110 mg/mL, diurèse = 1,1 mL/min. Clairance = 110 × 1,1 / 1 = 121 mL/min = DFG.</div>
+
+<hr class="expl-sep">
+
+<h4>📐 Démonstration mathématique : C inuline = DFG</h4>
+<p>Puisque l'inuline n'est que filtrée : débit filtré = débit excrété. On peut donc écrire :</p>
+<p style="text-align:center;padding:.6rem;background:rgba(52,152,219,.08);border-radius:8px;color:#3498db;font-weight:700">Cp × DFG = Cu × V → DFG = Cu × V / Cp = C inuline</p>
+<p>Cette égalité n'est vraie que parce qu'il n'y a ni réabsorption ni sécrétion. C'est pour cette raison que l'inuline est la seule substance dont la clairance est strictement égale au DFG.</p>
+
+<hr class="expl-sep">
+
+<h4>⚠️ Limites pratiques de l'inuline</h4>
+<p>Malgré sa précision absolue, la mesure du DFG par l'inuline est peu utilisée en routine clinique car elle est <strong>lourde à mettre en œuvre</strong>. Elle nécessite une perfusion intraveineuse continue (pour maintenir une concentration plasmatique stable), une vidange vésicale complète au départ, plusieurs recueils urinaires minutés, et un dosage spécifique de l'inuline dans le plasma et les urines.</p>
+<p>En pratique, on lui préfère la clairance de la <strong>créatinine endogène</strong> ou les formules estimatrices (Cockcroft, CKD-EPI) — moins précises mais beaucoup plus simples à réaliser.</p>
+<div class="expl-bq">Ex : Pour un patient hospitalisé suspect d'insuffisance rénale → on ne fait pas de perfusion d'inuline. On dose simplement la créatinémie et on applique la formule CKD-EPI → résultat immédiat, fiable pour les décisions cliniques.</div>
+
+</div>
+
+<svg viewBox="0 0 700 195" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-height:195px;margin:1rem 0;display:block">
+  <defs>
+    <marker id="a5" markerWidth="7" markerHeight="5" refX="7" refY="2.5" orient="auto"><polygon points="0 0,7 2.5,0 5" fill="#2ecc71"/></marker>
+    <marker id="b5" markerWidth="7" markerHeight="5" refX="7" refY="2.5" orient="auto"><polygon points="0 0,7 2.5,0 5" fill="#e74c3c"/></marker>
+  </defs>
+  <text x="350" y="18" text-anchor="middle" fill="#2ecc71" font-size="13" font-family="Segoe UI,sans-serif" font-weight="bold">Inuline — substance idéale pour mesurer le DFG</text>
+  <!-- Glomérule -->
+  <circle cx="120" cy="100" r="45" fill="rgba(46,204,113,.12)" stroke="#2ecc71" stroke-width="2"/>
+  <text x="120" y="94" text-anchor="middle" fill="#2ecc71" font-size="11" font-family="Segoe UI,sans-serif" font-weight="bold">Glomérule</text>
+  <text x="120" y="110" text-anchor="middle" fill="#c0c0d8" font-size="9.5" font-family="Segoe UI,sans-serif">Filtration</text>
+  <text x="120" y="124" text-anchor="middle" fill="#9090b0" font-size="9" font-family="Segoe UI,sans-serif">libre, passive</text>
+  <!-- Flèche filtrée -->
+  <line x1="167" y1="100" x2="230" y2="100" stroke="#2ecc71" stroke-width="2" marker-end="url(#a5)"/>
+  <text x="198" y="92" text-anchor="middle" fill="#2ecc71" font-size="9" font-family="Segoe UI,sans-serif">Filtrée ✓</text>
+  <!-- Tubule long -->
+  <rect x="230" y="70" width="290" height="60" rx="8" fill="rgba(52,152,219,.08)" stroke="#3498db" stroke-width="1.5"/>
+  <text x="375" y="97" text-anchor="middle" fill="#3498db" font-size="11" font-family="Segoe UI,sans-serif" font-weight="bold">TUBULE</text>
+  <text x="375" y="115" text-anchor="middle" fill="#9090b0" font-size="9.5" font-family="Segoe UI,sans-serif">Pas de réabsorption | Pas de sécrétion</text>
+  <!-- Croix sur réabs et sécr -->
+  <text x="290" y="155" text-anchor="middle" fill="#e74c3c" font-size="11" font-family="Segoe UI,sans-serif">✗ Réabsorption</text>
+  <text x="460" y="155" text-anchor="middle" fill="#e74c3c" font-size="11" font-family="Segoe UI,sans-serif">✗ Sécrétion</text>
+  <!-- Urine -->
+  <line x1="520" y1="100" x2="580" y2="100" stroke="#2ecc71" stroke-width="2" marker-end="url(#a5)"/>
+  <rect x="580" y="68" width="110" height="64" rx="8" fill="rgba(46,204,113,.15)" stroke="#2ecc71" stroke-width="2"/>
+  <text x="635" y="92" text-anchor="middle" fill="#2ecc71" font-size="11" font-family="Segoe UI,sans-serif" font-weight="bold">URINE</text>
+  <text x="635" y="108" text-anchor="middle" fill="#c0c0d8" font-size="9.5" font-family="Segoe UI,sans-serif">= Filtrat total</text>
+  <text x="635" y="122" text-anchor="middle" fill="#2ecc71" font-size="10" font-family="Segoe UI,sans-serif" font-weight="bold">C = DFG</text>
+</svg>
+
+<div class="highlight-box">L'inuline est le gold standard du DFG car : librement filtrée + ni réabsorbée + ni sécrétée + ni métabolisée. Sa clairance = DFG. Limite : lourde en pratique (perfusion IV continue). En clinique on lui préfère la créatinine ou les formules estimatrices.</div>
+
+<h3>🃏 Flashcards</h3>
+<div class="flash-block" data-answer="4 conditions : librement filtrée (petite molécule non liée aux protéines), non réabsorbée par le tubule, non sécrétée, non métabolisée/synthétisée par le rein. Tout ce qui est filtré se retrouve dans l'urine → C = DFG.">
+  <div class="q-text">❓ Quelles sont les 4 propriétés qui font de l'inuline le marqueur idéal du DFG ? (niveau 1)</div>
+  <div class="flash-input-row">
+    <input class="flash-input" type="text" placeholder="Votre réponse…" onkeydown="if(event.key==='Enter')validateFlash(this)">
+    <button class="qcm-validate" onclick="validateFlash(this)">Vérifier</button>
+  </div>
+  <div class="qcm-explanation"></div>
+</div>
+</div>
+
+<!-- ══════════════════════ SLIDE 6 — Créatinine ══════════════════════ -->
+<div class="slide content-slide" id="slide-6">
+<h2>III (suite) — La créatinine : estimation clinique du DFG</h2>
+
+<h3>📦 Prérequis</h3>
+<div class="def-box"><strong>Phosphocréatine</strong> : molécule de réserve d'énergie dans le muscle squelettique. Elle se dégrade spontanément et irréversiblement en créatinine, à un taux proportionnel à la masse musculaire totale. La production de créatinine est donc relativement stable d'un jour à l'autre chez un individu donné.</div>
+<div class="def-box"><strong>Relation inverse</strong> : si deux grandeurs ont un produit constant (A × B = K), quand l'une augmente l'autre diminue. Ex : si DFG × créatininémie = constante → lorsque le DFG chute de moitié, la créatininémie double.</div>
+<div class="def-box"><strong>Formule CKD-EPI (Chronic Kidney Disease Epidemiology Collaboration)</strong> : formule recommandée par la HAS pour estimer le DFG à partir de la créatininémie, de l'âge, du sexe et de la race. Plus précise que Cockcroft-Gault, notamment aux DFG normaux. La formule MDRD est plus précise chez les sujets âgés ou dénutris.</div>
+
+<h3>📖 Explication</h3>
+<div class="expl-wrap">
+
+<h4>💪 Origine de la créatinine — production constante et endogène</h4>
+<p>La créatinine est un <strong>déchet endogène</strong> issu du métabolisme musculaire : la phosphocréatine se dégrade spontanément en créatinine dans les cellules musculaires. Elle passe ensuite dans le sang (créatininémie) et est éliminée par le rein.</p>
+<p>Sa production est <strong>relativement stable</strong> d'un individu à l'autre car elle dépend principalement de la masse musculaire totale. Un homme sportif de 90 kg produit plus de créatinine qu'une femme de 50 kg. Cette constance relative permet de l'utiliser comme marqueur endogène du DFG — pas besoin de perfusion continue comme pour l'inuline.</p>
+<div class="expl-bq">Ex : Pourquoi les valeurs normales de créatininémie diffèrent entre homme et femme ? Parce que les hommes ont en moyenne une masse musculaire plus importante → production de créatinine plus élevée → créatininémie normalement plus haute.</div>
+
+<hr class="expl-sep">
+
+<h4>🔢 Valeurs normales à mémoriser</h4>
+<p>Ce sont des données à connaître absolument pour l'ECN :</p>
+<p>Chez l'<strong>homme</strong> : créatininémie normale = <strong>80 à 110 µmol/L</strong><br>
+Chez la <strong>femme</strong> : créatininémie normale = <strong>60 à 90 µmol/L</strong></p>
+<p>Une créatininémie supérieure à ces valeurs chez un patient doit alerter sur une possible insuffisance rénale. Cependant, une créatininémie normale n'exclut pas une insuffisance rénale débutante, surtout chez un patient âgé ou sarcopénique (peu de muscle → peu de créatinine produite → créatininémie faussement normale).</p>
+<div class="expl-warn"><strong>⚠️ Piège de la sarcopénie</strong><br>Une personne âgée très maigre avec peu de masse musculaire peut avoir une créatininémie normale (50 µmol/L) alors que son DFG réel est à 30 mL/min. La faible production de créatinine masque l'insuffisance rénale. Toujours estimer le DFG avec une formule, ne pas se fier à la créatininémie seule.</div>
+
+<hr class="expl-sep">
+
+<h4>📉 Relation inverse DFG / créatininémie — la courbe hyperbolique</h4>
+<p>Le rein élimine la créatinine produite chaque jour. Si la production est constante mais que le DFG diminue, la créatinine s'accumule dans le sang. La relation fondamentale est : <strong>DFG × créatininémie = constante</strong>.</p>
+<p>Conséquence capitale : la courbe DFG/créatininémie est une <strong>hyperbole</strong>. Quand le DFG est normal (120 mL/min), la créatininémie est normale. Si le DFG est divisé par 2 (60 mL/min), la créatininémie double. Si le DFG tombe à 25 mL/min, la créatininémie est multipliée par ~5.</p>
+<div class="expl-bq">Ex : Un patient a une créatininémie à 200 µmol/L (norme homme = 80-110). Cela correspond à un DFG d'environ 30-35 mL/min. C'est une insuffisance rénale sévère (stade 4 selon la classification CKD). On commence à discuter la préparation à la dialyse.</div>
+
+<hr class="expl-sep">
+
+<h4>📋 Légère sécrétion tubulaire de la créatinine — impact sur la clairance</h4>
+<p>Contrairement à l'inuline, la créatinine est <strong>légèrement sécrétée</strong> par le tubule proximal (environ +10% par rapport à la quantité filtrée). Cela signifie que le débit excrété est légèrement supérieur au débit filtré.</p>
+<p>Conséquence : la clairance de la créatinine <strong>surestime légèrement le DFG réel</strong> d'environ 10%. C'est acceptable en pratique clinique car on ne cherche qu'une estimation — mais c'est pourquoi la créatinine n'est pas aussi précise que l'inuline.</p>
+
+</div>
+
+<svg viewBox="0 0 700 210" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-height:210px;margin:1rem 0;display:block">
+  <text x="350" y="18" text-anchor="middle" fill="#e74c3c" font-size="13" font-family="Segoe UI,sans-serif" font-weight="bold">Relation inverse DFG / créatininémie</text>
+  <!-- Axes -->
+  <line x1="70" y1="175" x2="620" y2="175" stroke="rgba(255,255,255,.3)" stroke-width="1.5"/>
+  <line x1="70" y1="35" x2="70" y2="175" stroke="rgba(255,255,255,.3)" stroke-width="1.5"/>
+  <text x="350" y="192" text-anchor="middle" fill="#9090b0" font-size="10" font-family="Segoe UI,sans-serif">DFG (mL/min)</text>
+  <text x="20" y="110" text-anchor="middle" fill="#9090b0" font-size="9.5" font-family="Segoe UI,sans-serif" transform="rotate(-90,20,110)">Créatininémie (µmol/L)</text>
+  <!-- Graduations X -->
+  <text x="70" y="187" text-anchor="middle" fill="#9090b0" font-size="9" font-family="Segoe UI,sans-serif">0</text>
+  <text x="165" y="187" text-anchor="middle" fill="#9090b0" font-size="9" font-family="Segoe UI,sans-serif">30</text>
+  <text x="260" y="187" text-anchor="middle" fill="#9090b0" font-size="9" font-family="Segoe UI,sans-serif">60</text>
+  <text x="355" y="187" text-anchor="middle" fill="#9090b0" font-size="9" font-family="Segoe UI,sans-serif">90</text>
+  <text x="450" y="187" text-anchor="middle" fill="#9090b0" font-size="9" font-family="Segoe UI,sans-serif">120</text>
+  <!-- Courbe hyperbole approchée (points) -->
+  <polyline points="100,42 130,50 165,62 200,78 260,102 310,118 355,135 400,148 450,158 500,164 550,168 600,170" fill="none" stroke="#e74c3c" stroke-width="2.5"/>
+  <!-- Points annotés -->
+  <circle cx="165" cy="62" r="5" fill="#e74c3c"/>
+  <text x="175" y="58" fill="#c0c0d8" font-size="9" font-family="Segoe UI,sans-serif">DFG=30 → Créat≈400</text>
+  <circle cx="260" cy="102" r="5" fill="#f39c12"/>
+  <text x="270" y="98" fill="#c0c0d8" font-size="9" font-family="Segoe UI,sans-serif">DFG=60 → Créat≈200</text>
+  <circle cx="450" cy="158" r="5" fill="#2ecc71"/>
+  <text x="460" y="154" fill="#c0c0d8" font-size="9" font-family="Segoe UI,sans-serif">DFG=120 → Créat≈100</text>
+  <!-- Zone normale -->
+  <rect x="390" y="145" width="180" height="30" rx="4" fill="rgba(46,204,113,.12)" stroke="#2ecc71" stroke-width="1" stroke-dasharray="4"/>
+  <text x="480" y="164" text-anchor="middle" fill="#2ecc71" font-size="9" font-family="Segoe UI,sans-serif">Zone normale</text>
+</svg>
+
+<div class="highlight-box">Créatinine endogène issue du muscle. Valeurs normales : H = 80-110 µmol/L, F = 60-90 µmol/L. Relation inverse : DFG × créatininémie = cte (hyperbole). Légèrement sécrétée → C créatinine surestime le DFG de ~10%. En pratique : formule CKD-EPI ou Cockcroft.</div>
+
+<h3>🃏 Flashcards</h3>
+<div class="flash-block" data-answer="Homme : 80-110 µmol/L. Femme : 60-90 µmol/L. Différence due à la masse musculaire plus importante chez l'homme. Piège : personne âgée sarcopénique peut avoir créatininémie normale malgré DFG abaissé → toujours calculer le DFG avec une formule.">
+  <div class="q-text">❓ Donnez les valeurs normales de créatininémie chez l'homme et la femme. Expliquez la différence. (niveau 1)</div>
+  <div class="flash-input-row">
+    <input class="flash-input" type="text" placeholder="Votre réponse…" onkeydown="if(event.key==='Enter')validateFlash(this)">
+    <button class="qcm-validate" onclick="validateFlash(this)">Vérifier</button>
+  </div>
+  <div class="qcm-explanation"></div>
+</div>
+<div class="flash-block" data-answer="La créatinine est légèrement sécrétée par le tubule proximal (~+10%). Le débit excrété > débit filtré → clairance créatinine légèrement supérieure au DFG réel → légère surestimation. C'est acceptable en pratique clinique mais c'est pourquoi l'inuline reste la référence absolue.">
+  <div class="q-text">❓ Pourquoi la clairance de la créatinine surestime-t-elle légèrement le DFG réel ? (niveau 2)</div>
+  <div class="flash-input-row">
+    <input class="flash-input" type="text" placeholder="Votre réponse…" onkeydown="if(event.key==='Enter')validateFlash(this)">
+    <button class="qcm-validate" onclick="validateFlash(this)">Vérifier</button>
+  </div>
+  <div class="qcm-explanation"></div>
+</div>
+</div>
+
+<!-- ══════════════════════ QCM 1 ══════════════════════ -->
+<div class="slide content-slide" id="slide-7">
+<h2>⚡ QCM — Chapitres I à III : filtration, débits, clairance, DFG</h2>
+
+<div class="qcm-block" data-answer="1">
+  <div class="q-text">Q1. La filtration glomérulaire est :</div>
+  <div class="qcm-options">
+    <div class="qcm-option" data-idx="0" onclick="selectOption(this)"><span class="letter">A</span><span>Un processus actif consommant directement de l'ATP</span></div>
+    <div class="qcm-option" data-idx="1" onclick="selectOption(this)"><span class="letter">B</span><span>Un processus passif dépendant des forces de Starling</span></div>
+    <div class="qcm-option" data-idx="2" onclick="selectOption(this)"><span class="letter">C</span><span>Un mécanisme régulé principalement par la réabsorption tubulaire</span></div>
+    <div class="qcm-option" data-idx="3" onclick="selectOption(this)"><span class="letter">D</span><span>Un phénomène identique à la sécrétion tubulaire</span></div>
+    <div class="qcm-option" data-idx="4" onclick="selectOption(this)"><span class="letter">E</span><span>Indépendante de la pression artérielle systémique</span></div>
+  </div>
+  <button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button>
+  <div class="qcm-feedback"></div>
+  <div class="qcm-explanation">La filtration est passive : son moteur est la pression d'ultrafiltration résultant des forces de Starling (pression hydrostatique capillaire - pression oncotique - pression tubulaire). Elle ne consomme pas d'ATP directement. Elle dépend bien de la pression artérielle via la pression capillaire glomérulaire.</div>
+</div>
+
+<div class="qcm-block" data-answer="2">
+  <div class="q-text">Q2. La relation fondamentale entre débits massiques s'écrit :</div>
+  <div class="qcm-options">
+    <div class="qcm-option" data-idx="0" onclick="selectOption(this)"><span class="letter">A</span><span>Excrété = Filtré + Sécrété + Réabsorbé</span></div>
+    <div class="qcm-option" data-idx="1" onclick="selectOption(this)"><span class="letter">B</span><span>Excrété = Filtré × Réabsorbé / Sécrété</span></div>
+    <div class="qcm-option" data-idx="2" onclick="selectOption(this)"><span class="letter">C</span><span>Excrété = Filtré − Réabsorbé + Sécrété</span></div>
+    <div class="qcm-option" data-idx="3" onclick="selectOption(this)"><span class="letter">D</span><span>Excrété = Filtré + Réabsorbé − Sécrété</span></div>
+    <div class="qcm-option" data-idx="4" onclick="selectOption(this)"><span class="letter">E</span><span>Excrété = Sécrété − Filtré − Réabsorbé</span></div>
+  </div>
+  <button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button>
+  <div class="qcm-feedback"></div>
+  <div class="qcm-explanation">La relation fondamentale est : Excrété = Filtré − Réabsorbé + Sécrété. La réabsorption retire de la substance du filtrat (diminue l'excrétion) ; la sécrétion en ajoute (augmente l'excrétion). Les autres formules ne respectent pas cette logique physiologique.</div>
+</div>
+
+<div class="qcm-block" data-answer="0">
+  <div class="q-text">Q3. La clairance est exprimée en :</div>
+  <div class="qcm-options">
+    <div class="qcm-option" data-idx="0" onclick="selectOption(this)"><span class="letter">A</span><span>mL/min</span></div>
+    <div class="qcm-option" data-idx="1" onclick="selectOption(this)"><span class="letter">B</span><span>mg/min</span></div>
+    <div class="qcm-option" data-idx="2" onclick="selectOption(this)"><span class="letter">C</span><span>mmol/L</span></div>
+    <div class="qcm-option" data-idx="3" onclick="selectOption(this)"><span class="letter">D</span><span>µmol/L/h</span></div>
+    <div class="qcm-option" data-idx="4" onclick="selectOption(this)"><span class="letter">E</span><span>mosmol/kg</span></div>
+  </div>
+  <button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button>
+  <div class="qcm-feedback"></div>
+  <div class="qcm-explanation">La clairance est un débit volumique : mL/min. C'est le volume (virtuel) de plasma épuré par minute. mg/min serait un débit massique. mmol/L une concentration. La clairance ne peut être qu'un volume/temps.</div>
+</div>
+
+<div class="qcm-block" data-answer="3">
+  <div class="q-text">Q4. Pour quelle substance la clairance est-elle strictement égale au DFG ?</div>
+  <div class="qcm-options">
+    <div class="qcm-option" data-idx="0" onclick="selectOption(this)"><span class="letter">A</span><span>Créatinine</span></div>
+    <div class="qcm-option" data-idx="1" onclick="selectOption(this)"><span class="letter">B</span><span>PAH à faible concentration</span></div>
+    <div class="qcm-option" data-idx="2" onclick="selectOption(this)"><span class="letter">C</span><span>Glucose chez un sujet diabétique</span></div>
+    <div class="qcm-option" data-idx="3" onclick="selectOption(this)"><span class="letter">D</span><span>Inuline</span></div>
+    <div class="qcm-option" data-idx="4" onclick="selectOption(this)"><span class="letter">E</span><span>Potassium</span></div>
+  </div>
+  <button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button>
+  <div class="qcm-feedback"></div>
+  <div class="qcm-explanation">L'inuline est la seule substance filtrée sans réabsorption ni sécrétion → débit filtré = débit excrété → C = DFG. La créatinine est légèrement sécrétée (+10%) donc C légèrement > DFG. Le PAH est massivement sécrété → C = DPR. Le glucose normal a C = 0. Le K+ est réabsorbé ET sécrété.</div>
+</div>
+
+<div class="qcm-block" data-answer="2">
+  <div class="q-text">Q5. Si le DFG est divisé par 3 (de 120 à 40 mL/min), que se passe-t-il à la créatininémie, en supposant une production constante ?</div>
+  <div class="qcm-options">
+    <div class="qcm-option" data-idx="0" onclick="selectOption(this)"><span class="letter">A</span><span>Elle reste stable</span></div>
+    <div class="qcm-option" data-idx="1" onclick="selectOption(this)"><span class="letter">B</span><span>Elle double</span></div>
+    <div class="qcm-option" data-idx="2" onclick="selectOption(this)"><span class="letter">C</span><span>Elle est multipliée par 3</span></div>
+    <div class="qcm-option" data-idx="3" onclick="selectOption(this)"><span class="letter">D</span><span>Elle diminue de moitié</span></div>
+    <div class="qcm-option" data-idx="4" onclick="selectOption(this)"><span class="letter">E</span><span>Elle augmente de 10%</span></div>
+  </div>
+  <button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button>
+  <div class="qcm-feedback"></div>
+  <div class="qcm-explanation">DFG × créatininémie = constante. Si DFG / 3 → créatininémie × 3. Pour DFG = 120 → créat normale ~100 µmol/L. Pour DFG = 40 → créat ≈ 300 µmol/L. C'est la relation inverse (hyperbolique) caractéristique. Attention : au début de l'insuffisance rénale, la créatininémie monte peu (partie plate de la courbe).</div>
+</div>
+
+<p class="key-hint">↕ Utilisez les flèches pour naviguer</p>
+</div>
+
+<!-- ══════════════════════ SLIDE 8 — PAH et DPR ══════════════════════ -->
+<div class="slide content-slide" id="slide-8">
+<h2>IV — Le PAH : mesure du débit plasmatique rénal (DPR)</h2>
+
+<h3>📦 Prérequis</h3>
+<div class="def-box"><strong>Débit plasmatique rénal (DPR)</strong> : volume de plasma qui traverse les reins par minute. Sa valeur normale est d'environ 660 mL/min chez l'adulte sain. À distinguer du débit sanguin rénal (DSR ≈ 1 100 mL/min) qui inclut les globules rouges.</div>
+<div class="def-box"><strong>Transport maximum (Tm)</strong> : débit maximal de transport d'une substance par les transporteurs tubulaires. Au-delà de ce seuil, les transporteurs sont saturés et ne peuvent pas traiter davantage de substrat par unité de temps.</div>
+<div class="def-box"><strong>Fraction d'extraction rénale</strong> : proportion d'une substance retirée du plasma à chaque passage rénal. Si la fraction d'extraction = 1 (100%), toute la substance apportée au rein est éliminée en un seul passage.</div>
+
+<h3>📖 Explication</h3>
+<div class="expl-wrap">
+
+<h4>🧪 Le PAH — une molécule conçue pour mesurer le DPR</h4>
+<p>L'<strong>acide para-aminohippurique (PAH)</strong> est une molécule exogène qui réunit toutes les qualités pour mesurer le débit plasmatique rénal. Elle est <strong>librement filtrée</strong>, <strong>non réabsorbée</strong>, <strong>massivement sécrétée</strong> par le tubule proximal, non métabolisée, non synthétisée par le tubule et non toxique.</p>
+<p>Le PAH est sécrété avec une telle efficacité qu'à <strong>faible concentration plasmatique</strong> (inférieure à 6 mg/L), tout le PAH arrivant au rein est extrait du plasma en un seul passage. Il n'en reste plus dans la veine rénale. La fraction d'extraction est alors égale à 1 (100%).</p>
+<div class="expl-bq">Ex : On perfuse du PAH à faible dose. On mesure [PAH]urine = 300 mg/mL, diurèse = 1 mL/min, [PAH]plasma = 0,5 mg/mL → Clairance PAH = 300 × 1 / 0,5 = 600 mL/min ≈ DPR. Toute la substance arrivant au rein (filtrée + sécrétée) est retrouvée dans l'urine.</div>
+
+<hr class="expl-sep">
+
+<h4>📊 PAH à forte concentration — sécrétion partielle</h4>
+<p>Lorsque la concentration plasmatique de PAH dépasse <strong>6 mg/L</strong>, les transporteurs tubulaires du PAH sont <strong>saturés</strong> (on atteint le Tm du PAH). Le tubule ne peut plus sécréter tout le PAH arrivant — une partie reste dans le sang et repart dans la veine rénale.</p>
+<p>Dans cette situation :<br>
+— La clairance du PAH est <strong>supérieure au DFG</strong> (car il y a toujours filtration + sécrétion partielle).<br>
+— La clairance du PAH est <strong>inférieure au DPR</strong> (car une partie n'est pas extraite).<br>
+On se situe donc dans la situation intermédiaire : DFG &lt; C PAH &lt; DPR.</p>
+<div class="expl-bq">Ex : À forte concentration de PAH → Tm PAH dépassé → une portion du PAH reste dans la veine rénale sortant du rein → C PAH = 400 mL/min (entre DFG de 120 et DPR de 660). Le rein est "débordé" par la quantité de PAH.</div>
+
+<hr class="expl-sep">
+
+<h4>📐 Calcul du DPR grâce à la clairance du PAH (faible dose)</h4>
+<p>À faible concentration de PAH, puisque tout le PAH arrivant est éliminé :</p>
+<p style="text-align:center;font-size:1.05rem;font-weight:700;color:#3498db;padding:.75rem;background:rgba(52,152,219,.08);border-radius:8px;margin:.75rem 0"><strong>DPR = C PAH = Cu(PAH) × V / Cp(PAH)</strong></p>
+<p>Cette mesure est le gold standard du DPR, tout comme l'inuline est le gold standard du DFG. Le DPR normal est d'environ <strong>660 mL/min</strong>. Le rapport DFG/DPR s'appelle la <strong>fraction de filtration</strong> (FF ≈ 120/660 ≈ 18-20%).</p>
+<div class="expl-bq">Ex : FF = DFG/DPR = 120/660 = 18%. Cela signifie que 18% du plasma traversant les capillaires glomérulaires est filtré vers la capsule de Bowman. Les 82% restants continuent vers le réseau péritubulaire.</div>
+
+</div>
+
+<svg viewBox="0 0 700 210" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-height:210px;margin:1rem 0;display:block">
+  <defs>
+    <marker id="a8" markerWidth="7" markerHeight="5" refX="7" refY="2.5" orient="auto"><polygon points="0 0,7 2.5,0 5" fill="#9b59b6"/></marker>
+    <marker id="b8" markerWidth="7" markerHeight="5" refX="7" refY="2.5" orient="auto"><polygon points="0 0,7 2.5,0 5" fill="#e74c3c"/></marker>
+  </defs>
+  <text x="350" y="18" text-anchor="middle" fill="#9b59b6" font-size="13" font-family="Segoe UI,sans-serif" font-weight="bold">PAH — faible vs forte concentration</text>
+  <!-- PAH faible -->
+  <rect x="10" y="35" width="320" height="155" rx="10" fill="rgba(46,204,113,.06)" stroke="#2ecc71" stroke-width="1.5"/>
+  <text x="170" y="55" text-anchor="middle" fill="#2ecc71" font-size="11" font-family="Segoe UI,sans-serif" font-weight="bold">PAH faible [&lt; 6 mg/L]</text>
+  <text x="170" y="73" text-anchor="middle" fill="#c0c0d8" font-size="9.5" font-family="Segoe UI,sans-serif">Filtré + sécrété totalement</text>
+  <text x="170" y="90" text-anchor="middle" fill="#c0c0d8" font-size="9.5" font-family="Segoe UI,sans-serif">Rien ne reste dans la veine rénale</text>
+  <text x="170" y="115" text-anchor="middle" fill="#2ecc71" font-size="12" font-family="Segoe UI,sans-serif" font-weight="bold">C PAH = DPR</text>
+  <text x="170" y="133" text-anchor="middle" fill="#c0c0d8" font-size="9.5" font-family="Segoe UI,sans-serif">≈ 660 mL/min</text>
+  <text x="170" y="152" text-anchor="middle" fill="#9090b0" font-size="9" font-family="Segoe UI,sans-serif">Fraction extraction = 100%</text>
+  <text x="170" y="170" text-anchor="middle" fill="#9090b0" font-size="9" font-family="Segoe UI,sans-serif">Gold standard du DPR</text>
+  <!-- PAH fort -->
+  <rect x="370" y="35" width="320" height="155" rx="10" fill="rgba(231,76,60,.06)" stroke="#e74c3c" stroke-width="1.5"/>
+  <text x="530" y="55" text-anchor="middle" fill="#e74c3c" font-size="11" font-family="Segoe UI,sans-serif" font-weight="bold">PAH forte [&gt; 6 mg/L]</text>
+  <text x="530" y="73" text-anchor="middle" fill="#c0c0d8" font-size="9.5" font-family="Segoe UI,sans-serif">Transporteurs tubulaires saturés (Tm)</text>
+  <text x="530" y="90" text-anchor="middle" fill="#c0c0d8" font-size="9.5" font-family="Segoe UI,sans-serif">Sécrétion partielle seulement</text>
+  <text x="530" y="115" text-anchor="middle" fill="#f39c12" font-size="12" font-family="Segoe UI,sans-serif" font-weight="bold">DFG &lt; C PAH &lt; DPR</text>
+  <text x="530" y="133" text-anchor="middle" fill="#c0c0d8" font-size="9.5" font-family="Segoe UI,sans-serif">Ex : C ≈ 400 mL/min</text>
+  <text x="530" y="152" text-anchor="middle" fill="#9090b0" font-size="9" font-family="Segoe UI,sans-serif">Du PAH reste dans la veine rénale</text>
+  <text x="530" y="170" text-anchor="middle" fill="#9090b0" font-size="9" font-family="Segoe UI,sans-serif">Inutilisable pour mesurer le DPR</text>
+</svg>
+
+<div class="highlight-box">PAH à faible concentration : entièrement filtré + sécrété → C PAH = DPR ≈ 660 mL/min (gold standard DPR). PAH à forte concentration : transporteurs saturés → sécrétion partielle → DFG &lt; C PAH &lt; DPR. Fraction de filtration = DFG/DPR ≈ 18-20%.</div>
+
+<h3>🃏 Flashcards</h3>
+<div class="flash-block" data-answer="Librement filtré + non réabsorbé + massivement sécrété + non métabolisé/synthétisé + non toxique. À faible concentration : fraction d'extraction = 1 → tout le PAH apporté au rein disparaît du plasma → C PAH = DPR.">
+  <div class="q-text">❓ Quelles propriétés font du PAH le marqueur du DPR ? Pourquoi C PAH = DPR à faible concentration ? (niveau 2)</div>
+  <div class="flash-input-row">
+    <input class="flash-input" type="text" placeholder="Votre réponse…" onkeydown="if(event.key==='Enter')validateFlash(this)">
+    <button class="qcm-validate" onclick="validateFlash(this)">Vérifier</button>
+  </div>
+  <div class="qcm-explanation"></div>
+</div>
+<div class="flash-block" data-answer="À concentration > 6 mg/L, les transporteurs tubulaires du PAH sont saturés (Tm atteint). Le tubule ne peut plus sécréter tout le PAH arrivant. Une partie reste dans la veine rénale. C PAH se situe entre DFG et DPR. Cette clairance n'est plus utilisable pour mesurer le DPR.">
+  <div class="q-text">❓ Que se passe-t-il à la clairance du PAH quand sa concentration dépasse 6 mg/L ? (niveau 2)</div>
+  <div class="flash-input-row">
+    <input class="flash-input" type="text" placeholder="Votre réponse…" onkeydown="if(event.key==='Enter')validateFlash(this)">
+    <button class="qcm-validate" onclick="validateFlash(this)">Vérifier</button>
+  </div>
+  <div class="qcm-explanation"></div>
+</div>
+</div>
+
+<!-- ══════════════════════ SLIDE 9 — Réabsorption + Tm ══════════════════════ -->
+<div class="slide content-slide" id="slide-9">
+<h2>V — Substances réabsorbées et notion de transport maximum</h2>
+
+<h3>📦 Prérequis</h3>
+<div class="def-box"><strong>Transporteurs membranaires</strong> : protéines enchâssées dans la membrane cellulaire qui permettent le passage de substances qui ne peuvent pas diffuser librement. Ils sont spécifiques (un transporteur = une ou quelques substances), et leur nombre par cellule est limité.</div>
+<div class="def-box"><strong>Saturation enzymatique (cinétique de Michaelis-Menten)</strong> : une enzyme ou un transporteur atteint une vitesse maximale (Vmax) quand tout le substrat disponible est en excès. Augmenter davantage le substrat n'augmente plus la vitesse de réaction. C'est le même concept pour les transporteurs tubulaires.</div>
+
+<h3>📖 Explication</h3>
+<div class="expl-wrap">
+
+<h4>🟡 Substances partiellement réabsorbées — la situation la plus courante</h4>
+<p>La majorité des substances filtrées sont <strong>partiellement réabsorbées</strong>. Leur clairance est donc comprise entre 0 et le DFG : <strong>0 &lt; C &lt; DFG</strong>. Le tubule en récupère une partie mais en laisse une autre passer dans l'urine.</p>
+<p>Les exemples classiques sont le <strong>sodium</strong> (99% réabsorbé, 1% excrété), le <strong>potassium</strong> (réabsorption variable), et l'<strong>urée</strong> (environ 50% réabsorbée passivement dans le tube collecteur). Cette réabsorption partielle est régulée par des hormones selon les besoins de l'organisme.</p>
+<div class="expl-bq">Ex : L'aldostérone stimule la réabsorption de Na+ dans le tubule distal et le canal collecteur. En cas d'hypovolémie, l'aldostérone augmente → plus de Na+ réabsorbé → rétention hydrique → restauration du volume circulant.</div>
+
+<hr class="expl-sep">
+
+<h4>🟢 Substance totalement réabsorbée — le glucose chez le sujet sain</h4>
+<p>Chez un sujet en bonne santé avec une glycémie normale (~5 mmol/L), le glucose filtré est <strong>entièrement réabsorbé</strong> dans le tubule contourné proximal. Sa <strong>clairance est nulle</strong> : on ne trouve pas de glucose dans les urines.</p>
+<p>Pourquoi est-ce si important ? Le cerveau fonctionne presque exclusivement au glucose. L'organisme ne peut pas se permettre de gaspiller du glucose dans les urines. La réabsorption rénale totale du glucose est donc une nécessité métabolique fondamentale.</p>
+<div class="expl-bq">Ex : Sujet sain à jeun → glycémie = 5 mmol/L → 600 mg/min de glucose filtré (= 5 × 120) → 600 mg/min de glucose réabsorbé → 0 mg/min dans l'urine → clairance glucose = 0. La glycosurie est impossible à glycémie normale.</div>
+
+<hr class="expl-sep">
+
+<h4>🔵 Les 3 modes de transport tubulaire — et lequel est limité</h4>
+<p><strong>1) Diffusion simple</strong> : sans transporteur. La substance passe librement à travers les espaces paracellulaires selon son gradient de concentration. Exemple : la diffusion paracellulaire de l'eau. Illimitée — il n'y a pas de transporteur à saturer.</p>
+<p><strong>2) Diffusion facilitée</strong> : avec un transporteur protéique, mais sans énergie directe. La substance suit encore son gradient de concentration, mais le transporteur accélère le passage. Exemple : les GLUT (transporteurs du glucose du côté basolatéral). <strong>Limité</strong> par le nombre de transporteurs.</p>
+<p><strong>3) Transport actif</strong> : avec un transporteur ET de l'énergie (ATP directement ou gradient ionique). Exemple : la Na+/K+ ATPase. <strong>Limité</strong> par le nombre de transporteurs et l'apport en ATP.</p>
+<div class="expl-warn"><strong>⚠️ Règle fondamentale</strong> — Tout transport utilisant un transporteur (facilitée ou actif) est potentiellement saturable = il existe un Transport Maximum (Tm). Seule la diffusion simple sans transporteur est illimitée.</div>
+
+<hr class="expl-sep">
+
+<h4>📊 Le Tm — définition et utilité</h4>
+<p>Le <strong>Tm (Transport Maximum)</strong> est le débit massique maximal que les cellules tubulaires peuvent transporter par unité de temps, exprimé en mg/min. Il représente la capacité maximale des transporteurs tubulaires pour une substance donnée.</p>
+<p>Quand la charge tubulaire (quantité arrivant au tubule par minute = Cp × DFG) dépasse le Tm, les transporteurs sont saturés. La substance en excès ne peut plus être transportée et se retrouve dans l'urine. C'est ce qui se passe avec le glucose chez le diabétique.</p>
+
+</div>
+
+<svg viewBox="0 0 700 210" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-height:210px;margin:1rem 0;display:block">
+  <text x="350" y="18" text-anchor="middle" fill="#f39c12" font-size="13" font-family="Segoe UI,sans-serif" font-weight="bold">Transport tubulaire — les 3 modes</text>
+  <!-- Diffusion simple -->
+  <rect x="15" y="35" width="195" height="135" rx="8" fill="rgba(52,152,219,.08)" stroke="#3498db" stroke-width="1.5"/>
+  <text x="112" y="58" text-anchor="middle" fill="#3498db" font-size="11" font-family="Segoe UI,sans-serif" font-weight="bold">① Diffusion simple</text>
+  <text x="112" y="76" text-anchor="middle" fill="#c0c0d8" font-size="9.5" font-family="Segoe UI,sans-serif">Pas de transporteur</text>
+  <text x="112" y="93" text-anchor="middle" fill="#c0c0d8" font-size="9.5" font-family="Segoe UI,sans-serif">Selon gradient</text>
+  <text x="112" y="110" text-anchor="middle" fill="#c0c0d8" font-size="9.5" font-family="Segoe UI,sans-serif">Ex : diffusion paracellulaire</text>
+  <text x="112" y="135" text-anchor="middle" fill="#2ecc71" font-size="10.5" font-family="Segoe UI,sans-serif" font-weight="bold">✓ Illimitée</text>
+  <text x="112" y="152" text-anchor="middle" fill="#9090b0" font-size="9" font-family="Segoe UI,sans-serif">Pas de Tm</text>
+  <!-- Diffusion facilitée -->
+  <rect x="253" y="35" width="195" height="135" rx="8" fill="rgba(243,156,18,.08)" stroke="#f39c12" stroke-width="1.5"/>
+  <text x="350" y="58" text-anchor="middle" fill="#f39c12" font-size="11" font-family="Segoe UI,sans-serif" font-weight="bold">② Diffusion facilitée</text>
+  <text x="350" y="76" text-anchor="middle" fill="#c0c0d8" font-size="9.5" font-family="Segoe UI,sans-serif">Transporteur, sans ATP</text>
+  <text x="350" y="93" text-anchor="middle" fill="#c0c0d8" font-size="9.5" font-family="Segoe UI,sans-serif">Suit le gradient</text>
+  <text x="350" y="110" text-anchor="middle" fill="#c0c0d8" font-size="9.5" font-family="Segoe UI,sans-serif">Ex : GLUT (glucose, côté baso.)</text>
+  <text x="350" y="135" text-anchor="middle" fill="#e74c3c" font-size="10.5" font-family="Segoe UI,sans-serif" font-weight="bold">⚠ Tm existant</text>
+  <text x="350" y="152" text-anchor="middle" fill="#9090b0" font-size="9" font-family="Segoe UI,sans-serif">Saturable</text>
+  <!-- Transport actif -->
+  <rect x="491" y="35" width="195" height="135" rx="8" fill="rgba(231,76,60,.08)" stroke="#e74c3c" stroke-width="1.5"/>
+  <text x="588" y="58" text-anchor="middle" fill="#e74c3c" font-size="11" font-family="Segoe UI,sans-serif" font-weight="bold">③ Transport actif</text>
+  <text x="588" y="76" text-anchor="middle" fill="#c0c0d8" font-size="9.5" font-family="Segoe UI,sans-serif">Transporteur + ATP</text>
+  <text x="588" y="93" text-anchor="middle" fill="#c0c0d8" font-size="9.5" font-family="Segoe UI,sans-serif">Contre le gradient possible</text>
+  <text x="588" y="110" text-anchor="middle" fill="#c0c0d8" font-size="9.5" font-family="Segoe UI,sans-serif">Ex : Na+/K+ ATPase, SGLT</text>
+  <text x="588" y="135" text-anchor="middle" fill="#e74c3c" font-size="10.5" font-family="Segoe UI,sans-serif" font-weight="bold">⚠ Tm existant</text>
+  <text x="588" y="152" text-anchor="middle" fill="#9090b0" font-size="9" font-family="Segoe UI,sans-serif">Saturable</text>
+</svg>
+
+<div class="highlight-box">Réabsorption totale (C = 0) pour le glucose chez le sujet sain. Réabsorption partielle (0 &lt; C &lt; DFG) pour Na+, K+, urée. Le Tm est la capacité maximale des transporteurs. Seuls les transports utilisant un transporteur (facilitée + actif) ont un Tm.</div>
+
+<h3>🃏 Flashcards</h3>
+<div class="flash-block" data-answer="La clairance du glucose est nulle chez le sujet sain car le glucose filtré est intégralement réabsorbé au TCP par le cotransporteur SGLT (transport actif secondaire). À glycémie normale (5 mmol/L), la charge filtrée ne dépasse pas le Tm → 0 glucose dans les urines.">
+  <div class="q-text">❓ Pourquoi la clairance du glucose est-elle nulle chez un sujet sain ? (niveau 1)</div>
+  <div class="flash-input-row">
+    <input class="flash-input" type="text" placeholder="Votre réponse…" onkeydown="if(event.key==='Enter')validateFlash(this)">
+    <button class="qcm-validate" onclick="validateFlash(this)">Vérifier</button>
+  </div>
+  <div class="qcm-explanation"></div>
+</div>
+</div>
+
+<!-- ══════════════════════ SLIDE 10 — Tm glucose et glycosurie ══════════════════════ -->
+<div class="slide content-slide" id="slide-10">
+<h2>V (suite) — Transport maximal du glucose : seuil et glycosurie</h2>
+
+<h3>📦 Prérequis</h3>
+<div class="def-box"><strong>SGLT (Sodium-Glucose Linked Transporter)</strong> : transporteur de la membrane apicale des cellules du TCP qui co-transporte le sodium et le glucose. Le SGLT2 réabsorbe ~90% du glucose filtré dans le TCP initial, le SGLT1 réabsorbe les ~10% restants dans le TCP terminal. Ce co-transport est "secondairement actif" car il utilise le gradient de Na+ créé par la Na+/K+ATPase.</div>
+<div class="def-box"><strong>Diurèse osmotique</strong> : augmentation de la production urinaire causée par la présence de molécules osmotiquement actives dans le tubule (comme le glucose en excès). Ces molécules retiennent l'eau dans la lumière tubulaire, réduisant la réabsorption d'eau → polyurie.</div>
+
+<h3>📖 Explication</h3>
+<div class="expl-wrap">
+
+<h4>🔄 Mécanisme du cotransport SGLT Na+/glucose — transport secondairement actif</h4>
+<p>Le SGLT est qualifié de "<strong>transport secondairement actif</strong>" car il n'utilise pas directement l'ATP, mais profite d'un gradient de Na+ créé par un autre mécanisme qui, lui, consomme de l'ATP (la Na+/K+ATPase basolatérale).</p>
+<p>Voici la séquence : ① La Na+/K+ATPase pompe le Na+ hors de la cellule vers le sang → la cellule tubulaire est pauvre en Na+. ② Ce gradient de Na+ "aspire" le Na+ du tubule vers la cellule, via le SGLT apical. ③ Le SGLT couple ce passage de Na+ au transport simultané du glucose, même contre son propre gradient de concentration. ④ Le glucose sort ensuite du côté basolatéral via les GLUT2 (diffusion facilitée) vers le capillaire péritubulaire.</p>
+<div class="expl-bq">Ex : C'est comme une pompe à eau actionnée par une roue hydraulique : la "roue" (Na+/K+ATPase) crée le dénivelé (gradient de Na+), et ce dénivelé fait monter l'eau (glucose) en sens inverse. On utilise l'énergie d'un système pour en alimenter un autre.</div>
+
+<hr class="expl-sep">
+
+<h4>📈 La courbe du Tm glucose — 3 phases à connaître</h4>
+<p>En augmentant progressivement la glycémie, on augmente la charge filtrée de glucose (= glycémie × DFG). On observe 3 phases distinctes :</p>
+<p><strong>Phase 1 — Glycémie normale (0–10 mmol/L) :</strong> la charge filtrée est inférieure au Tm. Tous les transporteurs sont disponibles. La réabsorption suit exactement la filtration. La clairance du glucose est nulle. Il n'y a pas de glucose dans l'urine.</p>
+<p><strong>Phase 2 — Seuil d'apparition (glycémie ≈ 10 mmol/L = 1,80 g/L) :</strong> la charge filtrée commence à dépasser le Tm. Les transporteurs sont saturés. Le glucose non réabsorbé commence à passer dans les urines → <strong>glycosurie</strong>. C'est le seuil rénal du glucose.</p>
+<p><strong>Phase 3 — Au-delà du seuil (diabète décompensé) :</strong> la réabsorption reste bloquée au Tm = <strong>375 mg/min</strong>. Tout glucose filtré en excès du Tm se retrouve dans les urines. Plus la glycémie monte, plus la glycosurie augmente. La présence de glucose dans le tubule cause une diurèse osmotique : polyurie + polydipsie.</p>
+<div class="expl-warn"><strong>⚠️ Confusion à éviter absolument</strong><br>Le <strong>Tm du glucose = 375 mg/min</strong> → c'est un débit massique (quantité max réabsorbable par minute).<br>Le <strong>seuil d'apparition = 10 mmol/L (1,80 g/L)</strong> → c'est une concentration plasmatique.<br>Ce sont deux grandeurs de nature différente. Le seuil est atteint quand la charge filtrée (Cp × DFG) dépasse le Tm.</div>
+
+<hr class="expl-sep">
+
+<h4>💊 Application clinique — inhibiteurs SGLT2 (gliflozines)</h4>
+<p>Les <strong>gliflozines</strong> (empagliflozine, dapagliflozine, canagliflozine) sont des médicaments qui bloquent le SGLT2 dans le TCP. En bloquant ce transporteur, on réduit artificiellement le Tm du glucose → le seuil d'apparition du glucose dans les urines s'abaisse → même à glycémie normale, une partie du glucose est excrétée dans les urines.</p>
+<p>C'est un mécanisme hypoglycémiant innovant (indépendant de l'insuline) utilisé dans le diabète de type 2. Effet bonus : la glycosurie provoquée entraîne une diurèse osmotique légère → perte de poids et baisse tensionnelle.</p>
+
+</div>
+
+<svg viewBox="0 0 700 220" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-height:220px;margin:1rem 0;display:block">
+  <text x="350" y="18" text-anchor="middle" fill="#f39c12" font-size="13" font-family="Segoe UI,sans-serif" font-weight="bold">Courbe de transport du glucose — le Tm</text>
+  <!-- Axes -->
+  <line x1="70" y1="185" x2="640" y2="185" stroke="rgba(255,255,255,.3)" stroke-width="1.5"/>
+  <line x1="70" y1="30" x2="70" y2="185" stroke="rgba(255,255,255,.3)" stroke-width="1.5"/>
+  <text x="355" y="202" text-anchor="middle" fill="#9090b0" font-size="9.5" font-family="Segoe UI,sans-serif">Concentration plasmatique de glucose (mmol/L)</text>
+  <text x="18" y="105" text-anchor="middle" fill="#9090b0" font-size="9" font-family="Segoe UI,sans-serif" transform="rotate(-90,18,105)">Débit (mg/min)</text>
+  <!-- Graduations X -->
+  <text x="168" y="197" text-anchor="middle" fill="#9090b0" font-size="9" font-family="Segoe UI,sans-serif">5</text>
+  <text x="282" y="197" text-anchor="middle" fill="#e74c3c" font-size="9" font-family="Segoe UI,sans-serif">10</text>
+  <text x="395" y="197" text-anchor="middle" fill="#9090b0" font-size="9" font-family="Segoe UI,sans-serif">15</text>
+  <text x="510" y="197" text-anchor="middle" fill="#9090b0" font-size="9" font-family="Segoe UI,sans-serif">20</text>
+  <!-- Ligne Tm horizontale -->
+  <line x1="70" y1="90" x2="640" y2="90" stroke="#f39c12" stroke-width="1.5" stroke-dasharray="5,3"/>
+  <text x="645" y="93" fill="#f39c12" font-size="9" font-family="Segoe UI,sans-serif">Tm = 375</text>
+  <!-- Courbe réabsorption (monte jusqu'à Tm puis plateau) -->
+  <polyline points="70,185 168,148 282,90 640,90" fill="none" stroke="#2ecc71" stroke-width="2.5"/>
+  <!-- Courbe excrétion (0 puis monte après seuil) -->
+  <polyline points="70,185 282,185 395,162 510,135 640,108" fill="none" stroke="#e74c3c" stroke-width="2.5"/>
+  <!-- Seuil vertical -->
+  <line x1="282" y1="90" x2="282" y2="185" stroke="#e74c3c" stroke-width="1.5" stroke-dasharray="4,3"/>
+  <text x="290" y="175" fill="#e74c3c" font-size="9" font-family="Segoe UI,sans-serif">Seuil</text>
+  <text x="290" y="165" fill="#e74c3c" font-size="9" font-family="Segoe UI,sans-serif">10 mmol/L</text>
+  <!-- Légendes -->
+  <line x1="80" y1="48" x2="110" y2="48" stroke="#2ecc71" stroke-width="2"/>
+  <text x="115" y="52" fill="#2ecc71" font-size="9.5" font-family="Segoe UI,sans-serif">Réabsorption</text>
+  <line x1="80" y1="65" x2="110" y2="65" stroke="#e74c3c" stroke-width="2"/>
+  <text x="115" y="69" fill="#e74c3c" font-size="9.5" font-family="Segoe UI,sans-serif">Excrétion (glycosurie)</text>
+</svg>
+
+<div class="highlight-box">Tm glucose = 375 mg/min (débit max réabsorbable). Seuil glycémique = 10 mmol/L (1,80 g/L) — concentration au-delà de laquelle le glucose apparaît dans les urines. Ces deux valeurs sont à distinguer. Application clinique : gliflozines bloquent SGLT2 → abaissent le seuil → hypoglycémiant non insulinique.</div>
+
+<h3>🃏 Flashcards</h3>
+<div class="flash-block" data-answer="Tm glucose = 375 mg/min (débit massique maximum réabsorbable). Seuil d'apparition = 10 mmol/L de glycémie (= 1,80 g/L). Ce sont deux grandeurs différentes : l'un est un débit (mg/min), l'autre une concentration (mmol/L). Le seuil est atteint quand la charge filtrée (Cp × DFG) dépasse le Tm.">
+  <div class="q-text">❓ Donnez la valeur du Tm glucose ET du seuil d'apparition du glucose dans les urines. Sont-ce la même chose ? (niveau 1)</div>
+  <div class="flash-input-row">
+    <input class="flash-input" type="text" placeholder="Votre réponse…" onkeydown="if(event.key==='Enter')validateFlash(this)">
+    <button class="qcm-validate" onclick="validateFlash(this)">Vérifier</button>
+  </div>
+  <div class="qcm-explanation"></div>
+</div>
+<div class="flash-block" data-answer="Transport secondairement actif : le SGLT n'utilise pas directement d'ATP mais exploite le gradient de Na+ créé par la Na+/K+ATPase (qui, elle, consomme de l'ATP). Ce gradient de Na+ du tubule vers la cellule entraîne avec lui le glucose, même contre son gradient de concentration.">
+  <div class="q-text">❓ Pourquoi le cotransport SGLT est-il qualifié de "transport secondairement actif" ? (niveau 2)</div>
+  <div class="flash-input-row">
+    <input class="flash-input" type="text" placeholder="Votre réponse…" onkeydown="if(event.key==='Enter')validateFlash(this)">
+    <button class="qcm-validate" onclick="validateFlash(this)">Vérifier</button>
+  </div>
+  <div class="qcm-explanation"></div>
+</div>
+</div>
+
+<!-- ══════════════════════ QCM 2 ══════════════════════ -->
+<div class="slide content-slide" id="slide-11">
+<h2>⚡ QCM — Chapitres III à V : DFG, PAH, DPR, Tm, glucose</h2>
+
+<div class="qcm-block" data-answer="2">
+  <div class="q-text">Q1. Le PAH à faible concentration plasmatique permet de mesurer le DPR car :</div>
+  <div class="qcm-options">
+    <div class="qcm-option" data-idx="0" onclick="selectOption(this)"><span class="letter">A</span><span>Il est uniquement filtré, sans sécrétion</span></div>
+    <div class="qcm-option" data-idx="1" onclick="selectOption(this)"><span class="letter">B</span><span>Sa concentration plasmatique est constante et endogène</span></div>
+    <div class="qcm-option" data-idx="2" onclick="selectOption(this)"><span class="letter">C</span><span>Toute la substance est extraite du plasma en un seul passage rénal</span></div>
+    <div class="qcm-option" data-idx="3" onclick="selectOption(this)"><span class="letter">D</span><span>Il est totalement réabsorbé dans le tubule proximal</span></div>
+    <div class="qcm-option" data-idx="4" onclick="selectOption(this)"><span class="letter">E</span><span>Sa clairance est égale au DFG</span></div>
+  </div>
+  <button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button>
+  <div class="qcm-feedback"></div>
+  <div class="qcm-explanation">À faible concentration, le PAH est filtré ET massivement sécrété, si bien qu'il n'en reste plus dans la veine rénale. La fraction d'extraction = 1 → tout le plasma traversant le rein est "épuré" du PAH → C PAH = DPR. C'est la définition même de la clairance égale au DPR.</div>
+</div>
+
+<div class="qcm-block" data-answer="3">
+  <div class="q-text">Q2. La clairance de la créatinine endogène surestime légèrement le DFG réel. Cela est dû à :</div>
+  <div class="qcm-options">
+    <div class="qcm-option" data-idx="0" onclick="selectOption(this)"><span class="letter">A</span><span>Une réabsorption tubulaire de la créatinine</span></div>
+    <div class="qcm-option" data-idx="1" onclick="selectOption(this)"><span class="letter">B</span><span>Une production de créatinine par le tubule lui-même</span></div>
+    <div class="qcm-option" data-idx="2" onclick="selectOption(this)"><span class="letter">C</span><span>Une liaison de la créatinine à l'albumine plasmatique</span></div>
+    <div class="qcm-option" data-idx="3" onclick="selectOption(this)"><span class="letter">D</span><span>Une légère sécrétion tubulaire de la créatinine</span></div>
+    <div class="qcm-option" data-idx="4" onclick="selectOption(this)"><span class="letter">E</span><span>Une variation circadienne de la créatininémie</span></div>
+  </div>
+  <button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button>
+  <div class="qcm-feedback"></div>
+  <div class="qcm-explanation">La créatinine est légèrement sécrétée par le tubule proximal (~+10% du débit filtré). Cela augmente le débit excrété au-delà du débit filtré → la clairance calculée (Cu × V / Cp) est légèrement supérieure au DFG réel. C'est pour cette raison que l'inuline reste le gold standard absolu.</div>
+</div>
+
+<div class="qcm-block" data-answer="1">
+  <div class="q-text">Q3. Un patient a une créatininémie à 204 µmol/L (norme homme 80-110). Quelle estimation du DFG est la plus cohérente ?</div>
+  <div class="qcm-options">
+    <div class="qcm-option" data-idx="0" onclick="selectOption(this)"><span class="letter">A</span><span>DFG ≈ 120 mL/min</span></div>
+    <div class="qcm-option" data-idx="1" onclick="selectOption(this)"><span class="letter">B</span><span>DFG ≈ 40–50 mL/min</span></div>
+    <div class="qcm-option" data-idx="2" onclick="selectOption(this)"><span class="letter">C</span><span>DFG ≈ 80 mL/min</span></div>
+    <div class="qcm-option" data-idx="3" onclick="selectOption(this)"><span class="letter">D</span><span>DFG ≈ 200 mL/min</span></div>
+    <div class="qcm-option" data-idx="4" onclick="selectOption(this)"><span class="letter">E</span><span>DFG ≈ 10 mL/min</span></div>
+  </div>
+  <button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button>
+  <div class="qcm-feedback"></div>
+  <div class="qcm-explanation">Relation inverse : DFG × créatininémie ≈ constante. Créatininémie normale homme ≈ 100 µmol/L pour DFG 120. Créatininémie à 204 ≈ doubling → DFG divisé par ~2 → DFG ≈ 50-60 mL/min. Plus précisément avec la formule CKD-EPI : environ 40-50 mL/min selon l'âge, ce qui correspond à une IRC modérée (stade 3b).</div>
+</div>
+
+<div class="qcm-block" data-answer="0">
+  <div class="q-text">Q4. Chez un sujet sain avec une glycémie de 5 mmol/L, la clairance du glucose est :</div>
+  <div class="qcm-options">
+    <div class="qcm-option" data-idx="0" onclick="selectOption(this)"><span class="letter">A</span><span>Nulle</span></div>
+    <div class="qcm-option" data-idx="1" onclick="selectOption(this)"><span class="letter">B</span><span>Égale au DFG</span></div>
+    <div class="qcm-option" data-idx="2" onclick="selectOption(this)"><span class="letter">C</span><span>Égale au DPR</span></div>
+    <div class="qcm-option" data-idx="3" onclick="selectOption(this)"><span class="letter">D</span><span>Supérieure au DFG</span></div>
+    <div class="qcm-option" data-idx="4" onclick="selectOption(this)"><span class="letter">E</span><span>Comprise entre 0 et le DFG</span></div>
+  </div>
+  <button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button>
+  <div class="qcm-feedback"></div>
+  <div class="qcm-explanation">À glycémie normale (5 mmol/L), toute la charge filtrée de glucose (5 × 120 = 600 mg/min × correction) est intégralement réabsorbée au TCP par les SGLT. Aucun glucose ne passe dans les urines → Cu glucose = 0 → C = Cu × V / Cp = 0.</div>
+</div>
+
+<div class="qcm-block" data-answer="4">
+  <div class="q-text">Q5. À partir de quelle concentration plasmatique de PAH les transporteurs tubulaires commencent-ils à être saturés ?</div>
+  <div class="qcm-options">
+    <div class="qcm-option" data-idx="0" onclick="selectOption(this)"><span class="letter">A</span><span>0,5 mg/L</span></div>
+    <div class="qcm-option" data-idx="1" onclick="selectOption(this)"><span class="letter">B</span><span>2 mg/L</span></div>
+    <div class="qcm-option" data-idx="2" onclick="selectOption(this)"><span class="letter">C</span><span>4 mg/L</span></div>
+    <div class="qcm-option" data-idx="3" onclick="selectOption(this)"><span class="letter">D</span><span>10 mg/L</span></div>
+    <div class="qcm-option" data-idx="4" onclick="selectOption(this)"><span class="letter">E</span><span>6 mg/L</span></div>
+  </div>
+  <button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button>
+  <div class="qcm-feedback"></div>
+  <div class="qcm-explanation">Le seuil de saturation des transporteurs du PAH est de 6 mg/L. En dessous : sécrétion totale → C PAH = DPR. Au-dessus : sécrétion partielle (Tm dépassé) → DFG &lt; C PAH &lt; DPR. Cette valeur de 6 mg/L est à connaître pour les QCM.</div>
+</div>
+
+<p class="key-hint">↕ Utilisez les flèches pour naviguer</p>
+</div>
+
+<!-- ══════════════════════ SLIDE 12 — Clairance osmolaire ══════════════════════ -->
+<div class="slide content-slide" id="slide-12">
+<h2>VI — Clairance osmolaire : le rein et les osmoles</h2>
+
+<h3>📦 Prérequis</h3>
+<div class="def-box"><strong>Osmolalité</strong> : concentration de toutes les particules osmotiquement actives dans un solvant, exprimée en mosmol/kg d'eau. L'osmolalité plasmatique normale est d'environ 300 mosmol/kg. Elle est régulée précisément par l'ADH (hormone antidiurétique) et la soif.</div>
+<div class="def-box"><strong>ADH (Vasopressine)</strong> : hormone libérée par l'hypothalamus en réponse à une augmentation de l'osmolalité plasmatique ou une hypovolémie. Elle augmente la perméabilité à l'eau du tube collecteur → réabsorption d'eau → urine concentrée et volume urinaire réduit.</div>
+<div class="def-box"><strong>Iso-osmotique / hypo-osmotique / hyper-osmotique</strong> : urine de même osmolalité que le plasma (iso), moins concentrée (hypo), ou plus concentrée (hyper). Le rein peut concentrer les urines jusqu'à 1 200 mosmol/kg (4× l'osmolalité plasmatique).</div>
+
+<h3>📖 Explication</h3>
+<div class="expl-wrap">
+
+<h4>💧 Principe fondamental — le rein gère les osmoles et l'eau séparément</h4>
+<p>Le rein doit chaque jour éliminer les osmoles accumulées (provenant de l'alimentation, des déchets métaboliques : sodium, chlorure, potassium, urée…). La quantité d'osmoles à éliminer est relativement fixe et <strong>indépendante du bilan hydrique</strong>.</p>
+<p>Le rein peut éliminer ces osmoles dans plus ou moins d'eau selon les besoins. En cas d'hyperhydratation, il les dilue dans un grand volume d'eau. En cas de déshydratation, il les concentre dans un petit volume. C'est cette séparation fonctionnelle entre la gestion des osmoles et la gestion de l'eau qui est le cœur du chapitre.</p>
+<div class="expl-bq">Ex : Un même nombre d'osmoles (disons 600 mosmol/jour) peut être éliminé dans 2 L d'urine (osmolalité 300 = iso-osmotique) ou dans 0,5 L (osmolalité 1 200 = urine très concentrée) ou dans 3 L (osmolalité 200 = urine diluée). Même "travail" osmolaire, volumes très différents.</div>
+
+<hr class="expl-sep">
+
+<h4>🔵 Urine iso-osmotique (osmolalité urinaire = 300 mosmol/kg)</h4>
+<p>Quand les urines ont exactement la même osmolalité que le plasma, la <strong>clairance osmolaire est égale au débit urinaire</strong>. Formule : C osm = V × Uosm / Posm. Si Uosm = Posm → C osm = V × 1 = V.</p>
+<p>Cela signifie que le rein élimine ses osmoles dans le même volume d'eau qu'il filtre. Il ne fait pas de travail net de concentration ni de dilution. Cette situation survient quand le statut hydrique est parfaitement équilibré et que l'ADH est à un niveau intermédiaire.</p>
+
+<hr class="expl-sep">
+
+<h4>🔵 Urine hypo-osmotique (hyperhydratation)</h4>
+<p>En cas d'excès d'eau (hyperhydratation), l'osmolalité plasmatique tend à baisser. L'ADH est <strong>supprimée</strong>. Le tube collecteur devient imperméable à l'eau. L'eau n'est plus réabsorbée → les urines sont <strong>diluées</strong>, avec une osmolalité inférieure à 300 mosmol/kg.</p>
+<p>Dans ce cas : débit urinaire V &gt; clairance osmolaire. Le rein excrète ses osmoles dans un <strong>grand volume d'eau</strong>. Il "se débarrasse" de l'eau excédentaire sous forme d'eau "libre" d'osmoles.</p>
+
+<hr class="expl-sep">
+
+<h4>🔴 Urine hyper-osmotique (déshydratation)</h4>
+<p>En cas de manque d'eau (déshydratation), l'osmolalité plasmatique monte. L'ADH est <strong>sécrétée massivement</strong>. Le tube collecteur devient très perméable à l'eau → réabsorption maximale d'eau → urines très concentrées, avec osmolalité pouvant atteindre <strong>1 200 mosmol/kg</strong> (4× l'osmolalité plasmatique).</p>
+<p>Dans ce cas : débit urinaire V &lt; clairance osmolaire. Le rein concentre les osmoles dans un <strong>petit volume d'eau</strong>. Il "économise" l'eau pour maintenir l'osmolalité plasmatique.</p>
+
+</div>
+
+<svg viewBox="0 0 700 195" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-height:195px;margin:1rem 0;display:block">
+  <text x="350" y="18" text-anchor="middle" fill="#3498db" font-size="13" font-family="Segoe UI,sans-serif" font-weight="bold">Les 3 états osmotiques urinaires</text>
+  <!-- Iso -->
+  <rect x="15" y="35" width="210" height="145" rx="8" fill="rgba(52,152,219,.08)" stroke="#3498db" stroke-width="1.5"/>
+  <text x="120" y="58" text-anchor="middle" fill="#3498db" font-size="11" font-family="Segoe UI,sans-serif" font-weight="bold">Urine iso-osmotique</text>
+  <text x="120" y="76" text-anchor="middle" fill="#c0c0d8" font-size="9.5" font-family="Segoe UI,sans-serif">Uosm = Posm = 300 mosmol/kg</text>
+  <text x="120" y="96" text-anchor="middle" fill="#c0c0d8" font-size="9.5" font-family="Segoe UI,sans-serif">ADH niveau intermédiaire</text>
+  <text x="120" y="122" text-anchor="middle" fill="#3498db" font-size="10.5" font-family="Segoe UI,sans-serif" font-weight="bold">C osm = V</text>
+  <text x="120" y="142" text-anchor="middle" fill="#9090b0" font-size="9" font-family="Segoe UI,sans-serif">Clairance eau libre = 0</text>
+  <text x="120" y="158" text-anchor="middle" fill="#9090b0" font-size="9" font-family="Segoe UI,sans-serif">Bilan hydrique neutre</text>
+  <!-- Hypo -->
+  <rect x="245" y="35" width="210" height="145" rx="8" fill="rgba(46,204,113,.08)" stroke="#2ecc71" stroke-width="1.5"/>
+  <text x="350" y="58" text-anchor="middle" fill="#2ecc71" font-size="11" font-family="Segoe UI,sans-serif" font-weight="bold">Urine hypo-osmotique</text>
+  <text x="350" y="76" text-anchor="middle" fill="#c0c0d8" font-size="9.5" font-family="Segoe UI,sans-serif">Uosm &lt; 300 | Hyperhydratation</text>
+  <text x="350" y="96" text-anchor="middle" fill="#c0c0d8" font-size="9.5" font-family="Segoe UI,sans-serif">ADH supprimée</text>
+  <text x="350" y="122" text-anchor="middle" fill="#2ecc71" font-size="10.5" font-family="Segoe UI,sans-serif" font-weight="bold">V &gt; C osm</text>
+  <text x="350" y="142" text-anchor="middle" fill="#9090b0" font-size="9" font-family="Segoe UI,sans-serif">Clairance eau libre &gt; 0</text>
+  <text x="350" y="158" text-anchor="middle" fill="#9090b0" font-size="9" font-family="Segoe UI,sans-serif">Élimination d'eau excédentaire</text>
+  <!-- Hyper -->
+  <rect x="475" y="35" width="210" height="145" rx="8" fill="rgba(231,76,60,.08)" stroke="#e74c3c" stroke-width="1.5"/>
+  <text x="580" y="58" text-anchor="middle" fill="#e74c3c" font-size="11" font-family="Segoe UI,sans-serif" font-weight="bold">Urine hyper-osmotique</text>
+  <text x="580" y="76" text-anchor="middle" fill="#c0c0d8" font-size="9.5" font-family="Segoe UI,sans-serif">Uosm &gt; 300 (max 1 200) | Déshydrat.</text>
+  <text x="580" y="96" text-anchor="middle" fill="#c0c0d8" font-size="9.5" font-family="Segoe UI,sans-serif">ADH maximale</text>
+  <text x="580" y="122" text-anchor="middle" fill="#e74c3c" font-size="10.5" font-family="Segoe UI,sans-serif" font-weight="bold">V &lt; C osm</text>
+  <text x="580" y="142" text-anchor="middle" fill="#9090b0" font-size="9" font-family="Segoe UI,sans-serif">Clairance eau libre &lt; 0</text>
+  <text x="580" y="158" text-anchor="middle" fill="#9090b0" font-size="9" font-family="Segoe UI,sans-serif">Économie d'eau (anti-déshydratation)</text>
+</svg>
+
+<div class="highlight-box">Le rein gère osmoles et eau indépendamment. Osmolalité urinaire normale = 300 mosmol/kg. Max concentration = 1 200 mosmol/kg (× 4). 3 états : iso (V = C osm), hypo-osm. hyperhydratation (V &gt; C osm), hyper-osm. déshydratation (V &lt; C osm).</div>
+
+<h3>🃏 Flashcards</h3>
+<div class="flash-block" data-answer="La clairance osmolaire = V × Uosm / Posm. Quand Uosm = Posm (iso-osmotique), C osm = V. Cette formule mesure le volume de plasma épuré de ses osmoles par minute. L'ADH régule ce système : ADH ↑ → urine concentrée (hyper-osm.) ; ADH ↓ → urine diluée (hypo-osm.).">
+  <div class="q-text">❓ Donnez la formule de la clairance osmolaire. Dans quel cas est-elle égale au débit urinaire ? (niveau 2)</div>
+  <div class="flash-input-row">
+    <input class="flash-input" type="text" placeholder="Votre réponse…" onkeydown="if(event.key==='Enter')validateFlash(this)">
+    <button class="qcm-validate" onclick="validateFlash(this)">Vérifier</button>
+  </div>
+  <div class="qcm-explanation"></div>
+</div>
+</div>
+
+<!-- ══════════════════════ SLIDE 13 — Clairance de l'eau libre ══════════════════════ -->
+<div class="slide content-slide" id="slide-13">
+<h2>VI (suite) — Clairance de l'eau libre</h2>
+
+<h3>📦 Prérequis</h3>
+<div class="def-box"><strong>Eau libre (eau sans osmoles)</strong> : eau pure, sans particules osmotiquement actives. La clairance de l'eau libre quantifie le volume d'eau "pure" que le rein excrète (si positive) ou réabsorbe (si négative) par rapport à une urine iso-osmotique de référence.</div>
+
+<h3>📖 Explication</h3>
+<div class="expl-wrap">
+
+<h4>📐 Formule de la clairance de l'eau libre</h4>
+<p>La <strong>clairance de l'eau libre</strong> (notée C H₂O) se définit comme :</p>
+<p style="text-align:center;font-size:1.05rem;font-weight:700;color:#3498db;padding:.75rem;background:rgba(52,152,219,.08);border-radius:8px;margin:.75rem 0"><strong>C H₂O = V (débit urinaire) − C osm (clairance osmolaire)</strong></p>
+<p>C'est la différence entre ce que le rein excrète réellement (V) et ce qu'il excréterait s'il produisait une urine iso-osmotique (C osm). Ce "surplus" ou "déficit" par rapport à une urine iso-osmotique, c'est l'eau libre.</p>
+
+<hr class="expl-sep">
+
+<h4>🟢 C H₂O = 0 — urines iso-osmotiques</h4>
+<p>Quand C H₂O est nulle, le rein élimine ses osmoles dans exactement la même proportion d'eau que dans le plasma. Les urines sont iso-osmotiques. Il n'y a ni excès ni déficit d'eau libre. Le rein est en "régime neutre" pour la gestion de l'eau.</p>
+<div class="expl-bq">Ex : Personne bien hydratée, alimentation normale → Uosm = 300 = Posm → C H₂O = 0. Le rein fait son travail osmolaire sans effort particulier pour l'eau.</div>
+
+<hr class="expl-sep">
+
+<h4>🔵 C H₂O &gt; 0 — urines hypo-osmotiques (excrétion d'eau libre)</h4>
+<p>Quand la clairance d'eau libre est <strong>positive</strong>, le rein excrète plus d'eau que nécessaire pour éliminer ses osmoles à concentration iso-osmotique. Cela signifie que les urines sont <strong>diluées</strong> (hypo-osmotiques) et que le rein <strong>se débarrasse d'eau libre</strong> — c'est ce qui se passe lors d'une hyperhydratation.</p>
+<p>Exemple : V = 3 mL/min, C osm = 1 mL/min → C H₂O = +2 mL/min. Le rein excrète 2 mL/min d'eau pure en plus de ses osmoles — il "dilue" l'excès d'eau absorbé.</p>
+
+<hr class="expl-sep">
+
+<h4>🔴 C H₂O &lt; 0 — urines hyper-osmotiques (économie d'eau)</h4>
+<p>Quand la clairance d'eau libre est <strong>négative</strong>, le rein excrète <strong>moins d'eau</strong> que si les urines étaient iso-osmotiques. Il réabsorbe activement de l'eau libre grâce à l'ADH — il la "retient" dans l'organisme pour lutter contre la déshydratation. Les urines sont hyper-osmotiques.</p>
+<p>Exemple : V = 0,5 mL/min, C osm = 2 mL/min → C H₂O = −1,5 mL/min. Le rein "retient" 1,5 mL d'eau par minute qui auraient été excrétés si les urines étaient iso-osmotiques. Cette eau reste dans le secteur vasculaire.</p>
+<div class="expl-bq">Ex : Marathon en plein soleil par 35°C → sudation intense → déshydratation → ADH maximale → Uosm → 1 200 mosmol/kg → C H₂O très négative. Le rein concentre les urines au maximum pour préserver l'eau corporelle.</div>
+
+<hr class="expl-sep">
+
+<h4>🧠 Conclusion — deux systèmes indépendants</h4>
+<p>Le rein gère <strong>les osmoles d'un côté et l'eau de l'autre</strong>, de façon relativement indépendante. La quantité d'osmoles à éliminer chaque jour dépend de l'alimentation et du métabolisme. Le volume d'eau dans lequel ces osmoles sont excrétées dépend du statut hydrique et de l'ADH. Ce sont deux régulations hormonales distinctes qui se superposent sans s'imposer l'une à l'autre.</p>
+
+</div>
+
+<svg viewBox="0 0 700 180" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-height:180px;margin:1rem 0;display:block">
+  <text x="350" y="18" text-anchor="middle" fill="#3498db" font-size="13" font-family="Segoe UI,sans-serif" font-weight="bold">Clairance de l'eau libre = V − C osm</text>
+  <!-- Axe -->
+  <line x1="60" y1="95" x2="640" y2="95" stroke="rgba(255,255,255,.3)" stroke-width="2"/>
+  <!-- Zéro -->
+  <circle cx="350" cy="95" r="7" fill="#3498db"/>
+  <text x="350" y="116" text-anchor="middle" fill="#3498db" font-size="10.5" font-family="Segoe UI,sans-serif" font-weight="bold">C H₂O = 0</text>
+  <text x="350" y="130" text-anchor="middle" fill="#9090b0" font-size="9" font-family="Segoe UI,sans-serif">Urines iso-osmotiques</text>
+  <text x="350" y="142" text-anchor="middle" fill="#9090b0" font-size="9" font-family="Segoe UI,sans-serif">V = C osm</text>
+  <!-- Gauche (négatif) -->
+  <rect x="65" y="50" width="240" height="40" rx="6" fill="rgba(231,76,60,.12)" stroke="#e74c3c" stroke-width="1.5"/>
+  <text x="185" y="68" text-anchor="middle" fill="#e74c3c" font-size="10.5" font-family="Segoe UI,sans-serif" font-weight="bold">C H₂O &lt; 0</text>
+  <text x="185" y="82" text-anchor="middle" fill="#c0c0d8" font-size="9" font-family="Segoe UI,sans-serif">Hyper-osmotique | Déshydratation | ADH ↑↑</text>
+  <text x="185" y="130" text-anchor="middle" fill="#e74c3c" font-size="9" font-family="Segoe UI,sans-serif">Rein économise l'eau</text>
+  <text x="185" y="142" text-anchor="middle" fill="#9090b0" font-size="9" font-family="Segoe UI,sans-serif">V &lt; C osm | Uosm &gt; 300</text>
+  <!-- Droite (positif) -->
+  <rect x="395" y="50" width="240" height="40" rx="6" fill="rgba(46,204,113,.12)" stroke="#2ecc71" stroke-width="1.5"/>
+  <text x="515" y="68" text-anchor="middle" fill="#2ecc71" font-size="10.5" font-family="Segoe UI,sans-serif" font-weight="bold">C H₂O &gt; 0</text>
+  <text x="515" y="82" text-anchor="middle" fill="#c0c0d8" font-size="9" font-family="Segoe UI,sans-serif">Hypo-osmotique | Hyperhydratation | ADH ↓</text>
+  <text x="515" y="130" text-anchor="middle" fill="#2ecc71" font-size="9" font-family="Segoe UI,sans-serif">Rein élimine l'eau excédentaire</text>
+  <text x="515" y="142" text-anchor="middle" fill="#9090b0" font-size="9" font-family="Segoe UI,sans-serif">V &gt; C osm | Uosm &lt; 300</text>
+  <!-- Flèches -->
+  <text x="65" y="100" fill="#e74c3c" font-size="14" font-family="Segoe UI,sans-serif">←</text>
+  <text x="620" y="100" fill="#2ecc71" font-size="14" font-family="Segoe UI,sans-serif">→</text>
+</svg>
+
+<div class="highlight-box">C H₂O = V − C osm. C H₂O = 0 : iso-osmotique. C H₂O &gt; 0 : hypo-osmotique, excrétion d'eau libre (hyperhydratation, ADH ↓). C H₂O &lt; 0 : hyper-osmotique, économie d'eau (déshydratation, ADH ↑↑). Max concentration urinaire = 1 200 mosmol/kg.</div>
+
+<h3>🃏 Flashcards</h3>
+<div class="flash-block" data-answer="Négative. En déshydratation, l'ADH est maximale → le tube collecteur réabsorbe l'eau au maximum → urines hyper-osmotiques (Uosm jusqu'à 1200 mosmol/kg). V (débit urinaire) < C osm → C H₂O = V - C osm < 0. Le rein retient l'eau pour maintenir l'osmolalité plasmatique.">
+  <div class="q-text">❓ Quel est le signe de la clairance de l'eau libre lors d'une déshydratation ? Expliquez le raisonnement. (niveau 2)</div>
+  <div class="flash-input-row">
+    <input class="flash-input" type="text" placeholder="Votre réponse…" onkeydown="if(event.key==='Enter')validateFlash(this)">
+    <button class="qcm-validate" onclick="validateFlash(this)">Vérifier</button>
+  </div>
+  <div class="qcm-explanation"></div>
+</div>
+</div>
+
+<!-- ══════════════════════ QCM 3 ══════════════════════ -->
+<div class="slide content-slide" id="slide-14">
+<h2>⚡ QCM — Chapitre VI : clairance osmolaire et eau libre</h2>
+
+<div class="qcm-block" data-answer="2">
+  <div class="q-text">Q1. Chez un sujet hyperhydraté avec une osmolalité urinaire de 150 mosmol/kg pour une osmolalité plasmatique de 300 mosmol/kg, la clairance de l'eau libre est :</div>
+  <div class="qcm-options">
+    <div class="qcm-option" data-idx="0" onclick="selectOption(this)"><span class="letter">A</span><span>Nulle</span></div>
+    <div class="qcm-option" data-idx="1" onclick="selectOption(this)"><span class="letter">B</span><span>Négative</span></div>
+    <div class="qcm-option" data-idx="2" onclick="selectOption(this)"><span class="letter">C</span><span>Positive</span></div>
+    <div class="qcm-option" data-idx="3" onclick="selectOption(this)"><span class="letter">D</span><span>Égale à la clairance osmolaire</span></div>
+    <div class="qcm-option" data-idx="4" onclick="selectOption(this)"><span class="letter">E</span><span>Égale au DFG</span></div>
+  </div>
+  <button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button>
+  <div class="qcm-feedback"></div>
+  <div class="qcm-explanation">Uosm = 150 &lt; Posm = 300 → urines hypo-osmotiques → hyperhydratation → ADH supprimée → le rein excrète de l'eau libre → C H₂O = V - C osm &gt; 0. En pratique : C osm = V × 150/300 = V/2. C H₂O = V - V/2 = V/2 &gt; 0.</div>
+</div>
+
+<div class="qcm-block" data-answer="0">
+  <div class="q-text">Q2. La capacité maximale de concentration des urines par le rein humain est de :</div>
+  <div class="qcm-options">
+    <div class="qcm-option" data-idx="0" onclick="selectOption(this)"><span class="letter">A</span><span>1 200 mosmol/kg</span></div>
+    <div class="qcm-option" data-idx="1" onclick="selectOption(this)"><span class="letter">B</span><span>300 mosmol/kg</span></div>
+    <div class="qcm-option" data-idx="2" onclick="selectOption(this)"><span class="letter">C</span><span>600 mosmol/kg</span></div>
+    <div class="qcm-option" data-idx="3" onclick="selectOption(this)"><span class="letter">D</span><span>900 mosmol/kg</span></div>
+    <div class="qcm-option" data-idx="4" onclick="selectOption(this)"><span class="letter">E</span><span>2 400 mosmol/kg</span></div>
+  </div>
+  <button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button>
+  <div class="qcm-feedback"></div>
+  <div class="qcm-explanation">La concentration maximale urinaire est de 1 200 mosmol/kg, soit 4× l'osmolalité plasmatique normale (300 mosmol/kg). Cette limite est atteinte lors d'une déshydratation sévère avec ADH maximale et gradient osmotique médullaire maximal (créé par l'anse de Henlé).</div>
+</div>
+
+<div class="qcm-block" data-answer="3">
+  <div class="q-text">Q3. La clairance de l'eau libre est nulle quand :</div>
+  <div class="qcm-options">
+    <div class="qcm-option" data-idx="0" onclick="selectOption(this)"><span class="letter">A</span><span>Les urines sont hypo-osmotiques</span></div>
+    <div class="qcm-option" data-idx="1" onclick="selectOption(this)"><span class="letter">B</span><span>Les urines sont hyper-osmotiques</span></div>
+    <div class="qcm-option" data-idx="2" onclick="selectOption(this)"><span class="letter">C</span><span>L'ADH est maximale</span></div>
+    <div class="qcm-option" data-idx="3" onclick="selectOption(this)"><span class="letter">D</span><span>L'osmolalité urinaire est égale à l'osmolalité plasmatique</span></div>
+    <div class="qcm-option" data-idx="4" onclick="selectOption(this)"><span class="letter">E</span><span>Le débit urinaire est nul</span></div>
+  </div>
+  <button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button>
+  <div class="qcm-feedback"></div>
+  <div class="qcm-explanation">C H₂O = V - C osm = V - V × Uosm/Posm. Si Uosm = Posm → C H₂O = V - V = 0. Urines iso-osmotiques = clairance eau libre nulle. Pas de travail net de dilution ni de concentration. L'ADH est à un niveau intermédiaire.</div>
+</div>
+
+<div class="qcm-block" data-answer="4">
+  <div class="q-text">Q4. Une substance dont la clairance est comprise entre le DFG et le DPR a un comportement rénal de type :</div>
+  <div class="qcm-options">
+    <div class="qcm-option" data-idx="0" onclick="selectOption(this)"><span class="letter">A</span><span>Filtration seule</span></div>
+    <div class="qcm-option" data-idx="1" onclick="selectOption(this)"><span class="letter">B</span><span>Filtration + réabsorption totale</span></div>
+    <div class="qcm-option" data-idx="2" onclick="selectOption(this)"><span class="letter">C</span><span>Filtration + réabsorption partielle</span></div>
+    <div class="qcm-option" data-idx="3" onclick="selectOption(this)"><span class="letter">D</span><span>Filtration + sécrétion totale</span></div>
+    <div class="qcm-option" data-idx="4" onclick="selectOption(this)"><span class="letter">E</span><span>Filtration + sécrétion partielle</span></div>
+  </div>
+  <button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button>
+  <div class="qcm-feedback"></div>
+  <div class="qcm-explanation">DFG &lt; C &lt; DPR signifie que le débit excrété est supérieur au débit filtré (→ il y a sécrétion) mais inférieur au DPR (→ la sécrétion n'est pas totale, les transporteurs sont partiellement saturés). C'est la situation du PAH à forte concentration (&gt; 6 mg/L).</div>
+</div>
+
+<div class="qcm-block" data-answer="1">
+  <div class="q-text">Q5. Le cotransport SGLT est qualifié de transport secondairement actif car :</div>
+  <div class="qcm-options">
+    <div class="qcm-option" data-idx="0" onclick="selectOption(this)"><span class="letter">A</span><span>Il hydrolyse directement l'ATP pour fonctionner</span></div>
+    <div class="qcm-option" data-idx="1" onclick="selectOption(this)"><span class="letter">B</span><span>Il exploite le gradient de Na+ créé par la Na+/K+ATPase sans consommer lui-même d'ATP</span></div>
+    <div class="qcm-option" data-idx="2" onclick="selectOption(this)"><span class="letter">C</span><span>Il fonctionne uniquement par diffusion simple sans transporteur</span></div>
+    <div class="qcm-option" data-idx="3" onclick="selectOption(this)"><span class="letter">D</span><span>Il est localisé dans le tubule distal</span></div>
+    <div class="qcm-option" data-idx="4" onclick="selectOption(this)"><span class="letter">E</span><span>Il peut fonctionner à n'importe quelle glycémie sans saturation</span></div>
+  </div>
+  <button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button>
+  <div class="qcm-feedback"></div>
+  <div class="qcm-explanation">Transport secondairement actif = exploite l'énergie d'un gradient ionique (Na+) créé par un autre système actif (Na+/K+ATPase qui consomme de l'ATP). Le SGLT lui-même n'hydrolyse pas d'ATP directement. Il est situé dans le TCP (tubule contourné proximal), pas dans le tubule distal.</div>
+</div>
+
+<p class="key-hint">↕ Utilisez les flèches pour naviguer</p>
+</div>
+
+<!-- ══════════════════════ SLIDE 15 — BILAN ══════════════════════ -->
+<div class="slide content-slide" id="slide-15">
+<h2>📋 Bilan — Clairance rénale en un coup d'œil</h2>
+
+<div class="bilan-grid">
+  <div class="bilan-card">
+    <div class="bilan-card-title">📐 Formules fondamentales</div>
+    <ul>
+      <li>Débit filtré = <strong>Cp × DFG</strong></li>
+      <li>Débit excrété = <strong>Cu × V</strong></li>
+      <li>Excrété = Filtré − Réabs. + Sécr.</li>
+      <li>Clairance = <strong>Cu × V / Cp</strong> (mL/min)</li>
+      <li>C osm = V × Uosm / Posm</li>
+      <li>C H₂O = V − C osm</li>
+    </ul>
+  </div>
+  <div class="bilan-card">
+    <div class="bilan-card-title">🎯 Les 4 situations rénales</div>
+    <ul>
+      <li>① Filtration seule → C = DFG (inuline)</li>
+      <li>② Filtr. + réabs. → C &lt; DFG (Na+, glucose)</li>
+      <li>③ Filtr. + sécr. → C &gt; DFG (PAH)</li>
+      <li>④ Filtr. + réabs. + sécr. → C variable (K+)</li>
+      <li>Clairance nulle → réabsorption totale (glucose sain)</li>
+    </ul>
+  </div>
+  <div class="bilan-card">
+    <div class="bilan-card-title">🧪 Marqueurs de référence</div>
+    <ul>
+      <li>Gold standard DFG : <strong>inuline</strong></li>
+      <li>Gold standard DPR : <strong>PAH faible dose</strong></li>
+      <li>DFG clinique : créatinine (légère surestimation +10%)</li>
+      <li>Formule CKD-EPI ou Cockcroft-Gault</li>
+      <li>DFG normal : 90–120 mL/min</li>
+      <li>DPR normal : ~660 mL/min | FF = 18-20%</li>
+    </ul>
+  </div>
+  <div class="bilan-card">
+    <div class="bilan-card-title">🔢 Valeurs à mémoriser</div>
+    <ul>
+      <li>Créatinémie H : 80–110 µmol/L</li>
+      <li>Créatinémie F : 60–90 µmol/L</li>
+      <li>Seuil glycémique glycosurie : <strong>10 mmol/L</strong></li>
+      <li>Tm glucose : <strong>375 mg/min</strong></li>
+      <li>Seuil saturation PAH : <strong>6 mg/L</strong></li>
+      <li>Osmolalité urinaire max : <strong>1 200 mosmol/kg</strong></li>
+    </ul>
+  </div>
+  <div class="bilan-card">
+    <div class="bilan-card-title">💧 Clairance osmolaire</div>
+    <ul>
+      <li>Iso-osm. : C H₂O = 0 | Uosm = Posm</li>
+      <li>Hypo-osm. : C H₂O &gt; 0 | Hyperhydratation | ADH ↓</li>
+      <li>Hyper-osm. : C H₂O &lt; 0 | Déshydratation | ADH ↑↑</li>
+      <li>Osmoles et eau : gestion indépendante</li>
+    </ul>
+  </div>
+  <div class="bilan-card">
+    <div class="bilan-card-title">⚠️ Pièges fréquents</div>
+    <ul>
+      <li>Sécrétion ≠ Excrétion</li>
+      <li>Tm glucose ≠ seuil glycémique</li>
+      <li>Clairance créatinine légèrement &gt; DFG réel</li>
+      <li>Sarcopénie → créatinémie normale ≠ DFG normal</li>
+      <li>PAH &gt; 6 mg/L → C PAH ≠ DPR</li>
+    </ul>
+  </div>
+</div>
+<p class="key-hint">↕ Utilisez les flèches pour naviguer</p>
+</div>
+
+<!-- ══════════════════════ SLIDE 16 — FIN ══════════════════════ -->
+<div class="slide title-slide" id="slide-16">
+  <a class="menu-link" href="index.html">← Menu</a>
+  <div>
+    <div class="title-tag">Clairance rénale — Terminé</div>
+    <h1>Félicitations 🎉</h1>
+    <div class="title-subtitle">Vous avez parcouru les 16 diapos de clairance rénale. Maîtrisez les formules, les valeurs numériques et les 4 situations avant l'examen.</div>
+    <div class="title-meta">
+      <span>📐 6 formules clés</span>
+      <span>🧪 3 marqueurs de référence</span>
+      <span>⚡ 15 QCM réalisés</span>
+    </div>
+  </div>
+</div>
+
+</div><!-- fin slide-container -->
+
+<script>
+let current = 0;
+const TOTAL = 17;
+
+function showSlide(n) {
+  const slides = document.querySelectorAll('.slide');
+  if (n < 0 || n >= TOTAL) return;
+  slides.forEach(s => s.classList.remove('active'));
+  const target = document.getElementById('slide-' + n);
+  if (target) {
+    target.classList.add('active');
+    const sc = document.getElementById('slide-container');
+    if (sc) sc.scrollTop = 0;
+  }
+  current = n;
+  const fill = document.getElementById('progress-fill');
+  if (fill) fill.style.width = ((n / (TOTAL - 1)) * 100) + '%';
+  const counter = document.getElementById('counter');
+  if (counter) counter.textContent = (n + 1) + ' / ' + TOTAL;
+}
+
+function changeSlide(d) { showSlide(current + d); }
+
+function selectOption(el) {
+  const block = el.closest('.qcm-block');
+  if (block.dataset.answered) return;
+  block.querySelectorAll('.qcm-option').forEach(o => o.classList.remove('selected'));
+  el.classList.add('selected');
+  block.querySelector('.qcm-validate').disabled = false;
+}
+
+function validateQCM(btn) {
+  const block = btn.closest('.qcm-block');
+  if (block.dataset.answered) return;
+  block.dataset.answered = '1';
+  const correct = parseInt(block.dataset.answer);
+  const opts = block.querySelectorAll('.qcm-option');
+  const selected = block.querySelector('.qcm-option.selected');
+  const selectedIdx = selected ? parseInt(selected.dataset.idx) : -1;
+  opts.forEach((o, i) => {
+    if (i === correct) o.classList.add('correct');
+    else if (i === selectedIdx) o.classList.add('wrong');
+  });
+  const feedback = block.querySelector('.qcm-feedback');
+  feedback.textContent = selectedIdx === correct ? '✅ Bonne réponse !' : '❌ Mauvaise réponse.';
+  feedback.style.color = selectedIdx === correct ? '#2ecc71' : '#e74c3c';
+  const expl = block.querySelector('.qcm-explanation');
+  if (expl) expl.style.display = 'block';
+  btn.disabled = true;
+}
+
+function validateFlash(btn) {
+  const block = btn.closest('.flash-block');
+  const expl = block.querySelector('.qcm-explanation');
+  expl.style.display = 'block';
+  expl.style.color = '#b0d0b0';
+  expl.textContent = '💡 ' + block.dataset.answer;
+  btn.disabled = true;
+}
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'ArrowRight' || e.key === 'ArrowDown') changeSlide(1);
+  if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') changeSlide(-1);
+});
+
+let touchX = 0;
+document.addEventListener('touchstart', e => { touchX = e.touches[0].clientX; }, {passive:true});
+document.addEventListener('touchend', e => {
+  const dx = e.changedTouches[0].clientX - touchX;
+  if (Math.abs(dx) > 50) changeSlide(dx < 0 ? 1 : -1);
+}, {passive:true});
+
+showSlide(0);
+</script>
+</body>
+</html>
