@@ -1492,11 +1492,17 @@ function validateQCM(btn){
   btn.disabled=true;
 }
 
-function validateFlash(btn){
-  const card = btn.closest('.flashcard-item');
+function validateFlash(el){
+  const card = el.closest('.flash-block') || el.closest('.flashcard-item');
+  if(!card) return;
+  const expl = card.querySelector('.qcm-explanation');
+  if(expl){
+    expl.textContent = card.dataset.answer || '';
+    expl.style.display = 'block';
+    return;
+  }
   const ans = card.querySelector('.flash-answer');
-  ans.style.display='block';
-  btn.style.display='none';
+  if(ans){ ans.style.display='block'; el.style.display='none'; }
 }
 
 document.addEventListener('keydown',e=>{
