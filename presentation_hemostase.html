@@ -1,0 +1,1054 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hémostase — Physiologie & Exploration | MédECN</title>
+  <style>
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  background: #0d0d1a; color: #e0e0f0;
+  min-height: 100vh; overflow: hidden;
+}
+.topbar {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  height: 50px; background: rgba(13,13,26,0.97);
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+  display: flex; align-items: center; padding: 0 1rem; gap: 0.75rem;
+}
+.topbar-home {
+  text-decoration: none; color: #3498db; font-weight: 600;
+  font-size: 0.85rem; white-space: nowrap;
+  padding: 0.3rem 0.7rem; border: 1px solid rgba(52,152,219,0.4);
+  border-radius: 6px; transition: background 0.2s;
+}
+.topbar-home:hover { background: rgba(52,152,219,0.15); }
+.topbar-title { flex: 1; text-align: center; font-size: 0.85rem; color: #9090b0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.topbar-counter { font-size: 0.85rem; color: #b0b0c0; white-space: nowrap; min-width: 55px; text-align: right; }
+.topbar-nav { display: flex; gap: 0.4rem; }
+.topbar-btn { background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.15); color: #e0e0f0; padding: 0.3rem 0.7rem; border-radius: 6px; cursor: pointer; font-size: 0.85rem; transition: background 0.2s; }
+.topbar-btn:hover { background: rgba(255,255,255,0.14); }
+.progress-bar { position: fixed; top: 50px; left: 0; right: 0; height: 3px; z-index: 99; background: rgba(255,255,255,0.08); }
+.progress-fill { height: 100%; background: linear-gradient(90deg, #3498db, #2ecc71); transition: width 0.3s ease; width: 0%; }
+.slide-container { position: fixed; top: 53px; left: 0; right: 0; bottom: 0; overflow-y: auto; }
+.slide { display: none !important; }
+.slide.active { display: block !important; }
+.slide.active.title-slide { display: flex !important; }
+.title-slide {
+  flex-direction: column; align-items: center; justify-content: center;
+  text-align: center; min-height: calc(100vh - 53px); padding: 2rem;
+  background: radial-gradient(ellipse at center, rgba(52,152,219,0.08) 0%, transparent 70%);
+}
+.title-tag { color: #3498db; font-size: 0.85rem; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 1rem; }
+.title-slide h1 { font-size: clamp(1.8rem, 4vw, 3rem); font-weight: 800; line-height: 1.2; background: linear-gradient(135deg, #3498db, #2ecc71); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 1rem; }
+.title-subtitle { color: #9090b0; font-size: 1rem; margin-bottom: 1.5rem; }
+.title-meta { display: flex; gap: 1.5rem; flex-wrap: wrap; justify-content: center; }
+.title-meta span { color: #b0b0c0; font-size: 0.9rem; }
+.menu-link { position: absolute; top: 1rem; left: 1rem; color: #3498db; text-decoration: none; font-size: 0.9rem; padding: 0.4rem 0.8rem; border: 1px solid rgba(52,152,219,0.4); border-radius: 6px; transition: background 0.2s; }
+.menu-link:hover { background: rgba(52,152,219,0.15); }
+.content-slide { max-width: 880px; margin: 0 auto; padding: 1.5rem 1.5rem 3rem; }
+.content-slide h2 { font-size: 1.4rem; font-weight: 700; color: #3498db; margin-bottom: 1rem; border-bottom: 2px solid rgba(52,152,219,0.3); padding-bottom: 0.5rem; }
+.content-slide h3 { font-size: 1.05rem; font-weight: 600; color: #f39c12; margin: 1.2rem 0 0.6rem; }
+.content-slide h4 { font-size: 0.97rem; font-weight: 600; color: #2ecc71; margin: 1rem 0 0.4rem; }
+.content-slide p { line-height: 1.8; color: #c0c0d8; margin-bottom: 0.75rem; font-size: 0.95rem; }
+.content-slide ul, .content-slide ol { margin: 0.5rem 0 0.75rem 1.5rem; }
+.content-slide li { line-height: 1.8; color: #c0c0d8; font-size: 0.95rem; margin-bottom: 0.4rem; }
+.content-slide strong { color: #e8e8f8; }
+.def-box { background: rgba(243,156,18,0.1); border-left: 4px solid #f39c12; border-radius: 0 8px 8px 0; padding: 0.8rem 1rem; margin: 0.6rem 0; font-size: 0.92rem; line-height: 1.65; color: #c8c8d8; }
+.highlight-box { background: rgba(46,204,113,0.1); border-left: 4px solid #2ecc71; border-radius: 0 8px 8px 0; padding: 0.8rem 1rem; margin: 0.75rem 0; font-size: 0.92rem; line-height: 1.65; color: #c8c8d8; }
+.warning-box { background: rgba(231,76,60,0.1); border: 2px solid #e74c3c; border-radius: 8px; padding: 0.8rem 1rem; margin: 0.75rem 0; font-size: 0.92rem; line-height: 1.65; color: #c8c8d8; }
+.urgence-box { background: rgba(231,76,60,0.2); border: 2px solid #e74c3c; border-radius: 8px; padding: 0.8rem 1rem; margin: 0.75rem 0; font-size: 0.92rem; line-height: 1.65; }
+.table-wrap { overflow-x: auto; margin: 0.75rem 0; border-radius: 8px; }
+table { width: 100%; border-collapse: collapse; font-size: 0.88rem; }
+thead { background: rgba(52,152,219,0.15); }
+th { padding: 0.6rem 0.75rem; text-align: left; color: #3498db; font-weight: 600; }
+td { padding: 0.5rem 0.75rem; border-bottom: 1px solid rgba(255,255,255,0.05); color: #c0c0d8; }
+tr:last-child td { border-bottom: none; }
+tr:hover td { background: rgba(255,255,255,0.03); }
+/* QCM */
+.qcm-block { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 1rem; margin: 0.75rem 0; }
+.q-text { font-weight: 600; color: #e0e0f0; margin-bottom: 0.75rem; font-size: 0.95rem; line-height: 1.5; }
+.qcm-options { display: flex; flex-direction: column; gap: 0.5rem; margin-bottom: 0.75rem; }
+.qcm-option { display: flex; align-items: center; gap: 0.6rem; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; padding: 0.6rem 0.8rem; cursor: pointer; transition: background 0.15s, border-color 0.15s; font-size: 0.9rem; color: #c0c0d8; }
+.qcm-option:hover { background: rgba(255,255,255,0.08); }
+.qcm-option.selected { background: rgba(52,152,219,0.15); border-color: #3498db; color: #e0e0f0; }
+.qcm-option.correct { background: rgba(46,204,113,0.2); border-color: #2ecc71; color: #e0e0f0; }
+.qcm-option.wrong { background: rgba(231,76,60,0.2); border-color: #e74c3c; color: #e0e0f0; }
+.letter { min-width: 24px; height: 24px; border-radius: 50%; background: rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.8rem; color: #3498db; }
+.qcm-validate { padding: 0.5rem 1rem; border-radius: 8px; border: none; cursor: pointer; background: rgba(52,152,219,0.2); color: #3498db; font-weight: 600; font-size: 0.85rem; transition: background 0.2s; }
+.qcm-validate:disabled { opacity: 0.4; cursor: not-allowed; }
+.qcm-validate:hover:not(:disabled) { background: rgba(52,152,219,0.35); }
+.qcm-feedback { margin-top: 0.5rem; font-weight: 600; font-size: 0.9rem; }
+.qcm-explanation { display: none; margin-top: 0.75rem; padding: 0.75rem; background: rgba(255,255,255,0.04); border-radius: 8px; font-size: 0.88rem; color: #b0b0c0; line-height: 1.65; }
+/* Flash */
+.flash-block { background: rgba(52,152,219,0.07); border: 1px solid rgba(52,152,219,0.25); border-radius: 12px; padding: 1rem; margin: 0.75rem 0; }
+.flash-input-row { display: flex; gap: 0.5rem; margin: 0.6rem 0; flex-wrap: wrap; }
+.flash-input { flex: 1; min-width: 200px; padding: 0.5rem 0.75rem; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.15); border-radius: 8px; color: #e0e0f0; font-size: 0.92rem; }
+.flash-input:focus { outline: none; border-color: #3498db; }
+/* DP */
+.dp-block { background: rgba(155,89,182,0.07); border: 1px solid rgba(155,89,182,0.25); border-radius: 12px; padding: 1rem; margin: 1rem 0; }
+.dp-block h3 { color: #9b59b6; margin-bottom: 0.75rem; }
+.dp-block > p { font-style: italic; color: #9090b0; font-size: 0.9rem; margin-bottom: 0.75rem; }
+.dp-step { margin: 0.75rem 0; }
+.dp-step-num { font-size: 0.75rem; font-weight: 700; color: #9b59b6; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.2rem; }
+.dp-step-title { font-weight: 600; color: #c0c0d8; margin-bottom: 0.5rem; font-size: 0.92rem; }
+/* Explications structurées */
+.expl-wrap { margin: 0 0 1.5rem 0; }
+.expl-wrap h4 { color: #e0e0f0; font-size: 1rem; margin: 1.1rem 0 0.4rem; font-weight: 700; }
+.expl-wrap p { color: #c0c0d8; font-size: 0.95rem; line-height: 1.8; margin-bottom: 0.4rem; }
+.expl-wrap strong { color: #f0f0ff; }
+.expl-bq { border-left: 3px solid rgba(52,152,219,0.5); padding: 0.4rem 1rem; color: #9898b8; font-style: italic; font-size: 0.9rem; margin: 0.3rem 0 0.9rem 0; background: rgba(52,152,219,0.04); border-radius: 0 6px 6px 0; }
+.expl-sep { border: none; border-top: 1px solid rgba(255,255,255,0.07); margin: 1.1rem 0; }
+.expl-warn { background: rgba(231,76,60,0.08); border-left: 4px solid #e74c3c; border-radius: 0 8px 8px 0; padding: 0.6rem 1rem; margin: 0.75rem 0; font-size: 0.92rem; color: #c8c8d8; line-height: 1.65; }
+.expl-info { background: rgba(52,152,219,0.08); border-left: 4px solid #3498db; border-radius: 0 8px 8px 0; padding: 0.6rem 1rem; margin: 0.75rem 0; font-size: 0.92rem; color: #c8c8d8; line-height: 1.65; }
+/* Images bloc */
+.img-block { margin: 1.2rem 0; border-radius: 10px; overflow: hidden; border: 1px solid rgba(255,255,255,0.1); background: rgba(0,0,0,0.35); }
+.img-block img { width: 100%; max-height: 420px; object-fit: contain; display: block; background: #1a1a2e; }
+.img-caption { padding: 0.65rem 1rem; font-size: 0.84rem; color: #9090b0; font-style: italic; border-top: 1px solid rgba(255,255,255,0.07); background: rgba(0,0,0,0.2); line-height: 1.55; }
+.img-row { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; margin: 1rem 0; }
+@media (max-width: 640px) { .img-row { grid-template-columns: 1fr; } }
+.img-annot { display: inline-block; background: rgba(231,76,60,0.85); color: white; border-radius: 50%; width: 18px; height: 18px; text-align: center; line-height: 18px; font-weight: bold; font-size: 10px; margin-right: 3px; vertical-align: middle; }
+.key-hint { text-align: center; color: rgba(255,255,255,0.2); font-size: 0.75rem; margin-top: 2rem; padding-bottom: 1rem; }
+@media (max-width: 768px) { .content-slide { padding: 1rem 1rem 2.5rem; } .content-slide h2 { font-size: 1.15rem; } .title-slide h1 { font-size: 1.8rem; } }
+@media (max-width: 480px) { .topbar-title { display: none; } .flash-input-row { flex-direction: column; } }
+
+/* ── SLIDE-INNER : alias de content-slide pour les slides 3+ ── */
+.slide-inner {
+  max-width: 880px; margin: 0 auto; padding: 1.5rem 1.5rem 3rem;
+}
+.slide-inner h2 { font-size: 1.4rem; font-weight: 700; color: #3498db; margin-bottom: 1rem; border-bottom: 2px solid rgba(52,152,219,0.3); padding-bottom: 0.5rem; }
+.slide-inner h3 { font-size: 1.05rem; font-weight: 600; color: #f39c12; margin: 1.2rem 0 0.6rem; }
+.slide-inner h4 { font-size: 0.97rem; font-weight: 600; color: #2ecc71; margin: 1rem 0 0.4rem; }
+.slide-inner p { line-height: 1.8; color: #c0c0d8; margin-bottom: 0.75rem; font-size: 0.95rem; }
+.slide-inner ul, .slide-inner ol { margin: 0.5rem 0 0.75rem 1.5rem; }
+.slide-inner li { line-height: 1.8; color: #c0c0d8; font-size: 0.95rem; margin-bottom: 0.4rem; }
+.slide-inner strong { color: #e8e8f8; }
+
+/* ── SLIDE INTRO paragraph ── */
+.slide-intro {
+  background: rgba(52,152,219,0.07); border-left: 4px solid #3498db;
+  border-radius: 0 8px 8px 0; padding: 0.75rem 1rem; margin: 0.5rem 0 1.2rem;
+  font-size: 0.95rem; line-height: 1.75; color: #b0b0c8; font-style: italic;
+}
+
+/* ── QCM question text (alternative à .q-text) ── */
+.qcm-question {
+  font-weight: 600; color: #e0e0f0; margin-bottom: 0.75rem;
+  font-size: 0.95rem; line-height: 1.5;
+}
+
+/* ── FLASHCARDS flip ── */
+.flashcard-section { margin: 1.5rem 0 0.5rem; }
+.flashcard-section h3 { font-size: 1.05rem; font-weight: 600; color: #f39c12; margin: 0 0 0.75rem; }
+.flashcard {
+  background: rgba(52,152,219,0.08); border: 1px solid rgba(52,152,219,0.25);
+  border-radius: 12px; padding: 1rem; margin: 0.6rem 0; cursor: pointer;
+  transition: background 0.2s; min-height: 60px; position: relative;
+}
+.flashcard:hover { background: rgba(52,152,219,0.14); }
+.flashcard .fc-front { color: #e0e0f0; font-weight: 600; font-size: 0.92rem; line-height: 1.5; }
+.flashcard .fc-back {
+  display: none; margin-top: 0.75rem; padding-top: 0.75rem;
+  border-top: 1px solid rgba(255,255,255,0.1);
+  color: #b0b0c8; font-size: 0.9rem; line-height: 1.65;
+}
+.flashcard.flipped .fc-back { display: block; }
+.flashcard.flipped .fc-front { color: #9090b0; font-size: 0.88rem; }
+.flashcard::after {
+  content: '↕ cliquer'; position: absolute; bottom: 0.5rem; right: 0.75rem;
+  font-size: 0.72rem; color: rgba(255,255,255,0.2);
+}
+
+/* ── BILAN grid ── */
+.bilan-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(280px,1fr));
+  gap: 1rem; margin: 1rem 0;
+}
+.bilan-card {
+  background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 12px; padding: 1rem 1.1rem;
+}
+.bilan-card-title {
+  font-weight: 700; color: #3498db; font-size: 0.95rem; margin-bottom: 0.6rem;
+  border-bottom: 1px solid rgba(52,152,219,0.2); padding-bottom: 0.4rem;
+}
+.bilan-card ul { margin-left: 1.1rem; }
+.bilan-card li { font-size: 0.88rem; color: #b0b0c8; line-height: 1.7; margin-bottom: 0.2rem; }
+
+/* ── DP Dossier Progressif ── */
+.dp-block {
+  background: rgba(155,89,182,0.07); border: 1px solid rgba(155,89,182,0.25);
+  border-radius: 12px; padding: 1rem; margin: 1rem 0;
+}
+.dp-title { font-weight: 700; color: #9b59b6; font-size: 0.95rem; margin-bottom: 0.6rem; }
+.dp-block > p { font-style: italic; color: #9090b0; font-size: 0.9rem; margin-bottom: 0.75rem; line-height: 1.65; }
+.dp-questions { margin-left: 1.4rem; margin-bottom: 0.75rem; }
+.dp-questions li { color: #c0c0d8; font-size: 0.9rem; line-height: 1.7; margin-bottom: 0.4rem; }
+.dp-show-btn {
+  padding: 0.45rem 1rem; border-radius: 8px; border: 1px solid rgba(155,89,182,0.4);
+  background: rgba(155,89,182,0.12); color: #9b59b6; font-size: 0.85rem;
+  font-weight: 600; cursor: pointer; transition: background 0.2s;
+}
+.dp-show-btn:hover { background: rgba(155,89,182,0.25); }
+.dp-correction {
+  margin-top: 0.75rem; padding: 0.75rem; background: rgba(155,89,182,0.06);
+  border-radius: 8px; font-size: 0.88rem; color: #b0b0c0; line-height: 1.7;
+}
+
+/* ── Responsive slide-inner ── */
+@media (max-width: 768px) {
+  .slide-inner { padding: 1rem 1rem 2.5rem; }
+  .slide-inner h2 { font-size: 1.15rem; }
+  .bilan-grid { grid-template-columns: 1fr; }
+  .img-row { grid-template-columns: 1fr; }
+}
+
+
+  </style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="topbar">
+  <a href="index.html" class="home-btn" title="Accueil">🏠</a>
+  <span id="counter" style="color:#b0b0c0;font-size:.85rem"></span>
+  <div class="nav-btns">
+    <button onclick="changeSlide(-1)">&#8592;</button>
+    <button onclick="changeSlide(1)">&#8594;</button>
+  </div>
+</div>
+<div class="progress-bar"><div class="progress-fill" id="progress"></div></div>
+
+<div class="slides-container" id="slides">
+
+<div class="slide title-slide active" id="slide-0">
+  <div class="title-tag">Hématologie · Item 216 · ECNi</div>
+  <h1>Hémostase : physiologie<br>et exploration</h1>
+  <p class="title-subtitle">Hémostase primaire · Coagulation · Fibrinolyse · Bilans biologiques</p>
+  <div class="title-meta">
+    <span>📚 14 diapositives</span>
+    <span>✅ 20 QCM</span>
+    <span>⚡ 14 flashcards</span>
+    <span>🩸 Hématologie</span>
+  </div>
+</div>
+
+<div class="slide" id="slide-1">
+<div class="content-slide">
+<h2>I — Vue d'ensemble : l'hémostase en trois temps</h2>
+<div class="def-box"><strong>Hémostase</strong> — processus physiologique maintenant le sang à l'état fluide dans les vaisseaux sains et permettant l'arrêt rapide d'un saignement en cas de lésion vasculaire, sans provoquer de thrombose. Elle se décompose en trois temps : hémostase primaire, coagulation, fibrinolyse.</div>
+<div class="expl-wrap">
+<h4>🔵 L'équilibre fondamental — entre hémorragie et thrombose</h4>
+<p>Le sang doit circuler en permanence pour oxygéner tous les organes. Mais il doit aussi "se boucher" rapidement en cas de blessure vasculaire pour éviter l'hémorragie. Et il ne doit pas coaguler spontanément dans les vaisseaux sains, ce qui provoquerait une thrombose (infarctus du myocarde, AVC, embolie pulmonaire). L'hémostase est donc un système d'équilibre extrêmement précis entre deux dangers opposés.</p>
+<p>Cet équilibre repose sur deux camps antagonistes : les acteurs <strong>pro-coagulants</strong> (plaquettes, facteurs de coagulation, fibrine) et les acteurs <strong>anticoagulants</strong> (endothélium sain, antithrombine, système protéine C/S, fibrinolyse). Toute rupture de cet équilibre entraîne soit un syndrome hémorragique (déficit en acteurs pro-coagulants : hémophilie, thrombopénie, maladie de Willebrand), soit une maladie thromboembolique (déficit en acteurs anticoagulants : déficit en protéine C ou S, mutation FV Leiden).</p>
+<div class="expl-bq">Ex : un patient hémophile A (déficit en FVIII) saigne spontanément dans les articulations (hémarthroses) car sa coagulation est inefficace. À l'opposé, un patient avec déficit en protéine C fait des thromboses veineuses profondes récidivantes dès 25–30 ans. Même molécule (thrombine), deux faces : trop peu → hémorragie ; trop → thrombose.</div>
+<hr class="expl-sep">
+<h4>🔵 Les trois temps — cascade coordonnée</h4>
+<p><strong>1. Hémostase primaire</strong> : réaction la plus rapide (secondes → 3–5 min). Aboutit à la formation d'un <strong>thrombus blanc</strong> (clou plaquettaire) — agrégat de plaquettes obstruant provisoirement la brèche vasculaire. Acteurs : cellules endothéliales, plaquettes, vWF, fibrinogène. Premier bouchon instable et fragile.</p>
+<p><strong>2. Coagulation</strong> : consolide le thrombus plaquettaire en générant de la <strong>fibrine</strong>, trame solide du caillot définitif. Cascade enzymatique déclenchée par le facteur tissulaire (FT), aboutissant à la production de thrombine qui transforme le fibrinogène soluble en fibrine insoluble. Le caillot final est appelé <strong>thrombus rouge</strong> (fibrine + plaquettes + globules rouges emprisonnés).</p>
+<p><strong>3. Fibrinolyse</strong> : une fois la paroi vasculaire réparée, le caillot de fibrine est progressivement dissous par la <strong>plasmine</strong> pour restaurer la perméabilité vasculaire. La plasmine dégrade la fibrine en fragments appelés <strong>D-dimères</strong>. Régulée par des inhibiteurs (α₂-antiplasmine, PAI-1) pour éviter une dissolution prématurée.</p>
+<div class="expl-bq">Ex : coupure cutanée — immédiatement : blanchissement (vasoconstriction) → 1–3 min : saignement ralentit (clou plaquettaire) → 5–10 min : arrêt (caillot de fibrine) → jours suivants : cicatrisation + fibrinolyse progressive du caillot. Chez un patient sous aspirine : vasoconstriction intacte mais clou plaquettaire plus long à se former (inhibition TXA₂).</div>
+<hr class="expl-sep">
+<h4>🔵 Les quatre acteurs principaux de l'hémostase primaire</h4>
+<p><strong>Cellules endothéliales</strong> : monocouche tapissant les vaisseaux. À l'état sain = antithrombotiques (PGI₂, NO, thrombomoduline, héparan sulfate). Lors d'une lésion = exposent le sous-endothélium (collagène, vWF) et peuvent exprimer le FT → déclenchement de l'hémostase.</p>
+<p><strong>Plaquettes</strong> : fragments cellulaires sans noyau issus des mégacaryocytes (moelle osseuse). Normales : 150–400 G/L. Portent les récepteurs GPIb (adhérence) et GPIIb/IIIa (agrégation). Contiennent des granules α (vWF, fibrinogène, PDGF…) et des granules denses (ADP, sérotonine, calcium).</p>
+<p><strong>vWF (facteur Willebrand)</strong> : grosse protéine multimérique, "colle moléculaire" entre plaquettes et sous-endothélium lésé. Transporte et protège le FVIII dans le plasma. Sa taille est régulée par ADAMTS13. Déficit = maladie de Willebrand (plus fréquente maladie hémorragique constitutionnelle).</p>
+<p><strong>Fibrinogène</strong> : protéine très abondante dans le plasma (2–4 g/L), synthétisée par le foie. Forme les "ponts" entre plaquettes lors de l'agrégation (via GPIIb/IIIa). Substrat ultime de la thrombine → transformé en fibrine lors de la coagulation.</p>
+<div class="expl-bq">Ex : la maladie de Willebrand de type 3 (déficit complet en vWF) = syndrome hémorragique sévère à prédominance muqueuse (épistaxis massives, ménorragies) car l'hémostase primaire est défaillante. La coagulation peut être normale ou peu perturbée. Traitement : desmopressine (libère le vWF endothélial) ou concentrés de vWF/FVIII.</div>
+</div>
+<div class="flash-block" data-answer="3 temps HP : (1) thrombus blanc plaquettaire en 3-5 min ; (2) coagulation → fibrine → thrombus rouge ; (3) fibrinolyse → plasmine → D-dimères. 4 acteurs HP : CE (antithrombotiques sains / déclenchent si lésion), plaquettes (GPIb adhérence, GPIIb/IIIa agrégation), vWF (colle + transport FVIII), fibrinogène (ponts + substrat thrombine).">
+  <p class="flash-q">⚡ Flash — citez les 3 temps de l'hémostase et les 4 acteurs de l'hémostase primaire</p>
+  <div class="flash-input-row">
+    <input class="flash-input" type="text" placeholder="Votre réponse…">
+    <button class="qcm-validate" onclick="validateFlash(this)">Vérifier</button>
+  </div>
+  <div class="qcm-explanation"></div>
+</div>
+</div>
+</div>
+
+<div class="slide" id="slide-2">
+<div class="content-slide">
+<h2>II — Hémostase primaire : récepteurs plaquettaires</h2>
+<div class="def-box"><strong>GPIb</strong> — glycoprotéine Ib, récepteur de l'adhérence plaquettaire, se lie au vWF sous-endothélial. <strong>GPIIb/IIIa</strong> — complexe glycoprotéique, récepteur de l'agrégation, se lie au fibrinogène après activation. <strong>ADAMTS13</strong> — métalloprotéinase plasmatique qui clive les grands multimères de vWF ; son déficit provoque le PTT.</div>
+<div class="expl-wrap">
+<h4>🔵 L'endothélium sain — actif contre la thrombose</h4>
+<p>Les cellules endothéliales ne sont pas passives. À l'état sain, elles synthétisent en permanence des molécules antithrombotiques : la <strong>prostacycline (PGI₂)</strong> (vasodilatateur + inhibiteur de l'agrégation plaquettaire), le <strong>monoxyde d'azote (NO)</strong> (même effet), la <strong>thrombomoduline</strong> (capte la thrombine → génère de la protéine C activée, anticoagulant puissant), et l'<strong>héparan sulfate</strong> de surface (active l'antithrombine).</p>
+<p>Lors d'une lésion, l'endothélium est détruit ou activé. Il expose le <strong>sous-endothélium</strong> (collagène I et III, vWF matriciel), internalise la thrombomoduline (suppression de l'effet anticoagulant) et peut exprimer le <strong>FT</strong> à sa surface, déclenchant simultanément l'hémostase primaire et la coagulation. L'endothélium activé par l'inflammation ou l'athérosclérose présente un phénotype pro-thrombotique similaire.</p>
+<div class="expl-bq">Ex : l'athérosclérose érode et active l'endothélium. Les plaques contiennent du collagène et du FT. Lors de la rupture d'une plaque coronaire, une activation massive de l'hémostase → thrombus coronaire occlusif → IDM. C'est pourquoi l'aspirine (anti-agrégant) est prescrite en prévention secondaire cardiovasculaire.</div>
+<hr class="expl-sep">
+<h4>🔵 GPIb — le récepteur de l'adhérence</h4>
+<p>La GPIb est exprimée en abondance à la surface des plaquettes non activées (~25 000 copies). Son principal ligand est le <strong>vWF</strong>. Cette interaction GPIb–vWF est la première étape de l'hémostase primaire : elle "capture" les plaquettes au sous-endothélium exposé, même dans des conditions de fort flux sanguin. Plus le flux est rapide, plus le vWF s'étire sous l'effet des contraintes de cisaillement et expose davantage de sites de liaison à GPIb — un mécanisme adapté aux artères de petit calibre.</p>
+<p>Le déficit congénital en GPIb = <strong>syndrome de Bernard-Soulier</strong> : thrombopathie rare avec macrothrombocytes, adhérence impossible malgré un nombre de plaquettes quasi-normal → syndrome hémorragique sévère. À différencier de la maladie de Willebrand (le vWF est absent) : dans Bernard-Soulier, c'est le récepteur GPIb qui manque. Le test de référence : agrégation anormale à la ristocétine (car la ristocétine mime l'interaction GPIb–vWF).</p>
+<div class="expl-bq">Ex : la ristocétine est un antibiotique retiré du marché car il provoquait des thrombopénies par activation plaquettaire. En laboratoire, elle est utilisée comme inducteur d'agrégation : en présence de plasma riche en vWF, la ristocétine agglutine les plaquettes normales via GPIb–vWF. Absence d'agglutination → déficit en vWF ou en GPIb.</div>
+<hr class="expl-sep">
+<h4>🔵 GPIIb/IIIa — le récepteur de l'agrégation</h4>
+<p>GPIIb/IIIa (intégrine αIIbβ₃) est le récepteur le plus abondant (~80 000 copies/plaquette). Sur une plaquette <em>non activée</em>, GPIIb/IIIa est en conformation de faible affinité (ne fixe pas le fibrinogène). Lors de l'activation par l'ADP, la thrombine, le collagène ou le TXA₂, un signal intracellulaire ("inside-out signaling") modifie sa conformation → haute affinité pour le <strong>fibrinogène</strong> et le vWF.</p>
+<p>Le fibrinogène est bivalent : il se lie simultanément aux GPIIb/IIIa de deux plaquettes différentes, créant des <strong>ponts inter-plaquettaires</strong>. C'est la base moléculaire de l'agrégation. Le déficit congénital = <strong>thrombasthénie de Glanzmann</strong> : aucune agrégation malgré une adhérence normale et un nombre de plaquettes normal. Les inhibiteurs de GPIIb/IIIa (abciximab, tirofiban) sont utilisés en cardiologie interventionnelle.</p>
+<div class="expl-bq">Ex : thrombasthénie de Glanzmann — agrégométrie : pas de réponse à l'ADP, collagène, thrombine, TXA₂ ; réponse normale à la ristocétine (car GPIb intact). Phénotype clinique : saignements muqueux sévères (gingivorragies, épistaxis) mais pas d'hémarthroses (la coagulation est normale). Traitement : transfusion plaquettaire si épisode hémorragique grave.</div>
+<hr class="expl-sep">
+<h4>🔵 ADAMTS13 et vWF — régulation par protéolyse</h4>
+<p>Le vWF circule dans le plasma sous forme de multimères de taille variable. Les <strong>grands multimères</strong> (UL-vWF = ultra-large) sont les plus actifs hémostatiquement car ils ont plus de sites de liaison à GPIb. Ils sont libérés lors de la stimulation endothéliale (stress, infection, chirurgie). <strong>ADAMTS13</strong> est la protéase qui clive ces grands multimères en fragments de taille plus petite et moins thrombogènes. Ce clivage se produit sous l'effet des contraintes de cisaillement dans la circulation.</p>
+<p>En cas de <strong>déficit sévère en ADAMTS13</strong> (&lt;10% d'activité) — par mutation constitutionnelle (PTT congénital de Upshaw-Schulman) ou par auto-anticorps (PTT acquis = maladie de Moschcowitz) — les UL-vWF s'accumulent dans le plasma → microthrombi plaquettaires diffus dans la microcirculation → <strong>purpura thrombotique thrombocytopénique (PTT)</strong>. Urgence hématologique : pentade clinique (anémie hémolytique mécanique + thrombopénie + fièvre + neurologique + rénal) → échanges plasmatiques en urgence.</p>
+<div class="expl-bq">Ex : PTT acquis — une jeune femme présente thrombopénie profonde + anémie hémolytique (schizocytes au frottis) + confusion + fièvre → ADAMTS13 &lt;10% + anticorps anti-ADAMTS13 → PTT → échanges plasmatiques urgents (apportent ADAMTS13 + éliminent les anticorps). Sans traitement : mortalité &gt;90%. Avec traitement : mortalité &lt;15%.</div>
+</div>
+<div class="flash-block" data-answer="GPIb = adhérence (se lie au vWF) → déficit = Bernard-Soulier. GPIIb/IIIa = agrégation (se lie au fibrinogène après activation, inside-out) → déficit = Glanzmann. ADAMTS13 = protéase clivant les grands multimères de vWF → déficit = PTT (thrombopénie + anémie hémolytique mécanique + schizocytes). Ristocétine teste GPIb-vWF.">
+  <p class="flash-q">⚡ Flash — rôle de GPIb, GPIIb/IIIa et ADAMTS13 + maladie liée à chaque déficit</p>
+  <div class="flash-input-row">
+    <input class="flash-input" type="text" placeholder="Votre réponse…">
+    <button class="qcm-validate" onclick="validateFlash(this)">Vérifier</button>
+  </div>
+  <div class="qcm-explanation"></div>
+</div>
+</div>
+</div>
+
+<div class="slide" id="slide-3">
+<div class="content-slide">
+<h2>III — Déroulement de l'hémostase primaire</h2>
+<div class="def-box"><strong>Thrombus blanc (clou plaquettaire)</strong> — agrégat de plaquettes activées formé à la brèche vasculaire. Appelé "blanc" car sans globules rouges, à la différence du thrombus rouge (coagulation + fibrine + GR emprisonnés). Se forme en 3 à 5 minutes. Fragile : stabilisé par la coagulation.</div>
+<div class="expl-wrap">
+<h4>🔵 Temps 1 — Vasoconstriction réflexe</h4>
+<p>Immédiatement après la lésion vasculaire, la paroi du vaisseau se contracte réflexivement. Cette vasoconstriction est déclenchée par des médiateurs nerveux (réflexe axonique), endothéliaux (endothéline-1) et plaquettaires (thromboxane A₂ TXA₂, sérotonine libérés par les premières plaquettes activées). Elle réduit le calibre vasculaire et ralentit le flux sanguin, favorisant l'accumulation de plaquettes à la brèche.</p>
+<p>Dans les très petits capillaires, la vasoconstriction peut suffire à stopper un saignement minime. Cliniquement, le blanchissement local immédiat autour d'une coupure traduit cette vasoconstriction. L'aspirine ne perturbe pas cette étape (elle bloque COX-1 plaquettaire donc le TXA₂, mais l'endothéline et le réflexe nerveux sont préservés).</p>
+<hr class="expl-sep">
+<h4>🔵 Temps 2 — Adhérence plaquettaire au sous-endothélium</h4>
+<p>L'adhérence est l'accrochage des premières plaquettes circulantes au sous-endothélium exposé par la lésion. Elle est médiée principalement par le <strong>vWF</strong> qui forme des ponts entre la <strong>GPIb plaquettaire</strong> et le collagène sous-endothélial. Sous l'effet du flux sanguin, le vWF change de conformation (s'étire), révélant davantage de sites de fixation à GPIb — mécanisme particulièrement efficace dans les artères à haut débit.</p>
+<p>Dans les veines (faible cisaillement), l'adhérence peut se faire directement via des récepteurs au collagène (GPVI, GPIa/IIa) sans vWF. Dans les artères (fort cisaillement), la GPIb–vWF est indispensable. Le collagène sub-endothélial joue aussi un rôle activateur direct en se liant à GPVI, déclenchant l'activation des plaquettes adhérentes.</p>
+<hr class="expl-sep">
+<h4>🔵 Temps 3 — Activation plaquettaire : sécrétion des granules</h4>
+<p>L'adhérence déclenche l'activation des plaquettes : changement de forme (discoïde → sphérique + pseudopodes), et sécrétion des granules de stockage. Les <strong>granules α</strong> libèrent du vWF, du fibrinogène, de la P-sélectine (adhérence leucocytaire), du PDGF, du FV. Les <strong>granules denses (δ)</strong> libèrent de l'<strong>ADP</strong> (activateur plaquettaire via P2Y12), de la <strong>sérotonine</strong> (vasoconstriction), du calcium et de l'ATP.</p>
+<p>Simultanément, les phospholipides membranaires sont convertis en <strong>TXA₂</strong> par la COX-1 → TXA₂ amplifie la vasoconstriction et recrute de nouvelles plaquettes. C'est cette boucle de rétroactivation (ADP + TXA₂ → activation de nouvelles plaquettes → libération de plus d'ADP et de TXA₂) qui permet la construction rapide du clou plaquettaire. La thrombine générée par la coagulation est également le plus puissant activateur plaquettaire connu (via PAR-1 et PAR-4).</p>
+<div class="expl-bq">Ex : médicaments anti-plaquettaires et leurs cibles — aspirine : inhibe COX-1 → ↓TXA₂ (irréversible, 7–10 j) ; clopidogrel/prasugrel/ticagrelor : bloquent P2Y12 (récepteur ADP) ; abciximab/tirofiban : bloquent GPIIb/IIIa (en aval). Association aspirine + P2Y12 = double antiagrégation après IDM ou stent coronaire.</div>
+<hr class="expl-sep">
+<h4>🔵 Temps 4 — Agrégation et formation du clou plaquettaire</h4>
+<p>L'activation plaquettaire déclenche un changement conformationnel de GPIIb/IIIa (inside-out signaling via la phospholipase C → DAG → PKC → activation de la taline → conformation ouverte de GPIIb/IIIa). GPIIb/IIIa acquiert une haute affinité pour le <strong>fibrinogène</strong>, qui forme des ponts covalents entre plaquettes adjacentes en présence de calcium.</p>
+<p>L'agrégation est auto-entretenue par la libération croissante d'ADP, de TXA₂ et par la thrombine générée localement. Le clou plaquettaire grossit progressivement jusqu'à obturer la brèche. Ce premier bouchon est stabilisé par la coagulation (réseau de fibrine reticulé par FXIIIa) pour former le thrombus rouge définitif. Physiologiquement, des inhibiteurs endothéliaux (PGI₂, NO) limitent l'extension du thrombus aux vaisseaux sains adjacents.</p>
+<div class="expl-bq">Ex : activateurs de l'agrégation à mémoriser (ECN++) : collagène (adhérence/activation), ADP (granules denses → P2Y12), thrombine (via PAR-1, le plus puissant), TXA₂ (via COX-1), sérotonine et adrénaline (amplification). Inhibiteurs : PGI₂ (endothélium), NO (endothélium), aspirine (↓TXA₂), clopidogrel (↓ADP/P2Y12).</div>
+</div>
+<div class="flash-block" data-answer="4 temps déroulement HP : (1) vasoconstriction (TXA₂, sérotonine, endothéline) ; (2) adhérence plaquettaire (GPIb–vWF–collagène, flux-dépendant) ; (3) activation (granules α = vWF/fibrinogène + granules denses = ADP/sérotonine + TXA₂ via COX-1) ; (4) agrégation (GPIIb/IIIa haute affinité + fibrinogène ponts Ca²⁺-dépendants) → thrombus blanc → stabilisé par fibrine.">
+  <p class="flash-q">⚡ Flash — décrivez les 4 temps du déroulement de l'hémostase primaire</p>
+  <div class="flash-input-row">
+    <input class="flash-input" type="text" placeholder="Votre réponse…">
+    <button class="qcm-validate" onclick="validateFlash(this)">Vérifier</button>
+  </div>
+  <div class="qcm-explanation"></div>
+</div>
+</div>
+</div>
+
+<div class="slide" id="slide-4">
+<div class="content-slide">
+<h2>IV — Coagulation : facteurs et vitamine K</h2>
+<div class="def-box"><strong>Proenzyme (zymogène)</strong> — forme inactive d'une enzyme circulant dans le plasma. Activée par protéolyse par un facteur activé en amont dans la cascade. Notation : FVII = inactif, FVIIa = actif (suffixe "a"). <strong>Exception</strong> : FV et FVIII ne sont pas des proenzymes mais des cofacteurs (activés par la thrombine).</div>
+<div class="expl-wrap">
+<h4>🔵 Les facteurs de coagulation — synthèse hépatique et cascade enzymatique</h4>
+<p>Les facteurs de coagulation (numérotés FI à FXIII selon l'ordre de leur découverte) sont des protéines circulant dans le plasma sous forme inactive (proenzymes), toutes synthétisées par le <strong>foie</strong>. En cas d'insuffisance hépatocellulaire sévère (hépatite fulminante, cirrhose décompensée), leur synthèse est diminuée → TP bas + TCA allongé. La gravité de l'atteinte hépatique est évaluée par le dosage du FV (qui n'est pas vitamine K-dépendant) et le facteur II.</p>
+<p>Chaque facteur activé peut activer au moins un autre facteur en aval, créant une <strong>cascade enzymatique d'amplification</strong> : une infime quantité de FT/FVIIa suffit à déclencher une réaction qui, par amplification successive, génère finalement une quantité massive de thrombine (le "burst" de thrombine). Cette amplification est essentielle : sans elle, le caillot serait trop petit pour stopper une hémorragie.</p>
+<div class="expl-bq">Ex : la thrombine peut coaguler 1 000 fois son poids en fibrinogène. Une molécule de FXa peut générer des milliers de molécules de thrombine via le complexe prothrombinase. C'est cette amplification exponentielle qui explique que même un déficit partiel en un facteur (ex : FVIII à 30% dans une hémophilie modérée) peut perturber significativement la coagulation.</div>
+<hr class="expl-sep">
+<h4>🔵 Les six facteurs vitamine K-dépendants — mécanisme de γ-carboxylation</h4>
+<p>Quatre facteurs procoagulants (<strong>FII, FVII, FIX, FX</strong>) et deux inhibiteurs (<strong>protéine C, protéine S</strong>) nécessitent la vitamine K pour être fonctionnels. La vitamine K est un cofacteur de la <strong>γ-carboxylase</strong>, enzyme qui ajoute un groupement carboxyl sur des résidus acide glutamique spécifiques → formation de résidus γ-carboxyglutamate (Gla).</p>
+<p>Les domaines Gla ont une propriété unique : en présence de <strong>calcium (Ca²⁺)</strong>, ils se lient aux phospholipides anioniques (phosphatidylsérine) exposés à la surface des <strong>plaquettes activées</strong>. Cette fixation membranaire concentre les facteurs vitamine K-dépendants à la surface des plaquettes, au niveau de la brèche vasculaire, et permet leur interaction rapide avec leurs substrats. Sans domaine Gla fonctionnel (carence en vitamine K, AVK), les facteurs sont synthétisés mais inefficaces car ils ne peuvent pas se concentrer aux membranes.</p>
+<div class="expl-bq">Ex mémorisation ECN : "<strong>1972</strong>" — les facteurs vitamine K-dépendants sont FI (= FII prothrombine), FV (non, FV n'est pas vitamine K)... Méthode simple : FII, FVII, FIX, FX + Protéine C + Protéine S = les 6. Moyen mnémotechnique : "2-7-9-10 + C + S" ou "Prochain Concert à Paris Ce Soir".</div>
+<hr class="expl-sep">
+<h4>🔵 Les AVK — mécanisme et surveillance</h4>
+<p>Les <strong>antagonistes de la vitamine K</strong> (warfarine, acénocoumarol, fluindione) inhibent la <strong>vitamine K époxyde réductase</strong>, l'enzyme qui régénère la vitamine K active après son utilisation comme cofacteur. Résultat : la γ-carboxylation est bloquée → FII, FVII, FIX, FX, protéine C et protéine S sont synthétisés mais non fonctionnels.</p>
+<p>Les demi-vies des facteurs diffèrent : FVII (6h) chute en premier → le TP/TQ s'abaisse dès 24h de traitement. FIX (18–24h) et FX (36–72h) chutent ensuite. FII (60h) chute en dernier. La <strong>surveillance</strong> des AVK se fait par l'<strong>INR</strong> (International Normalized Ratio), cible 2–3 pour la plupart des indications (FA, MTEV), 2,5–3,5 pour certaines prothèses valvulaires. Surdosage grave : PPSB (concentré de complexe prothrombinique = FII + FVII + FIX + FX) + vitamine K IV.</p>
+<div class="expl-bq">Ex : initiation d'un traitement par AVK — les premières 48h sont paradoxalement pro-thrombotiques car la protéine C (demi-vie 8h) chute avant les facteurs procoagulants. C'est pourquoi les AVK sont initiés sous couverture d'héparine jusqu'à un INR thérapeutique stable pendant 2 jours consécutifs.</div>
+<hr class="expl-sep">
+<h4>🔵 FV — différencier insuffisance hépatique et hypovitaminose K</h4>
+<p>Le FV est synthétisé par le foie mais <strong>n'est PAS vitamine K-dépendant</strong>. Il est donc diminué en cas d'insuffisance hépatocellulaire sévère, mais <strong>normal en cas de carence/antagonisme vitamine K</strong>. Cette différence est fondamentale en clinique pour distinguer deux situations de TP bas + TCA allongé :</p>
+<p><strong>FV normal + TP bas + TCA allongé</strong> → hypovitaminose K ou AVK (seuls FII, VII, IX, X sont diminués, le foie fonctionne). <strong>FV bas + TP bas + TCA allongé</strong> → insuffisance hépatocellulaire (le foie ne synthétise plus rien, y compris le FV non vitamine K-dépendant). En pratique, dosage du FII et du FV suffit à distinguer ces deux syndromes (ECN++).</p>
+<div class="expl-bq">Ex : patient avec TP à 40% et TCA à 2× la normale — FV dosé à 90% (normal) → probable hypovitaminose K ou AVK non signalé. FV dosé à 25% → insuffisance hépatique sévère → bilan hépatique, recherche cause, évaluation transplantation hépatique si hépatite fulminante.</div>
+</div>
+<div class="flash-block" data-answer="6 facteurs vitamine K-dépendants : FII, FVII, FIX, FX (procoagulants) + protéine C + protéine S (inhibiteurs). Mécanisme : γ-carboxylation des résidus Gla → fixation aux phospholipides plaquettaires via Ca²⁺. AVK bloquent vitamine K époxyde réductase. FV non vitamine K-dépendant : si FV bas → insuffisance hépatique ; si FV normal → hypovitaminose K/AVK.">
+  <p class="flash-q">⚡ Flash — 6 facteurs vitamine K, mécanisme, et comment distinguer insuffisance hépatique vs AVK grâce au FV ?</p>
+  <div class="flash-input-row">
+    <input class="flash-input" type="text" placeholder="Votre réponse…">
+    <button class="qcm-validate" onclick="validateFlash(this)">Vérifier</button>
+  </div>
+  <div class="qcm-explanation"></div>
+</div>
+</div>
+</div>
+
+<div class="slide" id="slide-5">
+<div class="content-slide">
+<h2>V — Voie classique de la coagulation in vitro</h2>
+<div class="def-box"><strong>Voie extrinsèque</strong> — déclenchée par le FT (sous-endothélium), explorée par le <strong>TP/TQ</strong> (FVII + FX + FV + FII + fibrinogène). <strong>Voie intrinsèque</strong> — déclenchée par le système contact in vitro, explorée par le <strong>TCA</strong> (FXII + FXI + FIX + FVIII + FX + FV + FII + fibrinogène). Les deux convergent vers une voie commune finale (FX → prothrombinase → thrombine → fibrine).</div>
+<div class="expl-wrap">
+<h4>🔵 Le schéma classique — un outil pour interpréter les tests biologiques</h4>
+<p>Le schéma "à deux voies" de la coagulation a été développé dans les années 1960 pour expliquer les résultats des tests de laboratoire. Ce schéma est <strong>artificiel</strong> : il reflète les mécanismes in vitro lors des tests biologiques, mais ne reflète pas ce qui se passe in vivo lors d'une lésion vasculaire réelle. Son intérêt est purement diagnostique : il permet d'interpréter un TP ou un TCA anormal et de cibler le déficit responsable.</p>
+<p>Les deux voies convergent vers une <strong>voie commune</strong> : le FX activé (FXa) forme avec FVa, des phospholipides et du calcium le <strong>complexe prothrombinase</strong>, qui active la prothrombine (FII) en thrombine (FIIa). La thrombine transforme ensuite le fibrinogène en fibrine, qui polymérise et est réticulée par FXIIIa pour former un caillot solide.</p>
+<div class="expl-bq">Ex : TP bas isolé (TCA normal) → déficit en FVII (voie extrinsèque seule). TCA allongé isolé (TP normal) → déficit en VIII/IX/XI (voie intrinsèque seule). TP bas + TCA allongé → déficit en FX, FV, FII, fibrinogène (voie commune) ou insuffisance hépatocellulaire ou AVK (qui touchent FVII, IX, X, II = les deux voies).</div>
+<hr class="expl-sep">
+<h4>🔵 Le Temps de Quick (TQ / TP) — méthode, facteurs, interprétation</h4>
+<p>Le TQ consiste à mesurer le temps de formation du caillot après addition à du plasma citraté d'un excès de <strong>thromboplastine calcique</strong> (contenant FT + phospholipides + calcium). Normalement ce temps est de 12–13 secondes. En France, on l'exprime après étalonnage en <strong>pourcentage (70–100%)</strong> et on l'appelle improprement "taux de prothrombine (TP)" — bien qu'il ne mesure pas seulement la prothrombine mais tout la voie extrinsèque + voie commune.</p>
+<p>Le TQ explore : <strong>FVII</strong> (voie extrinsèque), <strong>FX, FV, FII, fibrinogène</strong> (voie commune). Il <strong>n'explore pas</strong> FVIII, FIX, FXI, FXII. Il est allongé par les AVK (tous les facteurs vitamine K-dépendants sauf FV). Il n'est pas sensible aux héparines normales (sauf doses très élevées). Pour la surveillance des AVK, on utilise l'<strong>INR</strong> (ratio international normalisé) = (TP malade/TP témoin)^ISI, cible 2–3.</p>
+<div class="expl-bq">Ex piège : "TP = taux de prothrombine" est un terme trompeur. Le TP ne mesure pas seulement la prothrombine (FII). Il mesure FVII + FX + FV + FII + fibrinogène. Un TP bas peut être dû à un déficit isolé en FVII (le plus fréquent en cas de début d'AVK ou de déficit congénital) ou à un déficit en FV (insuffisance hépatique), ou à plusieurs facteurs (hypovitaminose K).</div>
+<hr class="expl-sep">
+<h4>🔵 Le TCA — méthode, facteurs, pièges cliniques</h4>
+<p>Le TCA est réalisé en activant la voie intrinsèque par kaolin, silice micronisée ou acide ellagique (contact) + céphaline (phospholipide remplaçant les plaquettes). Valeur normale : rapport M/T ≤ 1,2 (adulte), ≤ 1,3 (enfant). Il explore : FXII, FXI, KHPM, prékallicréine (système contact), FIX, FVIII (complexe antihémophilique), FX, FV, FII, fibrinogène (voie commune).</p>
+<p><strong>Point capital ECN</strong> : le TCA n'est PAS allongé en cas de thrombopénie ou de thrombopathie (la céphaline remplace les phospholipides plaquettaires dans le test). Un TCA allongé isolé évoque : (1) déficit FVIII/FIX/FXI → risque hémorragique réel ; (2) déficit FXII/KHPM/prékallicréine → AUCUN risque hémorragique (ces facteurs jouent un rôle in vitro mais pas in vivo) ; (3) anticoagulant circulant lupique → risque THROMBOTIQUE paradoxal. Le <strong>test de correction</strong> (mélange 50/50 plasma malade + plasma normal) distingue : correction = déficit en facteur ; non-correction = anticoagulant circulant.</p>
+<div class="expl-bq">Ex : patient avec TCA allongé avant chirurgie → mélange 50/50 → TCA se corrige → déficit en facteur → dosage FVIII : 2% → hémophilie A sévère → chirurgie contre-indiquée sans remplacement en FVIII. Si TCA ne se corrige pas → anticoagulant lupique → pas de risque hémorragique mais risque thrombotique → bilan thrombophilie + adapter la prise en charge chirurgicale.</div>
+</div>
+<div class="flash-block" data-answer="TP explore : FVII (extrinsèque) + FX/FV/FII/fibrinogène (commune). Sensible AVK. TCA explore : FXII/FXI/KHPM/PK (contact) + FIX/FVIII (antihémophilique) + FX/FV/FII/fibrinogène (commune). Non allongé si thrombopénie. Test de correction : corrige si déficit facteur ; ne corrige pas si anticoagulant circulant. FXII déficit = TCA allongé SANS risque hémorragique.">
+  <p class="flash-q">⚡ Flash — quels facteurs exploreT le TP et le TCA ? Que signifie un TCA allongé isolé ?</p>
+  <div class="flash-input-row">
+    <input class="flash-input" type="text" placeholder="Votre réponse…">
+    <button class="qcm-validate" onclick="validateFlash(this)">Vérifier</button>
+  </div>
+  <div class="qcm-explanation"></div>
+</div>
+</div>
+</div>
+
+<div class="slide" id="slide-6">
+<div class="content-slide">
+<h2>VI — Coagulation in vivo : voie directe et amplification</h2>
+<div class="def-box"><strong>Facteur tissulaire (FT)</strong> — protéine exprimée constitutivement par les fibroblastes et cellules périvasculaires du sous-endothélium (jamais en contact avec le sang en conditions normales). Récepteur pour FVII/FVIIa : le complexe FT/FVIIa est le déclencheur universel de la coagulation in vivo. <strong>Ténase</strong> — complexe FIXa/FVIIIa/phospholipides/Ca²⁺ qui active FX. Phase d'amplification principale.</div>
+<div class="expl-wrap">
+<h4>🔵 L'élément déclencheur unique in vivo — le facteur tissulaire</h4>
+<p>Contrairement au schéma classique à deux voies, il est maintenant établi que <strong>la coagulation in vivo est déclenchée exclusivement par le facteur tissulaire (FT)</strong>. Le FT est une protéine transmembranaire exprimée de façon constitutive par les fibroblastes, myocytes lisses et cellules mésenchymateuses du sous-endothélium — toutes des cellules normalement séparées du flux sanguin par l'endothélium intact. D'autres cellules (monocytes, cellules endothéliales activées) peuvent l'exprimer en réponse à l'inflammation ou à un stimulus pathologique.</p>
+<p>Lors d'une lésion vasculaire, le sang entre en contact avec le FT sous-endothélial. Il existe à l'état basal dans le plasma une toute petite quantité de FVIIa déjà actif (0,1% du FVII total). Ce FVIIa se fixe immédiatement au FT, formant le complexe <strong>FT/FVIIa</strong>. Ce complexe clive ensuite le FVII inactif présent localement en FVIIa, amplifiant rapidement la quantité de complexe FT/FVIIa disponible. Le FT associé à des phospholipides est la <em>thromboplastine</em> utilisée au laboratoire pour mesurer le TP.</p>
+<div class="expl-bq">Ex : le sepsis sévère active les monocytes et les cellules endothéliales qui expriment massivement le FT → activation systémique de la coagulation → microthrombi diffus dans les organes → défaillance multiviscérale. C'est le mécanisme de la CIVD (coagulation intravasculaire disséminée) liée au sepsis. Traitement : traiter le sepsis, ± transfusion de PFC et plaquettes.</div>
+<hr class="expl-sep">
+<h4>🔵 Voie directe d'initiation FT/FVIIa</h4>
+<p>Le complexe FT/FVIIa active deux substrats directement :</p>
+<p><strong>FX → FXa</strong> (directement) : le FXa s'assemble avec FVa (activé par les premières traces de thrombine), des phospholipides plaquettaires et du calcium → <strong>complexe prothrombinase</strong> → active la prothrombine (FII) en thrombine (FIIa). Cette voie directe est très rapide mais génère une quantité de thrombine <em>insuffisante</em> pour former un caillot solide : elle est rapidement stoppée par le <strong>TFPI</strong> (tissue factor pathway inhibitor) qui inhibe FXa et le complexe FT/FVIIa.</p>
+<p><strong>FIX → FIXa</strong> : le FIXa formé par le complexe FT/FVIIa est crucial pour la voie d'amplification. Il s'associera ensuite avec FVIIIa pour former le complexe ténase et activer massivement FX. C'est ce deuxième effet (FT/FVIIa → FIXa) qui explique pourquoi l'hémophilie A (déficit FVIII) et l'hémophilie B (déficit FIX) sont des maladies hémorragiques graves : l'amplification est impossible sans ténase.</p>
+<div class="expl-bq">Ex : chez un hémophile A sévère (FVIII &lt;1%), la voie directe FT/FVIIa → FXa → prothrombinase fonctionne encore. Un thrombus initial se forme. Mais l'amplification est bloquée car FVIIIa est absent → le caillot est friable → il se lyse rapidement → saignement secondaire caractéristique de l'hémophilie (saignement retardé, qui reprend après 1-2h d'arrêt apparent).</div>
+<hr class="expl-sep">
+<h4>🔵 Voie d'amplification — la ténase et les boucles de rétroactivation</h4>
+<p>Les premières traces de thrombine générées par la voie directe activent en cascade : <strong>FV → FVa</strong> (complète la prothrombinase), <strong>FVIII → FVIIIa</strong> (complète la ténase), <strong>plaquettes</strong> (via PAR-1/PAR-4 → expose les phospholipides procoagulants), et <strong>FXI → FXIa</strong> (active FIX en FIXa supplémentaire).</p>
+<p>Le complexe <strong>ténase</strong> = FIXa + FVIIIa + phospholipides + Ca²⁺ — est 50–100 fois plus efficace que le complexe FT/FVIIa pour activer FX. Cette amplification par la ténase génère une quantité massive de FXa → explosion de thrombine ("thrombin burst") → fibrinoformation solide. La boucle FXI → FIXa → ténase → thrombine → FXIa constitue une rétro-activation positive qui amplifie le signal de façon exponentielle. Les boucles de rétroactivation (thrombine → FVa, FVIIIa, FXIa, plaquettes) sont essentielles : sans elles, le caillot serait trop fragile.</p>
+<div class="expl-bq">Ex : TFPI = inhibiteur de la voie du FT. Dès les premières traces de FXa formées, le TFPI forme un complexe TFPI-FXa-FT-FVIIa qui bloque la voie directe. Ceci explique que la voie directe seule génère peu de thrombine — l'amplification via FIX/FVIII est indispensable. Déficit en TFPI : aucune pathologie prothrombotique connue chez l'homme à ce jour (malgré son rôle anticoagulant).</div>
+</div>
+<div class="flash-block" data-answer="Déclencheur unique in vivo : FT (fibroblastes, myocytes) + FVIIa → complexe FT/FVIIa. Voie directe : FT/FVIIa → FX→FXa + FIX→FIXa → peu de thrombine (bloquée par TFPI). Amplification : thrombine trace → FV/FVIII/plaquettes activés + FXI→FIXa → ténase (FIXa+FVIIIa) → FXa massif → thrombin burst. Hémophilie A/B = déficit FVIII/FIX = pas de ténase = amplification impossible.">
+  <p class="flash-q">⚡ Flash — déclencheur in vivo + voie directe + voie d'amplification (ténase)</p>
+  <div class="flash-input-row">
+    <input class="flash-input" type="text" placeholder="Votre réponse…">
+    <button class="qcm-validate" onclick="validateFlash(this)">Vérifier</button>
+  </div>
+  <div class="qcm-explanation"></div>
+</div>
+</div>
+</div>
+
+<div class="slide" id="slide-7">
+<div class="content-slide">
+<h2>VII — Fibrinoformation, FXIII et inhibiteurs de la coagulation</h2>
+<div class="def-box"><strong>Thrombine (FIIa)</strong> — enzyme centrale de la coagulation, peut coaguler 1000× son poids de fibrinogène. Active aussi le FV, FVIII, FXI, FXIII et les plaquettes. <strong>FXIIIa</strong> — transglutaminase qui réticule les monomères de fibrine par des liaisons covalentes (isopeptidiques) entre les domaines D → caillot solide et insoluble.</div>
+<div class="expl-wrap">
+<h4>🔵 Fibrinoformation — les étapes de la construction du caillot</h4>
+<p>La thrombine est l'enzyme finale et centrale de la coagulation. Son principal substrat est le <strong>fibrinogène</strong>, glycoprotéine hépatique abondante (2–4 g/L). La thrombine protéolyse le fibrinogène en libérant deux petits peptides, les <strong>fibrinopeptides A et B</strong> (FPA et FPB), transformant ainsi le fibrinogène en <strong>monomères de fibrine</strong>.</p>
+<p>Les monomères de fibrine polymérisent spontanément et forment un réseau initial de fibrine <em>instable</em>, <em>fragile</em> et <em>soluble</em>. Ce réseau initial est un simple caillot mécanique. La <strong>consolidation</strong> du caillot est assurée par le FXIIIa (facteur XIII activé par la thrombine) : le FXIIIa est une transglutaminase qui établit des <strong>liaisons covalentes isopeptidiques</strong> entre les monomères de fibrine (notamment entre les domaines D de fibrinogènes adjacents), formant un réseau tridimensionnel solide et résistant aux protéases. Ce réseau insoluble emprisonne des globules rouges → <strong>thrombus rouge</strong>.</p>
+<div class="expl-bq">Ex : déficit congénital en FXIII (très rare) : le fibrinogène est transformé en fibrine et le caillot se forme normalement au début → le TP, le TCA et le fibrinogène sont normaux ! Mais le caillot est friable et se lyse spontanément en quelques heures. Diagnostic par test de lyse du caillot en milieu urée 5M. Manifestation clinique : chute du cordon ombilical tardive (signe classique), saignements post-traumatiques différés.</div>
+<hr class="expl-sep">
+<h4>🔵 Les trois systèmes inhibiteurs de la coagulation</h4>
+<p>La coagulation doit être précisément régulée pour éviter une extension excessive et dangereuse. Trois systèmes inhibiteurs agissent en synergie :</p>
+<p><strong>1. Antithrombine (AT)</strong> : sérine-protéase inhibitrice, principale inhibitrice de la thrombine et du FXa. Elle agit en se fixant irréversiblement aux sérine-protéases actives. Son action est augmentée ×1000 par les molécules d'<strong>héparan sulfate</strong> endothéliales (mécanisme physiologique) ou par les <strong>héparines thérapeutiques</strong> qui modifient la conformation de l'AT et la rendent beaucoup plus active. L'AT inhibe aussi partiellement FVIIa, FIXa et FXIa. Déficit en AT = thrombophilie sévère avec MTEV récidivante.</p>
+<p><strong>2. Système protéine C/protéine S (PC/PS)</strong> : la <strong>thrombomoduline</strong> (exprimée à la surface des CE saines) fixe la thrombine et la redirige vers l'activation de la <strong>protéine C (PC)</strong> (via EPCR = endothelial protein C receptor). La PC activée (PCa), avec son cofacteur la <strong>protéine S (PS)</strong>, protéolyse et inactive <strong>FVa et FVIIIa</strong> → arrêt de la prothrombinase et de la ténase. PC et PS sont vitamine K-dépendantes. Déficit en PC ou PS = thrombophilie veineuse récidivante.</p>
+<p><strong>3. TFPI (Tissue Factor Pathway Inhibitor)</strong> : inhibe la voie directe d'initiation. Il fixe FXa, puis le complexe FXa-TFPI inhibe le complexe FT/FVIIa, formant un complexe quaternaire TFPI/FXa/FT/FVIIa inactif. Ceci explique en partie pourquoi la voie directe seule génère peu de thrombine et pourquoi l'amplification via FIX/FVIII est indispensable. Aucune pathologie prothrombotique associée à un déficit en TFPI n'est connue à ce jour.</p>
+<div class="expl-bq">Ex : anticoagulants thérapeutiques et leurs cibles — héparine non fractionnée : potentialise l'AT → inhibe IIa + Xa (monitorer par TCA) ; HBPM : potentialise AT → inhibe surtout Xa (monitorer par anti-Xa) ; HNF/fondaparinux : anti-Xa pur ; dabigatran : inhibiteur direct de la thrombine (IIa) ; rivaroxaban/apixaban : inhibiteurs directs du FXa. Les AOD (anti-Xa et anti-IIa) ont des antidotes spécifiques : idarucizumab (anti-dabigatran), andexanet α (anti-Xa).</div>
+</div>
+<div class="flash-block" data-answer="Fibrinoformation : thrombine → fibrinogène → monomères fibrine (libère FPA + FPB) → polymérisation spontanée (caillot instable) → FXIIIa réticule liaisons covalentes inter-domaines D → caillot solide (thrombus rouge). 3 inhibiteurs : (1) Antithrombine (inhibe IIa+Xa, potentialisée par héparine) ; (2) PC/PS (thrombomoduline + PC → PCa + PS → inactive FVa + FVIIIa, vitamine K-dép) ; (3) TFPI (inhibe FT/FVIIa+FXa).">
+  <p class="flash-q">⚡ Flash — étapes de la fibrinoformation et les 3 inhibiteurs physiologiques de la coagulation</p>
+  <div class="flash-input-row">
+    <input class="flash-input" type="text" placeholder="Votre réponse…">
+    <button class="qcm-validate" onclick="validateFlash(this)">Vérifier</button>
+  </div>
+  <div class="qcm-explanation"></div>
+</div>
+</div>
+</div>
+
+<div class="slide" id="slide-qcm1">
+<div class="content-slide">
+<h2>🎯 QCM — Hémostase primaire et coagulation</h2>
+<p style="color:#9090b0;font-size:0.9rem;margin-bottom:1.5rem">10 questions · Réponse unique sauf mention contraire</p>
+
+<div class="qcm-block" data-answer="C,D,E">
+  <div class="q-text">Q1 — Parmi les propositions suivantes concernant l'hémostase primaire, laquelle(lesquelles) est(sont) exacte(s) ?</div>
+  <div class="qcm-options">
+    <div class="qcm-option" onclick="selectOption(this)"><span class="letter">A</span>La vasodilatation du vaisseau lésé favorise l'hémostase initiale</div>
+    <div class="qcm-option" onclick="selectOption(this)"><span class="letter">B</span>L'adhérence des plaquettes à l'endothélium est médiée par le vWF</div>
+    <div class="qcm-option" onclick="selectOption(this)"><span class="letter">C</span>Les plaquettes adhèrent essentiellement au collagène vasculaire (via le vWF)</div>
+    <div class="qcm-option" onclick="selectOption(this)"><span class="letter">D</span>L'agrégation plaquettaire implique des interactions entre GPIIb/IIIa et le fibrinogène</div>
+    <div class="qcm-option" onclick="selectOption(this)"><span class="letter">E</span>L'agrégation plaquettaire nécessite la présence de calcium</div>
+  </div>
+  <button class="qcm-validate" onclick="validateQCM(this,['C','D','E'],'A faux : c'est une vasoconstriction (pas vasodilatation). B faux : le vWF fait adhérer les plaquettes au sous-endothélium (pas à l'endothélium sain). C vrai : vWF fait le pont entre GPIb et collagène sous-endothélial. D vrai : GPIIb/IIIa–fibrinogène = base de l'agrégation. E vrai : Ca²⁺ indispensable pour la fixation du fibrinogène à GPIIb/IIIa.')">Valider</button>
+  <div class="qcm-explanation"></div>
+</div>
+
+<div class="qcm-block" data-answer="A">
+  <div class="q-text">Q2 — Parmi les propositions suivantes concernant la coagulation, laquelle est exacte ?</div>
+  <div class="qcm-options">
+    <div class="qcm-option" onclick="selectOption(this)"><span class="letter">A</span>Elle a lieu physiologiquement à la surface des plaquettes activées</div>
+    <div class="qcm-option" onclick="selectOption(this)"><span class="letter">B</span>Elle implique des protéines circulantes constitutionnellement actives</div>
+    <div class="qcm-option" onclick="selectOption(this)"><span class="letter">C</span>Elle nécessite des ions magnésium</div>
+    <div class="qcm-option" onclick="selectOption(this)"><span class="letter">D</span>Elle implique deux proenzymes : le FVIII et le FIX</div>
+    <div class="qcm-option" onclick="selectOption(this)"><span class="letter">E</span>Elle nécessite de la vitamine K pour tous les facteurs impliqués</div>
+  </div>
+  <button class="qcm-validate" onclick="validateQCM(this,['A'],'A vrai : la coagulation a lieu principalement à la surface des plaquettes activées (phospholipides anioniques). B faux : les facteurs circulent sous forme de proenzymes INACTIVES. C faux : c'est le calcium (Ca²⁺) et non le magnésium. D faux : FV et FVIII ne sont pas des proenzymes mais des cofacteurs (non vitamine K-dépendants). E faux : seuls 4 facteurs procoagulants + PC + PS nécessitent la vitamine K.')">Valider</button>
+  <div class="qcm-explanation"></div>
+</div>
+
+<div class="qcm-block" data-answer="E">
+  <div class="q-text">Q3 — Quel déficit en facteur de la coagulation n'est PAS associé à un risque hémorragique majoré ?</div>
+  <div class="qcm-options">
+    <div class="qcm-option" onclick="selectOption(this)"><span class="letter">A</span>Déficit en FVII</div>
+    <div class="qcm-option" onclick="selectOption(this)"><span class="letter">B</span>Déficit en FV</div>
+    <div class="qcm-option" onclick="selectOption(this)"><span class="letter">C</span>Déficit en FX</div>
+    <div class="qcm-option" onclick="selectOption(this)"><span class="letter">D</span>Déficit en FXI</div>
+    <div class="qcm-option" onclick="selectOption(this)"><span class="letter">E</span>Déficit en FXII</div>
+  </div>
+  <button class="qcm-validate" onclick="validateQCM(this,['E'],'E vrai : le FXII (facteur de Hageman) n'a aucun rôle dans l'hémostase in vivo. Son déficit allonge le TCA mais ne provoque aucun saignement. De même, KHPM et prékallicréine : TCA allongé, pas de risque hémorragique. Point ECN piège classique. A, B, C, D : déficits associés à un risque hémorragique réel (de sévérité variable).')">Valider</button>
+  <div class="qcm-explanation"></div>
+</div>
+
+<div class="qcm-block" data-answer="B,D,E">
+  <div class="q-text">Q4 — Lors d'un traitement par AVK, quelle(s) protéine(s) a(ont) une moins bonne capacité à se fixer aux phospholipides plaquettaires ?</div>
+  <div class="qcm-options">
+    <div class="qcm-option" onclick="selectOption(this)"><span class="letter">A</span>Fibrinogène</div>
+    <div class="qcm-option" onclick="selectOption(this)"><span class="letter">B</span>FII (prothrombine)</div>
+    <div class="qcm-option" onclick="selectOption(this)"><span class="letter">C</span>FV</div>
+    <div class="qcm-option" onclick="selectOption(this)"><span class="letter">D</span>Protéine S</div>
+    <div class="qcm-option" onclick="selectOption(this)"><span class="letter">E</span>Protéine C</div>
+  </div>
+  <button class="qcm-validate" onclick="validateQCM(this,['B','D','E'],'Les AVK bloquent la γ-carboxylation (domaines Gla) → les facteurs vitamine K-dépendants ne peuvent plus se fixer aux phospholipides plaquettaires. B (FII), D (PS), E (PC) sont tous vitamine K-dépendants. A (fibrinogène) : non vitamine K-dépendant, se fixe via GPIIb/IIIa. C (FV) : cofacteur non vitamine K-dépendant, mais activé par la thrombine → pas affecté par les AVK.')">Valider</button>
+  <div class="qcm-explanation"></div>
+</div>
+
+<div class="qcm-block" data-answer="A,C">
+  <div class="q-text">Q5 — Quelle(s) cellule(s) exprime(nt) constitutivement du facteur tissulaire (FT) à sa(leur) surface ?</div>
+  <div class="qcm-options">
+    <div class="qcm-option" onclick="selectOption(this)"><span class="letter">A</span>Fibroblaste</div>
+    <div class="qcm-option" onclick="selectOption(this)"><span class="letter">B</span>Leucocyte</div>
+    <div class="qcm-option" onclick="selectOption(this)"><span class="letter">C</span>Cellule mésenchymateuse (myocyte lisse)</div>
+    <div class="qcm-option" onclick="selectOption(this)"><span class="letter">D</span>Cellule endothéliale</div>
+    <div class="qcm-option" onclick="selectOption(this)"><span class="letter">E</span>Monocyte</div>
+  </div>
+  <button class="qcm-validate" onclick="validateQCM(this,['A','C'],'A et C vrais : fibroblastes et cellules périvasculaires (myocytes lisses, cellules mésenchymateuses) expriment le FT de façon CONSTITUTIVE (permanente) mais ne sont normalement pas en contact avec le sang. D faux : les CE en contact avec le sang expriment le FT seulement quand elles sont ACTIVÉES (inflammation). E faux : les monocytes n'expriment le FT que lorsqu'ils sont stimulés (endotoxines, cytokines).')">Valider</button>
+  <div class="qcm-explanation"></div>
+</div>
+
+<div class="qcm-block" data-answer="E">
+  <div class="q-text">Q6 — Quel facteur de la coagulation permet de consolider le caillot de fibrine initialement formé par la thrombine ?</div>
+  <div class="qcm-options">
+    <div class="qcm-option" onclick="selectOption(this)"><span class="letter">A</span>FVa</div>
+    <div class="qcm-option" onclick="selectOption(this)"><span class="letter">B</span>FVIIIa</div>
+    <div class="qcm-option" onclick="selectOption(this)"><span class="letter">C</span>FIXa</div>
+    <div class="qcm-option" onclick="selectOption(this)"><span class="letter">D</span>FXIa</div>
+    <div class="qcm-option" onclick="selectOption(this)"><span class="letter">E</span>FXIIIa</div>
+  </div>
+  <button class="qcm-validate" onclick="validateQCM(this,['E'],'E vrai : le FXIIIa (activé par la thrombine) est une transglutaminase qui établit des liaisons covalentes isopeptidiques entre les monomères de fibrine (domaines D), transformant le caillot friable en réseau solide et résistant à la fibrinolyse. Déficit en FXIII = caillot fragile, TP/TCA normaux, test de lyse en urée 5M.')">Valider</button>
+  <div class="qcm-explanation"></div>
+</div>
+
+<div class="qcm-block" data-answer="B,D,E">
+  <div class="q-text">Q7 — Quel(s) élément(s) impliqué(s) dans l'hémostase nécessite(nt) de la vitamine K pour être actif(s) ?</div>
+  <div class="qcm-options">
+    <div class="qcm-option" onclick="selectOption(this)"><span class="letter">A</span>Antithrombine</div>
+    <div class="qcm-option" onclick="selectOption(this)"><span class="letter">B</span>Protéine C</div>
+    <div class="qcm-option" onclick="selectOption(this)"><span class="letter">C</span>Facteur V</div>
+    <div class="qcm-option" onclick="selectOption(this)"><span class="letter">D</span>Protéine S</div>
+    <div class="qcm-option" onclick="selectOption(this)"><span class="letter">E</span>Facteur II (prothrombine)</div>
+  </div>
+  <button class="qcm-validate" onclick="validateQCM(this,['B','D','E'],'B vrai : protéine C = inhibiteur vitamine K-dépendant. D vrai : protéine S = cofacteur vitamine K-dépendant. E vrai : FII (prothrombine) = vitamine K-dépendant. A faux : antithrombine N'est PAS vitamine K-dépendante (elle n'a pas de domaine Gla). C faux : FV n'est PAS vitamine K-dépendant → clé pour distinguer insuffisance hépatique (FV bas) vs AVK (FV normal).')">Valider</button>
+  <div class="qcm-explanation"></div>
+</div>
+
+<div class="qcm-block" data-answer="D">
+  <div class="q-text">Q8 — Parmi les propositions concernant le TCA, laquelle est exacte ?</div>
+  <div class="qcm-options">
+    <div class="qcm-option" onclick="selectOption(this)"><span class="letter">A</span>Il explore la voie extrinsèque de la coagulation</div>
+    <div class="qcm-option" onclick="selectOption(this)"><span class="letter">B</span>Il est perturbé si le rapport M/T est supérieur à 1,10</div>
+    <div class="qcm-option" onclick="selectOption(this)"><span class="letter">C</span>Il est allongé en cas de thrombopénie isolée</div>
+    <div class="qcm-option" onclick="selectOption(this)"><span class="letter">D</span>Il est allongé par la présence de dabigatran</div>
+    <div class="qcm-option" onclick="selectOption(this)"><span class="letter">E</span>Il est raccourci en présence d'un lupus anticoagulant</div>
+  </div>
+  <button class="qcm-validate" onclick="validateQCM(this,['D'],'D vrai : le dabigatran (inhibiteur direct de la thrombine = anti-IIa) allonge le TCA (et aussi le temps de thrombine). A faux : le TCA explore la voie INTRINSÈQUE (+ voie commune). B faux : seuil = M/T > 1,2 (adulte) et > 1,3 (enfant), pas 1,10. C faux : la céphaline remplace les phospholipides plaquettaires dans le test → TCA non allongé par thrombopénie. E faux : le lupus anticoagulant ALLONGE le TCA (il inhibe les phospholipides du test).')">Valider</button>
+  <div class="qcm-explanation"></div>
+</div>
+
+<div class="qcm-block" data-answer="C">
+  <div class="q-text">Q9 — Parmi les propositions concernant le Temps de Quick (TQ), laquelle est exacte ?</div>
+  <div class="qcm-options">
+    <div class="qcm-option" onclick="selectOption(this)"><span class="letter">A</span>Il est exprimé usuellement en g/L</div>
+    <div class="qcm-option" onclick="selectOption(this)"><span class="letter">B</span>Il est mesuré avec un réactif contenant exclusivement des phospholipides et du calcium</div>
+    <div class="qcm-option" onclick="selectOption(this)"><span class="letter">C</span>Il permet de dépister un déficit en FVII</div>
+    <div class="qcm-option" onclick="selectOption(this)"><span class="letter">D</span>Il est sensible à l'héparine standard aux doses thérapeutiques habituelles</div>
+    <div class="qcm-option" onclick="selectOption(this)"><span class="letter">E</span>Il est utilisé pour surveiller un traitement par rivaroxaban</div>
+  </div>
+  <button class="qcm-validate" onclick="validateQCM(this,['C'],'C vrai : le TQ/TP explore la voie extrinsèque dont FVII est l'élément spécifique. A faux : exprimé en % (70-100%) ou en INR (pas g/L). B faux : le réactif contient du FT (thromboplastine) + phospholipides + calcium. D faux : l'héparine standard n'allonge pas le TQ aux doses thérapeutiques habituelles (seul le TCA est sensible). E faux : le rivaroxaban (anti-Xa direct) peut modifier le TQ mais la surveillance recommandée utilise une mesure spécifique de l'activité anti-Xa.')">Valider</button>
+  <div class="qcm-explanation"></div>
+</div>
+
+<div class="qcm-block" data-answer="A,B">
+  <div class="q-text">Q10 — Parmi les éléments suivants, lequel(lesquels) est(sont) nécessaire(s) à la dégradation du caillot de fibrine lors de la fibrinolyse ?</div>
+  <div class="qcm-options">
+    <div class="qcm-option" onclick="selectOption(this)"><span class="letter">A</span>Le plasminogène</div>
+    <div class="qcm-option" onclick="selectOption(this)"><span class="letter">B</span>Le t-PA</div>
+    <div class="qcm-option" onclick="selectOption(this)"><span class="letter">C</span>Le PAI-1</div>
+    <div class="qcm-option" onclick="selectOption(this)"><span class="letter">D</span>L'alpha-2-macroglobuline</div>
+    <div class="qcm-option" onclick="selectOption(this)"><span class="letter">E</span>L'alpha-2-antiplasmine</div>
+  </div>
+  <button class="qcm-validate" onclick="validateQCM(this,['A','B'],'A vrai : le plasminogène est la proenzyme qui, activée en plasmine par le t-PA, dégrade la fibrine. B vrai : le t-PA (tissue plasminogen activator) active le plasminogène en plasmine. C faux : PAI-1 = INHIBITEUR du t-PA → inhibe la fibrinolyse. D faux : alpha-2-macroglobuline = inhibiteur de la plasmine. E faux : alpha-2-antiplasmine = inhibiteur rapide de la plasmine.')">Valider</button>
+  <div class="qcm-explanation"></div>
+</div>
+</div>
+</div>
+
+<div class="slide" id="slide-9">
+<div class="content-slide">
+<h2>VIII — Fibrinolyse</h2>
+<div class="def-box"><strong>Plasminogène</strong> — proenzyme hépatique inactive, forte affinité pour la fibrine. Activé en <strong>plasmine</strong> (enzyme protéolytique active) par le t-PA ou l'u-PA. La plasmine dégrade la fibrine en PDF et D-dimères. <strong>D-dimères</strong> — fragments spécifiques de la fibrine réticulée (par FXIIIa), marqueurs d'une activation simultanée de la coagulation et de la fibrinolyse.</div>
+<div class="expl-wrap">
+<h4>🔵 La fibrinolyse physiologique — dissoudre le caillot sans déclencher d'hémorragie</h4>
+<p>Une fois l'endothélium vasculaire réparé, le caillot de fibrine doit être progressivement dissous pour restaurer la perméabilité du vaisseau et permettre le flux sanguin normal. Ce processus est la fibrinolyse physiologique. Sans fibrinolyse, les vaisseaux s'obstrueraient définitivement après chaque lésion mineure — c'est d'ailleurs ce qui survient en cas d'inhibition pathologique de la fibrinolyse (certains états pro-thrombotiques).</p>
+<p>La fibrinolyse repose sur la <strong>plasmine</strong>, une enzyme protéolytique puissante mais non spécifique. La plasmine dégrade principalement la fibrine (caillot) mais peut aussi dégrader le fibrinogène et certains facteurs de coagulation (FV, FVIII) si elle n'est pas régulée. Une activation pathologique de la fibrinolyse (fibrinolyse aiguë primitive) peut conduire à une hémorragie grave par consommation du fibrinogène et des facteurs de coagulation.</p>
+<div class="expl-bq">Ex : lors d'une fibrinolyse thérapeutique (alteplase = t-PA recombinant dans l'IDM ou l'AVC ischémique), on administre de grandes quantités de t-PA → activation massive du plasminogène en plasmine → lyse du thrombus coronaire ou cérébral. Risque principal : hémorragie (car la plasmine dégrade aussi le fibrinogène circulant et les facteurs de coagulation).</div>
+<hr class="expl-sep">
+<h4>🔵 Les activateurs du plasminogène — t-PA et u-PA</h4>
+<p>Le <strong>t-PA (tissue plasminogen activator)</strong> est synthétisé de façon quasi exclusive par les cellules endothéliales et libéré localement à proximité des caillots. Sa particularité essentielle est son activation préférentielle au contact de la <strong>fibrine</strong> : la fibrine augmente considérablement l'efficacité du t-PA pour activer le plasminogène. Ceci crée un mécanisme auto-localisé : la plasmine n'est générée massivement qu'au site du caillot, pas dans le plasma systémique, évitant une fibrinolyse généralisée.</p>
+<p>L'<strong>u-PA (urokinase)</strong> est synthétisée par les reins et les fibroblastes. Elle ne circule pratiquement pas à l'état libre dans le plasma : seule circule une proenzyme, la pro-urokinase (scu-PA). Elle est activée au niveau du caillot. Son rôle principal est la fibrinolyse tissulaire (lyse des caillots dans les tissus plutôt que dans les vaisseaux), impliquée aussi dans la cicatrisation et la migration cellulaire.</p>
+<div class="expl-bq">Ex : dans l'AVC ischémique, la fenêtre thérapeutique de l'alteplase (t-PA recombinant) est de 4h30 après le début des symptômes. Au-delà, le risque de transformation hémorragique (hémorragie intracérébrale) dépasse le bénéfice clinique. L'alteplase active le plasminogène contenu dans le thrombus et dans le plasma → lyse rapide → reperméabilisation de l'artère cérébrale obstruée.</div>
+<hr class="expl-sep">
+<h4>🔵 Les inhibiteurs de la fibrinolyse — réguler la dissolution du caillot</h4>
+<p>La fibrinolyse est régulée par deux types d'inhibiteurs qui empêchent une dissolution excessive et prématurée des caillots :</p>
+<p><strong>Inhibiteurs de la plasmine</strong> : l'<strong>α₂-antiplasmine</strong> (ou antiplasmine rapide) est le principal inhibiteur de la plasmine libre dans le plasma. Elle se lie irréversiblement à la plasmine en quelques secondes et la neutralise. Elle est aussi incorporée dans le caillot de fibrine lors de sa formation (réticulée par FXIIIa) → elle inhibe la plasmine directement dans le caillot. L'α₂-macroglobuline est un inhibiteur secondaire de la plasmine, moins spécifique.</p>
+<p><strong>Inhibiteurs des activateurs du plasminogène (PAI)</strong> : le <strong>PAI-1</strong> est le principal inhibiteur du t-PA et de l'u-PA dans le plasma. Synthétisé par les cellules endothéliales et les plaquettes (stocké dans les granules α). Un excès de PAI-1 (élévation en cas d'obésité, syndrome métabolique) est associé à un état pro-thrombotique car la fibrinolyse est trop inhibée → les microthrombi ne se dissolvent pas. Le <strong>PAI-2</strong> est surtout présent chez la femme enceinte (synthétisé par le placenta) ; il contribue à l'état pro-coagulant de la grossesse.</p>
+<div class="expl-bq">Ex : l'acide tranexamique (antifibrinolytique) est un analogue structurel de la lysine qui bloque la liaison du plasminogène à la fibrine → inhibit la fibrinolyse. Utilisé : hémorragie du post-partum, traumatismes hémorragiques graves, chirurgie à haut risque (cardiaque, orthopédique). L'acide ε-aminocaproïque est un analogue similaire moins utilisé.</div>
+<hr class="expl-sep">
+<h4>🔵 Les produits de dégradation de la fibrine — D-dimères</h4>
+<p>L'action de la plasmine sur la fibrine réticule (réticulée par FXIIIa) libère des fragments spécifiques appelés <strong>D-dimères</strong>. Ce sont des produits de dégradation de la <strong>fibrine</strong> (et non du fibrinogène) : leur présence dans le plasma signifie qu'il y a eu simultanément activation de la coagulation (formation de fibrine réticulée) ET de la fibrinolyse (dégradation de cette fibrine). Valeur normale : &lt;500 ng/mL (technique ELISA).</p>
+<p>Les D-dimères ont une excellente <strong>valeur prédictive négative (VPN &gt;95%)</strong> pour l'exclusion d'une TVP ou d'une EP : un D-dimère &lt;500 ng/mL chez un patient à faible probabilité clinique élimine une thrombose veineuse avec une fiabilité très élevée. En revanche, les D-dimères sont peu spécifiques : ils sont élevés dans de nombreuses situations (infection, inflammation, grossesse, cancer, post-opératoire) → valeur prédictive positive médiocre. Ils ne servent qu'à <strong>exclure</strong>, pas à confirmer une thrombose.</p>
+<div class="expl-bq">Ex : patient de 25 ans, probabilité clinique faible de TVP (score Wells 0), D-dimères &lt;500 ng/mL → TVP exclue sans examen complémentaire. Même patient avec D-dimères à 800 ng/mL → non diagnostique → écho-Doppler des membres inférieurs obligatoire. Chez une femme enceinte au 3ème trimestre, les D-dimères sont physiologiquement élevés → seuil ajusté à l'âge gestationnel (par ex. &gt;3000 ng/mL au 3ème trimestre).</div>
+</div>
+<div class="flash-block" data-answer="Fibrinolyse : plasminogène (proenzyme hépatique) → plasmine (par t-PA endothélial ou u-PA) → dégrade fibrine → PDF + D-dimères. Inhibiteurs : α₂-antiplasmine (inhibe plasmine), PAI-1 (inhibe t-PA/u-PA), PAI-2 (grossesse). D-dimères = spécifiques fibrine réticulée, VPN>95% pour exclure TVP/EP, peu spécifiques (élevés si inflammation, cancer, grossesse). Seuil : 500 ng/mL (ELISA).">
+  <p class="flash-q">⚡ Flash — mécanisme de la fibrinolyse + inhibiteurs + valeur des D-dimères</p>
+  <div class="flash-input-row">
+    <input class="flash-input" type="text" placeholder="Votre réponse…">
+    <button class="qcm-validate" onclick="validateFlash(this)">Vérifier</button>
+  </div>
+  <div class="qcm-explanation"></div>
+</div>
+</div>
+</div>
+
+
+<!-- ============================================================ -->
+<!-- SLIDE 10 — Exploration de l'hémostase primaire               -->
+<!-- ============================================================ -->
+<div class="slide content-slide" id="slide-10">
+  <div class="slide-header"><span class="slide-tag">Exploration</span><h2>Exploration de l'hémostase primaire</h2></div>
+  <div class="slide-body">
+
+    <h4>🔬 Pourquoi explorer l'hémostase primaire ?</h4>
+    <p>L'hémostase primaire est la première ligne de défense anti-hémorragique : elle intervient en quelques secondes à minutes après une brèche vasculaire. Lorsqu'un patient présente des saignements cutanéo-muqueux (purpura, épistaxis répétées, gingivorragies, ménorragies), c'est l'hémostase primaire qu'on suspecte en premier lieu. L'exploration repose sur plusieurs examens complémentaires qui évaluent chacun un aspect différent de ce processus.</p>
+    <p>Il est essentiel de comprendre que ces tests sont des outils fonctionnels, pas des mesures directes. Ils reproduisent <em>in vitro</em> ou dans des conditions standardisées des étapes de la physiologie plaquettaire et vasculo-plaquettaire, et leur interprétation doit toujours être corrélée au contexte clinique du patient.</p>
+    <hr class="expl-sep">
+
+    <h4>⏱️ Temps de saignement (TS) — Duke et Ivy</h4>
+    <p>Le <span class="def-box">temps de saignement (TS)</span> est le test historique d'exploration de l'hémostase primaire. Il consiste à pratiquer une petite incision standardisée (méthode d'<strong>Ivy</strong> au niveau de l'avant-bras avec pose d'un brassard à 40 mmHg, ou méthode de <strong>Duke</strong> au lobe de l'oreille) et à mesurer le temps jusqu'à l'arrêt spontané du saignement. La valeur normale est inférieure à 8 minutes pour la méthode d'Ivy.</p>
+    <p>Le TS explore l'ensemble de l'hémostase primaire en <em>in vivo</em> : la fonction plaquettaire, le facteur Willebrand, l'intégrité vasculaire. Il est allongé dans les thrombopénies sévères (&lt; 50 G/L), les thrombopathies constitutionnelles (Glanzmann, Bernard-Soulier), la maladie de Willebrand, et sous aspirine ou anti-agrégants. Cependant, ce test est peu reproductible, opérateur-dépendant et douloureux — il est de moins en moins pratiqué.</p>
+    <blockquote class="expl-bq">🩹 Exemple : Un patient sous aspirine au long cours avec une epistaxis : son TS peut être allongé à 12 minutes. Mais un TS normal n'exclut pas une thrombopathie légère, et un TS allongé chez un patient anxieux peut être faussement positif.</blockquote>
+    <hr class="expl-sep">
+
+    <h4>🔢 Numération plaquettaire (NFS)</h4>
+    <p>La <span class="def-box">numération plaquettaire</span> est le premier examen demandé. Elle est incluse dans la NFS standard (automate hématologique). Valeur normale : <strong>150–400 G/L</strong>. On parle de <strong>thrombopénie</strong> en dessous de 150 G/L, et de <strong>thrombocytose</strong> au-delà de 400 G/L.</p>
+    <p>Une thrombopénie peut être centrale (insuffisance de production : aplasie, envahissement médullaire) ou périphérique (destruction : PTAI, médicaments, PTT/SHU ; ou consommation : CIVD ; ou séquestration : hypersplénisme). Une thrombopénie inférieure à 20 G/L expose à un risque hémorragique spontané sévère (hémorragie cérébrale). La thrombocytose peut être réactionnelle (inflammation, carence martiale) ou primitive (syndrome myéloprolifératif).</p>
+    <hr class="expl-sep">
+
+    <h4>🧪 PFA-100 (Platelet Function Analyser)</h4>
+    <p>Le <span class="def-box">PFA-100</span> est un automate qui simule les conditions d'activation plaquettaire en faisant passer le sang à grande vitesse dans une cartouche contenant du collagène/ADP ou collagène/adrénaline, créant une condition de cisaillement élevé comme en capillaire. Il mesure le <strong>temps d'occlusion (TO)</strong> nécessaire pour que les plaquettes forment un clou obstruant l'orifice. Valeur normale : TO-ADP &lt; 106 s, TO-adrénaline &lt; 150 s.</p>
+    <p>Le PFA-100 explore la fonction plaquettaire et le facteur Willebrand. Il est allongé dans la maladie de Willebrand, les thrombopathies, et sous aspirine. Il est plus reproductible que le TS et tend à le remplacer. Il est cependant sensible à la thrombopénie : en dessous de 100 G/L, le test n'est plus interprétable.</p>
+    <hr class="expl-sep">
+
+    <h4>🔬 Agrégométrie plaquettaire</h4>
+    <p>L'<span class="def-box">agrégométrie plaquettaire</span> (ou agrégation plaquettaire en plasma riche en plaquettes — PRP) est le test de référence pour l'étude de la fonction plaquettaire. On expose les plaquettes à différents agonistes (ADP, collagène, ristocétine, acide arachidonique, thrombine) et on mesure la variation de turbidité (méthode de Born) ou d'impédance électrique (méthode à sang total). La <strong>ristocétine</strong> active l'axe GPIb/vWF : son absence de réponse oriente vers une maladie de Willebrand ou un syndrome de Bernard-Soulier.</p>
+    <p>L'agrégométrie permet de distinguer les thrombopathies constitutionnelles (thrombasthénie de Glanzmann : absence d'agrégation à tous agonistes sauf ristocétine ; Bernard-Soulier : absence à ristocétine) des thrombopathies acquises (médicamenteuses, urémiques). C'est un examen spécialisé, réalisé en laboratoire d'hémostase de référence.</p>
+    <hr class="expl-sep">
+
+    <div class="flash-block" data-answer="PFA-100 : explore la fonction plaquettaire ET le facteur Willebrand. Allongé dans la maladie de Willebrand, les thrombopathies, et sous aspirine. Nécessite une numération plaquettaire &gt; 100 G/L pour être interprétable.">
+      <div class="flash-q">💡 Flashcard — Quels sont les deux principaux apports du PFA-100 par rapport au TS classique, et quelle est sa limite en cas de thrombopénie ?</div>
+      <input class="flash-input" type="text" placeholder="Votre réponse...">
+      <button class="qcm-validate" onclick="validateFlash(this)">Vérifier</button>
+      <div class="qcm-explanation"></div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- SLIDE 11 — Exploration de la coagulation (I)                 -->
+<!-- ============================================================ -->
+<div class="slide content-slide" id="slide-11">
+  <div class="slide-header"><span class="slide-tag">Exploration</span><h2>Exploration de la coagulation — Bilan de base</h2></div>
+  <div class="slide-body">
+
+    <h4>🧪 Temps de Quick (TQ) et Taux de Prothrombine (TP)</h4>
+    <p>Le <span class="def-box">Temps de Quick (TQ)</span> explore la <strong>voie extrinsèque et la voie commune</strong> de la coagulation. Il est réalisé en ajoutant de la thromboplastine tissulaire (facteur tissulaire + phospholipides) et du calcium à un plasma pauvre en plaquettes, puis en mesurant le temps de coagulation. Il est ensuite converti en <strong>Taux de Prothrombine (TP)</strong> (normal : 70–100 %) par comparaison à un plasma témoin.</p>
+    <p>Le TQ/TP explore les facteurs suivants : <strong>FII (prothrombine), FV, FVII, FX, fibrinogène</strong>. Un TP abaissé oriente vers un déficit en l'un de ces facteurs. La distinction entre déficit isolé en FVII (seul facteur vitamine K-dépendant de courte demi-vie) et déficits combinés est cliniquement importante. Dans l'insuffisance hépatocellulaire grave, le TP chute car le foie ne synthétise plus les facteurs de coagulation.</p>
+    <blockquote class="expl-bq">📋 Exemple : Un patient traité par AVK aura un TP abaissé (cible 25–35 % selon l'indication) car les facteurs II, VII, IX, X sont inhibés. Son TCA sera aussi allongé. En cas d'hépatite fulminante, le TP s'effondre également — mais ici le FV est abaissé aussi.</blockquote>
+    <hr class="expl-sep">
+
+    <h4>🔄 INR — Standardisation internationale</h4>
+    <p>L'<span class="def-box">INR (International Normalized Ratio)</span> est le rapport standardisé du temps de Quick du patient sur le temps de Quick normal, élevé à la puissance ISI (Index de Sensibilité International de la thromboplastine utilisée). Sa formule : <strong>INR = (TQ patient / TQ témoin)^ISI</strong>. L'INR normal est de 1. Il a été créé pour permettre la comparaison inter-laboratoires du suivi des AVK, quelle que soit la thromboplastine utilisée.</p>
+    <p>L'INR est utilisé exclusivement pour le suivi des <strong>AVK</strong>. Il ne remplace pas le TP dans les autres contextes (insuffisance hépatique, bilan pré-opératoire). La cible INR en anticoagulation pour fibrillation auriculaire ou MTEV est 2–3 ; pour valve mécanique mitrale, 3–4,5. Un INR &gt; 5 nécessite une conduite à tenir urgente (risque hémorragique majeur).</p>
+    <hr class="expl-sep">
+
+    <h4>⏳ Temps de Céphaline Activé (TCA)</h4>
+    <p>Le <span class="def-box">Temps de Céphaline Activé (TCA)</span>, anciennement TCA ou TCK (kaolin), explore la <strong>voie intrinsèque et la voie commune</strong> de la coagulation. Il est réalisé en ajoutant des céphalines (phospholipides) et un activateur de contact (kaolin, silice, celite) au plasma, puis du calcium. Il mesure la durée de coagulation par voie intrinsèque.</p>
+    <p>Le TCA est exprimé en rapport patient/témoin. Le ratio normal est inférieur à 1,2. Un TCA allongé peut être lié à : déficit en facteurs VIII, IX, XI, XII (contact), en facteurs de la voie commune (II, V, X, fibrinogène), présence d'un anticoagulant circulant (ACC — anticoagulant lupique), ou traitement par héparine. Le TCA ne détecte pas les déficits en FVII (voie extrinsèque exclusive).</p>
+    <hr class="expl-sep">
+
+    <h4>🔍 Tests de correction (ou de mélange)</h4>
+    <p>Face à un TCA allongé, le <span class="def-box">test de correction</span> consiste à mélanger à volume égal le plasma du patient avec un plasma normal. Si le TCA se corrige (revient à la normale), cela signe un <strong>déficit en facteur</strong> (le plasma normal apporte le facteur manquant). Si le TCA reste allongé malgré le mélange, cela signe un <strong>anticoagulant circulant (ACC)</strong> qui inhibe les facteurs du plasma normal.</p>
+    <p>Cette distinction est cruciale : un déficit en facteur nécessite une substitution (concentrés de facteurs, PFC), tandis qu'un ACC peut orienter vers un syndrome des antiphospholipides (SAPL) ou un inhibiteur spécifique anti-FVIII. L'anticoagulant lupique est paradoxalement associé à un risque <em>thrombotique</em> et non hémorragique (sauf si associé à une thrombopénie).</p>
+    <hr class="expl-sep">
+
+    <div class="flash-block" data-answer="Le TQ/TP explore la voie extrinsèque (FVII) + voie commune (FII, FV, FX, fibrinogène). Le TCA explore la voie intrinsèque (FVIII, FIX, FXI, FXII) + voie commune. Seul le TCA sera allongé en cas de déficit isolé en FVIII (hémophilie A) ou FIX (hémophilie B).">
+      <div class="flash-q">💡 Flashcard — Quels facteurs sont explorés par le TP vs le TCA ? Pourquoi l'hémophilie A (déficit en FVIII) allonge-t-elle le TCA mais pas le TP ?</div>
+      <input class="flash-input" type="text" placeholder="Votre réponse...">
+      <button class="qcm-validate" onclick="validateFlash(this)">Vérifier</button>
+      <div class="qcm-explanation"></div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- SLIDE 12 — Exploration de la coagulation (II)                -->
+<!-- ============================================================ -->
+<div class="slide content-slide" id="slide-12">
+  <div class="slide-header"><span class="slide-tag">Exploration</span><h2>Exploration de la coagulation — Tests spécialisés</h2></div>
+  <div class="slide-body">
+
+    <h4>📏 Dosage du fibrinogène</h4>
+    <p>Le <span class="def-box">fibrinogène</span> est dosé selon la méthode de Clauss : on ajoute une forte concentration de thrombine au plasma dilué et on mesure le temps de coagulation, inversement proportionnel à la concentration en fibrinogène. Valeur normale : <strong>2–4 g/L</strong>. Le fibrinogène est une protéine de la phase aiguë : il augmente dans l'inflammation, la grossesse, le syndrome néphrotique. Il diminue dans la CIVD avancée, les fibrinolyses primitives, l'insuffisance hépatique sévère.</p>
+    <p>Un fibrinogène abaissé (&lt; 1 g/L) expose à un risque hémorragique majeur par défaut de polymérisation de la fibrine. Dans la CIVD, le fibrinogène peut être consommé massivement. Dans la dysfibrinogénémie constitutionnelle, le fibrinogène est quantitativement normal mais fonctionnellement déficient.</p>
+    <hr class="expl-sep">
+
+    <h4>🧬 Dosages des facteurs de coagulation</h4>
+    <p>Les dosages individuels de facteurs permettent d'identifier précisément un déficit. On distingue les dosages <strong>fonctionnels</strong> (en chromogénique ou coagulométrique, explorant l'activité biologique) et les dosages <strong>antigéniques</strong> (ELISA, explorant la quantité de protéine). La comparaison activité/antigène oriente vers une anomalie qualitative (activité basse mais antigène normal) vs quantitative.</p>
+    <p>Les indications principales sont : le bilan de diathèse hémorragique (hémophilie A : FVIII abaissé &lt; 1% forme sévère ; hémophilie B : FIX abaissé), le suivi des concentrés de facteurs en substitution, et le bilan pré-thérapeutique. Les déficits en facteurs rares (FXI, FXII, FVII, FXIII) sont diagnostiqués par des dosages spécifiques en laboratoire spécialisé.</p>
+    <hr class="expl-sep">
+
+    <h4>🩸 Bilan de la maladie de Willebrand</h4>
+    <p>La <span class="def-box">maladie de Willebrand (VWD)</span> est la plus fréquente des maladies hémorragiques constitutionnelles (1/100 à 1/1000). Son bilan comprend : dosage du <strong>facteur Willebrand antigène (VWF:Ag)</strong>, dosage de l'<strong>activité Willebrand Ristocétine (VWF:RCo)</strong> (mesure la liaison GPIb-vWF), et dosage du <strong>FVIII coagulant</strong> (car le vWF est transporteur/protecteur du FVIII). Le rapport VWF:RCo/VWF:Ag permet de distinguer les différents types.</p>
+    <p>Dans le type 1 (le plus fréquent, 70–80% des VWD), les trois valeurs sont abaissées proportionnellement. Dans le type 2A/2B, le rapport RCo/Ag est &lt; 0,6 (anomalie qualitative). Dans le type 3 (rare, &lt; 1% des VWD), les trois sont effondrées avec hémophilie A associée. Le FMTC (multimère analysis) par électrophorèse complète le bilan dans les formes sévères.</p>
+    <hr class="expl-sep">
+
+    <h4>🔄 Thromboélastographie (TEG/ROTEM)</h4>
+    <p>La <span class="def-box">thromboélastographie (TEG)</span> et la <span class="def-box">thromboélastométrie rotatoire (ROTEM)</span> sont des tests viscoélastiques qui analysent <em>en temps réel</em> la formation, la consolidation et la lyse du caillot de sang total dans un contexte physiologique. Ils fournissent des paramètres cinétiques : temps de coagulation initial, vitesse de formation du caillot, solidité maximale du caillot (MCF), et éventuelle lyse précoce.</p>
+    <p>Ces examens sont particulièrement utiles en situation <strong>d'urgence hémorragique</strong> (chirurgie cardiaque, transplantation hépatique, polytraumatisme, hémorragie du post-partum) car ils guident en quelques minutes la transfusion ciblée : PFC si coagulopathie, plaquettes si défaut de solidité, fibrinogène si MCF basse, acide tranexamique si lyse précoce. Ils ne remplacent pas les tests conventionnels en dehors de l'urgence.</p>
+    <hr class="expl-sep">
+
+    <div class="flash-block" data-answer="VWF:Ag (antigène quantitatif), VWF:RCo (activité fonctionnelle ristocétine — liaison GPIb), et FVIII coagulant (car vWF protège FVIII de la dégradation). Le rapport RCo/Ag &lt; 0,6 oriente vers un type 2 (anomalie qualitative du vWF).">
+      <div class="flash-q">💡 Flashcard — Citez les 3 dosages de base du bilan de maladie de Willebrand et ce que chacun explore. Quel rapport oriente vers un type 2 ?</div>
+      <input class="flash-input" type="text" placeholder="Votre réponse...">
+      <button class="qcm-validate" onclick="validateFlash(this)">Vérifier</button>
+      <div class="qcm-explanation"></div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- SLIDE 13 — Exploration de la fibrinolyse + D-dimères         -->
+<!-- ============================================================ -->
+<div class="slide content-slide" id="slide-13">
+  <div class="slide-header"><span class="slide-tag">Exploration</span><h2>Exploration de la fibrinolyse & situations cliniques intégrées</h2></div>
+  <div class="slide-body">
+
+    <h4>🔬 Tests d'exploration de la fibrinolyse</h4>
+    <p>La fibrinolyse physiologique est difficile à mesurer directement car elle est très localisée et transitoire. On dispose de plusieurs tests : le <span class="def-box">temps de lyse des euglobulines (TLE)</span> (test d'Euglobuline de von Kaulla) mesure la vitesse de lyse d'un caillot formé à partir des facteurs de coagulation concentrés — normal &gt; 2 heures ; abrégé en cas de fibrinolyse pathologique primitive. Les dosages de <strong>plasminogène</strong> et d'<strong>α2-antiplasmine</strong> permettent d'explorer les anomalies constitutionnelles rares.</p>
+    <p>En pratique courante, l'exploration de la fibrinolyse repose surtout sur les marqueurs de sa conséquence : les <strong>PDF</strong> (produits de dégradation de la fibrine/fibrinogène) et les <strong>D-dimères</strong> (marqueurs spécifiques de la dégradation de la fibrine réticulée par le FXIIIa).</p>
+    <hr class="expl-sep">
+
+    <h4>🔺 D-dimères : marqueur clé</h4>
+    <p>Les <span class="def-box">D-dimères</span> sont des fragments protéiques résultant de la dégradation de la fibrine réticulée par la plasmine. Leur valeur normale est inférieure à <strong>500 ng/mL (méthode ELISA de haute sensibilité)</strong>. Ils témoignent de l'activation simultanée de la coagulation (formation de fibrine) ET de la fibrinolyse (dégradation de cette fibrine). Ils ne sont donc pas spécifiques d'une pathologie particulière.</p>
+    <p>Leur principale indication est le <strong>diagnostic d'exclusion</strong> de la thrombose veineuse profonde (TVP) et de l'embolie pulmonaire (EP) : si les D-dimères sont inférieurs à 500 ng/mL chez un patient à probabilité pré-test faible ou intermédiaire (score de Wells), on peut raisonnablement exclure une TVP/EP sans imagerie. Leur valeur prédictive négative est excellente (> 95%). En revanche, un D-dimère élevé est peu spécifique (infection, cancer, chirurgie, grossesse, CIVD, âge avancé).</p>
+    <blockquote class="expl-bq">⚠️ Piège ECNi : les D-dimères augmentent avec l'âge. Chez les patients &gt; 50 ans, on peut utiliser un seuil ajusté à l'âge : D-dimères (ng/mL) &lt; âge × 10 pour exclure la MTEV. Ce seuil augmente la spécificité sans diminuer significativement la sensibilité.</blockquote>
+    <hr class="expl-sep">
+
+    <h4>⚡ CIVD — Coagulation Intravasculaire Disséminée</h4>
+    <p>La <span class="def-box">CIVD</span> est une activation systémique, non contrôlée et disséminée de la coagulation, avec consommation des facteurs et des plaquettes, et activation secondaire de la fibrinolyse. Elle complique les états septiques sévères, les cancers, les complications obstétricales (HELLP, hématome rétroplacentaire), les traumatismes graves. Elle se manifeste à la fois par des thromboses microvasculaires (insuffisances d'organes) et des saignements.</p>
+    <p>Le bilan de CIVD montre : <strong>thrombopénie</strong> (consommation plaquettaire), <strong>TP abaissé + TCA allongé</strong> (déficit en facteurs), <strong>fibrinogène bas</strong> (consommé — mais peut être faussement normal car réactant de phase aiguë), <strong>D-dimères élevés</strong> (++), <strong>schizocytes</strong> sur le frottis sanguin (hémolyse mécanique par les dépôts de fibrine). Le score ISTH de CIVD intègre ces paramètres pour poser le diagnostic biologique.</p>
+    <hr class="expl-sep">
+
+    <h4>📊 Approche diagnostique intégrée</h4>
+    <p>Face à un bilan d'hémostase perturbé, l'approche systématique est indispensable. On distingue : <strong>(1)</strong> allongement isolé du TCA → tests de correction → si correction : déficit intrinsèque (hémophilie A/B) ; si non correction : ACC (anticoagulant lupique, inhibiteur spécifique). <strong>(2)</strong> Allongement isolé du TP/TCA → déficit combiné des voies commune + extrinsèque + intrinsèque → AVK, héparinothérapie, IHC, CIVD. <strong>(3)</strong> Thrombopénie + D-dimères + CIVD. <strong>(4)</strong> Syndromes hémorragiques cutanéo-muqueux avec TS/PFA allongé → exploration plaquettaire + vWF.</p>
+    <p>L'hémostase ne peut être comprise qu'en intégrant la clinique, le contexte médicamenteux, l'histoire familiale, et les résultats biologiques. Aucun examen isolé ne suffit — c'est leur combinaison raisonnée qui permet le diagnostic.</p>
+    <hr class="expl-sep">
+
+    <div class="flash-block" data-answer="D-dimères &lt; 500 ng/mL chez un patient avec probabilité pré-test faible/intermédiaire (score de Wells) EXCLUT une TVP/EP sans imagerie complémentaire. La VPN est &gt; 95%. Attention : seuil ajusté à l'âge chez patients &gt; 50 ans (âge × 10 ng/mL).">
+      <div class="flash-q">💡 Flashcard — Dans quel contexte clinique les D-dimères permettent-ils d'EXCLURE une MTEV ? Quelle est leur limite chez le sujet âgé ?</div>
+      <input class="flash-input" type="text" placeholder="Votre réponse...">
+      <button class="qcm-validate" onclick="validateFlash(this)">Vérifier</button>
+      <div class="qcm-explanation"></div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- SLIDE QCM2 — QCM Exploration de l'hémostase                  -->
+<!-- ============================================================ -->
+<div class="slide content-slide" id="slide-qcm2">
+  <div class="slide-header"><span class="slide-tag">QCM</span><h2>QCM — Exploration de l'hémostase</h2></div>
+  <div class="slide-body">
+
+    <p style="color:#b0b0c0;font-size:.9rem;margin-bottom:1.2rem">Testez vos connaissances sur l'exploration biologique de l'hémostase. Cochez toutes les bonnes réponses.</p>
+
+    <div class="qcm-block">
+      <div class="qcm-question">1. Concernant le TP/INR, quelle(s) proposition(s) est(sont) exacte(s) ?</div>
+      <div class="qcm-options">
+        <div class="qcm-option" onclick="selectOption(this)">A. Le TP explore les facteurs VII, X, V, II et le fibrinogène</div>
+        <div class="qcm-option" onclick="selectOption(this)">B. L'INR est calculé en divisant le TQ patient par le TQ témoin, élevé à la puissance ISI</div>
+        <div class="qcm-option" onclick="selectOption(this)">C. Un déficit isolé en FVII allonge le TP mais pas le TCA</div>
+        <div class="qcm-option" onclick="selectOption(this)">D. L'INR est utile pour surveiller les héparines de bas poids moléculaire</div>
+        <div class="qcm-option" onclick="selectOption(this)">E. En cas d'insuffisance hépatocellulaire, le FV est abaissé alors qu'il est normal sous AVK</div>
+      </div>
+      <button class="qcm-validate" onclick="validateQCM(this,['A','B','C','E'],'FVII est le seul facteur vit.K-dépendant de très courte demi-vie, absent de la voie intrinsèque, donc un déficit isolé allonge TP sans TCA. Le FV est un facteur hépatique non vit.K-dépendant : abaissé dans l'IHC, normal sous AVK. L'INR ne s'applique qu'aux AVK.')">Valider</button>
+      <div class="qcm-explanation"></div>
+    </div>
+
+    <div class="qcm-block">
+      <div class="qcm-question">2. Le test de correction du TCA est réalisé. Le résultat montre que le mélange plasma patient + plasma normal corrige le TCA. Cela signifie :</div>
+      <div class="qcm-options">
+        <div class="qcm-option" onclick="selectOption(this)">A. Il existe un anticoagulant circulant de type lupique</div>
+        <div class="qcm-option" onclick="selectOption(this)">B. Il existe un déficit en facteur de la voie intrinsèque ou commune</div>
+        <div class="qcm-option" onclick="selectOption(this)">C. Un traitement par héparine est en cours</div>
+        <div class="qcm-option" onclick="selectOption(this)">D. Un traitement par aspirine est en cours</div>
+        <div class="qcm-option" onclick="selectOption(this)">E. Le résultat ne discrimine pas entre un déficit en FVIII et un déficit en FXI</div>
+      </div>
+      <button class="qcm-validate" onclick="validateQCM(this,['B','E'],'La correction par le plasma normal apporte les facteurs manquants → déficit factoriel. L'héparine est un anticoagulant qui ne se corrige pas par le plasma normal (sauf si neutralisée par la protamine ou héparinasetester). L'aspirine n'allonge pas le TCA.')">Valider</button>
+      <div class="qcm-explanation"></div>
+    </div>
+
+    <div class="qcm-block">
+      <div class="qcm-question">3. Concernant les D-dimères, quelle(s) affirmation(s) est(sont) vraie(s) ?</div>
+      <div class="qcm-options">
+        <div class="qcm-option" onclick="selectOption(this)">A. Ils résultent de la dégradation de la fibrine réticulée par la plasmine</div>
+        <div class="qcm-option" onclick="selectOption(this)">B. Un D-dimère normal exclut formellement une CIVD</div>
+        <div class="qcm-option" onclick="selectOption(this)">C. Leur seuil diagnostique standard est &lt; 500 ng/mL</div>
+        <div class="qcm-option" onclick="selectOption(this)">D. Ils peuvent être augmentés pendant la grossesse, en cas de cancer ou d'infection sévère</div>
+        <div class="qcm-option" onclick="selectOption(this)">E. Leur valeur prédictive négative pour exclure une MTEV est supérieure à 95% chez les patients à faible probabilité pré-test</div>
+      </div>
+      <button class="qcm-validate" onclick="validateQCM(this,['A','C','D','E'],'Les D-dimères peuvent être faussement normaux en CIVD chronique/subaiguë (faible activation). Mais en CIVD aiguë, ils sont très élevés. B est fausse car en CIVD débutante, ils peuvent être modérément élevés.')">Valider</button>
+      <div class="qcm-explanation"></div>
+    </div>
+
+    <div class="qcm-block">
+      <div class="qcm-question">4. Chez un patient présentant des épistaxis répétées et des ménorragies, le bilan montre : TP normal, TCA légèrement allongé, PFA-100 allongé. Le diagnostic le plus probable est :</div>
+      <div class="qcm-options">
+        <div class="qcm-option" onclick="selectOption(this)">A. Hémophilie A</div>
+        <div class="qcm-option" onclick="selectOption(this)">B. Maladie de Willebrand</div>
+        <div class="qcm-option" onclick="selectOption(this)">C. Déficit en FVII</div>
+        <div class="qcm-option" onclick="selectOption(this)">D. Syndrome des antiphospholipides</div>
+        <div class="qcm-option" onclick="selectOption(this)">E. Thrombopénie immune</div>
+      </div>
+      <button class="qcm-validate" onclick="validateQCM(this,['B'],'La maladie de Willebrand est la plus fréquente des diathèses hémorragiques constitutionnelles. Elle donne des saignements cutanéo-muqueux (HP perturbée = PFA allongé), peut allonger le TCA (car vWF protège FVIII). L'hémophilie A donne des hémarthroses et hématomes profonds chez le garçon.')">Valider</button>
+      <div class="qcm-explanation"></div>
+    </div>
+
+    <div class="qcm-block">
+      <div class="qcm-question">5. Quels paramètres biologiques constituent le bilan de CIVD ?</div>
+      <div class="qcm-options">
+        <div class="qcm-option" onclick="selectOption(this)">A. Thrombopénie</div>
+        <div class="qcm-option" onclick="selectOption(this)">B. D-dimères élevés</div>
+        <div class="qcm-option" onclick="selectOption(this)">C. Fibrinogène bas</div>
+        <div class="qcm-option" onclick="selectOption(this)">D. TP allongé (et/ou TCA allongé)</div>
+        <div class="qcm-option" onclick="selectOption(this)">E. Schizocytes sur frottis sanguin</div>
+      </div>
+      <button class="qcm-validate" onclick="validateQCM(this,['A','B','C','D','E'],'Le score ISTH de CIVD intègre les 5 paramètres : thrombopénie, D-dimères élevés, fibrinogène bas (&lt; 1 g/L), allongement du TP et/ou TCA, et schizocytes témoignant de l'hémolyse mécanique par les microthrombi fibrineux. Un score ≥ 5 affirme la CIVD.')">Valider</button>
+      <div class="qcm-explanation"></div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- SLIDE BILAN — Récapitulatif hémostase                         -->
+<!-- ============================================================ -->
+<div class="slide content-slide" id="slide-bilan">
+  <div class="slide-header"><span class="slide-tag">Bilan</span><h2>Récapitulatif — Hémostase physiologie & exploration</h2></div>
+  <div class="slide-body">
+    <div class="bilan-grid">
+
+      <div class="bilan-card">
+        <div class="bilan-card-title">⚡ Hémostase primaire</div>
+        <ul>
+          <li>Vasoconstriction réflexe initiale (endothéline, NO↓, PGI₂↓)</li>
+          <li>Adhésion plaquettaire : <strong>vWF – GPIb</strong> (haut cisaillement)</li>
+          <li>Activation : libération granules α et denses, expression GPIIb-IIIa</li>
+          <li>Agrégation : <strong>fibrinogène – GPIIb-IIIa</strong> → clou plaquettaire blanc</li>
+        </ul>
+      </div>
+
+      <div class="bilan-card">
+        <div class="bilan-card-title">🔗 Coagulation — voies</div>
+        <ul>
+          <li>Voie extrinsèque : <strong>FT + FVIIa</strong> → FXa (déclenchement in vivo)</li>
+          <li>Voie intrinsèque : FXII→XI→IX + VIIIa (ténase) → FXa (amplification)</li>
+          <li>Voie commune : <strong>FXa + Va → prothrombinase</strong> → thrombine → fibrine</li>
+          <li>FXIII réticulé : fibrine soluble → fibrine insoluble (caillot stable)</li>
+        </ul>
+      </div>
+
+      <div class="bilan-card">
+        <div class="bilan-card-title">💊 Vitamine K & facteurs</div>
+        <ul>
+          <li>Facteurs VitK-dépendants : <strong>II, VII, IX, X</strong> (carboxylation γ-glutamyl)</li>
+          <li>Protéines anticoagulantes VitK-dép : <strong>Protéine C et S</strong></li>
+          <li>AVK inhibent la VKOR → blocage recyclage VitK époxyde → ↓ FII,VII,IX,X,PC,PS</li>
+          <li>FV : hépatique NON VitK-dép → ↓ dans IHC mais normal sous AVK</li>
+        </ul>
+      </div>
+
+      <div class="bilan-card">
+        <div class="bilan-card-title">🛡️ Inhibiteurs physiologiques</div>
+        <ul>
+          <li><strong>Antithrombine (AT)</strong> : inhibe thrombine + FXa (potentialisée ×1000 par héparine)</li>
+          <li><strong>Protéine C activée + PS</strong> : dégradent FVa + FVIIIa (voie thrombomoduline)</li>
+          <li><strong>TFPI</strong> : inhibe FXa + complexe FT-FVIIa (limite l'amplification)</li>
+          <li>Déficits en AT, PC ou PS → thrombophilie constitutionnelle</li>
+        </ul>
+      </div>
+
+      <div class="bilan-card">
+        <div class="bilan-card-title">🔥 Fibrinolyse</div>
+        <ul>
+          <li>Plasminogène → plasmine (activé par <strong>t-PA</strong> et u-PA)</li>
+          <li>t-PA libéré par endothélium en réponse à la fibrine → activation locale</li>
+          <li>Plasmine dégrade fibrine → <strong>D-dimères</strong> (marqueur spécifique)</li>
+          <li>Inhibiteurs : α₂-antiplasmine, PAI-1, TAFI (inhibe fibrinolyse)</li>
+        </ul>
+      </div>
+
+      <div class="bilan-card">
+        <div class="bilan-card-title">🧪 Exploration HP</div>
+        <ul>
+          <li>NFS : thrombopénie &lt; 150 G/L → risque hémorragique si &lt; 50 G/L</li>
+          <li><strong>PFA-100</strong> : TO allongé → thrombopathie ou maladie de Willebrand</li>
+          <li>TS (Ivy) : allongé si thrombopénie sévère, VWD, anti-agrégants</li>
+          <li>Agrégométrie plaquettaire : test de référence des thrombopathies</li>
+        </ul>
+      </div>
+
+      <div class="bilan-card">
+        <div class="bilan-card-title">📋 Exploration coagulation</div>
+        <ul>
+          <li><strong>TP/INR</strong> : voie extrinsèque + commune (FII, V, VII, X, fibrinogène)</li>
+          <li><strong>TCA</strong> : voie intrinsèque + commune (FVIII, IX, XI, XII + FII,V,X,fib)</li>
+          <li>Test de correction : correction → déficit factoriel ; non correction → ACC</li>
+          <li>Dosages spécifiques : hémophilie, VWD (VWF:Ag, VWF:RCo, FVIII)</li>
+        </ul>
+      </div>
+
+      <div class="bilan-card">
+        <div class="bilan-card-title">🚨 Urgences biologiques</div>
+        <ul>
+          <li><strong>CIVD</strong> : thrombopénie + D-dimères↑ + fibrinogène↓ + TP↓ + schizocytes</li>
+          <li>INR &gt; 5 sous AVK → risque hémorragique majeur → antagonisation urgente</li>
+          <li>D-dimères &lt; 500 ng/mL + score Wells faible → exclusion MTEV sans imagerie</li>
+          <li>ADAMTS13 &lt; 10% + thrombopénie + MAHA → PTT (URGENCE plasma)</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- SLIDE FIN                                                      -->
+<!-- ============================================================ -->
+<div class="slide content-slide" id="slide-fin">
+  <div class="slide-header"><span class="slide-tag">Fin</span><h2>Fin du chapitre — Hémostase</h2></div>
+  <div class="slide-body" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:60vh;text-align:center">
+    <div style="font-size:4rem;margin-bottom:1rem">🩸</div>
+    <h3 style="color:#e74c3c;font-size:1.6rem;margin-bottom:.5rem">Hémostase — Physiologie & Exploration</h3>
+    <p style="color:#b0b0c0;max-width:520px;line-height:1.7">Ce chapitre couvre l'intégralité de la physiologie de l'hémostase (hémostase primaire, coagulation, fibrinolyse) et de son exploration biologique. Les connaissances acquises ici sont fondamentales pour comprendre les pathologies hémorragiques et thrombotiques, ainsi que les mécanismes d'action des anticoagulants et anti-agrégants.</p>
+    <div style="margin-top:1.5rem;display:flex;gap:1rem;flex-wrap:wrap;justify-content:center">
+      <div style="background:rgba(231,76,60,.15);border:1px solid rgba(231,76,60,.3);border-radius:10px;padding:.7rem 1.2rem;font-size:.85rem;color:#e74c3c">🩸 HP : GPIb/vWF + GPIIb-IIIa/fib</div>
+      <div style="background:rgba(52,152,219,.15);border:1px solid rgba(52,152,219,.3);border-radius:10px;padding:.7rem 1.2rem;font-size:.85rem;color:#3498db">⚗️ Coagulation : FT → FIIa → fibrine</div>
+      <div style="background:rgba(46,204,113,.15);border:1px solid rgba(46,204,113,.3);border-radius:10px;padding:.7rem 1.2rem;font-size:.85rem;color:#2ecc71">🔬 Explore : TP/TCA/PFA/D-dim</div>
+      <div style="background:rgba(243,156,18,.15);border:1px solid rgba(243,156,18,.3);border-radius:10px;padding:.7rem 1.2rem;font-size:.85rem;color:#f39c12">💊 AVK : ↓FII,VII,IX,X,PC,PS</div>
+    </div>
+    <a href="index.html" style="margin-top:2rem;background:#e74c3c;color:#fff;padding:.8rem 2rem;border-radius:30px;text-decoration:none;font-weight:600;font-size:.95rem">← Retour au sommaire</a>
+  </div>
+</div>
+
+
+</div><!-- end slides-container -->
+
+<script>
+
+const SLIDES = ['slide-0','slide-1','slide-2','slide-3','slide-4','slide-5','slide-6','slide-7','slide-qcm1','slide-9','slide-10','slide-11','slide-12','slide-13','slide-qcm2','slide-bilan','slide-fin'];
+let current = 0;
+
+function showSlide(n){
+  n = Math.max(0, Math.min(SLIDES.length-1, n));
+  document.querySelectorAll('.slide').forEach(s=>s.classList.remove('active'));
+  const el = document.getElementById(SLIDES[n]);
+  if(el){ el.classList.add('active'); el.scrollTop=0; }
+  current = n;
+  document.getElementById('counter').textContent = (n+1)+'/'+SLIDES.length;
+  const pct = SLIDES.length>1 ? (n/(SLIDES.length-1))*100 : 0;
+  document.querySelector('.progress-fill').style.width = pct+'%';
+}
+function changeSlide(d){ showSlide(current+d); }
+
+function selectOption(el){
+  const block = el.closest('.qcm-block');
+  block.querySelectorAll('.qcm-option').forEach(o=>o.classList.remove('selected'));
+  el.classList.add('selected');
+}
+function validateQCM(btn){
+  const block = btn.closest('.qcm-block');
+  const sel = block.querySelector('.qcm-option.selected');
+  const fb = block.querySelector('.qcm-feedback');
+  const correct = fb.dataset.correct;
+  if(!sel){ fb.textContent='⚠️ Sélectionnez une réponse.'; fb.style.display='block'; return; }
+  block.querySelectorAll('.qcm-option').forEach(o=>{
+    const letter = o.textContent.trim().charAt(0);
+    if(letter===correct) o.style.background='rgba(46,204,113,0.25)';
+    else if(o===sel && letter!==correct) o.style.background='rgba(231,76,60,0.25)';
+  });
+  fb.style.display='block';
+  btn.disabled=true;
+}
+
+function validateFlash(el){
+  const card = el.closest('.flash-block') || el.closest('.flashcard-item');
+  if(!card) return;
+  const expl = card.querySelector('.qcm-explanation');
+  if(expl){
+    expl.textContent = card.dataset.answer || '';
+    expl.style.display = 'block';
+    return;
+  }
+  const ans = card.querySelector('.flash-answer');
+  if(ans){ ans.style.display='block'; el.style.display='none'; }
+}
+
+document.addEventListener('keydown',e=>{
+  if(e.key==='ArrowRight'||e.key===' ') changeSlide(1);
+  if(e.key==='ArrowLeft') changeSlide(-1);
+});
+let tx=0;
+document.addEventListener('touchstart',e=>{ tx=e.touches[0].clientX; });
+document.addEventListener('touchend',e=>{ const d=tx-e.changedTouches[0].clientX; if(Math.abs(d)>50) changeSlide(d>0?1:-1); });
+
+window.addEventListener('DOMContentLoaded',()=>showSlide(0));
+
+</script>
+</body>
+</html>
