@@ -93,8 +93,13 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:#0d0d1a;color:#e8e8f
 .qcm-expl{display:none;background:rgba(46,204,113,.08);border-left:3px solid #2ecc71;padding:10px 14px;margin-top:10px;border-radius:0 8px 8px 0;font-size:.83rem;color:#a8f0c6;line-height:1.6}
 
 /* Flashcards */
-.flash-block{margin-bottom:20px}
-.flash-block h3{color:#3498db;font-size:.9rem;font-weight:700;margin-bottom:12px}
+.flash-block{background:rgba(52,152,219,.07);border:1px solid rgba(52,152,219,.25);border-radius:12px;padding:1rem;margin:0.75rem 0}
+.flash-q{font-size:.88rem;font-weight:600;color:#e8e8f0;margin-bottom:.6rem;line-height:1.5}
+.flash-block button{background:rgba(52,152,219,.2);border:1px solid rgba(52,152,219,.4);color:#3498db;padding:6px 16px;border-radius:8px;cursor:pointer;font-size:.83rem;font-weight:600;transition:.2s}
+.flash-block button:hover:not(:disabled){background:rgba(52,152,219,.4)}
+.flash-block button:disabled{opacity:.4;cursor:not-allowed}
+.qcm-explanation{display:none;margin-top:.75rem;padding:.75rem;background:rgba(255,255,255,.04);border-radius:8px;font-size:.86rem;color:#b0b0c0;line-height:1.65}
+/* Legacy flip-card style (preserved for QCM slides) */
 .flash-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px}
 .flashcard{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:10px;padding:14px;cursor:pointer;transition:.2s;min-height:80px;display:flex;flex-direction:column;justify-content:center}
 .flashcard:hover{background:rgba(52,152,219,.08);border-color:rgba(52,152,219,.3)}
@@ -1431,6 +1436,16 @@ function validateQCM(btn, correct, explanation) {
   var expl = btn.nextElementSibling;
   expl.textContent = explanation;
   expl.style.display = 'block';
+  btn.disabled = true;
+}
+
+function validateFlash(btn) {
+  var block = btn.closest('.flash-block');
+  var expl = block.querySelector('.qcm-explanation');
+  if (expl) {
+    expl.innerHTML = '<strong style="color:#2ecc71">✅ Réponse :</strong> ' + block.dataset.answer;
+    expl.style.display = 'block';
+  }
   btn.disabled = true;
 }
 
