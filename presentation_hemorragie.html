@@ -99,7 +99,7 @@ tr:hover td { background: rgba(255,255,255,0.03); }
 <div class="topbar">
   <a href="index.html" class="topbar-home">&#8592; Accueil</a>
   <span class="topbar-title">Syndrome hémorragique &amp; TVP</span>
-  <span class="topbar-counter" id="slide-counter">1 / 14</span>
+  <span class="topbar-counter" id="slide-counter">1 / 20</span>
   <div class="topbar-nav">
     <button class="topbar-btn" onclick="changeSlide(-1)">&#8592;</button>
     <button class="topbar-btn" onclick="changeSlide(1)">&#8594;</button>
@@ -115,7 +115,7 @@ tr:hover td { background: rgba(255,255,255,0.03); }
   <div class="title-subtitle">Hémostase primaire · Coagulation · Thrombophilies · TVP/EP</div>
   <div class="title-meta">
     <span>&#128197; 17/03/2026</span>
-    <span>&#128218; 14 slides</span>
+    <span>&#128218; 20 slides</span>
     <span>&#127981; Item ECN — Hématologie</span>
   </div>
   <div class="key-hint">&#8592; &#8594; ou swipe pour naviguer</div>
@@ -264,6 +264,17 @@ tr:hover td { background: rgba(255,255,255,0.03); }
     <button class="flash-reveal" onclick="this.nextElementSibling.style.display='block';this.style.display='none'">Révéler la réponse</button>
     <div class="flash-answer" style="display:none">Orientation vers une COAGULOPATHIE (déficit en facteur de coagulation). Les hématomes profonds spontanés sont le signe cardinal des coagulopathies (hémophilie notamment). Premier bilan : TP + TCA + NFS plaquettaire. Si TCA allongé isolément → penser hémophilie A ou B → doser FVIII et FIX.</div>
   </div>
+
+<div class="flash-block">
+  <div class="flash-q">❓ Quelles sont les 4 étapes de l'hémostase primaire dans l'ordre ?</div>
+  <button class="flash-reveal" onclick="this.nextElementSibling.style.display='block';this.style.display='none'">Révéler la réponse</button>
+  <div class="flash-answer" style="display:none">Vasoconstriction → Adhésion plaquettaire (GPIb + vWF) → Activation plaquettaire (dégranulation, TXA2) → Agrégation (GPIIb/IIIa + fibrinogène) = clou blanc. Ensuite consolidé par la coagulation plasmatique.</div>
+</div>
+<div class="flash-block">
+  <div class="flash-q">❓ Quel bilan de première intention devant suspicion d'anomalie de l'hémostase primaire ?</div>
+  <button class="flash-reveal" onclick="this.nextElementSibling.style.display='block';this.style.display='none'">Révéler la réponse</button>
+  <div class="flash-answer" style="display:none">NFS-plaquettes + TOP (temps d'occlusion PFA-100) + bilan vWF complet (Ag, activité cofacteur ristocétine, FVIII). TOP allongé + vWF normal = thrombopathie. TOP allongé + vWF bas = MvW.</div>
+</div>
 </div>
 
 <!-- SLIDE 2 : QCM 1 -->
@@ -323,8 +334,73 @@ tr:hover td { background: rgba(255,255,255,0.03); }
   </div>
 </div>
 
-<!-- SLIDE 3 : THROMBOPATHIES -->
 <div class="slide content-slide" id="slide-3">
+  <h2>🧠 QCM 2 — Hémostase primaire approfondie</h2>
+  <div class="qcm-block" data-answer="B" id="qNEWID-1">
+    <div class="q-text">Q1. Une femme de 25 ans, MvW type 1 confirmée, doit subir une extraction dentaire. Quel traitement préventif 30 min avant ?</div>
+    <div class="qcm-options">
+      <div class="qcm-option" data-idx="A" onclick="selectOption(this)"><span class="letter">A</span> Concentrés plaquettaires IV</div>
+      <div class="qcm-option" data-idx="B" onclick="selectOption(this)"><span class="letter">B</span> DDAVP (desmopressine) intranasal ou IV</div>
+      <div class="qcm-option" data-idx="C" onclick="selectOption(this)"><span class="letter">C</span> Héparine de bas poids moléculaire</div>
+      <div class="qcm-option" data-idx="D" onclick="selectOption(this)"><span class="letter">D</span> Vitamine K orale</div>
+    </div>
+    <button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button>
+    <div class="qcm-feedback"></div>
+    <div class="qcm-explanation">Réponse B. La DDAVP libère le vWF endothélial stocké dans les corps de Weibel-Palade → vWF × 3-5 en 30-60 min. Traitement de 1ère intention du type 1. À associer à l'acide tranexamique local (bain de bouche ou IV) pour réduire la fibrinolyse locale post-extraction.</div>
+  </div>
+  <div class="qcm-block" data-answer="B" id="qNEWID-2">
+    <div class="q-text">Q2. Quel est le critère au frottis qui distingue le syndrome de Bernard-Soulier de la thrombasthénie de Glanzmann ?</div>
+    <div class="qcm-options">
+      <div class="qcm-option" data-idx="A" onclick="selectOption(this)"><span class="letter">A</span> Schizocytes dans Bernard-Soulier</div>
+      <div class="qcm-option" data-idx="B" onclick="selectOption(this)"><span class="letter">B</span> Plaquettes géantes dans Bernard-Soulier, plaquettes normales dans Glanzmann</div>
+      <div class="qcm-option" data-idx="C" onclick="selectOption(this)"><span class="letter">C</span> Agrégats plaquettaires dans Glanzmann</div>
+      <div class="qcm-option" data-idx="D" onclick="selectOption(this)"><span class="letter">D</span> Pas de différence morphologique</div>
+    </div>
+    <button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button>
+    <div class="qcm-feedback"></div>
+    <div class="qcm-explanation">Réponse B. Bernard-Soulier = déficit GPIb (récepteur au vWF) → macroplaquettes (géantes). Glanzmann = déficit GPIIb/IIIa (récepteur au fibrinogène) → plaquettes normales. Les deux donnent TOP allongé, saignements cutanéo-muqueux, TS allongé.</div>
+  </div>
+  <div class="qcm-block" data-answer="C" id="qNEWID-3">
+    <div class="q-text">Q3. Un patient sous aspirine depuis 10 ans saigne après extraction dentaire. Quelle durée théorique pour que les plaquettes redeviennent normales après arrêt de l'aspirine ?</div>
+    <div class="qcm-options">
+      <div class="qcm-option" data-idx="A" onclick="selectOption(this)"><span class="letter">A</span> 24 heures</div>
+      <div class="qcm-option" data-idx="B" onclick="selectOption(this)"><span class="letter">B</span> 3-4 jours</div>
+      <div class="qcm-option" data-idx="C" onclick="selectOption(this)"><span class="letter">C</span> 7-10 jours (durée de vie des plaquettes)</div>
+      <div class="qcm-option" data-idx="D" onclick="selectOption(this)"><span class="letter">D</span> 30 jours</div>
+    </div>
+    <button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button>
+    <div class="qcm-feedback"></div>
+    <div class="qcm-explanation">Réponse C. L'aspirine inhibe irréversiblement la COX-1 dans les plaquettes. Les plaquettes ne synthétisent pas de nouvelles protéines. Il faut attendre le renouvellement plaquettaire complet (7-10 jours) pour une fonction normale. En urgence, la solution est la transfusion de nouvelles plaquettes non inhibées.</div>
+  </div>
+  <div class="qcm-block" data-answer="B" id="qNEWID-4">
+    <div class="q-text">Q4. Quel est le bilan biologique permettant de distinguer une thrombopathie d'un syndrome de von Willebrand ?</div>
+    <div class="qcm-options">
+      <div class="qcm-option" data-idx="A" onclick="selectOption(this)"><span class="letter">A</span> TP + TCA seuls suffisent</div>
+      <div class="qcm-option" data-idx="B" onclick="selectOption(this)"><span class="letter">B</span> TOP + vWF Ag + vWF activité + FVIII + NFS</div>
+      <div class="qcm-option" data-idx="C" onclick="selectOption(this)"><span class="letter">C</span> TOP seul suffit</div>
+      <div class="qcm-option" data-idx="D" onclick="selectOption(this)"><span class="letter">D</span> Temps de saignement (TS) seul</div>
+    </div>
+    <button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button>
+    <div class="qcm-feedback"></div>
+    <div class="qcm-explanation">Réponse B. Bilan complet : NFS (numération plaquettaire) + TOP (agrégation globale) + vWF Ag (quantité) + vWF activité (fonction) + FVIII (transporté par vWF). Si TOP allongé + vWF normaux = thrombopathie. Si vWF bas = MvW. Le TS seul est peu sensible et peu reproductible.</div>
+  </div>
+  <div class="qcm-block" data-answer="C" id="qNEWID-5">
+    <div class="q-text">Q5. Dans quelle situation la DDAVP est-elle absolument contre-indiquée dans la MvW ?</div>
+    <div class="qcm-options">
+      <div class="qcm-option" data-idx="A" onclick="selectOption(this)"><span class="letter">A</span> MvW type 1 sévère</div>
+      <div class="qcm-option" data-idx="B" onclick="selectOption(this)"><span class="letter">B</span> MvW type 3</div>
+      <div class="qcm-option" data-idx="C" onclick="selectOption(this)"><span class="letter">C</span> MvW type 2B</div>
+      <div class="qcm-option" data-idx="D" onclick="selectOption(this)"><span class="letter">D</span> MvW type 2M</div>
+    </div>
+    <button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button>
+    <div class="qcm-feedback"></div>
+    <div class="qcm-explanation">Réponse C. MvW type 2B = gain de fonction : le vWF mutant se lie spontanément aux plaquettes → consommation multimères HPM et thrombopénie basale. La DDAVP libère encore plus de vWF mutant → aggravation de la thrombopénie. CI absolue. Traitement : concentrés vWF/FVIII.</div>
+  </div>
+</div>
+
+
+<!-- SLIDE 3 : THROMBOPATHIES -->
+<div class="slide content-slide" id="slide-4">
   <h2>&#129514; Thrombopathies — Anomalies de l'hémostase primaire</h2>
 
   <h3>I — Physiologie plaquettaire : récepteurs clés</h3>
@@ -454,10 +530,21 @@ tr:hover td { background: rgba(255,255,255,0.03); }
     <button class="flash-reveal" onclick="this.nextElementSibling.style.display='block';this.style.display='none'">Révéler la réponse</button>
     <div class="flash-answer" style="display:none">Syndrome de Bernard-Soulier. Les plaquettes géantes (macrothrombocytes de la taille d'une hématie) sur frottis sont la signature morphologique de cette pathologie. Le récepteur déficitaire est le GP Ib/IX/V, empêchant l'adhésion des plaquettes au facteur de von Willebrand lors d'une brèche vasculaire. Transmission autosomique récessive. Syndrome hémorragique très sévère.</div>
   </div>
+
+<div class="flash-block">
+  <div class="flash-q">❓ Quelles sont les deux thrombopathies constitutionnelles ECN et leurs déficits ?</div>
+  <button class="flash-reveal" onclick="this.nextElementSibling.style.display='block';this.style.display='none'">Révéler la réponse</button>
+  <div class="flash-answer" style="display:none">Bernard-Soulier : déficit GPIb → pas d'adhésion au vWF → plaquettes géantes. Thrombasthénie de Glanzmann : déficit GPIIb/IIIa → pas d'agrégation → plaquettes normales. Les deux : TOP + TS allongés.</div>
+</div>
+<div class="flash-block">
+  <div class="flash-q">❓ Comment gérer en urgence une hémorragie active chez un patient sous aspirine + clopidogrel ?</div>
+  <button class="flash-reveal" onclick="this.nextElementSibling.style.display='block';this.style.display='none'">Révéler la réponse</button>
+  <div class="flash-answer" style="display:none">Transfusion de concentrés plaquettaires (les nouvelles plaquettes ne sont pas inhibées). Desmopressine si thrombopathie légère. Acide tranexamique en adjuvant. Si stent coronarien récent : discuter avec cardiologue.</div>
+</div>
 </div>
 
 <!-- SLIDE 4 : MALADIE DE VON WILLEBRAND -->
-<div class="slide content-slide" id="slide-4">
+<div class="slide content-slide" id="slide-5">
   <h2>&#129516; Maladie de von Willebrand (MvW) — Hémostase primaire</h2>
 
   <h3>I — Introduction : épidémiologie et rôles du FvW</h3>
@@ -599,10 +686,21 @@ tr:hover td { background: rgba(255,255,255,0.03); }
     <button class="flash-reveal" onclick="this.nextElementSibling.style.display='block';this.style.display='none'">Révéler la réponse</button>
     <div class="flash-answer" style="display:none">Type 1 = déficit quantitatif partiel (moins de FvW, mais fonctionnel) → rapport activité/antigène (vWF:RCo/vWF:Ag) &gt;0,7 (qualité conservée). Type 2 = déficit qualitatif (FvW présent mais dysfonctionnel) → rapport activité/antigène &lt;0,7 (qualité altérée). C'est ce rapport qui fait la distinction clé entre type 1 et type 2.</div>
   </div>
+
+<div class="flash-block">
+  <div class="flash-q">❓ Quelle est la particularité du type 2B de la MvW qui contre-indique le DDAVP ?</div>
+  <button class="flash-reveal" onclick="this.nextElementSibling.style.display='block';this.style.display='none'">Révéler la réponse</button>
+  <div class="flash-answer" style="display:none">Type 2B = gain de fonction de GPIb → le vWF mutant se lie spontanément aux plaquettes sans activation → consommation des multimères HPM + thrombopénie. Le DDAVP libère encore plus de vWF mutant → aggrave la thrombopénie. Traitement : concentrés de vWF/FVIII.</div>
+</div>
+<div class="flash-block">
+  <div class="flash-q">❓ Quand préférer les concentrés de vWF/FVIII à la DDAVP dans la MvW ?</div>
+  <button class="flash-reveal" onclick="this.nextElementSibling.style.display='block';this.style.display='none'">Révéler la réponse</button>
+  <div class="flash-answer" style="display:none">Indications concentrés vWF/FVIII : type 2B, type 3, chirurgie majeure en type 1 si DDAVP insuffisante, grossesse (DDAVP CI au 1er tri), enfant < 2 ans. La DDAVP reste le traitement de 1ère intention du type 1 et type 2A léger.</div>
+</div>
 </div>
 
 <!-- SLIDE 5 : QCM 2 -->
-<div class="slide content-slide" id="slide-5">
+<div class="slide content-slide" id="slide-6">
   <h2>&#129504; QCM 2 — Thrombopathies &amp; Maladie de von Willebrand</h2>
 
   <div class="qcm-block" data-answer="B" id="q2-1">
@@ -658,8 +756,73 @@ tr:hover td { background: rgba(255,255,255,0.03); }
   </div>
 </div>
 
+<div class="slide content-slide" id="slide-7">
+  <h2>🧠 QCM 4 — Coagulopathies acquises</h2>
+  <div class="qcm-block" data-answer="B" id="qNEWID-1">
+    <div class="q-text">Q1. Une femme de 35 ans en post-partum immédiat présente un effondrement hémodynamique. Bilan : fibrinogène 0,5 g/L, TP 15%, D-dimères 15 000 μg/L, plaquettes 28 G/L. Quel est le diagnostic ?</div>
+    <div class="qcm-options">
+      <div class="qcm-option" data-idx="A" onclick="selectOption(this)"><span class="letter">A</span> Hypovitaminose K post-partum</div>
+      <div class="qcm-option" data-idx="B" onclick="selectOption(this)"><span class="letter">B</span> CIVD obstétricale décompensée</div>
+      <div class="qcm-option" data-idx="C" onclick="selectOption(this)"><span class="letter">C</span> Hémophilie A acquise</div>
+      <div class="qcm-option" data-idx="D" onclick="selectOption(this)"><span class="letter">D</span> Thrombopénie immune post-partum</div>
+    </div>
+    <button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button>
+    <div class="qcm-feedback"></div>
+    <div class="qcm-explanation">Réponse B. Tableau classique de CIVD obstétricale : fibrinogène effondré + D-dimères massifs + TP bas + thrombopénie + contexte obstétrical (décollement placentaire, embolie amniotique, atonie utérine). Traitement : fibrinogène IV en urgence (objectif > 2 g/L) + traitement de la cause.</div>
+  </div>
+  <div class="qcm-block" data-answer="B" id="qNEWID-2">
+    <div class="q-text">Q2. Comment différencier CIVD et hypovitaminose K à l'ECN ?</div>
+    <div class="qcm-options">
+      <div class="qcm-option" data-idx="A" onclick="selectOption(this)"><span class="letter">A</span> TP est abaissé dans les deux, TCA normal dans les deux</div>
+      <div class="qcm-option" data-idx="B" onclick="selectOption(this)"><span class="letter">B</span> CIVD : facteur V bas. Hypovitaminose K : facteur V NORMAL</div>
+      <div class="qcm-option" data-idx="C" onclick="selectOption(this)"><span class="letter">C</span> Fibrinogène est abaissé dans les deux</div>
+      <div class="qcm-option" data-idx="D" onclick="selectOption(this)"><span class="letter">D</span> Les schizocytes sont présents dans les deux</div>
+    </div>
+    <button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button>
+    <div class="qcm-feedback"></div>
+    <div class="qcm-explanation">Réponse B. RÈGLE ECN : le facteur V est synthétisé par le foie MAIS N'EST PAS vitamine K-dépendant. En CIVD : FV consommé (bas). En hypovitaminose K : tous les facteurs VK-dépendants sont bas (II, VII, IX, X, protéines C et S) mais FV NORMAL. Schizocytes et fibrinogène bas = CIVD.</div>
+  </div>
+  <div class="qcm-block" data-answer="C" id="qNEWID-3">
+    <div class="q-text">Q3. Quel est le facteur de coagulation dont la demi-vie la plus courte impose un suivi INR fréquent chez les patients sous AVK ?</div>
+    <div class="qcm-options">
+      <div class="qcm-option" data-idx="A" onclick="selectOption(this)"><span class="letter">A</span> Facteur X (demi-vie 40h)</div>
+      <div class="qcm-option" data-idx="B" onclick="selectOption(this)"><span class="letter">B</span> Facteur II (demi-vie 60h)</div>
+      <div class="qcm-option" data-idx="C" onclick="selectOption(this)"><span class="letter">C</span> Facteur VII (demi-vie 4-6h)</div>
+      <div class="qcm-option" data-idx="D" onclick="selectOption(this)"><span class="letter">D</span> Facteur IX (demi-vie 24h)</div>
+    </div>
+    <button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button>
+    <div class="qcm-feedback"></div>
+    <div class="qcm-explanation">Réponse C. Le facteur VII a la demi-vie la plus courte (4-6h) des facteurs VK-dépendants. L'INR reflète principalement l'activité du FVII (voie extrinsèque/TP). C'est pourquoi l'INR s'élève rapidement après introduction des AVK (dès J1-J2). L'équilibre complet prend 5-7 jours car les facteurs à longue demi-vie (FII, FX) mettent plus de temps à descendre.</div>
+  </div>
+  <div class="qcm-block" data-answer="B" id="qNEWID-4">
+    <div class="q-text">Q4. Quel est le traitement de la surdosage grave en AVK avec hémorragie active ?</div>
+    <div class="qcm-options">
+      <div class="qcm-option" data-idx="A" onclick="selectOption(this)"><span class="letter">A</span> Arrêt des AVK seul + vitamine K orale</div>
+      <div class="qcm-option" data-idx="B" onclick="selectOption(this)"><span class="letter">B</span> Vitamine K IV + Concentré de complexe prothrombique (CCP/PPSB) en URGENCE</div>
+      <div class="qcm-option" data-idx="C" onclick="selectOption(this)"><span class="letter">C</span> Plasma frais congelé seul</div>
+      <div class="qcm-option" data-idx="D" onclick="selectOption(this)"><span class="letter">D</span> Protamine IV</div>
+    </div>
+    <button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button>
+    <div class="qcm-feedback"></div>
+    <div class="qcm-explanation">Réponse B. Surdosage grave AVK + hémorragie = URGENCE. Traitement : CCP (Octaplex®/Kanokad®) = facteurs II, VII, IX, X concentrés → correction immédiate (15 min) + Vitamine K IV 10 mg (prévient la rechute). Le PFC seul est insuffisant (volume trop important). La protamine inverse l'héparine, pas les AVK.</div>
+  </div>
+  <div class="qcm-block" data-answer="C" id="qNEWID-5">
+    <div class="q-text">Q5. Un patient sous AVK pour ACFA doit être opéré en urgence. INR = 3,8. Quel est le protocole de correction ?</div>
+    <div class="qcm-options">
+      <div class="qcm-option" data-idx="A" onclick="selectOption(this)"><span class="letter">A</span> Attendre retour spontané de l'INR < 1,5</div>
+      <div class="qcm-option" data-idx="B" onclick="selectOption(this)"><span class="letter">B</span> Vitamine K seule, action en 8-12h</div>
+      <div class="qcm-option" data-idx="C" onclick="selectOption(this)"><span class="letter">C</span> CCP + Vitamine K IV pour normalisation INR en 15-30 min</div>
+      <div class="qcm-option" data-idx="D" onclick="selectOption(this)"><span class="letter">D</span> Transfusion de plasma décongelé × 4</div>
+    </div>
+    <button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button>
+    <div class="qcm-feedback"></div>
+    <div class="qcm-explanation">Réponse C. Chirurgie urgente sous AVK : CCP (concentré de complexe prothrombique) + Vitamine K IV → normalisation INR < 1,5 en 15-30 min. La vitamine K seule prend 8-24h (synthèse de nouveaux facteurs). Le PFC demande de grands volumes. Objectif INR < 1,5 avant toute chirurgie majeure.</div>
+  </div>
+</div>
+
+
 <!-- SLIDE 6 : COAGULOPATHIES ACQUISES -->
-<div class="slide content-slide" id="slide-6">
+<div class="slide content-slide" id="slide-8">
   <h2>&#128683; Coagulopathies acquises — CIVD, fibrinolyse, vitamine K, IHC, inhibiteurs</h2>
 
   <h3>I — CIVD : coagulation intravasculaire disséminée</h3>
@@ -840,10 +1003,21 @@ tr:hover td { background: rgba(255,255,255,0.03); }
     <button class="flash-reveal" onclick="this.nextElementSibling.style.display='block';this.style.display='none'">Révéler la réponse</button>
     <div class="flash-answer" style="display:none">Clé : le FACTEUR V. Dans la CIVD, le facteur V est DIMINUÉ (consommé). Dans l'hypovitaminose K, le facteur V est NORMAL (non vitamine K dépendant, donc non affecté). Autres différences : dans la CIVD les D-dimères sont très élevés (microthrombi) et la thrombopénie est fréquente. Dans l'hypovitaminose K, les plaquettes sont normales et les D-dimères normaux.</div>
   </div>
+
+<div class="flash-block">
+  <div class="flash-q">❓ Comment distinguer biologiquement CIVD décompensée vs hypovitaminose K ?</div>
+  <button class="flash-reveal" onclick="this.nextElementSibling.style.display='block';this.style.display='none'">Révéler la réponse</button>
+  <div class="flash-answer" style="display:none">Clé = facteur V. CIVD : FV DIMINUÉ (consommé avec tous les facteurs). Hypovitaminose K : FV NORMAL (vitamine K-indépendant). Aussi : fibrinogène bas + schizocytes en CIVD. Fibrinogène normal + pas de schizocytes en hypovitaminose K.</div>
+</div>
+<div class="flash-block">
+  <div class="flash-q">❓ Quel est le traitement de la CIVD décompensée hémorragique ?</div>
+  <button class="flash-reveal" onclick="this.nextElementSibling.style.display='block';this.style.display='none'">Révéler la réponse</button>
+  <div class="flash-answer" style="display:none">Traiter la CAUSE (sepsis, cancer, hémorragie obstétricale...) est la priorité absolue. Transfusion guidée : fibrinogène < 1,5 g/L → fibrinogène/PFC. Plaquettes < 30 G/L → CPA. Contrôle biologique toutes les 4-6h. Acide tranexamique si fibrinolyse prédomine (caution en CIVD).</div>
+</div>
 </div>
 
 <!-- SLIDE 7 : HÉMOPHILIES -->
-<div class="slide content-slide" id="slide-7">
+<div class="slide content-slide" id="slide-9">
   <h2>&#129516; Hémophilies A et B — Coagulopathies constitutionnelles</h2>
 
   <h3>I — Génétique et épidémiologie</h3>
@@ -957,10 +1131,21 @@ tr:hover td { background: rgba(255,255,255,0.03); }
     <button class="flash-reveal" onclick="this.nextElementSibling.style.display='block';this.style.display='none'">Révéler la réponse</button>
     <div class="flash-answer" style="display:none">Hémophilie A sévère (FVIII &lt;1%). Le tableau est typique : hémarthrose du genou chez un petit garçon, TCA allongé isolément (voie intrinsèque), TP normal, plaquettes normales. Prise en charge immédiate : administration IV de concentré de facteur VIII pour corriger le taux (objectif &gt;50-80% selon sévérité du saignement), contacter le centre de traitement de l'hémophilie. Pas d'aspirine ni d'AINS, pas d'injection IM.</div>
   </div>
+
+<div class="flash-block">
+  <div class="flash-q">❓ Quelle est la règle de transmission d'un homme hémophile à sa descendance ?</div>
+  <button class="flash-reveal" onclick="this.nextElementSibling.style.display='block';this.style.display='none'">Révéler la réponse</button>
+  <div class="flash-answer" style="display:none">Homme hémophile (X^hY) : transmet X^h à TOUTES ses filles (100% conductrices obligatoires) et Y à tous ses fils (100% sains). Une femme conductrice (XX^h) : 50% fils hémophiles, 50% sains, 50% filles conductrices, 50% saines. 30% des cas sont des mutations de novo (pas de conductrice identifiable).</div>
+</div>
+<div class="flash-block">
+  <div class="flash-q">❓ Comment surveiller un hémophile en prophylaxie et dépister les inhibiteurs ?</div>
+  <button class="flash-reveal" onclick="this.nextElementSibling.style.display='block';this.style.display='none'">Révéler la réponse</button>
+  <div class="flash-answer" style="display:none">Prophylaxie primaire (hémophilie sévère < 2 ans) : objectif taux résiduel FVIII > 1%. Dépistage inhibiteurs : test de Bethesda annuellement + après chaque hospitalisation. Faible taux (< 5 UB) : tolérance immunitaire. Fort taux (≥ 5 UB) : agents by-pass (FEIBA, NovoSeven) ou emicizumab.</div>
+</div>
 </div>
 
 <!-- SLIDE 8 : QCM 3 -->
-<div class="slide content-slide" id="slide-8">
+<div class="slide content-slide" id="slide-10">
   <h2>&#129504; QCM 3 — Coagulopathies &amp; Hémophilies</h2>
 
   <div class="qcm-block" data-answer="B" id="q3-1">
@@ -1016,8 +1201,73 @@ tr:hover td { background: rgba(255,255,255,0.03); }
   </div>
 </div>
 
+<div class="slide content-slide" id="slide-11">
+  <h2>🧠 QCM 6 — Hémophilies & inhibiteurs</h2>
+  <div class="qcm-block" data-answer="C" id="qNEWID-1">
+    <div class="q-text">Q1. Un hémophile A sévère présente une hémarthrose du genou droite après un traumatisme mineur. Quel est le traitement immédiat ?</div>
+    <div class="qcm-options">
+      <div class="qcm-option" data-idx="A" onclick="selectOption(this)"><span class="letter">A</span> Aspirine à 1g pour l'antalgie + glace</div>
+      <div class="qcm-option" data-idx="B" onclick="selectOption(this)"><span class="letter">B</span> AINS + repos articulaire strict 48h</div>
+      <div class="qcm-option" data-idx="C" onclick="selectOption(this)"><span class="letter">C</span> FVIII IV (objectif 50-80%) + RICE sans aspirine/AINS</div>
+      <div class="qcm-option" data-idx="D" onclick="selectOption(this)"><span class="letter">D</span> Injection intra-articulaire de corticoïdes</div>
+    </div>
+    <button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button>
+    <div class="qcm-feedback"></div>
+    <div class="qcm-explanation">Réponse C. Règles absolues hémophile : JAMAIS d'aspirine ni AINS (thrombopathie supplémentaire). JAMAIS d'injection IM. Traitement : concentré de FVIII IV pour objectif 50-80% (hémarthrose modérée-grave). RICE (repos, glace, compression, élévation) en complément. En prophylaxie : objectif résiduel > 1-3%.</div>
+  </div>
+  <div class="qcm-block" data-answer="C" id="qNEWID-2">
+    <div class="q-text">Q2. Quelle est la proportion d'hémophiles A sévères développant un inhibiteur anti-FVIII ?</div>
+    <div class="qcm-options">
+      <div class="qcm-option" data-idx="A" onclick="selectOption(this)"><span class="letter">A</span> 2-3%</div>
+      <div class="qcm-option" data-idx="B" onclick="selectOption(this)"><span class="letter">B</span> 5-10%</div>
+      <div class="qcm-option" data-idx="C" onclick="selectOption(this)"><span class="letter">C</span> 15-30%</div>
+      <div class="qcm-option" data-idx="D" onclick="selectOption(this)"><span class="letter">D</span> Plus de 50%</div>
+    </div>
+    <button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button>
+    <div class="qcm-feedback"></div>
+    <div class="qcm-explanation">Réponse C. 15-30% des hémophiles A sévères développent des inhibiteurs anti-FVIII (anticorps IgG4 neutralisants). Pour l'hémophilie B sévère : 3-5%. Ces inhibiteurs rendent le traitement substitutif standard inefficace. Dépistage : test de Bethesda (dosage en Unités Bethesda).</div>
+  </div>
+  <div class="qcm-block" data-answer="B" id="qNEWID-3">
+    <div class="q-text">Q3. Quel est le mécanisme d'action de l'emicizumab dans l'hémophilie A avec inhibiteur ?</div>
+    <div class="qcm-options">
+      <div class="qcm-option" data-idx="A" onclick="selectOption(this)"><span class="letter">A</span> Inhibe les anticorps anti-FVIII en se liant à eux</div>
+      <div class="qcm-option" data-idx="B" onclick="selectOption(this)"><span class="letter">B</span> Anticorps bispécifique pontant FIXa et FX, mimant le rôle du FVIII</div>
+      <div class="qcm-option" data-idx="C" onclick="selectOption(this)"><span class="letter">C</span> Augmente la production endogène de FVIII hépatique</div>
+      <div class="qcm-option" data-idx="D" onclick="selectOption(this)"><span class="letter">D</span> Remplace le FVIII par voie orale</div>
+    </div>
+    <button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button>
+    <div class="qcm-feedback"></div>
+    <div class="qcm-explanation">Réponse B. Emicizumab (Hemlibra®) : anticorps bispécifique se liant simultanément à FIXa ET FX → active FX en FXa → coagulation normale, court-circuitant le besoin de FVIII. N'est pas reconnu par l'inhibiteur anti-FVIII. Administration SC hebdomadaire ou mensuelle. Révolution dans l'hémophilie A avec inhibiteur.</div>
+  </div>
+  <div class="qcm-block" data-answer="C" id="qNEWID-4">
+    <div class="q-text">Q4. Comment traiter une hémorragie grave chez un hémophile B (déficit en FIX) avec inhibiteur à fort titre ?</div>
+    <div class="qcm-options">
+      <div class="qcm-option" data-idx="A" onclick="selectOption(this)"><span class="letter">A</span> Doubler la dose de FIX</div>
+      <div class="qcm-option" data-idx="B" onclick="selectOption(this)"><span class="letter">B</span> Administrer du FVIII (efficace dans les deux hémophilies)</div>
+      <div class="qcm-option" data-idx="C" onclick="selectOption(this)"><span class="letter">C</span> FEIBA ou rFVIIa (agents by-pass)</div>
+      <div class="qcm-option" data-idx="D" onclick="selectOption(this)"><span class="letter">D</span> Transfusion de sang total</div>
+    </div>
+    <button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button>
+    <div class="qcm-feedback"></div>
+    <div class="qcm-explanation">Réponse C. Inhibiteur à fort titre dans l'hémophilie B : le FIX transfusé est neutralisé immédiatement. Agents by-pass : FEIBA (complexe prothrombique activé contenant FXa, thrombine) ou rFVIIa (NovoSeven®). Attention : l'hémophilie B avec inhibiteur peut donner des réactions anaphylactiques graves au FIX → importance du dépistage.</div>
+  </div>
+  <div class="qcm-block" data-answer="C" id="qNEWID-5">
+    <div class="q-text">Q5. Quel est le type d'hémophilie qui peut toucher les femmes symptomatiquement ?</div>
+    <div class="qcm-options">
+      <div class="qcm-option" data-idx="A" onclick="selectOption(this)"><span class="letter">A</span> Hémophilie A légère seulement (FVIII 5-40%)</div>
+      <div class="qcm-option" data-idx="B" onclick="selectOption(this)"><span class="letter">B</span> Aucun type, les femmes sont toujours conductrices asymptomatiques</div>
+      <div class="qcm-option" data-idx="C" onclick="selectOption(this)"><span class="letter">C</span> Hémophilie sévère chez les femmes avec 45,X (syndrome de Turner)</div>
+      <div class="qcm-option" data-idx="D" onclick="selectOption(this)"><span class="letter">D</span> MvW type 2N, faussement appelée "hémophilie" chez la femme</div>
+    </div>
+    <button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button>
+    <div class="qcm-feedback"></div>
+    <div class="qcm-explanation">Réponse C. Les femmes peuvent avoir une hémophilie symptomatique si : 1. Homozygotie (deux allèles X^h) → très rare. 2. Syndrome de Turner (45,X) : une seule X → si elle porte X^h, hémophilie clinique. 3. Inactivation skewed du X normal. MvW type 2N peut mimer l'hémophilie A mais est autosomique récessive (peut toucher les femmes 2N/2N).</div>
+  </div>
+</div>
+
+
 <!-- SLIDE 9 : TVP & EP -->
-<div class="slide content-slide" id="slide-9">
+<div class="slide content-slide" id="slide-12">
   <h2>&#128684; TVP &amp; Embolie Pulmonaire — Thrombose veineuse</h2>
 
   <h3>I — Thrombose artérielle vs thrombose veineuse</h3>
@@ -1167,10 +1417,21 @@ tr:hover td { background: rgba(255,255,255,0.03); }
     <button class="flash-reveal" onclick="this.nextElementSibling.style.display='block';this.style.display='none'">Révéler la réponse</button>
     <div class="flash-answer" style="display:none">D-dimères &gt;500 ng/mL avec probabilité intermédiaire → imagerie. On réalise un écho-Doppler veineux des membres inférieurs pour confirmer ou infirmer une TVP. La contraception oestro-progestative est un FDR de TVP chez la femme. Si TVP confirmée : anticoagulation curative immédiate (HBPM ou AOD) + arrêt de la contraception oestro-progestative + bilan de thrombophilie si jeune femme sans autre FDR évident.</div>
   </div>
+
+<div class="flash-block">
+  <div class="flash-q">❓ Quels sont les critères du score de Wells TVP et la règle de décision ?</div>
+  <button class="flash-reveal" onclick="this.nextElementSibling.style.display='block';this.style.display='none'">Révéler la réponse</button>
+  <div class="flash-answer" style="display:none">Cancer +1 / Paralysie MI +1 / Alitement > 3j ou chirurgie récente +1 / Douleur trajet veineux +1 / Œdème tout MI +1 / Asymétrie cheville +1 / CVC +1 / Autre diagnostic aussi probable -2. ≥ 2 = forte probabilité → écho-Doppler direct. < 2 = faible probabilité → D-dimères d'abord.</div>
+</div>
+<div class="flash-block">
+  <div class="flash-q">❓ Quelles sont les durées d'anticoagulation dans la TVP selon les RCP ?</div>
+  <button class="flash-reveal" onclick="this.nextElementSibling.style.display='block';this.style.display='none'">Révéler la réponse</button>
+  <div class="flash-answer" style="display:none">TVP distale provoquée : 6 semaines. TVP proximale/EP provoquée (facteur réversible) : 3-6 mois. TVP/EP non provoquée 1er épisode : 3 mois minimum puis réévaluation. Récidive ou SAPL ou cancer → durée indéfinie. Grossesse = HBPM seule (pas AVK, pas AOD).</div>
+</div>
 </div>
 
 <!-- SLIDE 10 : THROMBOPHILIES -->
-<div class="slide content-slide" id="slide-10">
+<div class="slide content-slide" id="slide-13">
   <h2>&#129516; Thrombophilies — Bilan étiologique des thromboses veineuses</h2>
 
   <h3>I — Indications du bilan de thrombophilie</h3>
@@ -1329,10 +1590,21 @@ tr:hover td { background: rgba(255,255,255,0.03); }
     <button class="flash-reveal" onclick="this.nextElementSibling.style.display='block';this.style.display='none'">Révéler la réponse</button>
     <div class="flash-answer" style="display:none">MAINTENANT (ADN stable, pas affecté par AVK) : mutation FV Leiden + mutation FII G20210A → avec consentement écrit signé. DIFFÉRER (attendre arrêt AVK depuis &gt;3 semaines ET situation stable depuis &gt;3 mois) : dosage antithrombine, protéine C, protéine S (faussement abaissées sous AVK). Protéine S aussi à doser hors grossesse. SAPL : peut être cherché maintenant mais à confirmer 3 mois plus tard si positif.</div>
   </div>
+
+<div class="flash-block">
+  <div class="flash-q">❓ Quelles sont les deux mutations génétiques les plus fréquentes des thrombophilies héréditaires ?</div>
+  <button class="flash-reveal" onclick="this.nextElementSibling.style.display='block';this.style.display='none'">Révéler la réponse</button>
+  <div class="flash-answer" style="display:none">Facteur V Leiden (G1691A) : résistance à la protéine C activée, autosomique dominant. Hétérozygote : risque TVP × 4-7. Homozygote : risque × 80. Mutation FII G20210A (prothrombine) : élévation prothrombine → thrombine excessive. Les deux : test génétique faisable à n'importe quel moment.</div>
+</div>
+<div class="flash-block">
+  <div class="flash-q">❓ Pourquoi ne pas effectuer le bilan fonctionnel de thrombophilie sous AVK ?</div>
+  <button class="flash-reveal" onclick="this.nextElementSibling.style.display='block';this.style.display='none'">Révéler la réponse</button>
+  <div class="flash-answer" style="display:none">Protéines C et S sont vitamine K-dépendantes → faussement abaissées sous AVK → faux diagnostic de déficit. Antithrombine : peut être faussée sous héparine. Règle : mutations génétiques (FV Leiden, FII G20210A) → à tout moment. Protéines C, S, AT → 3 mois après arrêt AVK.</div>
+</div>
 </div>
 
 <!-- SLIDE 11 : QCM 4 -->
-<div class="slide content-slide" id="slide-11">
+<div class="slide content-slide" id="slide-14">
   <h2>&#129504; QCM 4 — TVP &amp; Thrombophilies</h2>
 
   <div class="qcm-block" data-answer="B" id="q4-1">
@@ -1388,8 +1660,73 @@ tr:hover td { background: rgba(255,255,255,0.03); }
   </div>
 </div>
 
+<div class="slide content-slide" id="slide-15">
+  <h2>🧠 QCM 8 — TVP/EP & stratégie diagnostique</h2>
+  <div class="qcm-block" data-answer="C" id="qNEWID-1">
+    <div class="q-text">Q1. Femme de 35 ans, post-partum J3, douleur et gonflement de jambe gauche, dyspnée. Quelle est la stratégie diagnostique initiale ?</div>
+    <div class="qcm-options">
+      <div class="qcm-option" data-idx="A" onclick="selectOption(this)"><span class="letter">A</span> D-dimères seuls (valeur normale rassurante)</div>
+      <div class="qcm-option" data-idx="B" onclick="selectOption(this)"><span class="letter">B</span> Ne pas doser les D-dimères (ils seront toujours élevés en post-partum)</div>
+      <div class="qcm-option" data-idx="C" onclick="selectOption(this)"><span class="letter">C</span> Score de Wells + D-dimères si faible probabilité / écho-Doppler si forte probabilité</div>
+      <div class="qcm-option" data-idx="D" onclick="selectOption(this)"><span class="letter">D</span> Scintigraphie pulmonaire</div>
+    </div>
+    <button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button>
+    <div class="qcm-feedback"></div>
+    <div class="qcm-explanation">Réponse C. En post-partum : les D-dimères sont physiologiquement élevés (accouchement récent) → leur valeur normale seule est limitée. Mais le Score de Wells reste utilisable. Si probabilité forte → imagerie directe (écho-Doppler pour TVP, angioTDM pour EP). Si probabilité faible → D-dimères peuvent encore exclure si adaptés à l'âge/contexte.</div>
+  </div>
+  <div class="qcm-block" data-answer="B" id="qNEWID-2">
+    <div class="q-text">Q2. Quelle est la différence entre TVP proximale et distale en termes de risque embolique et de prise en charge ?</div>
+    <div class="qcm-options">
+      <div class="qcm-option" data-idx="A" onclick="selectOption(this)"><span class="letter">A</span> TVP distale = plus risquée que proximale</div>
+      <div class="qcm-option" data-idx="B" onclick="selectOption(this)"><span class="letter">B</span> TVP proximale (poplitée+) = risque EP 40-50%, anticoagulation obligatoire. TVP distale = risque EP < 5%, discuter anticoagulation</div>
+      <div class="qcm-option" data-idx="C" onclick="selectOption(this)"><span class="letter">C</span> Les deux nécessitent anticoagulation 6 mois systématiquement</div>
+      <div class="qcm-option" data-idx="D" onclick="selectOption(this)"><span class="letter">D</span> TVP distale ne nécessite aucun traitement ni surveillance</div>
+    </div>
+    <button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button>
+    <div class="qcm-feedback"></div>
+    <div class="qcm-explanation">Réponse B. TVP proximale (veine poplitée et au-dessus) : risque EP sans traitement 40-50% → anticoagulation curative obligatoire 3-6 mois selon contexte. TVP distale (veines surales) : risque EP < 5% → option : anticoagulation 6 semaines OU surveillance écho à 1 semaine (si symptomatique ou facteurs de risque d'extension).</div>
+  </div>
+  <div class="qcm-block" data-answer="B" id="qNEWID-3">
+    <div class="q-text">Q3. Quelle est l'indication de la thrombolyse systémique dans l'embolie pulmonaire ?</div>
+    <div class="qcm-options">
+      <div class="qcm-option" data-idx="A" onclick="selectOption(this)"><span class="letter">A</span> Toute EP avec D-dimères > 5 000 μg/L</div>
+      <div class="qcm-option" data-idx="B" onclick="selectOption(this)"><span class="letter">B</span> EP massive avec état de choc hémodynamique (PAS < 90 mmHg ou besoin vasopresseur)</div>
+      <div class="qcm-option" data-idx="C" onclick="selectOption(this)"><span class="letter">C</span> EP avec troponine positive</div>
+      <div class="qcm-option" data-idx="D" onclick="selectOption(this)"><span class="letter">D</span> EP confirmée avec BNP > 1000 pg/mL</div>
+    </div>
+    <button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button>
+    <div class="qcm-feedback"></div>
+    <div class="qcm-explanation">Réponse B. Thrombolyse dans l'EP : uniquement pour les EP MASSIVES à HAUT RISQUE avec état de choc hémodynamique (PAS < 90 mmHg, FC > 100, ou arrêt cardiaque). Altéplase 100 mg IV sur 2h. CI absolues : neurochirurgie < 3 mois, AVC < 3 mois, saignement actif. EP intermédiaire à haut risque (dysfL VD + troponine+) : envisager si aggravation.</div>
+  </div>
+  <div class="qcm-block" data-answer="B" id="qNEWID-4">
+    <div class="q-text">Q4. Quel anticoagulant utiliser en première intention pour une TVP proximale chez une femme enceinte de 20 SA ?</div>
+    <div class="qcm-options">
+      <div class="qcm-option" data-idx="A" onclick="selectOption(this)"><span class="letter">A</span> AVK (warfarine)</div>
+      <div class="qcm-option" data-idx="B" onclick="selectOption(this)"><span class="letter">B</span> HBPM à dose curative</div>
+      <div class="qcm-option" data-idx="C" onclick="selectOption(this)"><span class="letter">C</span> Rivaroxaban ou apixaban (AOD)</div>
+      <div class="qcm-option" data-idx="D" onclick="selectOption(this)"><span class="letter">D</span> Aspirine + compression</div>
+    </div>
+    <button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button>
+    <div class="qcm-feedback"></div>
+    <div class="qcm-explanation">Réponse B. Grossesse = HBPM SEULE. AVK : tératogènes (embryopathie vit K 6-12 SA, hémorragie fœtale au 2e-3e tri). AOD (xabans, dabigatran) : contre-indiqués (données insuffisantes, passage placentaire suspecté). HBPM : pas de passage placentaire (grosse molécule), sûre pour la mère et le fœtus tout au long de la grossesse.</div>
+  </div>
+  <div class="qcm-block" data-answer="B" id="qNEWID-5">
+    <div class="q-text">Q5. Qu'est-ce que le signe de Homans dans la TVP et quelle est sa valeur diagnostique actuelle ?</div>
+    <div class="qcm-options">
+      <div class="qcm-option" data-idx="A" onclick="selectOption(this)"><span class="letter">A</span> Signe très spécifique, toujours présent dans les TVP proximales</div>
+      <div class="qcm-option" data-idx="B" onclick="selectOption(this)"><span class="letter">B</span> Douleur du mollet à la dorsiflexion forcée du pied — peu sensible ET peu spécifique, abandonné en pratique</div>
+      <div class="qcm-option" data-idx="C" onclick="selectOption(this)"><span class="letter">C</span> Signe ECG de TVP confirmatoire</div>
+      <div class="qcm-option" data-idx="D" onclick="selectOption(this)"><span class="letter">D</span> Test biologique de référence pour la TVP</div>
+    </div>
+    <button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button>
+    <div class="qcm-feedback"></div>
+    <div class="qcm-explanation">Réponse B. Le signe de Homans (douleur du mollet à la dorsiflexion du pied) est historique mais peu fiable : sensibilité < 50%, spécificité < 40%. Il est ABANDONNÉ en pratique clinique moderne. Le diagnostic de TVP repose sur le Score de Wells + D-dimères + écho-Doppler veineux. La clinique seule est insuffisante.</div>
+  </div>
+</div>
+
+
 <!-- SLIDE 12 : RÉCAPITULATIF -->
-<div class="slide content-slide" id="slide-12">
+<div class="slide content-slide" id="slide-16">
   <h2>&#128203; Récapitulatif — Tableaux synoptiques complets</h2>
 
   <h3>I — Orientation diagnostique initiale</h3>
@@ -1467,10 +1804,86 @@ tr:hover td { background: rgba(255,255,255,0.03); }
     <button class="flash-reveal" onclick="this.nextElementSibling.style.display='block';this.style.display='none'">Révéler la réponse</button>
     <div class="flash-answer" style="display:none">1. Personnes âgées (augmentation physiologique avec l'âge → seuil adapté = âge × 10 ng/mL). 2. Syndrome inflammatoire (cancer, infections bactériennes, maladies auto-immunes). 3. Grossesse (augmentation progressive avec l'avancement de la grossesse). 4. Insuffisance rénale. 5. Post-opératoire récent (inflammation et cicatrisation). → C'est pourquoi les D-dimères seuls ne suffisent pas à affirmer une thrombose : il faut toujours une imagerie si positifs.</div>
   </div>
+
+<div class="flash-block">
+  <div class="flash-q">❓ Quels sont les 3 grands pièges biologiques à l'ECN en hémostase ?</div>
+  <button class="flash-reveal" onclick="this.nextElementSibling.style.display='block';this.style.display='none'">Révéler la réponse</button>
+  <div class="flash-answer" style="display:none">1. TCA allongé + TP normal + non corrigé au mélange → anticoagulant lupique (pas hémophilie). 2. TP bas + TCA allongé + FV bas → CIVD (FV est consommé, NORMAL en hypovitaminose K). 3. Thrombopénie sous héparine + THROMBOSE → TIH type II (ne jamais transfuser des plaquettes !).</div>
+</div>
+<div class="flash-block">
+  <div class="flash-q">❓ Citez 3 situations où le bilan standard de coagulation est normal malgré un risque hémorragique.</div>
+  <button class="flash-reveal" onclick="this.nextElementSibling.style.display='block';this.style.display='none'">Révéler la réponse</button>
+  <div class="flash-answer" style="display:none">1. Thrombopathie médicamenteuse (aspirine, clopidogrel) : TP/TCA normaux, TOP seul allongé. 2. MvW type 1 légère : bilan standard normal, seul le TOP et les tests vWF spécifiques sont anormaux. 3. Déficit en FXIII : TP/TCA/fibrinogène TOUS normaux, saignements retardés J3-J7 post-opératoires.</div>
+</div>
 </div>
 
+<div class="slide content-slide" id="slide-17">
+  <h2>🧠 QCM 9 — Thrombophilies & SAPL</h2>
+  <div class="qcm-block" data-answer="B" id="qNEWID-1">
+    <div class="q-text">Q1. Quels sont les critères biologiques de Sapporo pour diagnostiquer un SAPL ?</div>
+    <div class="qcm-options">
+      <div class="qcm-option" data-idx="A" onclick="selectOption(this)"><span class="letter">A</span> Un seul test positif suffit</div>
+      <div class="qcm-option" data-idx="B" onclick="selectOption(this)"><span class="letter">B</span> Au moins un test positif (ACL IgG/IgM, anti-β2GP1 IgG/IgM, ou anticoagulant lupique) à au moins 2 reprises espacées de 12 semaines</div>
+      <div class="qcm-option" data-idx="C" onclick="selectOption(this)"><span class="letter">C</span> Les 3 tests biologiques doivent être positifs simultanément</div>
+      <div class="qcm-option" data-idx="D" onclick="selectOption(this)"><span class="letter">D</span> Test positif une seule fois si clinique évocatrice</div>
+    </div>
+    <button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button>
+    <div class="qcm-feedback"></div>
+    <div class="qcm-explanation">Réponse B. SAPL = critères de Sapporo (Classification Sydney 2006) : au moins 1 critère clinique (thrombose artérielle/veineuse ou complications obstétricales) + au moins 1 critère biologique CONFIRMÉ 2 FOIS à ≥ 12 semaines d'intervalle (un résultat positif unique peut être transitoire/infectieux).</div>
+  </div>
+  <div class="qcm-block" data-answer="B" id="qNEWID-2">
+    <div class="q-text">Q2. Quel est le paradoxe biologique classique du SAPL à l'ECN ?</div>
+    <div class="qcm-options">
+      <div class="qcm-option" data-idx="A" onclick="selectOption(this)"><span class="letter">A</span> TP allongé avec tendance aux thromboses</div>
+      <div class="qcm-option" data-idx="B" onclick="selectOption(this)"><span class="letter">B</span> TCA allongé IN VITRO malgré un état PROTHROMBOTIQUE in vivo</div>
+      <div class="qcm-option" data-idx="C" onclick="selectOption(this)"><span class="letter">C</span> Plaquettes élevées avec risque hémorragique</div>
+      <div class="qcm-option" data-idx="D" onclick="selectOption(this)"><span class="letter">D</span> INR bas malgré surdosage en AVK</div>
+    </div>
+    <button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button>
+    <div class="qcm-feedback"></div>
+    <div class="qcm-explanation">Réponse B. Paradoxe ECN : les anticorps antiphospholipides interfèrent avec les phospholipides du test → TCA allongé IN VITRO. Mais in vivo, ces anticorps activent l'endothélium et les plaquettes → état PROTHROMBOTIQUE (thromboses artérielles et veineuses). Mémo : TCA allongé + thromboses + fausses couches répétées = SAPL.</div>
+  </div>
+  <div class="qcm-block" data-answer="B" id="qNEWID-3">
+    <div class="q-text">Q3. Le facteur V Leiden hétérozygote augmente combien de fois le risque de TVP ?</div>
+    <div class="qcm-options">
+      <div class="qcm-option" data-idx="A" onclick="selectOption(this)"><span class="letter">A</span> 1,5 à 2 fois (risque quasi-normal)</div>
+      <div class="qcm-option" data-idx="B" onclick="selectOption(this)"><span class="letter">B</span> 4 à 7 fois</div>
+      <div class="qcm-option" data-idx="C" onclick="selectOption(this)"><span class="letter">C</span> 20 à 30 fois</div>
+      <div class="qcm-option" data-idx="D" onclick="selectOption(this)"><span class="letter">D</span> 100 fois (thrombose certaine à l'âge adulte)</div>
+    </div>
+    <button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button>
+    <div class="qcm-feedback"></div>
+    <div class="qcm-explanation">Réponse B. FV Leiden HÉTÉROZYGOTE : risque TVP × 4-7 (risque absolu ~ 0,5-1%/an). FV Leiden HOMOZYGOTE : risque × 80 (risque élevé). En pratique : FV Leiden hétérozygote + facteur déclenchant (chirurgie, grossesse, contraception estroprogestative) → anticoagulation prophylactique discutée. La contraception EP est contre-indiquée.</div>
+  </div>
+  <div class="qcm-block" data-answer="C" id="qNEWID-4">
+    <div class="q-text">Q4. Quel déficit héréditaire en inhibiteur de la coagulation est le plus sévère et résiste à l'héparine ?</div>
+    <div class="qcm-options">
+      <div class="qcm-option" data-idx="A" onclick="selectOption(this)"><span class="letter">A</span> Déficit en protéine C</div>
+      <div class="qcm-option" data-idx="B" onclick="selectOption(this)"><span class="letter">B</span> Déficit en protéine S</div>
+      <div class="qcm-option" data-idx="C" onclick="selectOption(this)"><span class="letter">C</span> Déficit en antithrombine (AT)</div>
+      <div class="qcm-option" data-idx="D" onclick="selectOption(this)"><span class="letter">D</span> Facteur V Leiden homozygote</div>
+    </div>
+    <button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button>
+    <div class="qcm-feedback"></div>
+    <div class="qcm-explanation">Réponse C. Le déficit en antithrombine est la thrombophilie héréditaire la plus sévère. Risque TVP × 10-50. Résistance à l'héparine car l'héparine agit EN POTENTIALISANT L'AT. En cas de thrombose avec déficit AT : concentrés d'AT III avant anticoagulation. Le déficit en protéine C ou S est moins sévère (risque × 3-5).</div>
+  </div>
+  <div class="qcm-block" data-answer="B" id="qNEWID-5">
+    <div class="q-text">Q5. Un homme de 28 ans, sans facteur déclenchant, fait une thrombose mésentérique. Quel bilan de thrombophilie réaliser en priorité ?</div>
+    <div class="qcm-options">
+      <div class="qcm-option" data-idx="A" onclick="selectOption(this)"><span class="letter">A</span> FV Leiden uniquement (le plus fréquent)</div>
+      <div class="qcm-option" data-idx="B" onclick="selectOption(this)"><span class="letter">B</span> Bilan complet : protéines C, S, antithrombine, FV Leiden, FII G20210A, anticorps antiphospholipides</div>
+      <div class="qcm-option" data-idx="C" onclick="selectOption(this)"><span class="letter">C</span> Aucun bilan (thrombose mésentérique pas indicative)</div>
+      <div class="qcm-option" data-idx="D" onclick="selectOption(this)"><span class="letter">D</span> Uniquement bilan néoplasique (cancer digestif)</div>
+    </div>
+    <button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button>
+    <div class="qcm-feedback"></div>
+    <div class="qcm-explanation">Réponse B. Thrombose en territoire inhabituel (mésentérique, sus-hépatique, cérébrale) chez un JEUNE (< 50 ans) SANS facteur déclenchant = indication formelle de bilan complet de thrombophilie. + rechercher myéloprolifératif (JAK2), hémoglobinurie paroxystique nocturne (CD55/CD59), maladie inflammatoire intestinale. Le bilan complet est justifié car le traitement peut être prolongé.</div>
+  </div>
+</div>
+
+
 <!-- SLIDE 13 : FINALE -->
-<div class="slide content-slide" id="slide-13">
+<div class="slide content-slide" id="slide-18">
   <h2>&#9989; Points clés — Ce qui tombe aux ECN</h2>
 
   <h3>I — Les 10 règles d'or à ne jamais oublier</h3>
@@ -1596,13 +2009,89 @@ tr:hover td { background: rgba(255,255,255,0.03); }
   </div>
 
   <div class="key-hint">Fin du cours — Syndrome hémorragique &amp; TVP — Dr Roudot — &#8592; &#8594; pour naviguer</div>
+
+<div class="flash-block">
+  <div class="flash-q">❓ En 4 mots, résumez la différence clinique HP vs coagulation.</div>
+  <button class="flash-reveal" onclick="this.nextElementSibling.style.display='block';this.style.display='none'">Révéler la réponse</button>
+  <div class="flash-answer" style="display:none">HP = Muqueux/Spontané/Immédiat (pétéchies, purpura, épistaxis, ménorragies). Bilan : plaquettes + TOP + vWF. Coagulation = Profond/Provoqué/Retardé (hématomes profonds, hémarthroses). Bilan : TP + TCA + facteurs. Mnémo : HP saigne en SURFACE VITE, coagulation saigne en PROFONDEUR LENTEMENT.</div>
 </div>
+<div class="flash-block">
+  <div class="flash-q">❓ Quels sont les 5 médicaments les plus fréquents en cause de syndrome hémorragique acquis ?</div>
+  <button class="flash-reveal" onclick="this.nextElementSibling.style.display='block';this.style.display='none'">Révéler la réponse</button>
+  <div class="flash-answer" style="display:none">1. Aspirine/AINS : thrombopathie irréversible → TOP allongé. 2. Thiénopyridines (clopidogrel, ticagrelor) : anti-P2Y12 irréversible. 3. AVK : TP effondré. 4. HBPM/HNF : TCA allongé. 5. Antibiotiques (céphalosporines) → hypovitaminose K → TP bas. Cas particulier : thrombolytiques = risque hémorragique catastrophique.</div>
+</div>
+</div>
+
+<div class="slide content-slide" id="slide-19">
+  <h2>🧠 QCM 10 — Révision générale & cas cliniques</h2>
+  <div class="qcm-block" data-answer="C" id="qNEWID-1">
+    <div class="q-text">Q1. Une patiente de 35 ans consulte pour TCA allongé (ratio 1,8), TP normal, plaquettes normales. Elle n'a pas d'ATCD hémorragique. Le TCA ne se corrige pas au mélange 50/50. Quel diagnostic ?</div>
+    <div class="qcm-options">
+      <div class="qcm-option" data-idx="A" onclick="selectOption(this)"><span class="letter">A</span> Hémophilie A</div>
+      <div class="qcm-option" data-idx="B" onclick="selectOption(this)"><span class="letter">B</span> Maladie de von Willebrand type 2N</div>
+      <div class="qcm-option" data-idx="C" onclick="selectOption(this)"><span class="letter">C</span> Anticoagulant lupique</div>
+      <div class="qcm-option" data-idx="D" onclick="selectOption(this)"><span class="letter">D</span> Déficit en facteur XII</div>
+    </div>
+    <button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button>
+    <div class="qcm-feedback"></div>
+    <div class="qcm-explanation">Réponse C. TCA allongé ISOLÉ + TP normal + NON CORRIGÉ au mélange = INHIBITEUR (anticorps). L'anticoagulant lupique est le plus fréquent. Hémophilie A : corrigée au mélange. Déficit en FXII : corrigé au mélange ET pas de risque hémorragique (le FXII ne participe pas à l'hémostase in vivo).</div>
+  </div>
+  <div class="qcm-block" data-answer="B" id="qNEWID-2">
+    <div class="q-text">Q2. Quel est le premier traitement à donner devant un purpura fulminans chez l'enfant, AVANT tout résultat d'examen ?</div>
+    <div class="qcm-options">
+      <div class="qcm-option" data-idx="A" onclick="selectOption(this)"><span class="letter">A</span> Attendre les hémocultures avant toute antibiothérapie</div>
+      <div class="qcm-option" data-idx="B" onclick="selectOption(this)"><span class="letter">B</span> Ceftriaxone IM/IV 50 mg/kg EN URGENCE ABSOLUE, même avant la PL</div>
+      <div class="qcm-option" data-idx="C" onclick="selectOption(this)"><span class="letter">C</span> Transfusion de concentrés plaquettaires</div>
+      <div class="qcm-option" data-idx="D" onclick="selectOption(this)"><span class="letter">D</span> Corticoïdes haute dose IV</div>
+    </div>
+    <button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button>
+    <div class="qcm-feedback"></div>
+    <div class="qcm-explanation">Réponse B. Purpura fulminans = méningococcémie jusqu'à preuve du contraire = URGENCE VITALE. La ceftriaxone doit être injectée IMMÉDIATEMENT (même dans l'ambulance, même par le médecin de garde) AVANT la PL si celle-ci retarderait l'antibiothérapie de plus de quelques minutes. Ne jamais retarder l'antibiothérapie pour les examens.</div>
+  </div>
+  <div class="qcm-block" data-answer="B" id="qNEWID-3">
+    <div class="q-text">Q3. Quelle est la complication paradoxale à ne JAMAIS oublier dans la TIH (thrombopénie induite par l'héparine) type II ?</div>
+    <div class="qcm-options">
+      <div class="qcm-option" data-idx="A" onclick="selectOption(this)"><span class="letter">A</span> Risque hémorragique majeur par chute des plaquettes</div>
+      <div class="qcm-option" data-idx="B" onclick="selectOption(this)"><span class="letter">B</span> Risque THROMBOTIQUE (artériel et veineux) malgré la thrombopénie</div>
+      <div class="qcm-option" data-idx="C" onclick="selectOption(this)"><span class="letter">C</span> Risque d'embolie pulmonaire par thrombose cave</div>
+      <div class="qcm-option" data-idx="D" onclick="selectOption(this)"><span class="letter">D</span> Risque d'hémorragie cérébrale</div>
+    </div>
+    <button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button>
+    <div class="qcm-feedback"></div>
+    <div class="qcm-explanation">Réponse B. TIH type II = paradoxe : thrombopénie MAIS ÉTAT PROTHROMBOTIQUE (anticorps anti-FP4/héparine activent les plaquettes → thrombus). Complications : TVP, EP, thrombose artérielle (AVC, IDM, ischémie de membre). JAMAIS de transfusion plaquettaire (aggrave les thromboses). Arrêt IMMÉDIAT héparine toutes formes + relais danaparoïde ou argatroban.</div>
+  </div>
+  <div class="qcm-block" data-answer="B" id="qNEWID-4">
+    <div class="q-text">Q4. Un homme de 45 ans, cancer du poumon traité, présente une TVP fémorale. Quel anticoagulant à privilégier ?</div>
+    <div class="qcm-options">
+      <div class="qcm-option" data-idx="A" onclick="selectOption(this)"><span class="letter">A</span> AVK (INR cible 2-3)</div>
+      <div class="qcm-option" data-idx="B" onclick="selectOption(this)"><span class="letter">B</span> HBPM à dose curative pour 6 mois minimum</div>
+      <div class="qcm-option" data-idx="C" onclick="selectOption(this)"><span class="letter">C</span> Aspirine à 300 mg/j</div>
+      <div class="qcm-option" data-idx="D" onclick="selectOption(this)"><span class="letter">D</span> AOD uniquement si cancer non digestif</div>
+    </div>
+    <button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button>
+    <div class="qcm-feedback"></div>
+    <div class="qcm-explanation">Réponse B. Recommandations ITINSA/ESMO : cancer + TVP → HBPM à dose curative (tinzaparine, daltéparine) en 1ère intention (traitement de référence historique). Les AOD (rivaroxaban, apixaban) sont une alternative validée pour les cancers non-digestifs et non-gynécologiques en raison du risque de saignement. Durée : tant que le cancer est actif.</div>
+  </div>
+  <div class="qcm-block" data-answer="B" id="qNEWID-5">
+    <div class="q-text">Q5. Citez les 4 situations cliniques imposant un bilan de thrombophilie après une première TVP.</div>
+    <div class="qcm-options">
+      <div class="qcm-option" data-idx="A" onclick="selectOption(this)"><span class="letter">A</span> Systématiquement après toute TVP, quel que soit le contexte</div>
+      <div class="qcm-option" data-idx="B" onclick="selectOption(this)"><span class="letter">B</span> TVP spontanée < 50 ans / Localisation atypique / ATCD familiaux forts / 2ème épisode spontané</div>
+      <div class="qcm-option" data-idx="C" onclick="selectOption(this)"><span class="letter">C</span> Uniquement si l'anticoagulation doit être prolongée</div>
+      <div class="qcm-option" data-idx="D" onclick="selectOption(this)"><span class="letter">D</span> Seulement si le patient est sous contraception</div>
+    </div>
+    <button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button>
+    <div class="qcm-feedback"></div>
+    <div class="qcm-explanation">Réponse B. Indications consensuelles (ISTH, SFH) : 1. TVP spontanée < 50 ans. 2. Localisation inhabituelle (mésentérique, sus-hépatique, cérébrale, veines brachiales). 3. ATCD familiaux documentés (> 2 parents 1er degré). 4. 2ème épisode spontané. Aussi : pertes fœtales répétées (SAPL), résistance à l'héparine (déficit AT). Pas systématiquement après toute TVP.</div>
+  </div>
+</div>
+
 
 </div><!-- fin slide-container -->
 
 <script>
 let current = 0;
-const total = 14;
+const total = 20;
 function showSlide(n) {
   document.querySelectorAll('.slide').forEach(s => s.classList.remove('active'));
   current = Math.max(0, Math.min(n, total-1));
