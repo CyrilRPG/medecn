@@ -1,0 +1,1650 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Syndrome hémorragique & TVP — Hématologie</title>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  background: #0d0d1a; color: #e0e0f0;
+  min-height: 100vh; overflow: hidden;
+}
+.topbar {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  height: 50px; background: rgba(13,13,26,0.97);
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+  display: flex; align-items: center; padding: 0 1rem; gap: 0.75rem;
+}
+.topbar-home {
+  text-decoration: none; color: #e74c3c; font-weight: 600;
+  font-size: 0.85rem; white-space: nowrap;
+  padding: 0.3rem 0.7rem; border: 1px solid rgba(231,76,60,0.4);
+  border-radius: 6px; transition: background 0.2s;
+}
+.topbar-home:hover { background: rgba(231,76,60,0.15); }
+.topbar-title { flex: 1; text-align: center; font-size: 0.85rem; color: #9090b0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.topbar-counter { font-size: 0.85rem; color: #b0b0c0; white-space: nowrap; min-width: 55px; text-align: right; }
+.topbar-nav { display: flex; gap: 0.4rem; }
+.topbar-btn { background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.15); color: #e0e0f0; padding: 0.3rem 0.7rem; border-radius: 6px; cursor: pointer; font-size: 0.85rem; transition: background 0.2s; }
+.topbar-btn:hover { background: rgba(255,255,255,0.14); }
+.progress-bar { position: fixed; top: 50px; left: 0; right: 0; height: 3px; z-index: 99; background: rgba(255,255,255,0.08); }
+.progress-fill { height: 100%; background: linear-gradient(90deg, #e74c3c, #f39c12); transition: width 0.3s ease; width: 0%; }
+#slide-container { position: fixed; top: 53px; left: 0; right: 0; bottom: 0; overflow-y: auto; }
+.slide { display: none !important; }
+.slide.active { display: block !important; }
+.slide.active.title-slide { display: flex !important; }
+.title-slide {
+  flex-direction: column; align-items: center; justify-content: center;
+  text-align: center; min-height: calc(100vh - 53px); padding: 2rem;
+  background: radial-gradient(ellipse at center, rgba(231,76,60,0.08) 0%, transparent 70%);
+}
+.title-tag { color: #e74c3c; font-size: 0.85rem; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 1rem; }
+.title-slide h1 { font-size: clamp(1.8rem, 4vw, 3rem); font-weight: 800; line-height: 1.2; background: linear-gradient(135deg, #e74c3c, #f39c12); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 1rem; }
+.title-subtitle { color: #9090b0; font-size: 1rem; margin-bottom: 1.5rem; }
+.title-meta { display: flex; gap: 1.5rem; flex-wrap: wrap; justify-content: center; }
+.title-meta span { color: #b0b0c0; font-size: 0.9rem; }
+.content-slide { max-width: 880px; margin: 0 auto; padding: 1.5rem 1.5rem 3rem; }
+.content-slide h2 { font-size: 1.4rem; font-weight: 700; color: #e74c3c; margin-bottom: 1rem; border-bottom: 2px solid rgba(231,76,60,0.3); padding-bottom: 0.5rem; }
+.content-slide h3 { font-size: 1.05rem; font-weight: 600; color: #f39c12; margin: 1.2rem 0 0.6rem; }
+.content-slide h4 { font-size: 0.97rem; font-weight: 600; color: #2ecc71; margin: 1rem 0 0.4rem; }
+.content-slide p { line-height: 1.8; color: #c0c0d8; margin-bottom: 0.75rem; font-size: 0.95rem; }
+.content-slide ul, .content-slide ol { margin: 0.5rem 0 0.75rem 1.5rem; }
+.content-slide li { line-height: 1.8; color: #c0c0d8; font-size: 0.95rem; margin-bottom: 0.4rem; }
+.content-slide strong { color: #e8e8f8; }
+.def-box { background: rgba(243,156,18,0.1); border-left: 4px solid #f39c12; border-radius: 0 8px 8px 0; padding: 0.8rem 1rem; margin: 0.6rem 0; font-size: 0.92rem; line-height: 1.65; color: #c8c8d8; }
+.urgence-box { background: rgba(231,76,60,0.2); border: 2px solid #e74c3c; border-radius: 8px; padding: 0.8rem 1rem; margin: 0.75rem 0; font-size: 0.92rem; line-height: 1.65; color: #c8c8d8; }
+.table-wrap { overflow-x: auto; margin: 0.75rem 0; border-radius: 8px; }
+table { width: 100%; border-collapse: collapse; font-size: 0.88rem; }
+thead { background: rgba(231,76,60,0.15); }
+th { padding: 0.6rem 0.75rem; text-align: left; color: #e74c3c; font-weight: 600; }
+td { padding: 0.5rem 0.75rem; border-bottom: 1px solid rgba(255,255,255,0.05); color: #c0c0d8; }
+tr:last-child td { border-bottom: none; }
+tr:hover td { background: rgba(255,255,255,0.03); }
+.qcm-block { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 1rem; margin: 0.75rem 0; }
+.q-text { font-weight: 600; color: #e0e0f0; margin-bottom: 0.75rem; font-size: 0.95rem; line-height: 1.5; }
+.qcm-options { display: flex; flex-direction: column; gap: 0.5rem; margin-bottom: 0.75rem; }
+.qcm-option { display: flex; align-items: center; gap: 0.6rem; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; padding: 0.6rem 0.8rem; cursor: pointer; transition: background 0.15s, border-color 0.15s; font-size: 0.9rem; color: #c0c0d8; }
+.qcm-option:hover { background: rgba(255,255,255,0.08); }
+.qcm-option.selected { background: rgba(231,76,60,0.15); border-color: #e74c3c; color: #e0e0f0; }
+.qcm-option.correct { background: rgba(46,204,113,0.2); border-color: #2ecc71; color: #e0e0f0; }
+.qcm-option.wrong { background: rgba(231,76,60,0.2); border-color: #e74c3c; color: #e0e0f0; }
+.letter { min-width: 24px; height: 24px; border-radius: 50%; background: rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.8rem; color: #e74c3c; }
+.qcm-validate { padding: 0.5rem 1rem; border-radius: 8px; border: none; cursor: pointer; background: rgba(231,76,60,0.2); color: #e74c3c; font-weight: 600; font-size: 0.85rem; transition: background 0.2s; }
+.qcm-validate:disabled { opacity: 0.4; cursor: not-allowed; }
+.qcm-validate:hover:not(:disabled) { background: rgba(231,76,60,0.35); }
+.qcm-feedback { margin-top: 0.5rem; font-weight: 600; font-size: 0.9rem; }
+.qcm-explanation { display: none; margin-top: 0.75rem; padding: 0.75rem; background: rgba(255,255,255,0.04); border-radius: 8px; font-size: 0.88rem; color: #b0b0c0; line-height: 1.65; }
+.flash-block { background: rgba(231,76,60,0.07); border: 1px solid rgba(231,76,60,0.25); border-radius: 12px; padding: 1rem; margin: 0.75rem 0; }
+.flash-q { font-weight: 600; color: #e0e0f0; margin-bottom: 0.6rem; font-size: 0.95rem; }
+.flash-reveal { padding: 0.45rem 1rem; border-radius: 8px; border: 1px solid rgba(231,76,60,0.4); background: rgba(231,76,60,0.12); color: #e74c3c; font-size: 0.85rem; font-weight: 600; cursor: pointer; transition: background 0.2s; }
+.flash-reveal:hover { background: rgba(231,76,60,0.25); }
+.flash-answer { margin-top: 0.75rem; padding: 0.75rem; background: rgba(255,255,255,0.04); border-radius: 8px; font-size: 0.88rem; color: #b0b0c0; line-height: 1.65; }
+.expl-wrap { margin: 0 0 1.5rem 0; }
+.expl-wrap h4 { color: #e0e0f0; font-size: 1rem; margin: 1.1rem 0 0.4rem; font-weight: 700; }
+.expl-wrap p { color: #c0c0d8; font-size: 0.95rem; line-height: 1.8; margin-bottom: 0.4rem; }
+.expl-wrap strong { color: #f0f0ff; }
+.expl-bq { border-left: 3px solid rgba(231,76,60,0.5); padding: 0.4rem 1rem; color: #9898b8; font-style: italic; font-size: 0.9rem; margin: 0.3rem 0 0.9rem 0; background: rgba(231,76,60,0.04); border-radius: 0 6px 6px 0; }
+.expl-sep { border: none; border-top: 1px solid rgba(255,255,255,0.07); margin: 1.1rem 0; }
+.expl-warn { background: rgba(231,76,60,0.08); border-left: 4px solid #e74c3c; border-radius: 0 8px 8px 0; padding: 0.6rem 1rem; margin: 0.75rem 0; font-size: 0.92rem; color: #c8c8d8; line-height: 1.65; }
+.expl-info { background: rgba(52,152,219,0.08); border-left: 4px solid #3498db; border-radius: 0 8px 8px 0; padding: 0.6rem 1rem; margin: 0.75rem 0; font-size: 0.92rem; color: #c8c8d8; line-height: 1.65; }
+.key-hint { text-align: center; color: rgba(255,255,255,0.2); font-size: 0.75rem; margin-top: 2rem; padding-bottom: 1rem; }
+@media (max-width: 768px) { .content-slide { padding: 1rem 1rem 2.5rem; } .content-slide h2 { font-size: 1.15rem; } .title-slide h1 { font-size: 1.8rem; } }
+@media (max-width: 480px) { .topbar-title { display: none; } }
+</style>
+</head>
+<body>
+<div class="topbar">
+  <a href="index.html" class="topbar-home">&#8592; Accueil</a>
+  <span class="topbar-title">Syndrome hémorragique &amp; TVP</span>
+  <span class="topbar-counter" id="slide-counter">1 / 14</span>
+  <div class="topbar-nav">
+    <button class="topbar-btn" onclick="changeSlide(-1)">&#8592;</button>
+    <button class="topbar-btn" onclick="changeSlide(1)">&#8594;</button>
+  </div>
+</div>
+<div class="progress-bar"><div class="progress-fill" id="progress-fill"></div></div>
+<div id="slide-container">
+
+<!-- SLIDE 0 : TITRE -->
+<div class="slide title-slide" id="slide-0">
+  <div class="title-tag">UE6 — Hématologie — Cours n°13 — Dr Roudot</div>
+  <h1>Syndrome hémorragique<br>d'origine hématologique<br>&amp; Thrombose Veineuse Profonde</h1>
+  <div class="title-subtitle">Hémostase primaire · Coagulation · Thrombophilies · TVP/EP</div>
+  <div class="title-meta">
+    <span>&#128197; 17/03/2026</span>
+    <span>&#128218; 14 slides</span>
+    <span>&#127981; Item ECN — Hématologie</span>
+  </div>
+  <div class="key-hint">&#8592; &#8594; ou swipe pour naviguer</div>
+</div>
+
+<!-- SLIDE 1 : SÉMIOLOGIE -->
+<div class="slide content-slide" id="slide-1">
+  <h2>&#129656; Sémiologie hémorragique — Examen clinique complet</h2>
+
+  <h3>I — Interrogatoire : les 6 axes essentiels</h3>
+
+  <div class="expl-wrap">
+    <h4>&#128269; 1.1 — Localisation des saignements : première question à poser</h4>
+    <div class="def-box"><strong>Écchymose</strong> : épanchement sanguin dans le tissu sous-cutané provoquant une coloration violacée (« bleu »). Signe d'hémostase primaire défaillante ou de traumatisme.</div>
+    <div class="def-box"><strong>Pétéchie</strong> : petite tache hémorragique punctiforme &lt;2 mm, non palpable, ne s'effaçant pas à la vitropression. Signe de thrombopénie ou thrombopathie.</div>
+    <div class="def-box"><strong>Purpura</strong> : lésion hémorragique cutanée &gt;2 mm, non palpable, ne s'effaçant pas à la vitropression. Peut confluer en ecchymoses.</div>
+    <div class="def-box"><strong>Épistaxis</strong> : saignement nasal. Signe typique d'atteinte de l'hémostase primaire (muqueuses).</div>
+    <div class="def-box"><strong>Gingivorragie</strong> : saignement des gencives. Autre signe muqueux d'hémostase primaire.</div>
+    <div class="def-box"><strong>Hémarthrose</strong> : saignement à l'intérieur d'une articulation. Signe caractéristique d'une coagulopathie (hémophilie). Rarement présent dans les thrombopathies.</div>
+    <div class="def-box"><strong>Hématome profond</strong> : collection sanguine dans un muscle ou un tissu profond. Signe de coagulopathie. Différent de l'ecchymose superficielle.</div>
+    <p>La localisation des saignements est la <strong>première information</strong> à recueillir car elle oriente immédiatement vers le type de défaillance de l'hémostase. Les saignements <strong>cutanéo-muqueux</strong> (peau, muqueuses nasales, buccales, génitales) évoquent une atteinte de l'hémostase primaire — c'est-à-dire un problème de plaquettes ou de facteur de von Willebrand. Les saignements <strong>profonds</strong> (musculaires, articulaires, cérébraux, intra-péritonéaux) évoquent plutôt une coagulopathie — un déficit en facteur de la coagulation.</p>
+    <p>Il faut systématiquement explorer : les localisations <strong>cutanées</strong> (ecchymoses, pétéchies, purpura), <strong>muqueuses</strong> (épistaxis, gingivorragies, métrorragies), <strong>ostéo-articulaires</strong> (hémarthroses — plutôt rares et orientent vers hémophilie), <strong>musculaires</strong> (hématomes profonds) et <strong>viscérales graves</strong> (intracranien, intrapéritonéal, digestif).</p>
+    <div class="expl-bq">Exemple : Une jeune femme de 22 ans consultant pour épistaxis à répétition et gingivorragies lors du brossage de dents → atteinte de l'hémostase primaire (plaquettes ou vWF). Un homme de 8 ans avec hémarthrose de cheville spontanée → hémophilie A ou B à suspecter.</div>
+  </div>
+
+  <div class="expl-wrap">
+    <h4>&#127381; 1.2 — Circonstances et caractère spontané ou provoqué</h4>
+    <p>Un saignement <strong>spontané</strong> (sans traumatisme identifiable) traduit un trouble plus sévère qu'un saignement uniquement <strong>provoqué</strong> (post-traumatique, post-chirurgical, post-dentaire). Le caractère spontané est un <strong>critère de gravité supérieure</strong> et doit alerter. À l'inverse, un patient qui saigne seulement lors d'interventions chirurgicales peut avoir un déficit modéré bien compensé en situation basale.</p>
+    <p>En pratique, on demande : « Avez-vous des bleus sans choc ? », « Saignez-vous spontanément du nez ou des gencives ? » vs « Ne saignez-vous que lors de soins dentaires ou d'opérations ? »</p>
+    <div class="expl-bq">Exemple : Patient opéré 3 fois sans complications hémorragiques puis déficit découvert fortuitement → déficit modéré probablement. Patiente avec épistaxis spontanées quotidiennes depuis l'enfance → déficit constitutionnel sévère à rechercher.</div>
+  </div>
+
+  <div class="expl-wrap">
+    <h4>&#128200; 1.3 — Fréquence et abondance : critères de significativité</h4>
+    <p>La <strong>fréquence</strong> des épisodes hémorragiques est capitale. Un saignement rare n'est généralement pas significatif. En pratique clinique, on considère qu'un saignement devient <strong>médicalement significatif</strong> lorsqu'il survient <strong>au moins 1 fois par semaine</strong> pour l'épistaxis. Un patient qui dit « de temps en temps, une petite trace de sang » n'est pas équivalent à un patient qui saigne à chaque brossage de dents.</p>
+    <p>L'<strong>abondance</strong> est évaluée par la durée du saignement et le volume estimé. Une goutte de sang n'est pas comparable à un saignement durant 1 heure nécessitant une compression. Pour les <strong>ménorragies</strong>, on utilise le <strong>score de Higham</strong> : un volume de pertes &gt;100 ml/cycle est considéré comme abondant (normal &lt;100 ml/mois).</p>
+    <div class="def-box"><strong>Score de Higham</strong> : score validé permettant d'objectiver l'abondance des règles. Seuil de significativité pathologique : &gt;100 ml de pertes sanguines par cycle menstruel.</div>
+    <div class="expl-bq">Astuce mnémotechnique : « 1 fois/semaine épistaxis = significatif ». « &gt;100 ml/cycle = ménorragie pathologique ».</div>
+  </div>
+
+  <div class="expl-wrap">
+    <h4>&#128336; 1.4 — Durée d'évolution : acquis vs constitutionnel</h4>
+    <p>La durée d'évolution est fondamentale pour distinguer une pathologie <strong>constitutionnelle</strong> (présente depuis l'enfance, génétique) d'une pathologie <strong>acquise</strong> (apparue à l'âge adulte, secondaire à une maladie ou un traitement). Un patient de 20 ans qui saigne depuis l'enfance → penser constitutionnel. Un patient de 40 ans avec bleus apparus il y a 6 mois → penser acquis (médicament, cancer, maladie auto-immune).</p>
+    <div class="expl-bq">Cas type : Femme de 45 ans, pas d'ATCD, depuis 3 mois ecchymoses inexpliquées → acquis : chercher médicaments (aspirine, AINS, IRS), maladie hématologique (SMD, gammapathie), auto-immunité.</div>
+  </div>
+
+  <div class="expl-wrap">
+    <h4>&#128106; 1.5 — Antécédents familiaux : arbre généalogique</h4>
+    <p>Les antécédents familiaux permettent de <strong>construire un arbre généalogique</strong> et d'identifier le mode de transmission : autosomique dominant (tous les porteurs sont malades), autosomique récessif (1 chance sur 2 d'être malade si porteur), lié à l'X (garçons malades, femmes conductrices). On recherche qui dans la famille présente une symptomatologie hémorragique similaire.</p>
+    <div class="expl-bq">Exemple : Hémophilie A liée à l'X → les oncles maternels (côté X maternel) peuvent être atteints. Maladie de von Willebrand de type 1 → transmission autosomique dominante, souvent plusieurs membres de la famille atteints à des degrés variables.</div>
+  </div>
+
+  <div class="expl-wrap">
+    <h4>&#128138; 1.6 — ATCD chirurgicaux, obstétricaux et médicaments</h4>
+    <p>Les antécédents chirurgicaux (notamment les interventions sans saignement excessif) permettent d'estimer la sévérité du trouble. Les antécédents obstétricaux sont importants pour les femmes (hémorragies du post-partum, fausses couches à répétition → SAPL).</p>
+    <p>Les <strong>médicaments</strong> sont la cause n°1 de thrombopathie acquise en France : <strong>antiagrégants plaquettaires</strong> (aspirine, clopidogrel/Plavix — volontaires), <strong>AINS</strong> (effet secondaire), <strong>IRS</strong> (inhibiteurs de recapture de la sérotonine : antidépresseurs — effet secondaire méconnu). Les anticoagulants (héparine, AVK, AOD) provoquent également des saignements par leur mécanisme propre.</p>
+    <div class="expl-warn">⚠️ PIÈGE ECN : Les IRS (antidépresseurs) sont une cause fréquente et sous-estimée de thrombopathie acquise par inhibition de la sérotonine plaquettaire. Toujours les demander dans l'interrogatoire médicamenteux !</div>
+  </div>
+
+  <hr class="expl-sep">
+
+  <h3>II — Examen physique : évaluation hémodynamique et lésions</h3>
+
+  <div class="expl-wrap">
+    <h4>&#128138; 2.1 — Constantes vitales : évaluer la tolérance hémodynamique</h4>
+    <p>On mesure systématiquement : <strong>fréquence cardiaque</strong> (tachycardie = signe de choc), <strong>pression artérielle</strong> (hypotension = choc hémorragique), <strong>fréquence respiratoire</strong>, <strong>saturation en O2</strong>. Ces paramètres permettent d'évaluer si le patient est en état de choc et si la prise en charge doit être immédiate et urgente.</p>
+    <div class="urgence-box">&#128680; Critères de mauvaise tolérance hémodynamique = urgence absolue : hypotension + tachycardie + confusion = tableau de choc hémorragique. Prise en charge immédiate en réanimation.</div>
+  </div>
+
+  <div class="expl-wrap">
+    <h4>&#128064; 2.2 — Examen des téguments et des muqueuses</h4>
+    <p>On inspecte <strong>tous les téguments</strong> à la recherche d'ecchymoses, purpura, pétéchies, et on note leur <strong>localisation</strong> (membres inférieurs, membres supérieurs, tronc). On examine la <strong>bouche</strong> pour rechercher des <strong>bulles hémorragiques</strong> — signe de gravité dans les thrombopénies sévères (PTI sévère notamment).</p>
+    <div class="def-box"><strong>Bulles hémorragiques buccales</strong> : vésicules remplies de sang sur la muqueuse buccale, signe de thrombopénie sévère. Critère de gravité justifiant une hospitalisation d'urgence dans le PTI.</div>
+    <p>On réalise un <strong>examen ORL spécialisé</strong> si le patient présente uniquement des épistaxis — car celles-ci peuvent avoir une cause locale (varice nasale, télangiectasie) sans trouble de la coagulation systémique. Un <strong>examen neurologique</strong> est indispensable pour évaluer la tolérance au saignement cérébral.</p>
+    <div class="expl-bq">Exemple : PTI (purpura thrombopénique immunologique) avec plaquettes à 5 G/L → bulles hémorragiques buccales → hospitalisation en urgence pour traitement.</div>
+  </div>
+
+  <hr class="expl-sep">
+
+  <h3>III — Critères de gravité et orientation diagnostique</h3>
+
+  <div class="expl-wrap">
+    <h4>&#128680; 3.1 — Critères de gravité clinique</h4>
+    <p>Pour un saignement aigu : <strong>hypotension + tachycardie + confusion</strong> = choc hémorragique, urgence vitale immédiate. La présence de saignements spontanés (vs provoqués) est également un critère de gravité. Les localisations viscérales (intracranienne, intrapéritonéale) sont toujours graves. Les bulles hémorragiques buccales dans un contexte de thrombopénie signent un risque de saignement muqueux profond.</p>
+  </div>
+
+  <div class="expl-wrap">
+    <h4>&#128203; 3.2 — Orientation diagnostique : HP vs Coagulation (à connaître +++)</h4>
+    <p>L'orientation clinique est fondamentale et doit être maîtrisée avant tout bilan biologique :</p>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Caractéristique</th><th>Hémostase Primaire (HP)</th><th>Coagulation</th></tr></thead>
+        <tbody>
+          <tr><td>Mécanisme</td><td>Plaquettes + FvW défaillants</td><td>Facteurs de coagulation déficients</td></tr>
+          <tr><td>Type de saignement</td><td>Cutanéo-muqueux</td><td>Profond (musculaire, articulaire)</td></tr>
+          <tr><td>Caractère</td><td>Spontané +++</td><td>Provoqué (post-traumatique)</td></tr>
+          <tr><td>Localisations typiques</td><td>Épistaxis, gingivorragie, ménorragie, pétéchies, purpura</td><td>Hémarthrose, hématome profond, saignement post-op tardif</td></tr>
+          <tr><td>Hémorragie muqueuse</td><td>Spontanée</td><td>Uniquement post-traumatique</td></tr>
+          <tr><td>Exemples</td><td>Thrombopénie, thrombopathie, MvW</td><td>Hémophilie A/B, hypovitaminose K, CIVD</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="expl-warn">⚠️ POINT CLÉ : La différence pétéchie/purpura = LA TAILLE : pétéchie &lt;2 mm, purpura &gt;2 mm. Les deux ne s'effacent pas à la vitropression (contrairement à une rougeur vasculaire simple). Ce critère de vitropression négatif confirme le caractère hémorragique.</div>
+  </div>
+
+  <div class="expl-wrap">
+    <h4>&#128214; 3.3 — Définitions importantes à connaître</h4>
+    <div class="def-box"><strong>Ménorragie</strong> : règles abondantes dépassant 100 ml/cycle. Évaluées par le score de Higham. Signe fréquent de MvW ou thrombopathie chez la femme jeune.</div>
+    <div class="def-box"><strong>Métrorragie</strong> : saignement utérin en dehors des règles.</div>
+    <div class="def-box"><strong>Hématurie</strong> : présence d'hématies (globules rouges) dans les urines → à ne pas confondre avec <strong>hémoglobinurie</strong> (présence d'hémoglobine libre dans les urines, sans globules rouges intacts — comme dans les hémolyses intravasculaires).</div>
+    <div class="def-box"><strong>Bulles hémorragiques</strong> : vésicules sanglantes des muqueuses buccales, complication des PTI sévères, critère de gravité justifiant l'hospitalisation.</div>
+    <p>Ces définitions sont régulièrement testées aux ECN et doivent être parfaitement maîtrisées. En particulier, la distinction hématurie / hémoglobinurie est un classique de question de sémiologie.</p>
+  </div>
+
+  <svg viewBox="0 0 700 260" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-height:260px;margin:1.5rem 0;display:block">
+    <rect width="700" height="260" fill="#0d0d1a" rx="10"/>
+    <text x="350" y="28" text-anchor="middle" fill="#e74c3c" font-size="14" font-weight="bold">Orientation diagnostique : HP vs Coagulation</text>
+    <!-- HP side -->
+    <rect x="20" y="45" width="300" height="190" fill="rgba(231,76,60,0.08)" stroke="#e74c3c" stroke-width="1.5" rx="8"/>
+    <text x="170" y="68" text-anchor="middle" fill="#e74c3c" font-size="12" font-weight="bold">HÉMOSTASE PRIMAIRE</text>
+    <text x="170" y="88" text-anchor="middle" fill="#f39c12" font-size="10">(Plaquettes + FvW)</text>
+    <text x="35" y="110" fill="#c0c0d8" font-size="10">• Pétéchies / Purpura</text>
+    <text x="35" y="128" fill="#c0c0d8" font-size="10">• Épistaxis spontanées</text>
+    <text x="35" y="146" fill="#c0c0d8" font-size="10">• Gingivorragies</text>
+    <text x="35" y="164" fill="#c0c0d8" font-size="10">• Ménorragies</text>
+    <text x="35" y="182" fill="#c0c0d8" font-size="10">• Ecchymoses spontanées</text>
+    <text x="35" y="200" fill="#2ecc71" font-size="10" font-weight="bold">→ SPONTANÉ, muqueux, cutané</text>
+    <text x="35" y="220" fill="#9090b0" font-size="9">Bilan : NFS, TOP, FvW, FVIII</text>
+    <!-- Coag side -->
+    <rect x="380" y="45" width="300" height="190" fill="rgba(52,152,219,0.08)" stroke="#3498db" stroke-width="1.5" rx="8"/>
+    <text x="530" y="68" text-anchor="middle" fill="#3498db" font-size="12" font-weight="bold">COAGULATION</text>
+    <text x="530" y="88" text-anchor="middle" fill="#f39c12" font-size="10">(Facteurs de coagulation)</text>
+    <text x="395" y="110" fill="#c0c0d8" font-size="10">• Hémarthroses</text>
+    <text x="395" y="128" fill="#c0c0d8" font-size="10">• Hématomes profonds</text>
+    <text x="395" y="146" fill="#c0c0d8" font-size="10">• Saignements post-op tardifs</text>
+    <text x="395" y="164" fill="#c0c0d8" font-size="10">• Hémorragies viscérales</text>
+    <text x="395" y="182" fill="#c0c0d8" font-size="10">• Saignements provoqués</text>
+    <text x="395" y="200" fill="#2ecc71" font-size="10" font-weight="bold">→ PROVOQUÉ, profond, articulaire</text>
+    <text x="395" y="220" fill="#9090b0" font-size="9">Bilan : TP, TCA, facteurs spécifiques</text>
+    <!-- Arrow -->
+    <text x="350" y="145" text-anchor="middle" fill="#f39c12" font-size="20">⟺</text>
+  </svg>
+
+  <div class="flash-block">
+    <div class="flash-q">❓ Un patient présente des hématomes profonds musculaires spontanés sans pétéchies ni épistaxis. Vers quel type d'anomalie de l'hémostase s'oriente-t-on, et quel est le premier examen biologique à demander ?</div>
+    <button class="flash-reveal" onclick="this.nextElementSibling.style.display='block';this.style.display='none'">Révéler la réponse</button>
+    <div class="flash-answer" style="display:none">Orientation vers une COAGULOPATHIE (déficit en facteur de coagulation). Les hématomes profonds spontanés sont le signe cardinal des coagulopathies (hémophilie notamment). Premier bilan : TP + TCA + NFS plaquettaire. Si TCA allongé isolément → penser hémophilie A ou B → doser FVIII et FIX.</div>
+  </div>
+</div>
+
+<!-- SLIDE 2 : QCM 1 -->
+<div class="slide content-slide" id="slide-2">
+  <h2>&#129504; QCM 1 — Sémiologie hémorragique</h2>
+
+  <div class="qcm-block" data-answer="C" id="q1-1">
+    <div class="q-text">Q1. Une patiente de 30 ans consulte pour des épistaxis à répétition (3-4 fois/semaine), des gingivorragies au brossage de dents et des ecchymoses spontanées. Quel type d'anomalie de l'hémostase doit-on suspecter en premier ?</div>
+    <div class="qcm-options">
+      <div class="qcm-option" data-idx="A" onclick="selectOption(this)"><span class="letter">A</span> Coagulopathie par déficit en facteur VIII</div>
+      <div class="qcm-option" data-idx="B" onclick="selectOption(this)"><span class="letter">B</span> Coagulopathie par hypovitaminose K</div>
+      <div class="qcm-option" data-idx="C" onclick="selectOption(this)"><span class="letter">C</span> Anomalie de l'hémostase primaire (plaquettes ou facteur de Willebrand)</div>
+      <div class="qcm-option" data-idx="D" onclick="selectOption(this)"><span class="letter">D</span> Inhibiteur anti-facteur VIII acquis</div>
+    </div>
+    <button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button>
+    <div class="qcm-feedback"></div>
+    <div class="qcm-explanation">Réponse C. Les saignements cutanéo-muqueux spontanés (épistaxis, gingivorragies, ecchymoses) sont la signature clinique des anomalies de l'hémostase primaire : thrombopénie, thrombopathie ou maladie de von Willebrand. Les coagulopathies donnent plutôt des saignements profonds (hémarthroses, hématomes musculaires) et provoqués.</div>
+  </div>
+
+  <div class="qcm-block" data-answer="B" id="q1-2">
+    <div class="q-text">Q2. Quelle est la différence entre une pétéchie et un purpura ?</div>
+    <div class="qcm-options">
+      <div class="qcm-option" data-idx="A" onclick="selectOption(this)"><span class="letter">A</span> La pétéchie s'efface à la vitropression, le purpura non</div>
+      <div class="qcm-option" data-idx="B" onclick="selectOption(this)"><span class="letter">B</span> La pétéchie est &lt;2 mm, le purpura est &gt;2 mm ; ni l'un ni l'autre ne s'efface à la vitropression</div>
+      <div class="qcm-option" data-idx="C" onclick="selectOption(this)"><span class="letter">C</span> La pétéchie est palpable, le purpura ne l'est pas</div>
+      <div class="qcm-option" data-idx="D" onclick="selectOption(this)"><span class="letter">D</span> Le purpura est toujours thrombopénique, la pétéchie est toujours vasculaire</div>
+    </div>
+    <button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button>
+    <div class="qcm-feedback"></div>
+    <div class="qcm-explanation">Réponse B. La distinction pétéchie/purpura repose UNIQUEMENT sur la taille : pétéchie &lt;2 mm, purpura &gt;2 mm. Les deux ne s'effacent pas à la vitropression (critère commun aux deux, qui les distingue des érythèmes vasculaires). Ni l'un ni l'autre n'est palpable (contrairement au purpura vasculaire).</div>
+  </div>
+
+  <div class="qcm-block" data-answer="D" id="q1-3">
+    <div class="q-text">Q3. Un homme de 40 ans, sans antécédent, présente depuis 6 mois des ecchymoses inexpliquées. Il prend du citalopram (IRS) pour une dépression. Quelle est la cause la plus probable ?</div>
+    <div class="qcm-options">
+      <div class="qcm-option" data-idx="A" onclick="selectOption(this)"><span class="letter">A</span> Maladie de von Willebrand constitutionnelle</div>
+      <div class="qcm-option" data-idx="B" onclick="selectOption(this)"><span class="letter">B</span> Hémophilie A débutante</div>
+      <div class="qcm-option" data-idx="C" onclick="selectOption(this)"><span class="letter">C</span> PTI (purpura thrombopénique immunologique)</div>
+      <div class="qcm-option" data-idx="D" onclick="selectOption(this)"><span class="letter">D</span> Thrombopathie acquise médicamenteuse (IRS)</div>
+    </div>
+    <button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button>
+    <div class="qcm-feedback"></div>
+    <div class="qcm-explanation">Réponse D. Les IRS (inhibiteurs de recapture de la sérotonine) sont une cause classique et sous-estimée de thrombopathie acquise : ils inhibent la recapture de la sérotonine dans les plaquettes, réduisant leur capacité d'agrégation. L'apparition récente (6 mois, contemporaine du traitement) chez un adulte sans ATCD oriente vers une cause acquise et médicamenteuse. La MvW constitutionnelle et l'hémophilie A auraient des symptômes depuis l'enfance.</div>
+  </div>
+
+  <div class="qcm-block" data-answer="A" id="q1-4">
+    <div class="q-text">Q4. Quel est le seuil de pertes sanguines menstruelles définissant une ménorragie pathologique selon le score de Higham ?</div>
+    <div class="qcm-options">
+      <div class="qcm-option" data-idx="A" onclick="selectOption(this)"><span class="letter">A</span> &gt;100 ml par cycle menstruel</div>
+      <div class="qcm-option" data-idx="B" onclick="selectOption(this)"><span class="letter">B</span> &gt;50 ml par cycle menstruel</div>
+      <div class="qcm-option" data-idx="C" onclick="selectOption(this)"><span class="letter">C</span> &gt;200 ml par cycle menstruel</div>
+      <div class="qcm-option" data-idx="D" onclick="selectOption(this)"><span class="letter">D</span> &gt;150 ml par cycle menstruel</div>
+    </div>
+    <button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button>
+    <div class="qcm-feedback"></div>
+    <div class="qcm-explanation">Réponse A. Le seuil de ménorragie pathologique est &gt;100 ml par cycle menstruel, évalué par le score de Higham. En dessous de 100 ml/mois, les pertes sont considérées normales. Ce score est important pour objectiver les plaintes des patientes car l'estimation subjective est souvent inexacte.</div>
+  </div>
+</div>
+
+<!-- SLIDE 3 : THROMBOPATHIES -->
+<div class="slide content-slide" id="slide-3">
+  <h2>&#129514; Thrombopathies — Anomalies de l'hémostase primaire</h2>
+
+  <h3>I — Physiologie plaquettaire : récepteurs clés</h3>
+
+  <div class="expl-wrap">
+    <h4>&#128302; 1.1 — La plaquette et ses récepteurs membranaires essentiels</h4>
+    <div class="def-box"><strong>Thrombopathie</strong> : anomalie qualitative ou quantitative des plaquettes affectant leur fonction (adhésion, activation, agrégation), même si le nombre de plaquettes peut être normal. À distinguer de la thrombopénie (simple diminution du nombre).</div>
+    <p>La plaquette est une cellule anucléée dérivée du mégacaryocyte, dont la membrane est couverte de <strong>glycoprotéines (GP)</strong> qui lui permettent d'interagir avec le sous-endothélium lors d'une brèche vasculaire. Deux récepteurs sont fondamentaux et à connaître par cœur :</p>
+    <div class="def-box"><strong>GP Ib/IX/V</strong> : récepteur membranaire plaquettaire qui se lie au <strong>facteur de von Willebrand (FvW)</strong> fixé sur le collagène sous-endothélial. Il permet l'<strong>adhésion primaire</strong> des plaquettes à la paroi lésée. Déficit dans la maladie de Bernard-Soulier.</div>
+    <div class="def-box"><strong>GP IIb/IIIa</strong> : récepteur membranaire plaquettaire qui se lie au <strong>fibrinogène</strong> (et aussi au FvW). Il permet l'<strong>agrégation plaquettaire</strong> — la liaison inter-plaquettaire via les ponts de fibrinogène. Déficit dans la maladie de Glanzmann. C'est aussi la cible des médicaments antiagrégants de type abciximab (anti-GPIIb/IIIa).</div>
+    <p>En plus des récepteurs, la plaquette contient des <strong>granules</strong> (granules alpha contenant le FvW, le fibrinogène, les granules denses contenant l'ADP, la sérotonine) dont la libération amplifie l'activation plaquettaire. Un déficit en granules entraîne une thrombopathie constitutionnelle.</p>
+    <div class="expl-bq">Mémorisez : GP Ib = adhésion au FvW (Bernard-Soulier si déficit). GP IIb/IIIa = agrégation au fibrinogène (Glanzmann si déficit). « I avant II = adhésion avant agrégation ».</div>
+  </div>
+
+  <hr class="expl-sep">
+
+  <h3>II — Anomalies acquises des plaquettes</h3>
+
+  <div class="expl-wrap">
+    <h4>&#128138; 2.1 — Cause n°1 : les médicaments</h4>
+    <p>Les médicaments sont la <strong>cause numéro 1</strong> de thrombopathie acquise en France. On distingue :</p>
+    <ul>
+      <li><strong>Antiagrégants plaquettaires</strong> (volontaires, thérapeutiques) : aspirine (inhibe la COX-1 et la synthèse de thromboxane A2), clopidogrel/Plavix (inhibe le récepteur P2Y12 à l'ADP). Ces médicaments sont prescrits pour prévenir les thromboses artérielles mais provoquent un risque hémorragique cutanéo-muqueux.</li>
+      <li><strong>AINS</strong> (effet secondaire) : inhibent la COX-1 de façon réversible, donc perturbent la fonction plaquettaire le temps de leur présence dans le sang.</li>
+      <li><strong>IRS</strong> (inhibiteurs de recapture de la sérotonine, antidépresseurs) : inhibent la recapture de la sérotonine dans les plaquettes, réduisant leur capacité de sécrétion et d'agrégation. Effet secondaire souvent méconnu mais cliniquement significatif.</li>
+    </ul>
+    <div class="expl-warn">⚠️ ECN : Toujours chercher les médicaments dans l'interrogatoire d'une thrombopathie acquise. Les IRS sont pièges typique car souvent oubliés dans la liste des médicaments hémorragiques.</div>
+  </div>
+
+  <div class="expl-wrap">
+    <h4>&#128268; 2.2 — Maladies causant des thrombopathies acquises</h4>
+    <p>Certaines maladies perturbent la fonction plaquettaire sans nécessairement diminuer leur nombre :</p>
+    <ul>
+      <li><strong>Gammapathie monoclonale</strong> (myélome, Waldenström) : excès de production d'IgG ou IgM qui se fixent à la surface des plaquettes et perturbent leur activation.</li>
+      <li><strong>Syndromes myéloprolifératifs (SMP)</strong> : hyperplaquettose — les plaquettes reconnaissent trop le FvW et s'activent de façon anarchique, consommant les grands multimères de FvW (acquis von Willebrand dans les SMP).</li>
+      <li><strong>Syndromes myélodysplasiques (SMD)</strong> : les plaquettes produites sont de mauvaise qualité fonctionnelle (cellules dysplasiques).</li>
+    </ul>
+    <p>Le <strong>bilan biologique attendu</strong> dans les thrombopathies acquises :</p>
+    <ul>
+      <li>Temps d'occlusion plaquettaire (TOP/PFA) : <strong>allongé</strong> (test perturbé)</li>
+      <li>Numération plaquettaire : normale ou anormale selon la cause</li>
+      <li>Frottis sanguin : normal (sauf SMD où il peut être perturbé)</li>
+      <li>Facteur de Willebrand : normal</li>
+      <li>TP, TCA, fibrinogène : <strong>normaux</strong> (la voie de coagulation n'est pas touchée)</li>
+    </ul>
+    <div class="def-box"><strong>Temps d'occlusion plaquettaire (TOP / PFA-100)</strong> : test mesurant le temps que mettent les plaquettes à obturer une petite membrane in vitro sous flux sanguin. Allongé en cas de thrombopathie ou de thrombopénie sévère. Méthode de dépistage des anomalies de l'hémostase primaire.</div>
+  </div>
+
+  <hr class="expl-sep">
+
+  <h3>III — Anomalies constitutionnelles des plaquettes</h3>
+
+  <div class="expl-wrap">
+    <h4>&#129516; 3.1 — Caractéristiques générales des thrombopathies constitutionnelles</h4>
+    <p>Ce sont des anomalies <strong>héréditaires</strong> des plaquettes, présentes dès la naissance. Elles sont <strong>extrêmement rares</strong> (moins de 1 cas pour 100 000 personnes). La transmission peut être autosomique dominante (tous les porteurs du gène muté sont malades) ou autosomique récessive (les deux parents doivent transmettre le gène muté, souvent contexte de consanguinité).</p>
+    <p>Le tableau clinique est un <strong>syndrome hémorragique cutanéo-muqueux dès l'enfance</strong> : épistaxis, gingivorragies, ménorragies précoces. C'est ce caractère débutant dans l'enfance qui oriente vers une pathologie constitutionnelle plutôt qu'acquise.</p>
+    <p>Le bilan biologique attendu :</p>
+    <ul>
+      <li>Temps d'occlusion plaquettaire : allongé (surtout si forme sévère)</li>
+      <li>Numération plaquettaire : normale ou diminuée selon le type</li>
+      <li>Frottis sanguin : normal ou perturbé selon la pathologie</li>
+      <li>FvW : normal</li>
+    </ul>
+    <p>Pour le diagnostic précis, on réalise des <strong>études fonctionnelles spécialisées</strong> : agrégométrie (étude de l'agrégation plaquettaire sous différents agonistes), cytométrie en flux (comptage des récepteurs membranaires), et étude génétique.</p>
+  </div>
+
+  <div class="expl-wrap">
+    <h4>&#128009; 3.2 — Maladie de Bernard-Soulier : déficit en GP Ib/IX/V</h4>
+    <div class="def-box"><strong>Syndrome de Bernard-Soulier</strong> : thrombopathie constitutionnelle par déficit en récepteur GP Ib/IX/V (récepteur du FvW). Sans ce récepteur, les plaquettes ne peuvent plus adhérer à la paroi vasculaire lésée. Transmission <strong>autosomique récessive</strong>. Fréquence : 1/1 000 000.</div>
+    <p>Le syndrome hémorragique est <strong>très sévère</strong>, avec des saignements spontanés et provoqués importants. Sur le <strong>frottis sanguin</strong>, on observe des <strong>plaquettes géantes</strong> (de la taille d'une hématie) — particularité morphologique permettant une hypothèse diagnostique sur le frottis. La numération plaquettaire peut être diminuée (pseudo-thrombopénie liée aux grandes plaquettes).</p>
+    <div class="expl-bq">Mnémotechnique : Bernard-Soulier = « B pour Big plaquettes » — les plaquettes sont géantes, et « S pour Sevère » — syndrome hémorragique très sévère. Récepteur GP Ib absent → plus d'adhésion au FvW.</div>
+  </div>
+
+  <div class="expl-wrap">
+    <h4>&#128010; 3.3 — Maladie de Glanzmann : déficit en GP IIb/IIIa</h4>
+    <div class="def-box"><strong>Thrombasthénie de Glanzmann</strong> : thrombopathie constitutionnelle par déficit en récepteur GP IIb/IIIa (récepteur du fibrinogène). Sans ce récepteur, les plaquettes ne peuvent plus s'agréger entre elles via les ponts de fibrinogène. Transmission <strong>autosomique récessive</strong> (contexte de consanguinité fréquent). Fréquence : 1/100 000.</div>
+    <p>Le syndrome hémorragique est <strong>très sévère</strong> également. Particularité : sur le frottis sanguin, les plaquettes apparaissent <strong>normales</strong> en taille et en nombre — contrairement à Bernard-Soulier. La mutation est particulièrement fréquente dans certaines populations (variante « Gypsy » en France, populations du Proche-Orient).</p>
+    <p>Le test d'agrégation plaquettaire est très perturbé : aucune agrégation sous les agonistes habituels (ADP, collagène, acide arachidonique) sauf la ristocétine (qui teste GP Ib, non déficitaire dans Glanzmann).</p>
+    <div class="expl-bq">Mnémotechnique : Glanzmann = « G pour Groupement impossible » — les plaquettes ne peuvent plus se grouper/agréger. Plaquettes normales sur frottis mais agrégation nulle.</div>
+  </div>
+
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Critère</th><th>Bernard-Soulier</th><th>Glanzmann</th></tr></thead>
+      <tbody>
+        <tr><td>Récepteur déficitaire</td><td>GP Ib/IX/V</td><td>GP IIb/IIIa</td></tr>
+        <tr><td>Fonction perdue</td><td>Adhésion au FvW</td><td>Agrégation au fibrinogène</td></tr>
+        <tr><td>Transmission</td><td>Autosomique récessive</td><td>Autosomique récessive</td></tr>
+        <tr><td>Fréquence</td><td>1/1 000 000</td><td>1/100 000</td></tr>
+        <tr><td>Frottis sanguin</td><td>Plaquettes géantes (taille hématie)</td><td>Plaquettes normales</td></tr>
+        <tr><td>Sévérité hémorragique</td><td>Très sévère</td><td>Très sévère</td></tr>
+        <tr><td>NFS plaquettaire</td><td>Normale ou diminuée</td><td>Normale</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <svg viewBox="0 0 700 240" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-height:240px;margin:1.5rem 0;display:block">
+    <rect width="700" height="240" fill="#0d0d1a" rx="10"/>
+    <text x="350" y="25" text-anchor="middle" fill="#e74c3c" font-size="13" font-weight="bold">Récepteurs plaquettaires : GP Ib/IX/V et GP IIb/IIIa</text>
+    <!-- Plaquette cercle -->
+    <circle cx="350" cy="130" r="70" fill="rgba(231,76,60,0.12)" stroke="#e74c3c" stroke-width="2"/>
+    <text x="350" y="135" text-anchor="middle" fill="#e74c3c" font-size="11" font-weight="bold">PLAQUETTE</text>
+    <!-- GP Ib -->
+    <rect x="50" y="60" width="180" height="60" fill="rgba(243,156,18,0.12)" stroke="#f39c12" stroke-width="1.5" rx="6"/>
+    <text x="140" y="83" text-anchor="middle" fill="#f39c12" font-size="11" font-weight="bold">GP Ib/IX/V</text>
+    <text x="140" y="100" text-anchor="middle" fill="#c0c0d8" font-size="9">Adhésion au FvW</text>
+    <text x="140" y="113" text-anchor="middle" fill="#9090b0" font-size="8">Déficit → Bernard-Soulier</text>
+    <line x1="230" y1="90" x2="280" y2="110" stroke="#f39c12" stroke-width="1.5" stroke-dasharray="4"/>
+    <!-- GP IIb -->
+    <rect x="470" y="60" width="180" height="60" fill="rgba(52,152,219,0.12)" stroke="#3498db" stroke-width="1.5" rx="6"/>
+    <text x="560" y="83" text-anchor="middle" fill="#3498db" font-size="11" font-weight="bold">GP IIb/IIIa</text>
+    <text x="560" y="100" text-anchor="middle" fill="#c0c0d8" font-size="9">Agrégation fibrinogène</text>
+    <text x="560" y="113" text-anchor="middle" fill="#9090b0" font-size="8">Déficit → Glanzmann</text>
+    <line x1="470" y1="90" x2="420" y2="110" stroke="#3498db" stroke-width="1.5" stroke-dasharray="4"/>
+    <!-- FvW -->
+    <rect x="80" y="165" width="120" height="35" fill="rgba(46,204,113,0.1)" stroke="#2ecc71" stroke-width="1" rx="4"/>
+    <text x="140" y="187" text-anchor="middle" fill="#2ecc71" font-size="10">Facteur Willebrand</text>
+    <line x1="140" y1="165" x2="310" y2="170" stroke="#2ecc71" stroke-width="1.5" stroke-dasharray="3"/>
+    <!-- Fibrinogène -->
+    <rect x="500" y="165" width="120" height="35" fill="rgba(155,89,182,0.1)" stroke="#9b59b6" stroke-width="1" rx="4"/>
+    <text x="560" y="187" text-anchor="middle" fill="#9b59b6" font-size="10">Fibrinogène</text>
+    <line x1="560" y1="165" x2="390" y2="170" stroke="#9b59b6" stroke-width="1.5" stroke-dasharray="3"/>
+  </svg>
+
+  <div class="flash-block">
+    <div class="flash-q">❓ Un enfant de 5 ans présente depuis sa naissance des épistaxis sévères. Le frottis sanguin montre des plaquettes de la taille des globules rouges. Quel est le diagnostic le plus probable et quel récepteur est déficitaire ?</div>
+    <button class="flash-reveal" onclick="this.nextElementSibling.style.display='block';this.style.display='none'">Révéler la réponse</button>
+    <div class="flash-answer" style="display:none">Syndrome de Bernard-Soulier. Les plaquettes géantes (macrothrombocytes de la taille d'une hématie) sur frottis sont la signature morphologique de cette pathologie. Le récepteur déficitaire est le GP Ib/IX/V, empêchant l'adhésion des plaquettes au facteur de von Willebrand lors d'une brèche vasculaire. Transmission autosomique récessive. Syndrome hémorragique très sévère.</div>
+  </div>
+</div>
+
+<!-- SLIDE 4 : MALADIE DE VON WILLEBRAND -->
+<div class="slide content-slide" id="slide-4">
+  <h2>&#129516; Maladie de von Willebrand (MvW) — Hémostase primaire</h2>
+
+  <h3>I — Introduction : épidémiologie et rôles du FvW</h3>
+
+  <div class="expl-wrap">
+    <h4>&#128200; 1.1 — La maladie la plus fréquente de l'hémostase</h4>
+    <div class="def-box"><strong>Maladie de von Willebrand (MvW)</strong> : maladie hémorragique la plus fréquente, causée par un déficit quantitatif ou qualitatif du facteur de von Willebrand (FvW). Transmission <strong>autosomique dominante</strong> dans la grande majorité des cas (exceptionnellement récessive pour le type 3). Prévalence : 1 personne sur 100 est porteuse, mais seulement 1/1000 est symptomatique.</div>
+    <p>La maladie de von Willebrand est fondamentale car c'est la <strong>pathologie de l'hémostase la plus souvent rencontrée</strong> dans la pratique médicale. La prévalence élevée (1%) mais la faible expressivité (seulement 1/1000 symptomatique) signifie que la grande majorité des porteurs n'ont pas de saignements significatifs. Le diagnostic est souvent fait chez des patients jeunes lors d'un premier épisode hémorragique significatif (intervention chirurgicale, premiers cycles menstruels).</p>
+    <div class="expl-bq">Contexte : Une patiente découvrant ses ménorragies lors de ses premières règles, ou saignant anormalement après une extraction dentaire → contexte typique de révélation d'une MvW. L'âge jeune et les ATCD familiaux sont clés.</div>
+  </div>
+
+  <div class="expl-wrap">
+    <h4>&#128301; 1.2 — Les deux rôles essentiels du facteur de von Willebrand</h4>
+    <p>Le FvW est une glycoprotéine multimérique produite par les cellules endothéliales et stockée dans les plaquettes (granules alpha). Il remplit deux fonctions distinctes et indispensables à l'hémostase :</p>
+    <p><strong>Rôle 1 — Adhésion plaquettaire :</strong> Lors d'une brèche vasculaire, le FvW se fixe sur le collagène du sous-endothélium exposé. Il sert alors de pont entre le collagène et le récepteur GP Ib/IX/V des plaquettes, permettant l'adhésion primaire des plaquettes en conditions de flux sanguin élevé. Sans FvW, les plaquettes ne peuvent pas s'accrocher à la paroi lésée.</p>
+    <p><strong>Rôle 2 — Transport et protection du facteur VIII :</strong> Le FvW transporte le facteur VIII dans le sang en le protégeant de la dégradation. Sans FvW, le facteur VIII est rapidement dégradé et son taux circulant chute. C'est pourquoi dans les MvW sévères (type 3), le facteur VIII peut être très bas, mimant une hémophilie A.</p>
+    <div class="expl-warn">⚠️ PIÈGE ECN : Dans la MvW de type 2N, le FvW ne peut plus transporter le facteur VIII → le facteur VIII est bas → tableau identique à une hémophilie A ! La distinction se fait par le dosage du FvW et des tests de liaison FvW-FVIII.</div>
+  </div>
+
+  <hr class="expl-sep">
+
+  <h3>II — Approche diagnostique de la MvW</h3>
+
+  <div class="expl-wrap">
+    <h4>&#128203; 2.1 — Tableau clinique : syndrome hémorragique cutanéo-muqueux</h4>
+    <p>La MvW est une maladie de l'hémostase <strong>primaire</strong>. Elle se manifeste donc par des saignements cutanéo-muqueux : épistaxis, gingivorragies, ménométrorragies, ecchymoses. Ces saignements peuvent être spontanés ou survenir pour des microtraumatismes (brossage de dents, choc minime).</p>
+    <p>Les <strong>saignements per-opératoires et post-opératoires</strong> sont caractéristiques : saignement pendant le geste chirurgical avec formation d'un petit caillot (escarre), puis chute de l'escarre quelques jours après → resaignement secondaire. Ce mécanisme est typique de l'hémostase primaire insuffisante.</p>
+    <p>Le diagnostic est souvent porté chez des <strong>patients jeunes</strong>, ce qui aide à distinguer une pathologie constitutionnelle (débutant dans l'enfance ou la jeunesse) d'une pathologie acquise (apparaissant à l'âge adulte).</p>
+  </div>
+
+  <div class="expl-wrap">
+    <h4>&#128300; 2.2 — Bilan biologique de la MvW</h4>
+    <p>Le bilan biologique à prescrire face à une suspicion de MvW comprend :</p>
+    <ul>
+      <li><strong>TCA (TCK)</strong> : normal ou allongé selon le taux de facteur VIII. Si FVIII à 45% → TCA normal. Si FVIII à 15% → TCA allongé. L'allongement du TCA est inconstant et dépend de la sévérité.</li>
+      <li><strong>Temps d'occlusion plaquettaire (TOP/PFA)</strong> : allongé car adhésion plaquettaire perturbée.</li>
+      <li><strong>Dosage du FvW antigène (vWF:Ag)</strong> : mesure la quantité de FvW circulant.</li>
+      <li><strong>Dosage de l'activité du FvW (vWF:RCo ou vWF:GPIb)</strong> : mesure la capacité fonctionnelle du FvW à lier GP Ib et à agir comme pont.</li>
+      <li><strong>Dosage du facteur VIII</strong> : diminué si déficit sévère en FvW (car FvW transporte FVIII).</li>
+    </ul>
+    <p>Les deux dosages FvW:Ag ET vWF:RCo sont toujours réalisés <strong>simultanément</strong> car leur rapport permet de différencier type 1 (quantitatif, rapport normal) et type 2 (qualitatif, rapport anormal).</p>
+  </div>
+
+  <hr class="expl-sep">
+
+  <h3>III — Classification en types : 1, 2 (dont 2N) et 3</h3>
+
+  <div class="expl-wrap">
+    <h4>&#129517; 3.1 — Type 1 : déficit quantitatif partiel (le plus fréquent)</h4>
+    <div class="def-box"><strong>MvW type 1</strong> : déficit <strong>quantitatif partiel</strong> en FvW. Le FvW présent est fonctionnellement normal, mais en quantité insuffisante (taux &lt;50%, ou &lt;40% en groupe sanguin O). C'est le type le plus fréquent et le plus simple à identifier. Transmission autosomique dominante.</div>
+    <p>Dans le type 1 : le vWF:Ag est diminué, le vWF:RCo est diminué, mais le <strong>rapport activité/antigène (vWF:RCo/vWF:Ag) reste &gt;0,7</strong> — car la qualité du FvW est conservée. Le rapport FVIII/vWF:Ag est aussi &gt;0,7 — le FvW restant est capable de transporter le FVIII normalement. Tout est diminué de façon proportionnelle (homogène). Le facteur VIII est diminué proportionnellement au FvW (car moins de transporteur).</p>
+    <div class="expl-bq">Analogy : le type 1, c'est comme une fontaine avec un robinet partiellement fermé — l'eau qui coule est normale, mais il y en a moins.</div>
+  </div>
+
+  <div class="expl-wrap">
+    <h4>&#129300; 3.2 — Type 2 : déficit qualitatif (FvW dysfonctionnel)</h4>
+    <div class="def-box"><strong>MvW type 2</strong> : déficit <strong>qualitatif</strong> en FvW — le FvW est présent mais fonctionne mal. Le taux antigénique peut être normal ou diminué, mais la fonction est altérée. Caractérisé par un <strong>rapport activité/antigène &lt;0,7</strong> — la qualité est mauvaise.</div>
+    <p>Il existe plusieurs sous-types de type 2 selon le mécanisme :</p>
+    <ul>
+      <li><strong>Type 2A</strong> : absence des grands multimères de FvW (les plus actifs) → adhesion plaquettaire très réduite.</li>
+      <li><strong>Type 2B</strong> : FvW avec affinité <strong>augmentée</strong> pour GP Ib → les plaquettes se lient spontanément au FvW plasmatique → thrombopénie par consommation. <strong>CONTRE-INDICATION ABSOLUE à la desmopressine</strong> (libérerait plus de FvW anormal et aggraverait la thrombopénie).</li>
+      <li><strong>Type 2N</strong> : FvW avec affinité <strong>diminuée</strong> pour le facteur VIII → FVIII non protégé → taux de FVIII très bas. Tableau identique à une hémophilie A ! La distinction repose sur la normalité du FvW:Ag et un test de liaison FvW-FVIII.</li>
+    </ul>
+    <div class="expl-warn">⚠️ TYPE 2B : Contre-indication absolue de la desmopressine ! Elle libère le FvW anormal à haute affinité pour GP Ib → activation plaquettaire massive → thrombopénie sévère aiguë.</div>
+  </div>
+
+  <div class="expl-wrap">
+    <h4>&#128683; 3.3 — Type 3 : déficit quantitatif total (le plus sévère)</h4>
+    <div class="def-box"><strong>MvW type 3</strong> : déficit <strong>quantitatif total</strong> — plus de FvW circulant détectable (taux &lt;5%). Transmission <strong>autosomique récessive</strong> (les deux parents porteurs transmettent chacun un allèle muté). C'est le type le plus sévère mais le plus rare.</div>
+    <p>Dans le type 3 : absence totale de FvW → adhesion plaquettaire nulle + FVIII très fortement diminué (car plus de transporteur) → double déficit hémorragique. Le TCA est très allongé (FVIII effondré), le TOP est très allongé. Ce tableau peut mimer une coagulopathie sévère.</p>
+    <div class="expl-bq">Logique génétique : Pour avoir 0% de FvW, les deux parents doivent être porteurs d'une mutation → transmission récessive. C'est pour ça que le type 3 est rare et survient souvent dans des familles consanguines.</div>
+  </div>
+
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Type</th><th>Mécanisme</th><th>FvW:Ag</th><th>FvW:RCo</th><th>Ratio RCo/Ag</th><th>FVIII</th><th>Transmission</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Type 1</strong></td><td>Déficit quantitatif partiel</td><td>↓</td><td>↓</td><td><strong>&gt;0,7</strong></td><td>↓ proportionnel</td><td>AD</td></tr>
+        <tr><td><strong>Type 2</strong></td><td>Déficit qualitatif</td><td>N ou ↓</td><td>↓↓</td><td><strong>&lt;0,7</strong></td><td>Variable</td><td>AD</td></tr>
+        <tr><td><strong>Type 2N</strong></td><td>FvW ne lie pas FVIII</td><td>N</td><td>N</td><td>Normal</td><td>↓↓ (mimant hémophilie A)</td><td>AR</td></tr>
+        <tr><td><strong>Type 3</strong></td><td>Déficit quantitatif total</td><td>≈0</td><td>≈0</td><td>Indéterminable</td><td>↓↓↓</td><td><strong>AR</strong></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <hr class="expl-sep">
+
+  <h3>IV — Traitement de la MvW</h3>
+
+  <div class="expl-wrap">
+    <h4>&#128138; 4.1 — Principes généraux</h4>
+    <p>En première intention, on <strong>évite</strong> tout médicament favorisant les saignements chez un patient porteur de MvW : aspirine, antiagrégants, AINS, anticoagulants. Exception : si indication impérative (EP, infarctus), on traite malgré le risque hémorragique car le risque thrombotique est plus dangereux.</p>
+    <p>On évite également les <strong>injections intramusculaires</strong> (risque d'hématome profond). Un <strong>avis spécialisé</strong> est nécessaire avant tout geste invasif. Il n'existe pas de traitement correctif définitif au long cours pour les formes constitutionnelles, mais des traitements permettant d'assurer une bonne hémostase en période à risque.</p>
+  </div>
+
+  <div class="expl-wrap">
+    <h4>&#128138; 4.2 — Deux options thérapeutiques</h4>
+    <p><strong>Option 1 — Traitement substitutif :</strong> apport exogène de concentrés de FvW (contenant aussi du FVIII). Indiqué dans tous les types (y compris type 2B et type 3). Correction efficace et rapide.</p>
+    <p><strong>Option 2 — Desmopressine (DDAVP) :</strong> analogue synthétique de l'ADH (hormone antidiurétique). Elle agit en <strong>mobilisant les stocks de FvW</strong> endogènes stockés dans les plaquettes (granules alpha) et les cellules endothéliales (corps de Weibel-Palade), sans en produire de nouveau. Elle libère le FvW stocké. Il faut réaliser des tests préalables pour vérifier que le patient est répondeur.</p>
+    <div class="def-box"><strong>Tachyphylaxie à la desmopressine</strong> : perte rapide d'efficacité de la desmopressine lors d'administrations répétées, par épuisement progressif des stocks de FvW endogènes. Après 2-3 injections rapprochées, la réponse diminue fortement.</div>
+    <p>Effets secondaires de la desmopressine (à surveiller) : <strong>poussées hypertensives</strong> (effet vasoactif) et <strong>hyponatrémies sévères</strong> (effet antidiurétique → rétention d'eau).</p>
+    <div class="urgence-box">&#128683; CONTRE-INDICATION ABSOLUE : Desmopressine interdite dans le <strong>type 2B</strong> car elle libère du FvW anormal à haute affinité → activation plaquettaire incontrôlée → thrombopénie massive et thromboses.</div>
+  </div>
+
+  <svg viewBox="0 0 700 200" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-height:200px;margin:1.5rem 0;display:block">
+    <rect width="700" height="200" fill="#0d0d1a" rx="10"/>
+    <text x="350" y="22" text-anchor="middle" fill="#e74c3c" font-size="13" font-weight="bold">Maladie de von Willebrand : les 3 types</text>
+    <!-- Type 1 -->
+    <rect x="20" y="38" width="200" height="140" fill="rgba(46,204,113,0.08)" stroke="#2ecc71" stroke-width="1.5" rx="6"/>
+    <text x="120" y="58" text-anchor="middle" fill="#2ecc71" font-size="12" font-weight="bold">TYPE 1</text>
+    <text x="120" y="75" text-anchor="middle" fill="#c0c0d8" font-size="9">Quantitatif partiel</text>
+    <text x="35" y="95" fill="#c0c0d8" font-size="9">FvW:Ag ↓</text>
+    <text x="35" y="112" fill="#c0c0d8" font-size="9">FvW:RCo ↓</text>
+    <text x="35" y="129" fill="#2ecc71" font-size="9">Ratio &gt;0,7 ✓</text>
+    <text x="35" y="146" fill="#c0c0d8" font-size="9">AD — le + fréquent</text>
+    <text x="35" y="163" fill="#9090b0" font-size="8">Desmopressine OK</text>
+    <!-- Type 2 -->
+    <rect x="250" y="38" width="200" height="140" fill="rgba(243,156,18,0.08)" stroke="#f39c12" stroke-width="1.5" rx="6"/>
+    <text x="350" y="58" text-anchor="middle" fill="#f39c12" font-size="12" font-weight="bold">TYPE 2</text>
+    <text x="350" y="75" text-anchor="middle" fill="#c0c0d8" font-size="9">Qualitatif</text>
+    <text x="265" y="95" fill="#c0c0d8" font-size="9">FvW:Ag N ou ↓</text>
+    <text x="265" y="112" fill="#c0c0d8" font-size="9">FvW:RCo ↓↓</text>
+    <text x="265" y="129" fill="#e74c3c" font-size="9">Ratio &lt;0,7 ✗</text>
+    <text x="265" y="146" fill="#c0c0d8" font-size="9">AD — sous-types A/B/N</text>
+    <text x="265" y="163" fill="#e74c3c" font-size="8">2B : CI desmopressine !</text>
+    <!-- Type 3 -->
+    <rect x="480" y="38" width="200" height="140" fill="rgba(231,76,60,0.08)" stroke="#e74c3c" stroke-width="1.5" rx="6"/>
+    <text x="580" y="58" text-anchor="middle" fill="#e74c3c" font-size="12" font-weight="bold">TYPE 3</text>
+    <text x="580" y="75" text-anchor="middle" fill="#c0c0d8" font-size="9">Quantitatif total</text>
+    <text x="495" y="95" fill="#c0c0d8" font-size="9">FvW:Ag ≈ 0</text>
+    <text x="495" y="112" fill="#c0c0d8" font-size="9">FvW:RCo ≈ 0</text>
+    <text x="495" y="129" fill="#e74c3c" font-size="9">FVIII ↓↓↓</text>
+    <text x="495" y="146" fill="#c0c0d8" font-size="9">AR — le + sévère</text>
+    <text x="495" y="163" fill="#9090b0" font-size="8">Substitution FvW</text>
+  </svg>
+
+  <div class="flash-block">
+    <div class="flash-q">❓ Quelle est la différence fondamentale entre un type 1 et un type 2 de MvW au niveau biologique, et comment le bilan biologique permet-il de les distinguer ?</div>
+    <button class="flash-reveal" onclick="this.nextElementSibling.style.display='block';this.style.display='none'">Révéler la réponse</button>
+    <div class="flash-answer" style="display:none">Type 1 = déficit quantitatif partiel (moins de FvW, mais fonctionnel) → rapport activité/antigène (vWF:RCo/vWF:Ag) &gt;0,7 (qualité conservée). Type 2 = déficit qualitatif (FvW présent mais dysfonctionnel) → rapport activité/antigène &lt;0,7 (qualité altérée). C'est ce rapport qui fait la distinction clé entre type 1 et type 2.</div>
+  </div>
+</div>
+
+<!-- SLIDE 5 : QCM 2 -->
+<div class="slide content-slide" id="slide-5">
+  <h2>&#129504; QCM 2 — Thrombopathies &amp; Maladie de von Willebrand</h2>
+
+  <div class="qcm-block" data-answer="B" id="q2-1">
+    <div class="q-text">Q1. Un enfant de 7 ans présente depuis la naissance des saignements sévères. Le frottis sanguin montre des plaquettes normales en taille. L'agrégation plaquettaire est nulle sous ADP, collagène et acide arachidonique, mais normale sous ristocétine. Quel est le diagnostic ?</div>
+    <div class="qcm-options">
+      <div class="qcm-option" data-idx="A" onclick="selectOption(this)"><span class="letter">A</span> Syndrome de Bernard-Soulier</div>
+      <div class="qcm-option" data-idx="B" onclick="selectOption(this)"><span class="letter">B</span> Thrombasthénie de Glanzmann</div>
+      <div class="qcm-option" data-idx="C" onclick="selectOption(this)"><span class="letter">C</span> Maladie de von Willebrand type 1</div>
+      <div class="qcm-option" data-idx="D" onclick="selectOption(this)"><span class="letter">D</span> Hémophilie A sévère</div>
+    </div>
+    <button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button>
+    <div class="qcm-feedback"></div>
+    <div class="qcm-explanation">Réponse B. La thrombasthénie de Glanzmann est caractérisée par : plaquettes normales sur frottis (contrairement à Bernard-Soulier), agrégation nulle sous ADP/collagène/AA (tous les agonistes qui utilisent GP IIb/IIIa), mais NORMALE sous ristocétine (la ristocétine teste GP Ib, non déficitaire dans Glanzmann). Bernard-Soulier aurait des plaquettes géantes et une agrégation anormale sous ristocétine.</div>
+  </div>
+
+  <div class="qcm-block" data-answer="C" id="q2-2">
+    <div class="q-text">Q2. Dans la maladie de von Willebrand de type 1, quel est le résultat attendu du rapport vWF:RCo/vWF:Ag ?</div>
+    <div class="qcm-options">
+      <div class="qcm-option" data-idx="A" onclick="selectOption(this)"><span class="letter">A</span> &lt;0,5 (fortement diminué)</div>
+      <div class="qcm-option" data-idx="B" onclick="selectOption(this)"><span class="letter">B</span> Entre 0,5 et 0,7 (légèrement diminué)</div>
+      <div class="qcm-option" data-idx="C" onclick="selectOption(this)"><span class="letter">C</span> &gt;0,7 (normal — qualité conservée)</div>
+      <div class="qcm-option" data-idx="D" onclick="selectOption(this)"><span class="letter">D</span> Indosable (FvW absent)</div>
+    </div>
+    <button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button>
+    <div class="qcm-feedback"></div>
+    <div class="qcm-explanation">Réponse C. Dans le type 1 (déficit quantitatif partiel), la qualité du FvW est préservée. Le rapport activité/antigène (vWF:RCo/vWF:Ag) est &gt;0,7 car le FvW présent fonctionne normalement — il y en a juste moins. Si le rapport était &lt;0,7, ce serait un type 2 (qualitatif). Si le FvW était indosable, ce serait un type 3 (total).</div>
+  </div>
+
+  <div class="qcm-block" data-answer="D" id="q2-3">
+    <div class="q-text">Q3. Pourquoi la desmopressine est-elle absolument contre-indiquée dans la MvW de type 2B ?</div>
+    <div class="qcm-options">
+      <div class="qcm-option" data-idx="A" onclick="selectOption(this)"><span class="letter">A</span> Car elle provoque une hyponatrémie sévère dans le type 2B spécifiquement</div>
+      <div class="qcm-option" data-idx="B" onclick="selectOption(this)"><span class="letter">B</span> Car il n'y a plus de stock de FvW à libérer dans le type 2B</div>
+      <div class="qcm-option" data-idx="C" onclick="selectOption(this)"><span class="letter">C</span> Car elle produit un FvW de mauvaise qualité dans le type 2B</div>
+      <div class="qcm-option" data-idx="D" onclick="selectOption(this)"><span class="letter">D</span> Car elle libère du FvW anormal à haute affinité pour GP Ib, provoquant une thrombopénie massive par activation plaquettaire incontrôlée</div>
+    </div>
+    <button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button>
+    <div class="qcm-feedback"></div>
+    <div class="qcm-explanation">Réponse D. Dans le type 2B, le FvW a une affinité anormalement augmentée pour GP Ib (récepteur plaquettaire). La desmopressine libère massivement ce FvW anormal, qui se lie spontanément aux plaquettes → activation plaquettaire incontrôlée → thrombopénie sévère aiguë par consommation → paradoxalement aggravation des saignements. C'est la contre-indication absolue classique des ECN.</div>
+  </div>
+
+  <div class="qcm-block" data-answer="A" id="q2-4">
+    <div class="q-text">Q4. Quel phénomène explique que dans la MvW de type 3 sévère, le TCA soit fortement allongé alors qu'il s'agit d'une maladie de l'hémostase primaire ?</div>
+    <div class="qcm-options">
+      <div class="qcm-option" data-idx="A" onclick="selectOption(this)"><span class="letter">A</span> L'absence totale de FvW fait chuter le FVIII (car le FvW transporte et protège le FVIII), allongeant ainsi le TCA</div>
+      <div class="qcm-option" data-idx="B" onclick="selectOption(this)"><span class="letter">B</span> Le FvW intervient directement dans la voie intrinsèque de la coagulation</div>
+      <div class="qcm-option" data-idx="C" onclick="selectOption(this)"><span class="letter">C</span> Il y a une thrombopénie associée dans le type 3 qui allonge le TCA</div>
+      <div class="qcm-option" data-idx="D" onclick="selectOption(this)"><span class="letter">D</span> Le FvW active directement le facteur XII</div>
+    </div>
+    <button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button>
+    <div class="qcm-feedback"></div>
+    <div class="qcm-explanation">Réponse A. Dans le type 3, l'absence totale de FvW prive le facteur VIII de son transporteur protecteur → le FVIII est rapidement dégradé dans le sang → son taux chute → allongement du TCA (qui explore la voie intrinsèque incluant le FVIII). C'est le double mécanisme hémorragique du type 3 : hémostase primaire ET coagulation perturbées. Ce tableau peut mimer une hémophilie A sévère.</div>
+  </div>
+</div>
+
+<!-- SLIDE 6 : COAGULOPATHIES ACQUISES -->
+<div class="slide content-slide" id="slide-6">
+  <h2>&#128683; Coagulopathies acquises — CIVD, fibrinolyse, vitamine K, IHC, inhibiteurs</h2>
+
+  <h3>I — CIVD : coagulation intravasculaire disséminée</h3>
+
+  <div class="expl-wrap">
+    <h4>&#128302; 1.1 — Physiopathologie : activation diffuse de la coagulation</h4>
+    <div class="def-box"><strong>CIVD (Coagulation Intravasculaire Disséminée)</strong> : activation diffuse et incontrôlée de la coagulation dans tout l'organisme, secondaire à une libération massive de facteur tissulaire (TF). Elle associe paradoxalement une phase thrombotique (formation de microthrombi dans les capillaires) et une phase hémorragique (consommation et épuisement de tous les facteurs de coagulation et des plaquettes).</div>
+    <p>Le mécanisme est le suivant : un facteur causal libère massivement du <strong>facteur tissulaire (TF)</strong> dans la circulation, activant la cascade de coagulation de façon systémique. Les microthrombi se forment dans les capillaires, ischémiant les organes. En parallèle, les facteurs de coagulation et les plaquettes sont massivement consommés → épuisement → syndrome hémorragique majeur.</p>
+    <p><strong>Causes classiques à connaître :</strong></p>
+    <ul>
+      <li>Infections bactériennes sévères : bacilles Gram- (entérobactéries), méningocoque, infections parasitaires (paludisme)</li>
+      <li>Cancers agressifs (leucémies aiguës notamment)</li>
+      <li>Pathologies obstétricales (hématome rétroplacentaire, embolie amniotique, rétention de fœtus mort)</li>
+      <li>Chirurgies lourdes (pulmonaire, prostatique)</li>
+      <li>Envenimations (venins de serpent)</li>
+    </ul>
+    <div class="urgence-box">&#128680; URGENCE : Le <strong>purpura fulminans</strong> = purpura + fièvre + lésions nécrotiques cutanées (nécrose par microthrombi). C'est la forme la plus grave de CIVD, associée au méningocoque. Mortalité très élevée. Traitement antibiotique immédiat + réanimation.</div>
+  </div>
+
+  <div class="expl-wrap">
+    <h4>&#128203; 1.2 — Biologie de la CIVD : les 3 examens clés</h4>
+    <p>Le diagnostic biologique de CIVD repose sur 3 anomalies principales à connaître par cœur :</p>
+    <ul>
+      <li><strong>TP diminué</strong> (consommation des facteurs de la voie exogène)</li>
+      <li><strong>Facteur V diminué +++</strong> (facteur consommé mais non vitamine K dépendant — permet de distinguer la CIVD d'une simple hypovitaminose K où le facteur V est normal)</li>
+      <li><strong>Fibrinogène diminué +++</strong> (consommé massivement pour former les caillots)</li>
+    </ul>
+    <p>Autres anomalies associées : <strong>thrombopénie</strong> (plaquettes consommées), <strong>D-dimères augmentés</strong> (marqueurs de fibrinolyse secondaire aux caillots formés puis dégradés), allongement du TCA. Les autres facteurs de coagulation sont aussi diminués mais les 3 ci-dessus sont les marqueurs principaux à citer.</p>
+    <div class="def-box"><strong>D-dimères</strong> : fragments peptidiques produits lors de la dégradation de la fibrine par la plasmine. Leur élévation traduit la formation et la dégradation simultanées de caillots. Dans la CIVD, ils sont très élevés (formation massive de caillots).</div>
+    <div class="expl-bq">Mnémotechnique CIVD : « TFV → TP, Facteur V, fibrinogène diminués + Thrombopénie + D-dimères augmentés ». Le facteur V est clé car il n'est pas vitamine K dépendant → différencie CIVD de l'hypovitaminose K.</div>
+  </div>
+
+  <hr class="expl-sep">
+
+  <h3>II — Fibrinolyse aiguë primitive</h3>
+
+  <div class="expl-wrap">
+    <h4>&#128293; 2.1 — Mécanisme : activation diffuse du plasminogène</h4>
+    <div class="def-box"><strong>Fibrinolyse aiguë primitive</strong> : activation diffuse et incontrôlée du plasminogène → formation massive de plasmine → dégradation du fibrinogène, de la fibrine ET de tous les facteurs de coagulation. Pas de formation de microthrombi (contrairement à la CIVD) → saignements partout sans thrombose.</div>
+    <p>La plasmine est une enzyme protéolytique normalement régulée par des inhibiteurs (alpha-2-antiplasmine, PAI-1). Dans la fibrinolyse primitive, la quantité de plasmine dépasse les capacités des inhibiteurs → dégradation incontrôlée de tout le système coagulant.</p>
+    <p><strong>Causes :</strong> chirurgies lourdes pulmonaires (poumon riche en activateurs du plasminogène), cancers (prostate notamment), complications obstétricales. Les mêmes causes que la CIVD, mais la voie physiopathologique est différente.</p>
+    <p><strong>Différence clé CIVD vs fibrinolyse primitive :</strong> dans la CIVD il y a des <strong>microthrombi</strong> + hémorragie (double). Dans la fibrinolyse primitive, <strong>pas de microthrombi</strong> → saignements purs, sans atteinte ischémique viscérale.</p>
+    <p>Bilan biologique :</p>
+    <ul>
+      <li>Fibrinogène très diminué &lt;1 g/L (dégradé par la plasmine)</li>
+      <li>TP diminué, facteur V diminué</li>
+      <li><strong>Examen diagnostic spécifique : temps de lyse des euglobulines &lt;30 minutes</strong> (normalement 3 heures — la plasmine dégrade le caillot en moins de 30 min au lieu de 3h)</li>
+    </ul>
+    <div class="def-box"><strong>Temps de lyse des euglobulines</strong> : test de laboratoire mesurant la vitesse de dégradation d'un caillot formé in vitro. Valeur normale : environ 3 heures. Valeur dans la fibrinolyse primitive : &lt;30 minutes (caillot dégradé 6x plus vite). C'est l'examen diagnostic de référence.</div>
+  </div>
+
+  <hr class="expl-sep">
+
+  <h3>III — Hypovitaminose K</h3>
+
+  <div class="expl-wrap">
+    <h4>&#129502; 3.1 — Physiopathologie et facteurs dépendants</h4>
+    <div class="def-box"><strong>Hypovitaminose K</strong> : déficit en vitamine K entraînant une insuffisance de synthèse des facteurs de coagulation <strong>vitamine K dépendants</strong> : II (prothrombine), VII, IX, X, et des anticoagulants naturels Protéine C et Protéine S. Les autres facteurs (I/fibrinogène, V, VIII, XI, XII) sont <strong>normaux</strong>.</div>
+    <p>La vitamine K est indispensable à la carboxylation des facteurs II, VII, IX, X, PC, PS. Sans cette carboxylation, ces facteurs sont produits mais inactifs. En pratique, le facteur VII (demi-vie très courte : 4-6h) chute le premier, entraînant un allongement précoce du TP.</p>
+    <p><strong>Causes de l'hypovitaminose K :</strong></p>
+    <ul>
+      <li><strong>Nouveau-né</strong> : foie immature + absence de flore intestinale productrice de vit K + allaitement maternel pauvre en vit K → risque de maladie hémorragique du nouveau-né. Prévention : vitamine K per os systématique à la naissance en France.</li>
+      <li>Prise d'anti-vitamines K (AVK) : warfarine, acenocoumarol — traitement anticoagulant volontaire</li>
+      <li>Mort-aux-rats (rodenticides anticoagulants) — intoxication</li>
+      <li>Arrêt prolongé d'alimentation</li>
+      <li>Antibiotiques (éradiquent la flore intestinale productrice de vit K)</li>
+      <li>Malabsorption intestinale (vit K est liposoluble)</li>
+    </ul>
+    <p><strong>Bilan biologique :</strong> TP bas + TCA allongé + numération plaquettaire <strong>normale</strong>. Le facteur V est normal (non vitamine K dépendant). Les D-dimères sont normaux.</p>
+    <p><strong>Traitement d'urgence :</strong> injection de <strong>PPSB</strong> (concentré de complexe prothrombinique contenant les facteurs II, VII, IX, X — correction en 5 minutes) plutôt que vitamine K IV (qui nécessite 24h de synthèse hépatique). En cas d'urgence hémorragique, le PPSB est nettement supérieur.</p>
+    <div class="def-box"><strong>PPSB</strong> : concentré de complexe prothrombinique contenant les facteurs de coagulation vitamine K dépendants (II, VII, IX, X). Correction de l'hémostase en 5 minutes. Indiqué dans les surdosages en AVK avec saignement ou en prévention avant chirurgie urgente.</div>
+  </div>
+
+  <hr class="expl-sep">
+
+  <h3>IV — Insuffisance hépato-cellulaire (IHC)</h3>
+
+  <div class="expl-wrap">
+    <h4>&#127973; 4.1 — Tout diminue car le foie synthétise tous les facteurs</h4>
+    <div class="def-box"><strong>Insuffisance hépato-cellulaire (IHC)</strong> : atteinte fonctionnelle des hépatocytes → diminution de synthèse de <strong>tous</strong> les facteurs de coagulation (le foie synthétise l'ensemble : I, II, V, VII, IX, X, XI, XII). Différent de l'hypovitaminose K où seuls les facteurs vitamine K dépendants sont diminués.</div>
+    <p>Causes : IHC <strong>aiguë</strong> (hépatite virale fulminante, médicaments hépatotoxiques, thrombose des veines sus-hépatiques/Budd-Chiari, paracétamol) et IHC <strong>chronique</strong> (hépatite chronique C ou B, alcool, cirrhose).</p>
+    <p>Bilan biologique : allongement du TP + TCA allongé + <strong>diminution homogène de tous les facteurs de la voie exogène</strong> (II, V, VII, X) + transaminases élevées (cytolyse). En cas de cirrhose : hypersplénisme → séquestration des plaquettes → thrombopénie (mécanisme différent de la coagulopathie elle-même). Dans l'IHC aiguë : plaquettes normales.</p>
+    <div class="expl-warn">⚠️ DIFFÉRENCE CLÉ : Hypovitaminose K = facteur V <strong>normal</strong> (non vitamine K dépendant). IHC = facteur V <strong>diminué</strong> (le foie ne synthétise plus rien, y compris le facteur V). Ce point discrimine les deux en biologie.</div>
+  </div>
+
+  <hr class="expl-sep">
+
+  <h3>V — Inhibiteur anti-facteur VIII acquis</h3>
+
+  <div class="expl-wrap">
+    <h4>&#128267; 5.1 — Anticorps contre nos propres facteurs de coagulation</h4>
+    <div class="def-box"><strong>Inhibiteur acquis du facteur VIII</strong> : auto-anticorps (IgG) dirigé contre le facteur VIII de la coagulation. Entraîne une destruction rapide du FVIII → taux de FVIII très bas (&lt;5%) → syndrome hémorragique sévère. Rare (1/1 000 000) mais mortalité 10-20%.</div>
+    <p>Populations touchées : <strong>femme jeune en post-partum</strong> (jusqu'à 1 an après l'accouchement — alloimmunisation possible) et <strong>personnes âgées ≥60 ans</strong> (contexte de cancer ou maladie auto-immune).</p>
+    <p>Causes : cancer sous-jacent, maladie auto-immune (lupus), iatrogène (hémophiliaques traités développant des anticorps contre le FVIII exogène).</p>
+    <p>Tableau clinique : énormes hématomes, ecchymoses extensives, hématurie, saignements digestifs, saignements profonds. Tout geste invasif → saignement majeur incontrôlable.</p>
+    <p>Bilan biologique :</p>
+    <ul>
+      <li>TCA très allongé</li>
+      <li>Facteur VIII très bas (&lt;5%)</li>
+      <li>FvW normal (diagnostic différentiel avec MvW type 2N)</li>
+      <li>TP normal</li>
+      <li>Présence d'inhibiteur anti-FVIII (dosé spécifiquement)</li>
+    </ul>
+    <p><strong>Traitement :</strong> traiter la cause (cancer → chimiothérapie, lupus → immunosuppresseurs). Stopper le saignement aigu : <strong>NovoSeven (facteur VII recombinant activé)</strong> qui court-circuite la voie du FVIII. Neutraliser l'inhibiteur : immunosuppresseurs (corticoïdes, rituximab). Emicizumab en développement (anticorps bispécifique mimant le FVIII).</p>
+  </div>
+
+  <svg viewBox="0 0 700 220" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-height:220px;margin:1.5rem 0;display:block">
+    <rect width="700" height="220" fill="#0d0d1a" rx="10"/>
+    <text x="350" y="22" text-anchor="middle" fill="#e74c3c" font-size="13" font-weight="bold">Coagulopathies acquises : comparatif biologique</text>
+    <!-- Headers -->
+    <text x="10" y="48" fill="#f39c12" font-size="9" font-weight="bold">Pathologie</text>
+    <text x="130" y="48" fill="#f39c12" font-size="9" font-weight="bold">TP</text>
+    <text x="175" y="48" fill="#f39c12" font-size="9" font-weight="bold">TCA</text>
+    <text x="220" y="48" fill="#f39c12" font-size="9" font-weight="bold">Fact.V</text>
+    <text x="275" y="48" fill="#f39c12" font-size="9" font-weight="bold">Fibri.</text>
+    <text x="325" y="48" fill="#f39c12" font-size="9" font-weight="bold">Plaq.</text>
+    <text x="375" y="48" fill="#f39c12" font-size="9" font-weight="bold">D-dim.</text>
+    <text x="430" y="48" fill="#f39c12" font-size="9" font-weight="bold">FVIII</text>
+    <text x="480" y="48" fill="#f39c12" font-size="9" font-weight="bold">Clé</text>
+    <!-- Line -->
+    <line x1="5" y1="53" x2="695" y2="53" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
+    <!-- CIVD -->
+    <text x="10" y="70" fill="#e74c3c" font-size="9" font-weight="bold">CIVD</text>
+    <text x="130" y="70" fill="#c0c0d8" font-size="9">↓</text>
+    <text x="175" y="70" fill="#c0c0d8" font-size="9">↑</text>
+    <text x="220" y="70" fill="#c0c0d8" font-size="9">↓</text>
+    <text x="275" y="70" fill="#c0c0d8" font-size="9">↓</text>
+    <text x="325" y="70" fill="#c0c0d8" font-size="9">↓</text>
+    <text x="375" y="70" fill="#2ecc71" font-size="9" font-weight="bold">↑↑↑</text>
+    <text x="430" y="70" fill="#c0c0d8" font-size="9">↓</text>
+    <text x="480" y="70" fill="#9090b0" font-size="8">FV↓+D-dim↑↑↑</text>
+    <!-- Fibrinolyse -->
+    <text x="10" y="90" fill="#e74c3c" font-size="9" font-weight="bold">Fibrinolyse</text>
+    <text x="130" y="90" fill="#c0c0d8" font-size="9">↓</text>
+    <text x="175" y="90" fill="#c0c0d8" font-size="9">↑</text>
+    <text x="220" y="90" fill="#c0c0d8" font-size="9">↓</text>
+    <text x="275" y="90" fill="#c0c0d8" font-size="9">↓↓&lt;1g</text>
+    <text x="325" y="90" fill="#c0c0d8" font-size="9">N</text>
+    <text x="375" y="90" fill="#c0c0d8" font-size="9">↑</text>
+    <text x="430" y="90" fill="#c0c0d8" font-size="9">↓</text>
+    <text x="480" y="90" fill="#9090b0" font-size="8">Lyse euglobulines &lt;30min</text>
+    <!-- Vit K -->
+    <text x="10" y="110" fill="#f39c12" font-size="9" font-weight="bold">Hypovit.K</text>
+    <text x="130" y="110" fill="#c0c0d8" font-size="9">↓</text>
+    <text x="175" y="110" fill="#c0c0d8" font-size="9">↑</text>
+    <text x="220" y="110" fill="#2ecc71" font-size="9" font-weight="bold">N !</text>
+    <text x="275" y="110" fill="#c0c0d8" font-size="9">N</text>
+    <text x="325" y="110" fill="#c0c0d8" font-size="9">N</text>
+    <text x="375" y="110" fill="#c0c0d8" font-size="9">N</text>
+    <text x="430" y="110" fill="#c0c0d8" font-size="9">N</text>
+    <text x="480" y="110" fill="#9090b0" font-size="8">Facteur V normal !</text>
+    <!-- IHC -->
+    <text x="10" y="130" fill="#3498db" font-size="9" font-weight="bold">IHC</text>
+    <text x="130" y="130" fill="#c0c0d8" font-size="9">↓</text>
+    <text x="175" y="130" fill="#c0c0d8" font-size="9">↑</text>
+    <text x="220" y="130" fill="#e74c3c" font-size="9" font-weight="bold">↓ !</text>
+    <text x="275" y="130" fill="#c0c0d8" font-size="9">N/↓</text>
+    <text x="325" y="130" fill="#c0c0d8" font-size="9">N/↓</text>
+    <text x="375" y="130" fill="#c0c0d8" font-size="9">N</text>
+    <text x="430" y="130" fill="#c0c0d8" font-size="9">N</text>
+    <text x="480" y="130" fill="#9090b0" font-size="8">Facteur V diminué !</text>
+    <!-- Anti-FVIII -->
+    <text x="10" y="150" fill="#9b59b6" font-size="9" font-weight="bold">Anti-FVIII</text>
+    <text x="130" y="150" fill="#c0c0d8" font-size="9">N</text>
+    <text x="175" y="150" fill="#e74c3c" font-size="9" font-weight="bold">↑↑↑</text>
+    <text x="220" y="150" fill="#c0c0d8" font-size="9">N</text>
+    <text x="275" y="150" fill="#c0c0d8" font-size="9">N</text>
+    <text x="325" y="150" fill="#c0c0d8" font-size="9">N</text>
+    <text x="375" y="150" fill="#c0c0d8" font-size="9">N</text>
+    <text x="430" y="150" fill="#e74c3c" font-size="9" font-weight="bold">&lt;5%</text>
+    <text x="480" y="150" fill="#9090b0" font-size="8">TCA↑↑↑ + FVIII&lt;5%</text>
+    <!-- note -->
+    <text x="10" y="195" fill="#9090b0" font-size="8">N=normal, ↓=diminué, ↑=augmenté. Les cases vertes/rouges indiquent les éléments discriminants clés.</text>
+  </svg>
+
+  <div class="flash-block">
+    <div class="flash-q">❓ Comment différencier biologiquement une CIVD d'une hypovitaminose K sévère ?</div>
+    <button class="flash-reveal" onclick="this.nextElementSibling.style.display='block';this.style.display='none'">Révéler la réponse</button>
+    <div class="flash-answer" style="display:none">Clé : le FACTEUR V. Dans la CIVD, le facteur V est DIMINUÉ (consommé). Dans l'hypovitaminose K, le facteur V est NORMAL (non vitamine K dépendant, donc non affecté). Autres différences : dans la CIVD les D-dimères sont très élevés (microthrombi) et la thrombopénie est fréquente. Dans l'hypovitaminose K, les plaquettes sont normales et les D-dimères normaux.</div>
+  </div>
+</div>
+
+<!-- SLIDE 7 : HÉMOPHILIES -->
+<div class="slide content-slide" id="slide-7">
+  <h2>&#129516; Hémophilies A et B — Coagulopathies constitutionnelles</h2>
+
+  <h3>I — Génétique et épidémiologie</h3>
+
+  <div class="expl-wrap">
+    <h4>&#129516; 1.1 — Maladie liée au chromosome X</h4>
+    <div class="def-box"><strong>Hémophilie</strong> : coagulopathie constitutionnelle liée au chromosome X. Les <strong>hommes sont malades</strong> (un seul chromosome X, donc un seul allèle — si muté, pas d'allèle sain de compensation). Les <strong>femmes sont conductrices</strong> (deux chromosomes X — l'allèle sain compense généralement l'allèle muté, mais elles transmettent la maladie à leurs fils).</div>
+    <p>Un tiers des cas d'hémophilie sont des <strong>mutations de novo</strong> (30% de nouveaux cas dans une famille sans ATCD). Cela signifie qu'une hémophilie peut apparaître chez un patient sans antécédent familial connu. C'est pourquoi l'absence d'ATCD familiaux n'élimine pas le diagnostic.</p>
+    <p>Les hémophilies sont des maladies rares, suivies dans des centres spécialisés (centres de traitement de l'hémophilie, CTH). La fréquence globale est faible, mais leur sévérité potentielle justifie une prise en charge très spécialisée.</p>
+  </div>
+
+  <div class="expl-wrap">
+    <h4>&#128202; 1.2 — Hémophilie A vs Hémophilie B</h4>
+    <div class="def-box"><strong>Hémophilie A</strong> : déficit en <strong>facteur VIII</strong> (&lt;40% pour être symptomatique). La plus fréquente : 1/5 000 naissances masculines. FvW normal (contrairement à la MvW type 2N qui donne un tableau similaire).</div>
+    <div class="def-box"><strong>Hémophilie B</strong> (maladie de Christmas) : déficit en <strong>facteur IX</strong> (&lt;40%). Plus rare : 1/30 000 naissances masculines. Cliniquement identique à l'hémophilie A mais gène différent.</div>
+    <p>Il existe théoriquement des déficits pour chaque facteur de coagulation (VII, V, X, XI...) mais les hémophilies A et B sont les plus fréquentes et les plus importantes à connaître.</p>
+  </div>
+
+  <hr class="expl-sep">
+
+  <h3>II — Trois formes selon la sévérité</h3>
+
+  <div class="expl-wrap">
+    <h4>&#128200; 2.1 — Classification selon le taux de facteur résiduel</h4>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Forme</th><th>Taux de facteur circulant</th><th>Manifestations</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Sévère</strong></td><td>&lt;1% du normal</td><td>Saignements spontanés fréquents, hémarthroses dès que l'enfant marche</td></tr>
+          <tr><td><strong>Modérée</strong></td><td>1–5% du normal</td><td>Saignements provoqués ++ (chirurgie, traumatismes), rarement spontanés</td></tr>
+          <tr><td><strong>Mineure</strong></td><td>5–40% du normal</td><td>Saignements uniquement lors de traumatismes importants ou chirurgie</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>La sévérité clinique dépend <strong>directement</strong> du taux de facteur résiduel. Dans la forme sévère (&lt;1%), les saignements surviennent spontanément à partir des premiers mois de marche (articulations sollicitées). Dans la forme mineure (5–40%), le patient peut ne découvrir sa maladie qu'à l'occasion d'une première chirurgie.</p>
+  </div>
+
+  <hr class="expl-sep">
+
+  <h3>III — Manifestations cliniques et complications</h3>
+
+  <div class="expl-wrap">
+    <h4>&#128680; 3.1 — Tableau clinique de l'hémophilie sévère</h4>
+    <p>La manifestation inaugurale dans l'hémophilie sévère est l'<strong>hémarthrose</strong> — saignement intra-articulaire. Les articulations les plus touchées sont les chevilles, les genoux et les coudes (zones soumises aux contraintes mécaniques lors des premiers pas). L'enfant refuse de marcher, l'articulation est chaude, gonflée, douloureuse.</p>
+    <p>Les <strong>hématomes musculaires profonds</strong> sont également caractéristiques. Contrairement aux thrombopathies, il n'y a pas de pétéchies ni de saignements muqueux spontanés (l'hémostase primaire est normale dans l'hémophilie).</p>
+    <div class="urgence-box">&#128680; Hématome cérébral = complication gravissime. Dans toute hémophilie sévère, un traumatisme crânien même minime doit conduire à l'administration immédiate du facteur déficitaire AVANT même l'imagerie, en raison du risque de compression cérébrale fatale.</div>
+  </div>
+
+  <div class="expl-wrap">
+    <h4>&#9889; 3.2 — Complications au long cours</h4>
+    <p>Si les saignements articulaires se répètent au même endroit → <strong>inflammation chronique</strong> → <strong>arthropathie hémophilique</strong> : destruction progressive du cartilage, synovite, limitation articulaire irréversible. Cette complication était très fréquente avant l'ère des traitements préventifs.</p>
+    <p>Les hématomes cérébraux peuvent entraîner des compressions locales (neuropathies optiques, déficits neurologiques). Les saignements non contrôlables en l'absence de traitement sont potentiellement mortels.</p>
+    <p>Les patients sans prophylaxie sont à risque majeur lors de tout geste invasif (chirurgie, extraction dentaire, ponction lombaire). Ces gestes nécessitent une substitution préalable systématique.</p>
+  </div>
+
+  <hr class="expl-sep">
+
+  <h3>IV — Biologie et traitement</h3>
+
+  <div class="expl-wrap">
+    <h4>&#128203; 4.1 — Bilan biologique caractéristique</h4>
+    <p>Le profil biologique de l'hémophilie est très caractéristique :</p>
+    <ul>
+      <li><strong>TCA allongé isolément</strong> (la voie intrinsèque est perturbée par le déficit en FVIII ou FIX)</li>
+      <li><strong>TP normal</strong> (la voie exogène est intacte)</li>
+      <li><strong>Temps d'occlusion plaquettaire (PFA) normal</strong> (hémostase primaire intacte, FvW normal)</li>
+      <li>Hémophilie A : <strong>facteur VIII seul diminué</strong>, tous les autres facteurs normaux</li>
+      <li>Hémophilie B : <strong>facteur IX seul diminué</strong>, tous les autres facteurs normaux</li>
+    </ul>
+    <div class="expl-warn">⚠️ PIÈGE : TCA allongé + FVIII bas + FvW normal → hémophilie A. TCA allongé + FVIII bas + FvW bas → MvW type 3 ou type 2N. Le dosage du FvW est clé pour la distinction.</div>
+  </div>
+
+  <div class="expl-wrap">
+    <h4>&#128138; 4.2 — Traitement</h4>
+    <p><strong>Hémophilie A :</strong> apport de facteur VIII exogène (concentrés de FVIII plasmatique ou recombinant). Traitement curatif lors des saignements, préventif (prophylaxie) chez les formes sévères. Les stocks en FVIII dans les hôpitaux sont généralement bien fournis.</p>
+    <p><strong>Hémophilie B :</strong> apport de facteur IX exogène. Même principe.</p>
+    <p><strong>Emicizumab :</strong> anticorps bispécifique mimant le rôle du FVIII (sans être du FVIII) → utilisé en prophylaxie chez les hémophiles A avec ou sans inhibiteur anti-FVIII. Révolution thérapeutique récente.</p>
+    <p><strong>Prophylaxie hémorragique :</strong> chez les patients sévères, injection régulière (2-3 fois/semaine) de facteur pour maintenir un taux basal protecteur, réduisant drastiquement les hémarthroses et préservant les articulations.</p>
+    <div class="expl-bq">Contexte historique : avant les concentrés de facteurs (années 1980), de nombreux hémophiles décédaient de complications hémorragiques ou d'arthropathies invalidantes. La contamination des concentrés par le VIH et le VHC dans les années 1980 a été un drame majeur (affaire du sang contaminé en France).</div>
+  </div>
+
+  <svg viewBox="0 0 700 210" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-height:210px;margin:1.5rem 0;display:block">
+    <rect width="700" height="210" fill="#0d0d1a" rx="10"/>
+    <text x="350" y="22" text-anchor="middle" fill="#e74c3c" font-size="13" font-weight="bold">Hémophilies A et B : comparatif</text>
+    <!-- Hémophilie A -->
+    <rect x="20" y="35" width="310" height="155" fill="rgba(231,76,60,0.08)" stroke="#e74c3c" stroke-width="1.5" rx="6"/>
+    <text x="175" y="56" text-anchor="middle" fill="#e74c3c" font-size="12" font-weight="bold">HÉMOPHILIE A</text>
+    <text x="35" y="76" fill="#c0c0d8" font-size="10">Déficit : Facteur VIII</text>
+    <text x="35" y="93" fill="#c0c0d8" font-size="10">Fréquence : 1/5 000 (&#9794;)</text>
+    <text x="35" y="110" fill="#c0c0d8" font-size="10">Génétique : lié à l'X</text>
+    <text x="35" y="127" fill="#c0c0d8" font-size="10">TCA ↑, TP N, PFA N</text>
+    <text x="35" y="144" fill="#c0c0d8" font-size="10">FVIII ↓↓, FvW normal</text>
+    <text x="35" y="161" fill="#2ecc71" font-size="10">Traitement : concentré FVIII</text>
+    <text x="35" y="178" fill="#9090b0" font-size="9">Emicizumab en prophylaxie</text>
+    <!-- Hémophilie B -->
+    <rect x="370" y="35" width="310" height="155" fill="rgba(52,152,219,0.08)" stroke="#3498db" stroke-width="1.5" rx="6"/>
+    <text x="525" y="56" text-anchor="middle" fill="#3498db" font-size="12" font-weight="bold">HÉMOPHILIE B</text>
+    <text x="385" y="76" fill="#c0c0d8" font-size="10">Déficit : Facteur IX</text>
+    <text x="385" y="93" fill="#c0c0d8" font-size="10">Fréquence : 1/30 000 (&#9794;)</text>
+    <text x="385" y="110" fill="#c0c0d8" font-size="10">Génétique : lié à l'X</text>
+    <text x="385" y="127" fill="#c0c0d8" font-size="10">TCA ↑, TP N, PFA N</text>
+    <text x="385" y="144" fill="#c0c0d8" font-size="10">FIX ↓↓, FVIII normal</text>
+    <text x="385" y="161" fill="#2ecc71" font-size="10">Traitement : concentré FIX</text>
+    <text x="385" y="178" fill="#9090b0" font-size="9">Identique cliniquement à A</text>
+    <!-- commun -->
+    <text x="350" y="205" text-anchor="middle" fill="#9090b0" font-size="8">Commun aux 2 : lié à X, hémarthroses, pas de pétéchies, 30% de novo</text>
+  </svg>
+
+  <div class="flash-block">
+    <div class="flash-q">❓ Un garçon de 3 ans est amené aux urgences avec un genou très gonflé et douloureux après une chute mineure. TCA = 95s (normal &lt;40s), TP normal, plaquettes normales. FVIII = 0,5%. Quel est le diagnostic et la prise en charge immédiate ?</div>
+    <button class="flash-reveal" onclick="this.nextElementSibling.style.display='block';this.style.display='none'">Révéler la réponse</button>
+    <div class="flash-answer" style="display:none">Hémophilie A sévère (FVIII &lt;1%). Le tableau est typique : hémarthrose du genou chez un petit garçon, TCA allongé isolément (voie intrinsèque), TP normal, plaquettes normales. Prise en charge immédiate : administration IV de concentré de facteur VIII pour corriger le taux (objectif &gt;50-80% selon sévérité du saignement), contacter le centre de traitement de l'hémophilie. Pas d'aspirine ni d'AINS, pas d'injection IM.</div>
+  </div>
+</div>
+
+<!-- SLIDE 8 : QCM 3 -->
+<div class="slide content-slide" id="slide-8">
+  <h2>&#129504; QCM 3 — Coagulopathies &amp; Hémophilies</h2>
+
+  <div class="qcm-block" data-answer="B" id="q3-1">
+    <div class="q-text">Q1. Dans la CIVD, quel est l'élément biologique DISCRIMINANT par rapport à une hypovitaminose K sévère ?</div>
+    <div class="qcm-options">
+      <div class="qcm-option" data-idx="A" onclick="selectOption(this)"><span class="letter">A</span> Le TP est diminué dans les deux</div>
+      <div class="qcm-option" data-idx="B" onclick="selectOption(this)"><span class="letter">B</span> Le facteur V est diminué dans la CIVD mais NORMAL dans l'hypovitaminose K</div>
+      <div class="qcm-option" data-idx="C" onclick="selectOption(this)"><span class="letter">C</span> Le TCA est allongé dans la CIVD mais normal dans l'hypovitaminose K</div>
+      <div class="qcm-option" data-idx="D" onclick="selectOption(this)"><span class="letter">D</span> Les plaquettes sont normales dans la CIVD</div>
+    </div>
+    <button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button>
+    <div class="qcm-feedback"></div>
+    <div class="qcm-explanation">Réponse B. Le facteur V n'est pas vitamine K dépendant. Dans l'hypovitaminose K, seuls les facteurs vitamine K dépendants (II, VII, IX, X, PC, PS) sont diminués → facteur V NORMAL. Dans la CIVD, tous les facteurs sont consommés → facteur V DIMINUÉ. C'est le critère discriminant classique entre ces deux coagulopathies.</div>
+  </div>
+
+  <div class="qcm-block" data-answer="D" id="q3-2">
+    <div class="q-text">Q2. Quel est l'examen de référence permettant de confirmer une fibrinolyse aiguë primitive ?</div>
+    <div class="qcm-options">
+      <div class="qcm-option" data-idx="A" onclick="selectOption(this)"><span class="letter">A</span> D-dimères très élevés</div>
+      <div class="qcm-option" data-idx="B" onclick="selectOption(this)"><span class="letter">B</span> Fibrinogène &lt;1 g/L</div>
+      <div class="qcm-option" data-idx="C" onclick="selectOption(this)"><span class="letter">C</span> TP très diminué</div>
+      <div class="qcm-option" data-idx="D" onclick="selectOption(this)"><span class="letter">D</span> Temps de lyse des euglobulines &lt;30 minutes</div>
+    </div>
+    <button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button>
+    <div class="qcm-feedback"></div>
+    <div class="qcm-explanation">Réponse D. Le temps de lyse des euglobulines &lt;30 minutes est l'examen spécifique de la fibrinolyse primitive. Normalement, un caillot formé in vitro est dégradé en environ 3 heures. En cas de fibrinolyse primitive massive, la dégradation se fait en moins de 30 minutes. Les D-dimères, fibrinogène bas et TP bas sont présents mais non spécifiques (retrouvés aussi dans la CIVD).</div>
+  </div>
+
+  <div class="qcm-block" data-answer="C" id="q3-3">
+    <div class="q-text">Q3. Un patient de 65 ans présente des hématomes extensifs spontanés depuis 2 semaines. Biologie : TCA = 120s, TP normal, FVIII = 2%, FvW normal, inhibiteur anti-FVIII positif. Quel est le profil épidémiologique et la cause la plus probable ?</div>
+    <div class="qcm-options">
+      <div class="qcm-option" data-idx="A" onclick="selectOption(this)"><span class="letter">A</span> Hémophilie A constitutionnelle révélée tardivement</div>
+      <div class="qcm-option" data-idx="B" onclick="selectOption(this)"><span class="letter">B</span> Maladie de von Willebrand type 2N</div>
+      <div class="qcm-option" data-idx="C" onclick="selectOption(this)"><span class="letter">C</span> Inhibiteur acquis anti-FVIII (hémophilie acquise), probable cancer ou maladie auto-immune sous-jacente</div>
+      <div class="qcm-option" data-idx="D" onclick="selectOption(this)"><span class="letter">D</span> CIVD sur infection bactérienne</div>
+    </div>
+    <button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button>
+    <div class="qcm-feedback"></div>
+    <div class="qcm-explanation">Réponse C. L'inhibiteur acquis anti-FVIII touche typiquement les personnes âgées (&gt;60 ans) et les femmes en post-partum. Le profil biologique est : TCA très allongé, FVIII effondré (&lt;5%), FvW normal (distingue de la MvW type 2N), TP normal. L'inhibiteur anti-FVIII est positif. Chez un patient de 65 ans, chercher un cancer sous-jacent ou une maladie auto-immune. Mortalité 10-20%.</div>
+  </div>
+
+  <div class="qcm-block" data-answer="A" id="q3-4">
+    <div class="q-text">Q4. Dans l'hémophilie A, quel est le bilan biologique caractéristique ?</div>
+    <div class="qcm-options">
+      <div class="qcm-option" data-idx="A" onclick="selectOption(this)"><span class="letter">A</span> TCA allongé, TP normal, PFA normal, FVIII seul diminué, FvW normal</div>
+      <div class="qcm-option" data-idx="B" onclick="selectOption(this)"><span class="letter">B</span> TCA allongé, TP diminué, PFA allongé, FVIII et FvW diminués</div>
+      <div class="qcm-option" data-idx="C" onclick="selectOption(this)"><span class="letter">C</span> TCA normal, TP diminué, PFA allongé, FVIII normal</div>
+      <div class="qcm-option" data-idx="D" onclick="selectOption(this)"><span class="letter">D</span> TCA allongé, TP allongé, thrombopénie, fibrinogène bas</div>
+    </div>
+    <button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button>
+    <div class="qcm-feedback"></div>
+    <div class="qcm-explanation">Réponse A. L'hémophilie A se caractérise par : TCA allongé (voie intrinsèque perturbée par le déficit en FVIII), TP normal (voie exogène intacte), PFA normal (hémostase primaire intacte, FvW normal), et spécifiquement FVIII seul diminué (tous les autres facteurs normaux, y compris le FIX). Le FvW normal distingue l'hémophilie A de la MvW type 2N. Le TP normal distingue l'hémophilie des CIVD ou hypovitaminoses K.</div>
+  </div>
+</div>
+
+<!-- SLIDE 9 : TVP & EP -->
+<div class="slide content-slide" id="slide-9">
+  <h2>&#128684; TVP &amp; Embolie Pulmonaire — Thrombose veineuse</h2>
+
+  <h3>I — Thrombose artérielle vs thrombose veineuse</h3>
+
+  <div class="expl-wrap">
+    <h4>&#9889; 1.1 — Deux mécanismes physiopathologiques distincts</h4>
+    <div class="def-box"><strong>Thrombose artérielle</strong> : formation d'un caillot dans une artère, secondaire à une <strong>lésion endothéliale</strong> et vasculaire causée par l'athérosclérose. Une plaque d'athérome se fissure → exposition du collagène sous-endothélial → activation plaquettaire locale → thrombus artériel riche en plaquettes (thrombus blanc). Conséquences : infarctus du myocarde, AVC ischémique, ischémie des membres inférieurs.</div>
+    <div class="def-box"><strong>Thrombose veineuse</strong> : formation d'un caillot dans une veine, secondaire à une <strong>stase veineuse</strong> (immobilisation) + activation de la coagulation. Thrombus veineux riche en fibrine et globules rouges (thrombus rouge). Mécanisme différent de la thrombose artérielle.</div>
+    <p><strong>FDR de thrombose artérielle :</strong> âge, sexe masculin, ATCD familiaux cardiovasculaires, tabagisme, hypertension artérielle, diabète, dyslipidémie, surpoids, sédentarité. Ce sont les FDR vasculaires classiques.</p>
+    <p>Ces deux types de thromboses n'ont <strong>pas les mêmes mécanismes, pas les mêmes traitements, pas la même prévention</strong>. Les antiagrégants préviennent les thromboses artérielles (plaquettaires). Les anticoagulants préviennent les thromboses veineuses (coagulation). Cette distinction est fondamentale.</p>
+  </div>
+
+  <hr class="expl-sep">
+
+  <h3>II — Thrombose veineuse profonde (TVP) : classification et FDR</h3>
+
+  <div class="expl-wrap">
+    <h4>&#128683; 2.1 — Classification anatomique des TVP</h4>
+    <div class="def-box"><strong>Thrombose veineuse profonde (TVP)</strong> : formation d'un caillot dans le réseau veineux profond. Fréquence : 1/1000 (moins fréquente que la thrombose artérielle). Urgence diagnostique et thérapeutique car risque d'embolie pulmonaire fatale.</div>
+    <p>Classification anatomique :</p>
+    <ul>
+      <li><strong>TVP des membres inférieurs</strong> (majoritaires) :
+        <ul>
+          <li><strong>Proximale</strong> (genou → veine cave inférieure) : la plus grave, risque d'embolie pulmonaire très élevé, traitement anticoagulant systématique</li>
+          <li><strong>Distale</strong> (sous le genou) : moins grave, risque d'EP plus faible</li>
+        </ul>
+      </li>
+      <li>TVP superficielle (thrombophlébite superficielle) : moins grave, peut nécessiter traitement selon étendue</li>
+      <li>TVP des membres supérieurs : rare, contexte particulier (cathéter central, effort, syndrome de l'opercule thoracique)</li>
+      <li>Localisation cérébrale (thrombose des sinus veineux) : contexte particulier</li>
+      <li>Localisation digestive (veine porte, mésentérique) : contexte particulier, souvent syndrome myéloprolifératif ou SAPL</li>
+    </ul>
+    <div class="urgence-box">&#128680; La TVP proximale est une urgence diagnostique et thérapeutique car le risque d'embolie pulmonaire (potentiellement fatale) est majeur. Anticoagulation immédiate dès le diagnostic confirmé.</div>
+  </div>
+
+  <div class="expl-wrap">
+    <h4>&#128202; 2.2 — Facteurs de risque de TVP</h4>
+    <p><strong>FDR cliniques :</strong></p>
+    <ul>
+      <li>Thrombocytémie essentielle et maladie de Vaquez (syndromes myéloprolifératifs)</li>
+      <li>Syndrome inflammatoire chronique (cancer +++, infections chroniques)</li>
+      <li>Maladies de système (lupus, SAPL)</li>
+      <li>Grossesse (pic d'œstrogènes → procoagulant) et contraception oestro-progestative</li>
+    </ul>
+    <p><strong>FDR biologiques/généraux :</strong></p>
+    <ul>
+      <li>Âge (risque augmente progressivement)</li>
+      <li>ATCD familiaux de TVP ou EP</li>
+      <li>ATCD personnel de thrombose (récidive ++)</li>
+      <li>Surpoids / obésité</li>
+      <li>Immobilisation prolongée (alitement, long voyage)</li>
+    </ul>
+  </div>
+
+  <hr class="expl-sep">
+
+  <h3>III — Embolie pulmonaire (EP)</h3>
+
+  <div class="expl-wrap">
+    <h4>&#129704; 3.1 — Épidémiologie et clinique</h4>
+    <div class="def-box"><strong>Embolie pulmonaire (EP)</strong> : migration d'un caillot (thrombus) dans l'artère pulmonaire ou ses branches. Peut être un événement initial (thrombose in situ pulmonaire) ou secondaire à une TVP proximale. Incidence : 50 000–100 000 cas/an en France. Mortalité : 10%.</div>
+    <p><strong>Signes cliniques de l'EP :</strong></p>
+    <ul>
+      <li>Douleur thoracique (souvent pleurale, en rapport respiratoire)</li>
+      <li>Dyspnée (essoufflement, d'abord à l'effort puis au repos)</li>
+      <li>Tachycardie</li>
+      <li>Fièvre modérée</li>
+    </ul>
+    <p>Ces signes sont peu spécifiques — c'est pourquoi les <strong>scores cliniques de probabilité</strong> sont indispensables avant de décider de l'imagerie.</p>
+    <div class="urgence-box">&#128680; EP massive = choc obstructif : hypotension, tachycardie, défaillance du ventricule droit, risque d'arrêt cardiaque. Mortalité élevée. Traitement : anticoagulation IV immédiate + thrombolyse si instabilité hémodynamique.</div>
+  </div>
+
+  <hr class="expl-sep">
+
+  <h3>IV — Démarche diagnostique : scores, D-dimères, imagerie</h3>
+
+  <div class="expl-wrap">
+    <h4>&#128203; 4.1 — Scores de probabilité clinique</h4>
+    <div class="def-box"><strong>Score de Wells</strong> (TVP ou EP) : score clinique prenant en compte les signes cliniques, les FDR et les diagnostics alternatifs. Classe les patients en probabilité faible, intermédiaire ou élevée de TVP/EP.</div>
+    <div class="def-box"><strong>Score de Genève révisé</strong> : score clinique spécifique pour l'EP. Intègre l'âge, la fréquence cardiaque, l'immobilisation/chirurgie récente, les ATCD de TVP/EP, la douleur à la palpation du mollet, la douleur pleurale, l'hémoptysie, le cancer actif.</div>
+    <p>La stratégie diagnostique dépend de la probabilité clinique :</p>
+    <ul>
+      <li><strong>Probabilité élevée</strong> → on ne fait PAS de D-dimères (on est certain que le patient a thrombosé) → imagerie directe : écho-doppler des membres inférieurs pour TVP, angioscanner thoracique ou scintigraphie pulmonaire pour EP.</li>
+      <li><strong>Probabilité intermédiaire ou faible</strong> → dosage des D-dimères d'abord.</li>
+    </ul>
+  </div>
+
+  <div class="expl-wrap">
+    <h4>&#128300; 4.2 — D-dimères : interprétation et limites</h4>
+    <div class="def-box"><strong>D-dimères</strong> : fragments peptidiques libérés lors de la dégradation de la fibrine par la plasmine. Leur élévation indique qu'il y a eu formation d'un caillot (puis sa dégradation). Seuil : <strong>500 ng/mL</strong>. Valeur prédictive négative excellente : si &lt;500 ng/mL → thrombose pratiquement exclue.</div>
+    <p>Seuil adapté à l'âge : chez les patients &gt;50 ans, on utilise le seuil adapté à l'âge = <strong>âge × 10 ng/mL</strong> (ex : patient de 70 ans → seuil = 700 ng/mL). Cela augmente la spécificité sans réduire la sensibilité.</p>
+    <p><strong>Si D-dimères &lt;500 ng/mL</strong> → thrombose exclue, pas d'imagerie nécessaire. <strong>Si D-dimères &gt;500 ng/mL</strong> → imagerie nécessaire pour confirmer ou infirmer (car valeur prédictive positive basse → beaucoup de faux positifs).</p>
+    <p><strong>Causes de D-dimères élevés SANS thrombose</strong> (faux positifs) :</p>
+    <ul>
+      <li>Personnes âgées (augmentation physiologique)</li>
+      <li>Syndrome inflammatoire (cancer, infection, maladie auto-immune)</li>
+      <li>Grossesse (augmentation progressive tout au long de la grossesse)</li>
+      <li>Insuffisance rénale</li>
+    </ul>
+    <div class="expl-warn">⚠️ Les D-dimères ont une EXCELLENTE valeur prédictive négative (si négatifs → pas de thrombose) mais une MAUVAISE valeur prédictive positive (si positifs → ce n'est pas forcément une thrombose). Ne jamais exclure une thrombose sur une imagerie sans D-dimères négatifs si probabilité intermédiaire/élevée.</div>
+  </div>
+
+  <div class="expl-wrap">
+    <h4>&#128247; 4.3 — Imagerie : quelle technique selon la localisation</h4>
+    <ul>
+      <li><strong>TVP des membres inférieurs</strong> : écho-Doppler veineux des membres inférieurs (gold standard — non invasif, sensible, spécifique)</li>
+      <li><strong>EP</strong> : angioscanner thoracique (TDM avec injection) = gold standard actuel. Ou scintigraphie pulmonaire de ventilation-perfusion si contre-indication au scanner (allergie au produit de contraste, insuffisance rénale)</li>
+    </ul>
+  </div>
+
+  <svg viewBox="0 0 700 240" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-height:240px;margin:1.5rem 0;display:block">
+    <rect width="700" height="240" fill="#0d0d1a" rx="10"/>
+    <text x="350" y="22" text-anchor="middle" fill="#e74c3c" font-size="13" font-weight="bold">Algorithme diagnostique TVP/EP</text>
+    <!-- Box probabilité -->
+    <rect x="240" y="35" width="220" height="40" fill="rgba(243,156,18,0.15)" stroke="#f39c12" stroke-width="1.5" rx="6"/>
+    <text x="350" y="52" text-anchor="middle" fill="#f39c12" font-size="11" font-weight="bold">Suspicion TVP ou EP</text>
+    <text x="350" y="68" text-anchor="middle" fill="#c0c0d8" font-size="9">Score de Wells / Score de Genève</text>
+    <!-- Arrows -->
+    <line x1="200" y1="90" x2="200" y2="105" stroke="#f39c12" stroke-width="1.5"/>
+    <line x1="500" y1="90" x2="500" y2="105" stroke="#f39c12" stroke-width="1.5"/>
+    <line x1="200" y1="90" x2="500" y2="90" stroke="#f39c12" stroke-width="1.5"/>
+    <line x1="350" y1="75" x2="350" y2="90" stroke="#f39c12" stroke-width="1.5"/>
+    <!-- Probabilité faible/intermédiaire -->
+    <rect x="50" y="105" width="300" height="50" fill="rgba(46,204,113,0.1)" stroke="#2ecc71" stroke-width="1.5" rx="6"/>
+    <text x="200" y="123" text-anchor="middle" fill="#2ecc71" font-size="10" font-weight="bold">Prob. faible / intermédiaire</text>
+    <text x="200" y="142" text-anchor="middle" fill="#c0c0d8" font-size="9">→ D-dimères d'abord</text>
+    <!-- Probabilité élevée -->
+    <rect x="380" y="105" width="280" height="50" fill="rgba(231,76,60,0.1)" stroke="#e74c3c" stroke-width="1.5" rx="6"/>
+    <text x="520" y="123" text-anchor="middle" fill="#e74c3c" font-size="10" font-weight="bold">Probabilité élevée</text>
+    <text x="520" y="142" text-anchor="middle" fill="#c0c0d8" font-size="9">→ Imagerie directe</text>
+    <!-- D-dimeres box -->
+    <line x1="200" y1="155" x2="200" y2="170" stroke="#2ecc71" stroke-width="1.5"/>
+    <rect x="50" y="170" width="140" height="40" fill="rgba(231,76,60,0.08)" stroke="#e74c3c" stroke-width="1" rx="4"/>
+    <text x="120" y="188" text-anchor="middle" fill="#e74c3c" font-size="9">&lt;500 : Thrombose exclue</text>
+    <text x="120" y="204" text-anchor="middle" fill="#9090b0" font-size="8">Pas d'imagerie</text>
+    <rect x="210" y="170" width="140" height="40" fill="rgba(52,152,219,0.08)" stroke="#3498db" stroke-width="1" rx="4"/>
+    <text x="280" y="188" text-anchor="middle" fill="#3498db" font-size="9">&gt;500 : Imagerie</text>
+    <text x="280" y="204" text-anchor="middle" fill="#9090b0" font-size="8">Doppler / Angioscanner</text>
+    <!-- Imagerie box -->
+    <rect x="380" y="170" width="280" height="40" fill="rgba(52,152,219,0.08)" stroke="#3498db" stroke-width="1" rx="4"/>
+    <text x="520" y="188" text-anchor="middle" fill="#3498db" font-size="9">TVP → Écho-Doppler veineux</text>
+    <text x="520" y="204" text-anchor="middle" fill="#3498db" font-size="9">EP → Angioscanner thoracique</text>
+  </svg>
+
+  <div class="flash-block">
+    <div class="flash-q">❓ Une patiente de 32 ans, sous contraceptif oral, consulte pour douleur du mollet gauche depuis 2 jours. Score de Wells intermédiaire. D-dimères = 650 ng/mL. Que faites-vous ?</div>
+    <button class="flash-reveal" onclick="this.nextElementSibling.style.display='block';this.style.display='none'">Révéler la réponse</button>
+    <div class="flash-answer" style="display:none">D-dimères &gt;500 ng/mL avec probabilité intermédiaire → imagerie. On réalise un écho-Doppler veineux des membres inférieurs pour confirmer ou infirmer une TVP. La contraception oestro-progestative est un FDR de TVP chez la femme. Si TVP confirmée : anticoagulation curative immédiate (HBPM ou AOD) + arrêt de la contraception oestro-progestative + bilan de thrombophilie si jeune femme sans autre FDR évident.</div>
+  </div>
+</div>
+
+<!-- SLIDE 10 : THROMBOPHILIES -->
+<div class="slide content-slide" id="slide-10">
+  <h2>&#129516; Thrombophilies — Bilan étiologique des thromboses veineuses</h2>
+
+  <h3>I — Indications du bilan de thrombophilie</h3>
+
+  <div class="expl-wrap">
+    <h4>&#128203; 1.1 — Quand faire le bilan de thrombophilie ?</h4>
+    <div class="def-box"><strong>Bilan de thrombophilie</strong> : ensemble d'analyses sanguines réalisées chez un patient ayant fait une thrombose veineuse (TVP ou EP) pour rechercher une cause sous-jacente favorisante. Objectif : moduler la prise en charge et la durée de l'anticoagulation, et permettre une enquête familiale.</div>
+    <p>Le bilan n'est PAS systématique après toute TVP. Il est indiqué dans les situations suivantes :</p>
+    <ul>
+      <li><strong>1er épisode proximal ou EP</strong> chez un homme jeune (&lt;50 ans) sans FDR évident (thrombose spontanée → question sur une cause constitutionnelle)</li>
+      <li>Deuxième épisode de TVP/EP avant 50 ans</li>
+      <li>Femme &lt;50 ans sans varices ni FDR évident</li>
+      <li>Localisation inhabituelle (mésentérique, cérébrale, membres supérieurs)</li>
+      <li>Femme sous contraceptif oral ou enceinte avec TVP distale (risque de récidive à la prochaine grossesse → bilan quasi systématique)</li>
+    </ul>
+    <p>À contrario, bilan inutile si : varices importantes, âge avancé, FDR évident (immobilisation prolongée, chirurgie récente) → la cause est claire, le bilan ne changerait pas la prise en charge.</p>
+    <div class="expl-warn">⚠️ ECN : TVP distale chez l'homme sans FDR ni contraceptif → bilan NON requis. TVP distale chez la femme sous contraceptif ou enceinte → bilan QUASI SYSTÉMATIQUE (risque de récidive lors d'une future grossesse).</div>
+  </div>
+
+  <hr class="expl-sep">
+
+  <h3>II — Syndrome des antiphospholipides (SAPL)</h3>
+
+  <div class="expl-wrap">
+    <h4>&#128267; 2.1 — Mécanisme et tableau clinique</h4>
+    <div class="def-box"><strong>Syndrome des antiphospholipides (SAPL)</strong> : maladie auto-immune caractérisée par la présence d'anticorps dirigés contre les phospholipides plaquettaires et les protéines de la coagulation. Ces anticorps activent les plaquettes, les cellules endothéliales et les monocytes simultanément → état pro-thrombotique majeur, artériel ET veineux + pathologie placentaire (fausse couche, éclampsie).</div>
+    <p>Le SAPL peut être :</p>
+    <ul>
+      <li><strong>Primaire</strong> : isolé sans autre maladie associée</li>
+      <li><strong>Secondaire</strong> : associé à un lupus érythémateux systémique (LES) — association très classique</li>
+      <li>Associé à d'autres maladies de système, hémopathies (cancer, VIH)</li>
+    </ul>
+  </div>
+
+  <div class="expl-wrap">
+    <h4>&#128203; 2.2 — Critères diagnostiques du SAPL</h4>
+    <p>Le diagnostic de SAPL nécessite <strong>au moins 1 critère clinique ET au moins 1 critère biologique</strong>, confirmés à distance (persistance à 3 mois).</p>
+    <p><strong>Critères cliniques (au moins 1) :</strong></p>
+    <ul>
+      <li>Thrombose veineuse ou artérielle inexpliquée (personne jeune)</li>
+      <li>Mort fœtale inexpliquée &gt;10 SA (semaines d'aménorrhée)</li>
+      <li>Naissance prématurée &lt;34 SA avec éclampsie sévère ou insuffisance placentaire</li>
+      <li>3 fausses couches précoces inexpliquées consécutives</li>
+    </ul>
+    <p><strong>Critères biologiques (au moins 1) :</strong></p>
+    <ul>
+      <li><strong>Anticoagulant lupique</strong> : anticorps allongeant les tests de coagulation phospholipide-dépendants. Mis en évidence par TCA phospho-sensible (index de Rosner &gt;15) ou test au venin de vipère de Russell (DRVVT).</li>
+      <li><strong>Anticardiolipines IgG ou IgM</strong> (à titre modéré ou élevé)</li>
+      <li><strong>Anti-bêta-2-glycoprotéine 1 (anti-β2GP1) IgG ou IgM</strong></li>
+    </ul>
+    <div class="expl-warn">⚠️ PERSISTANCE OBLIGATOIRE : les critères biologiques doivent être confirmés 3 mois après le premier dosage. Un résultat positif unique ne suffit pas (peut être transitoire lors d'une infection). C'est une règle absolue du diagnostic de SAPL.</div>
+  </div>
+
+  <hr class="expl-sep">
+
+  <h3>III — Thrombophilies constitutionnelles</h3>
+
+  <div class="expl-wrap">
+    <h4>&#129516; 3.1 — Déficit en antithrombine</h4>
+    <div class="def-box"><strong>Antithrombine (AT)</strong> : principal inhibiteur naturel de la coagulation. Elle inhibe la thrombine (FIIa) et les facteurs Xa, IXa, XIa. Un déficit en AT lève ce frein → état prothrombotique. C'est la thrombophilie constitutionnelle la plus rare mais la plus sévère (pénétrance 100% : tout porteur thrombosera).</div>
+    <p>Le taux d'antithrombine peut être diminué physiologiquement dans plusieurs contextes : nouveau-né, grossesse, insuffisance hépatique, syndrome néphrotique (pertes urinaires d'AT), sous héparines (l'héparine utilise l'AT et la consomme), sous L-asparaginase. Ces situations peuvent faire porter à tort un diagnostic de déficit constitutionnel → faux positifs.</p>
+    <p>Risque relatif de thrombose à l'état hétérozygote : RR ≈ 50 (très élevé).</p>
+  </div>
+
+  <div class="expl-wrap">
+    <h4>&#129516; 3.2 — Déficit en protéine C</h4>
+    <div class="def-box"><strong>Protéine C (PC)</strong> : anticoagulant naturel vitamine K dépendant. La PC activée dégrade les facteurs Va et VIIIa. Un déficit → accumulation de Va et VIIIa → hypercoagulabilité. Transmission autosomique dominante (hétérozygote). Exceptionnellement homozygote : purpura fulminans néonatal.</div>
+    <p>La pénétrance est variable (porteur ≠ obligatoirement symptomatique). La protéine C est basse chez le nouveau-né (foie immature) et peut augmenter en grossesse. Diminuée par : insuffisance hépatique, AVK (vitamine K dépendant), carence en vitamine K. Ces situations donnent des faux positifs au bilan.</p>
+  </div>
+
+  <div class="expl-wrap">
+    <h4>&#129516; 3.3 — Déficit en protéine S</h4>
+    <div class="def-box"><strong>Protéine S (PS)</strong> : cofacteur de la protéine C activée. Vitamine K dépendante. Déficit → protéine C moins active → hypercoagulabilité. Transmission autosomique dominante. Pénétrance variable comme la PC.</div>
+    <p>La PS est diminuée chez le nouveau-né, en cas d'insuffisance hépatique, de carence en vitamine K et surtout lors de la <strong>grossesse</strong> et sous <strong>contraceptif oral</strong> (les œstrogènes font baisser la protéine S) → faux positifs très fréquents en grossesse. Il faut attendre 3 mois post-partum pour doser la PS.</p>
+  </div>
+
+  <div class="expl-wrap">
+    <h4>&#129516; 3.4 — Mutation du facteur V Leiden</h4>
+    <div class="def-box"><strong>Mutation facteur V Leiden</strong> : mutation ponctuelle unique du gène du facteur V rendant le facteur Va résistant à la dégradation par la protéine C activée. Le facteur V Leiden reste actif plus longtemps → hypercoagulabilité. Le taux de facteur V est normal — c'est la fonction qui est altérée, pas le taux. Étude génétique (pas dosage protéique).</div>
+    <p>Prévalence : 3-5% de la population caucasienne hétérozygote → la thrombophilie constitutionnelle la plus fréquente. Risque relatif hétérozygote : RR ≈ 5-10 (modéré). Homozygote : RR ≈ 50 (sévère). Peut être réalisé à tout moment (mutation génétique stable, ni la phase aiguë ni les traitements ne la modifient).</p>
+  </div>
+
+  <div class="expl-wrap">
+    <h4>&#129516; 3.5 — Mutation du facteur II G20210A</h4>
+    <div class="def-box"><strong>Mutation facteur II G20210A</strong> : mutation ponctuelle unique du gène de la prothrombine (facteur II). Elle augmente l'expression du gène → taux de facteur II normal ou augmenté mais fonction prothombotique accrue. Étude génétique uniquement. FDR de thrombose modéré.</div>
+    <p>Prévalence : 3-5% de la population caucasienne (comme le FV Leiden). Transmission autosomique dominante. Risque relatif hétérozygote : RR ≈ 3-5. Résistant aux modifications par la phase aiguë ou les traitements anticoagulants.</p>
+    <div class="expl-warn">⚠️ Pour les études génétiques (FV Leiden, FII G20210A) : consentement écrit du patient OBLIGATOIRE avant tout prélèvement. C'est une règle légale et déontologique stricte en France (loi de bioéthique).</div>
+  </div>
+
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Thrombophilie</th><th>Prévalence</th><th>RR hétzg</th><th>RR homzg</th><th>Mécanisme</th><th>Timing bilan</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Déficit AT</strong></td><td>0,02%</td><td>50</td><td>Létal/sévère</td><td>Moins d'inhibition de la thrombine</td><td>Distance + arrêt traitement</td></tr>
+        <tr><td><strong>Déficit PC</strong></td><td>0,2-0,5%</td><td>5-10</td><td>Purpura néonatal</td><td>Moins de dégradation FVa/FVIIIa</td><td>Distance + arrêt AVK</td></tr>
+        <tr><td><strong>Déficit PS</strong></td><td>0,5%</td><td>5-10</td><td>Purpura néonatal</td><td>Moins de cofacteur pour PC</td><td>Distance (pas grossesse)</td></tr>
+        <tr><td><strong>FV Leiden</strong></td><td>3-5%</td><td>5-10</td><td>50</td><td>FVa résistant à PC activée</td><td>N'importe quand</td></tr>
+        <tr><td><strong>FII G20210A</strong></td><td>3-5%</td><td>3-5</td><td>Sévère</td><td>FII ↑ → plus de thrombine</td><td>N'importe quand</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <hr class="expl-sep">
+
+  <h3>IV — Timing du bilan de thrombophilie</h3>
+
+  <div class="expl-wrap">
+    <h4>&#128336; 4.1 — Quand NE PAS faire le bilan</h4>
+    <p>Le timing est fondamental pour éviter les faux positifs :</p>
+    <ul>
+      <li><strong>Ne jamais faire en phase aiguë</strong> de la thrombose (l'AT, la PC et la PS sont consommées → faux déficits)</li>
+      <li><strong>Pas sous anticoagulants :</strong>
+        <ul>
+          <li>AVK : bloquent la vit K → PC et PS faussement basses (faux positifs, persistants 3 semaines après arrêt)</li>
+          <li>AOD : bloquent les facteurs de coagulation → AT, PC, PS apparaissent faussement normales ou élevées (faux négatifs, persistent 4 jours après arrêt)</li>
+          <li>Héparines : amplifient l'AT → AT plus consommée → AT basse → faux positifs pour déficit AT</li>
+        </ul>
+      </li>
+      <li><strong>Pas en grossesse</strong> pour la protéine S (faussement basse)</li>
+    </ul>
+    <p><strong>Exception : les mutations génétiques</strong> (FV Leiden, FII G20210A) ne sont PAS affectées par la phase aiguë ni par les traitements → peuvent être réalisées à n'importe quel moment (ADN stable). Mais nécessitent un consentement écrit signé.</p>
+    <div class="expl-bq">Résumé timing : « Attendre la situation stable ET l'arrêt des anticoagulants pour les protéines (AT, PC, PS). Les mutations génétiques peuvent être faites à tout moment avec consentement. »</div>
+  </div>
+
+  <svg viewBox="0 0 700 220" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-height:220px;margin:1.5rem 0;display:block">
+    <rect width="700" height="220" fill="#0d0d1a" rx="10"/>
+    <text x="350" y="22" text-anchor="middle" fill="#e74c3c" font-size="13" font-weight="bold">Thrombophilies : quand faire le bilan ?</text>
+    <!-- Phase aiguë -->
+    <rect x="20" y="35" width="200" height="170" fill="rgba(231,76,60,0.08)" stroke="#e74c3c" stroke-width="1.5" rx="6"/>
+    <text x="120" y="55" text-anchor="middle" fill="#e74c3c" font-size="11" font-weight="bold">PHASE AIGUË</text>
+    <text x="120" y="72" text-anchor="middle" fill="#e74c3c" font-size="9">CI absolue pour :</text>
+    <text x="35" y="92" fill="#c0c0d8" font-size="9">• AT : consommée → faux ↓</text>
+    <text x="35" y="109" fill="#c0c0d8" font-size="9">• PC : consommée → faux ↓</text>
+    <text x="35" y="126" fill="#c0c0d8" font-size="9">• PS : consommée → faux ↓</text>
+    <text x="35" y="160" fill="#2ecc71" font-size="9">✓ Mutations OK (ADN stable)</text>
+    <!-- Sous traitement -->
+    <rect x="250" y="35" width="200" height="170" fill="rgba(243,156,18,0.08)" stroke="#f39c12" stroke-width="1.5" rx="6"/>
+    <text x="350" y="55" text-anchor="middle" fill="#f39c12" font-size="11" font-weight="bold">SOUS TRAITEMENT</text>
+    <text x="265" y="79" fill="#c0c0d8" font-size="9">AVK : PC/PS faux ↓ (3 sem)</text>
+    <text x="265" y="96" fill="#c0c0d8" font-size="9">AOD : AT/PC/PS faux N (4j)</text>
+    <text x="265" y="113" fill="#c0c0d8" font-size="9">Héparine : AT faux ↓</text>
+    <text x="265" y="147" fill="#2ecc71" font-size="9">✓ Mutations OK (ADN stable)</text>
+    <!-- Moment idéal -->
+    <rect x="480" y="35" width="200" height="170" fill="rgba(46,204,113,0.08)" stroke="#2ecc71" stroke-width="1.5" rx="6"/>
+    <text x="580" y="55" text-anchor="middle" fill="#2ecc71" font-size="11" font-weight="bold">MOMENT IDÉAL</text>
+    <text x="495" y="75" fill="#c0c0d8" font-size="9">Situation stable (&gt;3 mois)</text>
+    <text x="495" y="92" fill="#c0c0d8" font-size="9">Anticoagulants arrêtés</text>
+    <text x="495" y="109" fill="#c0c0d8" font-size="9">Pas grossesse (pour PS)</text>
+    <text x="495" y="130" fill="#2ecc71" font-size="9">→ AT, PC, PS fiables</text>
+    <text x="495" y="147" fill="#2ecc71" font-size="9">→ Mutations + consentement</text>
+    <text x="495" y="180" fill="#9090b0" font-size="8">SAPL : à 3 mois de distance</text>
+  </svg>
+
+  <div class="flash-block">
+    <div class="flash-q">❓ Une patiente de 28 ans a fait une EP il y a 1 mois, traitée par AVK depuis. Vous voulez faire un bilan de thrombophilie. Quels tests peut-on faire maintenant et lesquels doit-on différer ?</div>
+    <button class="flash-reveal" onclick="this.nextElementSibling.style.display='block';this.style.display='none'">Révéler la réponse</button>
+    <div class="flash-answer" style="display:none">MAINTENANT (ADN stable, pas affecté par AVK) : mutation FV Leiden + mutation FII G20210A → avec consentement écrit signé. DIFFÉRER (attendre arrêt AVK depuis &gt;3 semaines ET situation stable depuis &gt;3 mois) : dosage antithrombine, protéine C, protéine S (faussement abaissées sous AVK). Protéine S aussi à doser hors grossesse. SAPL : peut être cherché maintenant mais à confirmer 3 mois plus tard si positif.</div>
+  </div>
+</div>
+
+<!-- SLIDE 11 : QCM 4 -->
+<div class="slide content-slide" id="slide-11">
+  <h2>&#129504; QCM 4 — TVP &amp; Thrombophilies</h2>
+
+  <div class="qcm-block" data-answer="B" id="q4-1">
+    <div class="q-text">Q1. Un homme de 45 ans présente une TVP proximale spontanée du membre inférieur gauche. Il n'a pas de FDR évident (pas de chirurgie récente, pas d'immobilisation, pas de cancer connu). Concernant le bilan de thrombophilie, quelle est la bonne conduite à tenir ?</div>
+    <div class="qcm-options">
+      <div class="qcm-option" data-idx="A" onclick="selectOption(this)"><span class="letter">A</span> Faire le bilan immédiatement dès le diagnostic de TVP posé</div>
+      <div class="qcm-option" data-idx="B" onclick="selectOption(this)"><span class="letter">B</span> Faire les mutations génétiques (FV Leiden, FII) avec consentement maintenant, différer les protéines (AT, PC, PS) après arrêt anticoagulants</div>
+      <div class="qcm-option" data-idx="C" onclick="selectOption(this)"><span class="letter">C</span> Ne pas faire de bilan car le patient a plus de 40 ans</div>
+      <div class="qcm-option" data-idx="D" onclick="selectOption(this)"><span class="letter">D</span> Faire uniquement l'anticoagulant lupique</div>
+    </div>
+    <button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button>
+    <div class="qcm-feedback"></div>
+    <div class="qcm-explanation">Réponse B. Indication au bilan : homme &lt;50 ans, TVP proximale spontanée sans FDR évident. Les mutations génétiques (FV Leiden, FII G20210A) ne sont pas affectées par la phase aiguë ni les anticoagulants → peuvent être faites maintenant avec consentement écrit signé. Les dosages de protéines (AT, PC, PS) sont faux en phase aiguë et sous anticoagulants → à différer après arrêt du traitement (&gt;3 semaines pour AVK, 4j pour AOD).</div>
+  </div>
+
+  <div class="qcm-block" data-answer="C" id="q4-2">
+    <div class="q-text">Q2. Une femme de 25 ans a 3 fausses couches précoces inexpliquées consécutives. La biologie montre : anticardiolipines IgG élevées, anticoagulant lupique positif. Le même bilan 2 semaines plus tard montre les mêmes résultats. Quel est le diagnostic ?</div>
+    <div class="qcm-options">
+      <div class="qcm-option" data-idx="A" onclick="selectOption(this)"><span class="letter">A</span> SAPL probable, à recontrôler dans 1 an</div>
+      <div class="qcm-option" data-idx="B" onclick="selectOption(this)"><span class="letter">B</span> SAPL confirmé car 2 dosages positifs consécutifs</div>
+      <div class="qcm-option" data-idx="C" onclick="selectOption(this)"><span class="letter">C</span> SAPL non confirmé : il faut 3 mois entre les 2 dosages, pas 2 semaines</div>
+      <div class="qcm-option" data-idx="D" onclick="selectOption(this)"><span class="letter">D</span> Pas de SAPL car il manque un critère de thrombose</div>
+    </div>
+    <button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button>
+    <div class="qcm-feedback"></div>
+    <div class="qcm-explanation">Réponse C. Les critères de SAPL exigent que les marqueurs biologiques soient positifs à AU MOINS 3 MOIS d'intervalle (pas 2 semaines). Un résultat positif transitoire (lors d'une infection par exemple) peut donner un faux positif. Cette règle des 3 mois est fondamentale dans la définition du SAPL. Les critères cliniques sont présents (3 FCS précoces consécutives = critère obstétrical). Mais la persistance biologique doit être prouvée sur 3 mois.</div>
+  </div>
+
+  <div class="qcm-block" data-answer="D" id="q4-3">
+    <div class="q-text">Q3. Quelle est la thrombophilie constitutionnelle la plus rare mais la plus sévère, avec une pénétrance de 100% ?</div>
+    <div class="qcm-options">
+      <div class="qcm-option" data-idx="A" onclick="selectOption(this)"><span class="letter">A</span> Mutation du facteur V Leiden</div>
+      <div class="qcm-option" data-idx="B" onclick="selectOption(this)"><span class="letter">B</span> Déficit en protéine C</div>
+      <div class="qcm-option" data-idx="C" onclick="selectOption(this)"><span class="letter">C</span> Déficit en protéine S</div>
+      <div class="qcm-option" data-idx="D" onclick="selectOption(this)"><span class="letter">D</span> Déficit en antithrombine</div>
+    </div>
+    <button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button>
+    <div class="qcm-feedback"></div>
+    <div class="qcm-explanation">Réponse D. Le déficit en antithrombine est la thrombophilie constitutionnelle la plus rare (prévalence 0,02%) et la plus sévère (RR ≈ 50 à l'état hétérozygote, pénétrance 100% = tous les porteurs thrombosent). Le facteur V Leiden est le plus fréquent (3-5%) mais avec un risque modéré (RR 5-10). Les déficits en PC et PS ont des pénétrances variables.</div>
+  </div>
+
+  <div class="qcm-block" data-answer="A" id="q4-4">
+    <div class="q-text">Q4. Un patient sous anticoagulant oral direct (AOD) depuis 6 mois après une TVP. On veut faire un bilan de thrombophilie. Quelle est l'erreur à éviter ?</div>
+    <div class="qcm-options">
+      <div class="qcm-option" data-idx="A" onclick="selectOption(this)"><span class="letter">A</span> Doser l'antithrombine, la protéine C et la protéine S sous AOD → résultats faussement normaux (faux négatifs)</div>
+      <div class="qcm-option" data-idx="B" onclick="selectOption(this)"><span class="letter">B</span> Faire les études génétiques (FV Leiden) sous AOD → résultats faussés</div>
+      <div class="qcm-option" data-idx="C" onclick="selectOption(this)"><span class="letter">C</span> Faire le dosage du SAPL sous AOD → résultats toujours fiables</div>
+      <div class="qcm-option" data-idx="D" onclick="selectOption(this)"><span class="letter">D</span> Demander le consentement du patient pour les mutations génétiques</div>
+    </div>
+    <button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button>
+    <div class="qcm-feedback"></div>
+    <div class="qcm-explanation">Réponse A. Sous AOD, les dosages fonctionnels des protéines (AT, PC, PS) apparaissent faussement normaux ou élevés (faux NÉGATIFS) car les AOD bloquent les facteurs de coagulation utilisés dans ces tests. L'AOD persiste 4 jours après arrêt. Il faut donc attendre l'arrêt de l'AOD depuis &gt;4 jours. Les études génétiques (FV Leiden, FII) ne sont pas affectées (ADN stable). Le consentement pour les études génétiques est une obligation légale correcte, pas une erreur.</div>
+  </div>
+</div>
+
+<!-- SLIDE 12 : RÉCAPITULATIF -->
+<div class="slide content-slide" id="slide-12">
+  <h2>&#128203; Récapitulatif — Tableaux synoptiques complets</h2>
+
+  <h3>I — Orientation diagnostique initiale</h3>
+
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Signe clinique</th><th>Hémostase Primaire (HP)</th><th>Coagulation</th></tr></thead>
+      <tbody>
+        <tr><td>Pétéchies / Purpura</td><td>&#9989; Oui (spontané)</td><td>Rare</td></tr>
+        <tr><td>Épistaxis spontanée</td><td>&#9989; Oui</td><td>Non (sauf post-traumatique)</td></tr>
+        <tr><td>Gingivorragies</td><td>&#9989; Oui</td><td>Non</td></tr>
+        <tr><td>Ménorragies</td><td>&#9989; Oui</td><td>Rare</td></tr>
+        <tr><td>Hémarthroses</td><td>Rare</td><td>&#9989; Oui (hémophilie)</td></tr>
+        <tr><td>Hématomes profonds</td><td>Non</td><td>&#9989; Oui</td></tr>
+        <tr><td>Bulles buccales</td><td>&#9989; Oui (thrombopénie sévère)</td><td>Non</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>II — Principales pathologies et leur biologie</h3>
+
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Pathologie</th><th>TP</th><th>TCA</th><th>Plaq.</th><th>PFA/TOP</th><th>FvW</th><th>FVIII</th><th>FV</th><th>Fibri.</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Thrombopathie</strong></td><td>N</td><td>N</td><td>N</td><td>↑</td><td>N</td><td>N</td><td>N</td><td>N</td></tr>
+        <tr><td><strong>MvW type 1</strong></td><td>N</td><td>N/↑</td><td>N</td><td>↑</td><td>↓</td><td>↓ (partiel)</td><td>N</td><td>N</td></tr>
+        <tr><td><strong>MvW type 3</strong></td><td>N</td><td>↑↑</td><td>N</td><td>↑↑</td><td>≈0</td><td>↓↓↓</td><td>N</td><td>N</td></tr>
+        <tr><td><strong>Hémophilie A</strong></td><td>N</td><td>↑</td><td>N</td><td>N</td><td>N</td><td>↓↓</td><td>N</td><td>N</td></tr>
+        <tr><td><strong>Hémophilie B</strong></td><td>N</td><td>↑</td><td>N</td><td>N</td><td>N</td><td>N</td><td>N</td><td>N</td></tr>
+        <tr><td><strong>CIVD</strong></td><td>↓</td><td>↑</td><td>↓</td><td>↑</td><td>↓</td><td>↓</td><td>↓</td><td>↓</td></tr>
+        <tr><td><strong>Hypovit. K</strong></td><td>↓</td><td>↑</td><td>N</td><td>N</td><td>N</td><td>N</td><td>N !</td><td>N</td></tr>
+        <tr><td><strong>IHC</strong></td><td>↓</td><td>↑</td><td>N/↓</td><td>N</td><td>N</td><td>N</td><td>↓ !</td><td>N/↓</td></tr>
+        <tr><td><strong>Anti-FVIII</strong></td><td>N</td><td>↑↑↑</td><td>N</td><td>N</td><td>N</td><td>&lt;5%</td><td>N</td><td>N</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>III — Traitements clés à retenir</h3>
+
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Pathologie</th><th>Traitement principal</th><th>Points spéciaux</th></tr></thead>
+      <tbody>
+        <tr><td>MvW type 1</td><td>Desmopressine ou concentré FvW</td><td>CI des médicaments hémorragiques. Tachyphylaxie à la desmopressine.</td></tr>
+        <tr><td>MvW type 2B</td><td>Concentré FvW uniquement</td><td>CI absolue desmopressine !</td></tr>
+        <tr><td>MvW type 3</td><td>Concentré FvW</td><td>Pas de desmopressine (stocks épuisés)</td></tr>
+        <tr><td>Hémophilie A</td><td>Concentré FVIII</td><td>Emicizumab en prophylaxie. CI IM.</td></tr>
+        <tr><td>Hémophilie B</td><td>Concentré FIX</td><td>Même principe qu'hémophilie A</td></tr>
+        <tr><td>Hypovitaminose K urgente</td><td>PPSB IV (5 min)</td><td>Vitamine K IV trop lente (24h)</td></tr>
+        <tr><td>Anti-FVIII acquis</td><td>NovoSeven + immunosuppresseurs</td><td>Traiter la cause (cancer, lupus)</td></tr>
+        <tr><td>TVP/EP</td><td>Anticoagulation curative (HBPM ou AOD)</td><td>Durée selon FDR et récidive</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>IV — Thrombophilies : tableau comparatif</h3>
+
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Thrombophilie</th><th>Fréquence</th><th>Sévérité (RR)</th><th>Transmission</th><th>Dosage</th><th>Timing</th></tr></thead>
+      <tbody>
+        <tr><td>Déficit AT</td><td>Très rare</td><td>50 (+++)</td><td>AD</td><td>Fonctionnel</td><td>À distance, hors héparines</td></tr>
+        <tr><td>Déficit PC</td><td>Rare (0,2-0,5%)</td><td>5-10</td><td>AD</td><td>Fonctionnel</td><td>À distance, hors AVK</td></tr>
+        <tr><td>Déficit PS</td><td>Rare (0,5%)</td><td>5-10</td><td>AD</td><td>Fonctionnel</td><td>À distance, pas grossesse, hors AVK</td></tr>
+        <tr><td>FV Leiden</td><td>Fréquent (3-5%)</td><td>5-10 (htzg)</td><td>AD</td><td>Génétique</td><td>N'importe quand + consentement</td></tr>
+        <tr><td>FII G20210A</td><td>Fréquent (3-5%)</td><td>3-5</td><td>AD</td><td>Génétique</td><td>N'importe quand + consentement</td></tr>
+        <tr><td>SAPL</td><td>Variable</td><td>Élevé</td><td>Acquis</td><td>Anticorps</td><td>Confirmer à 3 mois</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="flash-block">
+    <div class="flash-q">❓ Citez les 5 causes classiques de D-dimères élevés SANS thrombose veineuse (faux positifs).</div>
+    <button class="flash-reveal" onclick="this.nextElementSibling.style.display='block';this.style.display='none'">Révéler la réponse</button>
+    <div class="flash-answer" style="display:none">1. Personnes âgées (augmentation physiologique avec l'âge → seuil adapté = âge × 10 ng/mL). 2. Syndrome inflammatoire (cancer, infections bactériennes, maladies auto-immunes). 3. Grossesse (augmentation progressive avec l'avancement de la grossesse). 4. Insuffisance rénale. 5. Post-opératoire récent (inflammation et cicatrisation). → C'est pourquoi les D-dimères seuls ne suffisent pas à affirmer une thrombose : il faut toujours une imagerie si positifs.</div>
+  </div>
+</div>
+
+<!-- SLIDE 13 : FINALE -->
+<div class="slide content-slide" id="slide-13">
+  <h2>&#9989; Points clés — Ce qui tombe aux ECN</h2>
+
+  <h3>I — Les 10 règles d'or à ne jamais oublier</h3>
+
+  <div class="expl-wrap">
+    <h4>&#128161; 1. HP vs Coagulation : l'orientation clinique</h4>
+    <p><strong>HP = muqueux + spontané</strong> (pétéchies, épistaxis, gingivorragies, ménorragies). <strong>Coagulation = profond + provoqué</strong> (hémarthrose, hématome musculaire). Cette distinction oriente AVANT tout bilan biologique.</p>
+  </div>
+
+  <div class="expl-wrap">
+    <h4>&#128161; 2. Pétéchie vs Purpura</h4>
+    <p>Taille uniquement : pétéchie &lt;2 mm, purpura &gt;2 mm. Les deux ne s'effacent pas à la vitropression.</p>
+  </div>
+
+  <div class="expl-wrap">
+    <h4>&#128161; 3. MvW : les 3 types</h4>
+    <p>Type 1 = quantitatif partiel, ratio &gt;0,7, AD. Type 2 = qualitatif, ratio &lt;0,7, AD. Type 3 = quantitatif total, AR, FVIII effondré. CI absolue desmopressine dans le type 2B !</p>
+  </div>
+
+  <div class="expl-wrap">
+    <h4>&#128161; 4. CIVD vs Hypovitaminose K</h4>
+    <p>Facteur V : diminué dans la CIVD (tout est consommé), NORMAL dans l'hypovitaminose K (FV n'est pas vitamine K dépendant). C'est le critère discriminant.</p>
+  </div>
+
+  <div class="expl-wrap">
+    <h4>&#128161; 5. Inhibiteur anti-FVIII acquis</h4>
+    <p>TCA très allongé + FVIII &lt;5% + FvW normal + TP normal. Touche femme post-partum et personne âgée &gt;60 ans. Mortalité 10-20%. Traitement : NovoSeven + immunosuppresseurs.</p>
+  </div>
+
+  <div class="expl-wrap">
+    <h4>&#128161; 6. Hémophilie A vs B</h4>
+    <p>A = FVIII (1/5000 &#9794;). B = FIX (1/30000 &#9794;). Toutes deux liées à X. TCA allongé isolément, TP normal, PFA normal. Forme sévère &lt;1%, modérée 1-5%, mineure 5-40%.</p>
+  </div>
+
+  <div class="expl-wrap">
+    <h4>&#128161; 7. TVP/EP : algorithme diagnostique</h4>
+    <p>Score de probabilité → élevée : imagerie directe. Faible/intermédiaire : D-dimères (seuil 500 ng/mL). Si négatifs → thrombose exclue. Si positifs → imagerie (Doppler TVP, angioscanner EP).</p>
+  </div>
+
+  <div class="expl-wrap">
+    <h4>&#128161; 8. Bilan de thrombophilie : indications</h4>
+    <p>Indiqué si TVP proximale/EP spontanée avant 50 ans, deuxième épisode avant 50 ans, femme sans FDR, localisation inhabituelle. Inutile si FDR évident, âge avancé, varices.</p>
+  </div>
+
+  <div class="expl-wrap">
+    <h4>&#128161; 9. Timing du bilan de thrombophilie</h4>
+    <p>Mutations génétiques (FV Leiden, FII G20210A) : n'importe quand avec consentement écrit. Protéines (AT, PC, PS) : à distance (&gt;3 mois) + hors anticoagulants. AVK fausse PC/PS (3 sem). AOD fausse AT/PC/PS (4j). Héparine fausse AT.</p>
+  </div>
+
+  <div class="expl-wrap">
+    <h4>&#128161; 10. SAPL : critères</h4>
+    <p>1 critère clinique (thrombose, 3 FCS, mort fœtale &gt;10 SA, prématurité &lt;34 SA avec éclampsie) + 1 critère biologique (anticoagulant lupique, anticardiolipines, anti-β2GP1) confirmés à 3 mois d'intervalle.</p>
+  </div>
+
+  <hr class="expl-sep">
+
+  <h3>II — Les contre-indications absolues à retenir</h3>
+
+  <div class="urgence-box">
+    &#128683; <strong>CI absolues critiques :</strong><br>
+    • Desmopressine dans la MvW type <strong>2B</strong> (thrombopénie massive)<br>
+    • Aspirine/AINS chez tout patient avec trouble hémorragique connu<br>
+    • Injections IM chez les hémophiles<br>
+    • Bilan de thrombophilie (AT, PC, PS) en phase aiguë ou sous anticoagulants<br>
+    • Études génétiques sans consentement écrit signé
+  </div>
+
+  <h3>III — Mnémotechniques essentielles</h3>
+
+  <div class="expl-wrap">
+    <p><strong>« GP Ib → adhésion → Bernard-Soulier / GP IIb/IIIa → agrégation → Glanzmann »</strong></p>
+    <p><strong>« FV normal = Hypovitaminose K. FV bas = CIVD ou IHC. »</strong></p>
+    <p><strong>« Mutations génétiques = n'importe quand. Protéines = situation stable + hors traitements. »</strong></p>
+    <p><strong>« AT = le plus rare et le plus sévère (RR 50). FV Leiden + FII = les plus fréquents (3-5%). »</strong></p>
+    <p><strong>« D-dimères : excellente VPN (si négatifs = exclut), mauvaise VPP (si positifs → imagerie). »</strong></p>
+  </div>
+
+  <svg viewBox="0 0 700 220" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-height:220px;margin:1.5rem 0;display:block">
+    <rect width="700" height="220" fill="#0d0d1a" rx="10"/>
+    <text x="350" y="22" text-anchor="middle" fill="#e74c3c" font-size="13" font-weight="bold">Vue d'ensemble : hémostase primaire → coagulation → thrombose</text>
+    <!-- HP -->
+    <rect x="10" y="35" width="200" height="170" fill="rgba(231,76,60,0.08)" stroke="#e74c3c" stroke-width="1.5" rx="6"/>
+    <text x="110" y="55" text-anchor="middle" fill="#e74c3c" font-size="11" font-weight="bold">HÉMOSTASE PRIMAIRE</text>
+    <text x="20" y="73" fill="#c0c0d8" font-size="9">Thrombopathies acquises :</text>
+    <text x="20" y="88" fill="#c0c0d8" font-size="8">  • Médicaments (ASA, IRS)</text>
+    <text x="20" y="102" fill="#c0c0d8" font-size="8">  • Gammapathie, SMP, SMD</text>
+    <text x="20" y="118" fill="#c0c0d8" font-size="9">Constitutionnelles :</text>
+    <text x="20" y="133" fill="#c0c0d8" font-size="8">  • Bernard-Soulier (GP Ib)</text>
+    <text x="20" y="147" fill="#c0c0d8" font-size="8">  • Glanzmann (GP IIb/IIIa)</text>
+    <text x="20" y="163" fill="#f39c12" font-size="9">Maladie de Willebrand :</text>
+    <text x="20" y="178" fill="#c0c0d8" font-size="8">  • Types 1 / 2 / 2B / 2N / 3</text>
+    <text x="20" y="193" fill="#c0c0d8" font-size="8">  • Desmopressine / FvW</text>
+    <!-- Coagulation -->
+    <rect x="240" y="35" width="200" height="170" fill="rgba(243,156,18,0.08)" stroke="#f39c12" stroke-width="1.5" rx="6"/>
+    <text x="340" y="55" text-anchor="middle" fill="#f39c12" font-size="11" font-weight="bold">COAGULATION</text>
+    <text x="250" y="73" fill="#c0c0d8" font-size="9">Acquises :</text>
+    <text x="250" y="88" fill="#c0c0d8" font-size="8">  • CIVD (FV↓, fibri↓, D-dim↑)</text>
+    <text x="250" y="102" fill="#c0c0d8" font-size="8">  • Fibrinolyse (lyse &lt;30min)</text>
+    <text x="250" y="116" fill="#c0c0d8" font-size="8">  • Hypovit.K (FV normal !)</text>
+    <text x="250" y="130" fill="#c0c0d8" font-size="8">  • IHC (FV bas !)</text>
+    <text x="250" y="144" fill="#c0c0d8" font-size="8">  • Anti-FVIII (TCA↑↑, FW N)</text>
+    <text x="250" y="163" fill="#c0c0d8" font-size="9">Constitutionnelles :</text>
+    <text x="250" y="178" fill="#c0c0d8" font-size="8">  • Hémophilie A (FVIII)</text>
+    <text x="250" y="193" fill="#c0c0d8" font-size="8">  • Hémophilie B (FIX)</text>
+    <!-- Thrombose -->
+    <rect x="470" y="35" width="220" height="170" fill="rgba(52,152,219,0.08)" stroke="#3498db" stroke-width="1.5" rx="6"/>
+    <text x="580" y="55" text-anchor="middle" fill="#3498db" font-size="11" font-weight="bold">THROMBOSES</text>
+    <text x="480" y="73" fill="#c0c0d8" font-size="9">TVP/EP :</text>
+    <text x="480" y="88" fill="#c0c0d8" font-size="8">  • Score Wells/Genève</text>
+    <text x="480" y="102" fill="#c0c0d8" font-size="8">  • D-dim (&lt;500 exclut)</text>
+    <text x="480" y="116" fill="#c0c0d8" font-size="8">  • Doppler / Angioscanner</text>
+    <text x="480" y="133" fill="#c0c0d8" font-size="9">Thrombophilies :</text>
+    <text x="480" y="148" fill="#c0c0d8" font-size="8">  • SAPL (critères cliniques+bio)</text>
+    <text x="480" y="162" fill="#c0c0d8" font-size="8">  • AT (rare, sévère, RR50)</text>
+    <text x="480" y="176" fill="#c0c0d8" font-size="8">  • PC, PS (variable)</text>
+    <text x="480" y="190" fill="#c0c0d8" font-size="8">  • FV Leiden, FII (fréquent)</text>
+  </svg>
+
+  <div class="flash-block">
+    <div class="flash-q">❓ Point ECN final : un patient hémophile A sévère doit être opéré en urgence d'un appendice perforé. Quelles sont les 3 précautions absolues à prendre avant l'intervention ?</div>
+    <button class="flash-reveal" onclick="this.nextElementSibling.style.display='block';this.style.display='none'">Révéler la réponse</button>
+    <div class="flash-answer" style="display:none">1. Contacter immédiatement le centre de traitement de l'hémophilie (CTH) et un hématologiste. 2. Administrer du concentré de facteur VIII pour corriger le taux (objectif &gt;80-100% selon les recommandations pour chirurgie majeure) AVANT l'induction anesthésique. 3. Interdiction absolue d'injections IM et d'aspirine/AINS en péri-opératoire. Surveillance du taux de FVIII quotidienne en post-opératoire jusqu'à cicatrisation complète.</div>
+  </div>
+
+  <div class="key-hint">Fin du cours — Syndrome hémorragique &amp; TVP — Dr Roudot — &#8592; &#8594; pour naviguer</div>
+</div>
+
+</div><!-- fin slide-container -->
+
+<script>
+let current = 0;
+const total = 14;
+function showSlide(n) {
+  document.querySelectorAll('.slide').forEach(s => s.classList.remove('active'));
+  current = Math.max(0, Math.min(n, total-1));
+  document.getElementById('slide-'+current).classList.add('active');
+  document.getElementById('slide-container').scrollTop = 0;
+  document.getElementById('progress-fill').style.width = ((current/(total-1))*100)+'%';
+  document.getElementById('slide-counter').textContent = (current+1)+' / '+total;
+}
+function changeSlide(d) { showSlide(current+d); }
+function selectOption(el) {
+  const block = el.closest('.qcm-block');
+  block.querySelectorAll('.qcm-option').forEach(o => o.classList.remove('selected'));
+  el.classList.add('selected');
+  block.querySelector('.qcm-validate').disabled = false;
+}
+function validateQCM(btn) {
+  const block = btn.closest('.qcm-block');
+  const answer = block.dataset.answer;
+  const selected = block.querySelector('.qcm-option.selected');
+  if (!selected) return;
+  block.querySelectorAll('.qcm-option').forEach(o => {
+    if (o.dataset.idx === answer) o.classList.add('correct');
+    else if (o.classList.contains('selected')) o.classList.add('wrong');
+    o.style.pointerEvents = 'none';
+  });
+  const fb = block.querySelector('.qcm-feedback');
+  fb.textContent = selected.dataset.idx === answer ? '✅ Correct !' : '❌ Incorrect';
+  fb.style.color = selected.dataset.idx === answer ? '#2ecc71' : '#e74c3c';
+  block.querySelector('.qcm-explanation').style.display = 'block';
+  btn.disabled = true;
+}
+document.addEventListener('keydown', e => {
+  if (e.key==='ArrowRight'||e.key===' ') changeSlide(1);
+  if (e.key==='ArrowLeft') changeSlide(-1);
+});
+let tx=0;
+document.addEventListener('touchstart', e => { tx = e.touches[0].clientX; });
+document.addEventListener('touchend', e => {
+  const dx = e.changedTouches[0].clientX - tx;
+  if (Math.abs(dx)>50) changeSlide(dx<0?1:-1);
+});
+showSlide(0);
+</script>
+</body>
+</html>
