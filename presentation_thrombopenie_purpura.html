@@ -1,0 +1,1401 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Thrombopénies & Purpuras — Items 215-216</title>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  background: #0d0d1a;
+  color: #e0e0f0;
+  min-height: 100vh;
+  overflow: hidden;
+}
+.topbar {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  height: 50px;
+  background: rgba(13,13,26,0.97);
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+  display: flex; align-items: center;
+  padding: 0 1rem; gap: 0.75rem;
+}
+.topbar-home {
+  text-decoration: none; color: #e74c3c; font-weight: 600;
+  font-size: 0.85rem; white-space: nowrap;
+  padding: 0.3rem 0.7rem; border: 1px solid rgba(231,76,60,0.4);
+  border-radius: 6px; transition: background 0.2s;
+}
+.topbar-home:hover { background: rgba(231,76,60,0.15); }
+.topbar-title {
+  flex: 1; text-align: center; font-size: 0.85rem; color: #9090b0;
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+.topbar-counter {
+  font-size: 0.85rem; color: #b0b0c0; white-space: nowrap; min-width: 55px; text-align: right;
+}
+.topbar-nav { display: flex; gap: 0.4rem; }
+.topbar-btn {
+  background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.15);
+  color: #e0e0f0; padding: 0.3rem 0.7rem; border-radius: 6px;
+  cursor: pointer; font-size: 0.85rem; transition: background 0.2s;
+}
+.topbar-btn:hover { background: rgba(255,255,255,0.14); }
+.progress-bar {
+  position: fixed; top: 50px; left: 0; right: 0; height: 3px; z-index: 99;
+  background: rgba(255,255,255,0.08);
+}
+.progress-fill {
+  height: 100%; background: linear-gradient(90deg, #e74c3c, #f39c12);
+  transition: width 0.3s ease; width: 0%;
+}
+.slide-container {
+  position: fixed; top: 53px; left: 0; right: 0; bottom: 0;
+  overflow-y: auto;
+}
+.slide { display: none !important; }
+.slide.active { display: block !important; }
+.slide.active.title-slide { display: flex !important; }
+.title-slide {
+  flex-direction: column; align-items: center; justify-content: center;
+  text-align: center; min-height: calc(100vh - 53px);
+  padding: 2rem;
+  background: radial-gradient(ellipse at center, rgba(231,76,60,0.08) 0%, transparent 70%);
+}
+.title-tag {
+  color: #e74c3c; font-size: 0.85rem; font-weight: 600; letter-spacing: 0.05em;
+  text-transform: uppercase; margin-bottom: 1rem;
+}
+.title-slide h1 {
+  font-size: clamp(1.8rem, 4vw, 3rem);
+  font-weight: 800; line-height: 1.2;
+  background: linear-gradient(135deg, #e74c3c, #f39c12);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  background-clip: text; margin-bottom: 1rem;
+}
+.title-subtitle { color: #9090b0; font-size: 1rem; margin-bottom: 1.5rem; }
+.title-meta { display: flex; gap: 1.5rem; flex-wrap: wrap; justify-content: center; }
+.title-meta span { color: #b0b0c0; font-size: 0.9rem; }
+.menu-link {
+  position: absolute; top: 1rem; left: 1rem;
+  color: #e74c3c; text-decoration: none; font-size: 0.9rem;
+  padding: 0.4rem 0.8rem; border: 1px solid rgba(231,76,60,0.4);
+  border-radius: 6px; transition: background 0.2s;
+}
+.menu-link:hover { background: rgba(231,76,60,0.15); }
+.content-slide {
+  max-width: 860px; margin: 0 auto;
+  padding: 1.5rem 1.5rem 3rem;
+}
+.content-slide h2 {
+  font-size: 1.4rem; font-weight: 700; color: #e74c3c;
+  margin-bottom: 1rem; border-bottom: 2px solid rgba(231,76,60,0.3);
+  padding-bottom: 0.5rem;
+}
+.content-slide h3 {
+  font-size: 1.05rem; font-weight: 600; color: #f39c12;
+  margin: 1.2rem 0 0.6rem;
+}
+.content-slide h4 {
+  font-size: 0.97rem; font-weight: 600; color: #3498db;
+  margin: 1rem 0 0.4rem;
+}
+.content-slide p { line-height: 1.75; color: #c0c0d8; margin-bottom: 0.75rem; font-size: 0.95rem; }
+.content-slide ul, .content-slide ol { margin: 0.5rem 0 0.75rem 1.5rem; }
+.content-slide li { line-height: 1.75; color: #c0c0d8; font-size: 0.95rem; margin-bottom: 0.4rem; }
+.content-slide strong { color: #e8e8f8; }
+.def-box {
+  background: rgba(243,156,18,0.1); border-left: 4px solid #f39c12;
+  border-radius: 0 8px 8px 0; padding: 0.8rem 1rem;
+  margin: 0.6rem 0; font-size: 0.92rem; line-height: 1.65; color: #c8c8d8;
+}
+.highlight-box {
+  background: rgba(46,204,113,0.1); border-left: 4px solid #2ecc71;
+  border-radius: 0 8px 8px 0; padding: 0.8rem 1rem;
+  margin: 0.75rem 0; font-size: 0.92rem; line-height: 1.65; color: #c8c8d8;
+}
+.warning-box {
+  background: rgba(231,76,60,0.1); border: 2px solid #e74c3c;
+  border-radius: 8px; padding: 0.8rem 1rem;
+  margin: 0.75rem 0; font-size: 0.92rem; line-height: 1.65; color: #c8c8d8;
+}
+.urgence-box {
+  background: rgba(231,76,60,0.2); border: 2px solid #e74c3c;
+  border-radius: 8px; padding: 0.8rem 1rem;
+  margin: 0.75rem 0; font-size: 0.92rem; line-height: 1.65;
+}
+.table-wrap { overflow-x: auto; margin: 0.75rem 0; border-radius: 8px; }
+table { width: 100%; border-collapse: collapse; font-size: 0.88rem; }
+thead { background: rgba(231,76,60,0.15); }
+th { padding: 0.6rem 0.75rem; text-align: left; color: #e74c3c; font-weight: 600; }
+td { padding: 0.5rem 0.75rem; border-bottom: 1px solid rgba(255,255,255,0.05); color: #c0c0d8; }
+tr:last-child td { border-bottom: none; }
+tr:hover td { background: rgba(255,255,255,0.03); }
+.qcm-block {
+  background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 12px; padding: 1rem; margin: 0.75rem 0;
+}
+.q-text { font-weight: 600; color: #e0e0f0; margin-bottom: 0.75rem; font-size: 0.95rem; line-height: 1.5; }
+.qcm-options { display: flex; flex-direction: column; gap: 0.5rem; margin-bottom: 0.75rem; }
+.qcm-option {
+  display: flex; align-items: center; gap: 0.6rem;
+  background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 8px; padding: 0.6rem 0.8rem; cursor: pointer;
+  transition: background 0.15s, border-color 0.15s; font-size: 0.9rem; color: #c0c0d8;
+}
+.qcm-option:hover { background: rgba(255,255,255,0.08); }
+.qcm-option.selected { background: rgba(52,152,219,0.15); border-color: #3498db; color: #e0e0f0; }
+.qcm-option.correct { background: rgba(46,204,113,0.2); border-color: #2ecc71; color: #e0e0f0; }
+.qcm-option.wrong { background: rgba(231,76,60,0.2); border-color: #e74c3c; color: #e0e0f0; }
+.letter {
+  min-width: 24px; height: 24px; border-radius: 50%;
+  background: rgba(255,255,255,0.1); display: flex; align-items: center;
+  justify-content: center; font-weight: 700; font-size: 0.8rem; color: #e74c3c;
+}
+.qcm-validate {
+  padding: 0.5rem 1rem; border-radius: 8px; border: none; cursor: pointer;
+  background: rgba(231,76,60,0.2); color: #e74c3c; font-weight: 600;
+  font-size: 0.85rem; transition: background 0.2s;
+}
+.qcm-validate:disabled { opacity: 0.4; cursor: not-allowed; }
+.qcm-validate:hover:not(:disabled) { background: rgba(231,76,60,0.35); }
+.qcm-feedback { margin-top: 0.5rem; font-weight: 600; font-size: 0.9rem; }
+.qcm-explanation {
+  display: none; margin-top: 0.75rem; padding: 0.75rem;
+  background: rgba(255,255,255,0.04); border-radius: 8px;
+  font-size: 0.88rem; color: #b0b0c0; line-height: 1.65;
+}
+.flash-block {
+  background: rgba(52,152,219,0.07); border: 1px solid rgba(52,152,219,0.25);
+  border-radius: 12px; padding: 1rem; margin: 0.75rem 0;
+}
+.flash-input-row { display: flex; gap: 0.5rem; margin: 0.6rem 0; flex-wrap: wrap; }
+.flash-input {
+  flex: 1; min-width: 200px; padding: 0.5rem 0.75rem;
+  background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 8px; color: #e0e0f0; font-size: 0.92rem;
+}
+.flash-input:focus { outline: none; border-color: #3498db; }
+.dp-block {
+  background: rgba(155,89,182,0.07); border: 1px solid rgba(155,89,182,0.25);
+  border-radius: 12px; padding: 1rem; margin: 1rem 0;
+}
+.dp-block h3 { color: #9b59b6; margin-bottom: 0.75rem; }
+.dp-block > p { font-style: italic; color: #9090b0; font-size: 0.9rem; margin-bottom: 0.75rem; }
+.dp-step { margin: 0.75rem 0; }
+.dp-step-num {
+  font-size: 0.75rem; font-weight: 700; color: #9b59b6;
+  text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.2rem;
+}
+.dp-step-title { font-weight: 600; color: #c0c0d8; margin-bottom: 0.5rem; font-size: 0.92rem; }
+.key-hint {
+  text-align: center; color: rgba(255,255,255,0.2);
+  font-size: 0.75rem; margin-top: 2rem; padding-bottom: 1rem;
+}
+.expl-wrap { margin: 0 0 1.5rem 0; }
+.expl-wrap h4 { color: #e0e0f0; font-size: 1rem; margin: 1.1rem 0 0.4rem; font-weight: 700; }
+.expl-wrap p { color: #c0c0d8; font-size: 0.95rem; line-height: 1.8; margin-bottom: 0.4rem; }
+.expl-wrap strong { color: #f0f0ff; }
+.expl-bq {
+  border-left: 3px solid rgba(231,76,60,0.5); padding: 0.4rem 1rem;
+  color: #9898b8; font-style: italic; font-size: 0.9rem; margin: 0.3rem 0 0.9rem 0;
+  background: rgba(231,76,60,0.04); border-radius: 0 6px 6px 0;
+}
+.expl-sep { border: none; border-top: 1px solid rgba(255,255,255,0.07); margin: 1.1rem 0; }
+.expl-warn {
+  background: rgba(231,76,60,0.08); border-left: 4px solid #e74c3c;
+  border-radius: 0 8px 8px 0; padding: 0.6rem 1rem;
+  margin: 0.75rem 0; font-size: 0.92rem; color: #c8c8d8; line-height: 1.65;
+}
+.expl-info {
+  background: rgba(52,152,219,0.08); border-left: 4px solid #3498db;
+  border-radius: 0 8px 8px 0; padding: 0.6rem 1rem;
+  margin: 0.75rem 0; font-size: 0.92rem; color: #c8c8d8; line-height: 1.65;
+}
+@media (max-width: 768px) {
+  .content-slide { padding: 1rem 1rem 2.5rem; }
+  .content-slide h2 { font-size: 1.15rem; }
+  .title-slide h1 { font-size: 1.8rem; }
+  .title-meta { gap: 0.75rem; }
+}
+@media (max-width: 480px) {
+  .topbar-title { display: none; }
+  .flash-input-row { flex-direction: column; }
+}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <a class="topbar-home" href="index.html">← Menu</a>
+  <span class="topbar-title">Thrombopénies &amp; Purpuras — Items 215-216</span>
+  <span class="topbar-counter" id="slide-counter">1 / 14</span>
+  <div class="topbar-nav">
+    <button class="topbar-btn" onclick="changeSlide(-1)">&#8249;</button>
+    <button class="topbar-btn" onclick="changeSlide(1)">&#8250;</button>
+  </div>
+</div>
+<div class="progress-bar"><div class="progress-fill" id="progress-fill"></div></div>
+<div class="slide-container" id="slide-container">
+<div class="slide title-slide active" id="slide-0">
+  <a class="menu-link" href="index.html">← Menu</a>
+  <div>
+    <div class="title-tag">Hématologie · Items 215-216 · ECN</div>
+    <h1>Thrombopénies<br>&amp; Purpuras</h1>
+    <div class="title-subtitle">Définition · Mécanismes · PTI · MAT · TIH · Purpura fulminans · Purpura rhumatoïde</div>
+    <div class="title-meta">
+      <span>🩸 Hématologie</span>
+      <span>📚 14 diapos</span>
+      <span>⚡ Quiz intégrés</span>
+    </div>
+  </div>
+</div>
+<div class="slide content-slide" id="slide-1">
+<h2>🩸 Thrombopénies — Définition, Mécanismes &amp; Étiologies</h2>
+
+<h3>I — Définition et généralités</h3>
+<div class="expl-wrap">
+<h4>🔬 1.1 — Qu'est-ce qu'une thrombopénie ?</h4>
+<div class="def-box"><strong>Thrombopénie</strong> : diminution du taux de plaquettes en dessous de <strong>150 G/L</strong> (normale : 150–400 G/L). G/L signifie "giga par litre" = milliards de cellules par litre de sang. Les plaquettes (thrombocytes) sont de petits fragments cellulaires sans noyau, nettement plus petits que les globules rouges, visibles sur un frottis sanguin.</div>
+<p>Les plaquettes sont dosées par l'<strong>hémogramme (NFS)</strong> — l'automate les compte individuellement. Leur rôle est fondamental dans l'<strong>hémostase primaire</strong> : lors d'une brèche vasculaire, elles adhèrent au sous-endothélium exposé, s'activent et s'agrègent pour former le <strong>clou plaquettaire</strong>, premier bouchon qui stoppe le saignement. En cas de thrombopénie, ce bouchon se forme mal ou pas du tout → risque hémorragique.</p>
+<p>Les signes hémorragiques d'une thrombopénie sont de type <strong>cutanéo-muqueux</strong> (saignements de surface) : purpura, pétéchies, ecchymoses, épistaxis, gingivorragies, bulles hémorragiques buccales. Contrairement aux déficits en facteurs de coagulation qui donnent des hématomes profonds, la thrombopénie ne donne pas d'hémarthroses.</p>
+<div class="expl-bq">Ex : Un enfant de 6 ans consulte pour apparition brutale de pétéchies sur les jambes après une infection virale. NFS : plaquettes à 8 G/L → thrombopénie sévère → PTI aigu de l'enfant.</div>
+</div>
+
+<div class="expl-wrap">
+<h4>⚠️ 1.2 — Seuils de gravité à retenir absolument</h4>
+<div class="def-box"><strong>Seuils plaquettaires critiques</strong> : deux valeurs à retenir par cœur pour toute la médecine.</div>
+<p><strong>&lt; 20 G/L</strong> = risque d'hémorragie <em>spontanée</em>, urgence vitale. En dessous de ce seuil, des hémorragies peuvent survenir sans aucun traumatisme : hémorragie intracérébrale, hémorragies digestives, hémorragies rétiniennes. Les injections intramusculaires sont contre-indiquées. La ponction lombaire, la ponction pleurale/péricardique sont contre-indiquées.</p>
+<p><strong>20–50 G/L</strong> = risque hémorragique présent surtout si facteurs aggravants (patient &gt;65 ans, anticoagulants, CIVD associée, geste chirurgical). En dessous de 50 G/L : précautions particulières pour toute biopsie, ponction profonde ou chirurgie.</p>
+<p><strong>&gt; 50 G/L</strong> = pas de risque d'hémorragie spontanée grave mais attention aux interventions chirurgicales. Les signes hémorragiques ne sont pas toujours corrélés au chiffre exact de plaquettes — un patient à 15 G/L peut être asymptomatique, un autre à 40 G/L peut saigner si facteurs aggravants.</p>
+<div class="expl-warn">⚠️ Attention : si syndrome hémorragique grave, NE PAS perdre de temps à éliminer une fausse thrombopénie — prendre en charge immédiatement.</div>
+</div>
+
+<hr class="expl-sep">
+<h3>II — Les fausses thrombopénies</h3>
+<div class="expl-wrap">
+<h4>🔬 2.1 — Agrégats plaquettaires à l'EDTA</h4>
+<div class="def-box"><strong>Fausse thrombopénie</strong> : thrombopénie artefactuelle due à une agrégation des plaquettes dans le tube de prélèvement, sans pathologie réelle chez le patient.</div>
+<p>Le sang pour la NFS est prélevé dans des tubes contenant de l'<strong>EDTA</strong> (anticoagulant chélateur du calcium). Chez certains patients, l'EDTA déclenche une <strong>agrégation artefactuelle des plaquettes</strong> — elles se collent entre elles et forment des amas. L'automate ne compte que les plaquettes libres → sous-estime le vrai taux → fausse thrombopénie.</p>
+<p>On peut aussi observer un <strong>satellitisme plaquettaire</strong> : les plaquettes se collent autour des leucocytes → encore non comptées par l'automate.</p>
+<p><strong>Conduite à tenir</strong> : réaliser un <strong>frottis sanguin</strong> (visualisation directe des amas) + contrôler la numération sur un prélèvement en <strong>tube citraté</strong> (anticoagulant différent → les agrégats se dissolvent → vrai taux apparaît). Si le chiffre remonte = c'était une fausse thrombopénie.</p>
+<div class="expl-bq">Ex : Patient hospitalisé pour bilan préopératoire, NFS montre 40 G/L. Pas de saignement, pas de purpura. Frottis → amas plaquettaires nombreux. Tube citraté → 185 G/L. Fausse thrombopénie, opération non retardée.</div>
+</div>
+
+<hr class="expl-sep">
+<h3>III — Mécanismes des thrombopénies vraies</h3>
+<div class="expl-wrap">
+<h4>🔬 3.1 — Thrombopénies périphériques (production normale, destruction/consommation augmentée)</h4>
+<p>Dans les thrombopénies <strong>périphériques</strong>, la moelle produit normalement des mégacaryocytes et des plaquettes, mais celles-ci sont détruites ou consommées trop rapidement en périphérie → <strong>moelle riche en mégacaryocytes</strong> (réponse compensatoire) au myélogramme. La thrombopénie est souvent <strong>isolée</strong> dans l'hémogramme (pas d'atteinte des autres lignées).</p>
+<p><strong>3 mécanismes</strong> :</p>
+<ul>
+<li><strong>Destruction accélérée</strong> : anticorps dirigés contre les plaquettes (auto-immun = PTI ; allo-immun = post-transfusion ou fœto-maternel) ; infections virales (VIH, VHB, VHC, EBV, CMV, paludisme) ; médicaments (AINS, antibiotiques, héparine → TIH)</li>
+<li><strong>Séquestration splénique</strong> : hypersplénisme (rate agrandie capte et séquestre les plaquettes) — thrombopénie modérée, cirrhose ++</li>
+<li><strong>Consommation</strong> : MAT (microangiopathies thrombotiques — formation de microthrombi dans la microcirculation), CIVD, HELLP syndrome</li>
+</ul>
+</div>
+<div class="expl-wrap">
+<h4>🔬 3.2 — Thrombopénies centrales (défaut de production médullaire)</h4>
+<p>Dans les thrombopénies <strong>centrales</strong>, la moelle osseuse produit insuffisamment de plaquettes → <strong>moelle pauvre en mégacaryocytes</strong>. Souvent associée à une atteinte des autres lignées (anémie + leucopénie = pancytopénie).</p>
+<ul>
+<li><strong>Insuffisance médullaire</strong> : syndromes myélodysplasiques (SMD), aplasie médullaire, carences en B12/folates (anémie macrocytaire associée)</li>
+<li><strong>Envahissement médullaire</strong> : leucémies aiguës (blastes refoulent les autres lignées), lymphomes, métastases d'un cancer solide</li>
+<li><strong>Alcoolisme</strong> : toxicité directe sur la thrombopoïèse (mécanisme complexe)</li>
+</ul>
+<div class="expl-bq">Ex : Femme de 75 ans avec thrombopénie + anémie macrocytaire + polynucléaires hypersegmentés au frottis → carence en B12 ou folates → thrombopénie centrale. Myélogramme : mégacaryocytes peu nombreux ou anormaux.</div>
+</div>
+
+<hr class="expl-sep">
+<h3>IV — Démarche diagnostique devant une thrombopénie</h3>
+<div class="expl-wrap">
+<h4>📋 4.1 — Conduite à tenir systématique</h4>
+<p><strong>3 questions</strong> à se poser dans l'ordre : (1) Est-ce une vraie thrombopénie ? → frottis sanguin, tube citraté. (2) Est-ce une urgence ? → chercher signes de gravité (bulles buccales, hémorragie extériorisée, fond d'œil, purpura fulminans). (3) Quelle étiologie ?</p>
+<p><strong>Bilan de 1ère intention</strong> : NFS + réticulocytes + frottis sanguin (obligatoire : élimine fausse thrombopénie, cherche schizocytes = MAT, blastes = leucémie, anomalies morphologiques) + bilan hémostase (TP/TCA/fibrinogène : cherche CIVD).</p>
+<p><strong>Myélogramme</strong> : indiqué si suspicion de cause centrale (hémopathie, aplasie, SMD) — pas systématique dans le PTI (diagnostic d'exclusion).</p>
+<div class="def-box"><strong>Schizocytes</strong> : fragments de globules rouges en forme de casque ou de demi-cercle, visibles au frottis sanguin. Présence &gt;1% (normale &lt;0,1%) → signe de microangiopathie thrombotique (MAT) = urgence diagnostique.</div>
+</div>
+
+<div class="table-wrap"><table>
+<thead><tr><th>Caractéristique</th><th>Thrombopénie périphérique</th><th>Thrombopénie centrale</th></tr></thead>
+<tbody>
+<tr><td>Moelle osseuse</td><td>Riche en mégacaryocytes (production compensatrice)</td><td>Pauvre en mégacaryocytes</td></tr>
+<tr><td>Hémogramme</td><td>Thrombopénie souvent isolée</td><td>Souvent pancytopénie (3 lignées)</td></tr>
+<tr><td>Exemples</td><td>PTI, MAT, TIH, CIVD, infections</td><td>SMD, leucémie aiguë, aplasie, carence B12</td></tr>
+<tr><td>Risque hémorragique</td><td>Variable</td><td>Souvent élevé (thrombopénie profonde)</td></tr>
+</tbody>
+</table></div>
+
+<svg viewBox="0 0 700 240" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-height:240px;margin:1.5rem 0;display:block">
+<rect width="700" height="240" fill="#0d0d1a"/>
+<text x="350" y="22" text-anchor="middle" fill="#e74c3c" font-size="13" font-family="Segoe UI,sans-serif" font-weight="bold">Mécanismes des thrombopénies</text>
+<rect x="10" y="40" width="200" height="60" rx="8" fill="rgba(231,76,60,0.15)" stroke="#e74c3c" stroke-width="1.5"/>
+<text x="110" y="65" text-anchor="middle" fill="white" font-size="11" font-family="Segoe UI,sans-serif" font-weight="bold">PÉRIPHÉRIQUES</text>
+<text x="110" y="82" text-anchor="middle" fill="#c0c0d8" font-size="10" font-family="Segoe UI,sans-serif">Destruction / Séquestration</text>
+<text x="110" y="95" text-anchor="middle" fill="#c0c0d8" font-size="10" font-family="Segoe UI,sans-serif">/ Consommation</text>
+<rect x="250" y="40" width="200" height="60" rx="8" fill="rgba(52,152,219,0.15)" stroke="#3498db" stroke-width="1.5"/>
+<text x="350" y="65" text-anchor="middle" fill="white" font-size="11" font-family="Segoe UI,sans-serif" font-weight="bold">CENTRALES</text>
+<text x="350" y="82" text-anchor="middle" fill="#c0c0d8" font-size="10" font-family="Segoe UI,sans-serif">Défaut de production</text>
+<text x="350" y="95" text-anchor="middle" fill="#c0c0d8" font-size="10" font-family="Segoe UI,sans-serif">médullaire</text>
+<rect x="490" y="40" width="200" height="60" rx="8" fill="rgba(243,156,18,0.15)" stroke="#f39c12" stroke-width="1.5"/>
+<text x="590" y="65" text-anchor="middle" fill="white" font-size="11" font-family="Segoe UI,sans-serif" font-weight="bold">FAUSSE</text>
+<text x="590" y="82" text-anchor="middle" fill="#c0c0d8" font-size="10" font-family="Segoe UI,sans-serif">Agrégats EDTA</text>
+<text x="590" y="95" text-anchor="middle" fill="#c0c0d8" font-size="10" font-family="Segoe UI,sans-serif">Satellitisme plaquettaire</text>
+<text x="110" y="130" text-anchor="middle" fill="#f39c12" font-size="10" font-family="Segoe UI,sans-serif">PTI · MAT · TIH · CIVD · Infections</text>
+<text x="350" y="130" text-anchor="middle" fill="#3498db" font-size="10" font-family="Segoe UI,sans-serif">SMD · Leucémie · Aplasie · Carence B12</text>
+<text x="590" y="130" text-anchor="middle" fill="#f39c12" font-size="10" font-family="Segoe UI,sans-serif">Tube citraté → vrai taux</text>
+<text x="350" y="175" text-anchor="middle" fill="white" font-size="11" font-family="Segoe UI,sans-serif" font-weight="bold">Seuils : &lt;20 G/L = urgence vitale · 20–50 G/L = risque si facteurs aggravants · &gt;50 G/L = pas de saignement spontané</text>
+</svg>
+
+<div class="flash-block">
+<div class="flash-q">❓ Quels sont les 2 seuils plaquettaires critiques à retenir et leurs implications cliniques ?</div>
+<button class="flash-reveal" onclick="this.nextElementSibling.style.display='block';this.style.display='none'">Révéler la réponse</button>
+<div class="flash-answer" style="display:none"><strong>&lt;20 G/L</strong> : risque hémorragie spontanée, urgence vitale — CI ponction lombaire, IM, sports traumatisants. <strong>20–50 G/L</strong> : risque hémorragique si facteurs aggravants — précautions pour biopsies/chirurgie. <strong>&gt;50 G/L</strong> : pas de saignement spontané mais précautions opératoires.</div>
+</div>
+<div class="flash-block">
+<div class="flash-q">❓ Comment distinguer thrombopénie centrale de périphérique au myélogramme ?</div>
+<button class="flash-reveal" onclick="this.nextElementSibling.style.display='block';this.style.display='none'">Révéler la réponse</button>
+<div class="flash-answer" style="display:none">Périphérique → moelle <strong>riche</strong> en mégacaryocytes (production compensatrice normale). Centrale → moelle <strong>pauvre</strong> en mégacaryocytes (défaut de production). Hémogramme : périphérique = thrombopénie isolée ; centrale = souvent pancytopénie.</div>
+</div>
+<div class="flash-block">
+<div class="flash-q">❓ Quand faut-il éliminer une fausse thrombopénie et quelle est la conduite à tenir ?</div>
+<button class="flash-reveal" onclick="this.nextElementSibling.style.display='block';this.style.display='none'">Révéler la réponse</button>
+<div class="flash-answer" style="display:none">Devant toute thrombopénie <strong>sans signes hémorragiques</strong>. Conduite : frottis sanguin (amas plaquettaires?) + contrôle en <strong>tube citraté</strong> (anticoagulant différent de l'EDTA). Si chiffre remonte = fausse thrombopénie. NE PAS retarder la prise en charge si hémorragie grave.</div>
+</div>
+</div>
+<div class="slide content-slide" id="slide-2">
+<h2>🧠 QCM 1 — Thrombopénies</h2>
+<div class="qcm-block" data-answer="C" id="q2-1">
+<div class="q-text">Q1. Quel est le seuil de plaquettes en dessous duquel le risque d'hémorragie spontanée est urgent ?</div>
+<div class="qcm-options">
+<div class="qcm-option" data-idx="A" onclick="selectOption(this)"><span class="letter">A</span> < 50 G/L</div>
+<div class="qcm-option" data-idx="B" onclick="selectOption(this)"><span class="letter">B</span> < 100 G/L</div>
+<div class="qcm-option" data-idx="C" onclick="selectOption(this)"><span class="letter">C</span> < 20 G/L</div>
+<div class="qcm-option" data-idx="D" onclick="selectOption(this)"><span class="letter">D</span> < 10 G/L</div>
+</div>
+<button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button>
+<div class="qcm-feedback"></div>
+<div class="qcm-explanation">< 20 G/L = risque d'hémorragie spontanée, urgence vitale. Entre 20–50 G/L : risque si facteurs aggravants. > 50 G/L : pas de saignement spontané grave. Ces seuils sont à retenir absolument.</div>
+</div>
+<div class="qcm-block" data-answer="B" id="q2-2">
+<div class="q-text">Q2. Comment confirmer ou infirmer une fausse thrombopénie liée à l'EDTA ?</div>
+<div class="qcm-options">
+<div class="qcm-option" data-idx="A" onclick="selectOption(this)"><span class="letter">A</span> Refaire la NFS dans un second tube EDTA 24h plus tard</div>
+<div class="qcm-option" data-idx="B" onclick="selectOption(this)"><span class="letter">B</span> Frottis sanguin + contrôle sur prélèvement en tube citraté (autre anticoagulant)</div>
+<div class="qcm-option" data-idx="C" onclick="selectOption(this)"><span class="letter">C</span> Injection de thrombopoïétine pour stimuler la production</div>
+<div class="qcm-option" data-idx="D" onclick="selectOption(this)"><span class="letter">D</span> Faire un myélogramme en urgence</div>
+</div>
+<button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button>
+<div class="qcm-feedback"></div>
+<div class="qcm-explanation">La fausse thrombopénie est due à des agrégats plaquettaires dans l'EDTA. Le frottis sanguin montre ces amas. Le contrôle en tube citraté (anticoagulant différent) permet aux plaquettes de ne pas s'agréger → vrai taux apparaît. Si chiffre remonte = fausse thrombopénie.</div>
+</div>
+<div class="qcm-block" data-answer="B" id="q2-3">
+<div class="q-text">Q3. Une thrombopénie avec pancytopénie (atteinte des 3 lignées) oriente vers quelle origine ?</div>
+<div class="qcm-options">
+<div class="qcm-option" data-idx="A" onclick="selectOption(this)"><span class="letter">A</span> Périphérique par destruction immune (PTI)</div>
+<div class="qcm-option" data-idx="B" onclick="selectOption(this)"><span class="letter">B</span> Centrale par défaut de production médullaire</div>
+<div class="qcm-option" data-idx="C" onclick="selectOption(this)"><span class="letter">C</span> Séquestration splénique isolée</div>
+<div class="qcm-option" data-idx="D" onclick="selectOption(this)"><span class="letter">D</span> Consommation par CIVD</div>
+</div>
+<button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button>
+<div class="qcm-feedback"></div>
+<div class="qcm-explanation">Thrombopénie CENTRALE = défaut de production dans la moelle → souvent les 3 lignées atteintes (pancytopénie) car la moelle est le siège de toutes les lignées. Périphérique = thrombopénie souvent ISOLÉE (les autres lignées produites normalement). Exemples centraux : SMD, leucémie aiguë, aplasie médullaire.</div>
+</div>
+<div class="qcm-block" data-answer="C" id="q2-4">
+<div class="q-text">Q4. Parmi les signes suivants, lequel est un signe de GRAVITÉ d'une thrombopénie nécessitant une prise en charge urgente ?</div>
+<div class="qcm-options">
+<div class="qcm-option" data-idx="A" onclick="selectOption(this)"><span class="letter">A</span> Pétéchies sur les membres inférieurs sans autre symptôme</div>
+<div class="qcm-option" data-idx="B" onclick="selectOption(this)"><span class="letter">B</span> Plaquettes à 80 G/L découvertes fortuitement</div>
+<div class="qcm-option" data-idx="C" onclick="selectOption(this)"><span class="letter">C</span> Bulles hémorragiques buccales</div>
+<div class="qcm-option" data-idx="D" onclick="selectOption(this)"><span class="letter">D</span> Ecchymoses faciles au niveau des bras</div>
+</div>
+<button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button>
+<div class="qcm-feedback"></div>
+<div class="qcm-explanation">Les bulles hémorragiques buccales = signe de gravité absolu d'une thrombopénie sévère → risque hémorragique très élevé, notamment cérébral. Autres signes de gravité : hémorragies extériorisées (digestive, gynécologique, urinaire), fond d'œil hémorragique, purpura ecchymotique extensif rapidement évolutif.</div>
+</div>
+<div class="qcm-block" data-answer="B" id="q2-5">
+<div class="q-text">Q5. Dans quelle situation les schizocytes au frottis sanguin orientent-ils le diagnostic ?</div>
+<div class="qcm-options">
+<div class="qcm-option" data-idx="A" onclick="selectOption(this)"><span class="letter">A</span> Vers une thrombopénie centrale par aplasie médullaire</div>
+<div class="qcm-option" data-idx="B" onclick="selectOption(this)"><span class="letter">B</span> Vers une microangiopathie thrombotique (MAT) avec consommation de plaquettes</div>
+<div class="qcm-option" data-idx="C" onclick="selectOption(this)"><span class="letter">C</span> Vers une fausse thrombopénie à l'EDTA</div>
+<div class="qcm-option" data-idx="D" onclick="selectOption(this)"><span class="letter">D</span> Vers un PTI idiopathique</div>
+</div>
+<button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button>
+<div class="qcm-feedback"></div>
+<div class="qcm-explanation">Schizocytes > 1% (hématies fragmentées en casque, demi-cercle) = signe de MAT. Les hématies se fragmentent au contact des microthrombi dans la microcirculation. Contexte : anémie hémolytique mécanique + thrombopénie + atteinte d'organe. Urgence diagnostique et thérapeutique.</div>
+</div>
+</div>
+
+<div class="slide content-slide" id="slide-3">
+<h2>🛡️ PTI — Purpura Thrombopénique Immunologique</h2>
+
+<h3>I — Définition et physiopathologie</h3>
+<div class="expl-wrap">
+<h4>🔬 1.1 — Mécanisme auto-immun</h4>
+<div class="def-box"><strong>PTI (Purpura Thrombopénique Immunologique)</strong> : destruction accélérée des plaquettes par des <strong>auto-anticorps</strong> (principalement IgG anti-GPIIb/IIIa ou anti-GPIb-IX-V) → phagocytose des plaquettes opsonisées par les macrophages spléniques. Diagnostic d'<strong>exclusion</strong> : on ne peut poser le PTI qu'après avoir éliminé toutes les autres causes de thrombopénie.</div>
+<p>Le PTI est défini biologiquement par une <strong>thrombopénie isolée &lt;100 G/L</strong> d'origine auto-immune. L'hémogramme montre seulement la thrombopénie, sans anomalie des autres lignées (pas d'anémie, pas de leucopénie, sauf si saignement chronique → anémie ferriprive secondaire). Le bilan d'hémostase est normal (TP/TCA/fibrinogène normaux). Pas de schizocytes.</p>
+<p>La physiopathologie implique la rate à deux niveaux : (1) production des auto-anticorps anti-plaquettes par les lymphocytes B spléniques ; (2) destruction des plaquettes opsonisées (recouvertes d'Ac) par les macrophages spléniques via les récepteurs Fc. C'est pourquoi la splénectomie est un traitement efficace.</p>
+<div class="expl-bq">Ex : Femme de 35 ans avec purpura pétéchial, plaquettes à 12 G/L, bilan hémostase normal, frottis sans amas ni schizocytes, pas de splénomégalie. Sérologies virales négatives. Pas de médicament récent. Diagnostic : PTI — diagnostic d'exclusion.</div>
+</div>
+
+<h3>II — Formes cliniques</h3>
+<div class="expl-wrap">
+<h4>👶 2.1 — PTI aigu de l'enfant vs PTI chronique de l'adulte</h4>
+<p><strong>PTI aigu de l'enfant</strong> (80% des PTI pédiatriques) : apparition brutale 2–4 semaines après infection virale (EBV, CMV, varicelle, vaccination) ; enfant de 2–8 ans ; thrombopénie profonde mais souvent bien tolérée ; <strong>guérison spontanée dans 80% des cas</strong> en quelques semaines ; traitement si signes de gravité ou plaquettes &lt;20 G/L.</p>
+<p><strong>PTI chronique de l'adulte</strong> (persistant &gt;12 mois) : prédominance féminine (F/H = 3/1) ; début souvent insidieux ; pas de guérison spontanée ; traitement nécessaire si thrombopénie profonde ou signes hémorragiques ; risque hémorragique grave faible (&lt;2% des patients) mais surtout chez &gt;60 ans.</p>
+<p>PTI secondaire (20%) : hémopathies lymphoïdes (LLC, lymphome), maladies auto-immunes (lupus érythémateux systémique +++), infections (VIH, VHC), médicaments → recherche systématique.</p>
+</div>
+
+<h3>III — Traitement du PTI</h3>
+<div class="expl-wrap">
+<h4>💊 3.1 — Ligne par ligne</h4>
+<p><strong>Indication traitement</strong> : plaquettes &lt;30 G/L OU signes hémorragiques (quel que soit le chiffre de plaquettes). Si plaquettes &gt;30 G/L et asymptomatique → surveillance seule possible.</p>
+<p><strong>1ère ligne — Corticoïdes</strong> : prednisone 1 mg/kg/j pendant 3–4 semaines ou dexaméthasone 40 mg/j × 4 jours. Mécanisme : diminuent la production des auto-Ac + réduisent la phagocytose splénique. Réponse initiale 70–80% mais rechutes fréquentes à la décroissance.</p>
+<p><strong>Urgence hémorragique — IgIV</strong> : immunoglobulines intraveineuses (IgIV) 0,8–1 g/kg sur 2 jours. Mécanisme : saturent les récepteurs Fc des macrophages spléniques → moins de destruction des plaquettes opsonisées → remontée rapide des plaquettes en 24–48h. Indiqué en urgence (bulles buccales, hémorragie grave) en association aux corticoïdes.</p>
+<p><strong>2ème ligne — Rituximab</strong> : anticorps anti-CD20 → détruisent les lymphocytes B qui produisent les auto-Ac anti-plaquettes. Rémission prolongée dans 40–60% des cas. Moins d'effets secondaires que la splénectomie.</p>
+<p><strong>3ème ligne — Splénectomie</strong> : chirurgie d'ablation de la rate → supprime le principal site de production des Ac ET de destruction des plaquettes. Taux de rémission prolongée 60–70%. Contre-indication avant 5 ans (risque infectieux à pneumocoque majeur). Vaccination obligatoire avant (pneumocoque, méningocoque, Haemophilus).</p>
+<p><strong>Agonistes du récepteur de la TPO</strong> : romiplostim (SC hebdomadaire) et eltrombopag (oral quotidien) → stimulent la production de plaquettes par la moelle en mimant la thrombopoïétine → augmentent le nombre de plaquettes sans supprimer le processus auto-immun. Utilisés en 2ème/3ème ligne ou si contre-indication à la splénectomie.</p>
+<div class="expl-warn">⚠️ Le PTI est un DIAGNOSTIC D'EXCLUSION. Ne jamais poser ce diagnostic sans avoir éliminé : fausse thrombopénie, MAT (schizocytes?), CIVD (fibrinogène?), médicaments, infections (VIH/VHC), hémopathie maligne.</div>
+</div>
+
+<svg viewBox="0 0 700 220" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-height:220px;margin:1.5rem 0;display:block">
+<rect width="700" height="220" fill="#0d0d1a"/>
+<text x="350" y="20" text-anchor="middle" fill="#e74c3c" font-size="13" font-family="Segoe UI,sans-serif" font-weight="bold">PTI — Physiopathologie et traitement</text>
+<rect x="10" y="35" width="150" height="50" rx="6" fill="rgba(52,152,219,0.15)" stroke="#3498db" stroke-width="1.5"/>
+<text x="85" y="58" text-anchor="middle" fill="white" font-size="10" font-family="Segoe UI,sans-serif" font-weight="bold">Lymphocytes B</text>
+<text x="85" y="73" text-anchor="middle" fill="#c0c0d8" font-size="9" font-family="Segoe UI,sans-serif">spléniques</text>
+<line x1="160" y1="60" x2="210" y2="60" stroke="#e74c3c" stroke-width="1.5" marker-end="url(#arr)"/>
+<defs><marker id="arr" markerWidth="6" markerHeight="4" refX="6" refY="2" orient="auto"><polygon points="0 0,6 2,0 4" fill="#e74c3c"/></marker></defs>
+<rect x="210" y="35" width="160" height="50" rx="6" fill="rgba(231,76,60,0.15)" stroke="#e74c3c" stroke-width="1.5"/>
+<text x="290" y="58" text-anchor="middle" fill="white" font-size="10" font-family="Segoe UI,sans-serif" font-weight="bold">Auto-Ac IgG</text>
+<text x="290" y="73" text-anchor="middle" fill="#c0c0d8" font-size="9" font-family="Segoe UI,sans-serif">anti-GPIIb/IIIa</text>
+<line x1="370" y1="60" x2="420" y2="60" stroke="#e74c3c" stroke-width="1.5" marker-end="url(#arr)"/>
+<rect x="420" y="35" width="160" height="50" rx="6" fill="rgba(231,76,60,0.2)" stroke="#e74c3c" stroke-width="2"/>
+<text x="500" y="58" text-anchor="middle" fill="white" font-size="10" font-family="Segoe UI,sans-serif" font-weight="bold">Destruction plaquettes</text>
+<text x="500" y="73" text-anchor="middle" fill="#c0c0d8" font-size="9" font-family="Segoe UI,sans-serif">par macrophages spléniques</text>
+<text x="85" y="120" text-anchor="middle" fill="#2ecc71" font-size="9" font-family="Segoe UI,sans-serif">Rituximab → anti-CD20</text>
+<text x="290" y="120" text-anchor="middle" fill="#2ecc71" font-size="9" font-family="Segoe UI,sans-serif">IgIV → saturent Fc-R</text>
+<text x="500" y="120" text-anchor="middle" fill="#2ecc71" font-size="9" font-family="Segoe UI,sans-serif">Splénectomie</text>
+<text x="350" y="160" text-anchor="middle" fill="#f39c12" font-size="10" font-family="Segoe UI,sans-serif">1ère ligne: Corticoïdes · Urgence: IgIV · 2ème: Rituximab · 3ème: Splénectomie · Agonistes TPO</text>
+</svg>
+
+<div class="flash-block">
+<div class="flash-q">❓ Pourquoi le PTI est-il un diagnostic d'exclusion, et quels diagnostics faut-il éliminer en priorité ?</div>
+<button class="flash-reveal" onclick="this.nextElementSibling.style.display='block';this.style.display='none'">Révéler la réponse</button>
+<div class="flash-answer" style="display:none">Aucun test ne confirme positivement le PTI — on le pose quand tout le reste est éliminé. Éliminer : fausse thrombopénie (EDTA), MAT (schizocytes au frottis), CIVD (fibrinogène bas), médicaments récents, VIH/VHC (sérologies), hémopathie maligne (blastes au frottis), lupus (AAN).</div>
+</div>
+<div class="flash-block">
+<div class="flash-q">❓ Quel traitement d'urgence utilise-t-on devant des bulles hémorragiques buccales dans un PTI ?</div>
+<button class="flash-reveal" onclick="this.nextElementSibling.style.display='block';this.style.display='none'">Révéler la réponse</button>
+<div class="flash-answer" style="display:none"><strong>IgIV</strong> (immunoglobulines intraveineuses) 0,8–1 g/kg en urgence + corticoïdes. Les IgIV saturent les récepteurs Fc des macrophages spléniques → moins de destruction plaquettaire → remontée rapide en 24–48h. Les bulles buccales = signe de gravité absolue = urgence thérapeutique.</div>
+</div>
+<div class="flash-block">
+<div class="flash-q">❓ Quel est le mécanisme des agonistes du récepteur de la TPO (romiplostim, eltrombopag) dans le PTI ?</div>
+<button class="flash-reveal" onclick="this.nextElementSibling.style.display='block';this.style.display='none'">Révéler la réponse</button>
+<div class="flash-answer" style="display:none">Ils <strong>miment la thrombopoïétine</strong> (TPO, hormone de croissance des plaquettes) → stimulent les mégacaryocytes de la moelle osseuse → augmentation de la production plaquettaire. Ils ne suppriment pas le processus auto-immun mais compensent la destruction. Utilisés si échec ou contre-indication aux autres traitements.</div>
+</div>
+</div>
+<div class="slide content-slide" id="slide-4">
+<h2>🧠 QCM 2 — PTI</h2>
+<div class="qcm-block" data-answer="C" id="q4-1">
+<div class="q-text">Q1. Le PTI est un diagnostic d'exclusion. Parmi ces examens, lequel n'est PAS nécessaire pour poser le diagnostic ?</div>
+<div class="qcm-options">
+<div class="qcm-option" data-idx="A" onclick="selectOption(this)"><span class="letter">A</span> Frottis sanguin à la recherche de schizocytes</div>
+<div class="qcm-option" data-idx="B" onclick="selectOption(this)"><span class="letter">B</span> Sérologie VIH et VHC</div>
+<div class="qcm-option" data-idx="C" onclick="selectOption(this)"><span class="letter">C</span> Dosage d'un anticorps anti-plaquette spécifique confirmant le PTI</div>
+<div class="qcm-option" data-idx="D" onclick="selectOption(this)"><span class="letter">D</span> Bilan hémostase (TP, TCA, fibrinogène)</div>
+</div>
+<button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button>
+<div class="qcm-feedback"></div>
+<div class="qcm-explanation">Il n'existe pas de test spécifique qui confirme positivement le PTI — c'est pourquoi c'est un diagnostic d'exclusion. On élimine les autres causes (MAT par frottis, CIVD par hémostase, infections par sérologies). L'absence d'anomalie sur ces examens + contexte clinique compatible = PTI.</div>
+</div>
+<div class="qcm-block" data-answer="C" id="q4-2">
+<div class="q-text">Q2. Un adulte a un PTI avec plaquettes à 45 G/L mais aucun signe hémorragique. Quelle est la bonne attitude ?</div>
+<div class="qcm-options">
+<div class="qcm-option" data-idx="A" onclick="selectOption(this)"><span class="letter">A</span> Splénectomie d'emblée</div>
+<div class="qcm-option" data-idx="B" onclick="selectOption(this)"><span class="letter">B</span> Corticoïdes en urgence</div>
+<div class="qcm-option" data-idx="C" onclick="selectOption(this)"><span class="letter">C</span> Surveillance possible sans traitement car pas de signe hémorragique et plaquettes > 30 G/L</div>
+<div class="qcm-option" data-idx="D" onclick="selectOption(this)"><span class="letter">D</span> IgIV immédiatement</div>
+</div>
+<button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button>
+<div class="qcm-feedback"></div>
+<div class="qcm-explanation">Le traitement est indiqué si plaquettes < 30 G/L OU signes hémorragiques. Ici : 45 G/L et asymptomatique → surveillance seule est possible. Pas d'urgence thérapeutique. Un traitement systématique exposerait aux effets secondaires des corticoïdes sans bénéfice prouvé.</div>
+</div>
+<div class="qcm-block" data-answer="B" id="q4-3">
+<div class="q-text">Q3. Pourquoi la splénectomie est-elle efficace dans le PTI ?</div>
+<div class="qcm-options">
+<div class="qcm-option" data-idx="A" onclick="selectOption(this)"><span class="letter">A</span> Elle produit des anticorps anti-lymphocytes B</div>
+<div class="qcm-option" data-idx="B" onclick="selectOption(this)"><span class="letter">B</span> Elle supprime à la fois le site de production des auto-Ac ET le site de destruction des plaquettes opsonisées</div>
+<div class="qcm-option" data-idx="C" onclick="selectOption(this)"><span class="letter">C</span> Elle stimule la production plaquettaire dans la moelle</div>
+<div class="qcm-option" data-idx="D" onclick="selectOption(this)"><span class="letter">D</span> Elle normalise le taux de thrombopoïétine circulante</div>
+</div>
+<button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button>
+<div class="qcm-feedback"></div>
+<div class="qcm-explanation">La rate joue un double rôle dans le PTI : (1) production des auto-Ac anti-plaquettes par les lymphocytes B spléniques ; (2) destruction des plaquettes opsonisées par les macrophages spléniques via récepteurs Fc. La splénectomie supprime les deux mécanismes → rémission prolongée dans 60-70% des cas.</div>
+</div>
+<div class="qcm-block" data-answer="B" id="q4-4">
+<div class="q-text">Q4. Une patiente de 28 ans a un PTI depuis 18 mois résistant aux corticoïdes. Elle n'est pas vaccinée contre le pneumocoque. Quelle est la prochaine étape si l'on envisage une splénectomie ?</div>
+<div class="qcm-options">
+<div class="qcm-option" data-idx="A" onclick="selectOption(this)"><span class="letter">A</span> Splénectomie immédiate, la vaccination peut se faire après</div>
+<div class="qcm-option" data-idx="B" onclick="selectOption(this)"><span class="letter">B</span> Vaccination contre pneumocoque, méningocoque et Haemophilus influenzae AVANT la splénectomie</div>
+<div class="qcm-option" data-idx="C" onclick="selectOption(this)"><span class="letter">C</span> Rituximab contre-indiqué avant splénectomie</div>
+<div class="qcm-option" data-idx="D" onclick="selectOption(this)"><span class="letter">D</span> Romiplostim — seul traitement possible si cortico-résistant</div>
+</div>
+<button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button>
+<div class="qcm-feedback"></div>
+<div class="qcm-explanation">AVANT toute splénectomie : vaccination OBLIGATOIRE contre pneumocoque (Prevenar 13 + Pneumovax 23), méningocoque (ACWY + B), Haemophilus influenzae b. La rate est un organe clé de la défense contre les bactéries encapsulées. Sans elle, le risque de sepsis fulminant à pneumocoque (OPSI) est majeur. Vaccination idéalement 2 semaines avant l'intervention.</div>
+</div>
+<div class="qcm-block" data-answer="B" id="q4-5">
+<div class="q-text">Q5. Quel est le mécanisme des IgIV dans le traitement du PTI en urgence ?</div>
+<div class="qcm-options">
+<div class="qcm-option" data-idx="A" onclick="selectOption(this)"><span class="letter">A</span> Production d'anticorps anti-plaquettaires neutralisant les auto-Ac</div>
+<div class="qcm-option" data-idx="B" onclick="selectOption(this)"><span class="letter">B</span> Saturation des récepteurs Fc des macrophages spléniques → réduction de la destruction des plaquettes opsonisées</div>
+<div class="qcm-option" data-idx="C" onclick="selectOption(this)"><span class="letter">C</span> Stimulation directe de la mégacaryopoïèse médullaire</div>
+<div class="qcm-option" data-idx="D" onclick="selectOption(this)"><span class="letter">D</span> Inhibition de la synthèse des auto-Ac par les lymphocytes B</div>
+</div>
+<button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button>
+<div class="qcm-feedback"></div>
+<div class="qcm-explanation">Les IgIV en forte dose saturent les récepteurs Fc des macrophages spléniques (ces récepteurs reconnaissent le fragment Fc des IgG fixées sur les plaquettes). En saturant ces récepteurs, les macrophages ne peuvent plus phagocyter les plaquettes opsonisées → remontée rapide des plaquettes en 24-48h. Effet transitoire (1-3 semaines) mais utile en urgence.</div>
+</div>
+</div>
+
+<div class="slide content-slide" id="slide-5">
+<h2>🔴 Microangiopathies Thrombotiques (MAT)</h2>
+
+<h3>I — Définition et triade diagnostique</h3>
+<div class="expl-wrap">
+<h4>🔬 1.1 — La triade MAT</h4>
+<div class="def-box"><strong>MAT (Microangiopathie Thrombotique)</strong> : syndrome clinico-biologique défini par une triade : (1) anémie hémolytique mécanique (AHEM) + (2) thrombopénie par consommation + (3) atteinte ischémique d'organe(s). C'est une <strong>urgence diagnostique et thérapeutique</strong>.</div>
+<p>Le mécanisme est une <strong>lésion des cellules endothéliales</strong> des petits vaisseaux → formation de <strong>microthrombi</strong> riches en fibrine dans la microcirculation → les hématies se fragmentent mécaniquement en passant sur ces microthrombi → <strong>schizocytes</strong> (fragments de GR en casque, demi-cercle, triangle). Ces microthrombi consomment les plaquettes → thrombopénie. Les organes en aval sont en ischémie (rein, cerveau, cœur, tube digestif).</p>
+<p><strong>Diagnostic biologique de la MAT</strong> :</p>
+<ul>
+<li>Frottis sanguin : <strong>schizocytes &gt;1%</strong> (normale &lt;0,1%) — signe indispensable</li>
+<li>Anémie régénérative (réticulocytes élevés), haptoglobine effondrée (hémolyse), LDH très élevées, bilirubine libre augmentée</li>
+<li>Thrombopénie de consommation</li>
+<li>Bilan hémostase : normal ou peu perturbé (contrairement à la CIVD)</li>
+</ul>
+<div class="expl-warn">⚠️ MAT = urgence absolue. La déglobulisation rapide et les thromboses micro-vasculaires peuvent tuer en heures.</div>
+</div>
+
+<h3>II — PTT / Moschcowitz</h3>
+<div class="expl-wrap">
+<h4>🔬 2.1 — Déficit en ADAMTS13</h4>
+<div class="def-box"><strong>PTT (Purpura Thrombotique Thrombocytopénique) / syndrome de Moschcowitz</strong> : MAT due à un <strong>déficit en ADAMTS13</strong> (métalloprotéase qui clive les grands multimères de von Willebrand). Sans ADAMTS13, les ultra-larges multimères de FvW s'accumulent et activent massivement les plaquettes → microthrombi diffus.</div>
+<p>Le PTT touche surtout l'<strong>adulte</strong>. La <strong>pentade classique</strong> (rare de trouver les 5 ensemble) : thrombopénie + AHEM (schizocytes) + fièvre + troubles de la conscience (atteinte cérébrale) + atteinte rénale modérée.</p>
+<p>Deux formes : (1) <strong>Constitutionnel</strong> (syndrome d'Upshaw-Schulman) : déficit génétique en ADAMTS13 ; rare ; rechutes lors d'infections ou grossesse. (2) <strong>Acquis</strong> (80%) : auto-anticorps anti-ADAMTS13 → inhibent ou détruisent l'enzyme ; souvent idiopathique ou associé à médicaments (quinine, clopidogrel), infections, grossesse, lupus.</p>
+<p><strong>Traitement</strong> : <strong>échanges plasmatiques</strong> (plasmaphérèse) en URGENCE = apport d'ADAMTS13 fonctionnelle + élimination des auto-Ac. Rituximab (anti-CD20) si forme acquise. Caplacizumab (anti-FvW) en complément.</p>
+</div>
+
+<h3>III — SHU</h3>
+<div class="expl-wrap">
+<h4>👶 3.1 — Syndrome Hémolytique et Urémique</h4>
+<div class="def-box"><strong>SHU (Syndrome Hémolytique et Urémique)</strong> : MAT touchant préférentiellement l'enfant (&lt;5 ans), caractérisée par la triade MAT avec <strong>atteinte rénale prédominante</strong> (insuffisance rénale aiguë oligo-anurique). C'est la première cause d'insuffisance rénale aiguë de l'enfant.</div>
+<p>Forme typique (SHU +D) : infection par <strong>E.coli O157:H7</strong> (producteur de shigatoxines) via aliments contaminés (viande hachée crue, fromages non pasteurisés, légumes crus). Diarrhée sanglante 5–10 jours avant → shigatoxines détruisent l'endothélium rénal → MAT rénale. Traitement : <strong>dialyse</strong> si oligo-anurie, traitement symptomatique. Antibiotiques contre-indiqués (libèrent plus de toxines).</p>
+<p>Autres formes : HELLP syndrome (complication obstétricale — grossesse) ; MAT médicamenteuse (quinine, gemcitabine, ciclosporine) ; SHU atypique (mutations du complément).</p>
+<div class="expl-bq">Ex : Enfant de 3 ans, diarrhées sanglantes depuis 8 jours. Consultation urgences : pâleur, oligurie, hémoglobine 72 g/L, plaquettes 28 G/L, créatinine 320 µmol/L, schizocytes 4% au frottis → SHU à E.coli → dialyse, réhydratation.</div>
+</div>
+
+<div class="table-wrap"><table>
+<thead><tr><th>Critère</th><th>PTT</th><th>SHU</th></tr></thead>
+<tbody>
+<tr><td>Âge typique</td><td>Adulte</td><td>Enfant &lt;5 ans</td></tr>
+<tr><td>Mécanisme</td><td>Déficit ADAMTS13 (congénital ou Ac)</td><td>Shigatoxines E.coli O157:H7</td></tr>
+<tr><td>Atteinte rénale</td><td>Modérée</td><td>Prédominante (IRA oligo-anurique)</td></tr>
+<tr><td>Atteinte neurologique</td><td>Fréquente (confusion, coma)</td><td>Rare</td></tr>
+<tr><td>Traitement urgence</td><td>Échanges plasmatiques</td><td>Dialyse + symptomatique</td></tr>
+<tr><td>Antibiotiques</td><td>Selon contexte</td><td>CI (libèrent shigatoxines)</td></tr>
+</tbody>
+</table></div>
+
+<svg viewBox="0 0 700 200" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-height:200px;margin:1.5rem 0;display:block">
+<rect width="700" height="200" fill="#0d0d1a"/>
+<text x="350" y="18" text-anchor="middle" fill="#e74c3c" font-size="12" font-family="Segoe UI,sans-serif" font-weight="bold">MAT — Triade diagnostique et mécanisme</text>
+<rect x="20" y="35" width="180" height="55" rx="6" fill="rgba(231,76,60,0.15)" stroke="#e74c3c" stroke-width="1.5"/>
+<text x="110" y="57" text-anchor="middle" fill="white" font-size="11" font-family="Segoe UI,sans-serif" font-weight="bold">Microthrombi</text>
+<text x="110" y="73" text-anchor="middle" fill="#c0c0d8" font-size="9" font-family="Segoe UI,sans-serif">microcirculation</text>
+<rect x="260" y="35" width="180" height="55" rx="6" fill="rgba(231,76,60,0.15)" stroke="#e74c3c" stroke-width="1.5"/>
+<text x="350" y="57" text-anchor="middle" fill="white" font-size="11" font-family="Segoe UI,sans-serif" font-weight="bold">Schizocytes &gt;1%</text>
+<text x="350" y="73" text-anchor="middle" fill="#c0c0d8" font-size="9" font-family="Segoe UI,sans-serif">GR fragmentés mécaniquement</text>
+<rect x="500" y="35" width="180" height="55" rx="6" fill="rgba(231,76,60,0.15)" stroke="#e74c3c" stroke-width="1.5"/>
+<text x="590" y="57" text-anchor="middle" fill="white" font-size="11" font-family="Segoe UI,sans-serif" font-weight="bold">Thrombopénie</text>
+<text x="590" y="73" text-anchor="middle" fill="#c0c0d8" font-size="9" font-family="Segoe UI,sans-serif">Consommation plaquettaire</text>
+<text x="110" y="130" text-anchor="middle" fill="#3498db" font-size="9" font-family="Segoe UI,sans-serif">PTT: déficit ADAMTS13 → échanges plasmatiques</text>
+<text x="590" y="130" text-anchor="middle" fill="#3498db" font-size="9" font-family="Segoe UI,sans-serif">SHU: E.coli O157 → dialyse</text>
+<text x="350" y="165" text-anchor="middle" fill="#f39c12" font-size="10" font-family="Segoe UI,sans-serif" font-weight="bold">Urgence : frottis sanguin systématique si anémie + thrombopénie</text>
+</svg>
+
+<div class="flash-block">
+<div class="flash-q">❓ Quelle est la triade diagnostique de la MAT et quel examen simple la confirme ?</div>
+<button class="flash-reveal" onclick="this.nextElementSibling.style.display='block';this.style.display='none'">Révéler la réponse</button>
+<div class="flash-answer" style="display:none">Triade : (1) Anémie hémolytique mécanique + (2) thrombopénie par consommation + (3) atteinte ischémique d'organe. Examen clé : <strong>frottis sanguin</strong> à la recherche de <strong>schizocytes &gt;1%</strong> (fragments de GR).</div>
+</div>
+<div class="flash-block">
+<div class="flash-q">❓ Pourquoi les antibiotiques sont-ils contre-indiqués dans le SHU à E.coli O157:H7 ?</div>
+<button class="flash-reveal" onclick="this.nextElementSibling.style.display='block';this.style.display='none'">Révéler la réponse</button>
+<div class="flash-answer" style="display:none">Les antibiotiques tuent les bactéries E.coli mais provoquent leur lyse → libération massive de <strong>shigatoxines</strong> → aggravation de l'atteinte endothéliale rénale → aggravation du SHU. Traitement = symptomatique (dialyse si oligo-anurie, réhydratation).</div>
+</div>
+<div class="flash-block">
+<div class="flash-q">❓ Quel est le traitement d'urgence du PTT acquis et son mécanisme ?</div>
+<button class="flash-reveal" onclick="this.nextElementSibling.style.display='block';this.style.display='none'">Révéler la réponse</button>
+<div class="flash-answer" style="display:none"><strong>Échanges plasmatiques (plasmaphérèse)</strong> en urgence : (1) apportent de l'ADAMTS13 fonctionnelle (contenue dans le plasma du donneur) ; (2) éliminent les auto-anticorps anti-ADAMTS13. Si forme acquise immune : ajouter rituximab (anti-CD20) pour détruire les lymphocytes B producteurs d'Ac.</div>
+</div>
+</div><!-- SLIDE 6 : QCM 3 — MAT -->
+<div class="slide content-slide" id="slide-6">
+  <h2>🧠 QCM 3 — Microangiopathies thrombotiques (MAT)</h2>
+
+  <div class="qcm-block" data-answer="C" id="q3-1">
+    <div class="q-text">Q1. Quelle est la triade clinico-biologique définissant une MAT ?</div>
+    <div class="qcm-options">
+      <div class="qcm-option" data-idx="A" onclick="selectOption(this)"><span class="letter">A</span> Thrombopénie + fièvre + ictère</div>
+      <div class="qcm-option" data-idx="B" onclick="selectOption(this)"><span class="letter">B</span> Anémie + purpura + insuffisance rénale</div>
+      <div class="qcm-option" data-idx="C" onclick="selectOption(this)"><span class="letter">C</span> Anémie hémolytique mécanique (AHEM) + thrombopénie de consommation + atteinte d'organe</div>
+      <div class="qcm-option" data-idx="D" onclick="selectOption(this)"><span class="letter">D</span> Schizocytes + CIVD + insuffisance hépatique</div>
+    </div>
+    <button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button>
+    <div class="qcm-feedback"></div>
+    <div class="qcm-explanation">Réponse C. La triade MAT = AHEM (anémie hémolytique mécanique avec schizocytes et LDH élevées) + thrombopénie de consommation (plaquettes basses sans coagulation pathologique) + atteinte d'organe (cerveau dans PTT, rein dans SHU). La présence de schizocytes est l'élément morphologique clé.</div>
+  </div>
+
+  <div class="qcm-block" data-answer="B" id="q3-2">
+    <div class="q-text">Q2. Quel est le déficit enzymatique responsable du PTT (purpura thrombotique thrombocytopénique) ?</div>
+    <div class="qcm-options">
+      <div class="qcm-option" data-idx="A" onclick="selectOption(this)"><span class="letter">A</span> Déficit en FVIII</div>
+      <div class="qcm-option" data-idx="B" onclick="selectOption(this)"><span class="letter">B</span> Déficit en ADAMTS13 (protéase clivant le vWF)</div>
+      <div class="qcm-option" data-idx="C" onclick="selectOption(this)"><span class="letter">C</span> Déficit en facteur H du complément</div>
+      <div class="qcm-option" data-idx="D" onclick="selectOption(this)"><span class="letter">D</span> Déficit en protéine C activée</div>
+    </div>
+    <button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button>
+    <div class="qcm-feedback"></div>
+    <div class="qcm-explanation">Réponse B. Le PTT est causé par un déficit en ADAMTS13 (métallo-protéase qui clive les multimères de haut poids moléculaire du vWF). Sans clivage : accumulation de ultra-LPM vWF → agrégation plaquettaire diffuse → thrombus disséminés → MAT. Forme acquise (80%) : auto-Ac anti-ADAMTS13. Forme héréditaire : maladie de Upshaw-Schulman.</div>
+  </div>
+
+  <div class="qcm-block" data-answer="A" id="q3-3">
+    <div class="q-text">Q3. Quel est le traitement de première intention du PTT acquis avec anti-ADAMTS13 ?</div>
+    <div class="qcm-options">
+      <div class="qcm-option" data-idx="A" onclick="selectOption(this)"><span class="letter">A</span> Échanges plasmatiques quotidiens + corticoïdes ± rituximab</div>
+      <div class="qcm-option" data-idx="B" onclick="selectOption(this)"><span class="letter">B</span> Transfusion de plaquettes en urgence</div>
+      <div class="qcm-option" data-idx="C" onclick="selectOption(this)"><span class="letter">C</span> HBPM à dose curative</div>
+      <div class="qcm-option" data-idx="D" onclick="selectOption(this)"><span class="letter">D</span> Dialyse en urgence</div>
+    </div>
+    <button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button>
+    <div class="qcm-feedback"></div>
+    <div class="qcm-explanation">Réponse A. PTT acquis = échanges plasmatiques (plasmaphérèses) QUOTIDIENS en URGENCE : (1) apportent de l'ADAMTS13 fonctionnelle (dans le plasma du donneur) ; (2) éliminent les auto-anticorps. Corticoïdes associés. Rituximab si forme réfractaire ou récidivante. JAMAIS de transfusion plaquettaire (aggrave les thromboses).</div>
+  </div>
+
+  <div class="qcm-block" data-answer="D" id="q3-4">
+    <div class="q-text">Q4. Quel est l'agent infectieux le plus souvent responsable du SHU typique de l'enfant ?</div>
+    <div class="qcm-options">
+      <div class="qcm-option" data-idx="A" onclick="selectOption(this)"><span class="letter">A</span> Salmonella typhi</div>
+      <div class="qcm-option" data-idx="B" onclick="selectOption(this)"><span class="letter">B</span> Campylobacter jejuni</div>
+      <div class="qcm-option" data-idx="C" onclick="selectOption(this)"><span class="letter">C</span> Rotavirus</div>
+      <div class="qcm-option" data-idx="D" onclick="selectOption(this)"><span class="letter">D</span> Escherichia coli entérohémorragique O157:H7 (STEC)</div>
+    </div>
+    <button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button>
+    <div class="qcm-feedback"></div>
+    <div class="qcm-explanation">Réponse D. Le SHU typique (90% des SHU pédiatriques) est causé par E. coli entérohémorragique O157:H7 (et autres STEC). La vérotoxine (Shiga-toxine) est produite dans l'intestin → lésions endothéliales rénales → MAT localisée au rein. Clinique : diarrhée sanglante (5-10 jours avant) → anémie + thrombopénie + IRA. Pas d'antibiotiques (libèrent la toxine).</div>
+  </div>
+
+  <div class="qcm-block" data-answer="C" id="q3-5">
+    <div class="q-text">Q5. Quelle est la différence clinique principale entre PTT et SHU ?</div>
+    <div class="qcm-options">
+      <div class="qcm-option" data-idx="A" onclick="selectOption(this)"><span class="letter">A</span> PTT = enfant, SHU = adulte</div>
+      <div class="qcm-option" data-idx="B" onclick="selectOption(this)"><span class="letter">B</span> SHU = schizocytes, PTT = pas de schizocytes</div>
+      <div class="qcm-option" data-idx="C" onclick="selectOption(this)"><span class="letter">C</span> PTT = atteinte neurologique prédominante. SHU = insuffisance rénale prédominante</div>
+      <div class="qcm-option" data-idx="D" onclick="selectOption(this)"><span class="letter">D</span> Pas de différence clinique</div>
+    </div>
+    <button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button>
+    <div class="qcm-feedback"></div>
+    <div class="qcm-explanation">Réponse C. PTT = PENTADE de Moschcowitz : AHEM + thrombopénie + NEUROLOGIQUE (confusion, convulsions, AVC) + fièvre + atteinte rénale modérée. SHU = TRIADE : AHEM + thrombopénie + IRA SÉVÈRE (dialyse parfois nécessaire) avec atteinte neurologique mineure ou absente. Mémo : PTT = tête (cerveau), SHU = rein.</div>
+  </div>
+</div>
+
+<!-- SLIDE 7 : TIH & AUTRES THROMBOPÉNIES -->
+<div class="slide content-slide" id="slide-7">
+  <h2>⚠️ Thrombopénie induite par l'héparine (TIH) & autres thrombopénies médicamenteuses</h2>
+
+  <h3>I — TIH de type II : le paradoxe à connaître par cœur</h3>
+  <div class="def-box">
+    <strong>TIH type II</strong> = thrombopénie PARADOXALE sous héparine associée à un risque <strong>THROMBOTIQUE</strong> (pas hémorragique) : anticorps anti-complexe <strong>FP4-héparine</strong> → activation plaquettaire → thrombus artériels ET veineux simultanément.
+  </div>
+  <div class="expl-wrap">
+    <h4>🔬 Physiopathologie</h4>
+    <p>L'héparine se lie au <strong>facteur plaquettaire 4 (FP4)</strong>, libéré par les plaquettes activées. Ce complexe héparine-FP4 est reconnu comme étranger → formation d'<strong>auto-anticorps IgG anti-FP4/héparine</strong>.</p>
+    <p>Ces anticorps : (1) se lient au complexe FP4-héparine exposé à la surface des plaquettes → <strong>activation plaquettaire massive</strong> → thrombus ; (2) activent l'endothélium → amplification thrombotique. Résultat paradoxal : les plaquettes sont <em>consommées</em> (thrombopénie) mais dans un contexte <em>prothrombotique</em>.</p>
+    <blockquote class="expl-bq">💡 Analogie : c'est comme si les pompiers (plaquettes) arrivaient mais attisaient l'incendie au lieu de l'éteindre.</blockquote>
+  </div>
+
+  <div class="expl-wrap">
+    <h4>🕐 Cinétique et score 4T</h4>
+    <p>La TIH type II survient typiquement <strong>5-14 jours après introduction de l'héparine</strong> (délai de formation des anticorps). Si exposition antérieure récente < 100 jours : dès 24h (Ac déjà formés).</p>
+    <p>Le <strong>score 4T</strong> évalue la probabilité :</p>
+    <div class="table-wrap">
+      <table>
+        <tr><th>Critère</th><th>2 points</th><th>1 point</th><th>0 point</th></tr>
+        <tr><td><strong>T</strong>hrombopénie</td><td>> 50% chute, nadir ≥ 20</td><td>30-50% chute, nadir 10-19</td><td>< 30% chute ou nadir < 10</td></tr>
+        <tr><td><strong>T</strong>iming</td><td>J5-J10 ou < J1 si ATCD</td><td>J10-J14 ou > J14</td><td>< J4 sans ATCD</td></tr>
+        <tr><td><strong>T</strong>hrombose</td><td>Nouvelle TVP/EP/thrombose art.</td><td>Thrombose progressive ou sus-pectée</td><td>Aucune</td></tr>
+        <tr><td>Au<strong>t</strong>res causes</td><td>Aucune autre cause</td><td>Possible autre cause</td><td>Cause certaine</td></tr>
+      </table>
+    </div>
+    <p>Score ≥ 6 = forte probabilité → confirmer par dosage Ac anti-FP4/héparine (ELISA) et test fonctionnel (test de libération de sérotonine).</p>
+  </div>
+
+  <div class="urgence-box">
+    <strong>🚨 Conduite à tenir TIH type II :</strong><br>
+    1. <strong>Arrêt IMMÉDIAT de toute héparine</strong> (HNF ET HBPM) → y compris les rinçages de cathéter<br>
+    2. <strong>Relais IMMÉDIAT</strong> par anticoagulant non héparinique : danaparoïde (Orgaran®) ou argatroban ou fondaparinux<br>
+    3. <strong>JAMAIS de transfusion plaquettaire</strong> → apporte du FP4 → aggrave les thromboses<br>
+    4. Ne PAS introduire les AVK tant que plaquettes < 150 G/L (risque de gangrène veineuse)<br>
+    5. Recherche de thrombose systématique : écho-Doppler veineux des 4 membres
+  </div>
+
+  <h3>II — Autres thrombopénies médicamenteuses</h3>
+  <div class="expl-wrap">
+    <h4>💊 Mécanismes et médicaments en cause</h4>
+    <p><strong>Mécanisme immuno-allergique</strong> (le plus fréquent) : le médicament se lie aux plaquettes → complexe hapténique → Ac anti-médicament/plaquette → destruction. Délai : 7-14 jours après introduction. Guérison à l'arrêt.</p>
+    <ul>
+      <li>Quinine/quinidine : thrombopénie sévère, classique en ECN</li>
+      <li>Antibiotiques (vancomycine, rifampicine, pénicillines à forte dose)</li>
+      <li>Diurétiques thiazidiques (hydrochlorothiazide)</li>
+      <li>Anti-GP IIb/IIIa (abciximab, tirofiban) : thrombopénie précoce (< 24h)</li>
+    </ul>
+    <p><strong>Mécanisme toxique direct</strong> : chimiothérapies (effet myélosuppresseur direct sur les mégacaryocytes), alcool.</p>
+  </div>
+
+  <h3>III — Thrombopénies constitutionnelles (rares mais ECN)</h3>
+  <div class="expl-wrap">
+    <h4>🧬 À connaître</h4>
+    <ul>
+      <li><strong>Syndrome de Bernard-Soulier</strong> : thrombopénie modérée + macroplaquettes + déficit GPIb → anomalie de l'adhésion (voir thrombopathies)</li>
+      <li><strong>Syndrome MYH9</strong> (May-Hegglin, Fechtner...) : macroplaquettes + corps de Döhle dans PNN + thrombopénie variable → mutation MYH9</li>
+      <li><strong>Syndrome de Wiskott-Aldrich</strong> : thrombopénie sévère + microplaquettes + eczéma + immunodéficience → mutation WAS, lié à l'X</li>
+      <li><strong>Amegacaryocytose congénitale</strong> : absence de mégacaryocytes dès la naissance → aplasie médullaire secondaire → mutation MPL (récepteur TPO)</li>
+    </ul>
+  </div>
+
+  <h3>IV — Thrombopénies infectieuses</h3>
+  <div class="expl-wrap">
+    <h4>🦠 Mécanismes</h4>
+    <p><strong>VIH</strong> : thrombopénie fréquente (30% des patients), multiple mécanismes : auto-Ac anti-GP IIb/IIIa, toxicité médullaire directe, destruction splénique. Répond aux ARV.</p>
+    <p><strong>Virus des hépatites B et C</strong> : thrombopénie par hypersplénisme (cirrhose → séquestration) + auto-Ac. IFN-α aggrave la thrombopénie.</p>
+    <p><strong>Parvovirus B19</strong> : aplasie pure des précurseurs rouges ET plaquettaires, surtout en immunodépression.</p>
+    <p><strong>CMV/EBV</strong> : thrombopénie modérée, auto-limitée.</p>
+    <p><strong>Paludisme</strong> : mécanisme mixte (séquestration splénique + consommation + auto-Ac).</p>
+  </div>
+
+  <svg width="100%" height="160" viewBox="0 0 900 160">
+    <rect width="900" height="160" fill="rgba(0,0,0,0.3)" rx="8"/>
+    <text x="450" y="25" text-anchor="middle" fill="#e74c3c" font-size="13" font-weight="bold">TIH type II — paradoxe</text>
+    <rect x="30" y="40" width="200" height="50" rx="6" fill="rgba(52,152,219,0.2)" stroke="#3498db"/>
+    <text x="130" y="60" text-anchor="middle" fill="#3498db" font-size="10" font-weight="bold">Héparine</text>
+    <text x="130" y="75" text-anchor="middle" fill="#9090b0" font-size="9">Introduite</text>
+    <rect x="280" y="40" width="200" height="50" rx="6" fill="rgba(231,76,60,0.2)" stroke="#e74c3c"/>
+    <text x="380" y="60" text-anchor="middle" fill="#e74c3c" font-size="10" font-weight="bold">FP4 + Héparine</text>
+    <text x="380" y="75" text-anchor="middle" fill="#9090b0" font-size="9">Complexe antigénique</text>
+    <rect x="530" y="40" width="200" height="50" rx="6" fill="rgba(243,156,18,0.2)" stroke="#f39c12"/>
+    <text x="630" y="60" text-anchor="middle" fill="#f39c12" font-size="10" font-weight="bold">Ac anti-FP4</text>
+    <text x="630" y="75" text-anchor="middle" fill="#9090b0" font-size="9">J5-J14</text>
+    <text x="240" y="68" fill="#9090b0" font-size="14">→</text>
+    <text x="490" y="68" fill="#9090b0" font-size="14">→</text>
+    <rect x="280" y="105" width="360" height="40" rx="6" fill="rgba(231,76,60,0.3)" stroke="#e74c3c" stroke-width="2"/>
+    <text x="460" y="120" text-anchor="middle" fill="#e74c3c" font-size="10" font-weight="bold">⚠️ Activation plaquettaire → Thrombose</text>
+    <text x="460" y="135" text-anchor="middle" fill="#9090b0" font-size="9">TVP + EP + thrombose artérielle</text>
+    <line x1="380" y1="90" x2="380" y2="105" stroke="#e74c3c" stroke-width="2"/>
+    <line x1="630" y1="90" x2="540" y2="105" stroke="#e74c3c" stroke-width="2"/>
+  </svg>
+
+  <div class="flash-block">
+    <div class="flash-q">❓ Un patient est sous HBPM depuis 8 jours pour une TVP. Ses plaquettes passent de 180 G/L à 65 G/L. Il développe une thrombose d'un membre. Quel est le diagnostic, et quelle est l'erreur à ne PAS commettre ?</div>
+    <button class="flash-reveal" onclick="this.nextElementSibling.style.display='block';this.style.display='none'">Révéler la réponse</button>
+    <div class="flash-answer" style="display:none">Diagnostic : TIH type II (J5-J14, chute > 50%, nouvelle thrombose = score 4T fort). Erreur absolue : <strong>NE PAS transfuser des plaquettes</strong> → aggrave les thromboses. NE PAS garder l'HBPM. Conduite : arrêt TOUTE héparine → relais danaparoïde ou argatroban IMMÉDIATEMENT. Confirmer par ELISA anti-FP4.</div>
+  </div>
+  <div class="flash-block">
+    <div class="flash-q">❓ Quel est le délai typique d'apparition de la TIH type II et quelle est son explication immunologique ?</div>
+    <button class="flash-reveal" onclick="this.nextElementSibling.style.display='block';this.style.display='none'">Révéler la réponse</button>
+    <div class="flash-answer" style="display:none">Délai classique : <strong>5-14 jours</strong> après introduction de l'héparine (temps de formation des IgG anti-FP4/héparine). Si exposition récente < 100 jours : début possible dès 24h (mémoire immunologique → anticorps préformés). Ce délai est un élément clé du score 4T.</div>
+  </div>
+  <div class="flash-block">
+    <div class="flash-q">❓ Quels sont les 4 anticoagulants utilisables en relais lors d'une TIH type II confirmée ?</div>
+    <button class="flash-reveal" onclick="this.nextElementSibling.style.display='block';this.style.display='none'">Révéler la réponse</button>
+    <div class="flash-answer" style="display:none">1. <strong>Danaparoïde</strong> (Orgaran®) : héparinoïde sans réaction croisée avec les Ac anti-FP4. 2. <strong>Argatroban</strong> : inhibiteur direct de la thrombine, voie IV, hépatique. 3. <strong>Fondaparinux</strong> (Arixtra®) : pentasaccharide, pas de réaction croisée dans la majorité des cas. 4. <strong>Bivalirudine</strong> : inhibiteur direct thrombine, voie IV. Les AVK ne sont introduits qu'une fois plaquettes > 150 G/L (risque de gangrène veineuse si début précoce).</div>
+  </div>
+</div>
+
+<!-- SLIDE 8 : QCM 4 — TIH -->
+<div class="slide content-slide" id="slide-8">
+  <h2>🧠 QCM 4 — TIH & thrombopénies médicamenteuses</h2>
+
+  <div class="qcm-block" data-answer="B" id="q4-1">
+    <div class="q-text">Q1. Un patient sous HNF depuis J7 pour une EP présente une chute des plaquettes de 210 à 80 G/L, et une thrombose artérielle d'un membre. Quelle est la conduite à tenir IMMÉDIATE ?</div>
+    <div class="qcm-options">
+      <div class="qcm-option" data-idx="A" onclick="selectOption(this)"><span class="letter">A</span> Doubler la dose d'HNF et transfuser les plaquettes</div>
+      <div class="qcm-option" data-idx="B" onclick="selectOption(this)"><span class="letter">B</span> Arrêt IMMÉDIAT de l'HNF + relais danaparoïde ou argatroban. JAMAIS de plaquettes.</div>
+      <div class="qcm-option" data-idx="C" onclick="selectOption(this)"><span class="letter">C</span> Passer à l'HBPM et surveiller</div>
+      <div class="qcm-option" data-idx="D" onclick="selectOption(this)"><span class="letter">D</span> Introduire immédiatement les AVK</div>
+    </div>
+    <button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button>
+    <div class="qcm-feedback"></div>
+    <div class="qcm-explanation">Réponse B. Score 4T fort (J7, chute > 50%, nouvelle thrombose, aucune autre cause) = forte suspicion de TIH type II. Arrêt TOUTE héparine (HNF ET HBPM). JAMAIS de plaquettes. Relais par non-héparinique (danaparoïde, argatroban, fondaparinux). Passer à l'HBPM (réponse C) est FAUX : les HBPM ont une réaction croisée avec les Ac anti-FP4 dans 90% des cas.</div>
+  </div>
+
+  <div class="qcm-block" data-answer="C" id="q4-2">
+    <div class="q-text">Q2. Quel est le délai habituel d'apparition de la TIH type II chez un patient qui n'a jamais eu d'héparine ?</div>
+    <div class="qcm-options">
+      <div class="qcm-option" data-idx="A" onclick="selectOption(this)"><span class="letter">A</span> Dans les 24 premières heures</div>
+      <div class="qcm-option" data-idx="B" onclick="selectOption(this)"><span class="letter">B</span> J2-J4</div>
+      <div class="qcm-option" data-idx="C" onclick="selectOption(this)"><span class="letter">C</span> J5-J14 (délai de formation des IgG anti-FP4)</div>
+      <div class="qcm-option" data-idx="D" onclick="selectOption(this)"><span class="letter">D</span> Après 1 mois minimum</div>
+    </div>
+    <button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button>
+    <div class="qcm-feedback"></div>
+    <div class="qcm-explanation">Réponse C. En l'absence d'exposition antérieure récente, la TIH type II apparaît à J5-J14 (formation de novo des IgG anti-complexe FP4/héparine). Exception : si exposition antérieure < 100 jours → Ac préformés → thrombopénie possible dès J1. C'est un élément clé du score 4T (T = Timing).</div>
+  </div>
+
+  <div class="qcm-block" data-answer="D" id="q4-3">
+    <div class="q-text">Q3. Pourquoi les AVK ne doivent-ils pas être introduits immédiatement dans la TIH type II ?</div>
+    <div class="qcm-options">
+      <div class="qcm-option" data-idx="A" onclick="selectOption(this)"><span class="letter">A</span> Risque de résistance aux AVK en cas de TIH</div>
+      <div class="qcm-option" data-idx="B" onclick="selectOption(this)"><span class="letter">B</span> Les AVK aggravent la thrombopénie</div>
+      <div class="qcm-option" data-idx="C" onclick="selectOption(this)"><span class="letter">C</span> Risque d'hémorragie si INR trop élevé</div>
+      <div class="qcm-option" data-idx="D" onclick="selectOption(this)"><span class="letter">D</span> Risque de gangrène veineuse par consommation initiale de protéine C (vitamine K-dépendante) avant normalisation des autres facteurs</div>
+    </div>
+    <button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button>
+    <div class="qcm-feedback"></div>
+    <div class="qcm-explanation">Réponse D. Les AVK inhibent d'abord la protéine C (demi-vie courte 8h) → état transitoire prothrombotique par baisse de l'anticoagulant physiologique, sans encore avoir inhibé les facteurs pro-coagulants (II, X, IX). En contexte de TIH, ce déséquilibre provoque des gangrènes veineuses. Règle : AVK uniquement quand plaquettes > 150 G/L et TOUJOURS en relais d'un anticoagulant non héparinique.</div>
+  </div>
+
+  <div class="qcm-block" data-answer="A" id="q4-4">
+    <div class="q-text">Q4. Quel outil de score aide à stratifier la probabilité de TIH et quels sont ses 4 critères ?</div>
+    <div class="qcm-options">
+      <div class="qcm-option" data-idx="A" onclick="selectOption(this)"><span class="letter">A</span> Score 4T : Thrombopénie + Timing + Thrombose + auTres causes</div>
+      <div class="qcm-option" data-idx="B" onclick="selectOption(this)"><span class="letter">B</span> Score de Wells adapté à la TIH</div>
+      <div class="qcm-option" data-idx="C" onclick="selectOption(this)"><span class="letter">C</span> Score ISTH pour les thrombopénies héparino-induites</div>
+      <div class="qcm-option" data-idx="D" onclick="selectOption(this)"><span class="letter">D</span> Score HAS-BLED adapté</div>
+    </div>
+    <button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button>
+    <div class="qcm-feedback"></div>
+    <div class="qcm-explanation">Réponse A. Le score 4T est l'outil validé : T = Thrombopénie (degré de chute + nadir), T = Timing (délai par rapport à l'héparine), T = Thrombose (nouvelle thrombose = points majeurs), T = auTres causes (existence d'autre explication). Score 6-8 = forte probabilité → traitement avant confirmation biologique.</div>
+  </div>
+
+  <div class="qcm-block" data-answer="B" id="q4-5">
+    <div class="q-text">Q5. Quel médicament, s'il est introduit immédiatement dans une TIH active avec plaquettes à 50 G/L, risque de causer une gangrène veineuse ?</div>
+    <div class="qcm-options">
+      <div class="qcm-option" data-idx="A" onclick="selectOption(this)"><span class="letter">A</span> Danaparoïde</div>
+      <div class="qcm-option" data-idx="B" onclick="selectOption(this)"><span class="letter">B</span> Warfarine (AVK)</div>
+      <div class="qcm-option" data-idx="C" onclick="selectOption(this)"><span class="letter">C</span> Argatroban</div>
+      <div class="qcm-option" data-idx="D" onclick="selectOption(this)"><span class="letter">D</span> Fondaparinux</div>
+    </div>
+    <button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button>
+    <div class="qcm-feedback"></div>
+    <div class="qcm-explanation">Réponse B. La warfarine (AVK) est contre-indiquée en phase aiguë de TIH (plaquettes < 150 G/L). Raison : la warfarine inhibe d'abord la protéine C (demi-vie la plus courte, 8h) → déséquilibre pro-coagulant transitoire → gangrène veineuse des extrémités. Elle n'est introduite qu'une fois les plaquettes > 150 G/L et en relais d'un anticoagulant non héparinique déjà actif.</div>
+  </div>
+</div>
+
+<!-- SLIDE 9 : PURPURA — DÉFINITION ET CLASSIFICATION -->
+<div class="slide content-slide" id="slide-9">
+  <h2>🔴 Purpura — Définition, classification & démarche diagnostique</h2>
+
+  <h3>I — Définition et caractéristiques sémiologiques</h3>
+  <div class="def-box">
+    <strong>Purpura</strong> = lésion cutanée rouge ou pourpre résultant d'une <strong>extravasation de globules rouges dans le derme</strong>, caractérisée par : <em>ne s'efface PAS à la vitropression</em> (contrairement aux érythèmes vasculaires). Taille &gt; 2 mm (la pétéchie &lt; 2 mm est la forme la plus petite).
+  </div>
+
+  <div class="expl-wrap">
+    <h4>🔎 Sémiologie : les 3 formes à distinguer</h4>
+    <ul>
+      <li><strong>Pétéchie</strong> : &lt; 2 mm, ponctiforme, rouge vif → signe de thrombopénie ou thrombopathie</li>
+      <li><strong>Purpura</strong> : 2 mm-1 cm, placard rouge pourpre → thrombopénie, vasculite</li>
+      <li><strong>Ecchymose / vibice</strong> : &gt; 1 cm, violet puis jaune-verdâtre (biligénie) → traumatisme, coagulopathie</li>
+    </ul>
+    <blockquote class="expl-bq">⚠️ PIÈGE ECN : la vitropression distingue le purpura (NE s'efface PAS) de l'érythème (s'efface). Test : presser avec un verre → si la lésion disparaît = érythème (vasodilatation). Si persiste = purpura (GR extravasés).</blockquote>
+  </div>
+
+  <h3>II — Classification étiologique : 2 grands groupes</h3>
+  <div class="expl-wrap">
+    <h4>🩸 Groupe 1 — Purpura thrombopénique ou thrombopathique</h4>
+    <p>Mécanisme : insuffisance de la numération ou de la fonction plaquettaire → incapacité à former le clou hémostatique → extravasation spontanée.</p>
+    <ul>
+      <li>Purpura <strong>pétéchial</strong> prédominant (petites lésions punctiformes)</li>
+      <li>Distribution : déclive (membres inférieurs), confluente</li>
+      <li>Muqueuses souvent touchées (gingivorragies, buccal)</li>
+      <li>Bilan : NFS (thrombopénie) + frottis + bilan étiologique thrombopénie</li>
+    </ul>
+  </div>
+  <div class="expl-wrap">
+    <h4>🔵 Groupe 2 — Purpura vasculaire (non thrombopénique)</h4>
+    <p>Mécanisme : atteinte de la paroi vasculaire → fragilité capillaire → extravasation sans anomalie des plaquettes ni de la coagulation.</p>
+    <ul>
+      <li>Purpura souvent <strong>palpable</strong> (infiltré) si vasculite → élément clé</li>
+      <li>Typiquement déclive (membres inférieurs, zone de pression)</li>
+      <li>Plaquettes NORMALES, coagulation normale</li>
+      <li>Bilan : NFS (normal), VS-CRP, complément, ANCA, IgA, biopsie cutanée</li>
+    </ul>
+    <div class="table-wrap">
+      <table>
+        <tr><th>Cause</th><th>Signes associés</th><th>Mécanisme</th></tr>
+        <tr><td>Purpura rhumatoïde (IgA-vasculite)</td><td>Arthralgies, douleurs abdominales, néphropathie IgA</td><td>Dépôts IgA dans les petits vaisseaux</td></tr>
+        <tr><td>Vasculite à ANCA</td><td>Pneumopathie, glomérulonéphrite</td><td>Anticorps anti-cytoplasme des PNN</td></tr>
+        <tr><td>Maladie de Henoch-Schönlein</td><td>Enfant, post-infectieux (streptocoque)</td><td>IgA vasculite systémique</td></tr>
+        <tr><td>Fragilité capillaire sénile</td><td>Sujet âgé, corticoïdes au long cours</td><td>Atrophie cutanée + fragilité</td></tr>
+        <tr><td>Scorbut (déficit vitamine C)</td><td>Périfolliculaire, gencives</td><td>Déficit collagène</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <h3>III — Purpura fulminans : l'urgence absolue</h3>
+  <div class="urgence-box">
+    <strong>🚨 Purpura fulminans = URGENCE VITALE immédiate</strong><br>
+    Définition : purpura rapidement extensif, ecchymotique, nécrotique + purpura infectieux → méningococcémie jusqu'à preuve du contraire<br>
+    <strong>→ CEFTRIAXONE IM/IV 50 mg/kg (adulte : 2g) IMMÉDIATEMENT, AVANT LA PONCTION LOMBAIRE</strong>
+  </div>
+
+  <svg width="100%" height="160" viewBox="0 0 900 160">
+    <rect width="900" height="160" fill="rgba(0,0,0,0.3)" rx="8"/>
+    <text x="450" y="22" text-anchor="middle" fill="#e74c3c" font-size="12" font-weight="bold">Classification du purpura</text>
+    <!-- Thrombopénique -->
+    <rect x="30" y="35" width="380" height="110" rx="6" fill="rgba(52,152,219,0.15)" stroke="#3498db"/>
+    <text x="220" y="55" text-anchor="middle" fill="#3498db" font-size="11" font-weight="bold">Purpura thrombopénique</text>
+    <text x="220" y="72" text-anchor="middle" fill="#9090b0" font-size="9">Plaquettes basses / dysfonctionnantes</text>
+    <text x="60" y="90" fill="#c0c0d8" font-size="9">• Pétéchies prédominantes</text>
+    <text x="60" y="105" fill="#c0c0d8" font-size="9">• Muqueuses touchées</text>
+    <text x="60" y="120" fill="#c0c0d8" font-size="9">• PTI, MAT, aplasie...</text>
+    <text x="60" y="135" fill="#c0c0d8" font-size="9">• Plaquettes : abaissées</text>
+    <!-- Vasculaire -->
+    <rect x="490" y="35" width="380" height="110" rx="6" fill="rgba(231,76,60,0.15)" stroke="#e74c3c"/>
+    <text x="680" y="55" text-anchor="middle" fill="#e74c3c" font-size="11" font-weight="bold">Purpura vasculaire</text>
+    <text x="680" y="72" text-anchor="middle" fill="#9090b0" font-size="9">Fragilité de la paroi capillaire</text>
+    <text x="520" y="90" fill="#c0c0d8" font-size="9">• Purpura palpable (infiltré)</text>
+    <text x="520" y="105" fill="#c0c0d8" font-size="9">• Déclive, membres inférieurs</text>
+    <text x="520" y="120" fill="#c0c0d8" font-size="9">• Schönlein-Henoch, ANCA...</text>
+    <text x="520" y="135" fill="#c0c0d8" font-size="9">• Plaquettes : NORMALES</text>
+    <!-- Vitropression -->
+    <text x="450" y="85" text-anchor="middle" fill="#f39c12" font-size="10" font-weight="bold">Vitropression</text>
+    <text x="450" y="100" text-anchor="middle" fill="#f39c12" font-size="9">NE s'efface PAS</text>
+  </svg>
+
+  <div class="flash-block">
+    <div class="flash-q">❓ Quelle est la différence sémiologique entre purpura thrombopénique et purpura vasculaire à l'examen clinique ?</div>
+    <button class="flash-reveal" onclick="this.nextElementSibling.style.display='block';this.style.display='none'">Révéler la réponse</button>
+    <div class="flash-answer" style="display:none">Thrombopénique : pétéchies punctiformes + muqueuses touchées (gingivorragies) + plaquettes abaissées. Vasculaire : purpura souvent <strong>palpable (infiltré)</strong> car inflammation de la paroi → épaississement = signe clé ; distribution déclive ; plaquettes et coagulation <strong>normales</strong>. La palpabilité du purpura oriente d'emblée vers une vasculite.</div>
+  </div>
+  <div class="flash-block">
+    <div class="flash-q">❓ Quel est le premier geste thérapeutique devant un purpura fulminans avant même le résultat des examens ?</div>
+    <button class="flash-reveal" onclick="this.nextElementSibling.style.display='block';this.style.display='none'">Révéler la réponse</button>
+    <div class="flash-answer" style="display:none"><strong>CEFTRIAXONE IM/IV 50 mg/kg (2g chez l'adulte) IMMÉDIATEMENT</strong>, même avant la ponction lombaire si celle-ci est impossible ou risque de retarder l'antibiothérapie. Ne JAMAIS retarder l'antibiothérapie pour réaliser des examens. La méningococcémie est fatale en quelques heures sans traitement.</div>
+  </div>
+  <div class="flash-block">
+    <div class="flash-q">❓ Pourquoi le purpura ne s'efface-t-il pas à la vitropression, contrairement à un érythème ?</div>
+    <button class="flash-reveal" onclick="this.nextElementSibling.style.display='block';this.style.display='none'">Révéler la réponse</button>
+    <div class="flash-answer" style="display:none">L'érythème correspond à une <strong>vasodilatation</strong> (les GR restent DANS les vaisseaux). La pression vide les vaisseaux → la couleur disparaît. Le purpura correspond à des GR <strong>extravasés dans le derme</strong> (hors des vaisseaux). La pression ne peut pas les repousser → la couleur persiste. C'est le test diagnostique de référence clinique : presser avec un verre transparent.</div>
+  </div>
+</div>
+
+<!-- SLIDE 10 : QCM 5 — PURPURA -->
+<div class="slide content-slide" id="slide-10">
+  <h2>🧠 QCM 5 — Purpura : sémiologie et étiologie</h2>
+
+  <div class="qcm-block" data-answer="B" id="q5-1">
+    <div class="q-text">Q1. Quelle caractéristique sémiologique est commune aux deux types de purpura (thrombopénique ET vasculaire) ?</div>
+    <div class="qcm-options">
+      <div class="qcm-option" data-idx="A" onclick="selectOption(this)"><span class="letter">A</span> Palpabilité des lésions</div>
+      <div class="qcm-option" data-idx="B" onclick="selectOption(this)"><span class="letter">B</span> Non-effacement à la vitropression</div>
+      <div class="qcm-option" data-idx="C" onclick="selectOption(this)"><span class="letter">C</span> Thrombopénie associée</div>
+      <div class="qcm-option" data-idx="D" onclick="selectOption(this)"><span class="letter">D</span> Localisation périfolliculaire</div>
+    </div>
+    <button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button>
+    <div class="qcm-feedback"></div>
+    <div class="qcm-explanation">Réponse B. Le NON-EFFACEMENT à la vitropression est la caractéristique COMMUNE à TOUS les purpuras (qu'ils soient thrombopéniques, vasculaires ou infectieux). C'est ce qui les définit et les distingue des érythèmes (qui s'effacent). La palpabilité est spécifique au purpura vasculaire inflammatoire.</div>
+  </div>
+
+  <div class="qcm-block" data-answer="C" id="q5-2">
+    <div class="q-text">Q2. Un enfant de 8 ans présente un purpura des membres inférieurs palpable, des arthralgies et des douleurs abdominales. Bilan : plaquettes normales, IgA élevées. Quel est le diagnostic ?</div>
+    <div class="qcm-options">
+      <div class="qcm-option" data-idx="A" onclick="selectOption(this)"><span class="letter">A</span> PTI de l'enfant</div>
+      <div class="qcm-option" data-idx="B" onclick="selectOption(this)"><span class="letter">B</span> Septicémie à méningocoque</div>
+      <div class="qcm-option" data-idx="C" onclick="selectOption(this)"><span class="letter">C</span> Purpura rhumatoïde (IgA-vasculite / Schönlein-Henoch)</div>
+      <div class="qcm-option" data-idx="D" onclick="selectOption(this)"><span class="letter">D</span> Sarcome de Kaposi</div>
+    </div>
+    <button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button>
+    <div class="qcm-feedback"></div>
+    <div class="qcm-explanation">Réponse C. Tableau classique du purpura rhumatoïde (IgA-vasculite de Schönlein-Henoch) : purpura palpable déclive + arthralgies + douleurs abdominales ± néphropathie IgA ± invagination intestinale. Plaquettes NORMALES (≠ PTI). IgA élevées. Enfant après infection streptococcique. Bénin dans 95% des cas, guérison spontanée.</div>
+  </div>
+
+  <div class="qcm-block" data-answer="A" id="q5-3">
+    <div class="q-text">Q3. Quelle est la localisation anatomique préférentielle du purpura vasculaire par fragilité capillaire ?</div>
+    <div class="qcm-options">
+      <div class="qcm-option" data-idx="A" onclick="selectOption(this)"><span class="letter">A</span> Membres inférieurs (déclive)</div>
+      <div class="qcm-option" data-idx="B" onclick="selectOption(this)"><span class="letter">B</span> Tronc et dos</div>
+      <div class="qcm-option" data-idx="C" onclick="selectOption(this)"><span class="letter">C</span> Paumes des mains</div>
+      <div class="qcm-option" data-idx="D" onclick="selectOption(this)"><span class="letter">D</span> Cuir chevelu</div>
+    </div>
+    <button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button>
+    <div class="qcm-feedback"></div>
+    <div class="qcm-explanation">Réponse A. Le purpura vasculaire se localise préférentiellement aux membres inférieurs (zones DÉCLIVES) en raison de la gravité qui favorise la stase sanguine et augmente la pression hydrostatique dans les capillaires → favorise l'extravasation. Les pétéchies thrombopéniques peuvent se voir n'importe où (notamment au tronc).</div>
+  </div>
+
+  <div class="qcm-block" data-answer="D" id="q5-4">
+    <div class="q-text">Q4. Quel bilan biologique oriente vers un purpura vasculaire plutôt que thrombopénique ?</div>
+    <div class="qcm-options">
+      <div class="qcm-option" data-idx="A" onclick="selectOption(this)"><span class="letter">A</span> Thrombopénie + allongement du TS</div>
+      <div class="qcm-option" data-idx="B" onclick="selectOption(this)"><span class="letter">B</span> D-dimères élevés + fibrinogène bas</div>
+      <div class="qcm-option" data-idx="C" onclick="selectOption(this)"><span class="letter">C</span> TP abaissé + TCA allongé</div>
+      <div class="qcm-option" data-idx="D" onclick="selectOption(this)"><span class="letter">D</span> NFS normale + VS/CRP élevées + complément abaissé ± ANCA/IgA élevées</div>
+    </div>
+    <button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button>
+    <div class="qcm-feedback"></div>
+    <div class="qcm-explanation">Réponse D. Purpura vasculaire = plaquettes NORMALES + coagulation NORMALE. Le syndrome inflammatoire (VS, CRP) oriente vers une vasculite. La consommation de complément (C3, C4 bas) → vasculite à complexes immuns. Les ANCA → vasculite systémique (granulomatose avec polyangéite, polyangéite microscopique). IgA élevées → purpura rhumatoïde.</div>
+  </div>
+
+  <div class="qcm-block" data-answer="B" id="q5-5">
+    <div class="q-text">Q5. Quelle étiologie de purpura vasculaire présente des lésions périfolliculaires caractéristiques ?</div>
+    <div class="qcm-options">
+      <div class="qcm-option" data-idx="A" onclick="selectOption(this)"><span class="letter">A</span> Purpura rhumatoïde</div>
+      <div class="qcm-option" data-idx="B" onclick="selectOption(this)"><span class="letter">B</span> Scorbut (carence en vitamine C)</div>
+      <div class="qcm-option" data-idx="C" onclick="selectOption(this)"><span class="letter">C</span> Vasculite à ANCA</div>
+      <div class="qcm-option" data-idx="D" onclick="selectOption(this)"><span class="letter">D</span> Cryoglobulinémie</div>
+    </div>
+    <button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button>
+    <div class="qcm-feedback"></div>
+    <div class="qcm-explanation">Réponse B. Le scorbut (carence en vitamine C) donne des hémorragies PÉRIFOLLICULAIRES caractéristiques + hémorragies gingivales + cheveux en tire-bouchon. La vitamine C est essentielle pour la synthèse du collagène des parois vasculaires. Rare aujourd'hui (personnes âgées, alcooliques, régimes très déséquilibrés). Traitement : supplémentation en vitamine C.</div>
+  </div>
+</div>
+
+<!-- SLIDE 11 : URGENCES — PURPURA FULMINANS + SCHÖNLEIN-HENOCH -->
+<div class="slide content-slide" id="slide-11">
+  <h2>🚨 Urgences — Purpura fulminans & purpura rhumatoïde de l'enfant</h2>
+
+  <h3>I — Purpura fulminans : urgence vitale absolue</h3>
+  <div class="urgence-box">
+    <strong>⏰ Purpura fulminans = méningococcémie jusqu'à preuve du contraire</strong><br>
+    Définition : purpura rapidement extensif, ecchymotique, nécrotique avec signes de choc septique.<br>
+    Mortalité sans traitement : > 80% en quelques heures. Avec traitement précoce : 10-15%.
+  </div>
+
+  <div class="expl-wrap">
+    <h4>🔬 Physiopathologie</h4>
+    <p>La bactériémie à <em>Neisseria meningitidis</em> (ou plus rarement <em>Streptococcus pneumoniae</em>) → libération massive de lipopolysaccharides (LPS) → activation du complément et de la coagulation → <strong>CIVD</strong> → occlusion des petits vaisseaux cutanés → nécrose ischémique → purpura nécrotique.</p>
+    <p>La cascade est auto-entretenue : les bactéries se multiplient exponentiellement dans le sang → concentration de LPS croissante → choc septique réfractaire.</p>
+    <blockquote class="expl-bq">💡 Analogy : c'est un feu de forêt qui se propage plus vite que les pompiers ne peuvent intervenir. Chaque minute compte.</blockquote>
+  </div>
+
+  <div class="expl-wrap">
+    <h4>🏥 Conduite à tenir — Les 6 étapes en ordre chronologique</h4>
+    <ol>
+      <li><strong>CEFTRIAXONE IM/IV IMMÉDIATE</strong> : 50 mg/kg (enfant), 2g (adulte) → même dans l'ambulance, même avant la PL si elle risque d'être retardée</li>
+      <li>Appel du 15 (SAMU) si en ville / transfert immédiat en réanimation pédiatrique</li>
+      <li>Voie veineuse périphérique si possible (ne pas retarder l'antibiothérapie)</li>
+      <li>Prélèvements si réalisables SANS délai : hémocultures, NFS, bilan de CIVD (TP, TCA, fibrinogène), CRP, PCT, ionogramme</li>
+      <li>PL uniquement si : antibiothérapie débutée OU patient stable ET absence de CI (pas de HTIC, pas de troubles coagulation)</li>
+      <li>Réanimation : remplissage vasculaire (NaCl 0,9%), catécholamines si choc, correction CIVD (fibrinogène, PFC)</li>
+    </ol>
+  </div>
+
+  <div class="expl-wrap">
+    <h4>⚠️ Pièges ECN concernant le purpura fulminans</h4>
+    <ul>
+      <li><strong>Ne JAMAIS attendre</strong> les résultats biologiques pour traiter → la ceftriaxone doit précéder les examens</li>
+      <li>La PL N'EST PAS obligatoire AVANT l'antibiothérapie</li>
+      <li>Ne pas oublier les contacts proches : chimioprophylaxie par rifampicine (ou ciprofloxacine) pour l'entourage</li>
+      <li>Déclaration obligatoire à l'ARS (infection à méningocoque = MDO)</li>
+      <li>Complications redoutées : séquelles neurologiques, amputations (nécrose), surdité</li>
+    </ul>
+  </div>
+
+  <h3>II — Purpura rhumatoïde (IgA-vasculite de Schönlein-Henoch)</h3>
+  <div class="def-box">
+    <strong>Purpura rhumatoïde</strong> = vasculite systémique à dépôts d'<strong>IgA</strong> dans les petits vaisseaux. La plus fréquente des vasculites de l'enfant (pic 3-10 ans). Déclenchée souvent par une infection (streptocoque en particulier).
+  </div>
+
+  <div class="expl-wrap">
+    <h4>📋 Tétrade clinique caractéristique</h4>
+    <ul>
+      <li><strong>Purpura palpable</strong> déclive et symétrique (membres inférieurs, fesses) — NON thrombopénique</li>
+      <li><strong>Arthralgies</strong> (genoux, chevilles) — sans arthrite déformante</li>
+      <li><strong>Douleurs abdominales</strong> (coliques, vomissements) ± hémorragie digestive ± invagination intestinale aiguë</li>
+      <li><strong>Néphropathie à IgA</strong> (hématurie ± protéinurie) — facteur pronostique majeur</li>
+    </ul>
+    <p>Bilan biologique : plaquettes NORMALES, NFS normale, <strong>IgA élevées</strong> (50-70%), biopsie cutanée : dépôts IgA péri-vasculaires en immunofluorescence directe.</p>
+  </div>
+
+  <div class="expl-wrap">
+    <h4>💊 Prise en charge et pronostic</h4>
+    <p><strong>Forme simple</strong> (95%) : traitement symptomatique (AINS pour arthralgies + douleurs abdominales). Guérison spontanée en 4-6 semaines. Surveillance rénale 1 an.</p>
+    <p><strong>Complications</strong> : invagination intestinale (traitement par lavement opaque), orchite (garçons), néphropathie évolutive → corticoïdes ± immunosuppresseurs si SN ou IRC.</p>
+    <p><strong>Récidives</strong> possibles (30%), surtout dans les 6 mois.</p>
+  </div>
+
+  <svg width="100%" height="160" viewBox="0 0 900 160">
+    <rect width="900" height="160" fill="rgba(0,0,0,0.3)" rx="8"/>
+    <text x="450" y="22" text-anchor="middle" fill="#e74c3c" font-size="12" font-weight="bold">Purpura fulminans vs Schönlein-Henoch</text>
+    <!-- Fulminans -->
+    <rect x="20" y="35" width="400" height="110" rx="6" fill="rgba(231,76,60,0.2)" stroke="#e74c3c" stroke-width="2"/>
+    <text x="220" y="55" text-anchor="middle" fill="#e74c3c" font-size="11" font-weight="bold">⚡ Purpura fulminans</text>
+    <text x="40" y="73" fill="#c0c0d8" font-size="9">• Nécrotique, rapidement extensif</text>
+    <text x="40" y="88" fill="#c0c0d8" font-size="9">• Choc septique</text>
+    <text x="40" y="103" fill="#c0c0d8" font-size="9">• Méningocoque (CIVD)</text>
+    <text x="40" y="118" fill="#e74c3c" font-size="9" font-weight="bold">→ CEFTRIAXONE IMMÉDIATE</text>
+    <text x="40" y="133" fill="#f39c12" font-size="9">Pronostic vital en jeu</text>
+    <!-- Schönlein-Henoch -->
+    <rect x="480" y="35" width="400" height="110" rx="6" fill="rgba(52,152,219,0.2)" stroke="#3498db"/>
+    <text x="680" y="55" text-anchor="middle" fill="#3498db" font-size="11" font-weight="bold">🔵 Schönlein-Henoch</text>
+    <text x="500" y="73" fill="#c0c0d8" font-size="9">• Palpable, déclive, symétrique</text>
+    <text x="500" y="88" fill="#c0c0d8" font-size="9">• Arthralgies + douleurs abdominales</text>
+    <text x="500" y="103" fill="#c0c0d8" font-size="9">• IgA ↑, plaquettes normales</text>
+    <text x="500" y="118" fill="#3498db" font-size="9">→ Symptomatique + surveillance rénale</text>
+    <text x="500" y="133" fill="#2ecc71" font-size="9">Bénin dans 95% des cas</text>
+  </svg>
+
+  <div class="flash-block">
+    <div class="flash-q">❓ Citez les 4 éléments de la tétrade clinique du purpura rhumatoïde de Schönlein-Henoch.</div>
+    <button class="flash-reveal" onclick="this.nextElementSibling.style.display='block';this.style.display='none'">Révéler la réponse</button>
+    <div class="flash-answer" style="display:none">1. <strong>Purpura palpable déclive</strong> (membres inférieurs, fesses) — plaquettes NORMALES. 2. <strong>Arthralgies</strong> (genoux, chevilles). 3. <strong>Douleurs abdominales</strong> ± hémorragie digestive ± invagination intestinale. 4. <strong>Néphropathie à IgA</strong> (hématurie ± protéinurie — facteur pronostique majeur). IgA élevées dans 50-70% des cas.</div>
+  </div>
+  <div class="flash-block">
+    <div class="flash-q">❓ Quel est le traitement du purpura fulminans et pourquoi ne pas attendre la ponction lombaire ?</div>
+    <button class="flash-reveal" onclick="this.nextElementSibling.style.display='block';this.style.display='none'">Révéler la réponse</button>
+    <div class="flash-answer" style="display:none">Traitement : <strong>Ceftriaxone 50 mg/kg IM/IV IMMÉDIATEMENT</strong> (2g chez l'adulte). La PL n'est PAS obligatoire avant l'antibiothérapie car : (1) la méningococcémie est fatale en quelques heures → chaque minute compte ; (2) le LCR peut rester positif plusieurs heures après la première dose ; (3) la PL peut être difficile ou dangereuse si état de choc. Déclaration MDO + chimioprophylaxie des contacts.</div>
+  </div>
+  <div class="flash-block">
+    <div class="flash-q">❓ Quel est le facteur pronostique majeur du purpura rhumatoïde de Schönlein-Henoch ?</div>
+    <button class="flash-reveal" onclick="this.nextElementSibling.style.display='block';this.style.display='none'">Révéler la réponse</button>
+    <div class="flash-answer" style="display:none">La <strong>néphropathie à IgA</strong> est le facteur pronostique déterminant. Surveillance : bandelette urinaire (hématurie/protéinurie) + créatinine à chaque visite, et ce pendant 1 an après guérison clinique (car la néphropathie peut se révéler secondairement). Si protéinurie massive → corticoïdes ± mycophenolate mofétil. L'IRC est la principale complication à long terme.</div>
+  </div>
+</div>
+
+<!-- SLIDE 12 : QCM 6 — URGENCES -->
+<div class="slide content-slide" id="slide-12">
+  <h2>🧠 QCM 6 — Purpura fulminans & urgences</h2>
+
+  <div class="qcm-block" data-answer="B" id="q6-1">
+    <div class="q-text">Q1. Un enfant de 4 ans est amené aux urgences avec un purpura qui s'étend rapidement, ecchymotique, avec fièvre à 39,5°C et altération de l'état général. Quelle est la première action à réaliser ?</div>
+    <div class="qcm-options">
+      <div class="qcm-option" data-idx="A" onclick="selectOption(this)"><span class="letter">A</span> Demander une NFS + bilan de coagulation STAT avant de traiter</div>
+      <div class="qcm-option" data-idx="B" onclick="selectOption(this)"><span class="letter">B</span> Injecter de la ceftriaxone IM/IV 50 mg/kg IMMÉDIATEMENT</div>
+      <div class="qcm-option" data-idx="C" onclick="selectOption(this)"><span class="letter">C</span> Réaliser la ponction lombaire en urgence</div>
+      <div class="qcm-option" data-idx="D" onclick="selectOption(this)"><span class="letter">D</span> Transfuser des plaquettes en urgence</div>
+    </div>
+    <button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button>
+    <div class="qcm-feedback"></div>
+    <div class="qcm-explanation">Réponse B. Purpura fulminans = URGENCE VITALE. La ceftriaxone doit être injectée AVANT TOUT examen. La mortalité sans traitement dépasse 80% en quelques heures. Ne jamais retarder l'antibiothérapie pour des examens. La PL sera réalisée secondairement si faisable et si l'antibiothérapie ne risque pas d'être retardée.</div>
+  </div>
+
+  <div class="qcm-block" data-answer="C" id="q6-2">
+    <div class="q-text">Q2. Quelle mesure doit être prise concernant l'entourage d'un enfant atteint de méningococcémie ?</div>
+    <div class="qcm-options">
+      <div class="qcm-option" data-idx="A" onclick="selectOption(this)"><span class="letter">A</span> Aucune mesure particulière pour l'entourage</div>
+      <div class="qcm-option" data-idx="B" onclick="selectOption(this)"><span class="letter">B</span> Vaccination anti-méningocoque de tous les contacts</div>
+      <div class="qcm-option" data-idx="C" onclick="selectOption(this)"><span class="letter">C</span> Chimioprophylaxie par rifampicine (ou ciprofloxacine) pour les contacts proches dans les 24h</div>
+      <div class="qcm-option" data-idx="D" onclick="selectOption(this)"><span class="letter">D</span> Isolement de l'entourage pendant 14 jours</div>
+    </div>
+    <button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button>
+    <div class="qcm-feedback"></div>
+    <div class="qcm-explanation">Réponse C. Méningococcémie = maladie à déclaration obligatoire (MDO) → signalement à l'ARS. Chimioprophylaxie pour les contacts proches (famille, crèche, classe) dans les 24-48h : rifampicine 600 mg × 2/j × 2 jours (ou ciprofloxacine 500 mg dose unique). La vaccination peut compléter mais ne remplace pas l'antibiothérapie préventive.</div>
+  </div>
+
+  <div class="qcm-block" data-answer="D" id="q6-3">
+    <div class="q-text">Q3. Quel est le mécanisme physiopathologique du purpura nécrotique dans la méningococcémie ?</div>
+    <div class="qcm-options">
+      <div class="qcm-option" data-idx="A" onclick="selectOption(this)"><span class="letter">A</span> Auto-anticorps anti-plaquettes (PTI associé)</div>
+      <div class="qcm-option" data-idx="B" onclick="selectOption(this)"><span class="letter">B</span> Vasculite à IgA déclenchée par la bactérie</div>
+      <div class="qcm-option" data-idx="C" onclick="selectOption(this)"><span class="letter">C</span> Réaction de Jarisch-Herxheimer aux antibiotiques</div>
+      <div class="qcm-option" data-idx="D" onclick="selectOption(this)"><span class="letter">D</span> CIVD avec occlusion des capillaires cutanés + nécrose ischémique, déclenchée par les LPS bactériens</div>
+    </div>
+    <button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button>
+    <div class="qcm-feedback"></div>
+    <div class="qcm-explanation">Réponse D. La méningococcémie libère des LPS (lipopolysaccharides) → activation massive du complément et de la coagulation → CIVD → microthromboses dans les petits vaisseaux cutanés → ischémie → nécrose → purpura nécrotique. C'est la même cascade que dans d'autres chocs septiques à bactéries Gram négatif, mais particulièrement fulminante avec le méningocoque.</div>
+  </div>
+
+  <div class="qcm-block" data-answer="A" id="q6-4">
+    <div class="q-text">Q4. Quel est le facteur pronostique principal du purpura rhumatoïde de Schönlein-Henoch à surveiller pendant 1 an ?</div>
+    <div class="qcm-options">
+      <div class="qcm-option" data-idx="A" onclick="selectOption(this)"><span class="letter">A</span> La néphropathie à IgA (hématurie/protéinurie)</div>
+      <div class="qcm-option" data-idx="B" onclick="selectOption(this)"><span class="letter">B</span> Les arthralgies persistantes</div>
+      <div class="qcm-option" data-idx="C" onclick="selectOption(this)"><span class="letter">C</span> Les douleurs abdominales récurrentes</div>
+      <div class="qcm-option" data-idx="D" onclick="selectOption(this)"><span class="letter">D</span> Le taux d'IgA sérique</div>
+    </div>
+    <button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button>
+    <div class="qcm-feedback"></div>
+    <div class="qcm-explanation">Réponse A. La néphropathie à IgA est la principale complication à long terme du purpura rhumatoïde. Elle peut se révéler secondairement (après la guérison clinique apparente). Surveillance : BU + créatinine à chaque consultation pendant 1 an. Si protéinurie massive → corticoïdes. IRC possible à long terme dans les formes sévères.</div>
+  </div>
+
+  <div class="qcm-block" data-answer="C" id="q6-5">
+    <div class="q-text">Q5. Un enfant de 6 ans avec un purpura rhumatoïde confirmé présente des douleurs abdominales intenses avec arrêt des matières et des gaz. Quelle complication doit être suspectée ?</div>
+    <div class="qcm-options">
+      <div class="qcm-option" data-idx="A" onclick="selectOption(this)"><span class="letter">A</span> Péritonite bactérienne secondaire</div>
+      <div class="qcm-option" data-idx="B" onclick="selectOption(this)"><span class="letter">C</span> Appendicite aiguë</div>
+      <div class="qcm-option" data-idx="C" onclick="selectOption(this)"><span class="letter">C</span> Invagination intestinale aiguë (IIA)</div>
+      <div class="qcm-option" data-idx="D" onclick="selectOption(this)"><span class="letter">D</span> Néphropathie sévère avec anurie</div>
+    </div>
+    <button class="qcm-validate" onclick="validateQCM(this)" disabled>Valider</button>
+    <div class="qcm-feedback"></div>
+    <div class="qcm-explanation">Réponse C. L'invagination intestinale aiguë (IIA) est une complication chirurgicale du purpura rhumatoïde : les dépôts IgA dans la paroi intestinale créent des zones d'invagination (le segment proximal s'intussuscepte dans le distal). Clinique : douleurs abdominales intenses en crises + vomissements + sang dans les selles. Traitement : lavement opaque ou hydrostatique sous contrôle radiologique (ou chirurgie si échec).</div>
+  </div>
+</div>
+
+<!-- SLIDE 13 : RÉCAPITULATIF & DÉMARCHE -->
+<div class="slide content-slide" id="slide-13">
+  <h2>✅ Récapitulatif — Démarche diagnostique & points clés ECN</h2>
+
+  <h3>I — Algorithme diagnostique devant une thrombopénie</h3>
+  <div class="expl-wrap">
+    <h4>📊 Étape 1 : confirmer et quantifier</h4>
+    <ul>
+      <li>Vérifier l'absence de fausse thrombopénie EDTA (refaire sur tube citraté)</li>
+      <li>Seuil &lt; 20 G/L = risque hémorragique vital → URGENCE</li>
+      <li>Seuil 20-50 G/L = risque hémorragique élevé</li>
+      <li>Seuil 50-100 G/L = risque modéré (contre-indication chirurgie lourde)</li>
+    </ul>
+    <h4>📊 Étape 2 : mécanisme central ou périphérique ?</h4>
+    <div class="table-wrap">
+      <table>
+        <tr><th></th><th>Thrombopénie centrale</th><th>Thrombopénie périphérique</th></tr>
+        <tr><td>Mécanisme</td><td>Défaut de production (MO)</td><td>Destruction accélérée</td></tr>
+        <tr><td>Myélogramme</td><td>Mégacaryocytes ↓ ou absents</td><td>Mégacaryocytes ↑ (compensation)</td></tr>
+        <tr><td>Étiologies clés</td><td>Aplasie, envahissement tumoral, chimiothérapie</td><td>PTI, MAT, TIH, hypersplénisme</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="expl-wrap">
+    <h4>📊 Étape 3 : orientation étiologique</h4>
+    <div class="table-wrap">
+      <table>
+        <tr><th>Contexte</th><th>Étiologie la plus probable</th></tr>
+        <tr><td>Femme jeune, thrombopénie isolée, NFS sinon normale</td><td>PTI</td></tr>
+        <tr><td>Thrombopénie + schizocytes + atteinte neurologique</td><td>PTT → échanges plasmatiques URGENTS</td></tr>
+        <tr><td>Thrombopénie + schizocytes + IRA chez l'enfant</td><td>SHU → STEC O157:H7</td></tr>
+        <tr><td>Thrombopénie + chute > 50% sous héparine J5-J14 + thrombose</td><td>TIH type II → arrêt héparine + relais</td></tr>
+        <tr><td>Thrombopénie + ictère + hémoglobinurie + aplasie</td><td>Hémolyse immunologique (AHAI) ± Evan</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <h3>II — Algorithme diagnostique devant un purpura</h3>
+  <div class="expl-wrap">
+    <h4>🔍 Question 1 : s'efface-t-il à la vitropression ?</h4>
+    <p>OUI → érythème (vasodilatation) → pas un purpura. NON → purpura confirmé → continuer l'algorithme.</p>
+    <h4>🔍 Question 2 : plaquettes normales ou basses ?</h4>
+    <p>Plaquettes BASSES → purpura thrombopénique → bilan étiologique thrombopénie.<br>
+    Plaquettes NORMALES → purpura vasculaire → bilan vasculite (VS, CRP, complément, ANCA, IgA, biopsie).</p>
+    <h4>🔍 Question 3 : signe de gravité ?</h4>
+    <p>Extensif + nécrotique + fièvre + choc → PURPURA FULMINANS → CEFTRIAXONE IMMÉDIATE.</p>
+  </div>
+
+  <h3>III — Les 10 règles d'or ECN — Thrombopénies & Purpuras</h3>
+  <div class="expl-wrap">
+    <ol>
+      <li>Toujours <strong>éliminer la fausse thrombopénie EDTA</strong> en refaisant sur citrate</li>
+      <li>Thrombopénie &lt; 20 G/L = urgence thérapeutique (risque hémorragie cérébrale)</li>
+      <li><strong>Jamais de plaquettes dans le PTI</strong> sauf hémorragie grave (Ac détruisent les plaquettes transfusées)</li>
+      <li><strong>Jamais de plaquettes dans la TIH type II</strong> (aggrave les thromboses)</li>
+      <li><strong>Jamais de plaquettes dans les MAT (PTT/SHU)</strong> (aggrave les thromboses)</li>
+      <li>PTT → <strong>échanges plasmatiques QUOTIDIENS en URGENCE</strong> avant tout autre traitement</li>
+      <li>TIH → <strong>arrêt TOUTE héparine</strong> (HNF + HBPM) + relais non-héparinique IMMÉDIAT</li>
+      <li>Purpura fulminans → <strong>ceftriaxone AVANT la PL</strong></li>
+      <li>Purpura rhumatoïde → surveillance rénale <strong>1 an</strong> après guérison clinique</li>
+      <li>Bilan de thrombophilie : faire <strong>APRÈS arrêt anticoagulants</strong> (sauf mutations génétiques)</li>
+    </ol>
+  </div>
+
+  <svg width="100%" height="170" viewBox="0 0 900 170">
+    <rect width="900" height="170" fill="rgba(0,0,0,0.3)" rx="8"/>
+    <text x="450" y="22" text-anchor="middle" fill="#e74c3c" font-size="12" font-weight="bold">Contre-indications absolues aux transfusions plaquettaires</text>
+    <rect x="20" y="35" width="260" height="120" rx="6" fill="rgba(231,76,60,0.2)" stroke="#e74c3c"/>
+    <text x="150" y="55" text-anchor="middle" fill="#e74c3c" font-size="10" font-weight="bold">PTI</text>
+    <text x="40" y="72" fill="#c0c0d8" font-size="9">• Ac anti-GPIIb/IIIa</text>
+    <text x="40" y="87" fill="#c0c0d8" font-size="9">• Détruites en minutes</text>
+    <text x="40" y="102" fill="#9090b0" font-size="8">Sauf hémorragie urgente</text>
+    <text x="40" y="117" fill="#9090b0" font-size="8">+ IgIV + corticoïdes</text>
+    <rect x="320" y="35" width="260" height="120" rx="6" fill="rgba(231,76,60,0.2)" stroke="#e74c3c"/>
+    <text x="450" y="55" text-anchor="middle" fill="#e74c3c" font-size="10" font-weight="bold">TIH type II</text>
+    <text x="340" y="72" fill="#c0c0d8" font-size="9">• Ac anti-FP4</text>
+    <text x="340" y="87" fill="#c0c0d8" font-size="9">• Plaquettes → + de FP4</text>
+    <text x="340" y="102" fill="#c0c0d8" font-size="9">→ aggrave les thromboses</text>
+    <text x="340" y="117" fill="#9090b0" font-size="8">Arrêt héparine + relais</text>
+    <rect x="620" y="35" width="260" height="120" rx="6" fill="rgba(231,76,60,0.2)" stroke="#e74c3c"/>
+    <text x="750" y="55" text-anchor="middle" fill="#e74c3c" font-size="10" font-weight="bold">MAT (PTT/SHU)</text>
+    <text x="640" y="72" fill="#c0c0d8" font-size="9">• Thrombus disséminés</text>
+    <text x="640" y="87" fill="#c0c0d8" font-size="9">• Plaquettes alimentent</text>
+    <text x="640" y="102" fill="#c0c0d8" font-size="9">les micro-thrombus</text>
+    <text x="640" y="117" fill="#9090b0" font-size="8">PTT → échanges plasmatiques</text>
+    <text x="640" y="132" fill="#9090b0" font-size="8">SHU → soins de support</text>
+  </svg>
+
+  <div class="flash-block">
+    <div class="flash-q">❓ Dans quelles 3 situations la transfusion de plaquettes est-elle contre-indiquée malgré une thrombopénie sévère ?</div>
+    <button class="flash-reveal" onclick="this.nextElementSibling.style.display='block';this.style.display='none'">Révéler la réponse</button>
+    <div class="flash-answer" style="display:none">1. <strong>PTI</strong> : les anticorps anti-GPIIb/IIIa détruisent les plaquettes transfusées en quelques minutes → inefficace + risque d'aggravation. 2. <strong>TIH type II</strong> : les plaquettes transfusées apportent du FP4 → intensifient l'activation plaquettaire → thromboses. 3. <strong>MAT (PTT/SHU)</strong> : les plaquettes alimentent les microthrombus déjà présents → aggravation des lésions organiques.</div>
+  </div>
+  <div class="flash-block">
+    <div class="flash-q">❓ Quelle est la démarche diagnostique en 3 étapes devant un purpura ?</div>
+    <button class="flash-reveal" onclick="this.nextElementSibling.style.display='block';this.style.display='none'">Révéler la réponse</button>
+    <div class="flash-answer" style="display:none">Étape 1 : <strong>vitropression</strong> → ne s'efface pas = purpura confirmé. Étape 2 : <strong>NFS</strong> → plaquettes basses = thrombopénique (bilan étiologique) / plaquettes normales = vasculaire (bilan vasculite). Étape 3 : <strong>signes de gravité</strong> → extensif + nécrotique + fièvre = purpura fulminans → ceftriaxone IMMÉDIATE avant tout.</div>
+  </div>
+  <div class="flash-block">
+    <div class="flash-q">❓ Quel est l'unique traitement de première intention du PTT et pourquoi agit-il ?</div>
+    <button class="flash-reveal" onclick="this.nextElementSibling.style.display='block';this.style.display='none'">Révéler la réponse</button>
+    <div class="flash-answer" style="display:none"><strong>Échanges plasmatiques (plasmaphérèses) quotidiens</strong> agissent par double mécanisme : (1) <strong>Apportent</strong> de l'ADAMTS13 fonctionnelle (contenue dans le plasma du donneur = 1,3 L/échange) ; (2) <strong>Éliminent</strong> les auto-anticorps anti-ADAMTS13 qui causent la maladie. Le rituximab est ajouté pour les formes réfractaires (détruit les lymphocytes B producteurs d'Ac anti-ADAMTS13).</div>
+  </div>
+
+  <div class="key-hint">🎓 Fin du cours — Thrombopénies &amp; Purpuras Items 215-216 — ← → pour naviguer</div>
+</div>
+
+</div><!-- fin slide-container -->
+
+<script>
+let current = 0;
+const total = 14;
+
+function showSlide(n) {
+  document.querySelectorAll('.slide').forEach(s => s.classList.remove('active'));
+  current = Math.max(0, Math.min(n, total - 1));
+  document.getElementById('slide-' + current).classList.add('active');
+  document.getElementById('slide-container').scrollTop = 0;
+  document.getElementById('progress-fill').style.width = ((current / (total - 1)) * 100) + '%';
+  document.getElementById('slide-counter').textContent = (current + 1) + ' / ' + total;
+}
+
+function changeSlide(d) { showSlide(current + d); }
+
+function selectOption(el) {
+  const block = el.closest('.qcm-block');
+  block.querySelectorAll('.qcm-option').forEach(o => o.classList.remove('selected'));
+  el.classList.add('selected');
+  block.querySelector('.qcm-validate').disabled = false;
+}
+
+function validateQCM(btn) {
+  const block = btn.closest('.qcm-block');
+  const answer = block.dataset.answer;
+  const selected = block.querySelector('.qcm-option.selected');
+  if (!selected) return;
+  block.querySelectorAll('.qcm-option').forEach(o => {
+    if (o.dataset.idx === answer) o.classList.add('correct');
+    else if (o.classList.contains('selected')) o.classList.add('wrong');
+    o.style.pointerEvents = 'none';
+  });
+  const fb = block.querySelector('.qcm-feedback');
+  fb.textContent = selected.dataset.idx === answer ? '✅ Correct !' : '❌ Incorrect';
+  fb.style.color = selected.dataset.idx === answer ? '#2ecc71' : '#e74c3c';
+  block.querySelector('.qcm-explanation').style.display = 'block';
+  btn.disabled = true;
+}
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'ArrowRight' || e.key === ' ') changeSlide(1);
+  if (e.key === 'ArrowLeft') changeSlide(-1);
+});
+
+let tx = 0;
+document.addEventListener('touchstart', e => { tx = e.touches[0].clientX; });
+document.addEventListener('touchend', e => {
+  const dx = e.changedTouches[0].clientX - tx;
+  if (Math.abs(dx) > 50) changeSlide(dx < 0 ? 1 : -1);
+});
+
+showSlide(0);
+</script>
+</body>
+</html>
