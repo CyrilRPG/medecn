@@ -12,6 +12,8 @@ body { background: #0d0d1a; color: #e0e0e0; font-family: 'Segoe UI', sans-serif;
 .topbar-center { color: #aaa; font-size: .9em; }
 .nav-btn { background: rgba(255,255,255,.1); border: none; color: #e0e0e0; padding: 6px 14px; border-radius: 6px; cursor: pointer; font-size: .9em; margin-left: 4px; }
 .nav-btn:hover { background: rgba(255,255,255,.2); }
+.nav-btns button { background: rgba(255,255,255,.1); border: none; color: #e0e0e0; padding: 6px 14px; border-radius: 6px; cursor: pointer; font-size: .9em; margin-left: 4px; }
+.nav-btns button:hover { background: rgba(255,255,255,.2); }
 #slide-container { position: fixed; top: 50px; left: 0; right: 0; bottom: 0; overflow-y: auto; }
 .slide { display: none; padding: 30px; max-width: 960px; margin: 0 auto; padding-bottom: 60px; }
 .slide.active { display: block; }
@@ -39,19 +41,27 @@ blockquote { border-left: 4px solid #3498db; padding: 10px 16px; margin: 14px 0;
 .badge-green { background: rgba(46,204,113,.18); border-color: #2ecc71; color: #2ecc71; }
 .badge-purple { background: rgba(155,89,182,.18); border-color: #9b59b6; color: #9b59b6; }
 .qcm-block { background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.1); border-radius: 10px; padding: 20px; margin: 20px 0; }
-.qcm-question { font-weight: bold; font-size: 1.03em; margin-bottom: 14px; color: #f39c12; line-height: 1.5; }
-.qcm-option { padding: 10px 14px; margin: 6px 0; border-radius: 6px; cursor: pointer; background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.1); transition: all .2s; line-height: 1.5; }
-.qcm-option:hover { background: rgba(255,255,255,.08); }
-.qcm-option.selected { border-color: #3498db; background: rgba(52,152,219,.16); }
-.qcm-option.correct { border-color: #2ecc71; background: rgba(46,204,113,.2); }
-.qcm-option.wrong { border-color: #e74c3c; background: rgba(231,76,60,.2); }
-.qcm-validate { margin-top: 12px; padding: 9px 20px; background: #e74c3c; border: none; border-radius: 6px; color: white; cursor: pointer; font-size: .93em; }
-.qcm-validate:hover { background: #c0392b; }
-.qcm-explanation { margin-top: 12px; padding: 12px; background: rgba(46,204,113,.1); border-left: 4px solid #2ecc71; border-radius: 0 6px 6px 0; line-height: 1.7; display: none; }
-.flash-block { background: rgba(155,89,182,.1); border: 1px solid rgba(155,89,182,.3); border-radius: 10px; padding: 16px; margin: 14px 0; }
-.flash-q { font-weight: bold; color: #9b59b6; margin-bottom: 8px; font-size: 1em; }
-.flash-reveal { background: #9b59b6; border: none; color: white; padding: 7px 16px; border-radius: 6px; cursor: pointer; font-size: .88em; }
-.flash-answer { margin-top: 10px; padding: 11px; background: rgba(155,89,182,.14); border-radius: 6px; line-height: 1.7; }
+.question { margin-bottom: 28px; padding-bottom: 20px; border-bottom: 1px solid rgba(255,255,255,.07); }
+.question:last-child { border-bottom: none; margin-bottom: 0; }
+.options { margin: 10px 0; }
+.option { padding: 10px 14px; margin: 6px 0; border-radius: 6px; cursor: pointer; background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.1); transition: all .2s; line-height: 1.5; user-select: none; }
+.option:hover { background: rgba(255,255,255,.08); }
+.option.selected { border-color: #3498db; background: rgba(52,152,219,.16); }
+.option.correct { border-color: #2ecc71 !important; background: rgba(46,204,113,.22) !important; }
+.option.wrong { border-color: #e74c3c !important; background: rgba(231,76,60,.22) !important; }
+.option.disabled { pointer-events: none; }
+.validate-btn { margin-top: 12px; padding: 9px 22px; background: #e74c3c; border: none; border-radius: 6px; color: white; cursor: pointer; font-size: .93em; font-weight: bold; transition: background .2s; }
+.validate-btn:hover { background: #c0392b; }
+.validate-btn:disabled { background: #555; cursor: default; }
+.explanation { margin-top: 12px; padding: 12px 16px; background: rgba(46,204,113,.1); border-left: 4px solid #2ecc71; border-radius: 0 6px 6px 0; line-height: 1.7; }
+.flash-block { background: rgba(155,89,182,.1); border: 1px solid rgba(155,89,182,.3); border-radius: 10px; margin: 14px 0; cursor: pointer; overflow: hidden; transition: background .2s; }
+.flash-block:hover { background: rgba(155,89,182,.18); }
+.flash-title { font-weight: bold; color: #c39bd3; padding: 14px 16px; font-size: 1em; display: flex; align-items: center; justify-content: space-between; }
+.flash-title::after { content: '▼'; font-size: .75em; color: #9b59b6; transition: transform .25s; }
+.flash-block.open .flash-title::after { transform: rotate(180deg); }
+.flash-content { display: none; padding: 0 16px 14px; line-height: 1.75; color: #ddd; font-size: .95em; }
+.flash-block.open .flash-content { display: block; }
+@keyframes shake { 0%,100%{transform:translateX(0)} 25%{transform:translateX(-6px)} 75%{transform:translateX(6px)} }
 .slide-title-main { text-align: center; padding: 50px 20px 30px; }
 table { width: 100%; border-collapse: collapse; margin: 14px 0; font-size: .93em; }
 th { padding: 10px 12px; text-align: left; color: #f39c12; border-bottom: 2px solid rgba(255,255,255,.18); }
@@ -4283,25 +4293,29 @@ function showSlide(n) {
   const s = document.getElementById('slide-' + current);
   if (s) s.classList.add('active');
   document.getElementById('progress-bar').style.width = ((current/(total-1))*100)+'%';
-  document.querySelector('.topbar-center').textContent = 'Diapo '+(current+1)+' / '+total;
+  const counterEl = document.getElementById('counter-'+current);
+  if (counterEl) counterEl.textContent = 'Diapo '+(current+1)+' / '+total;
   document.getElementById('slide-container').scrollTop = 0;
 }
 function changeSlide(d) { showSlide(current + d); }
 function selectOption(el) {
-  el.closest('.qcm-block').querySelectorAll('.qcm-option').forEach(o => o.classList.remove('selected'));
+  const question = el.closest('.question');
+  if (!question || question.querySelector('.option.correct')) return; // already validated
+  question.querySelectorAll('.option').forEach(o => o.classList.remove('selected'));
   el.classList.add('selected');
 }
 function validateQCM(btn) {
-  const block = btn.closest('.qcm-block');
-  const answer = parseInt(block.dataset.answer);
-  const selected = block.querySelector('.qcm-option.selected');
-  if (!selected) return;
-  block.querySelectorAll('.qcm-option').forEach((o,i) => {
-    if (i===answer) o.classList.add('correct');
+  const question = btn.closest('.question');
+  if (!question) return;
+  const selected = question.querySelector('.option.selected');
+  if (!selected) { btn.style.animation='shake .3s'; setTimeout(()=>btn.style.animation='',300); return; }
+  question.querySelectorAll('.option').forEach(o => {
+    o.classList.add('disabled');
+    if (o.dataset.answer === 'true') o.classList.add('correct');
     else if (o.classList.contains('selected')) o.classList.add('wrong');
   });
-  const exp = block.querySelector('.qcm-explanation');
-  if (exp) exp.style.display='block';
+  const exp = question.querySelector('.explanation');
+  if (exp) exp.style.display = 'block';
   btn.disabled = true;
 }
 document.addEventListener('keydown', e => {
